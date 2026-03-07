@@ -1,0 +1,82 @@
+[
+  {
+    "title": "Widefield imaging of rapid pan-cortical voltage dynamics with an indicator evolved for one-photon microscopy",
+    "authors": "Xiaoyu Lu, Yunmiao Wang, Zhuohe Liu, Yueyang Gou, et al.",
+    "year": 2023,
+    "journal": "Nature Communications",
+    "doi": "10.1038/s41467-023-41975-3",
+    "link": "https://www.nature.com/articles/s41467-023-41975-3",
+    "type": "Original"
+  },
+  {
+    "title": "Cortex-wide voltage imaging in a sensory cued reaching task",
+    "authors": "Anonymous",
+    "year": 2025,
+    "journal": "bioRxiv",
+    "doi": "10.1101/2025.04.24.650533",
+    "link": "https://www.biorxiv.org/content/10.1101/2025.04.24.650533",
+    "type": "Preprint"
+  },
+  {
+    "title": "Scanless two-photon voltage imaging",
+    "authors": "Ruth R. Sims, Imane Bendifallah, Valentina Emiliani",
+    "year": 2024,
+    "journal": "Nature Communications",
+    "doi": "10.1038/s41467-024-49192-2",
+    "link": "https://www.nature.com/articles/s41467-024-49192-2",
+    "type": "Citing"
+  },
+  {
+    "title": "Volumetric voltage imaging of neuronal populations in the mouse brain by confocal light-field microscopy",
+    "authors": "Lu Bai, Lin Cong, Kai Wang",
+    "year": 2024,
+    "journal": "Nature Methods",
+    "doi": "10.1038/s41592-024-02458-5",
+    "link": "https://www.nature.com/articles/s41592-024-02458-5",
+    "type": "Citing"
+  },
+  {
+    "title": "State-of-the-art preclinical techniques to study the impact of spreading depolarizations in awake rodents",
+    "authors": "Alejandro Labastida-Ramirez, Neela K. Codadu, Robert C. Wykes",
+    "year": 2025,
+    "journal": "The Journal of Headache and Pain",
+    "doi": "10.1186/s10194-025-02121-0",
+    "link": "https://doi.org/10.1186/s10194-025-02121-0",
+    "type": "Citing"
+  },
+  {
+    "title": "Impact of uniform illumination in widefield microscopy and mesoscopy",
+    "authors": "Mete Aslan, Alexander J. Gray, M. Selim Ünlü",
+    "year": 2025,
+    "journal": "Scientific Reports",
+    "doi": "10.1038/s41598-025-08754-0",
+    "link": "https://doi.org/10.1038/s41598-025-08754-0",
+    "type": "Citing"
+  },
+  {
+    "title": "High-speed voltage imaging of action potentials in molecular layer interneurons reveals sensory-driven synchrony that augments movement",
+    "authors": "Anonymous",
+    "year": 2024,
+    "journal": "ResearchGate",
+    "link": "https://www.researchgate.net/publication/394489642",
+    "type": "Using JEDI-1P"
+  },
+  {
+    "title": "Neurovascular coupling: a review of spontaneous neocortical",
+    "authors": "Anonymous",
+    "year": 2024,
+    "journal": "Journal of Neurophysiology",
+    "doi": "10.1152/jn.00418.2024",
+    "link": "https://journals.physiology.org/doi/jn.00418.2024",
+    "type": "Review"
+  },
+  {
+    "title": "All-optical voltage interrogation for probing synaptic activity",
+    "authors": "J Carolan et al.",
+    "year": 2025,
+    "journal": "Nature Communications",
+    "doi": "10.1038/s41467-025-63867-4",
+    "link": "https://www.nature.com/articles/s41467-025-63867-4",
+    "type": "Citing (uses JEDI-2P)"
+  }
+]
