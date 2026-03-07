@@ -121,9 +121,9 @@ export const methodologyContent = {
   metrics: {
     title: "Score Components",
     items: [
-      { name: "Brightness", weight: "20%", description: "Relative brightness from pairwise comparisons across papers" },
       { name: "Speed", weight: "20%", description: "On/off kinetics - critical for temporal resolution. Based on τ_on and τ_off time constants" },
       { name: "Dynamic Range", weight: "20%", description: "Fluorescence change (ΔF/F) per 100mV depolarization" },
+      { name: "Brightness", weight: "20%", description: "Relative brightness from pairwise comparisons across papers" },
       { name: "SNR", weight: "15%", description: "Signal-to-noise ratio for action potential detection" },
       { name: "Photostability", weight: "15%", description: "Resistance to photobleaching during imaging" },
       { name: "Popularity", weight: "10%", description: "Number of papers using/citing the GEVI - measures community adoption" }
