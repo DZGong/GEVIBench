@@ -225,15 +225,15 @@
   {
     "id": "asap4s",
     "name": "ASAP4s",
-    "year": 2022,
+    "year": 2023,
     "category": "VSD-cpGFP GEVI",
     "tags": [
       "cpGFP",
       "Green",
       "Fast kinetics"
     ],
-    "paper": "Nature Methods 2022",
-    "paperUrl": "https://www.nature.com/articles/s41592-021-01204-5",
+    "paper": "Nature Methods 2023",
+    "paperUrl": "https://www.nature.com/articles/s41592-023-01913-z",
     "brightness": 70,
     "speed": 82,
     "snr": 72,
