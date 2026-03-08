@@ -138,5 +138,30 @@ export const methodologyContent = {
       "Confidence scores indicate data reliability",
       "External validation welcome - submit your data!"
     ]
+  },
+
+  bonusPoints: {
+    title: "Bonus Points",
+    description: "Additional points awarded for special properties that enhance a GEVI's utility:",
+    rules: [
+      {
+        name: "Red-shifted",
+        points: 3,
+        description: "Excitation/emission in red/far-red spectrum (>550nm) for improved tissue penetration",
+        logo: "redShift"
+      },
+      {
+        name: "Two-photon",
+        points: 3,
+        description: "Successfully demonstrated with two-photon imaging for deep tissue applications",
+        logo: "twoPhoton"
+      },
+      {
+        name: "Positive-going",
+        points: 3,
+        description: "Fluorescence increases with depolarization (easier to interpret signals)",
+        logo: "positiveGoing"
+      }
+    ]
   }
 };

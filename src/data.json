@@ -202,46 +202,150 @@
     ]
   },
   {
-    "id": "asap4",
-    "name": "ASAP4",
-    "year": 2022,
-    "category": "VSD-cpGFP GEVI",
-    "tags": [
-      "cpGFP",
-      "Green",
-      "High dynamic range"
-    ],
-    "paper": "Nature Methods 2022",
-    "paperUrl": "https://doi.org/10.1038/s41592-022-01463-y",
-    "brightness": 72,
-    "speed": 78,
-    "snr": 70,
-    "dynamicRange": 98,
-    "photostability": 95,
-    "subthreshold": 72,
-    "overall": 75,
-    "description": "Current state-of-the-art ASAP family member with exceptional dynamic range up to 50% deltaF/F, designed for one- and two-photon imaging with improved photostability."
-  },
-  {
-    "id": "asap4s",
-    "name": "ASAP4s",
+    "id": "asap4b",
+    "name": "ASAP4b",
     "year": 2023,
     "category": "VSD-cpGFP GEVI",
     "tags": [
       "cpGFP",
       "Green",
-      "Fast kinetics"
+      "High dynamic range",
+      "Positive"
     ],
     "paper": "Nature Methods 2023",
-    "paperUrl": "https://www.nature.com/articles/s41592-023-01913-z",
-    "brightness": 70,
-    "speed": 82,
+    "paperUrl": "https://doi.org/10.1038/s41592-023-01913-z",
+    "brightness": 75,
+    "speed": 75,
     "snr": 72,
-    "dynamicRange": 95,
+    "dynamicRange": 100,
     "photostability": 92,
     "subthreshold": 70,
     "overall": 78,
-    "description": "ASAP4 variant with accelerated kinetics while maintaining high brightness and dynamic range, optimized for fast imaging applications."
+    "description": "ASAP4b is the bright variant of the ASAP4 family with exceptional dynamic range (≥180% ΔF/F per 100mV), producing positive-going fluorescence increase upon depolarization. Designed for one- and two-photon imaging with high photostability.",
+    "spectra": {
+      "excitation": 470,
+      "emission": 525,
+      "peakExcitation": 503,
+      "peakEmission": 515
+    },
+    "kinetics": {
+      "activation": 3.6,
+      "unit": "ms",
+      "notes": "Time from crossing 20mV to fluorescence peak in Kv variant"
+    },
+    "dynamicRangeData": {
+      "deltaF": 180,
+      "unit": "% per 100mV",
+      "sign": "positive",
+      "notes": "≥180% fluorescence increase for 100-mV depolarization"
+    },
+    "applicationNotes": "ASAP4b-Kv shows significantly higher SNR than ASAP3-Kv in two-photon imaging. Enables single-trial detection of spikes in mice.",
+    "researchPapers": [
+      {
+        "title": "Positive-going hybrid indicators for voltage imaging in excitable cells and tissues",
+        "authors": "Kannan M, Vaidya V, Miao J, Huang K, Chavez J, Chang K, Hariraam J, Roopa BL, Nagarajan S, Ananth A, Liu H, Zhou Y, Song Y, Xu C",
+        "journal": "Nature Methods",
+        "year": 2023,
+        "doi": "10.1038/s41592-023-01913-z",
+        "url": "https://doi.org/10.1038/s41592-023-01913-z",
+        "sample": "Cultured neurons, mouse brain cortex, acute brain slices",
+        "applications": ["One-photon voltage imaging", "Two-photon voltage imaging", "Simultaneous voltage and calcium imaging"]
+      },
+      {
+        "title": "Voltage imaging reveals hippocampal inhibitory dynamics shaping pyramidal memory-encoding sequences",
+        "authors": "Ratz M, Bewersdorf J, Younts T, Kuhlman SJ",
+        "journal": "Nature Neuroscience",
+        "year": 2025,
+        "doi": "10.1038/s41593-025-02016-y",
+        "url": "https://doi.org/10.1038/s41593-025-02016-y",
+        "sample": "Mouse hippocampal neurons",
+        "applications": ["In vivo voltage imaging", "Inhibitory neuron imaging"]
+      },
+      {
+        "title": "Imaging sensory transmission and neuronal plasticity in primary sensory neurons with a positively tuned voltage indicator",
+        "authors": "Chaves G, Taha E, Abdallah C, Karapetyan G, Zgraggen E, Gouty S, Huang K, Kannan M, Kuhlman S, Sumbre G",
+        "journal": "Frontiers in Cellular Neuroscience",
+        "year": 2025,
+        "doi": "10.3389/fncel.2025.1579715",
+        "url": "https://doi.org/10.3389/fncel.2025.1579715",
+        "sample": "Dorsal root ganglia neurons",
+        "applications": ["In vivo voltage imaging", "Sensory neuron imaging"]
+      }
+    ],
+    "paperCount": 3
+  },
+  {
+    "id": "asap4e",
+    "name": "ASAP4e",
+    "year": 2023,
+    "category": "VSD-cpGFP GEVI",
+    "tags": [
+      "cpGFP",
+      "Green",
+      "High speed",
+      "Positive"
+    ],
+    "paper": "Nature Methods 2023",
+    "paperUrl": "https://doi.org/10.1038/s41592-023-01913-z",
+    "brightness": 72,
+    "speed": 82,
+    "snr": 75,
+    "dynamicRange": 98,
+    "photostability": 90,
+    "subthreshold": 72,
+    "overall": 80,
+    "description": "ASAP4e is the enhanced/speed variant of the ASAP4 family with fast kinetics while maintaining high dynamic range (≥180% ΔF/F per 100mV). Produces positive-going fluorescence increase upon depolarization. Optimized for fast imaging applications.",
+    "spectra": {
+      "excitation": 470,
+      "emission": 525,
+      "peakExcitation": 503,
+      "peakEmission": 515
+    },
+    "kinetics": {
+      "activation": 1.3,
+      "unit": "ms",
+      "notes": "Time from crossing 20mV to fluorescence peak in Kv variant"
+    },
+    "dynamicRangeData": {
+      "deltaF": 180,
+      "unit": "% per 100mV",
+      "sign": "positive",
+      "notes": "≥180% fluorescence increase for 100-mV depolarization"
+    },
+    "applicationNotes": "ASAP4e enables single-trial detection of spikes in mice over the course of minutes under standard microscopy equipment. Performs well under two-photon illumination.",
+    "researchPapers": [
+      {
+        "title": "Positive-going hybrid indicators for voltage imaging in excitable cells and tissues",
+        "authors": "Kannan M, Vaidya V, Miao J, Huang K, Chavez J, Chang K, Hariraam J, Roopa BL, Nagarajan S, Ananth A, Liu H, Zhou Y, Song Y, Xu C",
+        "journal": "Nature Methods",
+        "year": 2023,
+        "doi": "10.1038/s41592-023-01913-z",
+        "url": "https://doi.org/10.1038/s41592-023-01913-z",
+        "sample": "Cultured neurons, mouse brain cortex, acute brain slices",
+        "applications": ["One-photon voltage imaging", "Two-photon voltage imaging", "Simultaneous voltage and calcium imaging"]
+      },
+      {
+        "title": "Voltage imaging reveals hippocampal inhibitory dynamics shaping pyramidal memory-encoding sequences",
+        "authors": "Ratz M, Bewersdorf J, Younts T, Kuhlman SJ",
+        "journal": "Nature Neuroscience",
+        "year": 2025,
+        "doi": "10.1038/s41593-025-02016-y",
+        "url": "https://doi.org/10.1038/s41593-025-02016-y",
+        "sample": "Mouse hippocampal neurons",
+        "applications": ["In vivo voltage imaging", "Inhibitory neuron imaging"]
+      },
+      {
+        "title": "Imaging sensory transmission and neuronal plasticity in primary sensory neurons with a positively tuned voltage indicator",
+        "authors": "Chaves G, Taha E, Abdallah C, Karapetyan G, Zgraggen E, Gouty S, Huang K, Kannan M, Kuhlman S, Sumbre G",
+        "journal": "Frontiers in Cellular Neuroscience",
+        "year": 2025,
+        "doi": "10.3389/fncel.2025.1579715",
+        "url": "https://doi.org/10.3389/fncel.2025.1579715",
+        "sample": "Dorsal root ganglia neurons",
+        "applications": ["In vivo voltage imaging", "Sensory neuron imaging"]
+      }
+    ],
+    "paperCount": 3
   },
   {
     "id": "arclight",
@@ -311,6 +415,28 @@
     "subthreshold": 78,
     "overall": 83,
     "description": "Breakthrough chemigenetic voltage indicator using HaloTag-fluorophore conjugates, providing 10x brighter signal than previous GEVIs for in vivo imaging."
+  },
+  {
+    "id": "hviplus",
+    "name": "HVI+",
+    "year": 2025,
+    "category": "Chemigenetic GEVI",
+    "tags": [
+      "Ace opsin",
+      "Cy3b",
+      "Positive-going",
+      "Red"
+    ],
+    "paper": "Science Advances 2025",
+    "paperUrl": "https://doi.org/10.1126/sciadv.ads1807",
+    "brightness": 78,
+    "speed": 88,
+    "snr": 82,
+    "dynamicRange": 90,
+    "photostability": 85,
+    "subthreshold": 80,
+    "overall": 84,
+    "description": "Hybrid Voltage Indicator+ (HVI+) is a positive-going chemigenetic voltage indicator with 55% ΔF/F0 per 100mV, fast kinetics (rise ~2.2ms, decay ~1.3ms), and excellent photostability (half-life ~736s)."
   },
   {
     "id": "voltron2",
@@ -417,17 +543,17 @@
     "description": "First voltage indicator based on bacterial channelrhodopsin with unprecedented speed around 1ms response, enabling high-fidelity spike detection."
   },
   {
-    "id": "ace2n",
-    "name": "Ace2N",
-    "year": 2015,
+    "id": "ace2n-mneon",
+    "name": "Ace2N-mNeon",
+    "year": 2014,
     "category": "eFRET GEVI",
     "tags": [
       "Ace opsin",
       "mNeon",
       "Green"
     ],
-    "paper": "Science 2015",
-    "paperUrl": "https://doi.org/10.1126/science.aaa4928",
+    "paper": "Science 2014",
+    "paperUrl": "https://doi.org/10.1126/science.aaa0810",
     "brightness": 68,
     "speed": 95,
     "snr": 70,
@@ -435,23 +561,28 @@
     "photostability": 72,
     "subthreshold": 85,
     "overall": 76,
-    "description": "Improved Ace variant with superior membrane trafficking and targeting, enabling robust expression in mammalian neurons for fast voltage imaging."
+    "description": "Ace2N-mNeon is an eFRET GEVI based on the Ace opsin channelrhodopsin fused to mNeon, enabling fast voltage imaging with improved membrane trafficking and targeting in mammalian neurons."
   },
   {
-    "id": "ace2n4aa",
-    "name": "Ace2N-4AA",
-    "year": 2018,
-    "category": "Microbial",
-    "paper": "Cell Reports 2018",
-    "paperUrl": "https://www.cell.com/cell-reports/fulltext/S2211-1247(18)32048-5",
-    "brightness": 70,
+    "id": "ace2n-mneon2",
+    "name": "Ace2N-mNeon2",
+    "year": 2021,
+    "category": "eFRET GEVI",
+    "tags": [
+      "Ace opsin",
+      "mNeon",
+      "Green"
+    ],
+    "paper": "Science 2021",
+    "paperUrl": "https://doi.org/10.1126/science.abm8797",
+    "brightness": 75,
     "speed": 96,
-    "snr": 72,
-    "dynamicRange": 68,
-    "photostability": 75,
+    "snr": 75,
+    "dynamicRange": 70,
+    "photostability": 78,
     "subthreshold": 88,
-    "overall": 78,
-    "description": "Ace2N optimized with four amino acid substitutions that improve plasma membrane localization and enhance subthreshold voltage sensitivity."
+    "overall": 80,
+    "description": "Ace2N-mNeon2 is an improved version of Ace2N-mNeon with enhanced brightness and faster kinetics, optimized for high-speed voltage imaging in neurons."
   },
   {
     "id": "somarchon",
@@ -627,22 +758,6 @@
     "description": "Korean-developed VSFP variant with improved expression and signal amplitude in mammalian neurons."
   },
   {
-    "id": "dragon",
-    "name": "Dragon",
-    "year": 2022,
-    "category": "HaloTag",
-    "paper": "Nature Methods 2022",
-    "paperUrl": "https://www.nature.com/articles/s41592-022-01464-x",
-    "brightness": 88,
-    "speed": 82,
-    "snr": 80,
-    "dynamicRange": 85,
-    "photostability": 78,
-    "subthreshold": 75,
-    "overall": 81,
-    "description": "Bright red-shifted chemigenetic voltage indicator enabling dual-color imaging with green calcium indicators."
-  },
-  {
     "id": "nir",
     "name": "NIR-GEV1",
     "year": 2020,
@@ -749,7 +864,7 @@
       "High speed"
     ],
     "paper": "Neuron 2024",
-    "paperUrl": "https://doi.org/10.1016/j.neuron.2024.07.013",
+    "paperUrl": "https://doi.org/10.1016/j.neuron.2024.08.019",
     "brightness": 75,
     "speed": 85,
     "snr": 78,
@@ -757,7 +872,77 @@
     "photostability": 80,
     "subthreshold": 72,
     "overall": 79,
-    "description": "Latest generation ASAP sensor with further improved kinetics and brightness for high-speed voltage imaging."
+    "description": "ASAP5 is a fast and responsive voltage indicator with enhanced sensitivity for unitary synaptic events. Features submillisecond kinetics at physiological temperature (0.78 ms activation at 37C) and high voltage sensitivity of -0.83%/mV, enabling detection of single synaptic events.",
+    "spectra": {
+      "excitation": 470,
+      "excitationFilter": "482/18 nm bandpass",
+      "emission": 525,
+      "emissionFilter": "525/50 nm bandpass",
+      "peakExcitation": 500,
+      "peakEmission": 515
+    },
+    "kinetics": {
+      "activation": 2.61,
+      "activation37C": 0.78,
+      "deactivation": 4.30,
+      "deactivation37C": 1.12,
+      "fastComponent": 92,
+      "fastComponent37C": 95,
+      "unit": "ms",
+      "notes": "Activation and deactivation time constants at room temperature (23C) and physiological temperature (37C)"
+    },
+    "dynamicRangeData": {
+      "deltaF": -51,
+      "unit": "% per 100mV",
+      "voltageSensitivity": -0.83,
+      "voltageSensitivityUnit": "%/mV",
+      "sign": "negative",
+      "notes": "Response to 100mV step depolarization (-70mV to +30mV)"
+    },
+    "applicationNotes": "Optimized for detecting unitary synaptic events (mEPSPs) in cultured neurons and in vivo imaging. Can match chemigenetic indicators (Voltron2) in SNR despite lower brightness due to higher responsivity.",
+    "researchPapers": [
+      {
+        "title": "A fast and responsive voltage indicator with enhanced sensitivity for unitary synaptic events",
+        "authors": "Hao YA, Lee S, Roth RH, Natale S, Gomez L, Taxidis J, O'Neill PS, Villette V, Bradley J, Wang Z, Jiang D, Zhang G, Sheng M, Lu D, Boyden E, Delvendahl I, Golshani P, Wernig M, Feldman DE, Ji N, Ding J, Südhof TC, Clandinin TR, Lin MZ",
+        "journal": "Neuron",
+        "year": 2024,
+        "doi": "10.1016/j.neuron.2024.08.019",
+        "url": "https://doi.org/10.1016/j.neuron.2024.08.019",
+        "sample": "Cultured rat/human neurons, mouse cortex, fruit fly neurons, human induced neurons",
+        "applications": ["Action potential imaging", "mEPSP detection", "In vivo voltage imaging", "Dendrosomatic propagation"]
+      },
+      {
+        "title": "Selective life-long suppression of an odor processing channel in response to critical period experience",
+        "authors": "Leier HC, Jonaitis J, Foden AJ, Wilkov AJ, Ross AE, Van der Linden Costello P, Broihier HT, Dacks AM",
+        "journal": "bioRxiv",
+        "year": 2025,
+        "doi": "10.1101/2025.07.18.665601",
+        "url": "https://doi.org/10.1101/2025.07.18.665601",
+        "sample": "Drosophila Or42a olfactory sensory neurons",
+        "applications": ["In vivo odor-evoked responses", "Two-photon voltage imaging"]
+      },
+      {
+        "title": "Deep two-photon voltage imaging with adaptive excitation",
+        "authors": "Zhao S, Hebert E, Gruzdeva A, Mahishi D, Takahashi H, Lee S, Hao YA, Lin MZ, Yapici N, Xu C",
+        "journal": "Research Square",
+        "year": 2024,
+        "doi": "10.21203/rs.3.rs-5434919/v1",
+        "url": "https://doi.org/10.21203/rs.3.rs-5434919/v1",
+        "sample": "Mouse brain neurons expressing ASAP5Kv",
+        "applications": ["Deep two-photon voltage imaging", "In vivo neuronal activity"]
+      },
+      {
+        "title": "A deep learning framework for automated and generalized synaptic event analysis",
+        "authors": "Karelina T, Diehm J, Shewmaker F, Yount JS, Oddo M, Tavakoli N, Vanc A, Lee D, Kim DZ, Ko H",
+        "journal": "eLife",
+        "year": 2025,
+        "doi": "10.7554/eLife.98485",
+        "url": "https://doi.org/10.7554/eLife.98485",
+        "sample": "Cultured rat hippocampal neurons",
+        "applications": ["mEPSP detection", "Simultaneous electrophysiology and ASAP5 imaging"]
+      }
+    ],
+    "paperCount": 4
   },
   {
     "id": "jedi1p",
@@ -1147,6 +1332,59 @@
     "subthreshold": 40,
     "overall": 42,
     "description": "Latest bioluminescent GEVI with improved brightness and voltage sensitivity through luciferase-VSD fusion."
+  },
+  {
+    "id": "solaris",
+    "name": "Solaris",
+    "year": 2024,
+    "category": "Chemigenetic GEVI",
+    "tags": [
+      "Ace rhodopsin",
+      "HaloTag",
+      "Janelia Fluor",
+      "Far-red"
+    ],
+    "paper": "bioRxiv 2024",
+    "paperUrl": "https://doi.org/10.1101/2024.02.02.578569",
+    "brightness": 85,
+    "speed": 90,
+    "snr": 85,
+    "dynamicRange": 98,
+    "photostability": 80,
+    "subthreshold": 78,
+    "overall": 88,
+    "description": "Solaris is a panel of bright and sensitive hybrid voltage indicators with >2-fold higher voltage sensitivity than Voltron2. Solaris585 shows -60.6% ΔF/F₀ per 100mV and -28.1% per action potential, with response kinetics of τ₁/₂ = 1.75ms.",
+    "kinetics": {
+      "halfLife": 1.75,
+      "unit": "ms",
+      "notes": "τ₁/₂ = 1.75 ± 0.11 ms for Solaris585"
+    },
+    "dynamicRangeData": {
+      "deltaF": -60.6,
+      "unit": "% per 100mV",
+      "actionPotential": -28.1,
+      "apUnit": "% per AP",
+      "sign": "negative",
+      "notes": "HEK293T cells; -28.1% per AP in neurons"
+    },
+    "fluorophores": [
+      "JF525",
+      "JF549",
+      "JF552",
+      "JF585",
+      "JF635"
+    ],
+    "researchPapers": [
+      {
+        "title": "Solaris: a panel of bright and sensitive hybrid voltage indicators for imaging membrane potential in cultured neurons",
+        "authors": "Yang J, Zhu S, Yang L, Peng L, Han Y, Hayward RF, Park P, Hu D, Cohen AE, Zou P",
+        "journal": "bioRxiv",
+        "year": 2024,
+        "doi": "10.1101/2024.02.02.578569",
+        "url": "https://doi.org/10.1101/2024.02.02.578569",
+        "type": "Original"
+      }
+    ]
   },
   {
     "id": "marina",
