@@ -1,4 +1,5 @@
 import { ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar } from 'recharts';
+import { BonusBadges } from './BonusBadges';
 import { BookOpen, ExternalLink, Plus, X } from 'lucide-react';
 import { RainbowText, getGEVIColor } from '../utils';
 import { SpectrumViewer } from '../SpectrumViewer';
@@ -19,9 +20,10 @@ interface GEVIDetailProps {
   compareGEVIs: any[];
   darkMode: boolean;
   onClose: () => void;
+  onShowFamilyTree?: () => void;
 }
 
-export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, darkMode, onClose }: GEVIDetailProps) {
+export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, darkMode, onClose, onShowFamilyTree }: GEVIDetailProps) {
   const getRadarData = () => [
     { subject: 'Bright', value: gevi.brightness, fullMark: 100 },
     { subject: 'Speed', value: gevi.speed, fullMark: 100 },
@@ -169,12 +171,24 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, darkMode, onClo
               </RadarChart>
             </ResponsiveContainer>
           </div>
+          <div className="mt-4">
+            <BonusBadges gevi={gevi} size="md" />
+          </div>
         </div>
 
         {/* Family Tree */}
         <div className={`border rounded-lg p-4 md:p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
-          <h4 className={`text-sm font-semibold mb-3 md:mb-4 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Genetic Lineage</h4>
-          <FamilyTree geviId={gevi.id} darkMode={darkMode} />
+          <h4
+            className={`text-sm font-semibold mb-3 md:mb-4 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}
+          >
+            Genetic Lineage
+          </h4>
+          <div
+            className={`cursor-pointer ${onShowFamilyTree ? 'hover:ring-2 hover:ring-blue-500/50 rounded-lg -m-2 p-2' : ''}`}
+            onClick={onShowFamilyTree}
+          >
+            <FamilyTree geviId={gevi.id} darkMode={darkMode} />
+          </div>
         </div>
       </div>
 

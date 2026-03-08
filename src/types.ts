@@ -63,6 +63,6 @@ export interface SortConfig {
   order: SortOrder;
 }
 
-export type ViewTab = 'database' | 'methodology' | 'contact';
+export type ViewTab = 'database' | 'methodology' | 'contact' | 'tools';
 
 export type MobileView = 'list' | 'detail';

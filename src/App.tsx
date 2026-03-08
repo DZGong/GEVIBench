@@ -1,8 +1,9 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import gevisData from './data.json';
 import { methodologyContent } from './methodology';
 import { SpectrumViewer } from './SpectrumViewer';
 import { FamilyTree } from './FamilyTree';
+import { FamilyTreePanel } from './components/FamilyTreePanel';
 import { Header } from './components/Header';
 import { SearchFilters } from './components/SearchFilters';
 import { GEVIList } from './components/GEVIList';
@@ -37,6 +38,7 @@ function GEVIBenchApp() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<ViewTab>('database');
   const [compareGEVIs, setCompareGEVIs] = useState<GEVI[]>([]);
+  const [showFamilyTree, setShowFamilyTree] = useState(false);
 
   // Derived state
   const categories = [DEFAULT_CATEGORY, ...new Set(gevis.map(g => g.category))];
@@ -82,6 +84,7 @@ function GEVIBenchApp() {
   const handleSelectGEVI = useCallback((gevi: GEVI) => {
     setSelectedGEVI(gevi);
     setMobileView('detail');
+    setShowFamilyTree(false);
   }, []);
 
   const handleLogoClick = useCallback(() => {
@@ -232,26 +235,50 @@ function GEVIBenchApp() {
           </div>
         )}
 
-        {/* Detail Panel */}
-        {selectedGEVI && mobileView === 'detail' && (
-          <div className={`col-span-1 ${mobileView === 'list' ? 'sm:col-span-2' : 'col-span-1 md:col-span-2'}`}>
-            {mobileView === 'detail' && (
-              <button
-                onClick={() => setMobileView('list')}
-                className={`sm:hidden mb-3 text-sm flex items-center gap-1 ${colors.accent}`}
-              >
-                ← Back to list
-              </button>
-            )}
-            <GEVIDetail
-              gevi={selectedGEVI}
-              onAddToCompare={addToCompare}
-              compareGEVIs={compareGEVIs}
+        {/* Detail Panel / Family Tree */}
+        <div className={`col-span-1 ${mobileView === 'list' ? 'sm:col-span-2' : 'col-span-1 md:col-span-2'}`}>
+          {/* Family Tree or Detail Panel */}
+          {showFamilyTree ? (
+            <FamilyTreePanel
               darkMode={darkMode}
-              onClose={handleLogoClick}
+              onSelectGEVI={handleSelectGEVI}
+              selectedGEVI={selectedGEVI}
+              onCloseDetail={() => {
+                // Go back to previous view (GEVI detail if a GEVI was selected, otherwise main database)
+                setShowFamilyTree(false);
+                if (selectedGEVI) {
+                  setMobileView('detail');
+                }
+              }}
+              compareGEVIs={compareGEVIs}
+              onAddToCompare={addToCompare}
             />
-          </div>
-        )}
+          ) : (
+            selectedGEVI && mobileView === 'detail' && (
+              <>
+                {mobileView === 'detail' && (
+                  <button
+                    onClick={() => setMobileView('list')}
+                    className={`sm:hidden mb-3 text-sm flex items-center gap-1 ${colors.accent}`}
+                  >
+                    ← Back to list
+                  </button>
+                )}
+                <GEVIDetail
+                  gevi={selectedGEVI}
+                  onAddToCompare={addToCompare}
+                  compareGEVIs={compareGEVIs}
+                  darkMode={darkMode}
+                  onClose={handleLogoClick}
+                  onShowFamilyTree={() => {
+                    setActiveTab('database');
+                    setShowFamilyTree(true);
+                  }}
+                />
+              </>
+            )
+          )}
+        </div>
       </div>
     </main>
   );
@@ -350,6 +377,25 @@ function GEVIBenchApp() {
                 ))}
               </div>
             </div>
+
+            {/* Bonus Points Section */}
+            <div className="mt-6">
+              <h3 className={`text-lg font-semibold mb-2 ${colors.text}`}>{methodologyContent.bonusPoints.title}</h3>
+              <p className={`text-sm ${colors.textSecondary} mb-3`}>{methodologyContent.bonusPoints.description}</p>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                {methodologyContent.bonusPoints.rules.map((rule: any, i: number) => (
+                  <div key={i} className={`p-3 rounded-lg border ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'}`}>
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${darkMode ? 'bg-blue-900 text-blue-300' : 'bg-blue-100 text-blue-800'}`}>
+                        +{rule.points} pts
+                      </span>
+                      <span className={`text-sm font-medium ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>{rule.name}</span>
+                    </div>
+                    <div className={`text-xs ${colors.textMuted}`}>{rule.description}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -403,11 +449,27 @@ function GEVIBenchApp() {
         mobileMenuOpen={mobileMenuOpen}
         setMobileMenuOpen={setMobileMenuOpen}
         onLogoClick={handleLogoClick}
+        onShowFamilyTree={() => {
+          setActiveTab('database');
+          setShowFamilyTree(true);
+        }}
       />
 
       {activeTab === 'database' && renderDatabaseTab()}
       {activeTab === 'methodology' && renderMethodologyTab()}
       {activeTab === 'contact' && <ContactForm darkMode={darkMode} />}
+      {activeTab === 'tools' && (
+        <FamilyTreePanel
+          darkMode={darkMode}
+          onSelectGEVI={handleSelectGEVI}
+          selectedGEVI={selectedGEVI}
+          onCloseDetail={() => {
+            setSelectedGEVI(null);
+          }}
+          compareGEVIs={compareGEVIs}
+          onAddToCompare={addToCompare}
+        />
+      )}
     </div>
   );
 }
