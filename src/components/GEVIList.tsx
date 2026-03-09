@@ -1,4 +1,4 @@
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, Link, Sun, Zap, Activity, TrendingUp, Shield, FileText } from 'lucide-react';
 import { RainbowText, getGEVIColor } from '../utils';
 import type { SortConfig, SortField } from '../types';
 
@@ -95,7 +95,7 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
                       className={`text-xs flex items-center gap-1 whitespace-nowrap ${darkMode ? 'text-blue-400 hover:underline' : 'text-blue-900 hover:underline'}`}
                       title={gevi.paper}
                     >
-                      🔗
+                      <Link className="w-3 h-3" />
                     </a>
                   </div>
                 </div>
@@ -124,12 +124,12 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
                       <div className="h-full bg-blue-600 rounded-full" style={{ width: `${((gevi[sortField] || 0) / maxScore) * 100}%` }} />
                     </div>
                     <div className="flex items-center gap-1">
-                      <span className={`text-[10px] px-1 py-0.5 rounded ${darkMode ? 'bg-gray-600 text-gray-300' : 'bg-gray-100 text-gray-600'}`}>☀️{gevi.brightness}</span>
-                      <span className={`text-[10px] px-1 py-0.5 rounded ${darkMode ? 'bg-gray-600 text-gray-300' : 'bg-gray-100 text-gray-600'}`}>⚡{gevi.speed}</span>
-                      <span className={`text-[10px] px-1 py-0.5 rounded ${darkMode ? 'bg-gray-600 text-gray-300' : 'bg-gray-100 text-gray-600'}`}>📊{gevi.snr}</span>
-                      <span className={`text-[10px] px-1 py-0.5 rounded ${darkMode ? 'bg-gray-600 text-gray-300' : 'bg-gray-100 text-gray-600'}`}>📈{gevi.dynamicRange}</span>
-                      <span className={`text-[10px] px-1 py-0.5 rounded ${darkMode ? 'bg-gray-600 text-gray-300' : 'bg-gray-100 text-gray-600'}`}>🛡️{gevi.photostability}</span>
-                      <span className={`text-[10px] px-1 py-0.5 rounded ${darkMode ? 'bg-gray-600 text-gray-300' : 'bg-gray-100 text-gray-600'}`}>📄{gevi.paperCount || 0}</span>
+                      <span className={`text-[10px] px-1 py-0.5 rounded flex items-center gap-0.5 ${darkMode ? 'bg-gray-600 text-gray-300' : 'bg-gray-100 text-gray-600'}`}><Sun className="w-2.5 h-2.5" />{gevi.brightness}</span>
+                      <span className={`text-[10px] px-1 py-0.5 rounded flex items-center gap-0.5 ${darkMode ? 'bg-gray-600 text-gray-300' : 'bg-gray-100 text-gray-600'}`}><Zap className="w-2.5 h-2.5" />{gevi.speed}</span>
+                      <span className={`text-[10px] px-1 py-0.5 rounded flex items-center gap-0.5 ${darkMode ? 'bg-gray-600 text-gray-300' : 'bg-gray-100 text-gray-600'}`}><Activity className="w-2.5 h-2.5" />{gevi.snr}</span>
+                      <span className={`text-[10px] px-1 py-0.5 rounded flex items-center gap-0.5 ${darkMode ? 'bg-gray-600 text-gray-300' : 'bg-gray-100 text-gray-600'}`}><TrendingUp className="w-2.5 h-2.5" />{gevi.dynamicRange}</span>
+                      <span className={`text-[10px] px-1 py-0.5 rounded flex items-center gap-0.5 ${darkMode ? 'bg-gray-600 text-gray-300' : 'bg-gray-100 text-gray-600'}`}><Shield className="w-2.5 h-2.5" />{gevi.photostability}</span>
+                      <span className={`text-[10px] px-1 py-0.5 rounded flex items-center gap-0.5 ${darkMode ? 'bg-gray-600 text-gray-300' : 'bg-gray-100 text-gray-600'}`}><FileText className="w-2.5 h-2.5" />{gevi.paperCount || 0}</span>
                       <span className="text-base font-bold text-blue-500 ml-1">{gevi[sortField] || 0}</span>
                     </div>
                   </div>

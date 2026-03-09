@@ -1,16 +1,50 @@
 // Interactive Family Tree Panel
 // Shows the full GEVI family tree with interactive nodes
-// This component is used in the detail panel area of the database tab
+// FPbase-style vertical SVG tree (root at top, descendants below)
 
-import { useState } from 'react';
-import { X, ChevronRight, Info } from 'lucide-react';
+import { useState, useMemo } from 'react';
+import { X } from 'lucide-react';
 import gevisData from '../data.json';
 import type { GEVI } from '../types';
-import { useTheme } from '../context/ThemeContext';
 
 const gevis = gevisData as GEVI[];
 
-// Family tree structure from FamilyTree.tsx
+// Color mapping based on GEVI properties
+function getGEVIColor(geviName: string, category: string): string {
+  const name = geviName.toLowerCase();
+
+  // Red/Far-red
+  if (name.includes('red') || name.includes('far') || name.includes('rfp') ||
+      name.includes('nir') || name.includes('mcherry') || name.includes('tagrfp') ||
+      category.includes('Red FP')) {
+    return '#ff1744';
+  }
+  // Yellow/Orange
+  if (name.includes('yellow') || name.includes('orange') || name.includes('yfp') ||
+      name.includes('meyfp') || name.includes('citrine') || name.includes('venus')) {
+    return '#ffea00';
+  }
+  // Cyan
+  if (name.includes('cyan') || name.includes('cfp') || name.includes('tev') ||
+      name.includes('mteal') || name.includes('cerulean')) {
+    return '#00e5ff';
+  }
+  // Green (default)
+  if (name.includes('green') || name.includes('gfp') || name.includes('emerald') ||
+      name.includes('asap') || name.includes('arc') || name.includes('jedi') ||
+      category.includes('VSD') || category.includes('Opsin')) {
+    return '#00e676';
+  }
+  // Purple/Pink
+  if (name.includes('purple') || name.includes('pink') || name.includes('mVenus') ||
+      name.includes('positron') || name.includes('voltron')) {
+    return '#d500f9';
+  }
+
+  return '#00e676';
+}
+
+// Family tree structure
 const FAMILY_TREE = {
   'VSD': {
     name: 'VSD Based',
@@ -18,15 +52,16 @@ const FAMILY_TREE = {
       'VSD-FRET': {
         name: 'Ci-VSP FRET-based',
         children: {
-          'VSFP1': { name: 'VSFP1', year: 2001 },
+          'VSFP1': { name: 'VSFP1', year: 2001, geviId: 'vsfp1' },
           'VSFP2': {
             name: 'VSFP2',
             year: 2007,
+            geviId: 'vsfp2',
             children: {
-              'VSFP2.3': { name: 'VSFP2.3', year: 2009 },
-              'Mermaid': { name: 'Mermaid', year: 2008 },
-              'Butterfly': { name: 'VSFP-Butterfly', year: 2010 },
-              'nirButterfly': { name: 'nirButterfly', year: 2018 },
+              'VSFP2.3': { name: 'VSFP2.3', year: 2009, geviId: 'vsfp2_3' },
+              'Mermaid': { name: 'Mermaid', year: 2008, geviId: 'mermaid' },
+              'Butterfly': { name: 'VSFP-Butterfly', year: 2010, geviId: 'vsfpbutterfly' },
+              'nirButterfly': { name: 'nirButterfly', year: 2018, geviId: 'nirbutterfly' },
             }
           },
         }
@@ -37,10 +72,10 @@ const FAMILY_TREE = {
           'ArcLight': {
             name: 'ArcLight lineage',
             children: {
-              'arclight': { name: 'ArcLight', year: 2012 },
-              'arclightd': { name: 'ArcLight-D', year: 2015 },
-              'Bongwoori': { name: 'Bongwoori', year: 2017 },
-              'Marina': { name: 'Marina', year: 2017 },
+              'arclight': { name: 'ArcLight', year: 2012, geviId: 'arclight' },
+              'arclightd': { name: 'ArcLight-D', year: 2015, geviId: 'arclightd' },
+              'Bongwoori': { name: 'Bongwoori', year: 2017, geviId: 'bongwoori' },
+              'Marina': { name: 'Marina', year: 2017, geviId: 'marina' },
             }
           }
         }
@@ -51,28 +86,28 @@ const FAMILY_TREE = {
           'ASAP': {
             name: 'ASAP lineage',
             children: {
-              'asap1': { name: 'ASAP1', year: 2014 },
-              'asap2s': { name: 'ASAP2s', year: 2017 },
-              'asap3': { name: 'ASAP3', year: 2019 },
-              'asap4b': { name: 'ASAP4b', year: 2022 },
-              'asap4e': { name: 'ASAP4e', year: 2022 },
-              'asap5': { name: 'ASAP5', year: 2024 },
+              'asap1': { name: 'ASAP1', year: 2014, geviId: 'asap1' },
+              'asap2s': { name: 'ASAP2s', year: 2017, geviId: 'asap2s' },
+              'asap3': { name: 'ASAP3', year: 2019, geviId: 'asap3' },
+              'asap4b': { name: 'ASAP4b', year: 2022, geviId: 'asap4b' },
+              'asap4e': { name: 'ASAP4e', year: 2022, geviId: 'asap4e' },
+              'asap5': { name: 'ASAP5', year: 2024, geviId: 'asap5' },
               'JEDI': {
                 name: 'JEDI lineage',
                 children: {
-                  'jedi2p': { name: 'JEDI-2P', year: 2022 },
-                  'jedi1p': { name: 'JEDI-1P', year: 2023 },
+                  'jedi2p': { name: 'JEDI-2P', year: 2022, geviId: 'jedi2p' },
+                  'jedi1p': { name: 'JEDI-1P', year: 2023, geviId: 'jedi1p' },
                 }
               },
-              'restus': { name: 'rEstus', year: 2024 },
-              'synth': { name: 'Synth', year: 2024 },
-              'probedb': { name: 'ProbeDB', year: 2024 },
+              'restus': { name: 'rEstus', year: 2024, geviId: 'restus' },
+              'synth': { name: 'Synth', year: 2024, geviId: 'synth' },
+              'probedb': { name: 'ProbeDB', year: 2024, geviId: 'probedb' },
             }
           },
           'chiVSD': {
             name: 'ChiVSD lineage',
             children: {
-              'chivsfp': { name: 'ChiVSF', year: 2018 },
+              'chivsfp': { name: 'ChiVSF', year: 2018, geviId: 'chivsfp' },
             }
           },
         }
@@ -85,39 +120,39 @@ const FAMILY_TREE = {
       'Opsin-Fluorescent': {
         name: 'Microbial Rhodopsin',
         children: {
-          'PROPS': { name: 'PROPS', year: 2011 },
+          'PROPS': { name: 'PROPS', year: 2011, geviId: 'props' },
           'Arch': {
             name: 'Arch lineage',
             children: {
-              'archer1': { name: 'Archer1', year: 2014 },
+              'archer1': { name: 'Archer1', year: 2014, geviId: 'archer1' },
               'QuasAr': {
                 name: 'QuasAr lineage',
                 children: {
-                  'quasar1': { name: 'QuasAr1', year: 2014 },
-                  'quasar2': { name: 'QuasAr2', year: 2014 },
-                  'quasar3': { name: 'paQuasAr3', year: 2019 },
-                  'quasar6': { name: 'QuasAr6', year: 2022 },
+                  'quasar1': { name: 'QuasAr1', year: 2014, geviId: 'quasar1' },
+                  'quasar2': { name: 'QuasAr2', year: 2014, geviId: 'quasar2' },
+                  'quasar3': { name: 'paQuasAr3', year: 2019, geviId: 'quasar3' },
+                  'quasar6': { name: 'QuasAr6', year: 2022, geviId: 'quasar6' },
                 }
               },
               'Archon': {
                 name: 'Archon lineage',
                 children: {
-                  'archon1': { name: 'Archon1', year: 2018 },
-                  'archon2': { name: 'Archon2', year: 2018 },
-                  'archon3': { name: 'Archon3', year: 2019 },
-                  'somarchon': { name: 'SomArchon', year: 2019 },
+                  'archon1': { name: 'Archon1', year: 2018, geviId: 'archon1' },
+                  'archon2': { name: 'Archon2', year: 2018, geviId: 'archon2' },
+                  'archon3': { name: 'Archon3', year: 2019, geviId: 'archon3' },
+                  'somarchon': { name: 'SomArchon', year: 2019, geviId: 'somarchon' },
                 }
               },
-              'rho1': { name: 'Rho1', year: 2015 },
-              'electric': { name: 'Electric', year: 2018 },
-              'pado': { name: 'Pado', year: 2020 },
+              'rho1': { name: 'Rho1', year: 2015, geviId: 'rho1' },
+              'electric': { name: 'Electric', year: 2018, geviId: 'electric' },
+              'pado': { name: 'Pado', year: 2020, geviId: 'pado' },
             }
           },
           'NIR': {
             name: 'NIR lineage',
             children: {
-              'nir': { name: 'NIR', year: 2016 },
-              'nir2': { name: 'NIR2', year: 2018 },
+              'nir': { name: 'NIR', year: 2016, geviId: 'nir' },
+              'nir2': { name: 'NIR2', year: 2018, geviId: 'nir2' },
             }
           },
         }
@@ -125,17 +160,17 @@ const FAMILY_TREE = {
       'Opsin-FRET': {
         name: 'Opsin-FRET',
         children: {
-          'macq': { name: 'MacQ', year: 2014 },
-          'ace1': { name: 'Ace1', year: 2014 },
+          'macq': { name: 'MacQ', year: 2014, geviId: 'macq' },
+          'ace1': { name: 'Ace1', year: 2014, geviId: 'ace1' },
           'ace2n': {
             name: 'Ace2N lineage',
             children: {
-              'ace2n-mneon': { name: 'Ace2N-mNeon', year: 2015 },
-              'ace2n-mneon2': { name: 'Ace2N-mNeon2', year: 2018 },
+              'ace2n-mneon': { name: 'Ace2N-mNeon', year: 2015, geviId: 'ace2n-mneon' },
+              'ace2n-mneon2': { name: 'Ace2N-mNeon2', year: 2018, geviId: 'ace2n-mneon2' },
             }
           },
-          'varnam': { name: 'VARNAM', year: 2018 },
-          'positron': { name: 'Positron', year: 2020 },
+          'varnam': { name: 'VARNAM', year: 2018, geviId: 'varnam' },
+          'positron': { name: 'Positron', year: 2020, geviId: 'positron' },
         }
       },
     }
@@ -146,88 +181,27 @@ const FAMILY_TREE = {
       'Chemigenetic': {
         name: 'Chemigenetic',
         children: {
-          'voltron': { name: 'Voltron', year: 2018 },
-          'voltron2': { name: 'Voltron2', year: 2023 },
-          'hviplus': { name: 'HVIplus', year: 2023 },
+          'voltron': { name: 'Voltron', year: 2018, geviId: 'voltron' },
+          'voltron2': { name: 'Voltron2', year: 2023, geviId: 'voltron2' },
+          'hviplus': { name: 'HVIplus', year: 2023, geviId: 'hviplus' },
         }
       },
       'Red FP': {
         name: 'Red FP',
         children: {
-          'flicr1': { name: 'FlicR1', year: 2016 },
+          'flicr1': { name: 'FlicR1', year: 2016, geviId: 'flicr1' },
         }
       },
       'Bioluminescent': {
         name: 'Bioluminescent',
         children: {
-          'lotusv': { name: 'LOTUS-V', year: 2017 },
-          'amber': { name: 'AMBER', year: 2022 },
-          'solaris': { name: 'Solaris', year: 2023 },
+          'lotusv': { name: 'LOTUS-V', year: 2017, geviId: 'lotusv' },
+          'amber': { name: 'AMBER', year: 2022, geviId: 'amber' },
+          'solaris': { name: 'Solaris', year: 2023, geviId: 'solaris' },
         }
       },
     }
   }
-};
-
-// Map GEVI IDs to their tree path
-const GEVI_PATHS: Record<string, string[]> = {
-  // VSD Based
-  'vsfp1': ['VSD', 'VSD-FRET', 'VSFP1'],
-  'vsfp2': ['VSD', 'VSD-FRET', 'VSFP2', 'VSFP2'],
-  'vsfp2_3': ['VSD', 'VSD-FRET', 'VSFP2', 'VSFP2.3'],
-  'mermaid': ['VSD', 'VSD-FRET', 'VSFP2', 'Mermaid'],
-  'vsfpbutterfly': ['VSD', 'VSD-FRET', 'VSFP2', 'Butterfly'],
-  'nirbutterfly': ['VSD', 'VSD-FRET', 'VSFP2', 'nirButterfly'],
-  'arclight': ['VSD', 'VSD-single', 'ArcLight', 'arclight'],
-  'arclightd': ['VSD', 'VSD-single', 'ArcLight', 'arclightd'],
-  'bongwoori': ['VSD', 'VSD-single', 'ArcLight', 'Bongwoori'],
-  'marina': ['VSD', 'VSD-single', 'ArcLight', 'Marina'],
-  'asap1': ['VSD', 'VSD-cpGFP', 'ASAP', 'asap1'],
-  'asap2s': ['VSD', 'VSD-cpGFP', 'ASAP', 'asap2s'],
-  'asap3': ['VSD', 'VSD-cpGFP', 'ASAP', 'asap3'],
-  'asap4b': ['VSD', 'VSD-cpGFP', 'ASAP', 'asap4b'],
-  'asap4e': ['VSD', 'VSD-cpGFP', 'ASAP', 'asap4e'],
-  'asap5': ['VSD', 'VSD-cpGFP', 'ASAP', 'asap5'],
-  'jedi2p': ['VSD', 'VSD-cpGFP', 'ASAP', 'JEDI', 'jedi2p'],
-  'jedi1p': ['VSD', 'VSD-cpGFP', 'ASAP', 'JEDI', 'jedi1p'],
-  'restus': ['VSD', 'VSD-cpGFP', 'ASAP', 'restus'],
-  'synth': ['VSD', 'VSD-cpGFP', 'ASAP', 'synth'],
-  'probedb': ['VSD', 'VSD-cpGFP', 'ASAP', 'probedb'],
-  'chivsfp': ['VSD', 'VSD-cpGFP', 'chiVSD', 'chivsfp'],
-
-  // Opsin Based - Fluorescent
-  'props': ['Opsin', 'Opsin-Fluorescent', 'PROPS'],
-  'archer1': ['Opsin', 'Opsin-Fluorescent', 'Arch', 'archer1'],
-  'quasar1': ['Opsin', 'Opsin-Fluorescent', 'Arch', 'QuasAr', 'quasar1'],
-  'quasar2': ['Opsin', 'Opsin-Fluorescent', 'Arch', 'QuasAr', 'quasar2'],
-  'quasar3': ['Opsin', 'Opsin-Fluorescent', 'Arch', 'QuasAr', 'quasar3'],
-  'quasar6': ['Opsin', 'Opsin-Fluorescent', 'Arch', 'QuasAr', 'quasar6'],
-  'archon1': ['Opsin', 'Opsin-Fluorescent', 'Arch', 'Archon', 'archon1'],
-  'archon2': ['Opsin', 'Opsin-Fluorescent', 'Arch', 'Archon', 'archon2'],
-  'archon3': ['Opsin', 'Opsin-Fluorescent', 'Arch', 'Archon', 'archon3'],
-  'somarchon': ['Opsin', 'Opsin-Fluorescent', 'Arch', 'Archon', 'somarchon'],
-  'rho1': ['Opsin', 'Opsin-Fluorescent', 'Arch', 'rho1'],
-  'electric': ['Opsin', 'Opsin-Fluorescent', 'Arch', 'electric'],
-  'pado': ['Opsin', 'Opsin-Fluorescent', 'Arch', 'pado'],
-  'nir': ['Opsin', 'Opsin-Fluorescent', 'NIR', 'nir'],
-  'nir2': ['Opsin', 'Opsin-Fluorescent', 'NIR', 'nir2'],
-
-  // Opsin Based - FRET
-  'macq': ['Opsin', 'Opsin-FRET', 'macq'],
-  'ace1': ['Opsin', 'Opsin-FRET', 'ace1'],
-  'ace2n-mneon': ['Opsin', 'Opsin-FRET', 'ace2n', 'ace2n-mneon'],
-  'ace2n-mneon2': ['Opsin', 'Opsin-FRET', 'ace2n', 'ace2n-mneon2'],
-  'varnam': ['Opsin', 'Opsin-FRET', 'varnam'],
-  'positron': ['Opsin', 'Opsin-FRET', 'positron'],
-
-  // Others
-  'voltron': ['Others', 'Chemigenetic', 'voltron'],
-  'voltron2': ['Others', 'Chemigenetic', 'voltron2'],
-  'hviplus': ['Others', 'Chemigenetic', 'hviplus'],
-  'flicr1': ['Others', 'Red FP', 'flicr1'],
-  'lotusv': ['Others', 'Bioluminescent', 'lotusv'],
-  'amber': ['Others', 'Bioluminescent', 'amber'],
-  'solaris': ['Others', 'Bioluminescent', 'solaris'],
 };
 
 interface TreeNode {
@@ -235,13 +209,6 @@ interface TreeNode {
   year?: number;
   children?: Record<string, TreeNode>;
   geviId?: string;
-}
-
-interface HoveredNode {
-  node: TreeNode;
-  gevi: GEVI | null;
-  x: number;
-  y: number;
 }
 
 interface FamilyTreePanelProps {
@@ -253,258 +220,86 @@ interface FamilyTreePanelProps {
   onAddToCompare: (gevi: GEVI) => void;
 }
 
-function flattenTree(node: TreeNode, path: string[] = []): { node: TreeNode; path: string[] }[] {
-  const result: { node: TreeNode; path: string[] }[] = [];
+// Build vertical SVG tree with proper positioning
+function buildVerticalTree(node: TreeNode, depth: number = 0, parentX: number = 0): {
+  nodes: { id: string; name: string; year?: number; x: number; y: number; geviId?: string; color: string; parentX: number; parentY: number }[];
+  links: { fromX: number; fromY: number; toX: number; toY: number }[];
+  maxY: number;
+} {
+  const nodes: { id: string; name: string; year?: number; x: number; y: number; geviId?: string; color: string; parentX: number; parentY: number }[] = [];
+  const links: { fromX: number; fromY: number; toX: number; toY: number }[] = [];
 
-  if (node.geviId) {
-    result.push({ node, path });
-  }
+  const nodeId = node.name.replace(/\s+/g, '_').toLowerCase();
+  const isLeaf = !!node.geviId;
+  const color = isLeaf ? getGEVIColor(node.name, '') : '#9ca3af';
 
-  if (node.children) {
-    for (const [key, child] of Object.entries(node.children)) {
-      result.push(...flattenTree(child, [...path, key]));
-    }
-  }
+  // Calculate y position based on depth
+  const y = depth * 80 + 40;
+  const x = parentX;
 
-  return result;
-}
-
-// Mini Radar Chart component
-function MiniRadar({ gevi, size = 80 }: { gevi: GEVI | null; size?: number }) {
-  if (!gevi) return null;
-
-  const metrics = [
-    { label: 'Bright', value: gevi.brightness },
-    { label: 'Speed', value: gevi.speed },
-    { label: 'SNR', value: gevi.snr },
-    { label: 'Range', value: gevi.dynamicRange },
-    { label: 'Stable', value: gevi.photostability },
-  ];
-
-  const maxValue = 100;
-  const center = size / 2;
-  const radius = size / 2 - 10;
-  const angleStep = (2 * Math.PI) / 5;
-
-  const points = metrics.map((m, i) => {
-    const angle = i * angleStep - Math.PI / 2;
-    const value = (m.value / maxValue) * radius;
-    return {
-      x: center + value * Math.cos(angle),
-      y: center + value * Math.sin(angle),
-    };
+  nodes.push({
+    id: nodeId,
+    name: node.name,
+    year: node.year,
+    x,
+    y,
+    geviId: node.geviId,
+    color,
+    parentX,
+    parentY: y,
   });
 
-  const polygonPoints = points.map(p => `${p.x},${p.y}`).join(' ');
+  let maxChildY = y;
 
-  return (
-    <svg width={size} height={size} className="mx-auto">
-      {/* Background pentagon */}
-      {[0.2, 0.4, 0.6, 0.8, 1].map((scale, i) => (
-        <polygon
-          key={i}
-          points={metrics.map((_, j) => {
-            const angle = j * angleStep - Math.PI / 2;
-            const r = radius * scale;
-            return `${center + r * Math.cos(angle)},${center + r * Math.sin(angle)}`;
-          }).join(' ')}
-          fill="none"
-          stroke="#ccc"
-          strokeWidth="0.5"
-        />
-      ))}
-      {/* Data polygon */}
-      <polygon
-        points={polygonPoints}
-        fill="rgba(59, 130, 246, 0.3)"
-        stroke="#3b82f6"
-        strokeWidth="1.5"
-      />
-      {/* Labels */}
-      {metrics.map((m, i) => {
-        const angle = i * angleStep - Math.PI / 2;
-        const labelRadius = radius + 8;
-        return (
-          <text
-            key={i}
-            x={center + labelRadius * Math.cos(angle)}
-            y={center + labelRadius * Math.sin(angle)}
-            fontSize="6"
-            textAnchor="middle"
-            dominantBaseline="middle"
-            fill="#666"
-          >
-            {m.label}
-          </text>
-        );
-      })}
-    </svg>
-  );
+  if (node.children) {
+    const childKeys = Object.keys(node.children);
+    const totalWidth = childKeys.length * 100;
+    const startX = parentX - totalWidth / 2 + 50;
+
+    childKeys.forEach((key, index) => {
+      const child = node.children![key];
+      const childX = startX + index * 100;
+      const childResult = buildVerticalTree(child, depth + 1, childX);
+
+      // Add link from parent to child
+      links.push({
+        fromX: x,
+        fromY: y + 10,
+        toX: childX,
+        toY: childResult.nodes[0]?.y || (depth + 1) * 80 + 40,
+      });
+
+      nodes.push(...childResult.nodes);
+      links.push(...childResult.links);
+      maxChildY = Math.max(maxChildY, childResult.maxY);
+    });
+  }
+
+  return { nodes, links, maxY: Math.max(y, maxChildY) };
 }
 
-// Tooltip component
-function NodeTooltip({ hoveredNode }: { hoveredNode: HoveredNode }) {
-  const { darkMode } = useTheme();
-  const gevi = hoveredNode.gevi;
+// Build all branches
+function buildAllBranchesVertical() {
+  const allNodes: { id: string; name: string; year?: number; x: number; y: number; geviId?: string; color: string; branch: string }[] = [];
+  const allLinks: { fromX: number; fromY: number; toX: number; toY: number; branch: string }[] = [];
 
-  return (
-    <div
-      className={`absolute z-50 p-3 rounded-lg shadow-xl border ${
-        darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
-      }`}
-      style={{
-        left: hoveredNode.x + 20,
-        top: hoveredNode.y - 50,
-        minWidth: '200px',
-        pointerEvents: 'none',
-      }}
-    >
-      {gevi ? (
-        <>
-          <div className="flex items-center gap-2 mb-2">
-            <span className="font-semibold text-blue-500">{gevi.name}</span>
-            <span className={`text-xs px-1.5 py-0.5 rounded ${darkMode ? 'bg-gray-700 text-gray-300' : 'bg-gray-100 text-gray-600'}`}>
-              {gevi.year}
-            </span>
-          </div>
-          <div className={`text-xs mb-2 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-            {gevi.description.substring(0, 80)}...
-          </div>
-          <MiniRadar gevi={gevi} size={100} />
-          <div className="grid grid-cols-2 gap-1 mt-2 text-xs">
-            <div className={`${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Overall: <span className="font-semibold text-blue-500">{gevi.overall}</span></div>
-            <div className={`${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>SNR: <span className="font-semibold">{gevi.snr}</span></div>
-            <div className={`${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Speed: <span className="font-semibold">{gevi.speed}</span></div>
-            <div className={`${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Range: <span className="font-semibold">{gevi.dynamicRange}</span></div>
-          </div>
-        </>
-      ) : (
-        <div className="text-center">
-          <div className="font-semibold mb-1">{hoveredNode.node.name}</div>
-          {hoveredNode.node.year && (
-            <div className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-              Year: {hoveredNode.node.year}
-            </div>
-          )}
-        </div>
-      )}
-    </div>
-  );
-}
+  const branches = Object.entries(FAMILY_TREE);
+  // Vertical layout: each branch is a column
+  const branchSpacing = 500;
 
-// Tree Node component
-function TreeNodeComponent({
-  node,
-  path,
-  level,
-  onHover,
-  onLeave,
-  onClick,
-  expandedNodes,
-  toggleNode,
-  darkMode,
-}: {
-  node: TreeNode;
-  path: string[];
-  level: number;
-  onHover: (node: TreeNode, gevi: GEVI | null, x: number, y: number) => void;
-  onLeave: () => void;
-  onClick: (node: TreeNode, gevi: GEVI | null) => void;
-  expandedNodes: Set<string>;
-  toggleNode: (path: string) => void;
-  darkMode: boolean;
-}) {
-  const hasChildren = node.children && Object.keys(node.children).length > 0;
-  const isExpanded = expandedNodes.has(path.join('/'));
-  const nodePath = path.join('/');
+  branches.forEach(([branchKey, branch], branchIndex) => {
+    const branchCenterX = 50 + branchIndex * branchSpacing + 250;
+    const result = buildVerticalTree(branch as TreeNode, 0, branchCenterX);
 
-  const handleMouseEnter = (e: React.MouseEvent) => {
-    const gevi = node.geviId ? gevis.find(g => g.id === node.geviId) || null : null;
-    onHover(node, gevi, e.clientX, e.clientY);
-  };
+    result.nodes.forEach(n => {
+      allNodes.push({ ...n, branch: branchKey });
+    });
+    result.links.forEach(l => {
+      allLinks.push({ ...l, branch: branchKey });
+    });
+  });
 
-  const handleClick = () => {
-    const gevi = node.geviId ? gevis.find(g => g.id === node.geviId) || null : null;
-    if (gevi) {
-      onClick(node, gevi);
-    } else if (hasChildren) {
-      toggleNode(nodePath);
-    }
-  };
-
-  const isLeaf = node.geviId;
-  const isCategory = !node.geviId;
-
-  return (
-    <div className="ml-4">
-      <div
-        className={`flex items-center gap-1 py-0.5 cursor-pointer rounded px-2 hover:bg-opacity-20 ${
-          isLeaf
-            ? 'hover:bg-blue-500'
-            : hasChildren
-              ? 'hover:bg-blue-500'
-              : ''
-        } ${darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'}`}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={onLeave}
-        onClick={handleClick}
-      >
-        {hasChildren && (
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              toggleNode(nodePath);
-            }}
-            className="p-0.5"
-          >
-            <ChevronRight
-              className={`w-3 h-3 transition-transform ${isExpanded ? 'rotate-90' : ''}`}
-            />
-          </button>
-        )}
-        <span
-          className={`text-sm ${
-            isLeaf
-              ? 'font-medium text-blue-500'
-              : isCategory && level === 0
-                ? 'font-bold'
-                : darkMode
-                  ? 'text-gray-300'
-                  : 'text-gray-700'
-          }`}
-        >
-          {node.name}
-        </span>
-        {node.year && (
-          <span className={`text-xs ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>
-            ({node.year})
-          </span>
-        )}
-        {isLeaf && (
-          <Info className={`w-3 h-3 ${darkMode ? 'text-gray-500' : 'text-gray-400'}`} />
-        )}
-      </div>
-
-      {hasChildren && isExpanded && (
-        <div className="border-l border-gray-300 dark:border-gray-600 ml-1">
-          {Object.entries(node.children!).map(([key, child]) => (
-            <TreeNodeComponent
-              key={key}
-              node={child}
-              path={[...path, key]}
-              level={level + 1}
-              onHover={onHover}
-              onLeave={onLeave}
-              onClick={onClick}
-              expandedNodes={expandedNodes}
-              toggleNode={toggleNode}
-              darkMode={darkMode}
-            />
-          ))}
-        </div>
-      )}
-    </div>
-  );
+  return { nodes: allNodes, links: allLinks };
 }
 
 export function FamilyTreePanel({
@@ -515,47 +310,31 @@ export function FamilyTreePanel({
   compareGEVIs,
   onAddToCompare,
 }: FamilyTreePanelProps) {
-  const { colors } = useTheme();
-  const [hoveredNode, setHoveredNode] = useState<HoveredNode | null>(null);
-  const [expandedNodes, setExpandedNodes] = useState<Set<string>>(
-    new Set(['VSD', 'Opsin', 'Others', 'VSD/VSD-FRET', 'VSD/VSD-cpGFP', 'Opsin/Opsin-Fluorescent'])
-  );
+  const { nodes, links } = useMemo(() => buildAllBranchesVertical(), []);
 
-  const toggleNode = (path: string) => {
-    setExpandedNodes(prev => {
-      const next = new Set(prev);
-      if (next.has(path)) {
-        next.delete(path);
-      } else {
-        next.add(path);
+  // Calculate SVG dimensions
+  const maxX = Math.max(...nodes.map(n => n.x), 0) + 150;
+  const maxY = Math.max(...nodes.map(n => n.y), 0) + 100;
+  const svgWidth = Math.max(1400, maxX);
+  const svgHeight = Math.max(600, maxY);
+
+  const handleNodeClick = (geviId?: string) => {
+    if (geviId) {
+      const gevi = gevis.find(g => g.id === geviId);
+      if (gevi) {
+        onSelectGEVI(gevi);
       }
-      return next;
-    });
-  };
-
-  const handleHover = (node: TreeNode, gevi: GEVI | null, x: number, y: number) => {
-    setHoveredNode({ node, gevi, x, y });
-  };
-
-  const handleLeave = () => {
-    setHoveredNode(null);
-  };
-
-  const handleNodeClick = (node: TreeNode, gevi: GEVI | null) => {
-    if (gevi) {
-      onSelectGEVI(gevi);
     }
   };
 
-  const handleCloseDetail = () => {
-    onCloseDetail();
-  };
+  // Generate unique gradient IDs
+  const uniqueColors = [...new Set(nodes.map(n => n.color))];
 
   return (
     <div className={`rounded-lg border p-4 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
-      <div className="flex items-start gap-2 mb-4">
+      <div className="flex items-center gap-2 mb-4">
         <button
-          onClick={handleCloseDetail}
+          onClick={onCloseDetail}
           className={`p-1 rounded-md ${darkMode ? 'hover:bg-gray-700 text-gray-400' : 'hover:bg-gray-100 text-gray-500'}`}
           title="Close and return"
         >
@@ -566,24 +345,85 @@ export function FamilyTreePanel({
         </h3>
       </div>
 
-      <div className="relative overflow-auto" style={{ maxHeight: '500px' }}>
-        {Object.entries(FAMILY_TREE).map(([key, branch]) => (
-          <TreeNodeComponent
-            key={key}
-            node={branch}
-            path={[key]}
-            level={0}
-            onHover={handleHover}
-            onLeave={handleLeave}
-            onClick={handleNodeClick}
-            expandedNodes={expandedNodes}
-            toggleNode={toggleNode}
-            darkMode={darkMode}
-          />
-        ))}
+      {/* Scrollable container with fixed height */}
+      <div className="overflow-auto border rounded-lg" style={{ height: '500px' }}>
+        <svg width={svgWidth} height={svgHeight} className="block">
+          <defs>
+            {uniqueColors.map((color, i) => (
+              <radialGradient key={`v_grad_${i}`} id={`v_node_grad_${i}`} cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stopColor="#fff" />
+                <stop offset="40%" stopColor={color} />
+                <stop offset="100%" stopColor={color} />
+              </radialGradient>
+            ))}
+          </defs>
 
-        {/* Tooltip */}
-        {hoveredNode && <NodeTooltip hoveredNode={hoveredNode} />}
+          {/* Links - vertical curved paths */}
+          {links.map((link, i) => (
+            <path
+              key={`link_${i}`}
+              d={`M${link.fromX},${link.fromY}
+                  C${link.fromX},${link.fromY + 20}
+                   ${link.toX},${link.toY - 20}
+                   ${link.toX},${link.toY}`}
+              fill="none"
+              stroke={darkMode ? '#6b7280' : '#9ca3af'}
+              strokeWidth="1.5"
+              opacity="0.6"
+            />
+          ))}
+
+          {/* Nodes */}
+          {nodes.map((node, i) => {
+            const isLeaf = !!node.geviId;
+            const colorIndex = uniqueColors.indexOf(node.color);
+            const radius = isLeaf ? 8 : 10;
+
+            return (
+              <g
+                key={`node_${i}`}
+                transform={`translate(${node.x}, ${node.y})`}
+                onClick={() => handleNodeClick(node.geviId)}
+                style={{ cursor: isLeaf ? 'pointer' : 'default' }}
+              >
+                <circle
+                  r={radius}
+                  fill={isLeaf ? `url(#v_node_grad_${colorIndex})` : (darkMode ? '#4b5563' : '#d1d5db')}
+                  stroke={isLeaf ? '#fff' : (darkMode ? '#6b7280' : '#9ca3af')}
+                  strokeWidth={isLeaf ? 1.5 : 1}
+                  opacity={isLeaf ? 1 : 0.7}
+                  style={{
+                    filter: isLeaf ? `drop-shadow(0 0 4px ${node.color})` : 'none',
+                  }}
+                />
+                <text
+                  x={0}
+                  y={22}
+                  textAnchor="middle"
+                  className={`text-xs ${darkMode ? 'fill-gray-300' : 'fill-gray-700'}`}
+                  style={{ fontSize: '9px', fontWeight: isLeaf ? '600' : '500' }}
+                >
+                  {node.name}
+                </text>
+                {node.year && (
+                  <text
+                    x={0}
+                    y={32}
+                    textAnchor="middle"
+                    className={`text-xs ${darkMode ? 'fill-gray-500' : 'fill-gray-500'}`}
+                    style={{ fontSize: '7px' }}
+                  >
+                    ({node.year})
+                  </text>
+                )}
+              </g>
+            );
+          })}
+        </svg>
+      </div>
+
+      <div className={`mt-4 pt-3 border-t text-xs text-center ${darkMode ? 'border-gray-700 text-gray-500' : 'border-gray-200 text-gray-400'}`}>
+        Click on nodes to view sensor details
       </div>
     </div>
   );

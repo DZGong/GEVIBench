@@ -1,17 +1,17 @@
 import { ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar } from 'recharts';
 import { BonusBadges } from './BonusBadges';
-import { BookOpen, ExternalLink, Plus, X } from 'lucide-react';
+import { BookOpen, ExternalLink, Plus, X, Sun, Zap, Activity, TrendingUp, Shield, FileText, Dna } from 'lucide-react';
 import { RainbowText, getGEVIColor } from '../utils';
 import { SpectrumViewer } from '../SpectrumViewer';
 import { FamilyTree } from '../FamilyTree';
 
 const metrics = [
-  { key: 'brightness', name: 'Brightness', icon: '☀️' },
-  { key: 'speed', name: 'Speed', icon: '⚡' },
-  { key: 'snr', name: 'SNR', icon: '📊' },
-  { key: 'dynamicRange', name: 'Range', icon: '📈' },
-  { key: 'photostability', name: 'Stable', icon: '🛡️' },
-  { key: 'paperCount', name: 'Papers', icon: '📄' },
+  { key: 'brightness', name: 'Brightness', icon: Sun },
+  { key: 'speed', name: 'Speed', icon: Zap },
+  { key: 'snr', name: 'SNR', icon: Activity },
+  { key: 'dynamicRange', name: 'Range', icon: TrendingUp },
+  { key: 'photostability', name: 'Stable', icon: Shield },
+  { key: 'paperCount', name: 'Papers', icon: FileText },
 ];
 
 interface GEVIDetailProps {
@@ -65,11 +65,11 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, darkMode, onClo
           </a>
           {gevi.addgene ? (
             <a href={gevi.addgene.url} target="_blank" rel="noopener noreferrer" className={`text-sm flex items-center gap-1 ${darkMode ? 'text-green-400 hover:underline' : 'text-green-700 hover:underline'}`}>
-              🧬 Addgene #{gevi.addgene.id}<ExternalLink className="w-3 h-3" />
+              <Dna className="w-4 h-4" /> Addgene #{gevi.addgene.id}<ExternalLink className="w-3 h-3" />
             </a>
           ) : (
             <span className={`text-sm flex items-center gap-1 ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>
-              🧬 Addgene: Coming soon
+              <Dna className="w-4 h-4" /> Addgene: Coming soon
             </span>
           )}
         </div>
@@ -95,7 +95,7 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, darkMode, onClo
         {metrics.map((metric) => (
           <div key={metric.key} className={`rounded-lg p-2 md:p-3 ${darkMode ? 'bg-gray-750' : 'bg-gray-50'}`}>
             <div className="flex items-center gap-1.5 mb-1.5">
-              <span className="text-xs">{metric.icon}</span>
+              <metric.icon className="w-3 h-3" />
               <span className={`text-xs md:text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>{metric.name}</span>
             </div>
             <div className="flex items-center gap-2">

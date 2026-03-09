@@ -63,12 +63,12 @@ export const COLORS = {
 
 // Metrics configuration
 export const METRICS = [
-  { key: 'brightness', name: 'Brightness', icon: '☀️' },
-  { key: 'speed', name: 'Speed', icon: '⚡' },
-  { key: 'snr', name: 'SNR', icon: '📊' },
-  { key: 'dynamicRange', name: 'Range', icon: '📈' },
-  { key: 'photostability', name: 'Stable', icon: '🛡️' },
-  { key: 'paperCount', name: 'Papers', icon: '📄' },
+  { key: 'brightness', name: 'Brightness', icon: 'Sun' },
+  { key: 'speed', name: 'Speed', icon: 'Zap' },
+  { key: 'snr', name: 'SNR', icon: 'Activity' },
+  { key: 'dynamicRange', name: 'Range', icon: 'TrendingUp' },
+  { key: 'photostability', name: 'Stable', icon: 'Shield' },
+  { key: 'paperCount', name: 'Papers', icon: 'FileText' },
 ] as const;
 
 // Sort options

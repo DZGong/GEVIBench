@@ -1,9 +1,52 @@
 // GEVI Family Tree Component
 // Shows genetic lineage/relationships for each GEVI
+// FPbase-style vertical SVG tree (root at top, descendants below)
 
 import { useMemo } from 'react';
 
-// Family tree structure - genetic relationships
+// Color mapping based on GEVI properties
+function getGEVIColor(geviName: string, category: string): string {
+  const name = geviName.toLowerCase();
+
+  // Red/Far-red
+  if (name.includes('red') || name.includes('far') || name.includes('rfp') ||
+      name.includes('nir') || name.includes('mcherry') || name.includes('tagrfp') ||
+      category.includes('Red FP')) {
+    return '#ff1744';
+  }
+  // Yellow/Orange
+  if (name.includes('yellow') || name.includes('orange') || name.includes('yfp') ||
+      name.includes('meyfp') || name.includes('citrine') || name.includes('venus')) {
+    return '#ffea00';
+  }
+  // Cyan
+  if (name.includes('cyan') || name.includes('cfp') || name.includes('tev') ||
+      name.includes('mteal') || name.includes('cerulean')) {
+    return '#00e5ff';
+  }
+  // Green (default)
+  if (name.includes('green') || name.includes('gfp') || name.includes('emerald') ||
+      name.includes('asap') || name.includes('arc') || name.includes('jedi') ||
+      category.includes('VSD') || category.includes('Opsin')) {
+    return '#00e676';
+  }
+  // Purple/Pink
+  if (name.includes('purple') || name.includes('pink') || name.includes('mVenus') ||
+      name.includes('positron') || name.includes('voltron')) {
+    return '#d500f9';
+  }
+
+  return '#00e676';
+}
+
+// Build tree data structure from FAMILY_TREE
+interface TreeNode {
+  name: string;
+  year?: number;
+  children?: Record<string, TreeNode>;
+  geviId?: string;
+}
+
 const FAMILY_TREE = {
   'VSD': {
     name: 'VSD Based',
@@ -230,12 +273,12 @@ interface FamilyTreeProps {
 
 export function FamilyTree({ geviId, darkMode = false }: FamilyTreeProps) {
   const path = GEVI_PATHS[geviId];
-  
+
   if (!path) {
     return (
-      <div className={`border rounded-lg p-3 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-gray-50 border-gray-200'}`}>
+      <div className={`border rounded-lg p-4 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
         <h4 className={`text-sm font-semibold mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-          Family Tree
+          Genetic Lineage
         </h4>
         <div className={`text-xs ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>
           Family information not available
@@ -243,75 +286,120 @@ export function FamilyTree({ geviId, darkMode = false }: FamilyTreeProps) {
       </div>
     );
   }
-  
-  // Build the tree nodes to display
-  const renderTree = () => {
-    const nodes: { name: string; year?: number; isSelected: boolean; isRoot: boolean }[] = [];
-    
-    let current: any = FAMILY_TREE;
-    
-    for (let i = 0; i < path.length; i++) {
-      const key = path[i];
-      const isSelected = i === path.length - 1;
-      
-      if (current[key]) {
-        nodes.push({
-          name: current[key].name,
-          year: current[key].year,
-          isSelected,
-          isRoot: i === 0
-        });
-        if (current[key].children) {
-          current = current[key].children;
-        }
+
+  // Build the path nodes
+  const pathNodes: { name: string; year?: number; isSelected: boolean; category: string }[] = [];
+
+  let current: any = FAMILY_TREE;
+
+  for (let i = 0; i < path.length; i++) {
+    const key = path[i];
+    const isSelected = i === path.length - 1;
+
+    if (current[key]) {
+      pathNodes.push({
+        name: current[key].name,
+        year: current[key].year,
+        isSelected,
+        category: key,
+      });
+      if (current[key].children) {
+        current = current[key].children;
       }
     }
-    
-    return nodes;
-  };
-  
-  const treeNodes = renderTree();
-  
+  }
+
+  // Vertical layout: root at top, children below
+  const nodeSpacing = 80; // vertical spacing
+  const svgHeight = pathNodes.length * nodeSpacing + 50;
+  const svgWidth = 180;
+
+  // Generate gradient IDs based on node names
+  const gradients = pathNodes.map((node, i) => ({
+    id: `v_gradient_${i}`,
+    color: getGEVIColor(node.name, node.category),
+  }));
+
   return (
-    <div className={`border rounded-lg p-3 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-gray-50 border-gray-200'}`}>
-      <div className="space-y-1">
-        {treeNodes.map((node, idx) => (
-          <div key={idx} className="flex items-center gap-2">
-            {/* Connector lines */}
-            <div className="flex flex-col items-center" style={{ width: '20px' }}>
-              {idx > 0 && (
-                <div className={`w-0.5 h-3 ${darkMode ? 'bg-gray-600' : 'bg-gray-300'}`} />
-              )}
-              <div 
-                className={`w-2 h-2 rounded-full flex-shrink-0 ${
-                  node.isSelected 
-                    ? 'bg-blue-500 ring-2 ring-blue-500/30' 
-                    : darkMode ? 'bg-gray-500' : 'bg-gray-300'
-                }`} 
-              />
-              {idx < treeNodes.length - 1 && (
-                <div className={`w-0.5 flex-1 ${darkMode ? 'bg-gray-600' : 'bg-gray-300'}`} />
-              )}
-            </div>
-            
-            {/* Node content */}
-            <div className={`flex-1 py-0.5 ${node.isSelected ? '' : 'opacity-70'}`}>
-              <div className={`text-xs font-medium ${node.isSelected ? (darkMode ? 'text-blue-400' : 'text-blue-600') : (darkMode ? 'text-gray-300' : 'text-gray-700')}`}>
-                {node.name}
-              </div>
-              {node.year && (
-                <div className={`text-xs ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>
-                  {node.year}
-                </div>
-              )}
-            </div>
-          </div>
-        ))}
+    <div className={`border rounded-lg p-4 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
+      <h4 className={`text-sm font-semibold mb-3 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+        Genetic Lineage
+      </h4>
+
+      <div className="overflow-auto">
+        <svg width={svgWidth} height={svgHeight} className="mx-auto">
+          <defs>
+            {gradients.map((g, i) => (
+              <linearGradient key={g.id} id={g.id} x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#000" />
+                <stop offset="50%" stopColor={g.color} />
+                <stop offset="100%" stopColor={g.color} />
+              </linearGradient>
+            ))}
+          </defs>
+
+          {/* Links (vertical curved paths) */}
+          {pathNodes.slice(0, -1).map((node, i) => (
+            <path
+              key={`v_link_${i}`}
+              d={`M${svgWidth / 2},${i * nodeSpacing + 25}
+                  C${svgWidth / 2},${i * nodeSpacing + 40}
+                   ${svgWidth / 2},${(i + 1) * nodeSpacing + 10}
+                   ${svgWidth / 2},${(i + 1) * nodeSpacing + 25}`}
+              fill="none"
+              stroke={darkMode ? '#4b5563' : '#9ca3af'}
+              strokeWidth="2"
+            />
+          ))}
+
+          {/* Nodes (vertical) */}
+          {pathNodes.map((node, i) => {
+            const color = getGEVIColor(node.name, node.category);
+            const isSelected = node.isSelected;
+            const radius = isSelected ? 12 : 8;
+            const y = i * nodeSpacing + 25;
+
+            return (
+              <g key={`v_node_${i}`} transform={`translate(${svgWidth / 2}, ${y})`}>
+                <a href="#" onClick={(e) => e.preventDefault()}>
+                  <circle
+                    r={radius}
+                    fill={`url(#v_gradient_${i})`}
+                    stroke={isSelected ? '#fff' : 'none'}
+                    strokeWidth={isSelected ? 2 : 0}
+                    style={{ filter: isSelected ? `drop-shadow(0 0 8px ${color})` : 'none' }}
+                  />
+                </a>
+                <text
+                  x={0}
+                  y={-20}
+                  textAnchor="middle"
+                  className={`text-xs ${isSelected ? 'font-bold' : ''} ${darkMode ? 'fill-white' : 'fill-gray-700'}`}
+                  style={{ fontSize: '11px' }}
+                >
+                  {node.name}
+                </text>
+                {node.year && (
+                  <text
+                    x={0}
+                    y={-8}
+                    textAnchor="middle"
+                    className={`text-xs ${darkMode ? 'fill-gray-400' : 'fill-gray-400'}`}
+                    style={{ fontSize: '9px' }}
+                  >
+                    ({node.year})
+                  </text>
+                )}
+              </g>
+            );
+          })}
+        </svg>
       </div>
-      
-      {/* Root category label */}
-      <div className={`mt-3 pt-2 border-t text-xs ${darkMode ? 'border-gray-700 text-gray-500' : 'border-gray-200 text-gray-400'}`}>
-        Category: <span className={darkMode ? 'text-gray-400' : 'text-gray-600'}>{treeNodes[0]?.name}</span>
+
+      {/* Category label */}
+      <div className={`mt-3 pt-2 border-t text-xs text-center ${darkMode ? 'border-gray-700 text-gray-500' : 'border-gray-200 text-gray-400'}`}>
+        <span className="font-medium">Category:</span>{' '}
+        <span className={darkMode ? 'text-gray-400' : 'text-gray-600'}>{pathNodes[0]?.name}</span>
       </div>
     </div>
   );
