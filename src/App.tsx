@@ -39,6 +39,7 @@ function GEVIBenchApp() {
   const [activeTab, setActiveTab] = useState<ViewTab>('database');
   const [compareGEVIs, setCompareGEVIs] = useState<GEVI[]>([]);
   const [showFamilyTree, setShowFamilyTree] = useState(false);
+  const [showCompareEmpty, setShowCompareEmpty] = useState(false);
 
   // Derived state
   const categories = [DEFAULT_CATEGORY, ...new Set(gevis.map(g => g.category))];
@@ -73,6 +74,7 @@ function GEVIBenchApp() {
       if (prev.find(g => g.id === gevi.id) || prev.length >= MAX_COMPARE_ITEMS) {
         return prev;
       }
+      setShowCompareEmpty(false);
       return [...prev, gevi];
     });
   }, []);
@@ -174,12 +176,17 @@ function GEVIBenchApp() {
         </button>
       </div>
 
-      {/* Comparison Panel */}
-      {compareGEVIs.length > 0 && (
+      {/* Comparison Panel - only show when there are items or explicitly shown */}
+      {(compareGEVIs.length > 0 || showCompareEmpty) && (
         <ComparisonPanel
           compareGEVIs={compareGEVIs}
           onRemove={removeFromCompare}
           darkMode={darkMode}
+          showEmpty={showCompareEmpty}
+          onClose={() => {
+            setCompareGEVIs([]);
+            setShowCompareEmpty(false);
+          }}
         />
       )}
 
@@ -452,6 +459,17 @@ function GEVIBenchApp() {
         onShowFamilyTree={() => {
           setActiveTab('database');
           setShowFamilyTree(true);
+        }}
+        onShowCompare={() => {
+          setActiveTab('database');
+          setShowCompareEmpty(true);
+          // Scroll to comparison panel if there are items
+          if (compareGEVIs.length > 0) {
+            const comparePanel = document.getElementById('compare-panel');
+            if (comparePanel) {
+              comparePanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }
         }}
       />
 

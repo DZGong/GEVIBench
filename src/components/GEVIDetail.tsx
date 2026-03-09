@@ -3,6 +3,7 @@ import { BonusBadges } from './BonusBadges';
 import { BookOpen, ExternalLink, Plus, X, Sun, Zap, Activity, TrendingUp, Shield, FileText, Dna } from 'lucide-react';
 import { RainbowText, getGEVIColor } from '../utils';
 import { SpectrumViewer } from '../SpectrumViewer';
+import { VoltageCurveViewer } from '../VoltageCurveViewer';
 import { FamilyTree } from '../FamilyTree';
 
 const metrics = [
@@ -196,6 +197,12 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, darkMode, onClo
       <div className={`border rounded-lg p-4 md:p-6 mt-4 md:mt-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
         <h4 className={`text-sm font-semibold mb-3 md:mb-4 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Emission Spectrum</h4>
         <SpectrumViewer geviId={gevi.id} darkMode={darkMode} />
+      </div>
+
+      {/* Voltage Response Curve */}
+      <div className={`border rounded-lg p-4 md:p-6 mt-4 md:mt-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
+        <h4 className={`text-sm font-semibold mb-3 md:mb-4 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>ΔF/F - Voltage Curve</h4>
+        <VoltageCurveViewer geviId={gevi.id} darkMode={darkMode} />
       </div>
 
       {/* Research Papers with Representative Figures */}

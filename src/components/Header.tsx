@@ -1,4 +1,4 @@
-import { Search, Beaker, Moon, Sun, Menu, X, ChevronDown, TreeDeciduous } from 'lucide-react';
+import { Search, Beaker, Moon, Sun, Menu, X, ChevronDown, TreeDeciduous, GitCompare, Github } from 'lucide-react';
 import { useState, useRef, useEffect } from 'react';
 import { useTheme } from '../context/ThemeContext';
 import type { ViewTab } from '../types';
@@ -10,6 +10,7 @@ interface HeaderProps {
   setMobileMenuOpen: (v: boolean) => void;
   onLogoClick: () => void;
   onShowFamilyTree: () => void;
+  onShowCompare: () => void;
 }
 
 // Custom logo: hexagon with action potential waveform
@@ -36,7 +37,7 @@ const Logo = ({ darkMode }: { darkMode: boolean }) => (
   </svg>
 );
 
-export function Header({ activeTab, setActiveTab, mobileMenuOpen, setMobileMenuOpen, onLogoClick, onShowFamilyTree }: HeaderProps) {
+export function Header({ activeTab, setActiveTab, mobileMenuOpen, setMobileMenuOpen, onLogoClick, onShowFamilyTree, onShowCompare }: HeaderProps) {
   const { darkMode, toggleDarkMode } = useTheme();
   const [toolsMenuOpen, setToolsMenuOpen] = useState(false);
   const toolsMenuRef = useRef<HTMLDivElement>(null);
@@ -59,8 +60,12 @@ export function Header({ activeTab, setActiveTab, mobileMenuOpen, setMobileMenuO
     setToolsMenuOpen(!toolsMenuOpen);
   };
 
-  const handleToolSelect = (tool: 'family-tree') => {
-    onShowFamilyTree();
+  const handleToolSelect = (tool: 'family-tree' | 'compare') => {
+    if (tool === 'family-tree') {
+      onShowFamilyTree();
+    } else if (tool === 'compare') {
+      onShowCompare();
+    }
     setToolsMenuOpen(false);
     setMobileMenuOpen(false);
   };
@@ -108,6 +113,15 @@ export function Header({ activeTab, setActiveTab, mobileMenuOpen, setMobileMenuO
                   darkMode ? 'bg-gray-800 border border-gray-700' : 'bg-white border border-gray-200'
                 }`}>
                   <button
+                    onClick={() => handleToolSelect('compare')}
+                    className={`w-full text-left px-4 py-2 text-sm flex items-center gap-2 ${
+                      darkMode ? 'text-gray-300 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100'
+                    }`}
+                  >
+                    <GitCompare className="w-4 h-4" />
+                    Compare
+                  </button>
+                  <button
                     onClick={() => handleToolSelect('family-tree')}
                     className={`w-full text-left px-4 py-2 text-sm flex items-center gap-2 ${
                       darkMode ? 'text-gray-300 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100'
@@ -127,9 +141,19 @@ export function Header({ activeTab, setActiveTab, mobileMenuOpen, setMobileMenuO
           </nav>
 
           <div className="flex items-center gap-2">
+            <a
+              href="https://github.com/DZGong/GEVIBench"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`p-2 rounded-md ${darkMode ? 'text-gray-300 hover:bg-gray-700' : 'text-gray-600 hover:bg-gray-100'}`}
+              title="GitHub"
+            >
+              <Github className="w-5 h-5" />
+            </a>
             <button
               onClick={toggleDarkMode}
               className={`p-2 rounded-md ${darkMode ? 'text-gray-300 hover:bg-gray-700' : 'text-gray-600 hover:bg-gray-100'}`}
+              title={darkMode ? 'Light mode' : 'Dark mode'}
             >
               {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
             </button>
@@ -153,11 +177,18 @@ export function Header({ activeTab, setActiveTab, mobileMenuOpen, setMobileMenuO
                 Methodology
               </button>
               <button
+                onClick={() => { onShowCompare(); setMobileMenuOpen(false); }}
+                className={`text-sm px-3 py-2 rounded-md text-left flex items-center gap-2 ${activeTab === 'tools' ? 'bg-blue-900 text-white' : darkMode ? 'text-gray-300' : 'text-gray-600'}`}
+              >
+                <GitCompare className="w-4 h-4" />
+                Compare
+              </button>
+              <button
                 onClick={() => { onShowFamilyTree(); setMobileMenuOpen(false); }}
                 className={`text-sm px-3 py-2 rounded-md text-left flex items-center gap-2 ${activeTab === 'tools' ? 'bg-blue-900 text-white' : darkMode ? 'text-gray-300' : 'text-gray-600'}`}
               >
                 <TreeDeciduous className="w-4 h-4" />
-                Tools
+                Family Tree
               </button>
               <button
                 onClick={() => { setActiveTab('contact'); setMobileMenuOpen(false); }}
