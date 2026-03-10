@@ -6,6 +6,7 @@ import { useState, useMemo } from 'react';
 import { X } from 'lucide-react';
 import gevisData from '../data.json';
 import type { GEVI } from '../types';
+import { FAMILY_TREE } from '../FamilyTree';
 
 const gevis = gevisData as GEVI[];
 
@@ -44,166 +45,6 @@ function getGEVIColor(geviName: string, category: string): string {
   return '#00e676';
 }
 
-// Family tree structure
-const FAMILY_TREE = {
-  'VSD': {
-    name: 'VSD Based',
-    children: {
-      'VSD-FRET': {
-        name: 'Ci-VSP FRET-based',
-        children: {
-          'VSFP1': { name: 'VSFP1', year: 2001, geviId: 'vsfp1' },
-          'VSFP2': {
-            name: 'VSFP2',
-            year: 2007,
-            geviId: 'vsfp2',
-            children: {
-              'VSFP2.3': { name: 'VSFP2.3', year: 2009, geviId: 'vsfp2_3' },
-              'Mermaid': { name: 'Mermaid', year: 2008, geviId: 'mermaid' },
-              'Butterfly': { name: 'VSFP-Butterfly', year: 2010, geviId: 'vsfpbutterfly' },
-              'nirButterfly': { name: 'nirButterfly', year: 2018, geviId: 'nirbutterfly' },
-            }
-          },
-        }
-      },
-      'VSD-single': {
-        name: 'Ci-VSP Single-FP',
-        children: {
-          'ArcLight': {
-            name: 'ArcLight lineage',
-            children: {
-              'arclight': { name: 'ArcLight', year: 2012, geviId: 'arclight' },
-              'arclightd': { name: 'ArcLight-D', year: 2015, geviId: 'arclightd' },
-              'Bongwoori': { name: 'Bongwoori', year: 2017, geviId: 'bongwoori' },
-              'Marina': { name: 'Marina', year: 2017, geviId: 'marina' },
-            }
-          }
-        }
-      },
-      'VSD-cpGFP': {
-        name: 'VSD-cpGFP',
-        children: {
-          'ASAP': {
-            name: 'ASAP lineage',
-            children: {
-              'asap1': { name: 'ASAP1', year: 2014, geviId: 'asap1' },
-              'asap2s': { name: 'ASAP2s', year: 2017, geviId: 'asap2s' },
-              'asap3': { name: 'ASAP3', year: 2019, geviId: 'asap3' },
-              'asap4b': { name: 'ASAP4b', year: 2022, geviId: 'asap4b' },
-              'asap4e': { name: 'ASAP4e', year: 2022, geviId: 'asap4e' },
-              'asap5': { name: 'ASAP5', year: 2024, geviId: 'asap5' },
-              'JEDI': {
-                name: 'JEDI lineage',
-                children: {
-                  'jedi2p': { name: 'JEDI-2P', year: 2022, geviId: 'jedi2p' },
-                  'jedi1p': { name: 'JEDI-1P', year: 2023, geviId: 'jedi1p' },
-                }
-              },
-              'restus': { name: 'rEstus', year: 2024, geviId: 'restus' },
-              'synth': { name: 'Synth', year: 2024, geviId: 'synth' },
-              'probedb': { name: 'ProbeDB', year: 2024, geviId: 'probedb' },
-            }
-          },
-          'chiVSD': {
-            name: 'ChiVSD lineage',
-            children: {
-              'chivsfp': { name: 'ChiVSF', year: 2018, geviId: 'chivsfp' },
-            }
-          },
-        }
-      },
-    }
-  },
-  'Opsin': {
-    name: 'Opsin Based',
-    children: {
-      'Opsin-Fluorescent': {
-        name: 'Microbial Rhodopsin',
-        children: {
-          'PROPS': { name: 'PROPS', year: 2011, geviId: 'props' },
-          'Arch': {
-            name: 'Arch lineage',
-            children: {
-              'archer1': { name: 'Archer1', year: 2014, geviId: 'archer1' },
-              'QuasAr': {
-                name: 'QuasAr lineage',
-                children: {
-                  'quasar1': { name: 'QuasAr1', year: 2014, geviId: 'quasar1' },
-                  'quasar2': { name: 'QuasAr2', year: 2014, geviId: 'quasar2' },
-                  'quasar3': { name: 'paQuasAr3', year: 2019, geviId: 'quasar3' },
-                  'quasar6': { name: 'QuasAr6', year: 2022, geviId: 'quasar6' },
-                }
-              },
-              'Archon': {
-                name: 'Archon lineage',
-                children: {
-                  'archon1': { name: 'Archon1', year: 2018, geviId: 'archon1' },
-                  'archon2': { name: 'Archon2', year: 2018, geviId: 'archon2' },
-                  'archon3': { name: 'Archon3', year: 2019, geviId: 'archon3' },
-                  'somarchon': { name: 'SomArchon', year: 2019, geviId: 'somarchon' },
-                }
-              },
-              'rho1': { name: 'Rho1', year: 2015, geviId: 'rho1' },
-              'electric': { name: 'Electric', year: 2018, geviId: 'electric' },
-              'pado': { name: 'Pado', year: 2020, geviId: 'pado' },
-            }
-          },
-          'NIR': {
-            name: 'NIR lineage',
-            children: {
-              'nir': { name: 'NIR', year: 2016, geviId: 'nir' },
-              'nir2': { name: 'NIR2', year: 2018, geviId: 'nir2' },
-            }
-          },
-        }
-      },
-      'Opsin-FRET': {
-        name: 'Opsin-FRET',
-        children: {
-          'macq': { name: 'MacQ', year: 2014, geviId: 'macq' },
-          'ace1': { name: 'Ace1', year: 2014, geviId: 'ace1' },
-          'ace2n': {
-            name: 'Ace2N lineage',
-            children: {
-              'ace2n-mneon': { name: 'Ace2N-mNeon', year: 2015, geviId: 'ace2n-mneon' },
-              'ace2n-mneon2': { name: 'Ace2N-mNeon2', year: 2018, geviId: 'ace2n-mneon2' },
-            }
-          },
-          'varnam': { name: 'VARNAM', year: 2018, geviId: 'varnam' },
-          'positron': { name: 'Positron', year: 2020, geviId: 'positron' },
-        }
-      },
-    }
-  },
-  'Others': {
-    name: 'Others',
-    children: {
-      'Chemigenetic': {
-        name: 'Chemigenetic',
-        children: {
-          'voltron': { name: 'Voltron', year: 2018, geviId: 'voltron' },
-          'voltron2': { name: 'Voltron2', year: 2023, geviId: 'voltron2' },
-          'hviplus': { name: 'HVIplus', year: 2023, geviId: 'hviplus' },
-        }
-      },
-      'Red FP': {
-        name: 'Red FP',
-        children: {
-          'flicr1': { name: 'FlicR1', year: 2016, geviId: 'flicr1' },
-        }
-      },
-      'Bioluminescent': {
-        name: 'Bioluminescent',
-        children: {
-          'lotusv': { name: 'LOTUS-V', year: 2017, geviId: 'lotusv' },
-          'amber': { name: 'AMBER', year: 2022, geviId: 'amber' },
-          'solaris': { name: 'Solaris', year: 2023, geviId: 'solaris' },
-        }
-      },
-    }
-  }
-};
-
 interface TreeNode {
   name: string;
   year?: number;
@@ -221,10 +62,11 @@ interface FamilyTreePanelProps {
 }
 
 // Build vertical SVG tree with proper positioning
-function buildVerticalTree(node: TreeNode, depth: number = 0, parentX: number = 0): {
+function buildVerticalTree(node: TreeNode, depth: number = 0, parentX: number = 0, parentY: number = 40): {
   nodes: { id: string; name: string; year?: number; x: number; y: number; geviId?: string; color: string; parentX: number; parentY: number }[];
   links: { fromX: number; fromY: number; toX: number; toY: number }[];
   maxY: number;
+  width: number;
 } {
   const nodes: { id: string; name: string; year?: number; x: number; y: number; geviId?: string; color: string; parentX: number; parentY: number }[] = [];
   const links: { fromX: number; fromY: number; toX: number; toY: number }[] = [];
@@ -233,8 +75,7 @@ function buildVerticalTree(node: TreeNode, depth: number = 0, parentX: number = 
   const isLeaf = !!node.geviId;
   const color = isLeaf ? getGEVIColor(node.name, '') : '#9ca3af';
 
-  // Calculate y position based on depth
-  const y = depth * 80 + 40;
+  const y = parentY;
   const x = parentX;
 
   nodes.push({
@@ -250,32 +91,72 @@ function buildVerticalTree(node: TreeNode, depth: number = 0, parentX: number = 
   });
 
   let maxChildY = y;
+  let totalWidth = 0;
 
   if (node.children) {
     const childKeys = Object.keys(node.children);
-    const totalWidth = childKeys.length * 100;
-    const startX = parentX - totalWidth / 2 + 50;
 
-    childKeys.forEach((key, index) => {
-      const child = node.children![key];
-      const childX = startX + index * 100;
-      const childResult = buildVerticalTree(child, depth + 1, childX);
+    // First pass: calculate width of each child's subtree
+    const childResults = childKeys.map((key) => {
+      const childY = parentY + 70;
+      const result = buildVerticalTree(node.children![key], depth + 1, 0, childY);
+      return { key, result, width: result.width };
+    });
 
-      // Add link from parent to child
-      links.push({
-        fromX: x,
-        fromY: y + 10,
-        toX: childX,
-        toY: childResult.nodes[0]?.y || (depth + 1) * 80 + 40,
-      });
+    // Calculate spacing - tighter for narrower tree
+    const baseWidth = Math.max(5, 8 - depth);
+    const childSpacing = baseWidth / Math.max(1, childKeys.length - 1);
 
-      nodes.push(...childResult.nodes);
-      links.push(...childResult.links);
-      maxChildY = Math.max(maxChildY, childResult.maxY);
+    // Calculate total width needed
+    totalWidth = childResults.reduce((sum, cr) => sum + cr.width, 0) + (childKeys.length - 1) * 2;
+
+    // Position children
+    let currentX = parentX - totalWidth / 2;
+
+    childResults.forEach(({ key, result }) => {
+      const childX = currentX + result.width / 2;
+      const childY = parentY + 70;
+
+      // Adjust child positions
+      const adjustedNodes = result.nodes.map(n => ({
+        ...n,
+        x: n.x + childX,
+        parentX: n.parentX + childX,
+      }));
+
+      // Adjust links
+      const adjustedLinks = result.links.map(l => ({
+        fromX: l.fromX + childX,
+        toX: l.toX + childX,
+        fromY: l.fromY,
+        toY: l.toY,
+      }));
+
+      // Add link from parent to first child node
+      const firstChildNode = adjustedNodes.find(n => n.y === childY);
+      if (firstChildNode) {
+        links.push({
+          fromX: x,
+          fromY: y + 8,
+          toX: firstChildNode.x,
+          toY: firstChildNode.y - 8,
+        });
+      }
+
+      nodes.push(...adjustedNodes);
+      links.push(...adjustedLinks);
+      maxChildY = Math.max(maxChildY, result.maxY);
+
+      currentX += result.width + 5;
     });
   }
 
-  return { nodes, links, maxY: Math.max(y, maxChildY) };
+  return {
+    nodes,
+    links,
+    maxY: Math.max(y, maxChildY),
+    width: Math.max(totalWidth, 30)
+  };
 }
 
 // Build all branches
@@ -284,19 +165,42 @@ function buildAllBranchesVertical() {
   const allLinks: { fromX: number; fromY: number; toX: number; toY: number; branch: string }[] = [];
 
   const branches = Object.entries(FAMILY_TREE);
-  // Vertical layout: each branch is a column
-  const branchSpacing = 500;
+
+  // Calculate positions for each branch first
+  const branchWidths: number[] = [];
+  branches.forEach(([branchKey, branch]) => {
+    const result = buildVerticalTree(branch as TreeNode, 0, 0, 40);
+    branchWidths.push(result.width);
+  });
+
+  // Calculate total width and starting positions
+  const branchGap = 0;
+  const totalWidth = branchWidths.reduce((sum, w) => sum + w, 0) + (branches.length - 1) * branchGap;
+  let currentX = 0;
 
   branches.forEach(([branchKey, branch], branchIndex) => {
-    const branchCenterX = 50 + branchIndex * branchSpacing + 250;
-    const result = buildVerticalTree(branch as TreeNode, 0, branchCenterX);
+    const branchCenterX = currentX + branchWidths[branchIndex] / 2;
+    const result = buildVerticalTree(branch as TreeNode, 0, branchCenterX, 40);
 
+    // Offset all nodes and links
     result.nodes.forEach(n => {
-      allNodes.push({ ...n, branch: branchKey });
+      allNodes.push({
+        ...n,
+        x: n.x + currentX,
+        parentX: n.parentX + currentX,
+        branch: branchKey
+      });
     });
     result.links.forEach(l => {
-      allLinks.push({ ...l, branch: branchKey });
+      allLinks.push({
+        ...l,
+        fromX: l.fromX + currentX,
+        toX: l.toX + currentX,
+        branch: branchKey
+      });
     });
+
+    currentX += branchWidths[branchIndex] + branchGap;
   });
 
   return { nodes: allNodes, links: allLinks };
@@ -315,7 +219,7 @@ export function FamilyTreePanel({
   // Calculate SVG dimensions
   const maxX = Math.max(...nodes.map(n => n.x), 0) + 150;
   const maxY = Math.max(...nodes.map(n => n.y), 0) + 100;
-  const svgWidth = Math.max(1400, maxX);
+  const svgWidth = Math.max(800, maxX);
   const svgHeight = Math.max(600, maxY);
 
   const handleNodeClick = (geviId?: string) => {

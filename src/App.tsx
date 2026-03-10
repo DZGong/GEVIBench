@@ -109,15 +109,31 @@ function GEVIBenchApp() {
   // Render Database Tab
   const renderDatabaseTab = () => (
     <main className="max-w-7xl mx-auto px-4 py-6">
-      <div className="text-center mb-6">
-        <button onClick={handleLogoClick} className="hover:opacity-80 transition-opacity">
-          <h2 className={`text-xl md:text-2xl font-bold mb-2 ${colors.text}`}>
-            GEVIBench <span className="text-blue-400">— Voltage Indicator Benchmark</span>
-          </h2>
-        </button>
-        <p className={`text-sm md:text-base px-2 ${colors.textTertiary}`}>
-          Independent, standardized evaluation from publicly available datasets
-        </p>
+      {/* Title Panel with Video Background */}
+      <div className="relative rounded-xl overflow-hidden mb-6 -mt-2">
+        {/* Video Background */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-32 object-cover"
+        >
+          <source src="/imgs/spike_mov.mp4" type="video/mp4" />
+        </video>
+        {/* Dark Overlay for readability */}
+        <div className="absolute inset-0 bg-black/25" />
+        {/* Title Content */}
+        <div className="relative text-center py-6">
+          <button onClick={handleLogoClick} className="hover:opacity-80 transition-opacity">
+            <h2 className="text-xl md:text-2xl font-bold mb-2 text-white">
+              GEVIBench <span className="text-blue-300">— Voltage Indicator Benchmark</span>
+            </h2>
+          </button>
+          <p className="text-sm md:text-base px-2 text-gray-200">
+            Independent, standardized evaluation from publicly available datasets
+          </p>
+        </div>
       </div>
 
       <SearchFilters
@@ -449,7 +465,7 @@ function GEVIBenchApp() {
   );
 
   return (
-    <div className={`min-h-screen ${darkMode ? 'bg-gray-900' : 'bg-white'}`}>
+    <div className={`min-h-screen flex flex-col ${darkMode ? 'bg-gray-900' : 'bg-white'}`}>
       <Header
         activeTab={activeTab}
         setActiveTab={setActiveTab}
@@ -488,6 +504,15 @@ function GEVIBenchApp() {
           onAddToCompare={addToCompare}
         />
       )}
+
+      {/* Footer */}
+      <footer className={`mt-auto py-6 border-t ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-gray-50 border-gray-200'}`}>
+        <div className="max-w-7xl mx-auto px-4 text-center">
+          <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+            © 2026 GEVIBench. Data sourced from published studies.
+          </p>
+        </div>
+      </footer>
     </div>
   );
 }

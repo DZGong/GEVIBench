@@ -47,158 +47,238 @@ interface TreeNode {
   geviId?: string;
 }
 
-const FAMILY_TREE = {
-  'VSD': {
-    name: 'VSD Based',
+export const FAMILY_TREE = {
+  'GEVI': {
+    name: 'GEVI',
     children: {
-      'VSD-FRET': {
-        name: 'Ci-VSP FRET-based',
+      'VSD': {
+        name: 'VSD Based',
         children: {
-          'VSFP1': { name: 'VSFP1', year: 2001 },
-          'VSFP2': {
-            name: 'VSFP2',
-            year: 2007,
+          'VSD-FRET': {
+            name: 'Ci-VSP FRET-based',
             children: {
-              'VSFP2.3': { name: 'VSFP2.3', year: 2009 },
-              'Mermaid': { name: 'Mermaid', year: 2008 },
-              'Butterfly': { name: 'VSFP-Butterfly', year: 2010 },
-              'nirButterfly': { name: 'nirButterfly', year: 2018 },
-            }
-          },
-        }
-      },
-      'VSD-single': {
-        name: 'Ci-VSP Single-FP',
-        children: {
-          'ArcLight': {
-            name: 'ArcLight lineage',
-            children: {
-              'arclight': { name: 'ArcLight', year: 2012 },
-              'arclightd': { name: 'ArcLight-D', year: 2015 },
-              'Bongwoori': { name: 'Bongwoori', year: 2017 },
-              'Marina': { name: 'Marina', year: 2017 },
-            }
-          }
-        }
-      },
-      'VSD-cpGFP': {
-        name: 'VSD-cpGFP',
-        children: {
-          'ASAP': {
-            name: 'ASAP lineage',
-            children: {
-              'asap1': { name: 'ASAP1', year: 2014 },
-              'asap2s': { name: 'ASAP2s', year: 2017 },
-              'asap3': { name: 'ASAP3', year: 2019 },
-              'asap4b': { name: 'ASAP4b', year: 2022 },
-              'asap4e': { name: 'ASAP4e', year: 2022 },
-              'asap5': { name: 'ASAP5', year: 2024 },
-              'JEDI': {
-                name: 'JEDI lineage',
+              'VSFP1': {
+                name: 'VSFP1',
+                year: 2001,
+                geviId: 'vsfp1',
                 children: {
-                  'jedi2p': { name: 'JEDI-2P', year: 2022 },
-                  'jedi1p': { name: 'JEDI-1P', year: 2023 },
+                  'VSFP2': {
+                    name: 'VSFP2',
+                    year: 2007,
+                    geviId: 'vsfp2',
+                    children: {
+                      'VSFP2.3': { name: 'VSFP2.3', year: 2009, geviId: 'vsfp2_3' },
+                      'Mermaid': { name: 'Mermaid', year: 2008, geviId: 'mermaid' },
+                      'Butterfly': {
+                        name: 'VSFP-Butterfly',
+                        year: 2010,
+                        geviId: 'vsfpbutterfly',
+                        children: {
+                          'nirButterfly': { name: 'nirButterfly', year: 2018, geviId: 'nirbutterfly' },
+                        }
+                      },
+                    }
+                  },
                 }
               },
-              'restus': { name: 'rEstus', year: 2024 },
-              'synth': { name: 'Synth', year: 2024 },
-              'probedb': { name: 'ProbeDB', year: 2024 },
             }
           },
-          'chiVSD': {
-            name: 'ChiVSD lineage',
+          'VSD-single': {
+            name: 'VSD-cpGFP',
             children: {
-              'chivsfp': { name: 'ChiVSF', year: 2018 },
-            }
-          },
-        }
-      },
-    }
-  },
-  'Opsin': {
-    name: 'Opsin Based',
-    children: {
-      'Opsin-Fluorescent': {
-        name: 'Microbial Rhodopsin',
-        children: {
-          'PROPS': { name: 'PROPS', year: 2011 },
-          'Arch': {
-            name: 'Arch lineage',
-            children: {
-              'archer1': { name: 'Archer1', year: 2014 },
-              'QuasAr': {
-                name: 'QuasAr lineage',
+              'ArcLight': {
+                name: 'ArcLight lineage',
                 children: {
-                  'quasar1': { name: 'QuasAr1', year: 2014 },
-                  'quasar2': { name: 'QuasAr2', year: 2014 },
-                  'quasar3': { name: 'paQuasAr3', year: 2019 },
-                  'quasar6': { name: 'QuasAr6', year: 2022 },
+                  'arclight': { name: 'ArcLight', year: 2012, geviId: 'arclight' },
+                  'arclightd': { name: 'ArcLight-D', year: 2015, geviId: 'arclightd' },
+                  'Bongwoori': { name: 'Bongwoori', year: 2017, geviId: 'bongwoori' },
+                  'Marina': { name: 'Marina', year: 2017, geviId: 'marina' },
                 }
               },
-              'Archon': {
-                name: 'Archon lineage',
+              'ASAP': {
+                name: 'ASAP lineage',
                 children: {
-                  'archon1': { name: 'Archon1', year: 2018 },
-                  'archon2': { name: 'Archon2', year: 2018 },
-                  'archon3': { name: 'Archon3', year: 2019 },
-                  'somarchon': { name: 'SomArchon', year: 2019 },
+                  'asap1': {
+                    name: 'ASAP1',
+                    year: 2014,
+                    geviId: 'asap1',
+                    children: {
+                      'asap2s': {
+                        name: 'ASAP2s',
+                        year: 2017,
+                        geviId: 'asap2s',
+                        children: {
+                          'asap3': {
+                            name: 'ASAP3',
+                            year: 2019,
+                            geviId: 'asap3',
+                            children: {
+                              'asap4e': {
+                                name: 'ASAP4e',
+                                year: 2022,
+                                geviId: 'asap4e',
+                                children: {
+                                  'asap5': { name: 'ASAP5', year: 2024, geviId: 'asap5' },
+                                }
+                              },
+                              'asap4b': { name: 'ASAP4b', year: 2022, geviId: 'asap4b' },
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  'JEDI': {
+                    name: 'JEDI lineage',
+                    children: {
+                      'jedi2p': {
+                        name: 'JEDI-2P',
+                        year: 2022,
+                        geviId: 'jedi2p',
+                        children: {
+                          'jedi1p': { name: 'JEDI-1P', year: 2023, geviId: 'jedi1p' },
+                        }
+                      },
+                    }
+                  },
+                  'restus': { name: 'rEstus', year: 2024, geviId: 'restus' },
+                  'synth': { name: 'Synth', year: 2024, geviId: 'synth' },
+                  'probedb': { name: 'ProbeDB', year: 2024, geviId: 'probedb' },
                 }
               },
-              'rho1': { name: 'Rho1', year: 2015 },
-              'electric': { name: 'Electric', year: 2018 },
-              'pado': { name: 'Pado', year: 2020 },
+              'chiVSD': {
+                name: 'ChiVSD lineage',
+                children: {
+                  'chivsfp': { name: 'ChiVSF', year: 2018, geviId: 'chivsfp' },
+                }
+              },
             }
           },
-          'NIR': {
-            name: 'NIR lineage',
+        }
+      },
+      'Opsin': {
+        name: 'Opsin Based',
+        children: {
+          'Opsin-Fluorescent': {
+            name: 'Microbial Rhodopsin',
             children: {
-              'nir': { name: 'NIR', year: 2016 },
-              'nir2': { name: 'NIR2', year: 2018 },
+              'PROPS': { name: 'PROPS', year: 2011, geviId: 'props' },
+              'Arch': {
+                name: 'Arch lineage',
+                children: {
+                  'archer1': { name: 'Archer1', year: 2014, geviId: 'archer1' },
+                  'QuasAr': {
+                    name: 'QuasAr lineage',
+                    children: {
+                      'quasar1': {
+                        name: 'QuasAr1',
+                        year: 2014,
+                        geviId: 'quasar1',
+                        children: {
+                          'quasar2': {
+                            name: 'QuasAr2',
+                            year: 2014,
+                            geviId: 'quasar2',
+                            children: {
+                              'quasar3': { name: 'paQuasAr3', year: 2019, geviId: 'quasar3' },
+                              'quasar6': { name: 'QuasAr6', year: 2022, geviId: 'quasar6' },
+                            }
+                          },
+                        }
+                      },
+                    }
+                  },
+                  'Archon': {
+                    name: 'Archon lineage',
+                    children: {
+                      'archon1': {
+                        name: 'Archon1',
+                        year: 2018,
+                        geviId: 'archon1',
+                        children: {
+                          'archon2': {
+                            name: 'Archon2',
+                            year: 2018,
+                            geviId: 'archon2',
+                            children: {
+                              'archon3': { name: 'Archon3', year: 2019, geviId: 'archon3' },
+                            }
+                          },
+                        }
+                      },
+                      'somarchon': { name: 'SomArchon', year: 2019, geviId: 'somarchon' },
+                    }
+                  },
+                  'rho1': { name: 'Rho1', year: 2015, geviId: 'rho1' },
+                  'electric': { name: 'Electric', year: 2018, geviId: 'electric' },
+                  'pado': { name: 'Pado', year: 2020, geviId: 'pado' },
+                }
+              },
+              'NIR': {
+                name: 'NIR lineage',
+                children: {
+                  'nir': {
+                    name: 'NIR',
+                    year: 2016,
+                    geviId: 'nir',
+                    children: {
+                      'nir2': { name: 'NIR2', year: 2018, geviId: 'nir2' },
+                    }
+                  },
+                  'nir2': { name: 'NIR2', year: 2018, geviId: 'nir2' },
+                }
+              },
             }
           },
-        }
-      },
-      'Opsin-FRET': {
-        name: 'Opsin-FRET',
-        children: {
-          'macq': { name: 'MacQ', year: 2014 },
-          'ace1': { name: 'Ace1', year: 2014 },
-          'ace2n': {
-            name: 'Ace2N lineage',
+          'Opsin-FRET': {
+            name: 'Opsin-FRET',
             children: {
-              'ace2n-mneon': { name: 'Ace2N-mNeon', year: 2015 },
-              'ace2n-mneon2': { name: 'Ace2N-mNeon2', year: 2018 },
+              'macq': { name: 'MacQ', year: 2014, geviId: 'macq' },
+              'ace1': { name: 'Ace1', year: 2014, geviId: 'ace1' },
+              'ace2n': {
+                name: 'Ace2N lineage',
+                children: {
+                  'ace2n-mneon': { name: 'Ace2N-mNeon', year: 2015, geviId: 'ace2n-mneon' },
+                  'ace2n-mneon2': { name: 'Ace2N-mNeon2', year: 2018, geviId: 'ace2n-mneon2' },
+                }
+              },
+              'varnam': { name: 'VARNAM', year: 2018, geviId: 'varnam' },
+              'positron': { name: 'Positron', year: 2020, geviId: 'positron' },
             }
           },
-          'varnam': { name: 'VARNAM', year: 2018 },
-          'positron': { name: 'Positron', year: 2020 },
+          'Chemigenetic': {
+            name: 'Chemigenetic',
+            children: {
+              'voltron': {
+                name: 'Voltron',
+                year: 2018,
+                geviId: 'voltron',
+                children: {
+                  'voltron2': { name: 'Voltron2', year: 2023, geviId: 'voltron2' },
+                }
+              },
+              'hviplus': { name: 'HVIplus', year: 2023, geviId: 'hviplus' },
+            }
+          },
         }
       },
-    }
-  },
-  'Others': {
-    name: 'Others',
-    children: {
-      'Chemigenetic': {
-        name: 'Chemigenetic',
+      'Others': {
+        name: 'Others',
         children: {
-          'voltron': { name: 'Voltron', year: 2018 },
-          'voltron2': { name: 'Voltron2', year: 2023 },
-          'hviplus': { name: 'HVIplus', year: 2023 },
-        }
-      },
-      'Red FP': {
-        name: 'Red FP',
-        children: {
-          'flicr1': { name: 'FlicR1', year: 2016 },
-        }
-      },
-      'Bioluminescent': {
-        name: 'Bioluminescent',
-        children: {
-          'lotusv': { name: 'LOTUS-V', year: 2017 },
-          'amber': { name: 'AMBER', year: 2022 },
-          'solaris': { name: 'Solaris', year: 2023 },
+          'Red FP': {
+            name: 'Red FP',
+            children: {
+              'flicr1': { name: 'FlicR1', year: 2016, geviId: 'flicr1' },
+            }
+          },
+          'Bioluminescent': {
+            name: 'Bioluminescent',
+            children: {
+              'lotusv': { name: 'LOTUS-V', year: 2017, geviId: 'lotusv' },
+              'amber': { name: 'AMBER', year: 2022, geviId: 'amber' },
+              'solaris': { name: 'Solaris', year: 2023, geviId: 'solaris' },
+            }
+          },
         }
       },
     }
@@ -208,62 +288,63 @@ const FAMILY_TREE = {
 // Map GEVI IDs to their tree path
 const GEVI_PATHS: Record<string, string[]> = {
   // VSD Based
-  'vsfp1': ['VSD', 'VSD-FRET', 'VSFP1'],
-  'vsfp2': ['VSD', 'VSD-FRET', 'VSFP2', 'VSFP2'],
-  'vsfp2_3': ['VSD', 'VSD-FRET', 'VSFP2', 'VSFP2.3'],
-  'mermaid': ['VSD', 'VSD-FRET', 'VSFP2', 'Mermaid'],
-  'vsfpbutterfly': ['VSD', 'VSD-FRET', 'VSFP2', 'Butterfly'],
-  'nirbutterfly': ['VSD', 'VSD-FRET', 'VSFP2', 'nirButterfly'],
-  'arclight': ['VSD', 'VSD-single', 'ArcLight', 'arclight'],
-  'arclightd': ['VSD', 'VSD-single', 'ArcLight', 'arclightd'],
-  'bongwoori': ['VSD', 'VSD-single', 'ArcLight', 'Bongwoori'],
-  'marina': ['VSD', 'VSD-single', 'ArcLight', 'Marina'],
-  'asap1': ['VSD', 'VSD-cpGFP', 'ASAP', 'asap1'],
-  'asap2s': ['VSD', 'VSD-cpGFP', 'ASAP', 'asap2s'],
-  'asap3': ['VSD', 'VSD-cpGFP', 'ASAP', 'asap3'],
-  'asap4b': ['VSD', 'VSD-cpGFP', 'ASAP', 'asap4b'],
-  'asap4e': ['VSD', 'VSD-cpGFP', 'ASAP', 'asap4e'],
-  'asap5': ['VSD', 'VSD-cpGFP', 'ASAP', 'asap5'],
-  'jedi2p': ['VSD', 'VSD-cpGFP', 'ASAP', 'JEDI', 'jedi2p'],
-  'jedi1p': ['VSD', 'VSD-cpGFP', 'ASAP', 'JEDI', 'jedi1p'],
-  'restus': ['VSD', 'VSD-cpGFP', 'ASAP', 'restus'],
-  'synth': ['VSD', 'VSD-cpGFP', 'ASAP', 'synth'],
-  'probedb': ['VSD', 'VSD-cpGFP', 'ASAP', 'probedb'],
-  'chivsfp': ['VSD', 'VSD-cpGFP', 'chiVSD', 'chivsfp'],
+  'vsfp1': ['GEVI', 'VSD', 'VSD-FRET', 'VSFP1'],
+  'vsfp2': ['GEVI', 'VSD', 'VSD-FRET', 'VSFP1', 'VSFP2'],
+  'vsfp2_3': ['GEVI', 'VSD', 'VSD-FRET', 'VSFP1', 'VSFP2', 'VSFP2.3'],
+  'mermaid': ['GEVI', 'VSD', 'VSD-FRET', 'VSFP1', 'VSFP2', 'Mermaid'],
+  'vsfpbutterfly': ['GEVI', 'VSD', 'VSD-FRET', 'VSFP2', 'Butterfly'],
+  'nirbutterfly': ['GEVI', 'VSD', 'VSD-FRET', 'VSFP2', 'Butterfly', 'nirButterfly'],
+  'arclight': ['GEVI', 'VSD', 'VSD-single', 'ArcLight', 'arclight'],
+  'arclightd': ['GEVI', 'VSD', 'VSD-single', 'ArcLight', 'arclightd'],
+  'bongwoori': ['GEVI', 'VSD', 'VSD-single', 'ArcLight', 'Bongwoori'],
+  'marina': ['GEVI', 'VSD', 'VSD-single', 'ArcLight', 'Marina'],
+  'asap1': ['GEVI', 'VSD', 'VSD-single', 'ASAP', 'asap1'],
+  'asap2s': ['GEVI', 'VSD', 'VSD-single', 'ASAP', 'asap1', 'asap2s'],
+  'asap3': ['GEVI', 'VSD', 'VSD-single', 'ASAP', 'asap1', 'asap2s', 'asap3'],
+  'asap4b': ['GEVI', 'VSD', 'VSD-single', 'ASAP', 'asap1', 'asap2s', 'asap3','asap4b'],
+  'asap4e': ['GEVI', 'VSD', 'VSD-single', 'ASAP', 'asap1', 'asap2s', 'asap3','asap4e'],
+  'asap5': ['GEVI', 'VSD', 'VSD-single', 'ASAP', 'asap1', 'asap2s', 'asap3','asap4e', 'asap5'],
+  'jedi2p': ['GEVI', 'VSD', 'VSD-single', 'ASAP', 'JEDI', 'jedi2p'],
+  'jedi1p': ['GEVI', 'VSD', 'VSD-single', 'ASAP', 'JEDI', 'jedi2p', 'jedi1p'],
+  'restus': ['GEVI', 'VSD', 'VSD-single', 'ASAP', 'restus'],
+  'synth': ['GEVI', 'VSD', 'VSD-single', 'ASAP', 'synth'],
+  'probedb': ['GEVI', 'VSD', 'VSD-single', 'ASAP', 'probedb'],
+  'chivsfp': ['GEVI', 'VSD', 'VSD-single', 'chiVSD', 'chivsfp'],
 
   // Opsin Based - Fluorescent
-  'props': ['Opsin', 'Opsin-Fluorescent', 'PROPS'],
-  'archer1': ['Opsin', 'Opsin-Fluorescent', 'Arch', 'archer1'],
-  'quasar1': ['Opsin', 'Opsin-Fluorescent', 'Arch', 'QuasAr', 'quasar1'],
-  'quasar2': ['Opsin', 'Opsin-Fluorescent', 'Arch', 'QuasAr', 'quasar2'],
-  'quasar3': ['Opsin', 'Opsin-Fluorescent', 'Arch', 'QuasAr', 'quasar3'],
-  'quasar6': ['Opsin', 'Opsin-Fluorescent', 'Arch', 'QuasAr', 'quasar6'],
-  'archon1': ['Opsin', 'Opsin-Fluorescent', 'Arch', 'Archon', 'archon1'],
-  'archon2': ['Opsin', 'Opsin-Fluorescent', 'Arch', 'Archon', 'archon2'],
-  'archon3': ['Opsin', 'Opsin-Fluorescent', 'Arch', 'Archon', 'archon3'],
-  'somarchon': ['Opsin', 'Opsin-Fluorescent', 'Arch', 'Archon', 'somarchon'],
-  'rho1': ['Opsin', 'Opsin-Fluorescent', 'Arch', 'rho1'],
-  'electric': ['Opsin', 'Opsin-Fluorescent', 'Arch', 'electric'],
-  'pado': ['Opsin', 'Opsin-Fluorescent', 'Arch', 'pado'],
-  'nir': ['Opsin', 'Opsin-Fluorescent', 'NIR', 'nir'],
-  'nir2': ['Opsin', 'Opsin-Fluorescent', 'NIR', 'nir2'],
+  'props': ['GEVI', 'Opsin', 'Opsin-Fluorescent', 'PROPS'],
+  'archer1': ['GEVI', 'Opsin', 'Opsin-Fluorescent', 'Arch', 'archer1'],
+  'quasar1': ['GEVI', 'Opsin', 'Opsin-Fluorescent', 'Arch', 'QuasAr', 'quasar1'],
+  'quasar2': ['GEVI', 'Opsin', 'Opsin-Fluorescent', 'Arch', 'QuasAr', 'quasar1', 'quasar2'],
+  'quasar3': ['GEVI', 'Opsin', 'Opsin-Fluorescent', 'Arch', 'QuasAr', 'quasar1', 'quasar2', 'quasar3'],
+  'quasar6': ['GEVI', 'Opsin', 'Opsin-Fluorescent', 'Arch', 'QuasAr', 'quasar1', 'quasar2', 'quasar6'],
+  'archon1': ['GEVI', 'Opsin', 'Opsin-Fluorescent', 'Arch', 'Archon', 'archon1'],
+  'archon2': ['GEVI', 'Opsin', 'Opsin-Fluorescent', 'Arch', 'Archon', 'archon1', 'archon2'],
+  'archon3': ['GEVI', 'Opsin', 'Opsin-Fluorescent', 'Arch', 'Archon', 'archon1', 'archon2', 'archon3'],
+  'somarchon': ['GEVI', 'Opsin', 'Opsin-Fluorescent', 'Arch', 'Archon', 'somarchon'],
+  'rho1': ['GEVI', 'Opsin', 'Opsin-Fluorescent', 'Arch', 'rho1'],
+  'electric': ['GEVI', 'Opsin', 'Opsin-Fluorescent', 'Arch', 'electric'],
+  'pado': ['GEVI', 'Opsin', 'Opsin-Fluorescent', 'Arch', 'pado'],
+  'nir': ['GEVI', 'Opsin', 'Opsin-Fluorescent', 'NIR', 'nir'],
+  'nir2': ['GEVI', 'Opsin', 'Opsin-Fluorescent', 'NIR', 'nir', 'nir2'],
 
   // Opsin Based - FRET
-  'macq': ['Opsin', 'Opsin-FRET', 'macq'],
-  'ace1': ['Opsin', 'Opsin-FRET', 'ace1'],
-  'ace2n-mneon': ['Opsin', 'Opsin-FRET', 'ace2n', 'ace2n-mneon'],
-  'ace2n-mneon2': ['Opsin', 'Opsin-FRET', 'ace2n', 'ace2n-mneon2'],
-  'varnam': ['Opsin', 'Opsin-FRET', 'varnam'],
-  'positron': ['Opsin', 'Opsin-FRET', 'positron'],
+  'macq': ['GEVI', 'Opsin', 'Opsin-FRET', 'macq'],
+  'ace1': ['GEVI', 'Opsin', 'Opsin-FRET', 'ace1'],
+  'ace2n-mneon': ['GEVI', 'Opsin', 'Opsin-FRET', 'ace2n', 'ace2n-mneon'],
+  'ace2n-mneon2': ['GEVI', 'Opsin', 'Opsin-FRET', 'ace2n', 'ace2n-mneon2'],
+  'varnam': ['GEVI', 'Opsin', 'Opsin-FRET', 'varnam'],
+  'positron': ['GEVI', 'Opsin', 'Opsin-FRET', 'positron'],
+  'voltron': ['GEVI', 'Opsin', 'Chemigenetic', 'voltron'],
+  'voltron2': ['GEVI', 'Opsin', 'Chemigenetic', 'voltron', 'voltron2'],
+  'hviplus': ['GEVI', 'Opsin', 'Chemigenetic', 'hviplus'],
 
   // Others
-  'voltron': ['Others', 'Chemigenetic', 'voltron'],
-  'voltron2': ['Others', 'Chemigenetic', 'voltron2'],
-  'hviplus': ['Others', 'Chemigenetic', 'hviplus'],
-  'flicr1': ['Others', 'Red FP', 'flicr1'],
-  'lotusv': ['Others', 'Bioluminescent', 'lotusv'],
-  'amber': ['Others', 'Bioluminescent', 'amber'],
-  'solaris': ['Others', 'Bioluminescent', 'solaris'],
+
+  'flicr1': ['GEVI', 'Others', 'Red FP', 'flicr1'],
+  'lotusv': ['GEVI', 'Others', 'Bioluminescent', 'lotusv'],
+  'amber': ['GEVI', 'Others', 'Bioluminescent', 'amber'],
+  'solaris': ['GEVI', 'Others', 'Bioluminescent', 'solaris'],
 };
 
 interface FamilyTreeProps {
