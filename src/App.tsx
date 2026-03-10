@@ -117,13 +117,13 @@ function GEVIBenchApp() {
           loop
           muted
           playsInline
-          className="absolute inset-0 w-full h-32 object-cover"
+          className="absolute inset-0 w-full h-48 md:h-32 object-cover"
         >
           <source src="/imgs/spike_mov.mp4" type="video/mp4" />
         </video>
         {/* Dark Overlay for readability */}
                 {/* Title Content */}
-        <div className="relative text-center py-6">
+        <div className="relative text-center py-4 md:py-6">
           <button onClick={handleLogoClick} className="hover:opacity-80 transition-opacity">
             <h2 className="text-xl md:text-2xl font-bold mb-2 text-white" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>
               GEVIBench <span className="text-blue-300" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>— Voltage Indicator Benchmark</span>
