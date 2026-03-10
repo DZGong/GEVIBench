@@ -122,15 +122,14 @@ function GEVIBenchApp() {
           <source src="/imgs/spike_mov.mp4" type="video/mp4" />
         </video>
         {/* Dark Overlay for readability */}
-        <div className="absolute inset-0 bg-black/25" />
-        {/* Title Content */}
+                {/* Title Content */}
         <div className="relative text-center py-6">
           <button onClick={handleLogoClick} className="hover:opacity-80 transition-opacity">
-            <h2 className="text-xl md:text-2xl font-bold mb-2 text-white">
-              GEVIBench <span className="text-blue-300">— Voltage Indicator Benchmark</span>
+            <h2 className="text-xl md:text-2xl font-bold mb-2 text-white" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>
+              GEVIBench <span className="text-blue-300" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>— Voltage Indicator Benchmark</span>
             </h2>
           </button>
-          <p className="text-sm md:text-base px-2 text-gray-200">
+          <p className="text-sm md:text-base px-2 text-gray-200" style={{ textShadow: '0 1px 3px rgba(0,0,0,0.8)' }}>
             Independent, standardized evaluation from publicly available datasets
           </p>
         </div>
