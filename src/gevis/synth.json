@@ -1,0 +1,35 @@
+{
+  "id": "synth",
+  "name": "synth",
+  "year": 2024,
+  "category": "Synthetic",
+  "paper": "Nature Methods 2024",
+  "paperUrl": "https://www.nature.com/articles/s41592-024-02198-0",
+  "brightness": 82,
+  "speed": 78,
+  "snr": 75,
+  "dynamicRange": 78,
+  "photostability": 70,
+  "subthreshold": 70,
+  "overall": 75,
+  "description": "Synthetic biology approach combining multiple protein domains to engineer a novel GEVI architecture with optimized properties.",
+  "familyTreePath": [
+    "GEVI",
+    "VSD",
+    "VSD-single",
+    "ASAP",
+    "synth"
+  ],
+  "spectrum": {
+    "type": "fp",
+    "peakEx": 490,
+    "peakEm": 510,
+    "name": "Synth"
+  },
+  "voltage": {
+    "type": "fp",
+    "slope": 14,
+    "polarity": "positive",
+    "name": "Synth"
+  }
+}

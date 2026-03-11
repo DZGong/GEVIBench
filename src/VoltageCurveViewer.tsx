@@ -1,12 +1,36 @@
-// Interactive Voltage Curve Viewer Component
+// Interactive Voltage Curve Viewer Component - Pure Function
 // Shows deltaF/F response vs membrane potential
 // Real-time mouse tracking with instant updates
+// Accepts voltage data as props - no internal GEVI lookup
 
-import { useState, useRef, useCallback } from 'react';
+import { useState, useRef, useCallback, useMemo } from 'react';
 
 interface VoltagePoint {
   voltage: number;  // mV
   deltaF: number;  // % deltaF/F
+}
+
+interface VoltageConfig {
+  type: 'opsin' | 'fp' | 'fret' | 'red' | 'chemi';
+  slope: number;
+  polarity: 'positive' | 'negative';
+  name: string;
+}
+
+interface VoltageCustom {
+  voltage: number[];
+  deltaF: number[];
+}
+
+export interface VoltageData {
+  config?: VoltageConfig;
+  custom?: VoltageCustom;
+}
+
+interface VoltageCurveViewerProps {
+  voltageData?: VoltageData | null;
+  geviName?: string;
+  darkMode?: boolean;
 }
 
 // Generate placeholder F-V curve data for different GEVI types
@@ -53,85 +77,30 @@ export function generateVoltageCurve(type: 'opsin' | 'fp' | 'fret' | 'red' | 'ch
   return data;
 }
 
-// GEVI voltage response configurations
-export const GEVI_VOLTAGE: Record<string, { type: 'opsin' | 'fp' | 'fret' | 'red' | 'chemi'; slope: number; polarity: 'positive' | 'negative'; name: string }> = {
-  // Opsins (positive response, large signal)
-  'archon1': { type: 'opsin', slope: 35, polarity: 'positive', name: 'Archon1' },
-  'archon2': { type: 'opsin', slope: 38, polarity: 'positive', name: 'Archon2' },
-  'archon3': { type: 'opsin', slope: 40, polarity: 'positive', name: 'Archon3' },
-  'quasar1': { type: 'opsin', slope: 25, polarity: 'positive', name: 'QuasAr1' },
-  'quasar2': { type: 'opsin', slope: 28, polarity: 'positive', name: 'QuasAr2' },
-  'quasar3': { type: 'opsin', slope: 22, polarity: 'positive', name: 'paQuasAr3' },
-  'quasar6': { type: 'opsin', slope: 20, polarity: 'positive', name: 'QuasAr6' },
-  'somarchon': { type: 'opsin', slope: 32, polarity: 'positive', name: 'SomArchon' },
-  'props': { type: 'opsin', slope: 30, polarity: 'positive', name: 'PROPS' },
-  'archer1': { type: 'opsin', slope: 28, polarity: 'positive', name: 'Archer1' },
-  'ace1': { type: 'opsin', slope: 15, polarity: 'positive', name: 'Ace1' },
-  'ace2n': { type: 'opsin', slope: 18, polarity: 'positive', name: 'Ace2N' },
-  'ace2n4aa': { type: 'opsin', slope: 16, polarity: 'positive', name: 'Ace2N-4AA' },
-  'macq': { type: 'opsin', slope: 14, polarity: 'positive', name: 'MacQ' },
-  'varnam': { type: 'opsin', slope: 12, polarity: 'positive', name: 'VARNAM' },
-  'positron': { type: 'opsin', slope: 20, polarity: 'positive', name: 'Positron' },
-  'rho1': { type: 'opsin', slope: 22, polarity: 'positive', name: 'Rho1' },
-  'electric': { type: 'opsin', slope: 18, polarity: 'positive', name: 'Electric' },
-  'pado': { type: 'opsin', slope: 16, polarity: 'positive', name: 'Pado' },
-  // FP-based (typically negative response)
-  'asap1': { type: 'fp', slope: 15, polarity: 'negative', name: 'ASAP1' },
-  'asap2s': { type: 'fp', slope: 18, polarity: 'negative', name: 'ASAP2s' },
-  'asap3': { type: 'fp', slope: 12, polarity: 'negative', name: 'ASAP3' },
-  'asap4': { type: 'fp', slope: 20, polarity: 'negative', name: 'ASAP4' },
-  'asap4s': { type: 'fp', slope: 22, polarity: 'negative', name: 'ASAP4s' },
-  'asap5': { type: 'fp', slope: 14, polarity: 'negative', name: 'ASAP5' },
-  'jedi1p': { type: 'fp', slope: 10, polarity: 'positive', name: 'JEDI-1P' },
-  'jedi2p': { type: 'fp', slope: 12, polarity: 'positive', name: 'JEDI-2P' },
-  'restus': { type: 'fp', slope: 15, polarity: 'positive', name: 'rEstus' },
-  'arclight': { type: 'fp', slope: 20, polarity: 'negative', name: 'ArcLight' },
-  'arclightd': { type: 'fp', slope: 18, polarity: 'negative', name: 'ArcLight-D' },
-  'bongwoori': { type: 'fp', slope: 12, polarity: 'negative', name: 'Bongwoori' },
-  'marina': { type: 'fp', slope: 8, polarity: 'positive', name: 'Marina' },
-  'dragon': { type: 'fp', slope: 10, polarity: 'positive', name: 'Dragon' },
-  'synth': { type: 'fp', slope: 14, polarity: 'positive', name: 'Synth' },
-  'probedb': { type: 'fp', slope: 11, polarity: 'positive', name: 'ProbeDB' },
-  'lotusv': { type: 'fp', slope: 9, polarity: 'positive', name: 'LOTUS-V' },
-  'amber': { type: 'fp', slope: 8, polarity: 'positive', name: 'AMBER' },
-  // FRET (typically negative)
-  'vsfp1': { type: 'fret', slope: 12, polarity: 'negative', name: 'VSFP1' },
-  'vsfp2': { type: 'fret', slope: 15, polarity: 'negative', name: 'VSFP2' },
-  'vsfp2_3': { type: 'fret', slope: 18, polarity: 'negative', name: 'VSFP2.3' },
-  'chivsfp': { type: 'fret', slope: 16, polarity: 'negative', name: 'chi-VSFP' },
-  'butterfly': { type: 'fret', slope: 14, polarity: 'negative', name: 'VSFP-Butterfly' },
-  'vsfpbutterfly': { type: 'fret', slope: 14, polarity: 'negative', name: 'VSFP-Butterfly' },
-  'nirbutterfly': { type: 'red', slope: 10, polarity: 'negative', name: 'nirButterfly' },
-  'mermaid': { type: 'fret', slope: 12, polarity: 'negative', name: 'Mermaid' },
-  // Red FP
-  'flicr1': { type: 'red', slope: 12, polarity: 'positive', name: 'FlicR1' },
-  // NIR
-  'nir': { type: 'red', slope: 8, polarity: 'positive', name: 'NIR-GEV1' },
-  'nir2': { type: 'red', slope: 7, polarity: 'positive', name: 'NIR-GEV2' },
-  // Chemigenetic
-  'voltron': { type: 'chemi', slope: 25, polarity: 'positive', name: 'Voltron' },
-  'voltron2': { type: 'chemi', slope: 28, polarity: 'positive', name: 'Voltron2' },
-};
-
-interface VoltageCurveViewerProps {
-  geviId: string;
-  darkMode?: boolean;
-}
-
-export function VoltageCurveViewer({ geviId, darkMode = false }: VoltageCurveViewerProps) {
+export function VoltageCurveViewer({ voltageData, geviName, darkMode = false }: VoltageCurveViewerProps) {
   const [hoverVoltage, setHoverVoltage] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const config = GEVI_VOLTAGE[geviId];
+  // Support both formats:
+  // 1. { config: {...}, custom: {...} } - legacy
+  // 2. { type, slope, polarity, name, custom: {...} } - GEVI format
+  const voltageConfig = voltageData?.config || voltageData;
+  const voltageCustom = voltageData?.custom;
 
-  // Generate voltage curve data
-  const voltageData = config ? generateVoltageCurve(config.type, config.slope, config.polarity) : generateVoltageCurve('fp');
+  // Generate voltage curve data from props
+  const computedVoltage = useMemo(() => {
+    if (!voltageConfig?.type || !voltageConfig?.slope || !voltageConfig?.polarity) return null;
+    const { type, slope, polarity } = voltageConfig;
+    return generateVoltageCurve(type, slope, polarity);
+  }, [voltageConfig]);
+
+  const config = voltageConfig;
 
   // Find values at hover voltage
-  const hoverData = voltageData.find(d => d.voltage === hoverVoltage) || null;
+  const hoverData = computedVoltage?.find(d => d.voltage === hoverVoltage) || null;
 
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    if (!containerRef.current || !voltageData) return;
+    if (!containerRef.current || !computedVoltage) return;
 
     const rect = containerRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
@@ -148,16 +117,16 @@ export function VoltageCurveViewer({ geviId, darkMode = false }: VoltageCurveVie
     if (snappedVoltage >= minV && snappedVoltage <= maxV) {
       setHoverVoltage(snappedVoltage);
     }
-  }, [voltageData]);
+  }, [computedVoltage]);
 
   const handleMouseLeave = useCallback(() => {
     setHoverVoltage(null);
   }, []);
 
-  // Chart dimensions
-  const width = 500;
-  const height = 180;
-  const padding = { top: 15, right: 15, bottom: 25, left: 45 };
+  // Chart dimensions - larger for better visibility
+  const width = 600;
+  const height = 280;
+  const padding = { top: 25, right: 25, bottom: 40, left: 55 };
 
   const minV = -100;
   const maxV = 40;
@@ -171,7 +140,8 @@ export function VoltageCurveViewer({ geviId, darkMode = false }: VoltageCurveVie
 
   // Create smooth path
   const createPath = () => {
-    const points = voltageData.map(d => {
+    if (!computedVoltage) return '';
+    const points = computedVoltage.map(d => {
       return `${xScale(d.voltage)},${yScale(d.deltaF)}`;
     }).join(' ');
     return `M ${points}`;
@@ -187,40 +157,29 @@ export function VoltageCurveViewer({ geviId, darkMode = false }: VoltageCurveVie
   // Calculate sensitivity (% deltaF per 100mV)
   const sensitivity = config ? Math.abs(config.slope) : 15;
 
-  return (
-    <div className={`border rounded-lg p-3 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-gray-50 border-gray-200'}`}>
-      <div className="flex items-center justify-between mb-2">
-        <h4 className={`text-sm font-semibold ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-          Voltage Response
-        </h4>
-        <span className={`text-xs ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>
-          {config?.name || 'Generic'}
-        </span>
+  if (!config || !computedVoltage) {
+    return (
+      <div className={`border rounded-lg p-4 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-gray-50 border-gray-200'}`}>
+        <div className={`text-xs ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>
+          No voltage curve data available
+        </div>
       </div>
+    );
+  }
 
-      {/* Voltage curve display */}
+  return (
+    <div className={`border rounded-lg p-4 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-gray-50 border-gray-200'}`}>
       <div
         ref={containerRef}
-        className="relative cursor-crosshair"
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
+        className={`relative h-64 cursor-crosshair ${darkMode ? 'bg-gray-900' : 'bg-white'} rounded`}
       >
-        <svg viewBox={`0 0 ${width} ${height}`} className="w-full" style={{ touchAction: 'none' }}>
-          {/* Zero line */}
-          <line
-            x1={padding.left}
-            y1={yScale(0)}
-            x2={width - padding.right}
-            y2={yScale(0)}
-            stroke={darkMode ? '#4b5563' : '#d1d5db'}
-            strokeWidth="1"
-            strokeDasharray="4 4"
-          />
-
+        <svg className="absolute inset-0 w-full h-full" viewBox={`0 0 ${width} ${height}`} preserveAspectRatio="none">
           {/* Grid lines */}
-          {[-50, -25, 0, 30].map(v => (
+          {[30, 20, 10, 0, -10, -20, -30, -40, -50].map(v => (
             <line
-              key={v}
+              key={`grid-${v}`}
               x1={padding.left}
               y1={yScale(v)}
               x2={width - padding.right}
@@ -229,148 +188,96 @@ export function VoltageCurveViewer({ geviId, darkMode = false }: VoltageCurveVie
               strokeWidth="1"
             />
           ))}
-
-          {/* Y-axis labels */}
-          {[-50, -25, 0, 30].map(v => (
+          {/* X-axis labels */}
+          {[-80, -60, -40, -20, 0, 20, 40].map(v => (
             <text
-              key={v}
-              x={padding.left - 8}
-              y={yScale(v) + 3}
-              textAnchor="end"
-              fontSize="8"
+              key={`x-${v}`}
+              x={xScale(v)}
+              y={height - 10}
+              textAnchor="middle"
+              fontSize="11"
               fill={darkMode ? '#9ca3af' : '#6b7280'}
             >
-              {v > 0 ? `+${v}` : v}%
+              {v}
             </text>
           ))}
-
-          {/* X-axis */}
-          {[-80, -60, -40, -20, 0, 20].map(v => (
-            <g key={v}>
-              <line
-                x1={xScale(v)}
-                y1={yScale(minDeltaF)}
-                x2={xScale(v)}
-                y2={yScale(maxDeltaF)}
-                stroke={darkMode ? '#4b5563' : '#d1d5db'}
-                strokeWidth="1"
-              />
-              <text
-                x={xScale(v)}
-                y={height - 8}
-                textAnchor="middle"
-                fontSize="9"
-                fill={darkMode ? '#9ca3af' : '#6b7280'}
-              >
-                {v} mV
-              </text>
-            </g>
+          {/* Y-axis labels */}
+          {[30, 0, -30, -50].map(v => (
+            <text
+              key={`y-${v}`}
+              x={padding.left - 8}
+              y={yScale(v) + 4}
+              textAnchor="end"
+              fontSize="11"
+              fill={darkMode ? '#9ca3af' : '#6b7280'}
+            >
+              {v}%
+            </text>
           ))}
-
-          {/* Zero line label */}
-          <text
-            x={padding.left - 8}
-            y={yScale(0) + 3}
-            textAnchor="end"
-            fontSize="8"
-            fill={darkMode ? '#9ca3af' : '#6b7280'}
-          >
-            0%
-          </text>
-
-          {/* Curve line */}
+          {/* Zero line */}
+          <line
+            x1={padding.left}
+            y1={yScale(0)}
+            x2={width - padding.right}
+            y2={yScale(0)}
+            stroke={darkMode ? '#6b7280' : '#9ca3af'}
+            strokeWidth="1"
+            strokeDasharray="4"
+          />
+          {/* Voltage curve */}
           <path
             d={createPath()}
             fill="none"
-            stroke={darkMode ? '#3b82f6' : '#2563eb'}
+            stroke={config.polarity === 'positive' ? (darkMode ? '#3b82f6' : '#2563eb') : (darkMode ? '#ef4444' : '#dc2626')}
             strokeWidth="2"
           />
-
           {/* Data points */}
-          {voltageData.map((d, i) => (
+          {computedVoltage && computedVoltage.map((d, i) => (
             <circle
               key={i}
               cx={xScale(d.voltage)}
               cy={yScale(d.deltaF)}
-              r="3"
-              fill={darkMode ? '#3b82f6' : '#2563eb'}
+              r="4"
+              fill={config.polarity === 'positive' ? (darkMode ? '#3b82f6' : '#2563eb') : (darkMode ? '#ef4444' : '#dc2626')}
+              stroke={darkMode ? '#1f2937' : '#ffffff'}
+              strokeWidth="1.5"
             />
           ))}
-
           {/* Hover point */}
           {hoverData && (
-            <g>
-              <circle
-                cx={xScale(hoverData.voltage)}
-                cy={yScale(hoverData.deltaF)}
-                r="5"
-                fill={getResponseColor(hoverData.deltaF)}
-                stroke="white"
-                strokeWidth="2"
-              />
-              <line
-                x1={xScale(hoverData.voltage)}
-                y1={yScale(minDeltaF)}
-                x2={xScale(hoverData.voltage)}
-                y2={yScale(maxDeltaF)}
-                stroke={getResponseColor(hoverData.deltaF)}
-                strokeWidth="1"
-                strokeOpacity={0.5}
-              />
-            </g>
+            <circle
+              cx={xScale(hoverData.voltage)}
+              cy={yScale(hoverData.deltaF)}
+              r="6"
+              fill={getResponseColor(hoverData.deltaF)}
+              stroke="white"
+              strokeWidth="2"
+            />
           )}
         </svg>
 
-        {/* Hover info overlay */}
-        <div
-          className="absolute pointer-events-none transition-opacity duration-75"
-          style={{
-            left: hoverVoltage ? `${((hoverVoltage - minV) / (maxV - minV)) * 100}%` : '0%',
-            top: '0',
-            transform: 'translateX(-50%)',
-            opacity: hoverVoltage ? 1 : 0,
-          }}
-        >
-          <div className="flex flex-col items-center">
-            <div
-              className="w-3 h-3 rounded-full border-2 border-white shadow"
-              style={{ backgroundColor: hoverData ? getResponseColor(hoverData.deltaF) : 'transparent' }}
-            />
+        {/* Hover tooltip */}
+        {hoverData && (
+          <div
+            className={`absolute top-1 left-1/2 transform -translate-x-1/2 px-2 py-1 rounded text-xs ${
+              darkMode ? 'bg-gray-700 text-gray-200' : 'bg-white text-gray-800 shadow'
+            }`}
+            style={{ pointerEvents: 'none' }}
+          >
+            {hoverData.voltage}mV | {hoverData.deltaF.toFixed(2)}% ΔF/F
           </div>
-        </div>
+        )}
       </div>
 
-      {/* Data readout */}
-      <div className={`mt-2 pt-2 border-t ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
-        <div className="flex items-center justify-between text-xs">
-          <div className="flex items-center gap-2">
-            <span className={darkMode ? 'text-gray-400' : 'text-gray-600'}>Sensitivity:</span>
-            <span className={`font-mono font-semibold ${darkMode ? 'text-blue-400' : 'text-blue-600'}`}>
-              ~{sensitivity}%/100mV
-            </span>
-          </div>
+      {/* Axis labels */}
+      <div className="flex justify-between mt-1 text-xs">
+        <span className={darkMode ? 'text-gray-500' : 'text-gray-400'}>Membrane Potential (mV)</span>
+        <span className={darkMode ? 'text-gray-500' : 'text-gray-400'}>ΔF/F (%)</span>
+      </div>
 
-          {hoverData && (
-            <div className="flex items-center gap-3">
-              <span className={darkMode ? 'text-gray-400' : 'text-gray-600'}>
-                {hoverData.voltage} mV:
-              </span>
-              <span
-                className="font-mono font-semibold"
-                style={{ color: getResponseColor(hoverData.deltaF) }}
-              >
-                {hoverData.deltaF > 0 ? '+' : ''}{hoverData.deltaF.toFixed(1)}% ΔF/F
-              </span>
-            </div>
-          )}
-
-          <div className="flex items-center gap-2">
-            <span className={darkMode ? 'text-gray-400' : 'text-gray-600'}>Range:</span>
-            <span className={`font-mono ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-              -100 to +40 mV
-            </span>
-          </div>
-        </div>
+      {/* Sensitivity */}
+      <div className={`mt-2 text-xs ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>
+        Sensitivity: ~{sensitivity}% per 100mV | Response: {config.polarity === 'positive' ? 'Positive (↑ depolarization = ↑ fluorescence)' : 'Negative (↑ depolarization = ↓ fluorescence)'}
       </div>
     </div>
   );

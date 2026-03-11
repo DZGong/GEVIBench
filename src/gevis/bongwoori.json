@@ -1,0 +1,39 @@
+{
+  "id": "bongwoori",
+  "name": "Bongwoori",
+  "year": 2017,
+  "category": "VSD-single FP",
+  "tags": [
+    "Ci-VSP",
+    "Green"
+  ],
+  "paper": "Scientific Reports 2017",
+  "paperUrl": "https://doi.org/10.1038/s41598-017-08731-2",
+  "brightness": 52,
+  "speed": 48,
+  "snr": 45,
+  "dynamicRange": 42,
+  "photostability": 50,
+  "subthreshold": 42,
+  "overall": 45,
+  "description": "Korean-developed VSFP variant with improved expression and signal amplitude in mammalian neurons.",
+  "familyTreePath": [
+    "GEVI",
+    "VSD",
+    "VSD-single",
+    "ArcLight",
+    "Bongwoori"
+  ],
+  "spectrum": {
+    "type": "fp",
+    "peakEx": 490,
+    "peakEm": 510,
+    "name": "Bongwoori"
+  },
+  "voltage": {
+    "type": "fp",
+    "slope": 12,
+    "polarity": "negative",
+    "name": "Bongwoori"
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "id": "asap6.1",
+  "name": "ASAP6.1",
+  "year": 2024,
+  "category": "VSD-cpGFP GEVI",
+  "tags": [
+    "cpGFP",
+    "Green",
+    "Positive",
+    "Two-photon",
+    "One-photon"
+  ],
+  "paper": "bioRxiv 2024",
+  "paperUrl": "https://doi.org/10.1101/2024.06.21.599617",
+  "brightness": 65,
+  "speed": 30,
+  "snr": 70,
+  "dynamicRange": 28,
+  "photostability": 75,
+  "subthreshold": 65,
+  "overall": 55,
+  "description": "ASAP6.1 is a next-generation positively tuned ASAP variant demonstrating sufficient dynamic range and kinetics for reporting action potentials in vivo by one-photon and two-photon microscopy with high SNR and temporal resolution. Shows 50% ΔF/F response per action potential.",
+  "kinetics": {
+    "on": 3.99,
+    "off": 4.89,
+    "unit": "ms",
+    "notes": "Mono-exponential time constant; tested at 800Hz frame rates"
+  },
+  "dynamicRangeData": {
+    "deltaF": 204,
+    "unit": "% per AP",
+    "sign": "positive",
+    "notes": "Response to AP-like waveforms with 2-ms FWHM in HEK293 cells"
+  },
+  "researchPapers": [
+    {
+      "title": "ASAP6.1 and ASAP6b: genetically encoded voltage indicators with improved performance for two-photon imaging in vivo",
+      "authors": "Sungmoo Lee, Guofeng Zhang, Laura C. Gomez, Yukun Alex Hao, Dongyun Jiang, Richard H. Roth, Guilherme Testa-Silva, Jun Ding, Thomas R. Clandinin, Daniel Feldman, Na Ji, Michael Z. Lin",
+      "journal": "bioRxiv",
+      "year": 2024,
+      "doi": "10.1101/2024.06.21.599617",
+      "url": "https://doi.org/10.1101/2024.06.21.599617",
+      "type": "Original"
+    }
+  ],
+  "paperCount": 1,
+  "familyTreePath": [
+    "GEVI",
+    "VSD",
+    "VSD-single",
+    "ASAP",
+    "asap1",
+    "asap2s",
+    "asap3",
+    "asap4e",
+    "asap6.1"
+  ],
+  "spectrum": {
+    "type": "fp",
+    "peakEx": 480,
+    "peakEm": 503,
+    "name": "ASAP6.1",
+    "notes": "Screening used 480/40nm excitation filter and 503-nm long pass emission"
+  },
+  "voltage": {
+    "type": "fp",
+    "slope": 18,
+    "polarity": "positive",
+    "name": "ASAP6.1"
+  }
+}

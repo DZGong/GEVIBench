@@ -1,0 +1,39 @@
+{
+  "id": "asap1",
+  "name": "ASAP1",
+  "year": 2014,
+  "category": "VSD-cpGFP GEVI",
+  "tags": [
+    "cpGFP",
+    "Green"
+  ],
+  "paper": "Nature Neuroscience 2014",
+  "paperUrl": "https://doi.org/10.1038/nn.3709",
+  "brightness": 61,
+  "speed": 0,
+  "snr": 25,
+  "dynamicRange": 51,
+  "photostability": 65,
+  "subthreshold": 55,
+  "overall": 35,
+  "description": "First generation ArcLight-based ASAP sensor using cpGFP fused to voltage-sensing domain, providing bright fluorescence that decreases with depolarization.",
+  "familyTreePath": [
+    "GEVI",
+    "VSD",
+    "VSD-single",
+    "ASAP",
+    "asap1"
+  ],
+  "spectrum": {
+    "type": "fp",
+    "peakEx": 490,
+    "peakEm": 510,
+    "name": "ASAP1"
+  },
+  "voltage": {
+    "type": "fp",
+    "slope": 15,
+    "polarity": "negative",
+    "name": "ASAP1"
+  }
+}

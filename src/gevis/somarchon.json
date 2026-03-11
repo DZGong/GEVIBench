@@ -1,0 +1,41 @@
+{
+  "id": "somarchon",
+  "name": "SomArchon",
+  "year": 2019,
+  "category": "Opsin GEVI",
+  "tags": [
+    "Archaerhodopsin",
+    "Red",
+    "Somatic targeting"
+  ],
+  "paper": "Nature 2019",
+  "paperUrl": "https://doi.org/10.1038/s41586-019-1641-1",
+  "brightness": 55,
+  "speed": 92,
+  "snr": 58,
+  "dynamicRange": 52,
+  "photostability": 45,
+  "subthreshold": 80,
+  "overall": 64,
+  "description": "SomArchon enables population imaging in awake behaving mice, combining millisecond kinetics with compatibility for optogenetic manipulation.",
+  "familyTreePath": [
+    "GEVI",
+    "Opsin",
+    "Opsin-Fluorescent",
+    "Arch",
+    "Archon",
+    "somarchon"
+  ],
+  "spectrum": {
+    "type": "rhodopsin",
+    "peakEx": 560,
+    "peakEm": 590,
+    "name": "SomArchon"
+  },
+  "voltage": {
+    "type": "opsin",
+    "slope": 32,
+    "polarity": "positive",
+    "name": "SomArchon"
+  }
+}

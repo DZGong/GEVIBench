@@ -1,0 +1,35 @@
+{
+  "id": "rho1",
+  "name": "Rho1",
+  "year": 2020,
+  "category": "Microbial",
+  "paper": "Nature Methods 2020",
+  "paperUrl": "https://www.nature.com/articles/s41592-020-0857-1",
+  "brightness": 72,
+  "speed": 90,
+  "snr": 68,
+  "dynamicRange": 65,
+  "photostability": 65,
+  "subthreshold": 75,
+  "overall": 70,
+  "description": "Next-generation rhodopsin voltage indicator engineered for improved brightness and reduced DNA toxicity while maintaining fast kinetics.",
+  "familyTreePath": [
+    "GEVI",
+    "Opsin",
+    "Opsin-Fluorescent",
+    "Arch",
+    "rho1"
+  ],
+  "spectrum": {
+    "type": "rhodopsin",
+    "peakEx": 540,
+    "peakEm": 570,
+    "name": "Rho1"
+  },
+  "voltage": {
+    "type": "opsin",
+    "slope": 22,
+    "polarity": "positive",
+    "name": "Rho1"
+  }
+}

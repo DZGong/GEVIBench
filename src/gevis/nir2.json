@@ -1,0 +1,36 @@
+{
+  "id": "nir2",
+  "name": "NIR-GEV2",
+  "year": 2022,
+  "category": "Near-IR",
+  "paper": "Nature Biotechnology 2022",
+  "paperUrl": "https://www.nature.com/articles/s41587-022-01360-9",
+  "brightness": 60,
+  "speed": 78,
+  "snr": 55,
+  "dynamicRange": 52,
+  "photostability": 60,
+  "subthreshold": 55,
+  "overall": 56,
+  "description": "Improved near-infrared GEVI with enhanced brightness and faster kinetics for in vivo deep tissue voltage imaging.",
+  "familyTreePath": [
+    "GEVI",
+    "Opsin",
+    "Opsin-Fluorescent",
+    "NIR",
+    "nir",
+    "nir2"
+  ],
+  "spectrum": {
+    "type": "nir",
+    "peakEx": 700,
+    "peakEm": 730,
+    "name": "NIR-GEV2"
+  },
+  "voltage": {
+    "type": "red",
+    "slope": 7,
+    "polarity": "positive",
+    "name": "NIR-GEV2"
+  }
+}

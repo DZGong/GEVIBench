@@ -1,0 +1,53 @@
+{
+  "id": "asap3",
+  "name": "ASAP3",
+  "year": 2019,
+  "category": "VSD-cpGFP GEVI",
+  "tags": [
+    "cpGFP",
+    "Green",
+    "Two-photon"
+  ],
+  "paper": "Cell 2019",
+  "paperUrl": "https://doi.org/10.1016/j.cell.2019.10.028",
+  "brightness": 58,
+  "speed": 34,
+  "snr": 56,
+  "dynamicRange": 99,
+  "photostability": 80,
+  "subthreshold": 70,
+  "overall": 64,
+  "description": "High-performance ASAP sensor with 51% fluorescence modulation, submillisecond kinetics, and improved signal-to-noise ratio for reliable spike detection.",
+  "researchPapers": [
+    {
+      "title": "Ultrafast Two-Photon Imaging of a High-Gain Voltage Indicator in Awake Behaving Mice",
+      "journal": "Neuron",
+      "year": 2019,
+      "authors": "Piatkevich E, et al.",
+      "sample": "Cultured neurons, Brain slices, In vivo mice",
+      "dye": "N/A (genetically encoded)",
+      "url": "https://www.cell.com/neuron/fulltext/S0896-6273(19)31225-5"
+    }
+  ],
+  "familyTreePath": [
+    "GEVI",
+    "VSD",
+    "VSD-single",
+    "ASAP",
+    "asap1",
+    "asap2s",
+    "asap3"
+  ],
+  "spectrum": {
+    "type": "fp",
+    "peakEx": 490,
+    "peakEm": 510,
+    "name": "ASAP3"
+  },
+  "voltage": {
+    "type": "fp",
+    "slope": 12,
+    "polarity": "negative",
+    "name": "ASAP3"
+  }
+}

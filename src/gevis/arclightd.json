@@ -1,0 +1,35 @@
+{
+  "id": "arclightd",
+  "name": "ArcLight-D",
+  "year": 2015,
+  "category": "FP-based",
+  "paper": "Scientific Reports 2015",
+  "paperUrl": "https://www.nature.com/articles/srep11485",
+  "brightness": 68,
+  "speed": 52,
+  "snr": 58,
+  "dynamicRange": 53,
+  "photostability": 48,
+  "subthreshold": 53,
+  "overall": 54,
+  "description": "Improved ArcLight variant with mutations that enhance plasma membrane targeting and improve signal amplitude in neuronal processes.",
+  "familyTreePath": [
+    "GEVI",
+    "VSD",
+    "VSD-single",
+    "ArcLight",
+    "arclightd"
+  ],
+  "spectrum": {
+    "type": "fp",
+    "peakEx": 490,
+    "peakEm": 510,
+    "name": "ArcLight-D"
+  },
+  "voltage": {
+    "type": "fp",
+    "slope": 18,
+    "polarity": "negative",
+    "name": "ArcLight-D"
+  }
+}

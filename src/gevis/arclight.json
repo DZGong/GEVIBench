@@ -1,0 +1,50 @@
+{
+  "id": "arclight",
+  "name": "ArcLight",
+  "year": 2012,
+  "category": "VSD-single FP",
+  "tags": [
+    "pHluorin",
+    "Green"
+  ],
+  "paper": "Neuron 2012",
+  "paperUrl": "https://doi.org/10.1016/j.neuron.2012.08.040",
+  "brightness": 100,
+  "speed": 0,
+  "snr": 29,
+  "dynamicRange": 59,
+  "photostability": 80,
+  "subthreshold": 50,
+  "overall": 44,
+  "description": "Classic genetically encoded voltage indicator using a voltage-sensing domain fused to pH-sensitive GFP, producing large fluorescence decreases during depolarization.",
+  "researchPapers": [
+    {
+      "title": "Genetically expressed voltage sensor ArcLight for imaging large-scale neuronal activity",
+      "journal": "Journal of Neuroscience",
+      "year": 2012,
+      "authors": "Cao H, et al.",
+      "sample": "In vivo mouse olfactory bulb",
+      "dye": "N/A (genetically encoded)",
+      "url": "https://www.jneurosci.org/content/32/27/9332"
+    }
+  ],
+  "familyTreePath": [
+    "GEVI",
+    "VSD",
+    "VSD-single",
+    "ArcLight",
+    "arclight"
+  ],
+  "spectrum": {
+    "type": "fp",
+    "peakEx": 490,
+    "peakEm": 510,
+    "name": "ArcLight"
+  },
+  "voltage": {
+    "type": "fp",
+    "slope": 20,
+    "polarity": "negative",
+    "name": "ArcLight"
+  }
+}

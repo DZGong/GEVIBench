@@ -1,0 +1,41 @@
+{
+  "id": "nirbutterfly",
+  "name": "nirButterfly",
+  "year": 2018,
+  "category": "VSD-FRET GEVI",
+  "tags": [
+    "Ci-VSP",
+    "NIR FP",
+    "FRET"
+  ],
+  "paper": "Nature Communications 2018",
+  "paperUrl": "https://doi.org/10.1038/s41467-018-03608-8",
+  "brightness": 35,
+  "speed": 52,
+  "snr": 42,
+  "dynamicRange": 40,
+  "photostability": 50,
+  "subthreshold": 45,
+  "overall": 43,
+  "description": "Near-infrared VSFP variant using NIR fluorescent proteins for improved tissue penetration.",
+  "familyTreePath": [
+    "GEVI",
+    "VSD",
+    "VSD-FRET",
+    "VSFP2",
+    "Butterfly",
+    "nirButterfly"
+  ],
+  "spectrum": {
+    "type": "nir",
+    "peakEx": 680,
+    "peakEm": 710,
+    "name": "nirButterfly"
+  },
+  "voltage": {
+    "type": "red",
+    "slope": 10,
+    "polarity": "negative",
+    "name": "nirButterfly"
+  }
+}

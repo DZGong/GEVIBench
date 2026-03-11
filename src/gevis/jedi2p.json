@@ -1,0 +1,42 @@
+{
+  "id": "jedi2p",
+  "name": "JEDI-2P",
+  "year": 2022,
+  "category": "VSD-cpGFP GEVI",
+  "tags": [
+    "cpGFP",
+    "Green",
+    "Two-photon",
+    "JEDI"
+  ],
+  "paper": "Neuron 2022",
+  "paperUrl": "https://doi.org/10.1016/j.neuron.2022.08.024",
+  "brightness": 70,
+  "speed": 80,
+  "snr": 72,
+  "dynamicRange": 75,
+  "photostability": 75,
+  "subthreshold": 68,
+  "overall": 74,
+  "description": "Two-photon optimized JEDI variant for deep tissue voltage imaging with improved photostability.",
+  "familyTreePath": [
+    "GEVI",
+    "VSD",
+    "VSD-single",
+    "ASAP",
+    "JEDI",
+    "jedi2p"
+  ],
+  "spectrum": {
+    "type": "fp",
+    "peakEx": 490,
+    "peakEm": 510,
+    "name": "JEDI-2P"
+  },
+  "voltage": {
+    "type": "fp",
+    "slope": 12,
+    "polarity": "positive",
+    "name": "JEDI-2P"
+  }
+}

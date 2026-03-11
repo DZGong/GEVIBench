@@ -1,0 +1,41 @@
+{
+  "id": "vsfp2_3",
+  "name": "VSFP2.3",
+  "year": 2009,
+  "category": "VSD-FRET GEVI",
+  "tags": [
+    "Ci-VSP",
+    "CFP/YFP",
+    "FRET"
+  ],
+  "paper": "Biophysical Journal 2009",
+  "paperUrl": "https://doi.org/10.1016/j.bpj.2008.11.073",
+  "brightness": 50,
+  "speed": 58,
+  "snr": 45,
+  "dynamicRange": 42,
+  "photostability": 45,
+  "subthreshold": 42,
+  "overall": 45,
+  "description": "Optimized VSFP2 variant with improved plasma membrane targeting and faster response kinetics for imaging in C. elegans neurons.",
+  "familyTreePath": [
+    "GEVI",
+    "VSD",
+    "VSD-FRET",
+    "VSFP1",
+    "VSFP2",
+    "VSFP2.3"
+  ],
+  "spectrum": {
+    "type": "fret",
+    "peakEx": 440,
+    "peakEm": 530,
+    "name": "VSFP2.3"
+  },
+  "voltage": {
+    "type": "fret",
+    "slope": 18,
+    "polarity": "negative",
+    "name": "VSFP2.3"
+  }
+}

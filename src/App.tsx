@@ -1,5 +1,5 @@
 import { useState, useCallback, useMemo } from 'react';
-import gevisData from './data.json';
+import { getAllGEVIs } from './geviData';
 import { methodologyContent } from './methodology';
 import { SpectrumViewer } from './SpectrumViewer';
 import { FamilyTree } from './FamilyTree';
@@ -22,13 +22,24 @@ import {
   METRICS,
 } from './constants';
 
-const gevis = gevisData as GEVI[];
-
 // Inner component that uses the theme context
 function GEVIBenchApp() {
   const { darkMode, colors } = useTheme();
 
-  // State
+  // State - use lazy initializer to load GEVIs synchronously
+  const [gevis, setGevis] = useState<GEVI[]>(() => {
+    // This runs once on first render - load synchronously
+    const modules = import.meta.glob('./gevis/*.json', { eager: true });
+    const loadedGevis: GEVI[] = [];
+    for (const path in modules) {
+      const gevi = modules[path] as GEVI;
+      if (gevi?.id) {
+        loadedGevis.push(gevi);
+      }
+    }
+    loadedGevis.sort((a, b) => (b.overall || 0) - (a.overall || 0));
+    return loadedGevis;
+  });
   const [selectedGEVI, setSelectedGEVI] = useState<GEVI | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [categoryFilter, setCategoryFilter] = useState(DEFAULT_CATEGORY);

@@ -1,0 +1,40 @@
+{
+  "id": "hviplus",
+  "name": "HVI+",
+  "year": 2025,
+  "category": "Chemigenetic GEVI",
+  "tags": [
+    "Ace opsin",
+    "Cy3b",
+    "Positive-going",
+    "Red"
+  ],
+  "paper": "Science Advances 2025",
+  "paperUrl": "https://doi.org/10.1126/sciadv.ads1807",
+  "brightness": 78,
+  "speed": 88,
+  "snr": 82,
+  "dynamicRange": 90,
+  "photostability": 85,
+  "subthreshold": 80,
+  "overall": 84,
+  "description": "Hybrid Voltage Indicator+ (HVI+) is a positive-going chemigenetic voltage indicator with 55% ΔF/F0 per 100mV, fast kinetics (rise ~2.2ms, decay ~1.3ms), and excellent photostability (half-life ~736s).",
+  "familyTreePath": [
+    "GEVI",
+    "Opsin",
+    "Chemigenetic",
+    "hviplus"
+  ],
+  "spectrum": {
+    "type": "fp",
+    "peakEx": 550,
+    "peakEm": 580,
+    "name": "HVI+"
+  },
+  "voltage": {
+    "type": "chemi",
+    "slope": 25,
+    "polarity": "positive",
+    "name": "HVI+"
+  }
+}

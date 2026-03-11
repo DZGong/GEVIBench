@@ -1,7 +1,7 @@
 import { ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, Legend } from 'recharts';
 import { Trash2, GitCompare, X } from 'lucide-react';
 import { useState, useRef, useCallback } from 'react';
-import { generateVoltageCurve, GEVI_VOLTAGE } from '../VoltageCurveViewer';
+import { generateVoltageCurve } from '../VoltageCurveViewer';
 
 const COLORS = ['#3b82f6', '#ef4444', '#22c55e', '#f59e0b', '#8b5cf6'];
 
@@ -145,7 +145,7 @@ function FVCurveCompare({ compareGEVIs, COLORS, darkMode }: { compareGEVIs: any[
 
   // Generate curve data for each GEVI
   const getVoltageData = (gevi: any) => {
-    const config = GEVI_VOLTAGE[gevi.id];
+    const config = gevi.voltage;
     if (config) {
       return generateVoltageCurve(config.type, config.slope, config.polarity);
     }

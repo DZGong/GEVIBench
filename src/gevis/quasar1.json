@@ -1,0 +1,40 @@
+{
+  "id": "quasar1",
+  "name": "QuasAr1",
+  "year": 2014,
+  "category": "Opsin GEVI",
+  "tags": [
+    "Archaerhodopsin",
+    "Orange/Red"
+  ],
+  "paper": "Nature Methods 2014",
+  "paperUrl": "https://doi.org/10.1038/nmeth.3000",
+  "brightness": 15,
+  "speed": 98,
+  "snr": 30,
+  "dynamicRange": 25,
+  "photostability": 40,
+  "subthreshold": 35,
+  "overall": 30,
+  "description": "First quantum dot-like microbial rhodopsin voltage indicator requiring no exogenous fluorophore, enabling fluorescence detection with minimal illumination.",
+  "familyTreePath": [
+    "GEVI",
+    "Opsin",
+    "Opsin-Fluorescent",
+    "Arch",
+    "QuasAr",
+    "quasar1"
+  ],
+  "spectrum": {
+    "type": "rhodopsin",
+    "peakEx": 590,
+    "peakEm": 650,
+    "name": "QuasAr1"
+  },
+  "voltage": {
+    "type": "opsin",
+    "slope": 25,
+    "polarity": "positive",
+    "name": "QuasAr1"
+  }
+}

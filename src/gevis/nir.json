@@ -1,0 +1,35 @@
+{
+  "id": "nir",
+  "name": "NIR-GEV1",
+  "year": 2020,
+  "category": "Near-IR",
+  "paper": "Nature Methods 2020",
+  "paperUrl": "https://www.nature.com/articles/s41592-020-0884-0",
+  "brightness": 50,
+  "speed": 75,
+  "snr": 48,
+  "dynamicRange": 45,
+  "photostability": 55,
+  "subthreshold": 50,
+  "overall": 50,
+  "description": "First near-infrared GEVI based on bacterial rhodopsin, enabling deeper tissue imaging with reduced scattering.",
+  "familyTreePath": [
+    "GEVI",
+    "Opsin",
+    "Opsin-Fluorescent",
+    "NIR",
+    "nir"
+  ],
+  "spectrum": {
+    "type": "nir",
+    "peakEx": 680,
+    "peakEm": 710,
+    "name": "NIR-GEV1"
+  },
+  "voltage": {
+    "type": "red",
+    "slope": 8,
+    "polarity": "positive",
+    "name": "NIR-GEV1"
+  }
+}

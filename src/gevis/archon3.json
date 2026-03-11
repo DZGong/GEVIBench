@@ -1,0 +1,38 @@
+{
+  "id": "archon3",
+  "name": "Archon3",
+  "year": 2019,
+  "category": "Microbial",
+  "paper": "Nature Methods 2019",
+  "paperUrl": "https://www.nature.com/articles/s41592-019-0556-4",
+  "brightness": 30,
+  "speed": 88,
+  "snr": 42,
+  "dynamicRange": 38,
+  "photostability": 35,
+  "subthreshold": 48,
+  "overall": 39,
+  "description": "Third-generation Archon sensor with improved targeting and mutations that enhance fluorescence while maintaining fast rhodopsin kinetics for neural imaging.",
+  "familyTreePath": [
+    "GEVI",
+    "Opsin",
+    "Opsin-Fluorescent",
+    "Arch",
+    "Archon",
+    "archon1",
+    "archon2",
+    "archon3"
+  ],
+  "spectrum": {
+    "type": "rhodopsin",
+    "peakEx": 560,
+    "peakEm": 590,
+    "name": "Archon3"
+  },
+  "voltage": {
+    "type": "opsin",
+    "slope": 40,
+    "polarity": "positive",
+    "name": "Archon3"
+  }
+}

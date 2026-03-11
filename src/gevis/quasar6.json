@@ -1,0 +1,43 @@
+{
+  "id": "quasar6",
+  "name": "QuasAr6",
+  "year": 2022,
+  "category": "Opsin GEVI",
+  "tags": [
+    "Archaerhodopsin",
+    "Far-red",
+    "Bright"
+  ],
+  "paper": "Nature Methods 2022",
+  "paperUrl": "https://doi.org/10.1038/s41592-022-01752-6",
+  "brightness": 55,
+  "speed": 92,
+  "snr": 65,
+  "dynamicRange": 60,
+  "photostability": 55,
+  "subthreshold": 60,
+  "overall": 65,
+  "description": "Bright far-red QuasAr variant with improved quantum yield for better signal in deep tissue imaging.",
+  "familyTreePath": [
+    "GEVI",
+    "Opsin",
+    "Opsin-Fluorescent",
+    "Arch",
+    "QuasAr",
+    "quasar1",
+    "quasar2",
+    "quasar6"
+  ],
+  "spectrum": {
+    "type": "rhodopsin",
+    "peakEx": 610,
+    "peakEm": 690,
+    "name": "QuasAr6"
+  },
+  "voltage": {
+    "type": "opsin",
+    "slope": 20,
+    "polarity": "positive",
+    "name": "QuasAr6"
+  }
+}

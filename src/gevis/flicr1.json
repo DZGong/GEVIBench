@@ -1,0 +1,39 @@
+{
+  "id": "flicr1",
+  "name": "FlicR1",
+  "year": 2016,
+  "category": "Red FP GEVI",
+  "tags": [
+    "RFP",
+    "Red",
+    "Fast"
+  ],
+  "paper": "Nature Communications 2016",
+  "paperUrl": "https://doi.org/10.1038/ncomms13870",
+  "brightness": 40,
+  "speed": 85,
+  "snr": 38,
+  "dynamicRange": 35,
+  "photostability": 40,
+  "subthreshold": 45,
+  "overall": 42,
+  "description": "Bright red fluorescent voltage indicator based on CiVSD-cpTrefoil architecture, providing reliable action potential detection in neurons.",
+  "familyTreePath": [
+    "GEVI",
+    "Others",
+    "Red FP",
+    "flicr1"
+  ],
+  "spectrum": {
+    "type": "redfp",
+    "peakEx": 550,
+    "peakEm": 600,
+    "name": "FlicR1"
+  },
+  "voltage": {
+    "type": "red",
+    "slope": 12,
+    "polarity": "positive",
+    "name": "FlicR1"
+  }
+}

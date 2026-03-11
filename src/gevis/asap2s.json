@@ -1,0 +1,41 @@
+{
+  "id": "asap2s",
+  "name": "ASAP2s",
+  "year": 2017,
+  "category": "VSD-cpGFP GEVI",
+  "tags": [
+    "cpGFP",
+    "Green",
+    "Two-photon"
+  ],
+  "paper": "eLife 2017",
+  "paperUrl": "https://doi.org/10.7554/eLife.25690",
+  "brightness": 65,
+  "speed": 80,
+  "snr": 70,
+  "dynamicRange": 75,
+  "photostability": 70,
+  "subthreshold": 65,
+  "overall": 70,
+  "description": "Optimized ASAP variant with improved plasma membrane targeting and increased dynamic range through mutations in the voltage-sensing domain.",
+  "familyTreePath": [
+    "GEVI",
+    "VSD",
+    "VSD-single",
+    "ASAP",
+    "asap1",
+    "asap2s"
+  ],
+  "spectrum": {
+    "type": "fp",
+    "peakEx": 490,
+    "peakEm": 510,
+    "name": "ASAP2s"
+  },
+  "voltage": {
+    "type": "fp",
+    "slope": 18,
+    "polarity": "negative",
+    "name": "ASAP2s"
+  }
+}

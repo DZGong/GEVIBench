@@ -1,0 +1,40 @@
+{
+  "id": "voltron",
+  "name": "Voltron",
+  "year": 2018,
+  "category": "Chemigenetic GEVI",
+  "tags": [
+    "Ace opsin",
+    "HaloTag",
+    "Janelia Fluor",
+    "Red"
+  ],
+  "paper": "Science 2018",
+  "paperUrl": "https://doi.org/10.1126/science.aav6416",
+  "brightness": 90,
+  "speed": 85,
+  "snr": 82,
+  "dynamicRange": 88,
+  "photostability": 75,
+  "subthreshold": 78,
+  "overall": 83,
+  "description": "Breakthrough chemigenetic voltage indicator using HaloTag-fluorophore conjugates, providing 10x brighter signal than previous GEVIs for in vivo imaging.",
+  "familyTreePath": [
+    "GEVI",
+    "Opsin",
+    "Chemigenetic",
+    "voltron"
+  ],
+  "spectrum": {
+    "type": "fp",
+    "peakEx": 550,
+    "peakEm": 580,
+    "name": "Voltron"
+  },
+  "voltage": {
+    "type": "chemi",
+    "slope": 25,
+    "polarity": "positive",
+    "name": "Voltron"
+  }
+}

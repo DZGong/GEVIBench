@@ -1,0 +1,35 @@
+{
+  "id": "chivsfp",
+  "name": "chi-VSFP",
+  "year": 2015,
+  "category": "FP-based",
+  "paper": "Scientific Reports 2015",
+  "paperUrl": "https://www.nature.com/articles/srep10634",
+  "brightness": 55,
+  "speed": 62,
+  "snr": 50,
+  "dynamicRange": 48,
+  "photostability": 50,
+  "subthreshold": 48,
+  "overall": 50,
+  "description": "VSFP variant engineered using cyclic hypothesis-improved design, enhancing voltage sensitivity through structural modifications.",
+  "familyTreePath": [
+    "GEVI",
+    "VSD",
+    "VSD-single",
+    "chiVSD",
+    "chivsfp"
+  ],
+  "spectrum": {
+    "type": "fret",
+    "peakEx": 440,
+    "peakEm": 530,
+    "name": "chi-VSFP"
+  },
+  "voltage": {
+    "type": "fret",
+    "slope": 16,
+    "polarity": "negative",
+    "name": "chi-VSFP"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "id": "amber",
+  "name": "AMBER",
+  "year": 2022,
+  "category": "Bioluminescent GEVI",
+  "tags": [
+    "Luciferase",
+    "Bioluminescent"
+  ],
+  "paper": "Nature Methods 2022",
+  "paperUrl": "https://doi.org/10.1038/s41592-022-01472-x",
+  "brightness": 30,
+  "speed": 40,
+  "snr": 35,
+  "dynamicRange": 32,
+  "photostability": 90,
+  "subthreshold": 40,
+  "overall": 42,
+  "description": "Latest bioluminescent GEVI with improved brightness and voltage sensitivity through luciferase-VSD fusion.",
+  "familyTreePath": [
+    "GEVI",
+    "Others",
+    "Bioluminescent",
+    "amber"
+  ],
+  "spectrum": {
+    "type": "fp",
+    "peakEx": 490,
+    "peakEm": 510,
+    "name": "AMBER"
+  },
+  "voltage": {
+    "type": "fp",
+    "slope": 8,
+    "polarity": "positive",
+    "name": "AMBER"
+  }
+}

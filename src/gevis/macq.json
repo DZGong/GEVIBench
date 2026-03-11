@@ -1,0 +1,39 @@
+{
+  "id": "macq",
+  "name": "MacQ",
+  "year": 2014,
+  "category": "eFRET GEVI",
+  "tags": [
+    "Opsin",
+    "Green",
+    "FRET"
+  ],
+  "paper": "Nature Communications 2014",
+  "paperUrl": "https://doi.org/10.1038/ncomms4674",
+  "brightness": 45,
+  "speed": 88,
+  "snr": 40,
+  "dynamicRange": 35,
+  "photostability": 45,
+  "subthreshold": 40,
+  "overall": 42,
+  "description": "Macrolide-based eFRET voltage indicator combining opsin with fluorescent protein.",
+  "familyTreePath": [
+    "GEVI",
+    "Opsin",
+    "Opsin-FRET",
+    "macq"
+  ],
+  "spectrum": {
+    "type": "rhodopsin",
+    "peakEx": 510,
+    "peakEm": 540,
+    "name": "MacQ"
+  },
+  "voltage": {
+    "type": "opsin",
+    "slope": 14,
+    "polarity": "positive",
+    "name": "MacQ"
+  }
+}

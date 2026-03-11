@@ -1,0 +1,40 @@
+{
+  "id": "vsfpbutterfly",
+  "name": "VSFP-Butterfly",
+  "year": 2010,
+  "category": "VSD-FRET GEVI",
+  "tags": [
+    "Ci-VSP",
+    "CFP/YFP",
+    "FRET"
+  ],
+  "paper": "Nature Methods 2010",
+  "paperUrl": "https://doi.org/10.1038/nmeth.1492",
+  "brightness": 40,
+  "speed": 55,
+  "snr": 38,
+  "dynamicRange": 35,
+  "photostability": 45,
+  "subthreshold": 38,
+  "overall": 40,
+  "description": "VSFP variant with improved membrane targeting and FRET efficiency for better voltage sensitivity.",
+  "familyTreePath": [
+    "GEVI",
+    "VSD",
+    "VSD-FRET",
+    "VSFP2",
+    "Butterfly"
+  ],
+  "spectrum": {
+    "type": "fret",
+    "peakEx": 440,
+    "peakEm": 530,
+    "name": "VSFP-Butterfly"
+  },
+  "voltage": {
+    "type": "fret",
+    "slope": 14,
+    "polarity": "negative",
+    "name": "VSFP-Butterfly"
+  }
+}

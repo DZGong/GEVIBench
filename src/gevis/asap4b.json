@@ -1,0 +1,105 @@
+{
+  "id": "asap4b",
+  "name": "ASAP4b",
+  "year": 2023,
+  "category": "VSD-cpGFP GEVI",
+  "tags": [
+    "cpGFP",
+    "Green",
+    "High dynamic range",
+    "Positive"
+  ],
+  "paper": "Nature Methods 2023",
+  "paperUrl": "https://doi.org/10.1038/s41592-023-01913-z",
+  "brightness": 75,
+  "speed": 75,
+  "snr": 72,
+  "dynamicRange": 100,
+  "photostability": 92,
+  "subthreshold": 70,
+  "overall": 78,
+  "description": "ASAP4b is the bright variant of the ASAP4 family with exceptional dynamic range (≥180% ΔF/F per 100mV), producing positive-going fluorescence increase upon depolarization. Designed for one- and two-photon imaging with high photostability.",
+  "spectra": {
+    "excitation": 470,
+    "emission": 525,
+    "peakExcitation": 503,
+    "peakEmission": 515
+  },
+  "kinetics": {
+    "activation": 3.6,
+    "unit": "ms",
+    "notes": "Time from crossing 20mV to fluorescence peak in Kv variant"
+  },
+  "dynamicRangeData": {
+    "deltaF": 180,
+    "unit": "% per 100mV",
+    "sign": "positive",
+    "notes": "≥180% fluorescence increase for 100-mV depolarization"
+  },
+  "applicationNotes": "ASAP4b-Kv shows significantly higher SNR than ASAP3-Kv in two-photon imaging. Enables single-trial detection of spikes in mice.",
+  "researchPapers": [
+    {
+      "title": "Positive-going hybrid indicators for voltage imaging in excitable cells and tissues",
+      "authors": "Kannan M, Vaidya V, Miao J, Huang K, Chavez J, Chang K, Hariraam J, Roopa BL, Nagarajan S, Ananth A, Liu H, Zhou Y, Song Y, Xu C",
+      "journal": "Nature Methods",
+      "year": 2023,
+      "doi": "10.1038/s41592-023-01913-z",
+      "url": "https://doi.org/10.1038/s41592-023-01913-z",
+      "sample": "Cultured neurons, mouse brain cortex, acute brain slices",
+      "applications": [
+        "One-photon voltage imaging",
+        "Two-photon voltage imaging",
+        "Simultaneous voltage and calcium imaging"
+      ]
+    },
+    {
+      "title": "Voltage imaging reveals hippocampal inhibitory dynamics shaping pyramidal memory-encoding sequences",
+      "authors": "Ratz M, Bewersdorf J, Younts T, Kuhlman SJ",
+      "journal": "Nature Neuroscience",
+      "year": 2025,
+      "doi": "10.1038/s41593-025-02016-y",
+      "url": "https://doi.org/10.1038/s41593-025-02016-y",
+      "sample": "Mouse hippocampal neurons",
+      "applications": [
+        "In vivo voltage imaging",
+        "Inhibitory neuron imaging"
+      ]
+    },
+    {
+      "title": "Imaging sensory transmission and neuronal plasticity in primary sensory neurons with a positively tuned voltage indicator",
+      "authors": "Chaves G, Taha E, Abdallah C, Karapetyan G, Zgraggen E, Gouty S, Huang K, Kannan M, Kuhlman S, Sumbre G",
+      "journal": "Frontiers in Cellular Neuroscience",
+      "year": 2025,
+      "doi": "10.3389/fncel.2025.1579715",
+      "url": "https://doi.org/10.3389/fncel.2025.1579715",
+      "sample": "Dorsal root ganglia neurons",
+      "applications": [
+        "In vivo voltage imaging",
+        "Sensory neuron imaging"
+      ]
+    }
+  ],
+  "paperCount": 3,
+  "familyTreePath": [
+    "GEVI",
+    "VSD",
+    "VSD-single",
+    "ASAP",
+    "asap1",
+    "asap2s",
+    "asap3",
+    "asap4b"
+  ],
+  "spectrum": {
+    "type": "fp",
+    "peakEx": 490,
+    "peakEm": 510,
+    "name": "ASAP4b"
+  },
+  "voltage": {
+    "type": "fp",
+    "slope": 20,
+    "polarity": "negative",
+    "name": "ASAP4b"
+  }
+}

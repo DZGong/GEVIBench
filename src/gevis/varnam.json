@@ -1,0 +1,39 @@
+{
+  "id": "varnam",
+  "name": "VARNAM",
+  "year": 2018,
+  "category": "eFRET GEVI",
+  "tags": [
+    "Opsin",
+    "Red FP",
+    "FRET"
+  ],
+  "paper": "Nature Methods 2018",
+  "paperUrl": "https://doi.org/10.1038/s41592-018-0174-5",
+  "brightness": 50,
+  "speed": 75,
+  "snr": 55,
+  "dynamicRange": 52,
+  "photostability": 60,
+  "subthreshold": 50,
+  "overall": 56,
+  "description": "Voltage indicator using opsin-FRET architecture with red fluorescent protein for improved tissue penetration.",
+  "familyTreePath": [
+    "GEVI",
+    "Opsin",
+    "Opsin-FRET",
+    "varnam"
+  ],
+  "spectrum": {
+    "type": "rhodopsin",
+    "peakEx": 550,
+    "peakEm": 600,
+    "name": "VARNAM"
+  },
+  "voltage": {
+    "type": "opsin",
+    "slope": 12,
+    "polarity": "positive",
+    "name": "VARNAM"
+  }
+}

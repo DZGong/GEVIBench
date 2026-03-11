@@ -1,0 +1,40 @@
+{
+  "id": "ace2n-mneon2",
+  "name": "Ace2N-mNeon2",
+  "year": 2021,
+  "category": "eFRET GEVI",
+  "tags": [
+    "Ace opsin",
+    "mNeon",
+    "Green"
+  ],
+  "paper": "Science 2021",
+  "paperUrl": "https://doi.org/10.1126/science.abm8797",
+  "brightness": 75,
+  "speed": 96,
+  "snr": 75,
+  "dynamicRange": 70,
+  "photostability": 78,
+  "subthreshold": 88,
+  "overall": 80,
+  "description": "Ace2N-mNeon2 is an improved version of Ace2N-mNeon with enhanced brightness and faster kinetics, optimized for high-speed voltage imaging in neurons.",
+  "familyTreePath": [
+    "GEVI",
+    "Opsin",
+    "Opsin-FRET",
+    "ace2n",
+    "ace2n-mneon2"
+  ],
+  "spectrum": {
+    "type": "rhodopsin",
+    "peakEx": 510,
+    "peakEm": 540,
+    "name": "Ace2N"
+  },
+  "voltage": {
+    "type": "opsin",
+    "slope": 18,
+    "polarity": "positive",
+    "name": "Ace2N"
+  }
+}

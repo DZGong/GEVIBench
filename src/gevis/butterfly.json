@@ -1,0 +1,29 @@
+{
+  "id": "butterfly",
+  "name": "VSFP-Butterfly",
+  "year": 2016,
+  "category": "FP-based",
+  "paper": "Scientific Reports 2016",
+  "paperUrl": "https://www.nature.com/articles/srep22618",
+  "brightness": 58,
+  "speed": 65,
+  "snr": 52,
+  "dynamicRange": 50,
+  "photostability": 52,
+  "subthreshold": 50,
+  "overall": 52,
+  "description": "VSFP with butterfly motif design enabling dual-color ratiometric imaging for improved quantification of membrane potential.",
+  "familyTreePath": null,
+  "spectrum": {
+    "type": "fret",
+    "peakEx": 440,
+    "peakEm": 530,
+    "name": "VSFP-Butterfly"
+  },
+  "voltage": {
+    "type": "fret",
+    "slope": 14,
+    "polarity": "negative",
+    "name": "VSFP-Butterfly"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "id": "positron",
+  "name": "Positron",
+  "year": 2020,
+  "category": "eFRET GEVI",
+  "tags": [
+    "Opsin",
+    "Positive-going",
+    "FRET"
+  ],
+  "paper": "Nature Communications 2020",
+  "paperUrl": "https://doi.org/10.1038/s41467-020-17322-1",
+  "brightness": 58,
+  "speed": 72,
+  "snr": 52,
+  "dynamicRange": 48,
+  "photostability": 65,
+  "subthreshold": 55,
+  "overall": 55,
+  "description": "Positive-going eFRET voltage indicator that increases fluorescence with depolarization, opposite to most opsin-based sensors.",
+  "familyTreePath": [
+    "GEVI",
+    "Opsin",
+    "Opsin-FRET",
+    "positron"
+  ],
+  "spectrum": {
+    "type": "rhodopsin",
+    "peakEx": 550,
+    "peakEm": 580,
+    "name": "Positron"
+  },
+  "voltage": {
+    "type": "opsin",
+    "slope": 20,
+    "polarity": "positive",
+    "name": "Positron"
+  }
+}

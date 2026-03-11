@@ -1,0 +1,41 @@
+{
+  "id": "mermaid",
+  "name": "Mermaid",
+  "year": 2008,
+  "category": "VSD-FRET GEVI",
+  "tags": [
+    "Ci-VSP",
+    "FRET",
+    "Green"
+  ],
+  "paper": "Nature Methods 2008",
+  "paperUrl": "https://doi.org/10.1038/nmeth.1225",
+  "brightness": 35,
+  "speed": 50,
+  "snr": 30,
+  "dynamicRange": 25,
+  "photostability": 40,
+  "subthreshold": 30,
+  "overall": 32,
+  "description": "Early FRET-based voltage indicator using Ci-VSP voltage sensing domain with improved fluorescent protein pair.",
+  "familyTreePath": [
+    "GEVI",
+    "VSD",
+    "VSD-FRET",
+    "VSFP1",
+    "VSFP2",
+    "Mermaid"
+  ],
+  "spectrum": {
+    "type": "fret",
+    "peakEx": 440,
+    "peakEm": 530,
+    "name": "Mermaid"
+  },
+  "voltage": {
+    "type": "fret",
+    "slope": 12,
+    "polarity": "negative",
+    "name": "Mermaid"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "id": "archon2",
+  "name": "Archon2",
+  "year": 2018,
+  "category": "Opsin GEVI",
+  "tags": [
+    "Archaerhodopsin",
+    "Red"
+  ],
+  "paper": "Nature Methods 2018",
+  "paperUrl": "https://doi.org/10.1038/nmeth.4650",
+  "brightness": 25,
+  "speed": 90,
+  "snr": 40,
+  "dynamicRange": 35,
+  "photostability": 30,
+  "subthreshold": 45,
+  "overall": 36,
+  "description": "An improved version of Archon1 with enhanced plasma membrane localization and reduced intracellular aggregation, enabling more reliable neuronal imaging.",
+  "familyTreePath": [
+    "GEVI",
+    "Opsin",
+    "Opsin-Fluorescent",
+    "Arch",
+    "Archon",
+    "archon1",
+    "archon2"
+  ],
+  "spectrum": {
+    "type": "rhodopsin",
+    "peakEx": 550,
+    "peakEm": 580,
+    "name": "Archon2"
+  },
+  "voltage": {
+    "type": "opsin",
+    "slope": 38,
+    "polarity": "positive",
+    "name": "Archon2"
+  }
+}

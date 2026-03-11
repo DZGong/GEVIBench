@@ -1,0 +1,38 @@
+{
+  "id": "ace1",
+  "name": "Ace1",
+  "year": 2014,
+  "category": "eFRET GEVI",
+  "tags": [
+    "Ace opsin",
+    "Green"
+  ],
+  "paper": "Nature Communications 2014",
+  "paperUrl": "https://doi.org/10.1038/ncomms4674",
+  "brightness": 60,
+  "speed": 98,
+  "snr": 55,
+  "dynamicRange": 50,
+  "photostability": 60,
+  "subthreshold": 70,
+  "overall": 62,
+  "description": "First voltage indicator based on bacterial channelrhodopsin with unprecedented speed around 1ms response, enabling high-fidelity spike detection.",
+  "familyTreePath": [
+    "GEVI",
+    "Opsin",
+    "Opsin-FRET",
+    "ace1"
+  ],
+  "spectrum": {
+    "type": "rhodopsin",
+    "peakEx": 510,
+    "peakEm": 540,
+    "name": "Ace1"
+  },
+  "voltage": {
+    "type": "opsin",
+    "slope": 15,
+    "polarity": "positive",
+    "name": "Ace1"
+  }
+}

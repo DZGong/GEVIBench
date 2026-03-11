@@ -1,0 +1,128 @@
+{
+  "id": "asap5",
+  "name": "ASAP5",
+  "year": 2024,
+  "category": "VSD-cpGFP GEVI",
+  "tags": [
+    "cpGFP",
+    "Green",
+    "High speed"
+  ],
+  "paper": "Neuron 2024",
+  "paperUrl": "https://doi.org/10.1016/j.neuron.2024.08.019",
+  "brightness": 75,
+  "speed": 85,
+  "snr": 78,
+  "dynamicRange": 85,
+  "photostability": 80,
+  "subthreshold": 72,
+  "overall": 79,
+  "description": "ASAP5 is a fast and responsive voltage indicator with enhanced sensitivity for unitary synaptic events. Features submillisecond kinetics at physiological temperature (0.78 ms activation at 37C) and high voltage sensitivity of -0.83%/mV, enabling detection of single synaptic events.",
+  "spectra": {
+    "excitation": 470,
+    "excitationFilter": "482/18 nm bandpass",
+    "emission": 525,
+    "emissionFilter": "525/50 nm bandpass",
+    "peakExcitation": 500,
+    "peakEmission": 515
+  },
+  "kinetics": {
+    "activation": 2.61,
+    "activation37C": 0.78,
+    "deactivation": 4.3,
+    "deactivation37C": 1.12,
+    "fastComponent": 92,
+    "fastComponent37C": 95,
+    "unit": "ms",
+    "notes": "Activation and deactivation time constants at room temperature (23C) and physiological temperature (37C)"
+  },
+  "dynamicRangeData": {
+    "deltaF": -51,
+    "unit": "% per 100mV",
+    "voltageSensitivity": -0.83,
+    "voltageSensitivityUnit": "%/mV",
+    "sign": "negative",
+    "notes": "Response to 100mV step depolarization (-70mV to +30mV)"
+  },
+  "applicationNotes": "Optimized for detecting unitary synaptic events (mEPSPs) in cultured neurons and in vivo imaging. Can match chemigenetic indicators (Voltron2) in SNR despite lower brightness due to higher responsivity.",
+  "researchPapers": [
+    {
+      "title": "A fast and responsive voltage indicator with enhanced sensitivity for unitary synaptic events",
+      "authors": "Hao YA, Lee S, Roth RH, Natale S, Gomez L, Taxidis J, O'Neill PS, Villette V, Bradley J, Wang Z, Jiang D, Zhang G, Sheng M, Lu D, Boyden E, Delvendahl I, Golshani P, Wernig M, Feldman DE, Ji N, Ding J, Südhof TC, Clandinin TR, Lin MZ",
+      "journal": "Neuron",
+      "year": 2024,
+      "doi": "10.1016/j.neuron.2024.08.019",
+      "url": "https://doi.org/10.1016/j.neuron.2024.08.019",
+      "sample": "Cultured rat/human neurons, mouse cortex, fruit fly neurons, human induced neurons",
+      "applications": [
+        "Action potential imaging",
+        "mEPSP detection",
+        "In vivo voltage imaging",
+        "Dendrosomatic propagation"
+      ]
+    },
+    {
+      "title": "Selective life-long suppression of an odor processing channel in response to critical period experience",
+      "authors": "Leier HC, Jonaitis J, Foden AJ, Wilkov AJ, Ross AE, Van der Linden Costello P, Broihier HT, Dacks AM",
+      "journal": "bioRxiv",
+      "year": 2025,
+      "doi": "10.1101/2025.07.18.665601",
+      "url": "https://doi.org/10.1101/2025.07.18.665601",
+      "sample": "Drosophila Or42a olfactory sensory neurons",
+      "applications": [
+        "In vivo odor-evoked responses",
+        "Two-photon voltage imaging"
+      ]
+    },
+    {
+      "title": "Deep two-photon voltage imaging with adaptive excitation",
+      "authors": "Zhao S, Hebert E, Gruzdeva A, Mahishi D, Takahashi H, Lee S, Hao YA, Lin MZ, Yapici N, Xu C",
+      "journal": "Research Square",
+      "year": 2024,
+      "doi": "10.21203/rs.3.rs-5434919/v1",
+      "url": "https://doi.org/10.21203/rs.3.rs-5434919/v1",
+      "sample": "Mouse brain neurons expressing ASAP5Kv",
+      "applications": [
+        "Deep two-photon voltage imaging",
+        "In vivo neuronal activity"
+      ]
+    },
+    {
+      "title": "A deep learning framework for automated and generalized synaptic event analysis",
+      "authors": "Karelina T, Diehm J, Shewmaker F, Yount JS, Oddo M, Tavakoli N, Vanc A, Lee D, Kim DZ, Ko H",
+      "journal": "eLife",
+      "year": 2025,
+      "doi": "10.7554/eLife.98485",
+      "url": "https://doi.org/10.7554/eLife.98485",
+      "sample": "Cultured rat hippocampal neurons",
+      "applications": [
+        "mEPSP detection",
+        "Simultaneous electrophysiology and ASAP5 imaging"
+      ]
+    }
+  ],
+  "paperCount": 4,
+  "familyTreePath": [
+    "GEVI",
+    "VSD",
+    "VSD-single",
+    "ASAP",
+    "asap1",
+    "asap2s",
+    "asap3",
+    "asap4e",
+    "asap5"
+  ],
+  "spectrum": {
+    "type": "fp",
+    "peakEx": 490,
+    "peakEm": 510,
+    "name": "ASAP5"
+  },
+  "voltage": {
+    "type": "fp",
+    "slope": 14,
+    "polarity": "negative",
+    "name": "ASAP5"
+  }
+}

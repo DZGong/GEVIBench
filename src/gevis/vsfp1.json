@@ -1,0 +1,39 @@
+{
+  "id": "vsfp1",
+  "name": "VSFP1",
+  "year": 2001,
+  "category": "Ion-channel GEVI",
+  "tags": [
+    "Shaker K+ channel",
+    "GFP",
+    "Green"
+  ],
+  "paper": "European Journal of Neuroscience 2001",
+  "paperUrl": "https://doi.org/10.1046/j.0953-816x.2001.01617.x",
+  "brightness": 35,
+  "speed": 40,
+  "snr": 30,
+  "dynamicRange": 28,
+  "photostability": 35,
+  "subthreshold": 30,
+  "overall": 32,
+  "description": "The first genetically encoded voltage indicator, using GFP fused to voltage-sensing domain from Kv channels, pioneering the VSFP architecture.",
+  "familyTreePath": [
+    "GEVI",
+    "VSD",
+    "VSD-FRET",
+    "VSFP1"
+  ],
+  "spectrum": {
+    "type": "fret",
+    "peakEx": 440,
+    "peakEm": 530,
+    "name": "VSFP1"
+  },
+  "voltage": {
+    "type": "fret",
+    "slope": 12,
+    "polarity": "negative",
+    "name": "VSFP1"
+  }
+}

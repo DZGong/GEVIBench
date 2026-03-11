@@ -1,0 +1,71 @@
+{
+  "id": "asap6b",
+  "name": "ASAP6b",
+  "year": 2024,
+  "category": "VSD-cpGFP GEVI",
+  "tags": [
+    "cpGFP",
+    "Green",
+    "Positive",
+    "Two-photon",
+    "One-photon"
+  ],
+  "paper": "bioRxiv 2024",
+  "paperUrl": "https://doi.org/10.1101/2024.06.21.599617",
+  "brightness": 72,
+  "speed": 32,
+  "snr": 75,
+  "dynamicRange": 20,
+  "photostability": 78,
+  "subthreshold": 68,
+  "overall": 58,
+  "description": "ASAP6b (also known as ASAP6.2) is a next-generation positively tuned ASAP variant with the best per-molecule SNR for action potential detection. Demonstrates 33% ΔF/F response per action potential with high SNR in vivo imaging.",
+  "kinetics": {
+    "on": 3.74,
+    "off": 6.16,
+    "unit": "ms",
+    "notes": "Mono-exponential time constant; operates at higher molecular brightness range for better SNR"
+  },
+  "dynamicRangeData": {
+    "deltaF": 161,
+    "unit": "% per AP",
+    "sign": "positive",
+    "notes": "Response to AP-like waveforms with 2-ms FWHM in HEK293 cells; best per-molecule SNR"
+  },
+  "researchPapers": [
+    {
+      "title": "ASAP6.1 and ASAP6b: genetically encoded voltage indicators with improved performance for two-photon imaging in vivo",
+      "authors": "Sungmoo Lee, Guofeng Zhang, Laura C. Gomez, Yukun Alex Hao, Dongyun Jiang, Richard H. Roth, Guilherme Testa-Silva, Jun Ding, Thomas R. Clandinin, Daniel Feldman, Na Ji, Michael Z. Lin",
+      "journal": "bioRxiv",
+      "year": 2024,
+      "doi": "10.1101/2024.06.21.599617",
+      "url": "https://doi.org/10.1101/2024.06.21.599617",
+      "type": "Original"
+    }
+  ],
+  "paperCount": 1,
+  "familyTreePath": [
+    "GEVI",
+    "VSD",
+    "VSD-single",
+    "ASAP",
+    "asap1",
+    "asap2s",
+    "asap3",
+    "asap4e",
+    "asap6b"
+  ],
+  "spectrum": {
+    "type": "fp",
+    "peakEx": 480,
+    "peakEm": 503,
+    "name": "ASAP6b",
+    "notes": "Screening used 480/40nm excitation filter and 503-nm long pass emission"
+  },
+  "voltage": {
+    "type": "fp",
+    "slope": 15,
+    "polarity": "positive",
+    "name": "ASAP6b"
+  }
+}

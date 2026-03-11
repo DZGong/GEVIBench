@@ -1,0 +1,41 @@
+{
+  "id": "quasar2",
+  "name": "QuasAr2",
+  "year": 2014,
+  "category": "Opsin GEVI",
+  "tags": [
+    "Archaerhodopsin",
+    "Orange/Red"
+  ],
+  "paper": "Nature Methods 2014",
+  "paperUrl": "https://doi.org/10.1038/nmeth.3000",
+  "brightness": 20,
+  "speed": 95,
+  "snr": 35,
+  "dynamicRange": 30,
+  "photostability": 45,
+  "subthreshold": 40,
+  "overall": 34,
+  "description": "Improved QuasAr variant with brighter fluorescence and better expression in neurons while maintaining ultrafast response to voltage changes.",
+  "familyTreePath": [
+    "GEVI",
+    "Opsin",
+    "Opsin-Fluorescent",
+    "Arch",
+    "QuasAr",
+    "quasar1",
+    "quasar2"
+  ],
+  "spectrum": {
+    "type": "rhodopsin",
+    "peakEx": 590,
+    "peakEm": 650,
+    "name": "QuasAr2"
+  },
+  "voltage": {
+    "type": "opsin",
+    "slope": 28,
+    "polarity": "positive",
+    "name": "QuasAr2"
+  }
+}

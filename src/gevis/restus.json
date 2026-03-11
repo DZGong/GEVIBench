@@ -1,0 +1,40 @@
+{
+  "id": "restus",
+  "name": "rEstus",
+  "year": 2024,
+  "category": "VSD-cpGFP GEVI",
+  "tags": [
+    "cpGFP",
+    "Green",
+    "Ultrasensitive"
+  ],
+  "paper": "Advanced Science 2024",
+  "paperUrl": "https://doi.org/10.1002/advs.202307938",
+  "brightness": 68,
+  "speed": 78,
+  "snr": 80,
+  "dynamicRange": 82,
+  "photostability": 72,
+  "subthreshold": 78,
+  "overall": 77,
+  "description": "Ultrasensitive GEVI optimized for detecting subthreshold voltage changes with high fidelity.",
+  "familyTreePath": [
+    "GEVI",
+    "VSD",
+    "VSD-single",
+    "ASAP",
+    "restus"
+  ],
+  "spectrum": {
+    "type": "fp",
+    "peakEx": 490,
+    "peakEm": 510,
+    "name": "rEstus"
+  },
+  "voltage": {
+    "type": "fp",
+    "slope": 15,
+    "polarity": "positive",
+    "name": "rEstus"
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "id": "archon1",
+  "name": "Archon1",
+  "year": 2018,
+  "category": "Opsin GEVI",
+  "tags": [
+    "Archaerhodopsin",
+    "Red",
+    "Somatic targeting"
+  ],
+  "paper": "Nature Methods 2018",
+  "paperUrl": "https://doi.org/10.1038/nmeth.4650",
+  "brightness": 22,
+  "speed": 29,
+  "snr": 90,
+  "dynamicRange": 97,
+  "photostability": 95,
+  "subthreshold": 75,
+  "overall": 69,
+  "description": "First genetically encoded voltage indicator derived from archaerhodopsin-3 (Arch3), enabling direct imaging of membrane potential with millisecond temporal resolution in neurons.",
+  "researchPapers": [
+    {
+      "title": "A robotic multidimensional directed evolution approach applied to fluorescent voltage reporters",
+      "journal": "Nature Methods",
+      "year": 2018,
+      "authors": "Piatkevich E, et al.",
+      "sample": "Cultured neurons, Brain slices, Zebrafish, C. elegans",
+      "dye": "N/A (genetically encoded)",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5866759/"
+    }
+  ],
+  "familyTreePath": [
+    "GEVI",
+    "Opsin",
+    "Opsin-Fluorescent",
+    "Arch",
+    "Archon",
+    "archon1"
+  ],
+  "spectrum": {
+    "type": "rhodopsin",
+    "peakEx": 550,
+    "peakEm": 580,
+    "name": "Archon1"
+  },
+  "voltage": {
+    "type": "opsin",
+    "slope": 35,
+    "polarity": "positive",
+    "name": "Archon1"
+  }
+}

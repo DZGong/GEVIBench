@@ -1,0 +1,39 @@
+{
+  "id": "props",
+  "name": "PROPS",
+  "year": 2011,
+  "category": "Opsin GEVI",
+  "tags": [
+    "Proteorhodopsin",
+    "Green",
+    "Microbial"
+  ],
+  "paper": "Science 2011",
+  "paperUrl": "https://doi.org/10.1126/science.1204763",
+  "brightness": 20,
+  "speed": 90,
+  "snr": 25,
+  "dynamicRange": 20,
+  "photostability": 30,
+  "subthreshold": 25,
+  "overall": 28,
+  "description": "First proteorhodopsin-based voltage indicator, establishing the microbial opsin GEVI architecture.",
+  "familyTreePath": [
+    "GEVI",
+    "Opsin",
+    "Opsin-Fluorescent",
+    "PROPS"
+  ],
+  "spectrum": {
+    "type": "rhodopsin",
+    "peakEx": 530,
+    "peakEm": 560,
+    "name": "PROPS"
+  },
+  "voltage": {
+    "type": "opsin",
+    "slope": 30,
+    "polarity": "positive",
+    "name": "PROPS"
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "id": "voltron2",
+  "name": "Voltron2",
+  "year": 2023,
+  "category": "Chemigenetic GEVI",
+  "tags": [
+    "Ace opsin",
+    "HaloTag",
+    "Janelia Fluor",
+    "Red"
+  ],
+  "paper": "Neuron 2023",
+  "paperUrl": "https://doi.org/10.1016/j.neuron.2023.04.003",
+  "brightness": 75,
+  "speed": 92,
+  "snr": 88,
+  "dynamicRange": 88,
+  "photostability": 80,
+  "subthreshold": 85,
+  "overall": 86,
+  "description": "Second-generation Voltron with improved fluorophore options and better photostability, enabling extended imaging sessions in behaving animals.",
+  "researchPapers": [
+    {
+      "title": "Sensitivity optimization of a rhodopsin-based fluorescent voltage indicator",
+      "journal": "Neuron",
+      "year": 2023,
+      "authors": "Abdelfattah AS, et al.",
+      "sample": "Cultured neurons, Acute brain slices, In vivo mice, Zebrafish, Drosophila",
+      "dye": "JF552 (Voltron2552), JF585",
+      "url": "https://www.cell.com/neuron/fulltext/S0896-6273(23)00205-2",
+      "figureUrl": "/imgs/voltron-voltage-indicator-imaging-traces.jpg"
+    },
+    {
+      "title": "Photophysics-informed two-photon voltage imaging using FRET-opsins",
+      "journal": "Science Advances",
+      "year": 2025,
+      "authors": "Brooks F, et al.",
+      "sample": "Live mouse barrel cortex (two-photon)",
+      "dye": "JF552",
+      "url": "https://www.science.org/doi/10.1126/sciadv.adp5763",
+      "figureUrl": "/imgs/voltron2-deep-tissue-voltage-imaging-traces.jpg"
+    },
+    {
+      "title": "Imaging neuronal voltage beyond the scattering limit",
+      "journal": "Nature Methods",
+      "year": 2025,
+      "authors": "Wang X, et al.",
+      "sample": "Mouse hippocampus (ALI technique)",
+      "dye": "Voltron2",
+      "url": "https://www.nature.com/articles/s41592-025-02692-5",
+      "figureUrl": "/imgs/voltron2_deep_tissue_voltage_imaging_cortex_traces.jpg"
+    },
+    {
+      "title": "Large-scale deep tissue voltage imaging with targeted illumination",
+      "journal": "Nature",
+      "year": 2024,
+      "authors": "Song C, et al.",
+      "sample": "Awake mouse cortex",
+      "dye": "Voltron2",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11500676/",
+      "figureUrl": "/imgs/voltron2-deep-tissue-voltage-imaging-traces-cortex.jpg"
+    },
+    {
+      "title": "Two-photon voltage imaging with rhodopsin-based sensors",
+      "journal": "Neuron",
+      "year": 2025,
+      "authors": "Evans SW, et al.",
+      "sample": "Organotypic brain slices",
+      "dye": "JF552",
+      "url": "https://www.cell.com/neuron/fulltext/S0896-6273(25)00970-5",
+      "figureUrl": "/imgs/voltron-brain-slice-voltage-imaging-traces.jpg"
+    },
+    {
+      "title": "Orange/far-red hybrid voltage indicators with reduced phototoxicity",
+      "journal": "PNAS",
+      "year": 2023,
+      "authors": "Liu Y, et al.",
+      "sample": "Cardiomyocytes",
+      "dye": "JF585, JF635",
+      "url": "https://www.pnas.org/doi/10.1073/pnas.2306950120",
+      "figureUrl": "/imgs/voltron-cardiomyocyte-voltage-imaging-traces.jpg"
+    }
+  ],
+  "familyTreePath": [
+    "GEVI",
+    "Opsin",
+    "Chemigenetic",
+    "voltron",
+    "voltron2"
+  ],
+  "spectrum": {
+    "type": "fp",
+    "peakEx": 550,
+    "peakEm": 580,
+    "name": "Voltron2"
+  },
+  "voltage": {
+    "type": "chemi",
+    "slope": 28,
+    "polarity": "positive",
+    "name": "Voltron2"
+  }
+}

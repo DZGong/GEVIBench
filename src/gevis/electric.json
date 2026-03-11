@@ -1,0 +1,35 @@
+{
+  "id": "electric",
+  "name": "Electric",
+  "year": 2023,
+  "category": "Microbial",
+  "paper": "Nature Methods 2023",
+  "paperUrl": "https://www.nature.com/articles/s41592-023-01796-2",
+  "brightness": 75,
+  "speed": 88,
+  "snr": 70,
+  "dynamicRange": 68,
+  "photostability": 70,
+  "subthreshold": 78,
+  "overall": 74,
+  "description": "Recent microbial rhodopsin sensor engineered for improved photostability and subthreshold sensitivity in brain imaging.",
+  "familyTreePath": [
+    "GEVI",
+    "Opsin",
+    "Opsin-Fluorescent",
+    "Arch",
+    "electric"
+  ],
+  "spectrum": {
+    "type": "rhodopsin",
+    "peakEx": 550,
+    "peakEm": 580,
+    "name": "Electric"
+  },
+  "voltage": {
+    "type": "opsin",
+    "slope": 18,
+    "polarity": "positive",
+    "name": "Electric"
+  }
+}

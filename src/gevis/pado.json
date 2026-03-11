@@ -1,0 +1,35 @@
+{
+  "id": "pado",
+  "name": "Pado",
+  "year": 2016,
+  "category": "FP-based",
+  "paper": "Scientific Reports 2016",
+  "paperUrl": "https://www.nature.com/articles/srep23865",
+  "brightness": 70,
+  "speed": 85,
+  "snr": 65,
+  "dynamicRange": 62,
+  "photostability": 68,
+  "subthreshold": 72,
+  "overall": 69,
+  "description": "Rhodopsin-based sensor developed through machine learning-guided engineering, balancing speed and fluorescence properties.",
+  "familyTreePath": [
+    "GEVI",
+    "Opsin",
+    "Opsin-Fluorescent",
+    "Arch",
+    "pado"
+  ],
+  "spectrum": {
+    "type": "rhodopsin",
+    "peakEx": 560,
+    "peakEm": 590,
+    "name": "Pado"
+  },
+  "voltage": {
+    "type": "opsin",
+    "slope": 16,
+    "polarity": "positive",
+    "name": "Pado"
+  }
+}

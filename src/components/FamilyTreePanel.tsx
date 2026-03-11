@@ -2,13 +2,11 @@
 // Shows the full GEVI family tree with interactive nodes
 // FPbase-style vertical SVG tree (root at top, descendants below)
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { X } from 'lucide-react';
-import gevisData from '../data.json';
+import { getAllGEVIs } from '../geviData';
 import type { GEVI } from '../types';
 import { FAMILY_TREE } from '../FamilyTree';
-
-const gevis = gevisData as GEVI[];
 
 // Color mapping based on GEVI properties
 function getGEVIColor(geviName: string, category: string): string {
@@ -214,6 +212,12 @@ export function FamilyTreePanel({
   compareGEVIs,
   onAddToCompare,
 }: FamilyTreePanelProps) {
+  const [gevis, setGevis] = useState<GEVI[]>([]);
+
+  useEffect(() => {
+    getAllGEVIs().then(setGevis);
+  }, []);
+
   const { nodes, links } = useMemo(() => buildAllBranchesVertical(), []);
 
   // Calculate SVG dimensions

@@ -1,0 +1,38 @@
+{
+  "id": "lotusv",
+  "name": "LOTUS-V",
+  "year": 2017,
+  "category": "Bioluminescent GEVI",
+  "tags": [
+    "Luminescent",
+    "VSD"
+  ],
+  "paper": "Scientific Reports 2017",
+  "paperUrl": "https://doi.org/10.1038/srep42398",
+  "brightness": 25,
+  "speed": 45,
+  "snr": 30,
+  "dynamicRange": 28,
+  "photostability": 85,
+  "subthreshold": 35,
+  "overall": 38,
+  "description": "Bioluminescent voltage indicator combining luminescent protein with voltage-sensing domain, eliminating excitation light.",
+  "familyTreePath": [
+    "GEVI",
+    "Others",
+    "Bioluminescent",
+    "lotusv"
+  ],
+  "spectrum": {
+    "type": "fp",
+    "peakEx": 490,
+    "peakEm": 510,
+    "name": "LOTUS-V"
+  },
+  "voltage": {
+    "type": "fp",
+    "slope": 9,
+    "polarity": "positive",
+    "name": "LOTUS-V"
+  }
+}

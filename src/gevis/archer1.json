@@ -1,0 +1,39 @@
+{
+  "id": "archer1",
+  "name": "Archer1",
+  "year": 2014,
+  "category": "Opsin GEVI",
+  "tags": [
+    "Archaerhodopsin",
+    "Green"
+  ],
+  "paper": "Nature Communications 2014",
+  "paperUrl": "https://doi.org/10.1038/ncomms5894",
+  "brightness": 25,
+  "speed": 92,
+  "snr": 35,
+  "dynamicRange": 30,
+  "photostability": 35,
+  "subthreshold": 35,
+  "overall": 34,
+  "description": "Archaerhodopsin-based voltage indicator with improved brightness over early versions.",
+  "familyTreePath": [
+    "GEVI",
+    "Opsin",
+    "Opsin-Fluorescent",
+    "Arch",
+    "archer1"
+  ],
+  "spectrum": {
+    "type": "rhodopsin",
+    "peakEx": 550,
+    "peakEm": 580,
+    "name": "Archer1"
+  },
+  "voltage": {
+    "type": "opsin",
+    "slope": 28,
+    "polarity": "positive",
+    "name": "Archer1"
+  }
+}

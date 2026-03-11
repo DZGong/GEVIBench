@@ -2,7 +2,7 @@ import { ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadius
 import { BonusBadges } from './BonusBadges';
 import { BookOpen, ExternalLink, Plus, X, Sun, Zap, Activity, TrendingUp, Shield, FileText, Dna } from 'lucide-react';
 import { RainbowText, getGEVIColor } from '../utils';
-import { SpectrumViewer } from '../SpectrumViewer';
+import { SpectrumViewer, SpectrumData } from '../SpectrumViewer';
 import { VoltageCurveViewer } from '../VoltageCurveViewer';
 import { FamilyTree } from '../FamilyTree';
 
@@ -25,6 +25,9 @@ interface GEVIDetailProps {
 }
 
 export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, darkMode, onClose, onShowFamilyTree }: GEVIDetailProps) {
+  // Use spectrum data directly from gevi prop
+  const spectrumData = gevi.spectrum || null;
+
   const getRadarData = () => [
     { subject: 'Bright', value: gevi.brightness, fullMark: 100 },
     { subject: 'Speed', value: gevi.speed, fullMark: 100 },
@@ -196,13 +199,13 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, darkMode, onClo
       {/* Spectrum Viewer */}
       <div className={`border rounded-lg p-4 md:p-6 mt-4 md:mt-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
         <h4 className={`text-sm font-semibold mb-3 md:mb-4 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Emission Spectrum</h4>
-        <SpectrumViewer geviId={gevi.id} darkMode={darkMode} />
+        <SpectrumViewer spectrumData={spectrumData} geviName={gevi.name} darkMode={darkMode} />
       </div>
 
       {/* Voltage Response Curve */}
       <div className={`border rounded-lg p-4 md:p-6 mt-4 md:mt-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
         <h4 className={`text-sm font-semibold mb-3 md:mb-4 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>ΔF/F - Voltage Curve</h4>
-        <VoltageCurveViewer geviId={gevi.id} darkMode={darkMode} />
+        <VoltageCurveViewer voltageData={gevi.voltage || null} geviName={gevi.name} darkMode={darkMode} />
       </div>
 
       {/* Research Papers with Representative Figures */}

@@ -1,0 +1,39 @@
+{
+  "id": "marina",
+  "name": "Marina",
+  "year": 2017,
+  "category": "VSD-single FP",
+  "tags": [
+    "Ci-VSP",
+    "Green"
+  ],
+  "paper": "ACS Chemical Neuroscience 2017",
+  "paperUrl": "https://doi.org/10.1021/acschemneuro.6b00234",
+  "brightness": 42,
+  "speed": 48,
+  "snr": 35,
+  "dynamicRange": 30,
+  "photostability": 55,
+  "subthreshold": 35,
+  "overall": 38,
+  "description": "Single FP voltage indicator derived from Ci-VSP with improved expression and targeting.",
+  "familyTreePath": [
+    "GEVI",
+    "VSD",
+    "VSD-single",
+    "ArcLight",
+    "Marina"
+  ],
+  "spectrum": {
+    "type": "fp",
+    "peakEx": 490,
+    "peakEm": 510,
+    "name": "Marina"
+  },
+  "voltage": {
+    "type": "fp",
+    "slope": 8,
+    "polarity": "positive",
+    "name": "Marina"
+  }
+}

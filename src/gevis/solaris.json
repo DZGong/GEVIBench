@@ -1,0 +1,71 @@
+{
+  "id": "solaris",
+  "name": "Solaris",
+  "year": 2024,
+  "category": "Chemigenetic GEVI",
+  "tags": [
+    "Ace rhodopsin",
+    "HaloTag",
+    "Janelia Fluor",
+    "Far-red"
+  ],
+  "paper": "bioRxiv 2024",
+  "paperUrl": "https://doi.org/10.1101/2024.02.02.578569",
+  "brightness": 85,
+  "speed": 90,
+  "snr": 85,
+  "dynamicRange": 98,
+  "photostability": 80,
+  "subthreshold": 78,
+  "overall": 88,
+  "description": "Solaris is a panel of bright and sensitive hybrid voltage indicators with >2-fold higher voltage sensitivity than Voltron2. Solaris585 shows -60.6% ΔF/F₀ per 100mV and -28.1% per action potential, with response kinetics of τ₁/₂ = 1.75ms.",
+  "kinetics": {
+    "halfLife": 1.75,
+    "unit": "ms",
+    "notes": "τ₁/₂ = 1.75 ± 0.11 ms for Solaris585"
+  },
+  "dynamicRangeData": {
+    "deltaF": -60.6,
+    "unit": "% per 100mV",
+    "actionPotential": -28.1,
+    "apUnit": "% per AP",
+    "sign": "negative",
+    "notes": "HEK293T cells; -28.1% per AP in neurons"
+  },
+  "fluorophores": [
+    "JF525",
+    "JF549",
+    "JF552",
+    "JF585",
+    "JF635"
+  ],
+  "researchPapers": [
+    {
+      "title": "Solaris: a panel of bright and sensitive hybrid voltage indicators for imaging membrane potential in cultured neurons",
+      "authors": "Yang J, Zhu S, Yang L, Peng L, Han Y, Hayward RF, Park P, Hu D, Cohen AE, Zou P",
+      "journal": "bioRxiv",
+      "year": 2024,
+      "doi": "10.1101/2024.02.02.578569",
+      "url": "https://doi.org/10.1101/2024.02.02.578569",
+      "type": "Original"
+    }
+  ],
+  "familyTreePath": [
+    "GEVI",
+    "Others",
+    "Bioluminescent",
+    "solaris"
+  ],
+  "spectrum": {
+    "type": "fp",
+    "peakEx": 550,
+    "peakEm": 580,
+    "name": "Solaris"
+  },
+  "voltage": {
+    "type": "chemi",
+    "slope": 30,
+    "polarity": "positive",
+    "name": "Solaris"
+  }
+}

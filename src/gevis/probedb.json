@@ -1,0 +1,35 @@
+{
+  "id": "probedb",
+  "name": "ProbeDB",
+  "year": 2024,
+  "category": "FP-based",
+  "paper": "bioRxiv 2024",
+  "paperUrl": "https://www.biorxiv.org/content/10.1101/2024.01.15.575532",
+  "brightness": 78,
+  "speed": 80,
+  "snr": 72,
+  "dynamicRange": 70,
+  "photostability": 65,
+  "subthreshold": 68,
+  "overall": 71,
+  "description": "FP-based sensor discovered through large-scale screening of genetically encoded voltage indicators, selected for improved performance.",
+  "familyTreePath": [
+    "GEVI",
+    "VSD",
+    "VSD-single",
+    "ASAP",
+    "probedb"
+  ],
+  "spectrum": {
+    "type": "fp",
+    "peakEx": 490,
+    "peakEm": 510,
+    "name": "ProbeDB"
+  },
+  "voltage": {
+    "type": "fp",
+    "slope": 11,
+    "polarity": "positive",
+    "name": "ProbeDB"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "id": "quasar3",
+  "name": "paQuasAr3",
+  "year": 2019,
+  "category": "Opsin GEVI",
+  "tags": [
+    "Archaerhodopsin",
+    "Far-red",
+    "Negative"
+  ],
+  "paper": "Nature 2019",
+  "paperUrl": "https://doi.org/10.1038/s41586-019-1166-7",
+  "brightness": 40,
+  "speed": 95,
+  "snr": 60,
+  "dynamicRange": 65,
+  "photostability": 45,
+  "subthreshold": 65,
+  "overall": 43,
+  "description": "Third-generation QuasAr with orange/far-red shift for improved tissue penetration and reduced phototoxicity in deep imaging applications.",
+  "familyTreePath": [
+    "GEVI",
+    "Opsin",
+    "Opsin-Fluorescent",
+    "Arch",
+    "QuasAr",
+    "quasar1",
+    "quasar2",
+    "quasar3"
+  ],
+  "spectrum": {
+    "type": "rhodopsin",
+    "peakEx": 600,
+    "peakEm": 680,
+    "name": "paQuasAr3"
+  },
+  "voltage": {
+    "type": "opsin",
+    "slope": 22,
+    "polarity": "positive",
+    "name": "paQuasAr3"
+  }
+}

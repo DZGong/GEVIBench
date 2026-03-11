@@ -1,0 +1,40 @@
+{
+  "id": "vsfp2",
+  "name": "VSFP2",
+  "year": 2007,
+  "category": "VSD-FRET GEVI",
+  "tags": [
+    "Ci-VSP",
+    "CFP/YFP",
+    "FRET"
+  ],
+  "paper": "Biophysical Journal 2007",
+  "paperUrl": "https://www.nature.com/articles/nmeth1063",
+  "brightness": 45,
+  "speed": 55,
+  "snr": 40,
+  "dynamicRange": 38,
+  "photostability": 40,
+  "subthreshold": 38,
+  "overall": 41,
+  "description": "Second-generation VSFP with improved CFP-YFP FRET pair, providing ratiometric voltage sensing for improved signal stability.",
+  "familyTreePath": [
+    "GEVI",
+    "VSD",
+    "VSD-FRET",
+    "VSFP1",
+    "VSFP2"
+  ],
+  "spectrum": {
+    "type": "fret",
+    "peakEx": 440,
+    "peakEm": 530,
+    "name": "VSFP2"
+  },
+  "voltage": {
+    "type": "fret",
+    "slope": 15,
+    "polarity": "negative",
+    "name": "VSFP2"
+  }
+}
