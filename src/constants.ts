@@ -10,9 +10,6 @@ export const DEFAULT_SORT: SortField = 'overall';
 // Comparison
 export const MAX_COMPARE_ITEMS = 5;
 
-// Animation
-export const TRANSITION_DURATION = 'transition-opacity';
-
 // Colors
 export const COLORS = {
   // Spectrum colors
@@ -61,7 +58,7 @@ export const COLORS = {
   },
 } as const;
 
-// Metrics configuration
+// Metrics configuration (used by GEVIDetail)
 export const METRICS = [
   { key: 'brightness', name: 'Brightness', icon: 'Sun' },
   { key: 'speed', name: 'Speed', icon: 'Zap' },
@@ -70,15 +67,3 @@ export const METRICS = [
   { key: 'photostability', name: 'Stable', icon: 'Shield' },
   { key: 'paperCount', name: 'Papers', icon: 'FileText' },
 ] as const;
-
-// Sort options
-export const SORT_OPTIONS: { value: SortField; label: string }[] = [
-  { value: 'overall', label: 'Overall' },
-  { value: 'brightness', label: 'Brightness' },
-  { value: 'speed', label: 'Speed' },
-  { value: 'snr', label: 'SNR' },
-  { value: 'dynamicRange', label: 'Range' },
-  { value: 'photostability', label: 'Stable' },
-  { value: 'paperCount', label: 'Papers' },
-  { value: 'year', label: 'Year' },
-];

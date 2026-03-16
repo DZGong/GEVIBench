@@ -2,52 +2,10 @@
 // Shows genetic lineage/relationships for each GEVI
 // FPbase-style vertical SVG tree (root at top, descendants below)
 
-import { useMemo } from 'react';
+import type { TreeNode } from './types';
+import { getTreeNodeColor } from './utils';
 
-// Color mapping based on GEVI properties
-function getGEVIColor(geviName: string, category: string): string {
-  const name = geviName.toLowerCase();
-
-  // Red/Far-red
-  if (name.includes('red') || name.includes('far') || name.includes('rfp') ||
-      name.includes('nir') || name.includes('mcherry') || name.includes('tagrfp') ||
-      category.includes('Red FP')) {
-    return '#ff1744';
-  }
-  // Yellow/Orange
-  if (name.includes('yellow') || name.includes('orange') || name.includes('yfp') ||
-      name.includes('meyfp') || name.includes('citrine') || name.includes('venus')) {
-    return '#ffea00';
-  }
-  // Cyan
-  if (name.includes('cyan') || name.includes('cfp') || name.includes('tev') ||
-      name.includes('mteal') || name.includes('cerulean')) {
-    return '#00e5ff';
-  }
-  // Green (default)
-  if (name.includes('green') || name.includes('gfp') || name.includes('emerald') ||
-      name.includes('asap') || name.includes('arc') || name.includes('jedi') ||
-      category.includes('VSD') || category.includes('Opsin')) {
-    return '#00e676';
-  }
-  // Purple/Pink
-  if (name.includes('purple') || name.includes('pink') || name.includes('mVenus') ||
-      name.includes('positron') || name.includes('voltron')) {
-    return '#d500f9';
-  }
-
-  return '#00e676';
-}
-
-// Build tree data structure from FAMILY_TREE
-interface TreeNode {
-  name: string;
-  year?: number;
-  children?: Record<string, TreeNode>;
-  geviId?: string;
-}
-
-export const FAMILY_TREE = {
+export const FAMILY_TREE: Record<string, TreeNode> = {
   'GEVI': {
     name: 'GEVI',
     children: {
@@ -286,7 +244,7 @@ export const FAMILY_TREE = {
 };
 
 // Map GEVI IDs to their tree path
-const GEVI_PATHS: Record<string, string[]> = {
+export const GEVI_PATHS: Record<string, string[]> = {
   // VSD Based
   'vsfp1': ['GEVI', 'VSD', 'VSD-FRET', 'VSFP1'],
   'vsfp2': ['GEVI', 'VSD', 'VSD-FRET', 'VSFP1', 'VSFP2'],
@@ -340,7 +298,6 @@ const GEVI_PATHS: Record<string, string[]> = {
   'hviplus': ['GEVI', 'Opsin', 'Chemigenetic', 'hviplus'],
 
   // Others
-
   'flicr1': ['GEVI', 'Others', 'Red FP', 'flicr1'],
   'lotusv': ['GEVI', 'Others', 'Bioluminescent', 'lotusv'],
   'amber': ['GEVI', 'Others', 'Bioluminescent', 'amber'],
@@ -398,7 +355,7 @@ export function FamilyTree({ geviId, darkMode = false }: FamilyTreeProps) {
   // Generate gradient IDs based on node names
   const gradients = pathNodes.map((node, i) => ({
     id: `v_gradient_${i}`,
-    color: getGEVIColor(node.name, node.category),
+    color: getTreeNodeColor(node.name, node.category),
   }));
 
   return (
@@ -410,7 +367,7 @@ export function FamilyTree({ geviId, darkMode = false }: FamilyTreeProps) {
       <div className="overflow-auto">
         <svg width={svgWidth} height={svgHeight} className="mx-auto">
           <defs>
-            {gradients.map((g, i) => (
+            {gradients.map((g) => (
               <linearGradient key={g.id} id={g.id} x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stopColor="#000" />
                 <stop offset="50%" stopColor={g.color} />
@@ -435,7 +392,7 @@ export function FamilyTree({ geviId, darkMode = false }: FamilyTreeProps) {
 
           {/* Nodes (vertical) */}
           {pathNodes.map((node, i) => {
-            const color = getGEVIColor(node.name, node.category);
+            const color = getTreeNodeColor(node.name, node.category);
             const isSelected = node.isSelected;
             const radius = isSelected ? 12 : 8;
             const y = i * nodeSpacing + 25;

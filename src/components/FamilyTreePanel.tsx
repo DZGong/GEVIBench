@@ -2,52 +2,136 @@
 // Shows the full GEVI family tree with interactive nodes
 // FPbase-style vertical SVG tree (root at top, descendants below)
 
-import { useState, useMemo, useEffect } from 'react';
+import { useMemo } from 'react';
 import { X } from 'lucide-react';
 import { getAllGEVIs } from '../geviData';
-import type { GEVI } from '../types';
+import type { GEVI, TreeNode } from '../types';
 import { FAMILY_TREE } from '../FamilyTree';
+import { getTreeNodeColor } from '../utils';
 
-// Color mapping based on GEVI properties
-function getGEVIColor(geviName: string, category: string): string {
-  const name = geviName.toLowerCase();
+// Layout constants
+const MIN_NODE_WIDTH = 56;   // minimum horizontal space per leaf node
+const SIBLING_GAP = 6;       // gap between sibling subtrees
+const LEVEL_HEIGHT = 68;     // vertical distance between levels
+const TOP_PADDING = 30;      // top padding for root node
+const NODE_RADIUS_LEAF = 8;
+const NODE_RADIUS_BRANCH = 5;
 
-  // Red/Far-red
-  if (name.includes('red') || name.includes('far') || name.includes('rfp') ||
-      name.includes('nir') || name.includes('mcherry') || name.includes('tagrfp') ||
-      category.includes('Red FP')) {
-    return '#ff1744';
-  }
-  // Yellow/Orange
-  if (name.includes('yellow') || name.includes('orange') || name.includes('yfp') ||
-      name.includes('meyfp') || name.includes('citrine') || name.includes('venus')) {
-    return '#ffea00';
-  }
-  // Cyan
-  if (name.includes('cyan') || name.includes('cfp') || name.includes('tev') ||
-      name.includes('mteal') || name.includes('cerulean')) {
-    return '#00e5ff';
-  }
-  // Green (default)
-  if (name.includes('green') || name.includes('gfp') || name.includes('emerald') ||
-      name.includes('asap') || name.includes('arc') || name.includes('jedi') ||
-      category.includes('VSD') || category.includes('Opsin')) {
-    return '#00e676';
-  }
-  // Purple/Pink
-  if (name.includes('purple') || name.includes('pink') || name.includes('mVenus') ||
-      name.includes('positron') || name.includes('voltron')) {
-    return '#d500f9';
-  }
-
-  return '#00e676';
-}
-
-interface TreeNode {
+interface LayoutNode {
+  id: string;
   name: string;
   year?: number;
-  children?: Record<string, TreeNode>;
+  x: number;
+  y: number;
   geviId?: string;
+  color: string;
+}
+
+interface LayoutLink {
+  fromX: number;
+  fromY: number;
+  toX: number;
+  toY: number;
+}
+
+interface LayoutResult {
+  nodes: LayoutNode[];
+  links: LayoutLink[];
+  width: number;
+  maxY: number;
+}
+
+// Recursively compute subtree width (bottom-up), then position nodes (top-down)
+function layoutTree(node: TreeNode, x: number, y: number): LayoutResult {
+  const nodes: LayoutNode[] = [];
+  const links: LayoutLink[] = [];
+  const isLeaf = !!node.geviId;
+  const color = isLeaf ? getTreeNodeColor(node.name, '') : '#9ca3af';
+
+  // If no children, this is a leaf
+  if (!node.children || Object.keys(node.children).length === 0) {
+    nodes.push({ id: node.name, name: node.name, year: node.year, x, y, geviId: node.geviId, color });
+    return { nodes, links, width: MIN_NODE_WIDTH, maxY: y };
+  }
+
+  const childKeys = Object.keys(node.children);
+
+  // First pass: layout each child subtree to get its width
+  const childLayouts: { key: string; result: LayoutResult }[] = [];
+  for (const key of childKeys) {
+    const result = layoutTree(node.children[key], 0, y + LEVEL_HEIGHT);
+    childLayouts.push({ key, result });
+  }
+
+  // Total width = sum of child widths + gaps between them
+  const totalChildWidth = childLayouts.reduce((sum, cl) => sum + cl.result.width, 0)
+    + (childLayouts.length - 1) * SIBLING_GAP;
+  const treeWidth = Math.max(MIN_NODE_WIDTH, totalChildWidth);
+
+  // Position this node centered above its children
+  nodes.push({ id: node.name, name: node.name, year: node.year, x, y, geviId: node.geviId, color });
+
+  // Position children left-to-right, centered under parent
+  let childStartX = x - totalChildWidth / 2;
+  let maxY = y;
+
+  for (const { result } of childLayouts) {
+    const childCenterX = childStartX + result.width / 2;
+    const offsetX = childCenterX; // absolute center of this child subtree
+
+    // Shift all child nodes by the offset
+    for (const cn of result.nodes) {
+      const shiftedX = cn.x + offsetX;
+      nodes.push({ ...cn, x: shiftedX });
+    }
+    for (const cl of result.links) {
+      links.push({
+        fromX: cl.fromX + offsetX,
+        fromY: cl.fromY,
+        toX: cl.toX + offsetX,
+        toY: cl.toY,
+      });
+    }
+
+    // Link from parent to the root of this child subtree (first node at child y)
+    const childRootNode = result.nodes[0]; // first node is the root of subtree
+    links.push({
+      fromX: x,
+      fromY: y + NODE_RADIUS_BRANCH + 2,
+      toX: childRootNode.x + offsetX,
+      toY: (y + LEVEL_HEIGHT) - NODE_RADIUS_BRANCH - 2,
+    });
+
+    maxY = Math.max(maxY, result.maxY);
+    childStartX += result.width + SIBLING_GAP;
+  }
+
+  return { nodes, links, width: treeWidth, maxY };
+}
+
+// Build the complete tree from FAMILY_TREE (which has a single root "GEVI")
+function buildFullTree() {
+  const root = FAMILY_TREE['GEVI'];
+  if (!root) return { nodes: [] as LayoutNode[], links: [] as LayoutLink[] };
+
+  // Layout starting at center x=0, we'll shift everything to be positive afterwards
+  const result = layoutTree(root, 0, TOP_PADDING);
+
+  // Find min X to shift everything into positive coordinates
+  const minX = Math.min(...result.nodes.map(n => n.x));
+  const padding = 40; // left/right padding
+
+  // Shift all coordinates so minX becomes padding
+  const shiftX = -minX + padding;
+  const shiftedNodes = result.nodes.map(n => ({ ...n, x: n.x + shiftX }));
+  const shiftedLinks = result.links.map(l => ({
+    fromX: l.fromX + shiftX,
+    toX: l.toX + shiftX,
+    fromY: l.fromY,
+    toY: l.toY,
+  }));
+
+  return { nodes: shiftedNodes, links: shiftedLinks };
 }
 
 interface FamilyTreePanelProps {
@@ -59,172 +143,17 @@ interface FamilyTreePanelProps {
   onAddToCompare: (gevi: GEVI) => void;
 }
 
-// Build vertical SVG tree with proper positioning
-function buildVerticalTree(node: TreeNode, depth: number = 0, parentX: number = 0, parentY: number = 40): {
-  nodes: { id: string; name: string; year?: number; x: number; y: number; geviId?: string; color: string; parentX: number; parentY: number }[];
-  links: { fromX: number; fromY: number; toX: number; toY: number }[];
-  maxY: number;
-  width: number;
-} {
-  const nodes: { id: string; name: string; year?: number; x: number; y: number; geviId?: string; color: string; parentX: number; parentY: number }[] = [];
-  const links: { fromX: number; fromY: number; toX: number; toY: number }[] = [];
-
-  const nodeId = node.name.replace(/\s+/g, '_').toLowerCase();
-  const isLeaf = !!node.geviId;
-  const color = isLeaf ? getGEVIColor(node.name, '') : '#9ca3af';
-
-  const y = parentY;
-  const x = parentX;
-
-  nodes.push({
-    id: nodeId,
-    name: node.name,
-    year: node.year,
-    x,
-    y,
-    geviId: node.geviId,
-    color,
-    parentX,
-    parentY: y,
-  });
-
-  let maxChildY = y;
-  let totalWidth = 0;
-
-  if (node.children) {
-    const childKeys = Object.keys(node.children);
-
-    // First pass: calculate width of each child's subtree
-    const childResults = childKeys.map((key) => {
-      const childY = parentY + 70;
-      const result = buildVerticalTree(node.children![key], depth + 1, 0, childY);
-      return { key, result, width: result.width };
-    });
-
-    // Calculate spacing - tighter for narrower tree
-    const baseWidth = Math.max(5, 8 - depth);
-    const childSpacing = baseWidth / Math.max(1, childKeys.length - 1);
-
-    // Calculate total width needed
-    totalWidth = childResults.reduce((sum, cr) => sum + cr.width, 0) + (childKeys.length - 1) * 2;
-
-    // Position children
-    let currentX = parentX - totalWidth / 2;
-
-    childResults.forEach(({ key, result }) => {
-      const childX = currentX + result.width / 2;
-      const childY = parentY + 70;
-
-      // Adjust child positions
-      const adjustedNodes = result.nodes.map(n => ({
-        ...n,
-        x: n.x + childX,
-        parentX: n.parentX + childX,
-      }));
-
-      // Adjust links
-      const adjustedLinks = result.links.map(l => ({
-        fromX: l.fromX + childX,
-        toX: l.toX + childX,
-        fromY: l.fromY,
-        toY: l.toY,
-      }));
-
-      // Add link from parent to first child node
-      const firstChildNode = adjustedNodes.find(n => n.y === childY);
-      if (firstChildNode) {
-        links.push({
-          fromX: x,
-          fromY: y + 8,
-          toX: firstChildNode.x,
-          toY: firstChildNode.y - 8,
-        });
-      }
-
-      nodes.push(...adjustedNodes);
-      links.push(...adjustedLinks);
-      maxChildY = Math.max(maxChildY, result.maxY);
-
-      currentX += result.width + 5;
-    });
-  }
-
-  return {
-    nodes,
-    links,
-    maxY: Math.max(y, maxChildY),
-    width: Math.max(totalWidth, 30)
-  };
-}
-
-// Build all branches
-function buildAllBranchesVertical() {
-  const allNodes: { id: string; name: string; year?: number; x: number; y: number; geviId?: string; color: string; branch: string }[] = [];
-  const allLinks: { fromX: number; fromY: number; toX: number; toY: number; branch: string }[] = [];
-
-  const branches = Object.entries(FAMILY_TREE);
-
-  // Calculate positions for each branch first
-  const branchWidths: number[] = [];
-  branches.forEach(([branchKey, branch]) => {
-    const result = buildVerticalTree(branch as TreeNode, 0, 0, 40);
-    branchWidths.push(result.width);
-  });
-
-  // Calculate total width and starting positions
-  const branchGap = 0;
-  const totalWidth = branchWidths.reduce((sum, w) => sum + w, 0) + (branches.length - 1) * branchGap;
-  let currentX = 0;
-
-  branches.forEach(([branchKey, branch], branchIndex) => {
-    const branchCenterX = currentX + branchWidths[branchIndex] / 2;
-    const result = buildVerticalTree(branch as TreeNode, 0, branchCenterX, 40);
-
-    // Offset all nodes and links
-    result.nodes.forEach(n => {
-      allNodes.push({
-        ...n,
-        x: n.x + currentX,
-        parentX: n.parentX + currentX,
-        branch: branchKey
-      });
-    });
-    result.links.forEach(l => {
-      allLinks.push({
-        ...l,
-        fromX: l.fromX + currentX,
-        toX: l.toX + currentX,
-        branch: branchKey
-      });
-    });
-
-    currentX += branchWidths[branchIndex] + branchGap;
-  });
-
-  return { nodes: allNodes, links: allLinks };
-}
-
 export function FamilyTreePanel({
   darkMode,
   onSelectGEVI,
-  selectedGEVI,
   onCloseDetail,
-  compareGEVIs,
-  onAddToCompare,
 }: FamilyTreePanelProps) {
-  const [gevis, setGevis] = useState<GEVI[]>([]);
+  const gevis = useMemo(() => getAllGEVIs(), []);
+  const { nodes, links } = useMemo(() => buildFullTree(), []);
 
-  useEffect(() => {
-    getAllGEVIs().then(setGevis);
-  }, []);
-
-  const { nodes, links } = useMemo(() => buildAllBranchesVertical(), []);
-
-  // Calculate SVG dimensions
-  const maxX = Math.max(...nodes.map(n => n.x), 0) + 150;
-  const maxY = Math.max(...nodes.map(n => n.y), 0) + 100;
-  const svgWidth = Math.max(800, maxX);
-  const svgHeight = Math.max(600, maxY);
+  // Calculate SVG dimensions with enough padding for labels below deepest nodes
+  const svgWidth = Math.max(800, Math.max(...nodes.map(n => n.x)) + 80);
+  const svgHeight = Math.max(400, Math.max(...nodes.map(n => n.y)) + 50);
 
   const handleNodeClick = (geviId?: string) => {
     if (geviId) {
@@ -253,12 +182,12 @@ export function FamilyTreePanel({
         </h3>
       </div>
 
-      {/* Scrollable container with fixed height */}
-      <div className="overflow-auto border rounded-lg" style={{ height: '500px' }}>
+      {/* Scrollable container - auto height, horizontal scroll only */}
+      <div className="overflow-x-auto overflow-y-hidden border rounded-lg">
         <svg width={svgWidth} height={svgHeight} className="block">
           <defs>
             {uniqueColors.map((color, i) => (
-              <radialGradient key={`v_grad_${i}`} id={`v_node_grad_${i}`} cx="50%" cy="50%" r="50%">
+              <radialGradient key={`grad_${i}`} id={`tree_grad_${i}`} cx="50%" cy="50%" r="50%">
                 <stop offset="0%" stopColor="#fff" />
                 <stop offset="40%" stopColor={color} />
                 <stop offset="100%" stopColor={color} />
@@ -266,26 +195,26 @@ export function FamilyTreePanel({
             ))}
           </defs>
 
-          {/* Links - vertical curved paths */}
-          {links.map((link, i) => (
-            <path
-              key={`link_${i}`}
-              d={`M${link.fromX},${link.fromY}
-                  C${link.fromX},${link.fromY + 20}
-                   ${link.toX},${link.toY - 20}
-                   ${link.toX},${link.toY}`}
-              fill="none"
-              stroke={darkMode ? '#6b7280' : '#9ca3af'}
-              strokeWidth="1.5"
-              opacity="0.6"
-            />
-          ))}
+          {/* Links - curved paths */}
+          {links.map((link, i) => {
+            const midY = (link.fromY + link.toY) / 2;
+            return (
+              <path
+                key={`link_${i}`}
+                d={`M${link.fromX},${link.fromY} C${link.fromX},${midY} ${link.toX},${midY} ${link.toX},${link.toY}`}
+                fill="none"
+                stroke={darkMode ? '#4b5563' : '#cbd5e1'}
+                strokeWidth="1.5"
+              />
+            );
+          })}
 
           {/* Nodes */}
           {nodes.map((node, i) => {
             const isLeaf = !!node.geviId;
+            const isRoot = i === 0 && node.name === 'GEVI';
             const colorIndex = uniqueColors.indexOf(node.color);
-            const radius = isLeaf ? 8 : 10;
+            const radius = isRoot ? 10 : isLeaf ? NODE_RADIUS_LEAF : NODE_RADIUS_BRANCH;
 
             return (
               <g
@@ -294,31 +223,35 @@ export function FamilyTreePanel({
                 onClick={() => handleNodeClick(node.geviId)}
                 style={{ cursor: isLeaf ? 'pointer' : 'default' }}
               >
+                {/* Hover target (invisible larger circle for easier clicking) */}
+                {isLeaf && (
+                  <circle r={16} fill="transparent" />
+                )}
                 <circle
                   r={radius}
-                  fill={isLeaf ? `url(#v_node_grad_${colorIndex})` : (darkMode ? '#4b5563' : '#d1d5db')}
-                  stroke={isLeaf ? '#fff' : (darkMode ? '#6b7280' : '#9ca3af')}
-                  strokeWidth={isLeaf ? 1.5 : 1}
-                  opacity={isLeaf ? 1 : 0.7}
+                  fill={isRoot ? (darkMode ? '#60a5fa' : '#3b82f6') : isLeaf ? `url(#tree_grad_${colorIndex})` : (darkMode ? '#4b5563' : '#d1d5db')}
+                  stroke={isRoot ? '#fff' : isLeaf ? '#fff' : (darkMode ? '#6b7280' : '#9ca3af')}
+                  strokeWidth={isRoot ? 2 : isLeaf ? 1.5 : 1}
+                  opacity={1}
                   style={{
-                    filter: isLeaf ? `drop-shadow(0 0 4px ${node.color})` : 'none',
+                    filter: isRoot ? 'drop-shadow(0 0 6px rgba(59,130,246,0.5))' : isLeaf ? `drop-shadow(0 0 3px ${node.color})` : 'none',
                   }}
                 />
                 <text
                   x={0}
-                  y={22}
+                  y={isRoot ? -(radius + 4) : isLeaf ? radius + 14 : radius + 12}
                   textAnchor="middle"
-                  className={`text-xs ${darkMode ? 'fill-gray-300' : 'fill-gray-700'}`}
-                  style={{ fontSize: '9px', fontWeight: isLeaf ? '600' : '500' }}
+                  fill={isRoot ? (darkMode ? '#93c5fd' : '#2563eb') : darkMode ? (isLeaf ? '#e5e7eb' : '#9ca3af') : (isLeaf ? '#374151' : '#6b7280')}
+                  style={{ fontSize: isRoot ? '12px' : isLeaf ? '9px' : '10px', fontWeight: isRoot ? '700' : isLeaf ? '600' : '500' }}
                 >
                   {node.name}
                 </text>
                 {node.year && (
                   <text
                     x={0}
-                    y={32}
+                    y={radius + 24}
                     textAnchor="middle"
-                    className={`text-xs ${darkMode ? 'fill-gray-500' : 'fill-gray-500'}`}
+                    fill={darkMode ? '#6b7280' : '#9ca3af'}
                     style={{ fontSize: '7px' }}
                   >
                     ({node.year})

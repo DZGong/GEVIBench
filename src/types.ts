@@ -16,15 +16,12 @@ export interface GEVI {
   subthreshold: number;
   overall: number;
   description: string;
-  // Modular: Family tree path for lineage visualization
   familyTreePath?: string[];
-  // Modular: Reference to spectrum data (embedded directly)
   spectrum?: {
     type: 'fp' | 'rhodopsin' | 'nir' | 'fret' | 'redfp';
     peakEx: number;
     peakEm: number;
     name: string;
-    // Optional custom measured spectrum data
     custom?: {
       minEx: number;
       excitation: number[];
@@ -32,13 +29,11 @@ export interface GEVI {
       emission: number[];
     };
   };
-  // Modular: Voltage response data (embedded directly)
   voltage?: {
     type: 'opsin' | 'fp' | 'fret' | 'red' | 'chemi';
     slope: number;
     polarity: 'positive' | 'negative';
     name: string;
-    // Optional custom measured voltage data
     custom?: {
       voltage: number[];
       deltaF: number[];
@@ -101,41 +96,4 @@ export interface TreeNode {
   year?: number;
   children?: Record<string, TreeNode>;
   geviId?: string;
-}
-
-export interface FamilyTreeData {
-  tree: Record<string, TreeNode>;
-  geviPaths: Record<string, string[]>;
-}
-
-// Spectrum Data Types
-export interface SpectrumPoint {
-  wavelength: number;
-  value: number;
-}
-
-export interface SpectrumData {
-  excitation?: SpectrumPoint[];
-  emission?: SpectrumPoint[];
-  config?: {
-    type: string;
-    peakEx: number;
-    peakEm: number;
-    name: string;
-  };
-}
-
-// Voltage Curve Data Types
-export interface VoltagePoint {
-  voltage: number;
-  deltaF: number;
-}
-
-export interface VoltageCurveData {
-  data?: VoltagePoint[];
-  config?: {
-    slope: number;
-    polarity: 'positive' | 'negative';
-    type: string;
-  };
 }

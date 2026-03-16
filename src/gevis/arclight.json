@@ -10,12 +10,12 @@
   "paper": "Neuron 2012",
   "paperUrl": "https://doi.org/10.1016/j.neuron.2012.08.040",
   "brightness": 100,
-  "speed": 0,
+  "speed": 30,
   "snr": 29,
   "dynamicRange": 59,
   "photostability": 80,
   "subthreshold": 50,
-  "overall": 44,
+  "overall": 45,
   "description": "Classic genetically encoded voltage indicator using a voltage-sensing domain fused to pH-sensitive GFP, producing large fluorescence decreases during depolarization.",
   "researchPapers": [
     {

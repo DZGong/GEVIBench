@@ -1,8 +1,6 @@
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback } from 'react';
 import { getAllGEVIs } from './geviData';
 import { methodologyContent } from './methodology';
-import { SpectrumViewer } from './SpectrumViewer';
-import { FamilyTree } from './FamilyTree';
 import { FamilyTreePanel } from './components/FamilyTreePanel';
 import { Header } from './components/Header';
 import { SearchFilters } from './components/SearchFilters';
@@ -18,28 +16,14 @@ import {
   DEFAULT_YEAR,
   DEFAULT_SORT,
   MAX_COMPARE_ITEMS,
-  COLORS,
-  METRICS,
 } from './constants';
 
 // Inner component that uses the theme context
 function GEVIBenchApp() {
   const { darkMode, colors } = useTheme();
 
-  // State - use lazy initializer to load GEVIs synchronously
-  const [gevis, setGevis] = useState<GEVI[]>(() => {
-    // This runs once on first render - load synchronously
-    const modules = import.meta.glob('./gevis/*.json', { eager: true });
-    const loadedGevis: GEVI[] = [];
-    for (const path in modules) {
-      const gevi = modules[path] as GEVI;
-      if (gevi?.id) {
-        loadedGevis.push(gevi);
-      }
-    }
-    loadedGevis.sort((a, b) => (b.overall || 0) - (a.overall || 0));
-    return loadedGevis;
-  });
+  // State - load GEVIs synchronously via lazy initializer
+  const [gevis] = useState<GEVI[]>(() => getAllGEVIs());
   const [selectedGEVI, setSelectedGEVI] = useState<GEVI | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [categoryFilter, setCategoryFilter] = useState(DEFAULT_CATEGORY);
@@ -112,11 +96,6 @@ function GEVIBenchApp() {
     }));
   }, []);
 
-  // Render helpers
-  const getGEVISortValue = (field: SortField) => {
-    return sortConfig.field === field ? (sortConfig.order === 'desc' ? '↓' : '↑') : '';
-  };
-
   // Render Database Tab
   const renderDatabaseTab = () => (
     <main className="max-w-7xl mx-auto px-4 py-6">
@@ -146,21 +125,23 @@ function GEVIBenchApp() {
         </div>
       </div>
 
-      <SearchFilters
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
-        categoryFilter={categoryFilter}
-        setCategoryFilter={setCategoryFilter}
-        yearFilter={yearFilter}
-        setYearFilter={setYearFilter}
-        sortConfig={sortConfig}
-        onSortChange={handleSortChange}
-        categories={categories}
-        years={years}
-      />
+      {!showFamilyTree && (
+        <SearchFilters
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          categoryFilter={categoryFilter}
+          setCategoryFilter={setCategoryFilter}
+          yearFilter={yearFilter}
+          setYearFilter={setYearFilter}
+          sortConfig={sortConfig}
+          onSortChange={handleSortChange}
+          categories={categories}
+          years={years}
+        />
+      )}
 
       {/* Mobile View Toggle */}
-      <div className="sm:hidden flex mb-4 gap-2">
+      <div className={`sm:hidden flex mb-4 gap-2 ${showFamilyTree ? 'hidden' : ''}`}>
         <div className="flex-1">
           <button
             onClick={() => setMobileView('list')}
@@ -216,103 +197,104 @@ function GEVIBenchApp() {
         />
       )}
 
-      {/* Main Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Sidebar - GEVI List */}
-        <div className={`hidden sm:block ${selectedGEVI ? 'col-span-1' : 'col-span-3'}`}>
-          <GEVIList
-            gevis={filteredGEVIs}
-            selectedGEVI={selectedGEVI}
-            onSelect={handleSelectGEVI}
-            onAddToCompare={addToCompare}
-            compareGEVIs={compareGEVIs}
-            darkMode={darkMode}
-            compact={!!selectedGEVI}
-            sortConfig={sortConfig}
-            onSortChange={handleSortChange}
-          />
-        </div>
+      {/* Family Tree - full width, outside grid */}
+      {showFamilyTree ? (
+        <FamilyTreePanel
+          darkMode={darkMode}
+          onSelectGEVI={handleSelectGEVI}
+          selectedGEVI={selectedGEVI}
+          onCloseDetail={() => {
+            setShowFamilyTree(false);
+            if (selectedGEVI) {
+              setMobileView('detail');
+            }
+          }}
+          compareGEVIs={compareGEVIs}
+          onAddToCompare={addToCompare}
+        />
+      ) : (
+        <>
+          {/* Main Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Sidebar - GEVI List */}
+            <div className={`hidden sm:block ${selectedGEVI ? 'col-span-1' : 'col-span-3'}`}>
+              <GEVIList
+                gevis={filteredGEVIs}
+                selectedGEVI={selectedGEVI}
+                onSelect={handleSelectGEVI}
+                onAddToCompare={addToCompare}
+                compareGEVIs={compareGEVIs}
+                darkMode={darkMode}
+                compact={!!selectedGEVI}
+                sortConfig={sortConfig}
+                onSortChange={handleSortChange}
+              />
+            </div>
 
-        {/* Mobile List View */}
-        {mobileView === 'list' && (
-          <div className="sm:hidden col-span-1 space-y-2">
-            {filteredGEVIs.map((gevi, idx) => {
-              const geviColor = getGEVIColor(gevi);
-              return (
-                <button
-                  key={gevi.id}
-                  onClick={() => handleSelectGEVI(gevi)}
-                  className={`w-full p-3 text-left border rounded-lg ${darkMode ? 'bg-gray-800 border-gray-700 hover:bg-gray-700' : 'bg-white border-gray-200 hover:bg-gray-50'}`}
-                >
-                  <div className="flex items-center justify-between mb-1">
-                    <div className="flex items-center gap-2 flex-wrap">
-                      <span className={`text-xs font-medium ${colors.textMuted}`}>{idx + 1}.</span>
-                      {geviColor.color === 'rainbow' ? (
-                        <RainbowText text={gevi.name} />
-                      ) : (
-                        <span className="font-semibold text-base" style={{ color: geviColor.color }}>{gevi.name}</span>
-                      )}
-                      <span className="text-xs px-1.5 py-0.5 bg-blue-900 text-white rounded">{gevi.category}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className={`text-xs px-1.5 py-0.5 rounded ${darkMode ? 'bg-gray-600 text-gray-300' : 'bg-gray-100 text-gray-600'}`}>{gevi.year}</span>
-                      <span className="text-base font-bold text-blue-500">{gevi.overall}</span>
-                    </div>
-                  </div>
-                  <div className={`text-xs ${colors.textTertiary}`}>
-                    {gevi.description}
-                  </div>
-                </button>
-              );
-            })}
+            {/* Mobile List View */}
+            {mobileView === 'list' && (
+              <div className="sm:hidden col-span-1 space-y-2">
+                {filteredGEVIs.map((gevi, idx) => {
+                  const geviColor = getGEVIColor(gevi);
+                  return (
+                    <button
+                      key={gevi.id}
+                      onClick={() => handleSelectGEVI(gevi)}
+                      className={`w-full p-3 text-left border rounded-lg ${darkMode ? 'bg-gray-800 border-gray-700 hover:bg-gray-700' : 'bg-white border-gray-200 hover:bg-gray-50'}`}
+                    >
+                      <div className="flex items-center justify-between mb-1">
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <span className={`text-xs font-medium ${colors.textMuted}`}>{idx + 1}.</span>
+                          {geviColor.color === 'rainbow' ? (
+                            <RainbowText text={gevi.name} />
+                          ) : (
+                            <span className="font-semibold text-base" style={{ color: geviColor.color }}>{gevi.name}</span>
+                          )}
+                          <span className="text-xs px-1.5 py-0.5 bg-blue-900 text-white rounded">{gevi.category}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className={`text-xs px-1.5 py-0.5 rounded ${darkMode ? 'bg-gray-600 text-gray-300' : 'bg-gray-100 text-gray-600'}`}>{gevi.year}</span>
+                          <span className="text-base font-bold text-blue-500">{gevi.overall}</span>
+                        </div>
+                      </div>
+                      <div className={`text-xs ${colors.textTertiary}`}>
+                        {gevi.description}
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+
+            {/* Detail Panel */}
+            <div className={`col-span-1 ${mobileView === 'list' ? 'sm:col-span-2' : 'col-span-1 md:col-span-2'}`}>
+              {selectedGEVI && mobileView === 'detail' && (
+                <>
+                  {mobileView === 'detail' && (
+                    <button
+                      onClick={() => setMobileView('list')}
+                      className={`sm:hidden mb-3 text-sm flex items-center gap-1 ${colors.accent}`}
+                    >
+                      ← Back to list
+                    </button>
+                  )}
+                  <GEVIDetail
+                    gevi={selectedGEVI}
+                    onAddToCompare={addToCompare}
+                    compareGEVIs={compareGEVIs}
+                    darkMode={darkMode}
+                    onClose={handleLogoClick}
+                    onShowFamilyTree={() => {
+                      setActiveTab('database');
+                      setShowFamilyTree(true);
+                    }}
+                  />
+                </>
+              )}
+            </div>
           </div>
-        )}
-
-        {/* Detail Panel / Family Tree */}
-        <div className={`col-span-1 ${mobileView === 'list' ? 'sm:col-span-2' : 'col-span-1 md:col-span-2'}`}>
-          {/* Family Tree or Detail Panel */}
-          {showFamilyTree ? (
-            <FamilyTreePanel
-              darkMode={darkMode}
-              onSelectGEVI={handleSelectGEVI}
-              selectedGEVI={selectedGEVI}
-              onCloseDetail={() => {
-                // Go back to previous view (GEVI detail if a GEVI was selected, otherwise main database)
-                setShowFamilyTree(false);
-                if (selectedGEVI) {
-                  setMobileView('detail');
-                }
-              }}
-              compareGEVIs={compareGEVIs}
-              onAddToCompare={addToCompare}
-            />
-          ) : (
-            selectedGEVI && mobileView === 'detail' && (
-              <>
-                {mobileView === 'detail' && (
-                  <button
-                    onClick={() => setMobileView('list')}
-                    className={`sm:hidden mb-3 text-sm flex items-center gap-1 ${colors.accent}`}
-                  >
-                    ← Back to list
-                  </button>
-                )}
-                <GEVIDetail
-                  gevi={selectedGEVI}
-                  onAddToCompare={addToCompare}
-                  compareGEVIs={compareGEVIs}
-                  darkMode={darkMode}
-                  onClose={handleLogoClick}
-                  onShowFamilyTree={() => {
-                    setActiveTab('database');
-                    setShowFamilyTree(true);
-                  }}
-                />
-              </>
-            )
-          )}
-        </div>
-      </div>
+        </>
+      )}
     </main>
   );
 

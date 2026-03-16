@@ -60,6 +60,41 @@ export const getGEVIColor = (gevi: { tags?: string[]; category?: string; name: s
 };
 
 // Render rainbow text
+// Color mapping for family tree nodes (by name/category string matching)
+export function getTreeNodeColor(geviName: string, category: string): string {
+  const name = geviName.toLowerCase();
+
+  // Red/Far-red
+  if (name.includes('red') || name.includes('far') || name.includes('rfp') ||
+      name.includes('nir') || name.includes('mcherry') || name.includes('tagrfp') ||
+      category.includes('Red FP')) {
+    return '#ff1744';
+  }
+  // Yellow/Orange
+  if (name.includes('yellow') || name.includes('orange') || name.includes('yfp') ||
+      name.includes('meyfp') || name.includes('citrine') || name.includes('venus')) {
+    return '#ffea00';
+  }
+  // Cyan
+  if (name.includes('cyan') || name.includes('cfp') || name.includes('tev') ||
+      name.includes('mteal') || name.includes('cerulean')) {
+    return '#00e5ff';
+  }
+  // Green (default)
+  if (name.includes('green') || name.includes('gfp') || name.includes('emerald') ||
+      name.includes('asap') || name.includes('arc') || name.includes('jedi') ||
+      category.includes('VSD') || category.includes('Opsin')) {
+    return '#00e676';
+  }
+  // Purple/Pink
+  if (name.includes('purple') || name.includes('pink') || name.includes('mVenus') ||
+      name.includes('positron') || name.includes('voltron')) {
+    return '#d500f9';
+  }
+
+  return '#00e676';
+}
+
 export function RainbowText({ text }: { text: string }) {
   return (
     <span
