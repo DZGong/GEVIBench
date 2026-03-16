@@ -10,11 +10,12 @@ import { FAMILY_TREE } from '../FamilyTree';
 import { getTreeNodeColor } from '../utils';
 
 // Layout constants
-const MIN_NODE_WIDTH = 48;   // minimum horizontal space per leaf node
-const SIBLING_GAP = 6;       // gap between sibling subtrees
-const LEVEL_HEIGHT = 62;     // vertical distance between levels
-const LEVEL_STAGGER = 8;     // additional y offset per sibling index (creates staircase effect)
-const TOP_PADDING = 30;      // top padding for root node
+const MIN_NODE_WIDTH = 48;        // minimum horizontal space per leaf node
+const SIBLING_GAP = 6;            // gap between sibling subtrees
+const LEVEL_HEIGHT = 62;          // vertical distance between levels
+const LEVEL_STAGGER_BASE = 40;    // stagger per branch sibling at depth 0 (most aggressive)
+const LEVEL_STAGGER_DECAY = 10;   // stagger reduction per depth level
+const TOP_PADDING = 30;           // top padding for root node
 const NODE_RADIUS_LEAF = 8;
 const NODE_RADIUS_BRANCH = 5;
 
@@ -43,7 +44,8 @@ interface LayoutResult {
 }
 
 // Recursively compute subtree width (bottom-up), then position nodes (top-down)
-function layoutTree(node: TreeNode, x: number, y: number): LayoutResult {
+// depth: distance from root (used to scale stagger — more aggressive near root)
+function layoutTree(node: TreeNode, x: number, y: number, depth = 0): LayoutResult {
   const nodes: LayoutNode[] = [];
   const links: LayoutLink[] = [];
   const isLeaf = !!node.geviId;
@@ -57,13 +59,23 @@ function layoutTree(node: TreeNode, x: number, y: number): LayoutResult {
 
   const childKeys = Object.keys(node.children);
 
+  // Stagger amount decays with depth: large near root, zero for deep nodes.
+  // Leaf children (no grandchildren) get NO stagger — they stay at the same y
+  // so sibling leaves always align horizontally.
+  const effectiveStagger = Math.max(0, LEVEL_STAGGER_BASE - depth * LEVEL_STAGGER_DECAY);
+
   // First pass: layout each child subtree to get its width
-  // Stagger each child's y by siblingIndex * LEVEL_STAGGER for a cascading effect
   const childLayouts: { key: string; result: LayoutResult }[] = [];
+  let branchChildIndex = 0; // count only branch children for stagger index
   for (let i = 0; i < childKeys.length; i++) {
     const key = childKeys[i];
-    const childY = y + LEVEL_HEIGHT + i * LEVEL_STAGGER;
-    const result = layoutTree(node.children[key], 0, childY);
+    const childNode = node.children[key];
+    const childIsBranch = !!(childNode.children && Object.keys(childNode.children).length > 0);
+    // Branch children get staggered; leaf children stay at y + LEVEL_HEIGHT
+    const stagger = childIsBranch ? branchChildIndex * effectiveStagger : 0;
+    if (childIsBranch) branchChildIndex++;
+    const childY = y + LEVEL_HEIGHT + stagger;
+    const result = layoutTree(childNode, 0, childY, depth + 1);
     childLayouts.push({ key, result });
   }
 
