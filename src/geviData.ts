@@ -20,7 +20,6 @@ export function getAllGEVIs(): GEVI[] {
     }
   }
 
-  gevis.sort((a, b) => (b.overall || 0) - (a.overall || 0));
   geviCache = gevis;
   return gevis;
 }

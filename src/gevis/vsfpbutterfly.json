@@ -18,13 +18,7 @@
   "subthreshold": 38,
   "overall": 40,
   "description": "VSFP variant with improved membrane targeting and FRET efficiency for better voltage sensitivity.",
-  "familyTreePath": [
-    "GEVI",
-    "VSD",
-    "VSD-FRET",
-    "VSFP2",
-    "Butterfly"
-  ],
+  "parentId": "vsfp2",
   "spectrum": {
     "type": "fret",
     "peakEx": 440,

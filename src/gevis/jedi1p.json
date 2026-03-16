@@ -115,15 +115,7 @@
     }
   ],
   "paperCount": 8,
-  "familyTreePath": [
-    "GEVI",
-    "VSD",
-    "VSD-single",
-    "ASAP",
-    "JEDI",
-    "jedi2p",
-    "jedi1p"
-  ],
+  "parentId": "jedi2p",
   "spectrum": {
     "type": "fp",
     "peakEx": 487,

@@ -18,13 +18,7 @@
   "subthreshold": 38,
   "overall": 41,
   "description": "Second-generation VSFP with improved CFP-YFP FRET pair, providing ratiometric voltage sensing for improved signal stability.",
-  "familyTreePath": [
-    "GEVI",
-    "VSD",
-    "VSD-FRET",
-    "VSFP1",
-    "VSFP2"
-  ],
+  "parentId": "vsfp1",
   "spectrum": {
     "type": "fret",
     "peakEx": 440,

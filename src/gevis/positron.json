@@ -18,12 +18,7 @@
   "subthreshold": 55,
   "overall": 55,
   "description": "Positive-going eFRET voltage indicator that increases fluorescence with depolarization, opposite to most opsin-based sensors.",
-  "familyTreePath": [
-    "GEVI",
-    "Opsin",
-    "Opsin-FRET",
-    "positron"
-  ],
+  "parentId": "voltron",
   "spectrum": {
     "type": "rhodopsin",
     "peakEx": 550,

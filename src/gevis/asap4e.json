@@ -80,16 +80,7 @@
     }
   ],
   "paperCount": 3,
-  "familyTreePath": [
-    "GEVI",
-    "VSD",
-    "VSD-single",
-    "ASAP",
-    "asap1",
-    "asap2s",
-    "asap3",
-    "asap4e"
-  ],
+  "parentId": "asap3",
   "spectrum": {
     "type": "fp",
     "peakEx": 490,

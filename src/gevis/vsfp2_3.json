@@ -18,14 +18,7 @@
   "subthreshold": 42,
   "overall": 45,
   "description": "Optimized VSFP2 variant with improved plasma membrane targeting and faster response kinetics for imaging in C. elegans neurons.",
-  "familyTreePath": [
-    "GEVI",
-    "VSD",
-    "VSD-FRET",
-    "VSFP1",
-    "VSFP2",
-    "VSFP2.3"
-  ],
+  "parentId": "vsfp2",
   "spectrum": {
     "type": "fret",
     "peakEx": 440,

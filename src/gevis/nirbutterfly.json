@@ -18,14 +18,7 @@
   "subthreshold": 45,
   "overall": 43,
   "description": "Near-infrared VSFP variant using NIR fluorescent proteins for improved tissue penetration.",
-  "familyTreePath": [
-    "GEVI",
-    "VSD",
-    "VSD-FRET",
-    "VSFP2",
-    "Butterfly",
-    "nirButterfly"
-  ],
+  "parentId": "vsfpbutterfly",
   "spectrum": {
     "type": "nir",
     "peakEx": 680,

@@ -17,15 +17,7 @@
   "subthreshold": 55,
   "overall": 52,
   "description": "An improved version of Archon1 with enhanced plasma membrane localization and reduced intracellular aggregation, enabling more reliable neuronal imaging.",
-  "familyTreePath": [
-    "GEVI",
-    "Opsin",
-    "Opsin-Fluorescent",
-    "Arch",
-    "Archon",
-    "archon1",
-    "archon2"
-  ],
+  "parentId": "archon1",
   "spectrum": {
     "type": "rhodopsin",
     "peakEx": 550,

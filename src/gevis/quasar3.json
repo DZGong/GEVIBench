@@ -18,16 +18,7 @@
   "subthreshold": 65,
   "overall": 58,
   "description": "Third-generation QuasAr with orange/far-red shift for improved tissue penetration and reduced phototoxicity in deep imaging applications.",
-  "familyTreePath": [
-    "GEVI",
-    "Opsin",
-    "Opsin-Fluorescent",
-    "Arch",
-    "QuasAr",
-    "quasar1",
-    "quasar2",
-    "quasar3"
-  ],
+  "parentId": "quasar2",
   "spectrum": {
     "type": "rhodopsin",
     "peakEx": 600,

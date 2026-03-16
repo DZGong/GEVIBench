@@ -18,14 +18,7 @@
   "subthreshold": 30,
   "overall": 32,
   "description": "Early FRET-based voltage indicator using Ci-VSP voltage sensing domain with improved fluorescent protein pair.",
-  "familyTreePath": [
-    "GEVI",
-    "VSD",
-    "VSD-FRET",
-    "VSFP1",
-    "VSFP2",
-    "Mermaid"
-  ],
+  "parentId": "vsfp2",
   "spectrum": {
     "type": "fret",
     "peakEx": 440,

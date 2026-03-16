@@ -13,13 +13,7 @@
   "subthreshold": 53,
   "overall": 54,
   "description": "Improved ArcLight variant with mutations that enhance plasma membrane targeting and improve signal amplitude in neuronal processes.",
-  "familyTreePath": [
-    "GEVI",
-    "VSD",
-    "VSD-single",
-    "ArcLight",
-    "arclightd"
-  ],
+  "parentId": "arclight",
   "spectrum": {
     "type": "fp",
     "peakEx": 490,

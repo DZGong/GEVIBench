@@ -18,16 +18,7 @@
   "subthreshold": 60,
   "overall": 65,
   "description": "Bright far-red QuasAr variant with improved quantum yield for better signal in deep tissue imaging.",
-  "familyTreePath": [
-    "GEVI",
-    "Opsin",
-    "Opsin-Fluorescent",
-    "Arch",
-    "QuasAr",
-    "quasar1",
-    "quasar2",
-    "quasar6"
-  ],
+  "parentId": "quasar2",
   "spectrum": {
     "type": "rhodopsin",
     "peakEx": 610,

@@ -29,15 +29,7 @@
       "url": "https://www.cell.com/neuron/fulltext/S0896-6273(19)31225-5"
     }
   ],
-  "familyTreePath": [
-    "GEVI",
-    "VSD",
-    "VSD-single",
-    "ASAP",
-    "asap1",
-    "asap2s",
-    "asap3"
-  ],
+  "parentId": "asap2s",
   "spectrum": {
     "type": "fp",
     "peakEx": 490,

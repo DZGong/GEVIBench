@@ -4,7 +4,7 @@ import { BookOpen, ExternalLink, Plus, X, Sun, Zap, Activity, TrendingUp, Shield
 import { RainbowText, getGEVIColor } from '../utils';
 import { SpectrumViewer, SpectrumData } from '../SpectrumViewer';
 import { VoltageCurveViewer } from '../VoltageCurveViewer';
-import { FamilyTree } from '../FamilyTree';
+import { GEVILineage } from './GEVILineage';
 
 const metrics = [
   { key: 'brightness', name: 'Brightness', icon: Sun },
@@ -191,7 +191,7 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, darkMode, onClo
             className={`cursor-pointer ${onShowFamilyTree ? 'hover:ring-2 hover:ring-blue-500/50 rounded-lg -m-2 p-2' : ''}`}
             onClick={onShowFamilyTree}
           >
-            <FamilyTree geviId={gevi.id} darkMode={darkMode} />
+            <GEVILineage gevi={gevi} darkMode={darkMode} />
           </div>
         </div>
       </div>

@@ -13,14 +13,7 @@
   "subthreshold": 55,
   "overall": 56,
   "description": "Improved near-infrared GEVI with enhanced brightness and faster kinetics for in vivo deep tissue voltage imaging.",
-  "familyTreePath": [
-    "GEVI",
-    "Opsin",
-    "Opsin-Fluorescent",
-    "NIR",
-    "nir",
-    "nir2"
-  ],
+  "parentId": "nir",
   "spectrum": {
     "type": "nir",
     "peakEx": 700,

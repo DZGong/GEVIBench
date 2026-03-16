@@ -13,16 +13,7 @@
   "subthreshold": 55,
   "overall": 56,
   "description": "Third-generation Archon sensor with improved targeting and mutations that enhance fluorescence while maintaining fast rhodopsin kinetics for neural imaging.",
-  "familyTreePath": [
-    "GEVI",
-    "Opsin",
-    "Opsin-Fluorescent",
-    "Arch",
-    "Archon",
-    "archon1",
-    "archon2",
-    "archon3"
-  ],
+  "parentId": "archon2",
   "spectrum": {
     "type": "rhodopsin",
     "peakEx": 560,

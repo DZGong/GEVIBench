@@ -6,16 +6,26 @@ import { useMemo } from 'react';
 import { X } from 'lucide-react';
 import { getAllGEVIs } from '../geviData';
 import type { GEVI, TreeNode } from '../types';
-import { FAMILY_TREE } from '../FamilyTree';
 import { getTreeNodeColor } from '../utils';
 
-// Layout constants
-const MIN_NODE_WIDTH = 48;        // minimum horizontal space per leaf node
-const SIBLING_GAP = 6;            // gap between sibling subtrees
-const LEVEL_HEIGHT = 62;          // vertical distance between levels
-const LEVEL_STAGGER_BASE = 40;    // stagger per branch sibling at depth 0 (most aggressive)
-const LEVEL_STAGGER_DECAY = 10;   // stagger reduction per depth level
-const TOP_PADDING = 30;           // top padding for root node
+// Layout constants (all units are SVG pixels)
+//
+// Tree width is driven by: each leaf occupies MIN_NODE_WIDTH px horizontally,
+// siblings are separated by SIBLING_GAP px between their subtree bounding boxes.
+// To make the tree narrower, reduce MIN_NODE_WIDTH (floor ~36) or SIBLING_GAP.
+//
+// Tree height is driven by LEVEL_HEIGHT (baseline vertical gap per level) plus
+// y-stagger applied to branch siblings. Stagger = branchIndex × effectiveStagger,
+// where effectiveStagger = max(0, LEVEL_STAGGER_BASE − depth × LEVEL_STAGGER_DECAY).
+// This means siblings near the root are pushed further apart vertically (creating
+// space for their subtrees to share horizontal room) while deep siblings stay aligned.
+// To make the tree taller/shorter, adjust LEVEL_HEIGHT or LEVEL_STAGGER_BASE.
+const MIN_NODE_WIDTH = 48;
+const SIBLING_GAP = 6;
+const LEVEL_HEIGHT = 62;
+const LEVEL_STAGGER_BASE = 40;    // y-stagger (px) applied to first branch sibling at depth 0
+const LEVEL_STAGGER_DECAY = 10;   // stagger shrinks by this amount per depth level
+const TOP_PADDING = 30;
 const NODE_RADIUS_LEAF = 8;
 const NODE_RADIUS_BRANCH = 5;
 
@@ -41,20 +51,28 @@ interface LayoutResult {
   links: LayoutLink[];
   width: number;
   maxY: number;
+  leftContour: Map<number, number>;   // y → leftmost x
+  rightContour: Map<number, number>;  // y → rightmost x
 }
 
-// Recursively compute subtree width (bottom-up), then position nodes (top-down)
+// Recursively compute subtree layout using contour-based (profile-based) packing.
 // depth: distance from root (used to scale stagger — more aggressive near root)
 function layoutTree(node: TreeNode, x: number, y: number, depth = 0): LayoutResult {
   const nodes: LayoutNode[] = [];
   const links: LayoutLink[] = [];
   const isLeaf = !!node.geviId;
+  const isRoot = depth === 0;
   const color = isLeaf ? getTreeNodeColor(node.name, '') : '#9ca3af';
 
   // If no children, this is a leaf
   if (!node.children || Object.keys(node.children).length === 0) {
     nodes.push({ id: node.name, name: node.name, year: node.year, x, y, geviId: node.geviId, color });
-    return { nodes, links, width: MIN_NODE_WIDTH, maxY: y };
+    const hw = MIN_NODE_WIDTH / 2;
+    return {
+      nodes, links, width: MIN_NODE_WIDTH, maxY: y,
+      leftContour: new Map([[y, x - hw]]),
+      rightContour: new Map([[y, x + hw]]),
+    };
   }
 
   const childKeys = Object.keys(node.children);
@@ -64,14 +82,13 @@ function layoutTree(node: TreeNode, x: number, y: number, depth = 0): LayoutResu
   // so sibling leaves always align horizontally.
   const effectiveStagger = Math.max(0, LEVEL_STAGGER_BASE - depth * LEVEL_STAGGER_DECAY);
 
-  // First pass: layout each child subtree to get its width
+  // First pass: layout each child subtree at x=0 to get contours and structure
   const childLayouts: { key: string; result: LayoutResult }[] = [];
-  let branchChildIndex = 0; // count only branch children for stagger index
+  let branchChildIndex = 0;
   for (let i = 0; i < childKeys.length; i++) {
     const key = childKeys[i];
     const childNode = node.children[key];
     const childIsBranch = !!(childNode.children && Object.keys(childNode.children).length > 0);
-    // Branch children get staggered; leaf children stay at y + LEVEL_HEIGHT
     const stagger = childIsBranch ? branchChildIndex * effectiveStagger : 0;
     if (childIsBranch) branchChildIndex++;
     const childY = y + LEVEL_HEIGHT + stagger;
@@ -79,26 +96,56 @@ function layoutTree(node: TreeNode, x: number, y: number, depth = 0): LayoutResu
     childLayouts.push({ key, result });
   }
 
-  // Total width = sum of child widths + gaps between them
-  const totalChildWidth = childLayouts.reduce((sum, cl) => sum + cl.result.width, 0)
-    + (childLayouts.length - 1) * SIBLING_GAP;
-  const treeWidth = Math.max(MIN_NODE_WIDTH, totalChildWidth);
+  // Second pass: pack siblings using proximity-profile minimum
+  // combinedRight accumulates the rightmost x of all placed siblings so far
+  const combinedRight = new Map<number, number>();
+  const offsets: number[] = [];
 
-  // Position this node centered above its children
+  for (let i = 0; i < childLayouts.length; i++) {
+    const { result } = childLayouts[i];
+    // Fallback: place SIBLING_GAP to the right of the previous sibling's origin
+    let offset = i === 0 ? 0 : offsets[i - 1] + SIBLING_GAP;
+
+    // Tighten using contour proximity: only pairs within LEVEL_HEIGHT of each other constrain spacing
+    for (const [yb, leftX] of result.leftContour) {
+      for (const [ya, rightX] of combinedRight) {
+        if (Math.abs(ya - yb) < LEVEL_HEIGHT) {
+          offset = Math.max(offset, rightX - leftX + SIBLING_GAP);
+        }
+      }
+    }
+
+    offsets.push(offset);
+
+    // Merge this sibling's right contour (shifted by offset) into combinedRight
+    for (const [yr, rightX] of result.rightContour) {
+      combinedRight.set(yr, Math.max(combinedRight.get(yr) ?? -Infinity, rightX + offset));
+    }
+  }
+
+  // Third pass: center the group under the parent
+  let leftmostX = Infinity, rightmostX = -Infinity;
+  for (let i = 0; i < childLayouts.length; i++) {
+    for (const lx of childLayouts[i].result.leftContour.values())
+      leftmostX = Math.min(leftmostX, lx + offsets[i]);
+    for (const rx of childLayouts[i].result.rightContour.values())
+      rightmostX = Math.max(rightmostX, rx + offsets[i]);
+  }
+  const centerShift = x - (leftmostX + rightmostX) / 2;
+  for (let i = 0; i < offsets.length; i++) offsets[i] += centerShift;
+
+  // Position this node
   nodes.push({ id: node.name, name: node.name, year: node.year, x, y, geviId: node.geviId, color });
 
-  // Position children left-to-right, centered under parent
-  let childStartX = x - totalChildWidth / 2;
   let maxY = y;
 
-  for (const { result } of childLayouts) {
-    const childCenterX = childStartX + result.width / 2;
-    const offsetX = childCenterX; // absolute center of this child subtree
+  // Fourth pass: apply offsets to all child nodes and links
+  for (let i = 0; i < childLayouts.length; i++) {
+    const { result } = childLayouts[i];
+    const offsetX = offsets[i];
 
-    // Shift all child nodes by the offset
     for (const cn of result.nodes) {
-      const shiftedX = cn.x + offsetX;
-      nodes.push({ ...cn, x: shiftedX });
+      nodes.push({ ...cn, x: cn.x + offsetX });
     }
     for (const cl of result.links) {
       links.push({
@@ -109,8 +156,8 @@ function layoutTree(node: TreeNode, x: number, y: number, depth = 0): LayoutResu
       });
     }
 
-    // Link from parent to the root of this child subtree (first node at child y)
-    const childRootNode = result.nodes[0]; // first node is the root of subtree
+    // Link from parent to this child subtree root
+    const childRootNode = result.nodes[0];
     links.push({
       fromX: x,
       fromY: y + NODE_RADIUS_BRANCH + 2,
@@ -119,15 +166,94 @@ function layoutTree(node: TreeNode, x: number, y: number, depth = 0): LayoutResu
     });
 
     maxY = Math.max(maxY, result.maxY);
-    childStartX += result.width + SIBLING_GAP;
   }
 
-  return { nodes, links, width: treeWidth, maxY };
+  // Build parent contour = this node + union of all shifted children contours
+  const hw = isRoot ? 10 : (node.geviId ? MIN_NODE_WIDTH / 2 : NODE_RADIUS_BRANCH + 2);
+  const leftContour = new Map<number, number>([[y, x - hw]]);
+  const rightContour = new Map<number, number>([[y, x + hw]]);
+  for (let i = 0; i < childLayouts.length; i++) {
+    const off = offsets[i];
+    for (const [cy, cx] of childLayouts[i].result.leftContour)
+      leftContour.set(cy, Math.min(leftContour.get(cy) ?? Infinity, cx + off));
+    for (const [cy, cx] of childLayouts[i].result.rightContour)
+      rightContour.set(cy, Math.max(rightContour.get(cy) ?? -Infinity, cx + off));
+  }
+
+  const treeWidth = Math.max(MIN_NODE_WIDTH, rightmostX - leftmostX);
+  return { nodes, links, width: treeWidth, maxY, leftContour, rightContour };
 }
 
-// Build the complete tree from FAMILY_TREE (which has a single root "GEVI")
-function buildFullTree() {
-  const root = FAMILY_TREE['GEVI'];
+// Build a TreeNode tree from each gevi's familyTreePath (or parentId chain).
+// Branch node display names are the path key strings.
+// Leaf/dual node display names come from the gevi JSON (name, year, geviId).
+function buildTreeFromPaths(gevis: GEVI[]): TreeNode {
+  const geviById = new Map(gevis.map(g => [g.id, g]));
+
+  // Resolve parentId chains into full paths
+  const resolvedPaths = new Map<string, string[]>();
+  for (const g of gevis) {
+    if (g.familyTreePath) resolvedPaths.set(g.id, g.familyTreePath as string[]);
+  }
+  let changed = true;
+  while (changed) {
+    changed = false;
+    for (const g of gevis) {
+      if (resolvedPaths.has(g.id) || !g.parentId) continue;
+      const parentPath = resolvedPaths.get(g.parentId);
+      if (parentPath) { resolvedPaths.set(g.id, [...parentPath, g.id]); changed = true; }
+    }
+  }
+
+  // Sort so top-level groups appear in a consistent order, then by year within each group.
+  const GROUP_ORDER: Record<string, number> = { VSD: 0, Opsin: 1, Others: 2 };
+  const sorted = [...gevis].sort((a, b) => {
+    const aG = GROUP_ORDER[resolvedPaths.get(a.id)?.[1] ?? ''] ?? 3;
+    const bG = GROUP_ORDER[resolvedPaths.get(b.id)?.[1] ?? ''] ?? 3;
+    if (aG !== bG) return aG - bG;
+    return (a.year ?? 9999) - (b.year ?? 9999);
+  });
+
+  const root: TreeNode = { name: 'GEVI', children: {} };
+
+  for (const gevi of sorted) {
+    const path = resolvedPaths.get(gevi.id);
+    if (!path || path.length < 2) continue;
+
+    let node = root;
+    for (let i = 1; i < path.length; i++) {
+      const key = path[i];
+      const isLast = i === path.length - 1;
+      if (!node.children) node.children = {};
+      if (!node.children[key]) {
+        // If this key is a known geviId, use its name; otherwise use the key itself.
+        const match = geviById.get(key);
+        node.children[key] = { name: match ? match.name : key, year: match?.year, children: {} };
+      }
+      if (isLast) {
+        // Override with this gevi's authoritative data.
+        node.children[key].name = gevi.name;
+        node.children[key].year = gevi.year;
+        node.children[key].geviId = gevi.id;
+      }
+      node = node.children[key];
+    }
+  }
+
+  // Prune empty children objects.
+  function prune(n: TreeNode) {
+    if (!n.children) return;
+    if (Object.keys(n.children).length === 0) { delete n.children; return; }
+    for (const child of Object.values(n.children)) prune(child);
+  }
+  prune(root);
+
+  return root;
+}
+
+// Build the complete tree from gevi JSON paths
+function buildFullTree(gevis: GEVI[]) {
+  const root = buildTreeFromPaths(gevis);
   if (!root) return { nodes: [] as LayoutNode[], links: [] as LayoutLink[] };
 
   // Layout starting at center x=0, we'll shift everything to be positive afterwards
@@ -165,7 +291,7 @@ export function FamilyTreePanel({
   onCloseDetail,
 }: FamilyTreePanelProps) {
   const gevis = useMemo(() => getAllGEVIs(), []);
-  const { nodes, links } = useMemo(() => buildFullTree(), []);
+  const { nodes, links } = useMemo(() => buildFullTree(gevis), [gevis]);
 
   // Calculate SVG dimensions with enough padding for labels below deepest nodes
   const svgWidth = Math.max(800, Math.max(...nodes.map(n => n.x)) + 80);

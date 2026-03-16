@@ -17,15 +17,7 @@
   "subthreshold": 40,
   "overall": 34,
   "description": "Improved QuasAr variant with brighter fluorescence and better expression in neurons while maintaining ultrafast response to voltage changes.",
-  "familyTreePath": [
-    "GEVI",
-    "Opsin",
-    "Opsin-Fluorescent",
-    "Arch",
-    "QuasAr",
-    "quasar1",
-    "quasar2"
-  ],
+  "parentId": "quasar1",
   "spectrum": {
     "type": "rhodopsin",
     "peakEx": 590,

@@ -81,13 +81,7 @@
       "figureUrl": "/imgs/voltron-cardiomyocyte-voltage-imaging-traces.jpg"
     }
   ],
-  "familyTreePath": [
-    "GEVI",
-    "Opsin",
-    "Chemigenetic",
-    "voltron",
-    "voltron2"
-  ],
+  "parentId": "voltron",
   "spectrum": {
     "type": "fp",
     "peakEx": 550,

@@ -16,7 +16,8 @@ export interface GEVI {
   subthreshold: number;
   overall: number;
   description: string;
-  familyTreePath?: string[];
+  familyTreePath?: string[] | null;
+  parentId?: string;
   spectrum?: {
     type: 'fp' | 'rhodopsin' | 'nir' | 'fret' | 'redfp';
     peakEx: number;

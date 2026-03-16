@@ -18,14 +18,7 @@
   "subthreshold": 65,
   "overall": 70,
   "description": "Optimized ASAP variant with improved plasma membrane targeting and increased dynamic range through mutations in the voltage-sensing domain.",
-  "familyTreePath": [
-    "GEVI",
-    "VSD",
-    "VSD-single",
-    "ASAP",
-    "asap1",
-    "asap2s"
-  ],
+  "parentId": "asap1",
   "spectrum": {
     "type": "fp",
     "peakEx": 490,
