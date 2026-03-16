@@ -10,9 +10,10 @@ import { FAMILY_TREE } from '../FamilyTree';
 import { getTreeNodeColor } from '../utils';
 
 // Layout constants
-const MIN_NODE_WIDTH = 56;   // minimum horizontal space per leaf node
+const MIN_NODE_WIDTH = 48;   // minimum horizontal space per leaf node
 const SIBLING_GAP = 6;       // gap between sibling subtrees
-const LEVEL_HEIGHT = 68;     // vertical distance between levels
+const LEVEL_HEIGHT = 62;     // vertical distance between levels
+const LEVEL_STAGGER = 8;     // additional y offset per sibling index (creates staircase effect)
 const TOP_PADDING = 30;      // top padding for root node
 const NODE_RADIUS_LEAF = 8;
 const NODE_RADIUS_BRANCH = 5;
@@ -57,9 +58,12 @@ function layoutTree(node: TreeNode, x: number, y: number): LayoutResult {
   const childKeys = Object.keys(node.children);
 
   // First pass: layout each child subtree to get its width
+  // Stagger each child's y by siblingIndex * LEVEL_STAGGER for a cascading effect
   const childLayouts: { key: string; result: LayoutResult }[] = [];
-  for (const key of childKeys) {
-    const result = layoutTree(node.children[key], 0, y + LEVEL_HEIGHT);
+  for (let i = 0; i < childKeys.length; i++) {
+    const key = childKeys[i];
+    const childY = y + LEVEL_HEIGHT + i * LEVEL_STAGGER;
+    const result = layoutTree(node.children[key], 0, childY);
     childLayouts.push({ key, result });
   }
 
@@ -99,7 +103,7 @@ function layoutTree(node: TreeNode, x: number, y: number): LayoutResult {
       fromX: x,
       fromY: y + NODE_RADIUS_BRANCH + 2,
       toX: childRootNode.x + offsetX,
-      toY: (y + LEVEL_HEIGHT) - NODE_RADIUS_BRANCH - 2,
+      toY: childRootNode.y - NODE_RADIUS_BRANCH - 2,
     });
 
     maxY = Math.max(maxY, result.maxY);
