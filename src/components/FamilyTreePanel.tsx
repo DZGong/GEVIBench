@@ -2,8 +2,9 @@
 // Shows the full GEVI family tree with interactive nodes
 // FPbase-style vertical SVG tree (root at top, descendants below)
 
-import { useMemo } from 'react';
-import { X } from 'lucide-react';
+import { useMemo, useState } from 'react';
+import { X, BookOpen, ExternalLink } from 'lucide-react';
+import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar } from 'recharts';
 import { getAllGEVIs } from '../geviData';
 import type { GEVI, TreeNode } from '../types';
 import { getTreeNodeColor } from '../utils';
@@ -28,6 +29,8 @@ const LEVEL_STAGGER_DECAY = 10;   // stagger shrinks by this amount per depth le
 const TOP_PADDING = 30;
 const NODE_RADIUS_LEAF = 8;
 const NODE_RADIUS_BRANCH = 5;
+const TOOLTIP_W = 170;
+const TOOLTIP_H = 270;
 
 interface LayoutNode {
   id: string;
@@ -53,6 +56,12 @@ interface LayoutResult {
   maxY: number;
   leftContour: Map<number, number>;   // y → leftmost x
   rightContour: Map<number, number>;  // y → rightmost x
+}
+
+interface HoverInfo {
+  gevi: GEVI;
+  x: number;
+  y: number;
 }
 
 // Recursively compute subtree layout using contour-based (profile-based) packing.
@@ -292,6 +301,7 @@ export function FamilyTreePanel({
 }: FamilyTreePanelProps) {
   const gevis = useMemo(() => getAllGEVIs(), []);
   const { nodes, links } = useMemo(() => buildFullTree(gevis), [gevis]);
+  const [hoverInfo, setHoverInfo] = useState<HoverInfo | null>(null);
 
   // Calculate SVG dimensions with enough padding for labels below deepest nodes
   const svgWidth = Math.max(800, Math.max(...nodes.map(n => n.x)) + 80);
