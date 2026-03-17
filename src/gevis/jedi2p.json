@@ -19,14 +19,7 @@
   "subthreshold": 68,
   "overall": 74,
   "description": "Two-photon optimized JEDI variant for deep tissue voltage imaging with improved photostability.",
-  "familyTreePath": [
-    "GEVI",
-    "VSD",
-    "VSD-single",
-    "ASAP",
-    "JEDI",
-    "jedi2p"
-  ],
+  "parentId":"asap2s",
   "spectrum": {
     "type": "fp",
     "peakEx": 490,

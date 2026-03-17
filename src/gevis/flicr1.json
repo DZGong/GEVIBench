@@ -18,12 +18,7 @@
   "subthreshold": 45,
   "overall": 42,
   "description": "Bright red fluorescent voltage indicator based on CiVSD-cpTrefoil architecture, providing reliable action potential detection in neurons.",
-  "familyTreePath": [
-    "GEVI",
-    "Others",
-    "Red FP",
-    "flicr1"
-  ],
+  "parentId":"electric",
   "spectrum": {
     "type": "redfp",
     "peakEx": 550,

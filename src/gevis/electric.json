@@ -13,13 +13,7 @@
   "subthreshold": 78,
   "overall": 74,
   "description": "Recent microbial rhodopsin sensor engineered for improved photostability and subthreshold sensitivity in brain imaging.",
-  "familyTreePath": [
-    "GEVI",
-    "Opsin",
-    "Opsin-Fluorescent",
-    "Arch",
-    "electric"
-  ],
+  "parentId":"vsfp2_3",
   "spectrum": {
     "type": "rhodopsin",
     "peakEx": 550,

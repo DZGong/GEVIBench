@@ -18,13 +18,7 @@
   "subthreshold": 78,
   "overall": 77,
   "description": "Ultrasensitive GEVI optimized for detecting subthreshold voltage changes with high fidelity.",
-  "familyTreePath": [
-    "GEVI",
-    "VSD",
-    "VSD-single",
-    "ASAP",
-    "restus"
-  ],
+  "parentId":"asap3",
   "spectrum": {
     "type": "fp",
     "peakEx": 490,

@@ -7,8 +7,8 @@
     "Luciferase",
     "Bioluminescent"
   ],
-  "paper": "Nature Methods 2022",
-  "paperUrl": "https://doi.org/10.1038/s41592-022-01472-x",
+  "paper": "Advanced Biology 2021",
+  "paperUrl": "https://doi.org/10.1002/adbi.202100842",
   "brightness": 30,
   "speed": 40,
   "snr": 35,
@@ -17,12 +17,7 @@
   "subthreshold": 40,
   "overall": 42,
   "description": "Latest bioluminescent GEVI with improved brightness and voltage sensitivity through luciferase-VSD fusion.",
-  "familyTreePath": [
-    "GEVI",
-    "Others",
-    "Bioluminescent",
-    "amber"
-  ],
+  "parentId":"vsfp2",
   "spectrum": {
     "type": "fp",
     "peakEx": 490,

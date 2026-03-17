@@ -9,7 +9,7 @@
     "Green"
   ],
   "paper": "Nature Methods 2008",
-  "paperUrl": "https://doi.org/10.1038/nmeth.1225",
+  "paperUrl": "https://doi.org/10.1038/nmeth.1235",
   "brightness": 35,
   "speed": 50,
   "snr": 30,
@@ -18,7 +18,12 @@
   "subthreshold": 30,
   "overall": 32,
   "description": "Early FRET-based voltage indicator using Ci-VSP voltage sensing domain with improved fluorescent protein pair.",
-  "parentId": "vsfp2",
+  "familyTreePath":[ 
+   "GEVI",
+   "VSD",
+   "VSD-FRET",
+   "mermaid"
+  ],
   "spectrum": {
     "type": "fret",
     "peakEx": 440,

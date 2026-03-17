@@ -15,9 +15,8 @@
   "description": "Rhodopsin-based sensor developed through machine learning-guided engineering, balancing speed and fluorescence properties.",
   "familyTreePath": [
     "GEVI",
-    "Opsin",
-    "Opsin-Fluorescent",
-    "Arch",
+    "VSD",
+    "VSD-single",
     "pado"
   ],
   "spectrum": {

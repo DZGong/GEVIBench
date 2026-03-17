@@ -18,14 +18,8 @@
   "subthreshold": 80,
   "overall": 64,
   "description": "SomArchon enables population imaging in awake behaving mice, combining millisecond kinetics with compatibility for optogenetic manipulation.",
-  "familyTreePath": [
-    "GEVI",
-    "Opsin",
-    "Opsin-Fluorescent",
-    "Arch",
-    "Archon",
-    "somarchon"
-  ],
+  "parentId":"archon1",
+
   "spectrum": {
     "type": "rhodopsin",
     "peakEx": 560,

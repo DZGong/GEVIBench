@@ -18,13 +18,7 @@
   "subthreshold": 88,
   "overall": 80,
   "description": "Ace2N-mNeon2 is an improved version of Ace2N-mNeon with enhanced brightness and faster kinetics, optimized for high-speed voltage imaging in neurons.",
-  "familyTreePath": [
-    "GEVI",
-    "Opsin",
-    "Opsin-FRET",
-    "ace2n",
-    "ace2n-mneon2"
-  ],
+  "parentId":"ace2n-mneon",
   "spectrum": {
     "type": "rhodopsin",
     "peakEx": 510,

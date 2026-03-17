@@ -18,13 +18,7 @@
   "subthreshold": 85,
   "overall": 76,
   "description": "Ace2N-mNeon is an eFRET GEVI based on the Ace opsin channelrhodopsin fused to mNeon, enabling fast voltage imaging with improved membrane trafficking and targeting in mammalian neurons.",
-  "familyTreePath": [
-    "GEVI",
-    "Opsin",
-    "Opsin-FRET",
-    "ace2n",
-    "ace2n-mneon"
-  ],
+  "parentId":"ace1",
   "spectrum": {
     "type": "rhodopsin",
     "peakEx": 510,

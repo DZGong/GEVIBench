@@ -19,8 +19,8 @@
   "description": "Bioluminescent voltage indicator combining luminescent protein with voltage-sensing domain, eliminating excitation light.",
   "familyTreePath": [
     "GEVI",
-    "Others",
-    "Bioluminescent",
+    "VSD",
+    "VSD-FRET",
     "lotusv"
   ],
   "spectrum": {

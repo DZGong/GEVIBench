@@ -50,12 +50,7 @@
       "type": "Original"
     }
   ],
-  "familyTreePath": [
-    "GEVI",
-    "Others",
-    "Bioluminescent",
-    "solaris"
-  ],
+  "parentId":"voltron",
   "spectrum": {
     "type": "fp",
     "peakEx": 550,

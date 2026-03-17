@@ -9,7 +9,7 @@
     "FRET"
   ],
   "paper": "Nature Methods 2018",
-  "paperUrl": "https://doi.org/10.1038/s41592-018-0174-5",
+  "paperUrl": "https://doi.org/10.1038/s41592-018-0188-7",
   "brightness": 50,
   "speed": 75,
   "snr": 55,
@@ -18,12 +18,7 @@
   "subthreshold": 50,
   "overall": 56,
   "description": "Voltage indicator using opsin-FRET architecture with red fluorescent protein for improved tissue penetration.",
-  "familyTreePath": [
-    "GEVI",
-    "Opsin",
-    "Opsin-FRET",
-    "varnam"
-  ],
+  "parentId":"ace2n-mneon",
   "spectrum": {
     "type": "rhodopsin",
     "peakEx": 550,

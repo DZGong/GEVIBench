@@ -17,13 +17,7 @@
   "subthreshold": 35,
   "overall": 38,
   "description": "Single FP voltage indicator derived from Ci-VSP with improved expression and targeting.",
-  "familyTreePath": [
-    "GEVI",
-    "VSD",
-    "VSD-single",
-    "ArcLight",
-    "Marina"
-  ],
+  "parentId":"arclight",
   "spectrum": {
     "type": "fp",
     "peakEx": 490,

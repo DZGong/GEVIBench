@@ -263,7 +263,7 @@ function buildTreeFromPaths(gevis: GEVI[]): TreeNode {
 // Build the complete tree from gevi JSON paths
 function buildFullTree(gevis: GEVI[]) {
   const root = buildTreeFromPaths(gevis);
-  if (!root) return { nodes: [] as LayoutNode[], links: [] as LayoutLink[] };
+  if (!root) return { nodes: [] as LayoutNode[], links: [] as LayoutLink[], crossLinks: [] as LayoutLink[] };
 
   // Layout starting at center x=0, we'll shift everything to be positive afterwards
   const result = layoutTree(root, 0, TOP_PADDING);
@@ -282,7 +282,18 @@ function buildFullTree(gevis: GEVI[]) {
     toY: l.toY,
   }));
 
-  return { nodes: shiftedNodes, links: shiftedLinks };
+  const crossLinks: LayoutLink[] = [];
+  for (const gevi of gevis) {
+    if (!gevi.crossBranchParentId) continue;
+    const parentNode = shiftedNodes.find(n => n.geviId === gevi.crossBranchParentId);
+    const childNode  = shiftedNodes.find(n => n.geviId === gevi.id);
+    if (!parentNode || !childNode) continue;
+    const fromY = parentNode.y + NODE_RADIUS_LEAF + 2;
+    const toY   = childNode.y  - NODE_RADIUS_LEAF - 2;
+    crossLinks.push({ fromX: parentNode.x, fromY, toX: childNode.x, toY });
+  }
+
+  return { nodes: shiftedNodes, links: shiftedLinks, crossLinks };
 }
 
 interface FamilyTreePanelProps {
@@ -300,7 +311,7 @@ export function FamilyTreePanel({
   onCloseDetail,
 }: FamilyTreePanelProps) {
   const gevis = useMemo(() => getAllGEVIs(), []);
-  const { nodes, links } = useMemo(() => buildFullTree(gevis), [gevis]);
+  const { nodes, links, crossLinks } = useMemo(() => buildFullTree(gevis), [gevis]);
   const [hoverInfo, setHoverInfo] = useState<HoverInfo | null>(null);
   const hideTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -393,6 +404,20 @@ export function FamilyTreePanel({
                 fill="none"
                 stroke={darkMode ? '#4b5563' : '#cbd5e1'}
                 strokeWidth="1.5"
+              />
+            );
+          })}
+          {/* Cross-branch links — dashed, same bezier style as solid links */}
+          {crossLinks.map((link, i) => {
+            const midY = (link.fromY + link.toY) / 2;
+            return (
+              <path
+                key={`xlink_${i}`}
+                d={`M${link.fromX},${link.fromY} C${link.fromX},${midY} ${link.toX},${midY} ${link.toX},${link.toY}`}
+                fill="none"
+                stroke={darkMode ? '#4b5563' : '#cbd5e1'}
+                strokeWidth="1.5"
+                strokeDasharray="6 4"
               />
             );
           })}

@@ -18,6 +18,7 @@ export interface GEVI {
   description: string;
   familyTreePath?: string[] | null;
   parentId?: string;
+  crossBranchParentId?: string;  // geviId of a parent in a different branch
   spectrum?: {
     type: 'fp' | 'rhodopsin' | 'nir' | 'fret' | 'redfp';
     peakEx: number;
