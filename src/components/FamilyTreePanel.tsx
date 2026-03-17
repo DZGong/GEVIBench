@@ -2,7 +2,7 @@
 // Shows the full GEVI family tree with interactive nodes
 // FPbase-style vertical SVG tree (root at top, descendants below)
 
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useRef } from 'react';
 import { X, BookOpen, ExternalLink } from 'lucide-react';
 import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar } from 'recharts';
 import { getAllGEVIs } from '../geviData';
@@ -302,6 +302,7 @@ export function FamilyTreePanel({
   const gevis = useMemo(() => getAllGEVIs(), []);
   const { nodes, links } = useMemo(() => buildFullTree(gevis), [gevis]);
   const [hoverInfo, setHoverInfo] = useState<HoverInfo | null>(null);
+  const hideTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Calculate SVG dimensions with enough padding for labels below deepest nodes
   const svgWidth = Math.max(800, Math.max(...nodes.map(n => n.x)) + 80);
@@ -410,10 +411,13 @@ export function FamilyTreePanel({
                 onClick={() => handleNodeClick(node.geviId)}
                 style={{ cursor: isLeaf ? 'pointer' : 'default' }}
                 onMouseEnter={isLeaf ? (e: React.MouseEvent<SVGGElement>) => {
+                  if (hideTimeout.current) clearTimeout(hideTimeout.current);
                   const gevi = gevis.find(g => g.id === node.geviId);
                   if (gevi) setHoverInfo({ gevi, x: e.clientX, y: e.clientY });
                 } : undefined}
-                onMouseLeave={isLeaf ? () => setHoverInfo(null) : undefined}
+                onMouseLeave={isLeaf ? () => {
+                  hideTimeout.current = setTimeout(() => setHoverInfo(null), 120);
+                } : undefined}
               >
                 {/* Hover target (invisible larger circle for easier clicking) */}
                 {isLeaf && (
@@ -462,17 +466,24 @@ export function FamilyTreePanel({
             left: tooltipLeft,
             top: tooltipTop,
             zIndex: 9999,
-            pointerEvents: 'none',
             width: TOOLTIP_W,
           }}
           className={`rounded-lg border shadow-lg p-2.5 ${
             darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
           }`}
+          onMouseEnter={() => {
+            if (hideTimeout.current) clearTimeout(hideTimeout.current);
+          }}
+          onMouseLeave={() => setHoverInfo(null)}
         >
-          {/* Name */}
-          <div className="font-bold text-sm mb-0.5" style={{ color: tooltipNameColor }}>
+          {/* Name — click to open detail panel */}
+          <button
+            className="font-bold text-sm mb-0.5 text-left w-full hover:underline cursor-pointer"
+            style={{ color: tooltipNameColor }}
+            onClick={() => { onSelectGEVI(hoverInfo.gevi); setHoverInfo(null); }}
+          >
             {hoverInfo.gevi.name}
-          </div>
+          </button>
 
           {/* Year · Category */}
           <div className={`text-[10px] mb-1.5 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
@@ -497,15 +508,20 @@ export function FamilyTreePanel({
             )}
           </div>
 
-          {/* Paper link (decorative) */}
+          {/* Paper link */}
           {hoverInfo.gevi.paperUrl && hoverInfo.gevi.paper && (
-            <div className={`text-xs flex items-center gap-1 mb-1.5 ${
-              darkMode ? 'text-blue-400' : 'text-blue-900'
-            }`}>
+            <a
+              href={hoverInfo.gevi.paperUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`text-xs flex items-center gap-1 mb-1.5 hover:underline ${
+                darkMode ? 'text-blue-400' : 'text-blue-900'
+              }`}
+            >
               <BookOpen className="w-3 h-3 flex-shrink-0" />
               <span className="truncate flex-1">{hoverInfo.gevi.paper}</span>
               <ExternalLink className="w-3 h-3 flex-shrink-0" />
-            </div>
+            </a>
           )}
 
           {/* Divider */}
