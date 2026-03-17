@@ -374,6 +374,11 @@ export function FamilyTreePanel({
                 transform={`translate(${node.x}, ${node.y})`}
                 onClick={() => handleNodeClick(node.geviId)}
                 style={{ cursor: isLeaf ? 'pointer' : 'default' }}
+                onMouseEnter={isLeaf ? (e: React.MouseEvent<SVGGElement>) => {
+                  const gevi = gevis.find(g => g.id === node.geviId);
+                  if (gevi) setHoverInfo({ gevi, x: e.clientX, y: e.clientY });
+                } : undefined}
+                onMouseLeave={isLeaf ? () => setHoverInfo(null) : undefined}
               >
                 {/* Hover target (invisible larger circle for easier clicking) */}
                 {isLeaf && (
