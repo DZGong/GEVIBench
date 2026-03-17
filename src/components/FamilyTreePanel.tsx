@@ -321,7 +321,13 @@ export function FamilyTreePanel({
 
   let tooltipLeft = 0;
   let tooltipTop = 0;
+  let tooltipNameColor = '';
+  let tooltipTags: string[] = [];
+  let tooltipExtraCount = 0;
+  let tooltipRadarData: { subject: string; value: number; fullMark: number }[] = [];
   if (hoverInfo) {
+    const g = hoverInfo.gevi;
+
     tooltipLeft = hoverInfo.x + 16;
     if (tooltipLeft + TOOLTIP_W > window.innerWidth) {
       tooltipLeft = hoverInfo.x - 16 - TOOLTIP_W;
@@ -333,6 +339,19 @@ export function FamilyTreePanel({
       tooltipTop = window.innerHeight - TOOLTIP_H - 8;
     }
     tooltipTop = Math.max(8, tooltipTop);
+
+    tooltipNameColor = getTreeNodeColor(g.name, g.category);
+    const tags = g.tags ?? [];
+    tooltipTags = tags.slice(0, 4);
+    tooltipExtraCount = tags.length - tooltipTags.length;
+    tooltipRadarData = [
+      { subject: 'Bright', value: g.brightness    ?? 0, fullMark: 100 },
+      { subject: 'Speed',  value: g.speed          ?? 0, fullMark: 100 },
+      { subject: 'SNR',    value: g.snr            ?? 0, fullMark: 100 },
+      { subject: 'Range',  value: g.dynamicRange   ?? 0, fullMark: 100 },
+      { subject: 'Stable', value: g.photostability ?? 0, fullMark: 100 },
+      { subject: 'Papers', value: Math.min(100, (g.paperCount ?? 0) * 5), fullMark: 100 },
+    ];
   }
 
   return (
@@ -436,91 +455,76 @@ export function FamilyTreePanel({
         </svg>
       </div>
 
-      {hoverInfo && (() => {
-        const g = hoverInfo.gevi;
-        const tags = g.tags ?? [];
-        const visibleTags = tags.slice(0, 4);
-        const extraCount = tags.length - visibleTags.length;
-        const nameColor = getTreeNodeColor(g.name, '');
-        const radarData = [
-          { subject: 'Bright', value: g.brightness    ?? 0, fullMark: 100 },
-          { subject: 'Speed',  value: g.speed          ?? 0, fullMark: 100 },
-          { subject: 'SNR',    value: g.snr            ?? 0, fullMark: 100 },
-          { subject: 'Range',  value: g.dynamicRange   ?? 0, fullMark: 100 },
-          { subject: 'Stable', value: g.photostability ?? 0, fullMark: 100 },
-          { subject: 'Papers', value: Math.min(100, (g.paperCount ?? 0) * 5), fullMark: 100 },
-        ];
-        return (
-          <div
-            style={{
-              position: 'fixed',
-              left: tooltipLeft,
-              top: tooltipTop,
-              zIndex: 9999,
-              pointerEvents: 'none',
-              width: TOOLTIP_W,
-            }}
-            className={`rounded-lg border shadow-lg p-2.5 ${
-              darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
-            }`}
-          >
-            {/* Name */}
-            <div className="font-bold text-sm mb-0.5" style={{ color: nameColor }}>
-              {g.name}
-            </div>
-
-            {/* Year · Category */}
-            <div className={`text-[10px] mb-1.5 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-              {g.year} · {g.category}
-            </div>
-
-            {/* Tag chips */}
-            <div className="flex flex-wrap gap-1 mb-1.5">
-              {visibleTags.map(tag => (
-                <span key={tag} className={`text-[9px] px-1.5 py-0.5 rounded ${
-                  darkMode ? 'bg-blue-900/40 text-blue-300' : 'bg-blue-50 text-blue-700'
-                }`}>
-                  {tag}
-                </span>
-              ))}
-              {extraCount > 0 && (
-                <span className={`text-[9px] px-1.5 py-0.5 rounded ${
-                  darkMode ? 'bg-gray-700 text-gray-400' : 'bg-gray-100 text-gray-500'
-                }`}>
-                  +{extraCount}
-                </span>
-              )}
-            </div>
-
-            {/* Paper link (decorative) */}
-            {g.paperUrl && g.paper && (
-              <div className={`text-xs flex items-center gap-1 mb-1.5 ${
-                darkMode ? 'text-blue-400' : 'text-blue-900'
-              }`}>
-                <BookOpen className="w-3 h-3 flex-shrink-0" />
-                <span className="truncate flex-1">{g.paper}</span>
-                <ExternalLink className="w-3 h-3 flex-shrink-0" />
-              </div>
-            )}
-
-            {/* Divider */}
-            <div className={`border-t mb-1 ${darkMode ? 'border-gray-700' : 'border-gray-100'}`} />
-
-            {/* Radar chart */}
-            <RadarChart width={150} height={130} data={radarData}>
-              <PolarGrid />
-              <PolarAngleAxis dataKey="subject" tick={{ fontSize: 8 }} />
-              <PolarRadiusAxis domain={[0, 100]} tick={false} axisLine={false} />
-              <Radar
-                dataKey="value"
-                stroke={darkMode ? '#60a5fa' : '#1e40af'}
-                fill={darkMode ? '#60a5fa' : '#1e40af'}
-                fillOpacity={0.2}
-              />
-            </RadarChart>
+      {hoverInfo && (
+        <div
+          style={{
+            position: 'fixed',
+            left: tooltipLeft,
+            top: tooltipTop,
+            zIndex: 9999,
+            pointerEvents: 'none',
+            width: TOOLTIP_W,
+          }}
+          className={`rounded-lg border shadow-lg p-2.5 ${
+            darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
+          }`}
+        >
+          {/* Name */}
+          <div className="font-bold text-sm mb-0.5" style={{ color: tooltipNameColor }}>
+            {hoverInfo.gevi.name}
           </div>
-        );
-      })()}
+
+          {/* Year · Category */}
+          <div className={`text-[10px] mb-1.5 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+            {hoverInfo.gevi.year} · {hoverInfo.gevi.category}
+          </div>
+
+          {/* Tag chips */}
+          <div className="flex flex-wrap gap-1 mb-1.5">
+            {tooltipTags.map((tag, idx) => (
+              <span key={`${tag}-${idx}`} className={`text-[9px] px-1.5 py-0.5 rounded ${
+                darkMode ? 'bg-blue-900/40 text-blue-300' : 'bg-blue-50 text-blue-700'
+              }`}>
+                {tag}
+              </span>
+            ))}
+            {tooltipExtraCount > 0 && (
+              <span className={`text-[9px] px-1.5 py-0.5 rounded ${
+                darkMode ? 'bg-gray-700 text-gray-400' : 'bg-gray-100 text-gray-500'
+              }`}>
+                +{tooltipExtraCount}
+              </span>
+            )}
+          </div>
+
+          {/* Paper link (decorative) */}
+          {hoverInfo.gevi.paperUrl && hoverInfo.gevi.paper && (
+            <div className={`text-xs flex items-center gap-1 mb-1.5 ${
+              darkMode ? 'text-blue-400' : 'text-blue-900'
+            }`}>
+              <BookOpen className="w-3 h-3 flex-shrink-0" />
+              <span className="truncate flex-1">{hoverInfo.gevi.paper}</span>
+              <ExternalLink className="w-3 h-3 flex-shrink-0" />
+            </div>
+          )}
+
+          {/* Divider */}
+          <div className={`border-t mb-1 ${darkMode ? 'border-gray-700' : 'border-gray-100'}`} />
+
+          {/* Radar chart */}
+          <RadarChart width={150} height={130} data={tooltipRadarData}>
+            <PolarGrid stroke={darkMode ? '#4b5563' : '#e5e7eb'} />
+            <PolarAngleAxis dataKey="subject" tick={{ fontSize: 8 }} />
+            <PolarRadiusAxis domain={[0, 100]} tick={false} axisLine={false} />
+            <Radar
+              dataKey="value"
+              stroke={darkMode ? '#60a5fa' : '#1e40af'}
+              fill={darkMode ? '#60a5fa' : '#1e40af'}
+              fillOpacity={0.2}
+            />
+          </RadarChart>
+        </div>
+      )}
 
       <div className={`mt-4 pt-3 border-t text-xs text-center ${darkMode ? 'border-gray-700 text-gray-500' : 'border-gray-200 text-gray-400'}`}>
         Click on nodes to view sensor details
