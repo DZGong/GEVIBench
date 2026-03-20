@@ -14,28 +14,29 @@ interface HeaderProps {
 }
 
 // Custom logo: hexagon with action potential waveform
-const Logo = ({ darkMode }: { darkMode: boolean }) => (
-  <svg width="32" height="32" viewBox="0 0 32 32" className="flex-shrink-0">
-    {/* Hexagon */}
-    <path
-      d="M16 2 L28 9 L28 23 L16 30 L4 23 L4 9 Z"
-      fill="none"
-      stroke={darkMode ? '#60a5fa' : '#1e40af'}
-      strokeWidth="2"
-      strokeLinejoin="round"
-      strokeLinecap="round"
-    />
-    {/* Action potential waveform */}
-    <path
-      d="M2 16 L8 16 L10 10 L14 22 L18 8 L22 20 L26 16 L30 16"
-      fill="none"
-      stroke={darkMode ? '#60a5fa' : '#1e40af'}
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-);
+const Logo = ({ darkMode }: { darkMode: boolean }) => {
+  const bg = darkMode ? '#1f2937' : '#ffffff';
+  const color = darkMode ? '#60a5fa' : '#1e40af';
+  const wavePath = "M1,18 L12,18 C12,18 12.5,1 13.5,1 C14.5,1 15,25 16.5,24.5 C17.5,24 19,18 20,18 L31,18";
+  return (
+    <svg width="32" height="32" viewBox="0 0 32 32" className="flex-shrink-0" overflow="visible">
+      {/* Hexagon — back layer, slightly faded */}
+      <path
+        d="M16 2 L28 9 L28 23 L16 30 L4 23 L4 9 Z"
+        fill="none"
+        stroke={color}
+        strokeWidth="2"
+        strokeLinejoin="round"
+        strokeLinecap="round"
+        strokeOpacity="0.45"
+      />
+      {/* Gap knock-out: background-colored halo punches through hexagon border */}
+      <path d={wavePath} fill="none" stroke={bg} strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+      {/* Waveform — front layer, full color */}
+      <path d={wavePath} fill="none" stroke={color} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+};
 
 export function Header({ activeTab, setActiveTab, mobileMenuOpen, setMobileMenuOpen, onLogoClick, onShowFamilyTree, onShowCompare }: HeaderProps) {
   const { darkMode, toggleDarkMode } = useTheme();
@@ -91,9 +92,8 @@ export function Header({ activeTab, setActiveTab, mobileMenuOpen, setMobileMenuO
             <button onClick={() => setActiveTab('database')} className={tabButtonClass('database')}>
               Database
             </button>
-            <button onClick={() => setActiveTab('methodology')} className={`${tabButtonClass('methodology')} flex items-center gap-1`}>
-              <Search className="w-4 h-4" />
-              <span className="hidden sm:inline">Methodology</span>
+            <button onClick={() => setActiveTab('methodology')} className={tabButtonClass('methodology')}>
+              Methodology
             </button>
 
             {/* Tools Dropdown */}
@@ -102,8 +102,7 @@ export function Header({ activeTab, setActiveTab, mobileMenuOpen, setMobileMenuO
                 onClick={handleToolsClick}
                 className={`${tabButtonClass('tools')} flex items-center gap-1`}
               >
-                <TreeDeciduous className="w-4 h-4" />
-                <span className="hidden sm:inline">Tools</span>
+                Tools
                 <ChevronDown className={`w-3 h-3 transition-transform ${toolsMenuOpen ? 'rotate-180' : ''}`} />
               </button>
 
@@ -134,9 +133,8 @@ export function Header({ activeTab, setActiveTab, mobileMenuOpen, setMobileMenuO
               )}
             </div>
 
-            <button onClick={() => setActiveTab('contact')} className={`${tabButtonClass('contact')} flex items-center gap-1`}>
-              <Beaker className="w-4 h-4" />
-              <span className="hidden sm:inline">Contact</span>
+            <button onClick={() => setActiveTab('contact')} className={tabButtonClass('contact')}>
+              Contact
             </button>
           </nav>
 

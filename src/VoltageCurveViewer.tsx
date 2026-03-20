@@ -89,15 +89,27 @@ export function VoltageCurveViewer({ voltageData, geviName, darkMode = false }: 
 
   // Generate voltage curve data from props
   const computedVoltage = useMemo(() => {
+    // Prefer custom data if available
+    if (voltageCustom?.voltage?.length && voltageCustom?.deltaF?.length) {
+      return voltageCustom.voltage.map((v, i) => ({ voltage: v, deltaF: voltageCustom.deltaF[i] }));
+    }
     if (!voltageConfig?.type || !voltageConfig?.slope || !voltageConfig?.polarity) return null;
     const { type, slope, polarity } = voltageConfig;
     return generateVoltageCurve(type, slope, polarity);
-  }, [voltageConfig]);
+  }, [voltageConfig, voltageCustom]);
 
   const config = voltageConfig;
 
+  // Dynamic voltage range based on actual data
+  const dataMinV = computedVoltage ? Math.min(...computedVoltage.map(d => d.voltage)) : -100;
+  const dataMaxV = computedVoltage ? Math.max(...computedVoltage.map(d => d.voltage)) : 40;
+
   // Find values at hover voltage
-  const hoverData = computedVoltage?.find(d => d.voltage === hoverVoltage) || null;
+  const hoverData = computedVoltage?.reduce((closest, d) => {
+    if (hoverVoltage === null) return null;
+    if (!closest) return d;
+    return Math.abs(d.voltage - hoverVoltage) < Math.abs(closest.voltage - hoverVoltage) ? d : closest;
+  }, null as VoltagePoint | null) || null;
 
   const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     if (!containerRef.current || !computedVoltage) return;
@@ -106,18 +118,13 @@ export function VoltageCurveViewer({ voltageData, geviName, darkMode = false }: 
     const x = e.clientX - rect.left;
     const width = rect.width;
 
-    // Map x position to voltage (-100 to +40 mV range)
-    const minV = -100;
-    const maxV = 40;
-    const voltage = Math.round(minV + (x / width) * (maxV - minV));
+    // Map x position to actual voltage range
+    const voltage = Math.round(dataMinV + (x / width) * (dataMaxV - dataMinV));
 
-    // Snap to nearest data point
-    const snappedVoltage = Math.round(voltage / 5) * 5;
-
-    if (snappedVoltage >= minV && snappedVoltage <= maxV) {
-      setHoverVoltage(snappedVoltage);
+    if (voltage >= dataMinV && voltage <= dataMaxV) {
+      setHoverVoltage(voltage);
     }
-  }, [computedVoltage]);
+  }, [computedVoltage, dataMinV, dataMaxV]);
 
   const handleMouseLeave = useCallback(() => {
     setHoverVoltage(null);
@@ -128,10 +135,13 @@ export function VoltageCurveViewer({ voltageData, geviName, darkMode = false }: 
   const height = 280;
   const padding = { top: 25, right: 25, bottom: 40, left: 55 };
 
-  const minV = -100;
-  const maxV = 40;
-  const minDeltaF = -50;
-  const maxDeltaF = 30;
+  const minV = dataMinV;
+  const maxV = dataMaxV;
+  const rawMinDeltaF = computedVoltage ? Math.min(...computedVoltage.map(d => d.deltaF)) : -50;
+  const rawMaxDeltaF = computedVoltage ? Math.max(...computedVoltage.map(d => d.deltaF)) : 30;
+  const deltaFPad = Math.max(5, (rawMaxDeltaF - rawMinDeltaF) * 0.1);
+  const minDeltaF = Math.floor(rawMinDeltaF - deltaFPad);
+  const maxDeltaF = Math.ceil(rawMaxDeltaF + deltaFPad);
   const chartWidth = width - padding.left - padding.right;
   const chartHeight = height - padding.top - padding.bottom;
 
@@ -176,8 +186,8 @@ export function VoltageCurveViewer({ voltageData, geviName, darkMode = false }: 
         className={`relative h-64 cursor-crosshair ${darkMode ? 'bg-gray-900' : 'bg-white'} rounded`}
       >
         <svg className="absolute inset-0 w-full h-full" viewBox={`0 0 ${width} ${height}`} preserveAspectRatio="none">
-          {/* Grid lines */}
-          {[30, 20, 10, 0, -10, -20, -30, -40, -50].map(v => (
+          {/* Grid lines - dynamic Y ticks */}
+          {Array.from({ length: 6 }, (_, i) => Math.round(minDeltaF + (i / 5) * (maxDeltaF - minDeltaF))).map(v => (
             <line
               key={`grid-${v}`}
               x1={padding.left}
@@ -188,8 +198,8 @@ export function VoltageCurveViewer({ voltageData, geviName, darkMode = false }: 
               strokeWidth="1"
             />
           ))}
-          {/* X-axis labels */}
-          {[-80, -60, -40, -20, 0, 20, 40].map(v => (
+          {/* X-axis labels - dynamic based on voltage range */}
+          {Array.from({ length: 7 }, (_, i) => Math.round(minV + (i / 6) * (maxV - minV))).map(v => (
             <text
               key={`x-${v}`}
               x={xScale(v)}
@@ -201,8 +211,8 @@ export function VoltageCurveViewer({ voltageData, geviName, darkMode = false }: 
               {v}
             </text>
           ))}
-          {/* Y-axis labels */}
-          {[30, 0, -30, -50].map(v => (
+          {/* Y-axis labels - dynamic */}
+          {Array.from({ length: 6 }, (_, i) => Math.round(minDeltaF + (i / 5) * (maxDeltaF - minDeltaF))).map(v => (
             <text
               key={`y-${v}`}
               x={padding.left - 8}
@@ -214,16 +224,18 @@ export function VoltageCurveViewer({ voltageData, geviName, darkMode = false }: 
               {v}%
             </text>
           ))}
-          {/* Zero line */}
-          <line
-            x1={padding.left}
-            y1={yScale(0)}
-            x2={width - padding.right}
-            y2={yScale(0)}
-            stroke={darkMode ? '#6b7280' : '#9ca3af'}
-            strokeWidth="1"
-            strokeDasharray="4"
-          />
+          {/* Zero line - only if 0 is within the y-axis range */}
+          {minDeltaF <= 0 && maxDeltaF >= 0 && (
+            <line
+              x1={padding.left}
+              y1={yScale(0)}
+              x2={width - padding.right}
+              y2={yScale(0)}
+              stroke={darkMode ? '#6b7280' : '#9ca3af'}
+              strokeWidth="1"
+              strokeDasharray="4"
+            />
+          )}
           {/* Voltage curve */}
           <path
             d={createPath()}

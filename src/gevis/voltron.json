@@ -26,6 +26,7 @@
     "Chemigenetic",
     "voltron"
   ],
+ "crossBranchParentId":"ace2n-mneon",
   "spectrum": {
     "type": "fp",
     "peakEx": 550,

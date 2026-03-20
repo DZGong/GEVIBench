@@ -8,36 +8,39 @@ interface BonusBadgeProps {
 const badgeConfig = {
   redShift: {
     label: 'Red-shifted',
-    color: '#ef4444', // red
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-3/5 h-3/5">
-        <path d="M12 8C10 8 8 9 8 11C8 13 10 14 12 14" strokeLinecap="round" />
-        <path d="M12 14V18" strokeLinecap="round" />
-        <circle cx="12" cy="11" r="1.5" fill="currentColor" />
-      </svg>
+    color: '#ef4444',
+    // Arrow pointing right (longer wavelength = red shift), centered at (12,12)
+    iconPaths: (color: string) => (
+      <>
+        <path d="M7 12H17" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
+        <path d="M14 9L17 12L14 15" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      </>
     ),
     tooltip: 'Red-shifted for deep tissue imaging (+3 pts)'
   },
   twoPhoton: {
     label: '2-Photon',
-    color: '#8b5cf6', // violet
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-3/5 h-3/5">
-        <circle cx="9" cy="10" r="1.5" fill="currentColor" />
-        <circle cx="15" cy="10" r="1.5" fill="currentColor" />
-        <circle cx="12" cy="15" r="1.5" fill="currentColor" />
-      </svg>
+    color: '#8b5cf6',
+    // Two photon dots converging to a point, centered at (12,12)
+    iconPaths: (color: string) => (
+      <>
+        <circle cx="9" cy="9" r="1.5" fill={color} />
+        <circle cx="15" cy="9" r="1.5" fill={color} />
+        <path d="M9 9L12 14L15 9" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+        <circle cx="12" cy="15" r="1.5" fill={color} />
+      </>
     ),
     tooltip: 'Two-photon verified (+3 pts)'
   },
   positiveGoing: {
     label: 'Positive',
-    color: '#22c55e', // green
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-3/5 h-3/5">
-        <path d="M8 12H16" strokeLinecap="round" />
-        <path d="M12 8V16" strokeLinecap="round" />
-      </svg>
+    color: '#22c55e',
+    // Plus sign centered at (12,12)
+    iconPaths: (color: string) => (
+      <>
+        <path d="M8 12H16" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
+        <path d="M12 8V16" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
+      </>
     ),
     tooltip: 'Positive-going signal (+3 pts)'
   }
@@ -61,13 +64,11 @@ export const BonusBadge: React.FC<BonusBadgeProps> = ({ type, size = 'md' }) => 
   return (
     <div className="group relative flex flex-col items-center gap-1">
       <div
-        className={`${sizeClasses[size]} relative flex items-center justify-center transition-transform hover:scale-110`}
-        style={{
-          filter: `drop-shadow(0 1px 2px rgba(0,0,0,0.2))`
-        }}
+        className={`${sizeClasses[size]} transition-transform hover:scale-110`}
+        style={{ filter: `drop-shadow(0 1px 2px rgba(0,0,0,0.2))` }}
       >
-        {/* Single hexagon background */}
-        <svg viewBox="0 0 24 24" className="absolute inset-0 w-full h-full">
+        {/* Single SVG: hexagon + icon share the same viewBox so icon is always centered */}
+        <svg viewBox="0 0 24 24" className="w-full h-full">
           <path
             d="M12 2L20 7V17L12 22L4 17V7L12 2Z"
             fill={`${config.color}15`}
@@ -75,11 +76,8 @@ export const BonusBadge: React.FC<BonusBadgeProps> = ({ type, size = 'md' }) => 
             strokeWidth="1.5"
             strokeLinejoin="round"
           />
+          {config.iconPaths(config.color)}
         </svg>
-        {/* Icon */}
-        <div className="relative z-10" style={{ color: config.color }}>
-          {config.icon}
-        </div>
       </div>
       <span className={`${labelSizeClasses[size]} font-medium text-gray-600 dark:text-gray-400`}>
         {config.label}
@@ -113,8 +111,10 @@ interface BonusBadgesProps {
 export const BonusBadges: React.FC<BonusBadgesProps> = ({ gevi, size = 'md' }) => {
   const badges: ('redShift' | 'twoPhoton' | 'positiveGoing')[] = [];
 
+  const tags = Array.isArray(gevi.tags) ? gevi.tags : [];
+
   // Check for red-shifted (Far-red tag or similar)
-  if (gevi.tags?.some(t =>
+  if (tags.some(t =>
     t.toLowerCase().includes('far-red') ||
     t.toLowerCase().includes('red') ||
     t.toLowerCase().includes('nir')
@@ -123,7 +123,7 @@ export const BonusBadges: React.FC<BonusBadgesProps> = ({ gevi, size = 'md' }) =
   }
 
   // Check for two-photon (Two-photon tag or in research papers)
-  if (gevi.tags?.some(t => t.toLowerCase().includes('two-photon'))) {
+  if (tags.some(t => t.toLowerCase().includes('two-photon'))) {
     badges.push('twoPhoton');
   } else if (gevi.researchPapers?.some(p =>
     p.title?.toLowerCase().includes('two-photon') ||
@@ -133,7 +133,7 @@ export const BonusBadges: React.FC<BonusBadgesProps> = ({ gevi, size = 'md' }) =
   }
 
   // Check for positive-going
-  if (gevi.tags?.some(t => t.toLowerCase().includes('positive'))) {
+  if (tags.some(t => t.toLowerCase().includes('positive'))) {
     badges.push('positiveGoing');
   } else if (gevi.dynamicRangeData?.sign === 'positive') {
     badges.push('positiveGoing');

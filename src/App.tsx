@@ -87,6 +87,8 @@ function GEVIBenchApp() {
   const handleLogoClick = useCallback(() => {
     setSelectedGEVI(null);
     setMobileView('list');
+    setShowFamilyTree(false);
+    setActiveTab('database');
   }, []);
 
   const handleSortChange = useCallback((field: SortField) => {
@@ -98,9 +100,9 @@ function GEVIBenchApp() {
 
   // Render Database Tab
   const renderDatabaseTab = () => (
-    <main className="max-w-7xl mx-auto px-4 py-6">
+    <main className="w-full max-w-7xl mx-auto px-4 py-3">
       {/* Title Panel with Video Background */}
-      <div className="relative rounded-xl overflow-hidden mb-6 -mt-2">
+      <div className="relative rounded-xl overflow-hidden mb-3 -mt-1">
         {/* Video Background */}
         <video
           autoPlay
@@ -141,7 +143,7 @@ function GEVIBenchApp() {
       )}
 
       {/* Mobile View Toggle */}
-      <div className={`sm:hidden flex mb-4 gap-2 ${showFamilyTree ? 'hidden' : ''}`}>
+      <div className={`sm:hidden flex mb-2 gap-2 ${showFamilyTree ? 'hidden' : ''}`}>
         <div className="flex-1">
           <button
             onClick={() => setMobileView('list')}
@@ -215,9 +217,9 @@ function GEVIBenchApp() {
       ) : (
         <>
           {/* Main Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
             {/* Sidebar - GEVI List */}
-            <div className={`hidden sm:block ${selectedGEVI ? 'col-span-1' : 'col-span-3'}`}>
+            <div className={`hidden sm:block ${selectedGEVI && filteredGEVIs.length > 0 ? 'col-span-1' : 'col-span-3'}`}>
               <GEVIList
                 gevis={filteredGEVIs}
                 selectedGEVI={selectedGEVI}
@@ -225,7 +227,7 @@ function GEVIBenchApp() {
                 onAddToCompare={addToCompare}
                 compareGEVIs={compareGEVIs}
                 darkMode={darkMode}
-                compact={!!selectedGEVI}
+                compact={!!selectedGEVI && filteredGEVIs.length > 0}
                 sortConfig={sortConfig}
                 onSortChange={handleSortChange}
               />
@@ -266,7 +268,8 @@ function GEVIBenchApp() {
               </div>
             )}
 
-            {/* Detail Panel */}
+            {/* Detail Panel - only rendered when there are results (prevents narrow wrapping with 0 results) */}
+            {filteredGEVIs.length > 0 && (
             <div className={`col-span-1 ${mobileView === 'list' ? 'sm:col-span-2' : 'col-span-1 md:col-span-2'}`}>
               {selectedGEVI && mobileView === 'detail' && (
                 <>
@@ -292,6 +295,7 @@ function GEVIBenchApp() {
                 </>
               )}
             </div>
+            )}
           </div>
         </>
       )}
@@ -460,7 +464,10 @@ function GEVIBenchApp() {
     <div className={`min-h-screen flex flex-col ${darkMode ? 'bg-gray-900' : 'bg-white'}`}>
       <Header
         activeTab={activeTab}
-        setActiveTab={setActiveTab}
+        setActiveTab={(tab) => {
+          setActiveTab(tab);
+          if (tab === 'database') setShowFamilyTree(false);
+        }}
         mobileMenuOpen={mobileMenuOpen}
         setMobileMenuOpen={setMobileMenuOpen}
         onLogoClick={handleLogoClick}
@@ -498,7 +505,7 @@ function GEVIBenchApp() {
       )}
 
       {/* Footer */}
-      <footer className={`mt-auto py-6 border-t ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-gray-50 border-gray-200'}`}>
+      <footer className={`mt-auto py-4 border-t ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-gray-50 border-gray-200'}`}>
         <div className="max-w-7xl mx-auto px-4 text-center">
           <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
             © 2026 GEVIBench. Data sourced from published studies.

@@ -2,6 +2,27 @@
 // Driven purely by gevi.familyTreePath — no FamilyTree.tsx needed.
 
 import { useMemo } from 'react';
+
+// Pointy-top hexagon path with rounded corners, matching the site logo orientation
+function hexPath(r: number, cr = r * 0.32): string {
+  const verts = Array.from({ length: 6 }, (_, i) => {
+    const a = (Math.PI / 3) * i - Math.PI / 2;
+    return { x: r * Math.cos(a), y: r * Math.sin(a) };
+  });
+  const parts: string[] = [];
+  for (let i = 0; i < 6; i++) {
+    const prev = verts[(i + 5) % 6];
+    const curr = verts[i];
+    const next = verts[(i + 1) % 6];
+    const lenIn  = Math.hypot(curr.x - prev.x, curr.y - prev.y);
+    const lenOut = Math.hypot(next.x - curr.x, next.y - curr.y);
+    const p1 = { x: curr.x - (curr.x - prev.x) / lenIn  * cr, y: curr.y - (curr.y - prev.y) / lenIn  * cr };
+    const p2 = { x: curr.x + (next.x - curr.x) / lenOut * cr, y: curr.y + (next.y - curr.y) / lenOut * cr };
+    parts.push(i === 0 ? `M${p1.x.toFixed(2)},${p1.y.toFixed(2)}` : `L${p1.x.toFixed(2)},${p1.y.toFixed(2)}`);
+    parts.push(`Q${curr.x.toFixed(2)},${curr.y.toFixed(2)} ${p2.x.toFixed(2)},${p2.y.toFixed(2)}`);
+  }
+  return parts.join(' ') + ' Z';
+}
 import { getAllGEVIs } from '../geviData';
 import { getTreeNodeColor } from '../utils';
 import type { GEVI } from '../types';
@@ -50,11 +71,12 @@ export function GEVILineage({ gevi, darkMode = false }: GEVILineageProps) {
   const pathNodes = path.map((key, i) => {
     const isLast = i === path.length - 1;
     const match = geviById.get(key);
+    const geviData = isLast ? gevi : match;
     return {
       name: isLast ? gevi.name : (match?.name ?? key),
       year: isLast ? gevi.year : match?.year,
       isSelected: isLast,
-      category: key,
+      geviData,
     };
   });
 
@@ -64,7 +86,7 @@ export function GEVILineage({ gevi, darkMode = false }: GEVILineageProps) {
 
   const gradients = pathNodes.map((node, i) => ({
     id: `v_gradient_${i}`,
-    color: getTreeNodeColor(node.name, node.category),
+    color: node.geviData ? getTreeNodeColor(node.geviData) : '#9ca3af',
   }));
 
   return (
@@ -99,13 +121,13 @@ export function GEVILineage({ gevi, darkMode = false }: GEVILineageProps) {
           ))}
 
           {pathNodes.map((node, i) => {
-            const color = getTreeNodeColor(node.name, node.category);
+            const color = node.geviData ? getTreeNodeColor(node.geviData) : '#9ca3af';
             const radius = node.isSelected ? 12 : 8;
             const y = i * nodeSpacing + 25;
             return (
               <g key={`v_node_${i}`} transform={`translate(${svgWidth / 2}, ${y})`}>
-                <circle
-                  r={radius}
+                <path
+                  d={hexPath(radius)}
                   fill={`url(#v_gradient_${i})`}
                   stroke={node.isSelected ? '#fff' : 'none'}
                   strokeWidth={node.isSelected ? 2 : 0}

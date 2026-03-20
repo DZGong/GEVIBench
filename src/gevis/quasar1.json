@@ -17,13 +17,7 @@
   "subthreshold": 35,
   "overall": 30,
   "description": "First quantum dot-like microbial rhodopsin voltage indicator requiring no exogenous fluorophore, enabling fluorescence detection with minimal illumination.",
-  "familyTreePath": [
-    "GEVI",
-    "Opsin",
-    "Opsin-Fluorescent",
-    "Arch",
-    "quasar1"
-  ],
+  "parentId":"arch",
   "spectrum": {
     "type": "rhodopsin",
     "peakEx": 590,

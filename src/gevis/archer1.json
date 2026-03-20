@@ -17,13 +17,7 @@
   "subthreshold": 35,
   "overall": 34,
   "description": "Archaerhodopsin-based voltage indicator with improved brightness over early versions.",
-  "familyTreePath": [
-    "GEVI",
-    "Opsin",
-    "Opsin-Fluorescent",
-    "Arch",
-    "archer1"
-  ],
+  "parentId":"arch",
   "spectrum": {
     "type": "rhodopsin",
     "peakEx": 550,

@@ -21,6 +21,27 @@ import { getTreeNodeColor } from '../utils';
 // This means siblings near the root are pushed further apart vertically (creating
 // space for their subtrees to share horizontal room) while deep siblings stay aligned.
 // To make the tree taller/shorter, adjust LEVEL_HEIGHT or LEVEL_STAGGER_BASE.
+// Pointy-top hexagon path with rounded corners, matching the site logo orientation
+function hexPath(r: number, cr = r * 0.32): string {
+  const verts = Array.from({ length: 6 }, (_, i) => {
+    const a = (Math.PI / 3) * i - Math.PI / 2;
+    return { x: r * Math.cos(a), y: r * Math.sin(a) };
+  });
+  const parts: string[] = [];
+  for (let i = 0; i < 6; i++) {
+    const prev = verts[(i + 5) % 6];
+    const curr = verts[i];
+    const next = verts[(i + 1) % 6];
+    const lenIn  = Math.hypot(curr.x - prev.x, curr.y - prev.y);
+    const lenOut = Math.hypot(next.x - curr.x, next.y - curr.y);
+    const p1 = { x: curr.x - (curr.x - prev.x) / lenIn  * cr, y: curr.y - (curr.y - prev.y) / lenIn  * cr };
+    const p2 = { x: curr.x + (next.x - curr.x) / lenOut * cr, y: curr.y + (next.y - curr.y) / lenOut * cr };
+    parts.push(i === 0 ? `M${p1.x.toFixed(2)},${p1.y.toFixed(2)}` : `L${p1.x.toFixed(2)},${p1.y.toFixed(2)}`);
+    parts.push(`Q${curr.x.toFixed(2)},${curr.y.toFixed(2)} ${p2.x.toFixed(2)},${p2.y.toFixed(2)}`);
+  }
+  return parts.join(' ') + ' Z';
+}
+
 const MIN_NODE_WIDTH = 48;
 const SIBLING_GAP = 6;
 const LEVEL_HEIGHT = 62;
@@ -71,7 +92,7 @@ function layoutTree(node: TreeNode, x: number, y: number, depth = 0): LayoutResu
   const links: LayoutLink[] = [];
   const isLeaf = !!node.geviId;
   const isRoot = depth === 0;
-  const color = isLeaf ? getTreeNodeColor(node.name, '') : '#9ca3af';
+  const color = isLeaf ? getTreeNodeColor({ name: node.name }) : '#9ca3af';
 
   // If no children, this is a leaf
   if (!node.children || Object.keys(node.children).length === 0) {
@@ -262,6 +283,7 @@ function buildTreeFromPaths(gevis: GEVI[]): TreeNode {
 
 // Build the complete tree from gevi JSON paths
 function buildFullTree(gevis: GEVI[]) {
+  const geviById = new Map(gevis.map(g => [g.id, g]));
   const root = buildTreeFromPaths(gevis);
   if (!root) return { nodes: [] as LayoutNode[], links: [] as LayoutLink[], crossLinks: [] as LayoutLink[] };
 
@@ -272,9 +294,14 @@ function buildFullTree(gevis: GEVI[]) {
   const minX = Math.min(...result.nodes.map(n => n.x));
   const padding = 40; // left/right padding
 
-  // Shift all coordinates so minX becomes padding
+  // Shift all coordinates so minX becomes padding, and override leaf colors with
+  // actual GEVI data so colors match the detail panel title.
   const shiftX = -minX + padding;
-  const shiftedNodes = result.nodes.map(n => ({ ...n, x: n.x + shiftX }));
+  const shiftedNodes = result.nodes.map(n => {
+    const geviData = n.geviId ? geviById.get(n.geviId) : undefined;
+    const color = geviData ? getTreeNodeColor(geviData) : n.color;
+    return { ...n, x: n.x + shiftX, color };
+  });
   const shiftedLinks = result.links.map(l => ({
     fromX: l.fromX + shiftX,
     toX: l.toX + shiftX,
@@ -340,20 +367,25 @@ export function FamilyTreePanel({
   if (hoverInfo) {
     const g = hoverInfo.gevi;
 
-    tooltipLeft = hoverInfo.x + 16;
-    if (tooltipLeft + TOOLTIP_W > window.innerWidth) {
-      tooltipLeft = hoverInfo.x - 16 - TOOLTIP_W;
+    const GAP = 14;
+    // Horizontal: show right if cursor is in the left half, else show left
+    if (hoverInfo.x < window.innerWidth / 2) {
+      tooltipLeft = hoverInfo.x + GAP;
+    } else {
+      tooltipLeft = hoverInfo.x - GAP - TOOLTIP_W;
     }
-    tooltipLeft = Math.max(8, tooltipLeft);
+    tooltipLeft = Math.max(8, Math.min(tooltipLeft, window.innerWidth - TOOLTIP_W - 8));
 
-    tooltipTop = hoverInfo.y - 20;
-    if (tooltipTop + TOOLTIP_H > window.innerHeight) {
-      tooltipTop = window.innerHeight - TOOLTIP_H - 8;
+    // Vertical: show below unless cursor is in the bottom 1/4
+    if (hoverInfo.y < window.innerHeight * 3 / 5) {
+      tooltipTop = hoverInfo.y + GAP;
+    } else {
+      tooltipTop = hoverInfo.y - GAP - TOOLTIP_H;
     }
-    tooltipTop = Math.max(8, tooltipTop);
+    tooltipTop = Math.max(8, Math.min(tooltipTop, window.innerHeight - TOOLTIP_H - 8));
 
-    tooltipNameColor = getTreeNodeColor(g.name, g.category);
-    const tags = g.tags ?? [];
+    tooltipNameColor = getTreeNodeColor(g);
+    const tags = Array.isArray(g.tags) ? g.tags : [];
     tooltipTags = tags.slice(0, 4);
     tooltipExtraCount = tags.length - tooltipTags.length;
     tooltipRadarData = [
@@ -444,12 +476,12 @@ export function FamilyTreePanel({
                   hideTimeout.current = setTimeout(() => setHoverInfo(null), 120);
                 } : undefined}
               >
-                {/* Hover target (invisible larger circle for easier clicking) */}
+                {/* Hover target (invisible larger hexagon for easier clicking) */}
                 {isLeaf && (
-                  <circle r={16} fill="transparent" />
+                  <path d={hexPath(16)} fill="transparent" />
                 )}
-                <circle
-                  r={radius}
+                <path
+                  d={hexPath(radius)}
                   fill={isRoot ? (darkMode ? '#60a5fa' : '#3b82f6') : isLeaf ? `url(#tree_grad_${colorIndex})` : (darkMode ? '#4b5563' : '#d1d5db')}
                   stroke={isRoot ? '#fff' : isLeaf ? '#fff' : (darkMode ? '#6b7280' : '#9ca3af')}
                   strokeWidth={isRoot ? 2 : isLeaf ? 1.5 : 1}

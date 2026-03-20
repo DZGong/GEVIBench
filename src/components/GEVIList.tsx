@@ -53,6 +53,13 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
         </div>
       </div>
       <div className="divide-y divide-gray-100 max-h-[70vh] overflow-y-auto">
+        {gevis.length === 0 && (
+          <div className={`p-8 text-center ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>
+            <div className="text-2xl mb-2">🔍</div>
+            <div className="text-sm font-medium">No sensors match your search</div>
+            <div className="text-xs mt-1">Try adjusting the filters or search term</div>
+          </div>
+        )}
         {gevis.map((gevi, idx) => {
           const geviColor = getGEVIColor(gevi);
           return (

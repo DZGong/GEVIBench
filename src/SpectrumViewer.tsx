@@ -35,6 +35,29 @@ interface SpectrumViewerProps {
   darkMode?: boolean;
 }
 
+// Convert a wavelength (nm) to an approximate visible color
+function wavelengthToColor(nm: number): string {
+  let r = 0, g = 0, b = 0;
+  if      (nm < 380)             { r = 0.5; g = 0;   b = 0.8; }  // UV → violet
+  else if (nm < 440)             { r = (440 - nm) / 60; g = 0; b = 1; }
+  else if (nm < 490)             { r = 0; g = (nm - 440) / 50; b = 1; }
+  else if (nm < 510)             { r = 0; g = 1; b = (510 - nm) / 20; }
+  else if (nm < 580)             { r = (nm - 510) / 70; g = 1; b = 0; }
+  else if (nm < 645)             { r = 1; g = (645 - nm) / 65; b = 0; }
+  else if (nm <= 750)            { r = 1; g = 0; b = 0; }
+  else                           { r = 0.6; g = 0; b = 0; }       // NIR → dark red
+
+  // Dim at the edges of the visible range
+  let factor = 1;
+  if      (nm >= 380 && nm < 420) factor = 0.4 + 0.6 * (nm - 380) / 40;
+  else if (nm > 700 && nm <= 750) factor = 0.4 + 0.6 * (750 - nm) / 50;
+
+  const R = Math.round(255 * Math.min(1, r) * factor);
+  const G = Math.round(255 * Math.min(1, g) * factor);
+  const B = Math.round(255 * Math.min(1, b) * factor);
+  return `rgb(${R},${G},${B})`;
+}
+
 // Generate spectrum data for different protein types
 function generateSpectrum(type: 'fp' | 'rhodopsin' | 'nir' | 'fret' | 'redfp', peakEx: number, peakEm: number, custom?: CustomSpectrum): SpectrumPoint[] {
   // Check for custom spectrum data first
@@ -124,6 +147,8 @@ export function SpectrumViewer({ spectrumData, geviName, darkMode = false }: Spe
   }, [spectrumConfig, spectrumCustom]);
 
   const config = spectrumConfig;
+  const exColor = config?.peakEx ? wavelengthToColor(config.peakEx) : 'rgb(59,130,246)';
+  const emColor = config?.peakEm ? wavelengthToColor(config.peakEm) : 'rgb(34,197,94)';
 
   // Find values at hover wavelength
   const hoverData = computedSpectrum?.find(d => d.wavelength === hoverWavelength) || null;
@@ -179,12 +204,12 @@ export function SpectrumViewer({ spectrumData, geviName, darkMode = false }: Spe
         <svg className="absolute inset-0 w-full h-full" viewBox="0 0 500 160" preserveAspectRatio="none">
           <defs>
             <linearGradient id="exGradient" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor={darkMode ? '#3b82f6' : '#2563eb'} stopOpacity="0.6" />
-              <stop offset="100%" stopColor={darkMode ? '#3b82f6' : '#2563eb'} stopOpacity="0.1" />
+              <stop offset="0%" stopColor={exColor} stopOpacity="0.6" />
+              <stop offset="100%" stopColor={exColor} stopOpacity="0.05" />
             </linearGradient>
             <linearGradient id="emGradient" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor={darkMode ? '#22c55e' : '#16a34a'} stopOpacity="0.6" />
-              <stop offset="100%" stopColor={darkMode ? '#22c55e' : '#16a34a'} stopOpacity="0.1" />
+              <stop offset="0%" stopColor={emColor} stopOpacity="0.6" />
+              <stop offset="100%" stopColor={emColor} stopOpacity="0.05" />
             </linearGradient>
           </defs>
 
@@ -216,7 +241,7 @@ export function SpectrumViewer({ spectrumData, geviName, darkMode = false }: Spe
               return `${i === 0 ? 'M' : 'L'} ${x} ${y}`;
             }).join(' ')}
             fill="none"
-            stroke={darkMode ? '#3b82f6' : '#2563eb'}
+            stroke={exColor}
             strokeWidth="2"
           />
 
@@ -228,7 +253,7 @@ export function SpectrumViewer({ spectrumData, geviName, darkMode = false }: Spe
               return `${i === 0 ? 'M' : 'L'} ${x} ${y}`;
             }).join(' ')}
             fill="none"
-            stroke={darkMode ? '#22c55e' : '#16a34a'}
+            stroke={emColor}
             strokeWidth="2"
           />
 
@@ -262,11 +287,11 @@ export function SpectrumViewer({ spectrumData, geviName, darkMode = false }: Spe
       {/* Legend */}
       <div className="flex gap-4 mt-2 text-xs">
         <div className="flex items-center gap-1">
-          <div className={`w-3 h-3 rounded ${darkMode ? 'bg-blue-500' : 'bg-blue-600'}`} />
+          <div className="w-3 h-3 rounded" style={{ backgroundColor: exColor }} />
           <span className={darkMode ? 'text-gray-400' : 'text-gray-600'}>Excitation</span>
         </div>
         <div className="flex items-center gap-1">
-          <div className={`w-3 h-3 rounded ${darkMode ? 'bg-green-500' : 'bg-green-600'}`} />
+          <div className="w-3 h-3 rounded" style={{ backgroundColor: emColor }} />
           <span className={darkMode ? 'text-gray-400' : 'text-gray-600'}>Emission</span>
         </div>
       </div>

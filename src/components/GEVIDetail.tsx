@@ -229,8 +229,15 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, darkMode, onClo
                     <div className={`text-xs mt-1 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
                       {paper.authors} • <span className="font-medium">{paper.journal}</span>{paper.year && ` • ${paper.year}`}
                     </div>
-                    {paper.applications && (
+                    {paper.sample && (
                       <div className="flex flex-wrap gap-1 mt-2">
+                        {paper.sample.split(/[,;]/).map((s: string) => s.trim()).filter(Boolean).map((tag: string, i: number) => (
+                          <span key={i} className={`text-[10px] px-1.5 py-0.5 rounded ${darkMode ? 'bg-teal-900/50 text-teal-300' : 'bg-teal-50 text-teal-700'}`}>{tag}</span>
+                        ))}
+                      </div>
+                    )}
+                    {paper.applications && (
+                      <div className="flex flex-wrap gap-1 mt-1">
                         {paper.applications.map((app: string, i: number) => (
                           <span key={i} className={`text-[10px] px-1.5 py-0.5 rounded ${darkMode ? 'bg-gray-600 text-gray-300' : 'bg-gray-200 text-gray-600'}`}>{app}</span>
                         ))}
