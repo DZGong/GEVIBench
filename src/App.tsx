@@ -495,7 +495,7 @@ function GEVIBenchApp() {
   );
 
   return (
-    <div className={`min-h-screen flex flex-col ${darkMode ? 'bg-gray-900' : 'bg-white'}`}>
+    <div className={`min-h-screen flex flex-col ${darkMode ? 'bg-gray-900' : 'bg-warm-bg'}`}>
       <Header
         activeTab={activeTab}
         setActiveTab={(tab) => {
@@ -539,7 +539,7 @@ function GEVIBenchApp() {
       )}
 
       {/* Footer */}
-      <footer className={`mt-auto py-4 border-t ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-gray-50 border-gray-200'}`}>
+      <footer className={`mt-auto py-4 border-t ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-warm-accent border-warm-border'}`}>
         <div className="max-w-7xl mx-auto px-4 text-center">
           <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
             © 2026 GEVIBench. Data sourced from published studies.

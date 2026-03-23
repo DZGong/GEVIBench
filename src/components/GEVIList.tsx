@@ -24,15 +24,15 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
   const maxScore = Math.max(...gevis.map(g => g[sortField] || 0), 1);
   
   return (
-    <div className={`border rounded-lg overflow-hidden sticky top-24 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
+    <div className={`border rounded-lg overflow-hidden sticky top-24 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-warm-surface border-warm-border'}`}>
       {/* Header with sort dropdown */}
-      <div className={`p-3 border-b ${darkMode ? 'border-gray-700 bg-gray-750' : 'border-gray-200 bg-gray-50'} flex items-center justify-between gap-2`}>
+      <div className={`p-3 border-b ${darkMode ? 'border-gray-700 bg-gray-750' : 'border-warm-border bg-warm-accent'} flex items-center justify-between gap-2`}>
         <span className={`text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>{gevis.length} sensors</span>
         <div className="flex items-center gap-1">
           <select
             value={sortConfig.field}
             onChange={(e) => onSortChange(e.target.value as SortField)}
-            className={`text-xs px-2 py-1 border rounded ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300'}`}
+            className={`text-xs px-2 py-1 border rounded ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-warm-surface border-warm-border text-warm-text'}`}
           >
             <option value="overall">Overall</option>
             <option value="brightness">Brightness</option>
@@ -45,7 +45,7 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
           </select>
           <button
             onClick={() => onSortChange(sortConfig.field)}
-            className={`text-xs px-2 py-1 border rounded ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300'}`}
+            className={`text-xs px-2 py-1 border rounded ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-warm-surface border-warm-border text-warm-text'}`}
             title={sortConfig.order === 'desc' ? 'Ascending' : 'Descending'}
           >
             {sortConfig.order === 'desc' ? '↓' : '↑'}
@@ -67,8 +67,8 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
             key={gevi.id}
             className={`flex items-start p-3 transition ${
               selectedGEVI?.id === gevi.id
-                ? darkMode ? 'bg-gray-700' : 'bg-blue-50'
-                : darkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-50'
+                ? darkMode ? 'bg-gray-700' : 'bg-warm-accent'
+                : darkMode ? 'hover:bg-gray-700' : 'hover:bg-warm-accent'
             }`}
           >
             <button onClick={() => onSelect(gevi)} className="flex-1 text-left">

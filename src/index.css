@@ -29,6 +29,14 @@
 
 
 
+body {
+  font-family: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+}
+
+h1, h2, h3 {
+  font-family: 'DM Serif Display', ui-serif, Georgia, serif;
+}
+
 img {
   object-position: top;
 }
