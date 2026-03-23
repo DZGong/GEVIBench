@@ -1,0 +1,86 @@
+{
+  "id": "arch",
+  "name": "Arch",
+  "year": 2012,
+  "category": "Opsin GEVI",
+  "tags": [
+    "Archaerhodopsin",
+    "Red",
+    "Fast kinetics"
+  ],
+  "paper": "Nature Methods 2012",
+  "paperUrl": "https://doi.org/10.1038/nmeth.1782",
+  "brightness": 12,
+  "speed": 94,
+  "snr": 40,
+  "dynamicRange": 35,
+  "photostability": 30,
+  "subthreshold": 55,
+  "overall": 42,
+  "description": "Archaerhodopsin-3 (Arch) was the first opsin-based GEVI to demonstrate optical recording of single action potentials in mammalian neurons, achieving sub-millisecond response times but with a very low quantum yield.",
+
+  "familyTreePath": ["GEVI", "Opsin", "Opsin-Fluorescent", "arch"],
+
+  "spectrum": {
+    "type": "rhodopsin",
+    "peakEx": 559,
+    "peakEm": 722,
+    "name": "Arch",
+    "custom": {
+      "ex": [400, 430, 460, 490, 520, 540, 559, 575, 600, 630, 660],
+      "exNorm": [0.05, 0.10, 0.18, 0.30, 0.55, 0.78, 1.00, 0.85, 0.45, 0.15, 0.04],
+      "em": [680, 700, 722, 740, 760, 780, 800, 830, 860, 900],
+      "emNorm": [0.25, 0.65, 1.00, 0.85, 0.62, 0.40, 0.22, 0.10, 0.04, 0.01]
+    }
+  },
+
+  "voltage": {
+    "type": "opsin",
+    "slope": 33,
+    "polarity": "positive",
+    "name": "Arch",
+    "custom": {
+      "voltage": [-150, -120, -90, -70, -60, -30, 0, 30, 60, 90, 120, 150],
+      "deltaF":  [-21.1, -13.2, -5.3, 0.0, 2.6, 10.5, 18.4, 26.3, 34.2, 42.1, 50.0, 57.9]
+    }
+  },
+
+  "kinetics": {
+    "on": 0.5,
+    "off": 0.5,
+    "temperature": "room temperature"
+  },
+
+  "dynamicRangeData": {
+    "deltaF": 26,
+    "sign": "positive"
+  },
+
+  "researchPapers": [
+    {
+      "title": "Enhanced archaerhodopsin fluorescent protein voltage indicators",
+      "authors": "Gong Y, Li JZ, Schnitzer MJ",
+      "journal": "PLoS One",
+      "year": 2013,
+      "sample": "Cultured rat hippocampal neurons, in vitro",
+      "url": "https://doi.org/10.1371/journal.pone.0066959"
+    },
+    {
+      "title": "Archaerhodopsin voltage imaging: synaptic calcium and BK channels stabilize action potential repolarization at the Drosophila neuromuscular junction",
+      "authors": "Ford KJ, Davis GW",
+      "journal": "Journal of Neuroscience",
+      "year": 2014,
+      "sample": "Drosophila neuromuscular junction, in vivo",
+      "url": "https://doi.org/10.1523/JNEUROSCI.2203-14.2014"
+    },
+    {
+      "title": "Archaerhodopsin variants with enhanced voltage-sensitive fluorescence in mammalian and Caenorhabditis elegans neurons",
+      "authors": "Flytzanis NC, Bedbrook CN, Chiu H, Engqvist MKM, Xiao C, Chan KY, Sternberg PW, Arnold FH, Gradinaru V",
+      "journal": "Nature Communications",
+      "year": 2014,
+      "sample": "Cultured rat hippocampal neurons and C. elegans neurons, in vitro/in vivo",
+      "url": "https://doi.org/10.1038/ncomms5894"
+    }
+  ],
+  "paperCount": 3
+}

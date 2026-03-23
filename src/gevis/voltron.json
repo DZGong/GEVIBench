@@ -1,42 +1,100 @@
 {
   "id": "voltron",
   "name": "Voltron",
-  "year": 2018,
+  "year": 2019,
   "category": "Chemigenetic GEVI",
-  "tags": [
-    "Ace opsin",
-    "HaloTag",
-    "Janelia Fluor",
-    "Red"
-  ],
-  "paper": "Science 2018",
+  "tags": ["Ace opsin", "HaloTag", "Janelia Fluor", "Yellow-Green"],
+  "paper": "Science 2019",
   "paperUrl": "https://doi.org/10.1126/science.aav6416",
   "brightness": 90,
   "speed": 85,
   "snr": 82,
   "dynamicRange": 88,
-  "photostability": 75,
+  "photostability": 90,
   "subthreshold": 78,
-  "overall": 83,
-  "description": "Breakthrough chemigenetic voltage indicator using HaloTag-fluorophore conjugates, providing 10x brighter signal than previous GEVIs for in vivo imaging.",
-  "familyTreePath": [
-    "GEVI",
-    "Opsin",
-    "Opsin-FRET",
-    "Chemigenetic",
-    "voltron"
-  ],
- "crossBranchParentId":"ace2n-mneon",
+  "overall": 86,
+  "description": "Breakthrough chemigenetic design using HaloTag-bound Janelia Fluor dyes, delivering exceptional brightness and photostability that opened the door to long-term in vivo voltage imaging.",
+  "familyTreePath": ["GEVI", "Opsin", "Opsin-FRET", "Chemigenetic", "voltron"],
+  "crossBranchParentId": "ace2n-mneon",
   "spectrum": {
-    "type": "fp",
-    "peakEx": 550,
-    "peakEm": 580,
-    "name": "Voltron"
+    "type": "rhodopsin",
+    "peakEx": 525,
+    "peakEm": 549,
+    "name": "Voltron (JF525)"
   },
   "voltage": {
     "type": "chemi",
-    "slope": 25,
-    "polarity": "positive",
-    "name": "Voltron"
-  }
+    "slope": 23,
+    "polarity": "negative",
+    "name": "Voltron",
+    "custom": {
+      "voltage": [-70, -60, -50, -40, -30, -20, -10, 0, 10, 20, 30],
+      "deltaF":  [0, -2.3, -4.6, -6.9, -9.2, -11.5, -13.8, -16.1, -18.4, -20.7, -23.0]
+    }
+  },
+  "kinetics": {
+    "on": 0.85,
+    "off": 1.13,
+    "temperature": "room temperature"
+  },
+  "dynamicRangeData": {
+    "deltaF": -23,
+    "sign": "negative"
+  },
+  "photostabilityData": {
+    "brightnessRemaining": 88,
+    "illumination": "standard widefield",
+    "duration": "15 min"
+  },
+  "researchPapers": [
+    {
+      "title": "High-fidelity estimates of spikes and subthreshold waveforms from 1-photon voltage imaging in vivo",
+      "authors": "Xie ME, et al.",
+      "journal": "Cell Reports",
+      "year": 2021,
+      "sample": "Mouse, somatosensory cortex layer 1, in vivo",
+      "url": "https://doi.org/10.1016/j.celrep.2021.108954"
+    },
+    {
+      "title": "VolPy: Automated and scalable analysis pipelines for voltage imaging datasets",
+      "authors": "Cai C, et al.",
+      "journal": "PLOS Computational Biology",
+      "year": 2021,
+      "sample": "Mouse cortex L1 and hippocampus; larval zebrafish tegmentum, in vivo",
+      "url": "https://doi.org/10.1371/journal.pcbi.1008806"
+    },
+    {
+      "title": "High-speed multiplane confocal microscopy for voltage imaging in densely labeled neuronal populations",
+      "authors": "Weber TD, et al.",
+      "journal": "Nature Neuroscience",
+      "year": 2023,
+      "sample": "Mouse, neocortex (motor and somatosensory cortex), in vivo and ex vivo",
+      "url": "https://doi.org/10.1038/s41593-023-01408-2"
+    },
+    {
+      "title": "Large-scale deep tissue voltage imaging with targeted-illumination confocal microscopy",
+      "authors": "Xiao S, et al.",
+      "journal": "Nature Methods",
+      "year": 2024,
+      "sample": "Mouse, neocortex (motor, somatosensory, visual cortex) and hippocampal CA1, in vivo",
+      "url": "https://doi.org/10.1038/s41592-024-02275-w"
+    },
+    {
+      "title": "Synchronous ensembles of hippocampal CA1 pyramidal neurons during novel exploration",
+      "authors": "Chen SX, et al.",
+      "journal": "eLife",
+      "year": 2025,
+      "sample": "Mouse, hippocampal CA1 pyramidal layer, in vivo",
+      "url": "https://doi.org/10.7554/eLife.96718"
+    },
+    {
+      "title": "Voltage imaging reveals circuit computations in the raphe underlying serotonin-mediated motor vigor learning",
+      "authors": "Kawashima T, et al.",
+      "journal": "Neuron",
+      "year": 2025,
+      "sample": "Larval zebrafish, serotonergic raphe (DRN), in vivo",
+      "url": "https://doi.org/10.1016/j.neuron.2025.05.017"
+    }
+  ],
+  "paperCount": 6
 }

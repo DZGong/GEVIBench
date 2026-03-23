@@ -1,0 +1,64 @@
+{
+  "id": "restus-ni",
+  "name": "rEstus-NI",
+  "year": 2025,
+  "category": "VSD-cpGFP GEVI",
+  "tags": [
+    "cpGFP",
+    "Green",
+    "FLIM",
+    "Absolute Vm",
+    "Non-excitable cells",
+    "Subthreshold"
+  ],
+  "paper": "ACS Chemical Neuroscience 2025",
+  "paperUrl": "https://doi.org/10.1021/acschemneuro.5c00670",
+  "brightness": 55,
+  "speed": 60,
+  "snr": 68,
+  "dynamicRange": 82,
+  "photostability": 78,
+  "subthreshold": 85,
+  "overall": 69,
+  "description": "rEstus variant (G138N:T141I, equivalent to ASAP3-Y141I:S318A:Q396R) optimized for fluorescence lifetime imaging (FLIM) with left-shifted voltage sensitivity aligned to physiological resting potentials; enables absolute membrane potential measurement in non-excitable and cancer cells.",
+
+  "parentId": "restus",
+
+  "spectrum": {
+    "type": "fp",
+    "peakEx": 490,
+    "peakEm": 510,
+    "name": "rEstus-NI"
+  },
+
+  "voltage": {
+    "type": "fp",
+    "slope": 11,
+    "polarity": "negative",
+    "name": "rEstus-NI",
+    "custom": {
+      "voltage": [-120, -100, -80, -70, -50, -30, -10, 0, 20, 40, 60],
+      "deltaF":  [19.3, 13.7, 5.4, 0.0, -13.0, -28.0, -43.1, -50.0, -61.7, -70.2, -75.9]
+    }
+  },
+
+  "kinetics": {
+    "on": 1.28,
+    "off": 1.28,
+    "temperature": "room temperature"
+  },
+
+  "dynamicRangeData": {
+    "deltaF": -75.9,
+    "sign": "negative"
+  },
+
+  "photostabilityData": {
+    "brightnessRemaining": 94.5,
+    "illumination": "85% laser power, white-light (NKT Photonics), 480 nm excitation",
+    "duration": "132 s"
+  },
+
+  "researchPapers": [],
+  "paperCount": 0
+}

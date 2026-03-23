@@ -3,13 +3,7 @@
   "name": "ASAP6.1",
   "year": 2024,
   "category": "VSD-cpGFP GEVI",
-  "tags": [
-    "cpGFP",
-    "Green",
-    "Positive",
-    "Two-photon",
-    "One-photon"
-  ],
+  "tags": ["cpGFP", "Green", "Positive", "Two-photon", "One-photon"],
   "paper": "bioRxiv 2024",
   "paperUrl": "https://doi.org/10.1101/2024.06.21.599617",
   "brightness": 65,
@@ -18,44 +12,34 @@
   "dynamicRange": 95,
   "photostability": 75,
   "subthreshold": 65,
-  "overall": 68,
-  "description": "ASAP6.1 is a next-generation positively tuned ASAP variant demonstrating sufficient dynamic range and kinetics for reporting action potentials in vivo by one-photon and two-photon microscopy with high SNR and temporal resolution. Shows 50% ΔF/F response per action potential.",
+  "overall": 75,
+  "description": "ASAP6.1 is a positively tuned ASAP variant engineered by structure-guided saturation mutagenesis at VSD residues F413 and Q414, yielding the largest relative ΔF/F per action potential among ASAP6 variants. It exhibits mono-exponential kinetics (τ_on 3.99 ms, τ_off 4.89 ms at room temperature), with 50% ΔF/F for AP-like waveforms (2 ms FWHM) in HEK293 cells. ASAP6.1 successfully reports spikes from layer 2/3 pyramidal neurons in awake behaving mice by one-photon widefield microscopy (SNR = 14, 500 Hz). It is optimized for extended-duration spike detection in densely labeled neuronal populations.",
   "kinetics": {
     "on": 3.99,
     "off": 4.89,
-    "unit": "ms",
-    "notes": "Mono-exponential time constant; tested at 800Hz frame rates"
+    "temperature": "room temperature"
   },
   "dynamicRangeData": {
     "deltaF": 204,
-    "unit": "% per AP",
-    "sign": "positive",
-    "notes": "Response to AP-like waveforms with 2-ms FWHM in HEK293 cells"
+    "sign": "positive"
   },
-  "researchPapers": [
-    {
-      "title": "ASAP6.1 and ASAP6b: genetically encoded voltage indicators with improved performance for two-photon imaging in vivo",
-      "authors": "Sungmoo Lee, Guofeng Zhang, Laura C. Gomez, Yukun Alex Hao, Dongyun Jiang, Richard H. Roth, Guilherme Testa-Silva, Jun Ding, Thomas R. Clandinin, Daniel Feldman, Na Ji, Michael Z. Lin",
-      "journal": "bioRxiv",
-      "year": 2024,
-      "doi": "10.1101/2024.06.21.599617",
-      "url": "https://doi.org/10.1101/2024.06.21.599617",
-      "type": "Original"
-    }
-  ],
-  "paperCount": 1,
+  "researchPapers": [],
+  "paperCount": 0,
   "parentId": "asap4e",
   "spectrum": {
     "type": "fp",
     "peakEx": 480,
     "peakEm": 503,
-    "name": "ASAP6.1",
-    "notes": "Screening used 480/40nm excitation filter and 503-nm long pass emission"
+    "name": "ASAP6.1"
   },
   "voltage": {
     "type": "fp",
     "slope": 18,
     "polarity": "positive",
-    "name": "ASAP6.1"
+    "name": "ASAP6.1",
+    "custom": {
+      "voltage": [-120, -70, -40, 0, 30, 60, 100],
+      "deltaF":  [-33, 0, 33, 83, 204, 267, 296]
+    }
   }
 }

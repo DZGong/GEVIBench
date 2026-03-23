@@ -347,7 +347,9 @@ function GEVIBenchApp() {
                 methodologyContent.scoring.kineticsScoring.formula,
                 methodologyContent.scoring.kineticsScoring.details,
                 methodologyContent.scoring.kineticsScoring.benchmarks,
-                (bench) => `Score ${bench.score}: τ_on=${bench.tau_on}ms, τ_off=${bench.tau_off}ms (${bench.example})`
+                (bench) => `Score ${bench.score}: τ_on=${bench.tau_on}ms, τ_off=${bench.tau_off}ms (${bench.example})`,
+                undefined,
+                methodologyContent.scoring.kineticsScoring.formulaNote
               )}
 
               {/* Dynamic Range Scoring Rule */}
@@ -357,7 +359,33 @@ function GEVIBenchApp() {
                 methodologyContent.scoring.dynamicRangeScoring.formula,
                 methodologyContent.scoring.dynamicRangeScoring.details,
                 methodologyContent.scoring.dynamicRangeScoring.benchmarks,
-                (bench) => `Score ${bench.score}: ΔF/F=${bench.deltaF}% (${bench.example})`
+                (bench) => `Score ${bench.score}: ΔF/F=${bench.deltaF}% (${bench.example})`,
+                undefined,
+                methodologyContent.scoring.dynamicRangeScoring.formulaNote
+              )}
+
+              {/* Brightness Scoring Rule */}
+              {renderScoringSection(
+                methodologyContent.scoring.brightnessScoring.title,
+                methodologyContent.scoring.brightnessScoring.description,
+                methodologyContent.scoring.brightnessScoring.formula,
+                methodologyContent.scoring.brightnessScoring.details,
+                methodologyContent.scoring.brightnessScoring.benchmarks,
+                (bench) => `Score ${bench.score}: ${bench.brightness} EGFP (${bench.example})`,
+                undefined,
+                methodologyContent.scoring.brightnessScoring.formulaNote
+              )}
+
+              {/* SNR Scoring Rule */}
+              {renderScoringSection(
+                methodologyContent.scoring.snrScoring.title,
+                methodologyContent.scoring.snrScoring.description,
+                methodologyContent.scoring.snrScoring.formula,
+                methodologyContent.scoring.snrScoring.details,
+                methodologyContent.scoring.snrScoring.benchmarks,
+                (bench) => `Score ${bench.score}: SNR = ${bench.snr} (${bench.example})`,
+                undefined,
+                methodologyContent.scoring.snrScoring.formulaNote
               )}
 
               {/* Photostability Scoring Rule */}
@@ -367,8 +395,9 @@ function GEVIBenchApp() {
                 methodologyContent.scoring.photostabilityScoring.formula,
                 methodologyContent.scoring.photostabilityScoring.details,
                 methodologyContent.scoring.photostabilityScoring.benchmarks,
-                (bench) => `Score ${bench.score}: ${bench.remaining}% remaining (${bench.example})`,
-                methodologyContent.scoring.photostabilityScoring.example
+                (bench) => `Score ${bench.score}: ${bench.remaining} remaining (${bench.example})`,
+                methodologyContent.scoring.photostabilityScoring.example,
+                methodologyContent.scoring.photostabilityScoring.formulaNote
               )}
 
               {/* Popularity Scoring Rule */}
@@ -379,7 +408,8 @@ function GEVIBenchApp() {
                 methodologyContent.scoring.popularityScoring.details,
                 methodologyContent.scoring.popularityScoring.benchmarks,
                 (bench) => `Score ${bench.score}: ${bench.papers} papers (${bench.example})`,
-                methodologyContent.scoring.popularityScoring.example
+                methodologyContent.scoring.popularityScoring.example,
+                methodologyContent.scoring.popularityScoring.formulaNote
               )}
             </div>
 
@@ -429,7 +459,8 @@ function GEVIBenchApp() {
     details: string[],
     benchmarks: { [key: string]: string | number }[],
     formatBench: (bench: { [key: string]: string | number }) => string,
-    example?: string
+    example?: string,
+    formulaNote?: string
   ) => (
     <div className={`mt-4 p-3 rounded-lg ${darkMode ? 'bg-gray-700' : 'bg-blue-50'}`}>
       <h4 className={`text-md font-semibold mb-2 ${colors.text}`}>{title}</h4>
@@ -437,6 +468,9 @@ function GEVIBenchApp() {
       <div className={`mt-2 p-2 rounded font-mono text-sm ${darkMode ? 'bg-gray-800 text-green-400' : 'bg-white text-green-700'}`}>
         {formula}
       </div>
+      {formulaNote && (
+        <div className={`mt-1 text-xs italic ${colors.textTertiary}`}>{formulaNote}</div>
+      )}
       {example && (
         <div className={`mt-2 text-xs ${colors.textSecondary}`}>
           <span className="font-medium">Example:</span> {example}

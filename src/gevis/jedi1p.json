@@ -6,7 +6,9 @@
   "tags": [
     "cpGFP",
     "Green",
-    "JEDI"
+    "JEDI",
+    "One-photon",
+    "Somatic targeting"
   ],
   "paper": "Nature Communications 2023",
   "paperUrl": "https://doi.org/10.1038/s41467-023-41975-3",
@@ -17,105 +19,25 @@
   "photostability": 70,
   "subthreshold": 70,
   "overall": 75,
-  "description": "JEDI (Java-encoded DNA indicator) family of GEVIs with improved brightness and dynamic range for in vivo imaging.",
+  "description": "One-photon optimized GEVI evolved from ASAP2s via high-throughput directed evolution, with improved brightness, kinetics, and sensitivity enabling pan-cortical widefield voltage imaging and gamma-frequency tracking in awake mice.",
+  "parentId": "asap2s",
   "addgene": {
     "id": "202613",
-    "name": "pAAV-hSyn-JEDI-1P-WPRE",
     "url": "https://www.addgene.org/202613/"
   },
   "kinetics": {
     "on": 0.54,
-    "off": 1.2,
-    "temperature": "~33°C",
-    "notes": "Fast component (τ_fast), dual-exponential kinetics"
+    "off": 1.2
   },
   "dynamicRangeData": {
-    "deltaF": 31.2,
-    "unit": "% per 100mV",
-    "sign": "negative",
-    "notes": "Response to 100mV step depolarization (-70mV to +30mV)"
+    "deltaF": -31.2,
+    "sign": "negative"
   },
   "photostabilityData": {
     "brightnessRemaining": 64,
     "illumination": "16 mW/mm²",
-    "duration": "1 min",
-    "notes": "In vitro measurement"
+    "duration": "1 min"
   },
-  "researchPapers": [
-    {
-      "title": "Widefield imaging of rapid pan-cortical voltage dynamics with an indicator evolved for one-photon microscopy",
-      "authors": "Xiaoyu Lu, Yunmiao Wang, Zhuohe Liu, Yueyang Gou, et al.",
-      "journal": "Nature Communications",
-      "year": 2023,
-      "doi": "10.1038/s41467-023-41975-3",
-      "url": "https://www.nature.com/articles/s41467-023-41975-3",
-      "type": "Original"
-    },
-    {
-      "title": "Cortex-wide voltage imaging in a sensory cued reaching task",
-      "authors": "Anonymous",
-      "journal": "bioRxiv",
-      "year": 2025,
-      "doi": "10.1101/2025.04.24.650533",
-      "url": "https://www.biorxiv.org/content/10.1101/2025.04.24.650533",
-      "type": "Preprint"
-    },
-    {
-      "title": "Scanless two-photon voltage imaging",
-      "authors": "Ruth R. Sims, Imane Bendifallah, Valentina Emiliani",
-      "journal": "Nature Communications",
-      "year": 2024,
-      "doi": "10.1038/s41467-024-49192-2",
-      "url": "https://www.nature.com/articles/s41467-024-49192-2",
-      "type": "Citing"
-    },
-    {
-      "title": "Volumetric voltage imaging of neuronal populations in the mouse brain by confocal light-field microscopy",
-      "authors": "Lu Bai, Lin Cong, Kai Wang",
-      "journal": "Nature Methods",
-      "year": 2024,
-      "doi": "10.1038/s41592-024-02458-5",
-      "url": "https://www.nature.com/articles/s41592-024-02458-5",
-      "type": "Citing"
-    },
-    {
-      "title": "State-of-the-art preclinical techniques to study the impact of spreading depolarizations in awake rodents",
-      "authors": "Alejandro Labastida-Ramirez, Neela K. Codadu, Robert C. Wykes",
-      "journal": "The Journal of Headache and Pain",
-      "year": 2025,
-      "doi": "10.1186/s10194-025-02121-0",
-      "url": "https://doi.org/10.1186/s10194-025-02121-0",
-      "type": "Citing"
-    },
-    {
-      "title": "Impact of uniform illumination in widefield microscopy and mesoscopy",
-      "authors": "Mete Aslan, Alexander J. Gray, M. Selim Ünlü",
-      "journal": "Scientific Reports",
-      "year": 2025,
-      "doi": "10.1038/s41598-025-08754-0",
-      "url": "https://doi.org/10.1038/s41598-025-08754-0",
-      "type": "Citing"
-    },
-    {
-      "title": "High-speed voltage imaging of action potentials in molecular layer interneurons reveals sensory-driven synchrony",
-      "authors": "Anonymous",
-      "journal": "ResearchGate",
-      "year": 2024,
-      "url": "https://www.researchgate.net/publication/394489642",
-      "type": "Using JEDI-1P"
-    },
-    {
-      "title": "Neurovascular coupling: a review of spontaneous neocortical activity",
-      "authors": "Anonymous",
-      "journal": "Journal of Neurophysiology",
-      "year": 2024,
-      "doi": "10.1152/jn.00418.2024",
-      "url": "https://journals.physiology.org/doi/jn.00418.2024",
-      "type": "Review"
-    }
-  ],
-  "paperCount": 8,
-  "parentId": "jedi2p",
   "spectrum": {
     "type": "fp",
     "peakEx": 487,
@@ -509,7 +431,30 @@
   "voltage": {
     "type": "fp",
     "slope": 10,
-    "polarity": "positive",
-    "name": "JEDI-1P"
-  }
+    "polarity": "negative",
+    "name": "JEDI-1P",
+    "custom": {
+      "voltage": [-120, -100, -70, -50, -30, 0, 30],
+      "deltaF":  [15.6, 9.4, 0.0, -6.2, -12.5, -21.8, -31.2]
+    }
+  },
+  "researchPapers": [
+    {
+      "title": "Cortex-wide voltage imaging in a sensory cued reaching task reveals fast subnetwork dynamics",
+      "authors": "Wang Y, Kim SH, He EJ, Le Chatelier B, Choi H, Jaeger D",
+      "journal": "bioRxiv",
+      "year": 2025,
+      "sample": "Mouse, cortex, in vivo",
+      "url": "https://doi.org/10.1101/2025.04.24.650533"
+    },
+    {
+      "title": "A fast and responsive voltage indicator with enhanced sensitivity for unitary synaptic events",
+      "authors": "Hao YA, Lee S, Roth RH, et al.",
+      "journal": "Neuron",
+      "year": 2024,
+      "sample": "Mouse, motor cortex, in vivo",
+      "url": "https://doi.org/10.1016/j.neuron.2024.08.019"
+    }
+  ],
+  "paperCount": 2
 }

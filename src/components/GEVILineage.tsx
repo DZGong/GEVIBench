@@ -84,11 +84,6 @@ export function GEVILineage({ gevi, darkMode = false }: GEVILineageProps) {
   const svgHeight = pathNodes.length * nodeSpacing + 50;
   const svgWidth = 180;
 
-  const gradients = pathNodes.map((node, i) => ({
-    id: `v_gradient_${i}`,
-    color: node.geviData ? getTreeNodeColor(node.geviData) : '#9ca3af',
-  }));
-
   return (
     <div className={`border rounded-lg p-4 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
       <h4 className={`text-sm font-semibold mb-3 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
@@ -97,15 +92,6 @@ export function GEVILineage({ gevi, darkMode = false }: GEVILineageProps) {
 
       <div className="overflow-auto">
         <svg width={svgWidth} height={svgHeight} className="mx-auto">
-          <defs>
-            {gradients.map((g) => (
-              <linearGradient key={g.id} id={g.id} x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#000" />
-                <stop offset="50%" stopColor={g.color} />
-                <stop offset="100%" stopColor={g.color} />
-              </linearGradient>
-            ))}
-          </defs>
 
           {pathNodes.slice(0, -1).map((_node, i) => (
             <path
@@ -128,7 +114,7 @@ export function GEVILineage({ gevi, darkMode = false }: GEVILineageProps) {
               <g key={`v_node_${i}`} transform={`translate(${svgWidth / 2}, ${y})`}>
                 <path
                   d={hexPath(radius)}
-                  fill={`url(#v_gradient_${i})`}
+                  fill={color}
                   stroke={node.isSelected ? '#fff' : 'none'}
                   strokeWidth={node.isSelected ? 2 : 0}
                   style={{ filter: node.isSelected ? `drop-shadow(0 0 8px ${color})` : 'none' }}
@@ -158,10 +144,6 @@ export function GEVILineage({ gevi, darkMode = false }: GEVILineageProps) {
         </svg>
       </div>
 
-      <div className={`mt-3 pt-2 border-t text-xs text-center ${darkMode ? 'border-gray-700 text-gray-500' : 'border-gray-200 text-gray-400'}`}>
-        <span className="font-medium">Category:</span>{' '}
-        <span className={darkMode ? 'text-gray-400' : 'text-gray-600'}>{pathNodes[0]?.name}</span>
-      </div>
     </div>
   );
 }

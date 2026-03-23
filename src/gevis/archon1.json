@@ -8,7 +8,7 @@
     "Red",
     "Somatic targeting"
   ],
-  "paper": "Nature Methods 2018",
+  "paper": "Nature Chemical Biology 2018",
   "paperUrl": "https://doi.org/10.1038/s41589-018-0004-9",
   "brightness": 22,
   "speed": 29,
@@ -16,30 +16,82 @@
   "dynamicRange": 97,
   "photostability": 95,
   "subthreshold": 75,
-  "overall": 69,
-  "description": "First genetically encoded voltage indicator derived from archaerhodopsin-3 (Arch3), enabling direct imaging of membrane potential with millisecond temporal resolution in neurons.",
+  "overall": 67,
+  "description": "Archon1 is an archaerhodopsin-3-derived genetically encoded voltage indicator developed via robotic directed evolution, achieving a 2.4-fold brightness increase over its template (QuasAr2) with millisecond kinetics and high photostability. It enables imaging of action potentials and millivolt-scale subthreshold events in neurons, brain slices, zebrafish, and C. elegans.",
+  "parentId": "arch",
   "researchPapers": [
     {
       "title": "A robotic multidimensional directed evolution approach applied to fluorescent voltage reporters",
-      "journal": "Nature Methods",
+      "authors": "Piatkevich KD, Jung EE, Straub C, Linghu C, Park D, Suk HJ, Hochbaum DR, Goodwin D, Pnevmatikakis E, Pak N, Kawashima T, Yang CT, Rhoades JL, Shemesh O, Asano S, Yoon YG, Freifeld L, Saulnier JL, Riegler C, Engert F, Hughes T, Drobizhev M, Bhatt DL, Boyden ES",
+      "journal": "Nature Chemical Biology",
       "year": 2018,
-      "authors": "Piatkevich E, et al.",
-      "sample": "Cultured neurons, Brain slices, Zebrafish, C. elegans",
-      "dye": "N/A (genetically encoded)",
+      "sample": "Cultured neurons, Acute brain slices, Zebrafish larvae, C. elegans",
       "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5866759/"
+    },
+    {
+      "title": "In Vitro Testing of Voltage Indicators: Archon1, ArcLightD, ASAP1, ASAP2s, ASAP3b, Bongwoori-Pos6, BeRST1, FlicR1, and Chi-VSFP-Butterfly",
+      "authors": "Milosevic MM, Jang J, McKimm EJ, Zhu MH, Antic SD",
+      "journal": "eNeuro",
+      "year": 2020,
+      "sample": "HEK293 cells, Cultured cortical neurons",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7540930/"
+    },
+    {
+      "title": "Voltage Imaging of Cardiac Cells and Tissue Using the Genetically Encoded Voltage Sensor Archon1",
+      "authors": "Shroff SN, Das SL, Tseng HA, Noueihed J, Fernandez F, White JA, Chen CS, Han X",
+      "journal": "iScience",
+      "year": 2020,
+      "sample": "hiPSC-derived cardiomyocytes, 3D engineered cardiac tissue",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7160579/"
+    },
+    {
+      "title": "Studying Synaptically Evoked Cortical Responses ex vivo With Combination of a Single Neuron Recording (Whole-Cell) and Population Voltage Imaging (Genetically Encoded Voltage Indicator)",
+      "authors": "Jang J, Zhu MH, Jogdand AH, Antic SD",
+      "journal": "Frontiers in Neuroscience",
+      "year": 2021,
+      "sample": "Mouse cortical brain slices, layer 2/3 pyramidal neurons",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8579014/"
     }
   ],
-  "parentId":"arch",
+  "addgene": {
+    "id": "108423",
+    "url": "https://www.addgene.org/108423/"
+  },
   "spectrum": {
     "type": "rhodopsin",
-    "peakEx": 550,
-    "peakEm": 580,
-    "name": "Archon1"
+    "peakEx": 585,
+    "peakEm": 710,
+    "name": "Archon1",
+    "custom": {
+      "ex": [480, 500, 520, 540, 560, 575, 585, 600, 615, 630, 650, 670],
+      "exNorm": [0.08, 0.14, 0.25, 0.48, 0.75, 0.92, 1.00, 0.88, 0.65, 0.38, 0.14, 0.04],
+      "em": [650, 670, 690, 710, 730, 750, 770, 800, 830, 860],
+      "emNorm": [0.18, 0.52, 0.85, 1.00, 0.88, 0.68, 0.45, 0.22, 0.08, 0.02]
+    }
   },
   "voltage": {
     "type": "opsin",
-    "slope": 35,
+    "slope": 43,
     "polarity": "positive",
-    "name": "Archon1"
-  }
+    "name": "Archon1",
+    "custom": {
+      "voltage": [-150, -120, -90, -70, -60, -30,   0,  30,  60,  90, 120],
+      "deltaF":  [-34.4, -21.5, -8.6,  0.0,  4.3, 17.2, 30.0, 43.0, 56.0, 65.0, 70.0]
+    }
+  },
+  "kinetics": {
+    "on": 0.61,
+    "off": 1.1,
+    "temperature": "room temperature"
+  },
+  "dynamicRangeData": {
+    "deltaF": 43,
+    "sign": "positive"
+  },
+  "photostabilityData": {
+    "brightnessRemaining": 95,
+    "illumination": "800 mW/mm² at 637 nm",
+    "duration": "900 s"
+  },
+  "paperCount": 4
 }

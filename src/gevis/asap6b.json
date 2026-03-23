@@ -3,13 +3,7 @@
   "name": "ASAP6b",
   "year": 2024,
   "category": "VSD-cpGFP GEVI",
-  "tags": [
-    "cpGFP",
-    "Green",
-    "Positive",
-    "Two-photon",
-    "One-photon"
-  ],
+  "tags": ["cpGFP","Green","Positive","Two-photon","One-photon"],
   "paper": "bioRxiv 2024",
   "paperUrl": "https://doi.org/10.1101/2024.06.21.599617",
   "brightness": 72,
@@ -18,44 +12,40 @@
   "dynamicRange": 90,
   "photostability": 78,
   "subthreshold": 68,
-  "overall": 72,
-  "description": "ASAP6b (also known as ASAP6.2) is a next-generation positively tuned ASAP variant with the best per-molecule SNR for action potential detection. Demonstrates 33% ΔF/F response per action potential with high SNR in vivo imaging.",
+  "overall": 78,
+  "description": "ASAP6b (also called ASAP6.2) is an improved positively tuned ASAP variant engineered for higher molecular brightness at physiological resting potentials. Its fluorescence-voltage input range is shifted to more negative voltages compared to ASAP6.1, so it operates at higher baseline brightness near -70 mV. It exhibits a mono-exponential activation time constant of 3.7 ms and produces a 33% ΔF/F per action potential in HEK293 cells, outperforming ASAP4e (23%). ASAP6b reliably reports action potentials in cultured neurons, retinal ganglion cells, and cortical layer 2/3 neurons in vivo using both one-photon and two-photon microscopy.",
   "kinetics": {
-    "on": 3.74,
+    "on": 3.7,
     "off": 6.16,
-    "unit": "ms",
-    "notes": "Mono-exponential time constant; operates at higher molecular brightness range for better SNR"
+    "temperature": "room temperature"
   },
   "dynamicRangeData": {
-    "deltaF": 161,
-    "unit": "% per AP",
-    "sign": "positive",
-    "notes": "Response to AP-like waveforms with 2-ms FWHM in HEK293 cells; best per-molecule SNR"
+    "deltaF": 33,
+    "sign": "positive"
   },
-  "researchPapers": [
-    {
-      "title": "ASAP6.1 and ASAP6b: genetically encoded voltage indicators with improved performance for two-photon imaging in vivo",
-      "authors": "Sungmoo Lee, Guofeng Zhang, Laura C. Gomez, Yukun Alex Hao, Dongyun Jiang, Richard H. Roth, Guilherme Testa-Silva, Jun Ding, Thomas R. Clandinin, Daniel Feldman, Na Ji, Michael Z. Lin",
-      "journal": "bioRxiv",
-      "year": 2024,
-      "doi": "10.1101/2024.06.21.599617",
-      "url": "https://doi.org/10.1101/2024.06.21.599617",
-      "type": "Original"
-    }
-  ],
-  "paperCount": 1,
+  "researchPapers": [],
+  "paperCount": 0,
   "parentId": "asap4e",
   "spectrum": {
     "type": "fp",
-    "peakEx": 480,
-    "peakEm": 503,
+    "peakEx": 488,
+    "peakEm": 511,
     "name": "ASAP6b",
-    "notes": "Screening used 480/40nm excitation filter and 503-nm long pass emission"
+    "custom": {
+      "minEx": 300,
+      "excitation": [0.096,0.087,0.08,0.074,0.068,0.061,0.058,0.054,0.053,0.049,0.049,0.047,0.046,0.045,0.044,0.045,0.044,0.042,0.041,0.04,0.039,0.038,0.035,0.035,0.035,0.035,0.032,0.032,0.032,0.03,0.031,0.031,0.03,0.032,0.031,0.03,0.032,0.032,0.033,0.033,0.035,0.035,0.036,0.036,0.037,0.04,0.041,0.043,0.044,0.047,0.049,0.048,0.051,0.057,0.054,0.056,0.059,0.062,0.065,0.066,0.068,0.072,0.073,0.076,0.08,0.081,0.084,0.087,0.091,0.092,0.095,0.098,0.1,0.101,0.108,0.11,0.112,0.116,0.117,0.122,0.125,0.127,0.13,0.132,0.135,0.136,0.139,0.143,0.144,0.147,0.148,0.151,0.154,0.156,0.158,0.16,0.162,0.165,0.165,0.167,0.168,0.168,0.17,0.171,0.173,0.173,0.174,0.176,0.177,0.178,0.18,0.182,0.184,0.186,0.188,0.19,0.193,0.197,0.199,0.203,0.205,0.208,0.211,0.215,0.218,0.222,0.225,0.23,0.235,0.241,0.246,0.252,0.258,0.266,0.274,0.283,0.292,0.302,0.314,0.325,0.337,0.35,0.363,0.377,0.392,0.407,0.423,0.44,0.456,0.473,0.49,0.508,0.525,0.543,0.561,0.579,0.595,0.612,0.628,0.644,0.66,0.674,0.689,0.702,0.715,0.728,0.74,0.752,0.765,0.777,0.789,0.802,0.814,0.829,0.842,0.856,0.871,0.885,0.9,0.915,0.929,0.944,0.957,0.969,0.979,0.988,0.994,0.998,1.0,0.997,0.991,0.98,0.964,0.944,0.919,0.89,0.856,0.819,0.777,0.735,0.687,0.640,0.591,0.543,0.493,0.446,0.4,0.355,0.314,0.275,0.238,0.204,0.175,0.147,0.123,0.101,0.084,0.069,0.055,0.045,0.036,0.031,0.026,0.021,0.018,0.016,0.014,0.012,0.011,0.009,0.008,0.007,0.006,0.006,0.005,0.005,0.005,0.005,0.004,0.0,0.0,0.0,0.0],
+      "minEm": 463,
+      "emission": [0.003,0.003,0.003,0.004,0.004,0.005,0.006,0.007,0.009,0.01,0.012,0.015,0.018,0.022,0.027,0.032,0.038,0.046,0.055,0.065,0.078,0.092,0.109,0.127,0.148,0.172,0.198,0.227,0.259,0.295,0.332,0.371,0.416,0.460,0.509,0.559,0.610,0.665,0.718,0.767,0.816,0.862,0.903,0.936,0.966,0.988,0.999,1.0,0.999,0.989,0.970,0.941,0.906,0.871,0.835,0.793,0.751,0.715,0.680,0.651,0.621,0.597,0.570,0.547,0.527,0.508,0.490,0.473,0.464,0.450,0.439,0.430,0.422,0.411,0.401,0.394,0.387,0.381,0.369,0.362,0.358,0.348,0.339,0.330,0.322,0.312,0.302,0.291,0.279,0.267,0.256,0.245,0.234,0.224,0.215,0.207,0.197,0.187,0.181,0.171,0.162,0.155,0.149,0.141,0.135,0.128,0.122,0.117,0.114,0.108,0.104,0.097,0.096,0.092,0.088,0.084,0.081,0.079,0.076,0.073,0.071,0.069,0.065,0.064,0.063,0.059,0.059,0.056,0.054,0.053,0.050,0.049,0.047,0.046,0.044,0.042,0.041,0.039,0.037,0.036,0.036,0.034,0.032,0.033,0.030,0.029,0.028,0.027,0.026,0.025,0.024,0.022,0.022,0.022,0.021,0.020,0.019,0.018,0.018,0.017,0.017,0.016,0.015,0.015,0.015,0.015,0.014,0.013,0.014,0.013,0.012,0.012,0.012,0.012,0.011,0.011,0.011,0.010,0.010,0.010,0.010,0.010,0.010,0.009,0.010,0.009,0.009,0.008,0.008,0.008,0.008,0.008,0.008,0.008,0.008,0.008,0.008,0.008,0.007,0.008,0.008,0.007,0.007,0.007,0.007,0.007,0.007,0.007,0.007]
+    }
   },
   "voltage": {
     "type": "fp",
     "slope": 15,
     "polarity": "positive",
-    "name": "ASAP6b"
+    "name": "ASAP6b",
+    "custom": {
+      "voltage": [-120, -100, -80, -70, -50, -30, -10, 0, 10, 30],
+      "deltaF":  [-20, -12, -5, 0, 28, 65, 115, 140, 162, 185]
+    }
   }
 }

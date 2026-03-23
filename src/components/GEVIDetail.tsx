@@ -5,6 +5,7 @@ import { RainbowText, getGEVIColor } from '../utils';
 import { SpectrumViewer, SpectrumData } from '../SpectrumViewer';
 import { VoltageCurveViewer } from '../VoltageCurveViewer';
 import { GEVILineage } from './GEVILineage';
+import { SampleUsageChart } from './SampleUsageChart';
 
 const metrics = [
   { key: 'brightness', name: 'Brightness', icon: Sun },
@@ -161,38 +162,42 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, darkMode, onClo
         ))}
       </div>
 
-      {/* Radar Chart */}
+      {/* Radar Chart + Sample Usage | Lineage */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mt-6">
-        <div className={`border rounded-lg p-4 md:p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
-          <h4 className={`text-sm font-semibold mb-3 md:mb-4 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Performance Profile</h4>
-          <div className="h-48 md:h-64">
-            <ResponsiveContainer width="100%" height="100%">
-              <RadarChart data={getRadarData()}>
-                <PolarGrid stroke={darkMode ? "#4b5563" : "#e5e7eb"} />
-                <PolarAngleAxis dataKey="subject" tick={{ fill: darkMode ? '#d1d5db' : '#374151', fontSize: 10 }} />
-                <PolarRadiusAxis angle={30} domain={[0, 100]} tick={{ fill: darkMode ? '#9ca3af' : '#9ca3af', fontSize: 9 }} />
-                <Radar name={gevi.name} dataKey="value" stroke={darkMode ? "#60a5fa" : "#1e40af"} fill={darkMode ? "#60a5fa" : "#1e40af"} fillOpacity={0.2} />
-              </RadarChart>
-            </ResponsiveContainer>
+        {/* Left column: radar on top, sample chart below */}
+        <div className="flex flex-col gap-4">
+          <div className={`border rounded-lg p-4 md:p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
+            <h4 className={`text-sm font-semibold mb-3 md:mb-4 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Performance Profile</h4>
+            <div className="h-48 md:h-64">
+              <ResponsiveContainer width="100%" height="100%">
+                <RadarChart data={getRadarData()}>
+                  <PolarGrid stroke={darkMode ? "#4b5563" : "#e5e7eb"} />
+                  <PolarAngleAxis dataKey="subject" tick={{ fill: darkMode ? '#d1d5db' : '#374151', fontSize: 10 }} />
+                  <PolarRadiusAxis angle={30} domain={[0, 100]} tick={{ fill: darkMode ? '#9ca3af' : '#9ca3af', fontSize: 9 }} />
+                  <Radar name={gevi.name} dataKey="value" stroke={darkMode ? "#60a5fa" : "#1e40af"} fill={darkMode ? "#60a5fa" : "#1e40af"} fillOpacity={0.2} />
+                </RadarChart>
+              </ResponsiveContainer>
+            </div>
+            <div className="mt-4">
+              <BonusBadges gevi={gevi} size="md" />
+            </div>
           </div>
-          <div className="mt-4">
-            <BonusBadges gevi={gevi} size="md" />
-          </div>
+
+          {/* Sample Usage Chart */}
+          {gevi.researchPapers?.length > 0 && (
+            <div className={`border rounded-lg p-4 md:p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
+              <h4 className={`text-sm font-semibold mb-3 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Sample Usage</h4>
+              <SampleUsageChart mode="single" gevi={gevi} darkMode={darkMode} />
+            </div>
+          )}
         </div>
 
-        {/* Family Tree */}
-        <div className={`border rounded-lg p-4 md:p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
-          <h4
-            className={`text-sm font-semibold mb-3 md:mb-4 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}
-          >
-            Genetic Lineage
-          </h4>
-          <div
-            className={`cursor-pointer ${onShowFamilyTree ? 'hover:ring-2 hover:ring-blue-500/50 rounded-lg -m-2 p-2' : ''}`}
-            onClick={onShowFamilyTree}
-          >
-            <GEVILineage gevi={gevi} darkMode={darkMode} />
-          </div>
+        {/* Right column: Genetic Lineage */}
+        <div
+          className={`cursor-pointer ${onShowFamilyTree ? 'hover:ring-2 hover:ring-blue-500/50 rounded-lg' : ''}`}
+          onClick={onShowFamilyTree}
+        >
+          <GEVILineage gevi={gevi} darkMode={darkMode} />
         </div>
       </div>
 

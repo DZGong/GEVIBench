@@ -1,5 +1,32 @@
 import { COLORS } from './constants';
-import type { GEVIColor } from './types';
+import type { GEVIColor, ResearchPaper } from './types';
+
+// Canonical sample categories for organism usage bar chart
+export const SAMPLE_CATEGORY_ORDER = ['Rodent', 'Fly', 'Fish', 'C. elegans', 'Cell culture', 'Other'];
+
+const SAMPLE_CATEGORIES: { label: string; keywords: string[] }[] = [
+  { label: 'Rodent',       keywords: ['mouse', 'mice', 'rat', 'murine'] },
+  { label: 'Fly',          keywords: ['drosophila', 'fly', 'flies'] },
+  { label: 'Fish',         keywords: ['zebrafish', 'fish'] },
+  { label: 'C. elegans',   keywords: ['elegans', 'caenorhabditis', 'worm'] },
+  { label: 'Cell culture', keywords: ['hek', 'hela', 'ipsc', 'ips-c', 'mcf', 'cos-7', 'a375', 'melanoma', 'cell line'] },
+];
+
+export function computeSampleSummary(researchPapers?: ResearchPaper[]): Record<string, number> {
+  if (!researchPapers?.length) return {};
+  const counts: Record<string, number> = {};
+  for (const paper of researchPapers) {
+    if (!paper.sample) continue;
+    const s = paper.sample.toLowerCase();
+    const matched = new Set<string>();
+    for (const { label, keywords } of SAMPLE_CATEGORIES) {
+      if (keywords.some(kw => s.includes(kw))) matched.add(label);
+    }
+    if (matched.size === 0) matched.add('Other');
+    for (const label of matched) counts[label] = (counts[label] || 0) + 1;
+  }
+  return counts;
+}
 
 // Get GEVI color based on emission wavelength/tags - kept for backward compatibility
 export const getGEVIColor = (gevi: { tags?: string[]; category?: string; name: string }): GEVIColor => {

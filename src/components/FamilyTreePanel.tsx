@@ -355,8 +355,6 @@ export function FamilyTreePanel({
     }
   };
 
-  // Generate unique gradient IDs
-  const uniqueColors = [...new Set(nodes.map(n => n.color))];
 
   let tooltipLeft = 0;
   let tooltipTop = 0;
@@ -415,16 +413,8 @@ export function FamilyTreePanel({
 
       {/* Scrollable container - auto height, horizontal scroll only */}
       <div className="overflow-x-auto overflow-y-hidden border rounded-lg">
+        <div className="flex justify-center" style={{ minWidth: svgWidth }}>
         <svg width={svgWidth} height={svgHeight} className="block">
-          <defs>
-            {uniqueColors.map((color, i) => (
-              <radialGradient key={`grad_${i}`} id={`tree_grad_${i}`} cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stopColor="#fff" />
-                <stop offset="40%" stopColor={color} />
-                <stop offset="100%" stopColor={color} />
-              </radialGradient>
-            ))}
-          </defs>
 
           {/* Links - curved paths */}
           {links.map((link, i) => {
@@ -458,7 +448,6 @@ export function FamilyTreePanel({
           {nodes.map((node, i) => {
             const isLeaf = !!node.geviId;
             const isRoot = i === 0 && node.name === 'GEVI';
-            const colorIndex = uniqueColors.indexOf(node.color);
             const radius = isRoot ? 10 : isLeaf ? NODE_RADIUS_LEAF : NODE_RADIUS_BRANCH;
 
             return (
@@ -482,7 +471,7 @@ export function FamilyTreePanel({
                 )}
                 <path
                   d={hexPath(radius)}
-                  fill={isRoot ? (darkMode ? '#60a5fa' : '#3b82f6') : isLeaf ? `url(#tree_grad_${colorIndex})` : (darkMode ? '#4b5563' : '#d1d5db')}
+                  fill={isRoot ? (darkMode ? '#60a5fa' : '#3b82f6') : isLeaf ? node.color : (darkMode ? '#4b5563' : '#d1d5db')}
                   stroke={isRoot ? '#fff' : isLeaf ? '#fff' : (darkMode ? '#6b7280' : '#9ca3af')}
                   strokeWidth={isRoot ? 2 : isLeaf ? 1.5 : 1}
                   opacity={1}
@@ -514,6 +503,7 @@ export function FamilyTreePanel({
             );
           })}
         </svg>
+        </div>
       </div>
 
       {hoverInfo && (

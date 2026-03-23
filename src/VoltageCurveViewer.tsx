@@ -183,9 +183,9 @@ export function VoltageCurveViewer({ voltageData, geviName, darkMode = false }: 
         ref={containerRef}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        className={`relative h-64 cursor-crosshair ${darkMode ? 'bg-gray-900' : 'bg-white'} rounded`}
+        className={`relative cursor-crosshair ${darkMode ? 'bg-gray-900' : 'bg-white'} rounded`}
       >
-        <svg className="absolute inset-0 w-full h-full" viewBox={`0 0 ${width} ${height}`} preserveAspectRatio="none">
+        <svg className="w-full block" viewBox={`0 0 ${width} ${height}`}>
           {/* Grid lines - dynamic Y ticks */}
           {Array.from({ length: 6 }, (_, i) => Math.round(minDeltaF + (i / 5) * (maxDeltaF - minDeltaF))).map(v => (
             <line

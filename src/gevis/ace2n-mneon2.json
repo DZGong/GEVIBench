@@ -1,14 +1,10 @@
 {
   "id": "ace2n-mneon2",
   "name": "Ace2N-mNeon2",
-  "year": 2021,
+  "year": 2022,
   "category": "eFRET GEVI",
-  "tags": [
-    "Ace opsin",
-    "mNeon",
-    "Green"
-  ],
-  "paper": "Science 2021",
+  "tags": ["Ace opsin", "mNeon", "Green"],
+  "paper": "Science 2022",
   "paperUrl": "https://doi.org/10.1126/science.abm8797",
   "brightness": 75,
   "speed": 96,
@@ -16,19 +12,52 @@
   "dynamicRange": 70,
   "photostability": 78,
   "subthreshold": 88,
-  "overall": 80,
-  "description": "Ace2N-mNeon2 is an improved version of Ace2N-mNeon with enhanced brightness and faster kinetics, optimized for high-speed voltage imaging in neurons.",
-  "parentId":"ace2n-mneon",
+  "overall": 79,
+  "description": "Improved Ace2N variant with sub-millisecond kinetics and enhanced brightness for high-speed population voltage imaging in awake animals.",
+  "parentId": "ace2n-mneon",
   "spectrum": {
     "type": "rhodopsin",
-    "peakEx": 510,
-    "peakEm": 540,
-    "name": "Ace2N"
+    "peakEx": 506,
+    "peakEm": 517,
+    "name": "Ace2N-mNeon2"
   },
   "voltage": {
     "type": "opsin",
-    "slope": 18,
-    "polarity": "positive",
-    "name": "Ace2N"
-  }
+    "slope": 27,
+    "polarity": "negative",
+    "name": "Ace2N-mNeon2"
+  },
+  "kinetics": {
+    "on": 0.5,
+    "off": 0.5,
+    "temperature": "room temperature"
+  },
+  "dynamicRangeData": {
+    "deltaF": -27,
+    "sign": "negative"
+  },
+  "photostabilityData": {
+    "brightnessRemaining": 75,
+    "illumination": "1 W/cm² (488 nm)",
+    "duration": "38 s"
+  },
+  "researchPapers": [
+    {
+      "title": "Exploring Bioelectricity with Ace2N-mNeon during Zebrafish Embryogenesis",
+      "authors": "Wu Z, et al.",
+      "journal": "bioRxiv",
+      "year": 2024,
+      "sample": "Zebrafish (Danio rerio), neurons and cardiomyocytes, in vivo",
+      "url": "https://doi.org/10.1101/2024.12.12.628143"
+    },
+    {
+      "title": "Prefrontal gamma oscillations engage dynamic cell type-specific configurations to support flexible behavior",
+      "authors": "Phensy AJ, et al.",
+      "journal": "bioRxiv",
+      "year": 2025,
+      "sample": "Mouse, medial prefrontal cortex, in vivo",
+      "url": "https://doi.org/10.1101/2024.03.08.584173"
+    }
+  ],
+  "paperCount": 2
 }

@@ -2,6 +2,7 @@ import { ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadius
 import { Trash2, GitCompare, X } from 'lucide-react';
 import { useState, useRef, useCallback } from 'react';
 import { generateVoltageCurve } from '../VoltageCurveViewer';
+import { SampleUsageChart } from './SampleUsageChart';
 
 const COLORS = ['#3b82f6', '#ef4444', '#22c55e', '#f59e0b', '#8b5cf6'];
 
@@ -15,15 +16,13 @@ interface ComparisonProps {
 
 export function ComparisonPanel({ compareGEVIs, onRemove, darkMode, showEmpty = false, onClose }: ComparisonProps) {
   const getCompareRadarData = () => {
-    const subjects = ['Bright', 'Speed', 'SNR', 'Range', 'Stable', 'Sub-V'];
-    const keys = ['brightness', 'speed', 'snr', 'dynamicRange', 'photostability', 'subthreshold'];
-
+    const subjects = ['Bright', 'Speed', 'SNR', 'Range', 'Stable', 'Papers'];
     return subjects.map((subject, idx) => {
       const data: any = { subject };
-      compareGEVIs.forEach((gevi, gIdx) => {
-        // Use a sanitized key name for the dataKey
+      compareGEVIs.forEach((gevi) => {
         const safeName = gevi.name.replace(/[^a-zA-Z0-9]/g, '');
-        data[safeName] = gevi[keys[idx]];
+        const values = [gevi.brightness, gevi.speed, gevi.snr, gevi.dynamicRange, gevi.photostability, Math.min(100, (gevi.paperCount ?? 0) * 5)];
+        data[safeName] = values[idx];
       });
       return data;
     });
@@ -88,7 +87,7 @@ export function ComparisonPanel({ compareGEVIs, onRemove, darkMode, showEmpty = 
       </div>
 
       {/* Charts side by side */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {/* Radar Chart */}
         <div>
           <h4 className={`text-sm font-semibold mb-3 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Performance Radar</h4>
@@ -111,6 +110,14 @@ export function ComparisonPanel({ compareGEVIs, onRemove, darkMode, showEmpty = 
         <div>
           <h4 className={`text-sm font-semibold mb-3 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>F-V Curve</h4>
           <FVCurveCompare compareGEVIs={compareGEVIs} COLORS={COLORS} darkMode={darkMode} />
+        </div>
+
+        {/* Sample Usage Comparison */}
+        <div>
+          <h4 className={`text-sm font-semibold mb-3 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Sample Usage</h4>
+          <div className={`border rounded-lg p-4 ${darkMode ? 'bg-gray-750 border-gray-700' : 'bg-gray-50 border-gray-200'}`}>
+            <SampleUsageChart mode="compare" gevis={compareGEVIs} darkMode={darkMode} />
+          </div>
         </div>
       </div>
     </div>
@@ -143,10 +150,13 @@ function FVCurveCompare({ compareGEVIs, COLORS, darkMode }: { compareGEVIs: any[
     return `M ${points}`;
   };
 
-  // Generate curve data for each GEVI
+  // Generate curve data for each GEVI, preferring custom data
   const getVoltageData = (gevi: any) => {
     const config = gevi.voltage;
-    if (config) {
+    if (config?.custom?.voltage?.length && config?.custom?.deltaF?.length) {
+      return config.custom.voltage.map((v: number, i: number) => ({ voltage: v, deltaF: config.custom.deltaF[i] }));
+    }
+    if (config?.type && config?.slope && config?.polarity) {
       return generateVoltageCurve(config.type, config.slope, config.polarity);
     }
     return generateVoltageCurve('fp');

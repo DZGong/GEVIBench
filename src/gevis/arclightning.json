@@ -1,0 +1,30 @@
+{
+  "id": "arclightning",
+  "name": "ArcLightning",
+  "year": 2015,
+  "category": "FP-based",
+  "tags":["Green"],
+  "paper": "elife 2015",
+  "paperUrl": "https://elifesciences.org/articles/10482",
+  "brightness": 68,
+  "speed": 52,
+  "snr": 58,
+  "dynamicRange": 53,
+  "photostability": 48,
+  "subthreshold": 53,
+  "overall": 54,
+  "description": "Improved ArcLight variant with mutations that enhance plasma membrane targeting and improve signal amplitude in neuronal processes.",
+  "parentId": "arclight",
+  "spectrum": {
+    "type": "fp",
+    "peakEx": 490,
+    "peakEm": 510,
+    "name": "ArcLightning"
+  },
+  "voltage": {
+    "type": "fp",
+    "slope": 18,
+    "polarity": "negative",
+    "name": "ArcLightning"
+  }
+}
