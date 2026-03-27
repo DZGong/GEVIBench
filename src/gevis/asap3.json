@@ -74,6 +74,11 @@
       "sign": "negative",
       "source": "doi:10.1016/j.cell.2019.11.004",
       "note": "Per 100 mV step in spiking HEK cells at 22°C"
+    },
+    {
+      "deltaF": -49.3,
+      "sign": "negative",
+      "source": "doi:10.1523/ENEURO.0060-20.2020"
     }
   ],
   "sensitivityData": [

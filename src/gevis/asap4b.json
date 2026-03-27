@@ -8,6 +8,7 @@
   "paperUrl": "https://doi.org/10.1038/s41592-023-01913-z",
   "description": "Bright-optimized sibling of ASAP4e with the same polarity flip, trading some speed for superior baseline brightness and photostability for extended two-photon voltage recordings.",
   "parentId": "asap3",
+  "siblingId": "asap4e",
 
   "spectrum": {
     "type": "fp",

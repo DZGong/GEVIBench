@@ -33,6 +33,10 @@
   background-color: #F9F6F1;
 }
 
+.bg-paper-dark {
+  background-color: #F0EDE8;
+}
+
 img {
   object-position: top;
 }

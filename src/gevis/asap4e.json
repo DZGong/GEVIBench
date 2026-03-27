@@ -8,6 +8,7 @@
   "paperUrl": "https://doi.org/10.1038/s41592-023-01913-z",
   "description": "Speed-optimized ASAP4 variant that flips the classical ASAP polarity to positive-going, delivering fast kinetics and a massive fluorescence increase for photostable recordings in behaving animals.",
   "parentId": "asap3",
+  "siblingId": "asap4b",
 
   "spectrum": {
     "type": "fp",

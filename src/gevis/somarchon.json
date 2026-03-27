@@ -82,6 +82,13 @@
       "duration": "1 min",
       "source": "doi:10.1038/s41586-019-1641-1",
       "note": "From Extended Data Fig. 5e source data, n=17 cells"
+    },
+    {
+      "brightnessRemaining": 98,
+      "illumination": "44 mW/mm²",
+      "duration": "1 min",
+      "source": "doi:10.1021/acschemneuro.0c00046",
+      "note": "From Supplementary Figure 2, n=8 cells, 617 nm LED excitation"
     }
   ],
 
@@ -90,6 +97,11 @@
       "ratio": 1.0,
       "reference": "archon1",
       "source": "doi:10.1038/s41586-019-1641-1"
+    },
+    {
+      "ratio": 28,
+      "reference": "arch",
+      "source": "doi:10.1021/acschemneuro.0c00046"
     }
   ],
 

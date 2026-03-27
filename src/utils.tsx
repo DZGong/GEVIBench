@@ -1,4 +1,3 @@
-import { COLORS } from './constants';
 import type { GEVIColor, ResearchPaper } from './types';
 
 // Canonical sample categories for organism usage bar chart
@@ -33,24 +32,37 @@ export const getGEVIColor = (_gevi: { tags?: string[]; category?: string; name: 
   return { color: '#002FA7', label: '' };
 };
 
-// Color mapping for family tree nodes — category-based for visual differentiation
-export function getTreeNodeColor(gevi: { name: string; tags?: string[]; category?: string }): string {
-  const tags = Array.isArray(gevi.tags) ? gevi.tags : [];
-  const category = gevi.category || '';
-  const name = gevi.name.toLowerCase();
+// Convert a wavelength (nm) to an approximate visible color
+export function wavelengthToColor(nm: number): string {
+  let r = 0, g = 0, b = 0;
+  if      (nm < 380)             { r = 0.5; g = 0;   b = 0.8; }
+  else if (nm < 440)             { r = (440 - nm) / 60; g = 0; b = 1; }
+  else if (nm < 490)             { r = 0; g = (nm - 440) / 50; b = 1; }
+  else if (nm < 510)             { r = 0; g = 1; b = (510 - nm) / 20; }
+  else if (nm < 580)             { r = (nm - 510) / 70; g = 1; b = 0; }
+  else if (nm < 645)             { r = 1; g = (645 - nm) / 65; b = 0; }
+  else if (nm <= 750)            { r = 1; g = 0; b = 0; }
+  else                           { r = 0.6; g = 0; b = 0; }
 
-  if (category.includes('Chemigenetic') || tags.includes('HaloTag') || name.includes('voltron') || name.includes('positron')) return '#d500f9';
-  if (category.includes('Bioluminescent') || tags.includes('Luciferase')) return COLORS.yellow;
-  if (tags.includes('Green') || category.includes('VSD-cpGFP') || category.includes('VSD-single')) return COLORS.green;
-  if (tags.includes('Yellow') || tags.includes('cpYFP')) return COLORS.yellow;
-  if (tags.includes('Orange')) return COLORS.orange;
-  if (tags.includes('Red') || tags.includes('RFP')) return COLORS.red;
-  if (tags.includes('Far-red') || category.includes('Red FP GEVI')) return COLORS.farRed;
-  if (tags.includes('NIR') || tags.includes('Near-infrared')) return COLORS.nir;
-  if (category.includes('Opsin') || tags.includes('Archaerhodopsin') || tags.includes('Proteorhodopsin')) return COLORS.farRed;
-  if (category.includes('FRET') || category.includes('eFRET')) return COLORS.green;
-  if (category.includes('Ion-channel')) return COLORS.green;
-  return COLORS.gray;
+  let factor = 1;
+  if      (nm >= 380 && nm < 420) factor = 0.4 + 0.6 * (nm - 380) / 40;
+  else if (nm > 700 && nm <= 750) factor = 0.4 + 0.6 * (750 - nm) / 50;
+
+  const R = Math.round(255 * Math.min(1, r) * factor);
+  const G = Math.round(255 * Math.min(1, g) * factor);
+  const B = Math.round(255 * Math.min(1, b) * factor);
+  return `rgb(${R},${G},${B})`;
+}
+
+// Color mapping for family tree nodes — derived from emission peak wavelength
+export function getTreeNodeColor(gevi: { name: string; tags?: string[]; category?: string; spectrum?: { peakEm?: number; type?: string } }): string {
+  const category = gevi.category || '';
+  // Chemigenetic GEVIs use synthetic dyes — no intrinsic FP color
+  if (category.includes('Chemigenetic') || gevi.spectrum?.type === 'chemi') return '#d500f9';
+  if (gevi.spectrum?.peakEm) {
+    return wavelengthToColor(gevi.spectrum.peakEm);
+  }
+  return '#6b7280';
 }
 
 export function RainbowText({ text }: { text: string }) {

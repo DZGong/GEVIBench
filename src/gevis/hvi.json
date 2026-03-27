@@ -15,6 +15,7 @@
     "Chemigenetic",
     "hvi"
   ],
+  "crossBranchParentId": "ace2n-mneon",
 
   "spectrum": {
     "type": "rhodopsin",

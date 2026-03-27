@@ -14,6 +14,7 @@
   "paperUrl": "https://doi.org/10.1038/s41467-023-41975-3",
   "description": "One-photon optimized GEVI evolved from ASAP2s via high-throughput directed evolution, with improved brightness, kinetics, and sensitivity enabling pan-cortical widefield voltage imaging and gamma-frequency tracking in awake mice.",
   "parentId": "asap2s",
+  "siblingId": "jedi2p",
   "addgene": {
     "id": "202613",
     "url": "https://www.addgene.org/202613/"

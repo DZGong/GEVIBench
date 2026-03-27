@@ -219,7 +219,14 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, darkMode, onClo
               </div>
             )}
             {/* Photostability */}
-            {metric.key === 'photostability' && gevi.photostabilityData?.[0] && (
+            {metric.key === 'photostability' && gevi.photostabilityData === 'bioluminescent' && (
+              <div className={`mt-2 text-[10px] ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                <div className="flex items-center gap-2">
+                  <span>Bioluminescent — no photobleaching</span>
+                </div>
+              </div>
+            )}
+            {metric.key === 'photostability' && Array.isArray(gevi.photostabilityData) && gevi.photostabilityData?.[0] && (
               <div className={`mt-2 text-[10px] ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
                 <div className="flex items-center gap-2">
                   <span>Remaining:</span>

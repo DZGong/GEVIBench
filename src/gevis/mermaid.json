@@ -6,35 +6,142 @@
   "tags": [
     "Ci-VSP",
     "FRET",
-    "Green"
+    "Green-Orange",
+    "Positive-going"
   ],
   "paper": "Nature Methods 2008",
   "paperUrl": "https://doi.org/10.1038/nmeth.1235",
-  "description": "Early FRET-based voltage indicator using Ci-VSP voltage sensing domain with improved fluorescent protein pair.",
-  "familyTreePath":[
-   "GEVI",
-   "VSD",
-   "VSD-FRET",
-   "mermaid"
+  "description": "FRET-based voltage indicator pairing the Ci-VSP voltage-sensing domain with novel coral-derived mUKG donor and mKOk acceptor fluorescent proteins, enabling ratiometric voltage imaging in excitable cells.",
+  "familyTreePath": [
+    "GEVI",
+    "VSD",
+    "VSD-FRET",
+    "mermaid"
   ],
   "spectrum": {
     "type": "fret",
-    "peakEx": 440,
-    "peakEm": 530,
+    "peakEx": 483,
+    "peakEm": 563,
     "name": "Mermaid"
   },
   "voltage": {
     "type": "fret",
-    "slope": 9.2,
-    "polarity": "negative",
-    "name": "Mermaid"
+    "slope": 40,
+    "polarity": "positive",
+    "name": "Mermaid",
+    "custom": {
+      "voltage": [-120, -100, -80, -70, -60, -40, -20, 0, 20, 40],
+      "deltaF":  [-10, -7, -3, 0, 3, 13, 24, 31, 35, 38]
+    }
   },
-
+  "kinetics": [
+    {
+      "on": 8,
+      "off": 15,
+      "temperature": "33°C",
+      "source": "doi:10.1038/nmeth.1235"
+    },
+    {
+      "on": 12,
+      "off": 23,
+      "temperature": "35-37°C",
+      "source": "doi:10.1371/journal.pone.0043454"
+    }
+  ],
   "dynamicRangeData": [
     {
-      "deltaF": -9.2,
-      "sign": "negative",
-      "source": "doi:10.1038/nmeth.1782"
+      "deltaF": 40,
+      "sign": "positive",
+      "source": "doi:10.1038/nmeth.1235"
+    }
+  ],
+  "brightnessData": [
+    {
+      "ratio": 1.286,
+      "reference": "EGFP",
+      "source": "doi:10.1038/nmeth.1235"
+    }
+  ],
+
+  "sensitivityData": [
+    {
+      "deltaF": 6.2,
+      "source": "doi:10.1038/nmeth.1235"
+    }
+  ],
+  "photostabilityData": [
+    {
+      "brightnessRemaining": 20,
+      "illumination": "4.08 mW/mm²",
+      "duration": "2.5 min",
+      "source": "doi:10.1038/nmeth.1235"
+    }
+  ],
+
+  "researchPapers": [
+    {
+      "title": "Visualizing voltage dynamics in zebrafish heart",
+      "authors": "Tsutsui H, et al.",
+      "journal": "The Journal of Physiology",
+      "year": 2010,
+      "sample": "Zebrafish, heart, in vivo",
+      "url": "https://doi.org/10.1113/jphysiol.2010.189126"
+    },
+    {
+      "title": "Optical action potential screening on adult ventricular myocytes as an alternative QT-screen",
+      "authors": "Tian Q, et al.",
+      "journal": "Cellular Physiology and Biochemistry",
+      "year": 2011,
+      "sample": "Rat, ventricular myocytes, in vitro",
+      "url": "https://doi.org/10.1159/000327954"
+    },
+    {
+      "title": "Neural coding in a single sensory neuron controlling opposite seeking behaviours in Caenorhabditis elegans",
+      "authors": "Kuhara A, et al.",
+      "journal": "Nature Communications",
+      "year": 2011,
+      "sample": "C. elegans, in vivo",
+      "url": "https://doi.org/10.1038/ncomms1352"
+    },
+    {
+      "title": "Rapid evaluation of a protein-based voltage probe using a field-induced membrane potential change",
+      "authors": "Tsutsui H, et al.",
+      "journal": "Biochimica et Biophysica Acta",
+      "year": 2014,
+      "sample": "HEK293 cells, in vitro",
+      "url": "https://doi.org/10.1016/j.bbamem.2014.03.002"
+    },
+    {
+      "title": "INaP selective inhibition reverts precocious inter- and motorneurons hyperexcitability in the Sod1-G93R zebrafish ALS model",
+      "authors": "Benedetti L, et al.",
+      "journal": "Scientific Reports",
+      "year": 2016,
+      "sample": "Zebrafish, spinal motor neurons, in vivo",
+      "url": "https://doi.org/10.1038/srep24515"
+    },
+    {
+      "title": "Biosensing Motor Neuron Membrane Potential in Live Zebrafish Embryos",
+      "authors": "Benedetti L, et al.",
+      "journal": "Journal of Visualized Experiments",
+      "year": 2017,
+      "sample": "Zebrafish, motor neurons, in vivo",
+      "url": "https://doi.org/10.3791/55297"
+    },
+    {
+      "title": "Tracking the sarcoplasmic reticulum membrane voltage in muscle with a FRET biosensor",
+      "authors": "Sanchez C, et al.",
+      "journal": "The Journal of General Physiology",
+      "year": 2018,
+      "sample": "Mouse, skeletal muscle fibers, in vitro",
+      "url": "https://doi.org/10.1085/jgp.201812035"
+    },
+    {
+      "title": "Use of FRET-Sensor 'Mermaid' to Detect Subtle Changes in Membrane Potential of Primary Mouse PASMCs",
+      "authors": "Dartsch RC, et al.",
+      "journal": "Cells",
+      "year": 2024,
+      "sample": "Mouse, pulmonary arterial smooth muscle cells, in vitro",
+      "url": "https://doi.org/10.3390/cells13121070"
     }
   ]
 }

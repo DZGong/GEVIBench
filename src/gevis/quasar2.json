@@ -94,6 +94,7 @@
     }
   ],
   "parentId": "arch",
+  "siblingId": "quasar1",
   "spectrum": {
     "type": "rhodopsin",
     "peakEx": 590,

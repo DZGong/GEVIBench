@@ -66,7 +66,7 @@ Every raw data entry must include a `source` field (DOI string, e.g. `"doi:10.10
 | `sensitivityData` | Array of `{ deltaF, source }`. ΔF/F% per single action potential (always positive). |
 | `subthresholdData` | Array of `{ slope, source }`. Subthreshold sensitivity in %/mV, always positive. Look for it in voltage-clamp ramps or step responses in the subthreshold range (typically −90 to −50 mV). |
 | `brightnessData` | Array of `{ ratio, reference, source }` — see step B2. |
-| `photostabilityData` | Array of `{ brightnessRemaining, illumination, duration, source }`. If the paper reports multiple measurements, include **one entry per paper**: select the measurement with duration closest to 1 min, breaking ties by intensity closest to 10 mW/mm². |
+| `photostabilityData` | Array of `{ brightnessRemaining, illumination, duration, source }`. If the paper reports multiple measurements, include **one entry per paper**: select the measurement with duration closest to 1 min, breaking ties by intensity closest to 10 mW/mm². **Bioluminescent GEVIs:** If the GEVI is bioluminescent (no excitation light, e.g. uses NanoLuc/luciferase), set `"photostabilityData": "bioluminescent"` instead of an array — the scoring system will assign a score of 100 automatically. |
 | `researchPapers` | Exhaustive list of independent papers that used this GEVI for voltage imaging — see step C. The popularity subscore is computed automatically from `researchPapers.length`. **Do NOT set `paperCount`** — it is derived from `researchPapers` at runtime. |
 
 Omit a raw data field entirely if the paper does not report that measurement — do not include an empty array.
@@ -124,7 +124,11 @@ Rules:
 - `reference` must be an exact GEVI `id` as found in `src/gevis/*.json`, or `"EGFP"` for EGFP
 - Multiple entries are allowed — record every comparison found in the paper
 - If only a non-EGFP comparison is available, record it anyway; it will be used in graph traversal to infer the EGFP ratio later
-- If no brightness data is found, omit `brightnessData` entirely (do not include an empty array)
+- If no direct brightness comparison or EC×QY data is found, try these fallback approaches before giving up:
+  1. **Component FP estimation (for FRET constructs):** Use the QY and EC of the primary imaging-channel fluorescent protein (typically the acceptor). Compute `ratio = (FP_EC × FP_QY) / (EGFP_EC × EGFP_QY)`. Note it as an estimate in the `source` field (e.g., `"Estimated from Citrine QY=0.76, EC=77000 vs EGFP QY=0.60, EC=56000"`).
+  2. **SBR or SNR comparisons:** If a paper reports signal-to-background ratio or signal-to-noise ratio relative to another GEVI, this can serve as a proxy brightness comparison. Record as `brightnessData` with the compared GEVI as `reference`.
+  3. **Relative fluorescence intensity:** If a paper reports "X was N× more fluorescent than Y" or shows normalized intensity bar charts, use this as a brightness ratio.
+- Only omit `brightnessData` entirely if none of the above approaches yield a usable estimate
 
 The `brightness` score is computed automatically by the website from `brightnessData`. Do not set it manually.
 

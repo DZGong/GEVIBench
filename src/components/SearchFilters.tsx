@@ -25,7 +25,7 @@ export function SearchFilters({
   const { darkMode } = useTheme();
 
   return (
-    <div className={`border rounded-lg p-3 md:p-4 mb-3 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-gray-50 border-gray-200'}`}>
+    <div className={`border rounded-lg p-3 md:p-4 mb-3 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-paper-dark border-gray-200'}`}>
       <div className="space-y-3">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
@@ -34,7 +34,7 @@ export function SearchFilters({
             placeholder="Search sensors..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className={`w-full pl-10 pr-8 py-2 text-sm md:text-base border rounded-md focus:outline-none focus:border-blue-900 ${darkMode ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' : 'border-gray-300 text-gray-900'}`}
+            className={`w-full pl-10 pr-8 py-2 text-sm md:text-base border rounded-md focus:outline-none focus:border-blue-900 ${darkMode ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400' : 'bg-paper border-gray-300 text-gray-900'}`}
           />
           {searchTerm && (
             <button
@@ -50,7 +50,7 @@ export function SearchFilters({
           <select
             value={categoryFilter}
             onChange={(e) => setCategoryFilter(e.target.value)}
-            className={`flex-1 min-w-[120px] px-2 py-2 text-sm border rounded-md ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'border-gray-300'}`}
+            className={`flex-1 min-w-[120px] px-2 py-2 text-sm border rounded-md ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-paper border-gray-300'}`}
           >
             {categories.map((cat) => (
               <option key={cat} value={cat}>{cat === 'All' ? 'All Categories' : cat}</option>
@@ -59,7 +59,7 @@ export function SearchFilters({
           <select
             value={yearFilter}
             onChange={(e) => setYearFilter(e.target.value)}
-            className={`flex-1 min-w-[100px] px-2 py-2 text-sm border rounded-md ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'border-gray-300'}`}
+            className={`flex-1 min-w-[100px] px-2 py-2 text-sm border rounded-md ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-paper border-gray-300'}`}
           >
             {years.map((year) => (
               <option key={year} value={year}>{year === 'All' ? 'All Years' : year}</option>
@@ -68,7 +68,7 @@ export function SearchFilters({
           <select
             value={sortConfig.field}
             onChange={(e) => onSortChange(e.target.value as SortField)}
-            className={`flex-1 min-w-[120px] px-2 py-2 text-sm border rounded-md ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'border-gray-300'}`}
+            className={`flex-1 min-w-[120px] px-2 py-2 text-sm border rounded-md ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-paper border-gray-300'}`}
           >
             <option value="overall">Overall</option>
             <option value="brightness">Brightness</option>

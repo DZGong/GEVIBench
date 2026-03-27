@@ -12,6 +12,7 @@
   "paperUrl": "https://doi.org/10.1038/s41589-018-0004-9",
   "description": "Robotically evolved archaerhodopsin variant with improved brightness, millisecond kinetics, and exceptional photostability for long-duration recordings.",
   "parentId": "arch",
+  "siblingId": "archon2",
   "spectrum": {
     "type": "rhodopsin",
     "peakEx": 637,
@@ -42,11 +43,11 @@
       "source": "doi:10.1016/j.cell.2019.11.004"
     },
     {
-      "on": 2.5,
-      "off": 2,
-      "source": "doi:10.1101/2021.11.09.467909",
-      "note": "Bi-exponential fast component at 22°C in spiking HEK cells (93% on, 94% off); slow τ_on=13 ms, slow τ_off=17 ms",
-      "temperature": "22°C"
+      "on": 2.2,
+      "off": 1.6,
+      "source": "doi:10.1038/s41592-022-01743-5",
+      "note": "Bi-exponential fast component in HEK293T cells at 30°C, n=6 cells",
+      "temperature": "30°C"
     }
   ],
   "dynamicRangeData": [
@@ -68,8 +69,8 @@
     {
       "deltaF": 70,
       "sign": "positive",
-      "source": "doi:10.1101/2021.11.09.467909",
-      "note": "Per 100 mV step in spiking HEK cells at 22°C"
+      "source": "doi:10.1038/s41592-022-01743-5",
+      "note": "Per 100 mV step in HEK293T cells, n=4 cells"
     }
   ],
   "sensitivityData": [
@@ -84,7 +85,7 @@
   ],
   "brightnessData": [
     {
-      "ratio": 28,
+      "ratio": 80,
       "reference": "arch",
       "source": "doi:10.1021/acschemneuro.0c00046"
     },
@@ -100,6 +101,12 @@
       "illumination": "800 mW/mm²",
       "duration": "15 min",
       "source": "doi:10.1038/s41589-018-0004-9"
+    },
+    {
+      "brightnessRemaining": 62,
+      "illumination": "4200 mW/mm²",
+      "duration": "10 min",
+      "source": "doi:10.1038/s41592-022-01743-5"
     }
   ],
   "twoPhoton": [

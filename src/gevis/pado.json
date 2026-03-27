@@ -2,17 +2,15 @@
   "id": "pado",
   "name": "Pado",
   "year": 2016,
-  "category": "FP-based",
+  "category": "VSD-single FP",
+  "tags": [
+    "pHluorin",
+    "Green",
+    "Hv-VSD"
+  ],
   "paper": "Scientific Reports 2016",
-  "paperUrl": "https://www.nature.com/articles/srep23865",
-  "brightness": 70,
-  "speed": 85,
-  "sensitivity": 65,
-  "dynamicRange": 62,
-  "photostability": 68,
-  "subthreshold": 72,
-  "overall": 69,
-  "description": "Rhodopsin-based sensor developed through machine learning-guided engineering, balancing speed and fluorescence properties.",
+  "paperUrl": "https://doi.org/10.1038/srep23865",
+  "description": "GEVI utilizing a voltage-sensing domain from a proton channel (Hv) of the Chinese Liver Fluke Clonorchis sinensis fused to Super Ecliptic pHluorin A227D, capable of optically reporting membrane potential, intracellular pH, and mapping gap junctions.",
   "familyTreePath": [
     "GEVI",
     "VSD",
@@ -20,15 +18,34 @@
     "pado"
   ],
   "spectrum": {
-    "type": "rhodopsin",
-    "peakEx": 560,
-    "peakEm": 590,
+    "type": "fp",
+    "peakEx": 490,
+    "peakEm": 510,
     "name": "Pado"
   },
   "voltage": {
-    "type": "opsin",
-    "slope": 16,
-    "polarity": "positive",
-    "name": "Pado"
-  }
+    "type": "fp",
+    "slope": 5,
+    "polarity": "negative",
+    "name": "Pado",
+    "custom": {
+      "voltage": [-70, -20, 30, 80, 130],
+      "deltaF":  [0, -1.5, -5, -6, -10]
+    }
+  },
+  "kinetics": [
+    {
+      "on": 30,
+      "off": 10,
+      "temperature": "35°C",
+      "source": "doi:10.1038/srep23865"
+    }
+  ],
+  "dynamicRangeData": [
+    {
+      "deltaF": -5,
+      "sign": "negative",
+      "source": "doi:10.1038/srep23865"
+    }
+  ]
 }

@@ -35,7 +35,7 @@ export interface GEVI {
     illumination: string;
     duration: string;
     source: string;
-  }[];
+  }[] | 'bioluminescent';
   twoPhoton?: {
     compatible: boolean;
     source: string;
@@ -51,6 +51,7 @@ export interface GEVI {
   description: string;
   familyTreePath?: string[] | null;
   parentId?: string;
+  siblingId?: string;  // geviId of a sibling (same parent, same paper) — renders as Y-fork in tree
   crossBranchParentId?: string;  // geviId of a parent in a different branch
   spectrum?: {
     type: 'fp' | 'rhodopsin' | 'nir' | 'fret' | 'redfp';
@@ -58,8 +59,8 @@ export interface GEVI {
     peakEm: number;
     name: string;
     custom?: {
-      minEx: number;
-      excitation: number[];
+      minEx?: number;
+      excitation?: number[];
       minEm: number;
       emission: number[];
     };
@@ -123,4 +124,5 @@ export interface TreeNode {
   year?: number;
   children?: Record<string, TreeNode>;
   geviId?: string;
+  isFork?: boolean;  // invisible Y-fork node grouping siblings
 }

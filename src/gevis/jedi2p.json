@@ -14,6 +14,7 @@
   "paperUrl": "https://doi.org/10.1016/j.cell.2022.07.013",
   "description": "Two-photon optimized GEVI evolved from ASAP2s via multiparameter high-throughput screening, enabling sustained deep-tissue voltage recording with improved brightness, photostability, and sensitivity under two-photon illumination.",
   "parentId": "asap2s",
+  "siblingId": "jedi1p",
   "spectrum": {
     "type": "fp",
     "peakEx": 489,

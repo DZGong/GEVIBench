@@ -162,7 +162,9 @@ function photostabilityScore(brightnessRemaining: number, illumination: string, 
 }
 
 function computePhotostability(gevi: GEVI): number | null {
-  if (!gevi.photostabilityData || gevi.photostabilityData.length === 0) return null;
+  // Bioluminescent GEVIs have no photobleaching — score 100
+  if (gevi.photostabilityData === 'bioluminescent') return 100;
+  if (!gevi.photostabilityData || !Array.isArray(gevi.photostabilityData) || gevi.photostabilityData.length === 0) return null;
 
   const withParsed = gevi.photostabilityData.map(entry => {
     const powerMatch = entry.illumination.match(/([\d.]+)\s*mW\/mm[²2]/);
@@ -252,7 +254,7 @@ export function getAllGEVIs(): GEVI[] {
     const raw = { ...imported };
     const normalize = (key: string) => {
       const val = raw[key];
-      if (val && !Array.isArray(val)) raw[key] = [val];
+      if (val && !Array.isArray(val) && typeof val !== 'string') raw[key] = [val];
     };
     normalize('kinetics');
     normalize('dynamicRangeData');

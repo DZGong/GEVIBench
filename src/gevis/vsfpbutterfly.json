@@ -1,34 +1,234 @@
 {
   "id": "vsfpbutterfly",
   "name": "VSFP-Butterfly",
-  "year": 2010,
+  "year": 2012,
   "category": "VSD-FRET GEVI",
   "tags": [
     "Ci-VSP",
-    "CFP/YFP",
-    "FRET"
+    "mCitrine/mKate2",
+    "FRET",
+    "In vivo",
+    "Two-photon"
   ],
-  "paper": "Nature Methods 2010",
-  "paperUrl": "https://doi.org/10.1038/nmeth.1492",
-  "brightness": 40,
-  "speed": 55,
-  "sensitivity": 38,
-  "dynamicRange": 35,
-  "photostability": 45,
-  "subthreshold": 38,
-  "overall": 40,
-  "description": "VSFP variant with improved membrane targeting and FRET efficiency for better voltage sensitivity.",
+  "paper": "J. Neurophysiol. 2012",
+  "paperUrl": "https://doi.org/10.1152/jn.00452.2012",
+  "description": "FRET-based GEVI with a novel 'Butterfly' topology where the voltage-sensing domain is sandwiched between the mCitrine donor and mKate2 acceptor, enabling ratiometric voltage imaging of cortical population activity in awake behaving mice.",
   "parentId": "vsfp2",
   "spectrum": {
     "type": "fret",
-    "peakEx": 440,
-    "peakEm": 530,
-    "name": "VSFP-Butterfly"
+    "peakEx": 516,
+    "peakEm": 529,
+    "name": "VSFP-Butterfly",
+    "custom": {
+      "minEx": 380,
+      "excitation": [0.0136, 0.0142, 0.0141, 0.0144, 0.0138, 0.014, 0.0144, 0.0154, 0.0151, 0.0147, 0.015, 0.0144, 0.0147, 0.0149, 0.0147, 0.0152, 0.015, 0.0158, 0.016, 0.0164, 0.0165, 0.0167, 0.0168, 0.017, 0.0166, 0.0181, 0.0179, 0.018, 0.0191, 0.0189, 0.0181, 0.0184, 0.0184, 0.0191, 0.0184, 0.0187, 0.0188, 0.0193, 0.02, 0.0199, 0.0209, 0.0204, 0.0206, 0.0213, 0.0208, 0.0219, 0.0217, 0.0222, 0.0226, 0.0233, 0.0239, 0.0244, 0.0244, 0.0253, 0.0255, 0.0269, 0.0273, 0.028, 0.0292, 0.0306, 0.0322, 0.0335, 0.0353, 0.0369, 0.0389, 0.0405, 0.0434, 0.0456, 0.0481, 0.0512, 0.0542, 0.0573, 0.0605, 0.0636, 0.0662, 0.0698, 0.0731, 0.0758, 0.0799, 0.0837, 0.0881, 0.0929, 0.0977, 0.103, 0.1084, 0.1145, 0.1208, 0.1277, 0.1363, 0.1453, 0.1552, 0.1661, 0.178, 0.191, 0.2055, 0.2198, 0.2353, 0.2507, 0.2653, 0.281, 0.2942, 0.3067, 0.3181, 0.327, 0.3352, 0.3411, 0.3466, 0.3512, 0.354, 0.3584, 0.3617, 0.3667, 0.3729, 0.379, 0.3881, 0.3982, 0.4088, 0.4222, 0.4377, 0.4556, 0.4762, 0.4999, 0.5266, 0.557, 0.5918, 0.6292, 0.6705, 0.7152, 0.7607, 0.8086, 0.8545, 0.8989, 0.9372, 0.969, 0.9901, 1.0, 0.9959, 0.9768, 0.944, 0.8975, 0.8416, 0.776, 0.7062, 0.6333, 0.5618, 0.4915, 0.4256, 0.3655, 0.3104, 0.2618, 0.2195, 0.1818, 0.1497, 0.1234, 0.1008, 0.0821, 0.0675, 0.0552, 0.0451, 0.0367, 0.0307, 0.0257, 0.0215, 0.0184, 0.0152, 0.0126, 0.0107, 0.0092, 0.0081, 0.0073, 0.0063],
+      "minEm": 484,
+      "emission": [0.0017, 0.0018, 0.0019, 0.0021, 0.0023, 0.0025, 0.0027, 0.0031, 0.0035, 0.0039, 0.0047, 0.0055, 0.0065, 0.0078, 0.0092, 0.0114, 0.0136, 0.0166, 0.0202, 0.026, 0.0316, 0.0403, 0.0501, 0.064, 0.0788, 0.0998, 0.1232, 0.1529, 0.1865, 0.2266, 0.2721, 0.3223, 0.381, 0.4432, 0.5122, 0.581, 0.6472, 0.7153, 0.7808, 0.838, 0.8903, 0.9312, 0.9661, 0.9874, 0.999, 1.0, 1.0, 0.9832, 0.9622, 0.9413, 0.9095, 0.8783, 0.8467, 0.8126, 0.7782, 0.743, 0.7101, 0.6811, 0.6504, 0.6205, 0.5949, 0.5676, 0.5466, 0.5219, 0.5027, 0.484, 0.4656, 0.4522, 0.4369, 0.4238, 0.4152, 0.4009, 0.3929, 0.3857, 0.3764, 0.3718, 0.3632, 0.3553, 0.3477, 0.342, 0.3348, 0.3271, 0.3181, 0.3109, 0.3018, 0.2938, 0.288, 0.2774, 0.2708, 0.2602, 0.2504, 0.2427, 0.2362, 0.2231, 0.2153, 0.2086, 0.1995, 0.1911, 0.1844, 0.1756, 0.1673, 0.1609, 0.1543, 0.1475, 0.1418, 0.1352, 0.1303, 0.1241, 0.1192, 0.114, 0.1095, 0.1062, 0.1008, 0.0972, 0.0935, 0.0892, 0.0871, 0.0836, 0.081, 0.0794, 0.0743, 0.0719, 0.0715, 0.0674, 0.0652, 0.0645, 0.0622, 0.0596, 0.0572, 0.0562, 0.0538, 0.053, 0.0518, 0.0506, 0.0478, 0.0464, 0.045, 0.0437, 0.0426, 0.0409, 0.0399, 0.0398, 0.037, 0.0354, 0.0355, 0.0339, 0.0324, 0.0318, 0.0303, 0.0296, 0.028, 0.0276, 0.0273, 0.0263, 0.0255, 0.0237, 0.0234, 0.0216, 0.0217, 0.0213, 0.0209, 0.0203, 0.0193, 0.0185, 0.0179, 0.0172, 0.0162]
+    }
   },
   "voltage": {
     "type": "fret",
     "slope": 14,
     "polarity": "negative",
-    "name": "VSFP-Butterfly"
-  }
+    "name": "VSFP-Butterfly",
+    "custom": {
+      "voltage": [-140, -120, -100, -80, -60, -40, -20, 0, 20, 40, 60],
+      "deltaF": [6.3, 5.9, 4.8, 2.3, -2.1, -5.7, -7.5, -8.3, -8.6, -8.7, -8.7]
+    }
+  },
+  "kinetics": [
+    {
+      "on": 7.7,
+      "off": 89.9,
+      "temperature": "room temperature",
+      "source": "doi:10.1152/jn.00452.2012"
+    }
+  ],
+  "dynamicRangeData": [
+    {
+      "deltaF": -15,
+      "sign": "negative",
+      "source": "doi:10.3389/fnmol.2014.00078"
+    }
+  ],
+  "sensitivityData": [
+    {
+      "deltaF": 0.3,
+      "source": "doi:10.1152/jn.00452.2012"
+    }
+  ],
+  "photostabilityData": [
+    {
+      "brightnessRemaining": 81,
+      "illumination": "35 mW/mm²",
+      "duration": "1 min",
+      "source": "doi:10.1039/C8IB00063H",
+      "note": "Approximated from mCitrine donor FP in vitro t1/2=3.3min at 35 mW/mm² white light"
+    }
+  ],
+  "brightnessData": [
+    {
+      "ratio": 1.74,
+      "reference": "EGFP",
+      "source": "Estimated from mCitrine QY=0.76, EC=77000 vs EGFP QY=0.60, EC=56000"
+    }
+  ],
+  "addgene": {
+    "id": "47978",
+    "url": "https://www.addgene.org/47978/"
+  },
+  "researchPapers": [
+    {
+      "title": "Two-photon voltage imaging using a genetically encoded voltage indicator",
+      "authors": "Akemann W, et al.",
+      "journal": "Scientific Reports",
+      "year": 2013,
+      "sample": "Mouse, cortex layer 2/3, brain slices; mouse, somatosensory cortex, in vivo",
+      "url": "https://doi.org/10.1038/srep02231"
+    },
+    {
+      "title": "Voltage imaging of waking mouse cortex reveals emergence of critical neuronal dynamics",
+      "authors": "Scott G, et al.",
+      "journal": "Journal of Neuroscience",
+      "year": 2014,
+      "sample": "Mouse, cortex, in vivo",
+      "url": "https://doi.org/10.1523/JNEUROSCI.3474-14.2014"
+    },
+    {
+      "title": "Imaging the awake visual cortex with a genetically encoded voltage indicator",
+      "authors": "Carandini M, et al.",
+      "journal": "Journal of Neuroscience",
+      "year": 2015,
+      "sample": "Mouse, visual cortex, in vivo, awake",
+      "url": "https://doi.org/10.1523/JNEUROSCI.0594-14.2015"
+    },
+    {
+      "title": "Validation of optical voltage reporting by the genetically encoded voltage indicator VSFP-Butterfly from cortical layer 2/3 pyramidal neurons in mouse brain slices",
+      "authors": "Empson RM, et al.",
+      "journal": "Physiological Reports",
+      "year": 2015,
+      "sample": "Mouse, cortex layer 2/3, brain slices",
+      "url": "https://doi.org/10.14814/phy2.12468"
+    },
+    {
+      "title": "Cortical entropy, mutual information and scale-free dynamics in waking mice",
+      "authors": "Fagerholm ED, et al.",
+      "journal": "Cerebral Cortex",
+      "year": 2016,
+      "sample": "Mouse, cortex, in vivo",
+      "url": "https://doi.org/10.1093/cercor/bhw200"
+    },
+    {
+      "title": "Transgenic strategies for sparse but strong expression of genetically encoded voltage and calcium indicators",
+      "authors": "Song C, et al.",
+      "journal": "International Journal of Molecular Sciences",
+      "year": 2017,
+      "sample": "Mouse, cortex layer 2/3, transgenic",
+      "url": "https://doi.org/10.3390/ijms18071461"
+    },
+    {
+      "title": "Imaging of brain slices with a genetically encoded voltage indicator",
+      "authors": "Quicke P, et al.",
+      "journal": "Methods in Molecular Biology",
+      "year": 2017,
+      "sample": "Mouse, cortex layer 2/3, brain slices",
+      "url": "https://doi.org/10.1007/978-1-4939-6810-7_5"
+    },
+    {
+      "title": "Cortical signatures of wakeful somatosensory processing",
+      "authors": "Song C, et al.",
+      "journal": "Scientific Reports",
+      "year": 2018,
+      "sample": "Mouse, somatosensory cortex, in vivo, awake",
+      "url": "https://doi.org/10.1038/s41598-018-30422-9"
+    },
+    {
+      "title": "Effects of arousal on mouse sensory cortex depend on modality",
+      "authors": "Shimaoka D, et al.",
+      "journal": "Cell Reports",
+      "year": 2018,
+      "sample": "Mouse, visual cortex; barrel cortex; auditory cortex, in vivo, awake",
+      "url": "https://doi.org/10.1016/j.celrep.2018.02.092"
+    },
+    {
+      "title": "Optogenetic sensors in the zebrafish heart: a novel in vivo electrophysiological tool to study cardiac arrhythmogenesis",
+      "authors": "van Opbergen CJM, et al.",
+      "journal": "Theranostics",
+      "year": 2018,
+      "sample": "Zebrafish, heart, in vivo",
+      "url": "https://doi.org/10.7150/thno.26108"
+    },
+    {
+      "title": "Slow moving neural source in the epileptic hippocampus can mimic progression of human seizures",
+      "authors": "Chiang CC, et al.",
+      "journal": "Scientific Reports",
+      "year": 2018,
+      "sample": "Mouse, hippocampal slices, in vitro",
+      "url": "https://doi.org/10.1038/s41598-018-19925-7"
+    },
+    {
+      "title": "In vitro testing of voltage indicators: Archon1, ArcLightD, ASAP1, ASAP2s, ASAP3b, Bongwoori-Pos6, BeRST1, FlicR1, and Chi-VSFP-Butterfly",
+      "authors": "Milosevic MM, et al.",
+      "journal": "eNeuro",
+      "year": 2020,
+      "sample": "Mouse, cortex, brain slices; HEK293 cells, in vitro",
+      "url": "https://doi.org/10.1523/ENEURO.0060-20.2020"
+    },
+    {
+      "title": "Subcellular resolution three-dimensional light-field imaging with genetically encoded voltage indicators",
+      "authors": "Quicke P, et al.",
+      "journal": "Neurophotonics",
+      "year": 2020,
+      "sample": "Mouse, brain slices, in vitro",
+      "url": "https://doi.org/10.1117/1.NPh.7.3.035006"
+    },
+    {
+      "title": "Population imaging discrepancies between a genetically-encoded calcium indicator (GECI) versus a genetically-encoded voltage indicator (GEVI)",
+      "authors": "Zhu MH, et al.",
+      "journal": "Scientific Reports",
+      "year": 2021,
+      "sample": "Mouse, somatosensory cortex, brain slices",
+      "url": "https://doi.org/10.1038/s41598-021-84651-6"
+    },
+    {
+      "title": "Studying synaptically evoked cortical responses ex vivo with combination of a single neuron recording (whole-cell) and population voltage imaging (genetically encoded voltage indicator)",
+      "authors": "Jang J, et al.",
+      "journal": "Frontiers in Neuroscience",
+      "year": 2021,
+      "sample": "Mouse, cortex, brain slices",
+      "url": "https://doi.org/10.3389/fnins.2021.773883"
+    },
+    {
+      "title": "Combining cortical voltage imaging and hippocampal electrophysiology for investigating global, multi-timescale activity interactions in the brain",
+      "authors": "Pedrosa R, et al.",
+      "journal": "International Journal of Molecular Sciences",
+      "year": 2022,
+      "sample": "Mouse, cortex; hippocampus, in vivo, awake",
+      "url": "https://doi.org/10.3390/ijms23126814"
+    },
+    {
+      "title": "Cortical correlates of psychedelic-induced shaking behavior revealed by voltage imaging",
+      "authors": "Buchborn T, et al.",
+      "journal": "International Journal of Molecular Sciences",
+      "year": 2023,
+      "sample": "Mouse, cortex layer 2/3, in vivo, awake",
+      "url": "https://doi.org/10.3390/ijms24119463"
+    },
+    {
+      "title": "Imaging of evoked cortical depolarizations using either ASAP2s, or chi-VSFP, or Di-4-Anepps, or autofluorescence optical signals",
+      "authors": "Milicevic KD, et al.",
+      "journal": "Journal of Integrative Neuroscience",
+      "year": 2023,
+      "sample": "Mouse, cortex, brain slices",
+      "url": "https://doi.org/10.31083/j.jin2206160"
+    },
+    {
+      "title": "Cortical networks relating to arousal are differentially coupled to neural activity and hemodynamics",
+      "authors": "Meyer-Baese L, et al.",
+      "journal": "Journal of Neuroscience",
+      "year": 2024,
+      "sample": "Mouse, cortex, in vivo, awake",
+      "url": "https://doi.org/10.1523/JNEUROSCI.0298-23.2024"
+    }
+  ]
 }

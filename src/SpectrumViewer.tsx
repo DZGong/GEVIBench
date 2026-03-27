@@ -3,6 +3,7 @@
 // Accepts spectrum data as props - no internal GEVI lookup
 
 import { useState, useRef, useCallback, useMemo } from 'react';
+import { wavelengthToColor } from './utils';
 
 interface SpectrumPoint {
   wavelength: number;
@@ -18,8 +19,8 @@ interface SpectrumConfig {
 }
 
 interface CustomSpectrum {
-  minEx: number;
-  excitation: number[];
+  minEx?: number;
+  excitation?: number[];
   minEm: number;
   emission: number[];
 }
@@ -35,29 +36,6 @@ interface SpectrumViewerProps {
   darkMode?: boolean;
 }
 
-// Convert a wavelength (nm) to an approximate visible color
-function wavelengthToColor(nm: number): string {
-  let r = 0, g = 0, b = 0;
-  if      (nm < 380)             { r = 0.5; g = 0;   b = 0.8; }  // UV → violet
-  else if (nm < 440)             { r = (440 - nm) / 60; g = 0; b = 1; }
-  else if (nm < 490)             { r = 0; g = (nm - 440) / 50; b = 1; }
-  else if (nm < 510)             { r = 0; g = 1; b = (510 - nm) / 20; }
-  else if (nm < 580)             { r = (nm - 510) / 70; g = 1; b = 0; }
-  else if (nm < 645)             { r = 1; g = (645 - nm) / 65; b = 0; }
-  else if (nm <= 750)            { r = 1; g = 0; b = 0; }
-  else                           { r = 0.6; g = 0; b = 0; }       // NIR → dark red
-
-  // Dim at the edges of the visible range
-  let factor = 1;
-  if      (nm >= 380 && nm < 420) factor = 0.4 + 0.6 * (nm - 380) / 40;
-  else if (nm > 700 && nm <= 750) factor = 0.4 + 0.6 * (750 - nm) / 50;
-
-  const R = Math.round(255 * Math.min(1, r) * factor);
-  const G = Math.round(255 * Math.min(1, g) * factor);
-  const B = Math.round(255 * Math.min(1, b) * factor);
-  return `rgb(${R},${G},${B})`;
-}
-
 // Generate spectrum data for different protein types
 function generateSpectrum(type: 'fp' | 'rhodopsin' | 'nir' | 'fret' | 'redfp', peakEx: number, peakEm: number, custom?: CustomSpectrum): SpectrumPoint[] {
   // Check for custom spectrum data first
@@ -65,14 +43,17 @@ function generateSpectrum(type: 'fp' | 'rhodopsin' | 'nir' | 'fret' | 'redfp', p
     const data: SpectrumPoint[] = [];
 
     // Use the actual wavelength ranges for excitation and emission
-    const minWavelength = Math.min(custom.minEx, custom.minEm);
-    const maxWavelength = Math.max(custom.minEx + custom.excitation.length - 1, custom.minEm + custom.emission.length - 1);
+    const hasEx = custom.minEx != null && custom.excitation != null;
+    const minWavelength = hasEx ? Math.min(custom.minEx!, custom.minEm) : custom.minEm;
+    const maxWavelength = hasEx
+      ? Math.max(custom.minEx! + custom.excitation!.length - 1, custom.minEm + custom.emission.length - 1)
+      : custom.minEm + custom.emission.length - 1;
 
     for (let w = minWavelength; w <= maxWavelength; w++) {
       // Get excitation value if in range
       let exc = 0;
-      if (w >= custom.minEx && w < custom.minEx + custom.excitation.length) {
-        exc = custom.excitation[w - custom.minEx];
+      if (hasEx && w >= custom.minEx! && w < custom.minEx! + custom.excitation!.length) {
+        exc = custom.excitation![w - custom.minEx!];
       }
 
       // Get emission value if in range

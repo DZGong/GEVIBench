@@ -26,7 +26,7 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
   return (
     <div className={`border rounded-lg overflow-hidden sticky top-24 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-paper border-gray-200'}`}>
       {/* Header with sort dropdown */}
-      <div className={`p-3 border-b ${darkMode ? 'border-gray-700 bg-gray-750' : 'border-gray-200 bg-gray-50'} flex items-center justify-between gap-2`}>
+      <div className={`p-3 border-b ${darkMode ? 'border-gray-700 bg-gray-750' : 'border-gray-200 bg-paper-dark'} flex items-center justify-between gap-2`}>
         <span className={`text-sm font-medium ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>{gevis.length} sensors</span>
         <div className="flex items-center gap-1">
           <select
@@ -128,7 +128,7 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
                       <span className={`text-[10px] px-1 py-0.5 rounded flex items-center gap-0.5 ${darkMode ? 'bg-gray-600 text-gray-300' : 'bg-gray-100 text-gray-600'}`}><TrendingUp className="w-2.5 h-2.5" />{gevi.dynamicRange}</span>
                       <span className={`text-[10px] px-1 py-0.5 rounded flex items-center gap-0.5 ${darkMode ? 'bg-gray-600 text-gray-300' : 'bg-gray-100 text-gray-600'}`}><Shield className="w-2.5 h-2.5" />{gevi.photostability}</span>
                       <span className={`text-[10px] px-1 py-0.5 rounded flex items-center gap-0.5 ${darkMode ? 'bg-gray-600 text-gray-300' : 'bg-gray-100 text-gray-600'}`}><FileText className="w-2.5 h-2.5" />{gevi.paperCount || 0}</span>
-                      <span className="text-base font-bold text-blue-500 ml-1">{gevi[sortField] || 0}</span>
+                      <span className="text-base font-bold text-blue-500 ml-1">{gevi[sortField] ?? 'N/A'}</span>
                     </div>
                   </div>
                   

@@ -4,19 +4,17 @@
   "year": 2017,
   "category": "Bioluminescent GEVI",
   "tags": [
-    "Luminescent",
-    "VSD"
+    "Bioluminescent",
+    "FRET",
+    "NanoLuc",
+    "Venus",
+    "Ci-VSP",
+    "Positive-going",
+    "Ratiometric"
   ],
   "paper": "Scientific Reports 2017",
   "paperUrl": "https://doi.org/10.1038/srep42398",
-  "brightness": 25,
-  "speed": 45,
-  "sensitivity": 30,
-  "dynamicRange": 28,
-  "photostability": 85,
-  "subthreshold": 35,
-  "overall": 38,
-  "description": "Bioluminescent voltage indicator combining luminescent protein with voltage-sensing domain, eliminating excitation light.",
+  "description": "First bioluminescent FRET-based voltage indicator, enabling excitation-light-free ratiometric imaging fully compatible with optogenetic stimulation.",
   "familyTreePath": [
     "GEVI",
     "VSD",
@@ -24,15 +22,65 @@
     "lotusv"
   ],
   "spectrum": {
-    "type": "fp",
-    "peakEx": 490,
-    "peakEm": 510,
-    "name": "LOTUS-V"
+    "type": "fret",
+    "peakEx": 455,
+    "peakEm": 528,
+    "name": "LOTUS-V",
+    "custom": {
+      "minEm": 380,
+      "emission": [0.02,0.04,0.07,0.12,0.18,0.26,0.36,0.48,0.60,0.72,0.82,0.90,0.96,1.0,0.98,0.94,0.88,0.80,0.72,0.64,0.56,0.50,0.46,0.42,0.40,0.39,0.40,0.42,0.46,0.50,0.55,0.60,0.66,0.72,0.78,0.83,0.88,0.92,0.95,0.97,0.98,0.97,0.95,0.92,0.88,0.83,0.77,0.70,0.62,0.54,0.46,0.38,0.31,0.24,0.18,0.13,0.09,0.06,0.04,0.02,0.01]
+    }
   },
   "voltage": {
-    "type": "fp",
-    "slope": 9,
+    "type": "fret",
+    "slope": 21,
     "polarity": "positive",
-    "name": "LOTUS-V"
-  }
+    "name": "LOTUS-V",
+    "custom": {
+      "voltage": [-107, -70, -37, 4, 30, 63],
+      "deltaF": [-5, 0, 5, 13, 21, 26]
+    }
+  },
+  "kinetics": [
+    {
+      "on": 3.09,
+      "off": 6.12,
+      "source": "doi:10.1038/srep42398"
+    }
+  ],
+  "brightnessData": [
+    {
+      "ratio": 0.586,
+      "reference": "arclight",
+      "source": "doi:10.1038/srep42398"
+    }
+  ],
+  "dynamicRangeData": [
+    {
+      "deltaF": 21,
+      "sign": "positive",
+      "source": "doi:10.1038/srep42398"
+    }
+  ],
+  "photostabilityData": "bioluminescent",
+  "sensitivityData": [
+    {
+      "deltaF": 2.8,
+      "source": "doi:10.1038/s41598-019-43897-x"
+    }
+  ],
+  "addgene": {
+    "id": "87127",
+    "url": "https://www.addgene.org/87127/"
+  },
+  "researchPapers": [
+    {
+      "title": "Imaging local brain activity of multiple freely moving mice sharing the same environment",
+      "authors": "Inagaki S, et al.",
+      "journal": "Scientific Reports",
+      "year": 2019,
+      "sample": "Mouse, visual cortex, in vivo; rat, hippocampal neurons, in vitro",
+      "url": "https://doi.org/10.1038/s41598-019-43897-x"
+    }
+  ]
 }

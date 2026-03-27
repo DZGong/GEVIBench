@@ -61,6 +61,7 @@ interface LayoutNode {
   y: number;
   geviId?: string;
   color: string;
+  isFork?: boolean;
 }
 
 interface LayoutLink {
@@ -92,11 +93,12 @@ function layoutTree(node: TreeNode, x: number, y: number, depth = 0): LayoutResu
   const links: LayoutLink[] = [];
   const isLeaf = !!node.geviId;
   const isRoot = depth === 0;
+  const isFork = !!node.isFork;
   const color = isLeaf ? getTreeNodeColor({ name: node.name }) : '#9ca3af';
 
   // If no children, this is a leaf
   if (!node.children || Object.keys(node.children).length === 0) {
-    nodes.push({ id: node.name, name: node.name, year: node.year, x, y, geviId: node.geviId, color });
+    nodes.push({ id: node.name, name: node.name, year: node.year, x, y, geviId: node.geviId, color, isFork });
     const hw = MIN_NODE_WIDTH / 2;
     return {
       nodes, links, width: MIN_NODE_WIDTH, maxY: y,
@@ -106,6 +108,9 @@ function layoutTree(node: TreeNode, x: number, y: number, depth = 0): LayoutResu
   }
 
   const childKeys = Object.keys(node.children);
+
+  // Fork nodes use reduced vertical spacing for the Y-fork effect
+  const forkLevelHeight = Math.round(LEVEL_HEIGHT * 0.45);
 
   // Stagger amount decays with depth: large near root, zero for deep nodes.
   // Leaf children (no grandchildren) get NO stagger — they stay at the same y
@@ -121,7 +126,8 @@ function layoutTree(node: TreeNode, x: number, y: number, depth = 0): LayoutResu
     const childIsBranch = !!(childNode.children && Object.keys(childNode.children).length > 0);
     const stagger = childIsBranch ? branchChildIndex * effectiveStagger : 0;
     if (childIsBranch) branchChildIndex++;
-    const childY = y + LEVEL_HEIGHT + stagger;
+    const levelH = isFork ? forkLevelHeight : LEVEL_HEIGHT;
+    const childY = y + levelH + stagger;
     const result = layoutTree(childNode, 0, childY, depth + 1);
     childLayouts.push({ key, result });
   }
@@ -164,8 +170,8 @@ function layoutTree(node: TreeNode, x: number, y: number, depth = 0): LayoutResu
   const centerShift = x - (leftmostX + rightmostX) / 2;
   for (let i = 0; i < offsets.length; i++) offsets[i] += centerShift;
 
-  // Position this node
-  nodes.push({ id: node.name, name: node.name, year: node.year, x, y, geviId: node.geviId, color });
+  // Position this node (fork nodes are invisible junction points)
+  nodes.push({ id: node.name, name: node.name, year: node.year, x, y, geviId: node.geviId, color, isFork });
 
   let maxY = y;
 
@@ -188,18 +194,20 @@ function layoutTree(node: TreeNode, x: number, y: number, depth = 0): LayoutResu
 
     // Link from parent to this child subtree root
     const childRootNode = result.nodes[0];
+    const fromOffset = isFork ? 0 : NODE_RADIUS_BRANCH + 2;
+    const toOffset = childRootNode.isFork ? 0 : NODE_RADIUS_BRANCH + 2;
     links.push({
       fromX: x,
-      fromY: y + NODE_RADIUS_BRANCH + 2,
+      fromY: y + fromOffset,
       toX: childRootNode.x + offsetX,
-      toY: childRootNode.y - NODE_RADIUS_BRANCH - 2,
+      toY: childRootNode.y - toOffset,
     });
 
     maxY = Math.max(maxY, result.maxY);
   }
 
   // Build parent contour = this node + union of all shifted children contours
-  const hw = isRoot ? 10 : (node.geviId ? MIN_NODE_WIDTH / 2 : NODE_RADIUS_BRANCH + 2);
+  const hw = isRoot ? 10 : isFork ? 2 : (node.geviId ? MIN_NODE_WIDTH / 2 : NODE_RADIUS_BRANCH + 2);
   const leftContour = new Map<number, number>([[y, x - hw]]);
   const rightContour = new Map<number, number>([[y, x + hw]]);
   for (let i = 0; i < childLayouts.length; i++) {
@@ -269,6 +277,45 @@ function buildTreeFromPaths(gevis: GEVI[]): TreeNode {
       node = node.children[key];
     }
   }
+
+  // Group siblings under Y-fork nodes.
+  // When two children of the same parent both have siblingId pointing at each other,
+  // replace them with a single fork node that has them as its two children.
+  function groupSiblings(n: TreeNode) {
+    if (!n.children) return;
+    for (const child of Object.values(n.children)) groupSiblings(child);
+
+    const childKeys = Object.keys(n.children);
+    const grouped = new Set<string>();
+    const newChildren: Record<string, TreeNode> = {};
+
+    for (const key of childKeys) {
+      if (grouped.has(key)) continue;
+      const child = n.children[key];
+      const childGevi = child.geviId ? geviById.get(child.geviId) : null;
+      const sibId = childGevi?.siblingId;
+
+      // Check if sibling is also a direct child of this same parent
+      if (sibId && n.children[sibId] && !grouped.has(sibId)) {
+        const sibChild = n.children[sibId];
+        grouped.add(key);
+        grouped.add(sibId);
+
+        // Create a fork node with both siblings as children
+        const forkNode: TreeNode = {
+          name: '',
+          isFork: true,
+          children: { [key]: child, [sibId]: sibChild },
+        };
+        newChildren[`_fork_${key}_${sibId}`] = forkNode;
+      } else {
+        newChildren[key] = child;
+      }
+    }
+
+    n.children = newChildren;
+  }
+  groupSiblings(root);
 
   // Prune empty children objects.
   function prune(n: TreeNode) {
@@ -449,6 +496,9 @@ export function FamilyTreePanel({
             const isLeaf = !!node.geviId;
             const isRoot = i === 0 && node.name === 'GEVI';
             const radius = isRoot ? 10 : isLeaf ? NODE_RADIUS_LEAF : NODE_RADIUS_BRANCH;
+
+            // Fork nodes are invisible junction points — don't render
+            if (node.isFork) return null;
 
             return (
               <g
