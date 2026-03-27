@@ -9,31 +9,13 @@
   ],
   "paper": "Neuron 2012",
   "paperUrl": "https://www.cell.com/neuron/fulltext/S0896-6273(12)00704-0",
-  "brightness": 100,
-  "speed": 30,
-  "snr": 29,
-  "dynamicRange": 59,
-  "photostability": 80,
-  "subthreshold": 50,
-  "overall": 45,
   "description": "Classic genetically encoded voltage indicator using a voltage-sensing domain fused to pH-sensitive GFP, producing large fluorescence decreases during depolarization.",
-  "researchPapers": [
-    {
-      "title": "Genetically expressed voltage sensor ArcLight for imaging large-scale neuronal activity",
-      "journal": "Journal of Neuroscience",
-      "year": 2012,
-      "authors": "Cao H, et al.",
-      "sample": "In vivo mouse olfactory bulb",
-      "dye": "N/A (genetically encoded)",
-      "url": "https://www.jneurosci.org/content/32/27/9332"
-    }
-  ],
-  "familyTreePath":[
+  "familyTreePath": [
     "GEVI",
     "VSD",
     "VSD-single",
     "arclight"
-   ],
+  ],
   "crossBranchParentId": "mermaid",
   "spectrum": {
     "type": "fp",
@@ -43,8 +25,474 @@
   },
   "voltage": {
     "type": "fp",
-    "slope": 20,
     "polarity": "negative",
     "name": "ArcLight"
-  }
+  },
+  "kinetics": [
+    {
+      "on": 9,
+      "off": 17,
+      "temperature": "room temperature",
+      "source": "doi:10.1016/j.neuron.2012.06.040"
+    },
+    {
+      "on": 9,
+      "off": 17,
+      "temperature": "33-34°C",
+      "source": "doi:10.1016/j.cell.2019.11.004"
+    },
+    {
+      "on": 15,
+      "off": 45,
+      "temperature": "33-34°C",
+      "source": "doi:10.1038/nn.3709"
+    }
+  ],
+  "dynamicRangeData": [
+    {
+      "deltaF": -35,
+      "sign": "negative",
+      "source": "doi:10.1016/j.neuron.2012.06.040"
+    },
+    {
+      "deltaF": -29.6,
+      "sign": "negative",
+      "source": "doi:10.1523/ENEURO.0060-20.2020"
+    }
+  ],
+  "sensitivityData": [
+    {
+      "deltaF": 3.2,
+      "source": "doi:10.1016/j.neuron.2012.06.040"
+    },
+    {
+      "deltaF": 3.2,
+      "source": "doi:10.1016/j.cell.2019.11.004"
+    },
+    {
+      "deltaF": 2.2,
+      "source": "doi:10.1038/nn.3709"
+    },
+    {
+      "deltaF": 2.6,
+      "source": "doi:10.1021/acschemneuro.6b00234"
+    }
+  ],
+  "photostabilityData": [
+    {
+      "brightnessRemaining": 82,
+      "illumination": "100 mW/mm²",
+      "duration": "1 min",
+      "source": "doi:10.1523/JNEUROSCI.3590-15.2016"
+    },
+    {
+      "brightnessRemaining": 77,
+      "illumination": "11 mW/mm²",
+      "duration": "1 min",
+      "source": "doi:10.7554/eLife.25690"
+    }
+  ],
+  "brightnessData": [
+    {
+      "ratio": 1.097,
+      "reference": "EGFP",
+      "source": "doi:10.1016/j.cell.2019.11.004"
+    }
+  ],
+  "addgene": {
+    "id": "36856",
+    "url": "https://www.addgene.org/36856/"
+  },
+  "twoPhoton": [
+    {
+      "compatible": true,
+      "source": "doi:10.1016/j.cell.2019.11.004"
+    }
+  ],
+  "researchPapers": [
+    {
+      "title": "Genetically targeted optical electrophysiology in intact neural circuits",
+      "journal": "Cell",
+      "year": 2013,
+      "authors": "Cao G, et al.",
+      "sample": "Drosophila brain neurons, in vivo",
+      "url": "https://doi.org/10.1016/j.cell.2013.07.027"
+    },
+    {
+      "title": "Fluorescent protein voltage probes derived from ArcLight that respond to membrane voltage changes with fast kinetics",
+      "journal": "PLoS One",
+      "year": 2013,
+      "authors": "Han Z, et al.",
+      "sample": "HEK293 cells and cultured rat hippocampal neurons, in vitro",
+      "url": "https://doi.org/10.1371/journal.pone.0081295"
+    },
+    {
+      "title": "Rapid cellular phenotyping of human pluripotent stem cell-derived cardiomyocytes using a genetically encoded fluorescent voltage sensor",
+      "journal": "Stem Cell Reports",
+      "year": 2014,
+      "authors": "Leyton-Mange JS, et al.",
+      "sample": "Human iPSC-derived cardiomyocytes, in vitro",
+      "url": "https://doi.org/10.1016/j.stemcr.2014.01.003"
+    },
+    {
+      "title": "Imaging neural spiking in brain tissue using FRET-opsin protein voltage sensors",
+      "journal": "Nature Communications",
+      "year": 2014,
+      "authors": "Gong Y, et al.",
+      "sample": "Cultured neurons, brain slices, mouse cerebellum in vivo",
+      "url": "https://doi.org/10.1038/ncomms4674"
+    },
+    {
+      "title": "Mechanistic studies of the genetically encoded fluorescent protein voltage probe ArcLight",
+      "journal": "PLoS One",
+      "year": 2014,
+      "authors": "Han Z, et al.",
+      "sample": "HEK293 cells, in vitro",
+      "url": "https://doi.org/10.1371/journal.pone.0113873"
+    },
+    {
+      "title": "Monitoring brain activity with protein voltage and calcium sensors",
+      "journal": "Scientific Reports",
+      "year": 2015,
+      "authors": "Storace DA, et al.",
+      "sample": "Mouse olfactory bulb, in vivo",
+      "url": "https://doi.org/10.1038/srep10212"
+    },
+    {
+      "title": "Two-photon lifetime imaging of voltage indicating proteins as a probe of absolute membrane voltage",
+      "journal": "Biophysical Journal",
+      "year": 2015,
+      "authors": "Brinks D, et al.",
+      "sample": "HEK293 cells, in vitro",
+      "url": "https://doi.org/10.1016/j.bpj.2015.07.038"
+    },
+    {
+      "title": "Monitoring human-induced pluripotent stem cell-derived cardiomyocytes with genetically encoded calcium and voltage fluorescent reporters",
+      "journal": "Stem Cell Reports",
+      "year": 2015,
+      "authors": "Shinnawi R, et al.",
+      "sample": "Human iPSC-derived cardiomyocytes, in vitro",
+      "url": "https://doi.org/10.1016/j.stemcr.2015.08.009"
+    },
+    {
+      "title": "Dual optical recordings for action potentials and calcium handling in induced pluripotent stem cell models of cardiac arrhythmias",
+      "journal": "Stem Cells Translational Medicine",
+      "year": 2015,
+      "authors": "Song L, et al.",
+      "sample": "Human iPSC-derived cardiomyocytes (Timothy syndrome), in vitro",
+      "url": "https://doi.org/10.5966/sctm.2014-0245"
+    },
+    {
+      "title": "Expression and testing in plants of ArcLight, a genetically-encoded voltage indicator used in neuroscience research",
+      "journal": "BMC Plant Biology",
+      "year": 2015,
+      "authors": "Matzke AJ, et al.",
+      "sample": "Nicotiana benthamiana and Arabidopsis thaliana, in vivo",
+      "url": "https://doi.org/10.1186/s12870-015-0633-z"
+    },
+    {
+      "title": "Single-molecule fluorimetry and gating currents inspire an improved optical voltage indicator (ArcLightning)",
+      "journal": "eLife",
+      "year": 2015,
+      "authors": "Treger JS, et al.",
+      "sample": "HEK293 cells, Xenopus oocytes, in vitro",
+      "url": "https://doi.org/10.7554/eLife.10482"
+    },
+    {
+      "title": "Ziram, a pesticide associated with increased risk for Parkinson's disease, differentially affects the presynaptic function of aminergic and glutamatergic nerve terminals",
+      "journal": "Experimental Neurology",
+      "year": 2016,
+      "authors": "Martin CA, et al.",
+      "sample": "Drosophila neuromuscular junction, ex vivo",
+      "url": "https://doi.org/10.1016/j.expneurol.2015.09.017"
+    },
+    {
+      "title": "Optogenetic monitoring of synaptic activity with genetically encoded voltage indicators",
+      "journal": "Frontiers in Synaptic Neuroscience",
+      "year": 2016,
+      "authors": "Nakajima R, et al.",
+      "sample": "Mouse olfactory bulb brain slices and in vivo",
+      "url": "https://doi.org/10.3389/fnsyn.2016.00022"
+    },
+    {
+      "title": "Directed evolution of key residues in fluorescent protein inverses the polarity of voltage sensitivity in ArcLight (Marina)",
+      "journal": "ACS Chemical Neuroscience",
+      "year": 2017,
+      "authors": "Platisa J, et al.",
+      "sample": "HEK293 cells, in vitro",
+      "url": "https://doi.org/10.1021/acschemneuro.6b00234"
+    },
+    {
+      "title": "Genetically expressed voltage sensor ArcLight for imaging large scale cortical activity in the anesthetized and awake mouse",
+      "journal": "Neurophotonics",
+      "year": 2017,
+      "authors": "Borden PY, et al.",
+      "sample": "Mouse somatosensory cortex (barrel cortex), in vivo",
+      "url": "https://doi.org/10.1117/1.NPh.4.3.031212"
+    },
+    {
+      "title": "Attenuation of synaptic potentials in dendritic spines",
+      "journal": "Cell Reports",
+      "year": 2017,
+      "authors": "Kwon T, et al.",
+      "sample": "Cultured rat hippocampal neurons, in vitro (two-photon)",
+      "url": "https://doi.org/10.1016/j.celrep.2017.07.012"
+    },
+    {
+      "title": "Improving a genetically encoded voltage indicator by modifying the cytoplasmic charge composition (Bongwoori-R3)",
+      "journal": "Scientific Reports",
+      "year": 2017,
+      "authors": "Lee S, et al.",
+      "sample": "HEK293 cells and cultured rat hippocampal neurons, in vitro",
+      "url": "https://doi.org/10.1038/s41598-017-08731-2"
+    },
+    {
+      "title": "MicroRNA-92a is a circadian modulator of neuronal excitability in Drosophila",
+      "journal": "Nature Communications",
+      "year": 2017,
+      "authors": "Chen X, et al.",
+      "sample": "Drosophila PDF pacemaker neurons, in vivo",
+      "url": "https://doi.org/10.1038/ncomms14707"
+    },
+    {
+      "title": "Human induced pluripotent stem cell-derived cardiac cell sheets expressing genetically encoded voltage indicator for pharmacological and arrhythmia studies",
+      "journal": "Stem Cell Reports",
+      "year": 2018,
+      "authors": "Shaheen N, et al.",
+      "sample": "Human iPSC-derived cardiac cell sheets, in vitro",
+      "url": "https://doi.org/10.1016/j.stemcr.2018.04.006"
+    },
+    {
+      "title": "A dimeric fluorescent protein yields a bright, red-shifted GEVI capable of population signals in brain slice (Ilmol)",
+      "journal": "Scientific Reports",
+      "year": 2018,
+      "authors": "Yi B, et al.",
+      "sample": "HEK293 cells, cultured neurons, mouse hippocampal brain slices",
+      "url": "https://doi.org/10.1038/s41598-018-33297-y"
+    },
+    {
+      "title": "Mapping of excitatory and inhibitory postsynaptic potentials of neuronal populations in hippocampal slices using the GEVI, ArcLight",
+      "journal": "Journal of Physics D: Applied Physics",
+      "year": 2018,
+      "authors": "Nakajima R, et al.",
+      "sample": "Mouse hippocampal CA1 brain slices, ex vivo",
+      "url": "https://doi.org/10.1088/1361-6463/aae2e3"
+    },
+    {
+      "title": "Optical consequences of a genetically-encoded voltage indicator with a pH sensitive fluorescent protein",
+      "journal": "Neuroscience Research",
+      "year": 2019,
+      "authors": "Kang BE, et al.",
+      "sample": "HEK293 cells and cultured hippocampal neurons, in vitro",
+      "url": "https://doi.org/10.1016/j.neures.2018.10.006"
+    },
+    {
+      "title": "Comparative evaluation of genetically encoded voltage indicators",
+      "journal": "Cell Reports",
+      "year": 2019,
+      "authors": "Bando Y, et al.",
+      "sample": "HEK293 cells, cultured neurons, mouse visual cortex in vivo",
+      "url": "https://doi.org/10.1016/j.celrep.2018.12.088"
+    },
+    {
+      "title": "Using genetically encoded voltage indicators (GEVIs) to study the input-output transformation of the mammalian olfactory bulb",
+      "journal": "Frontiers in Cellular Neuroscience",
+      "year": 2019,
+      "authors": "Storace DA, et al.",
+      "sample": "Mouse olfactory bulb, in vivo",
+      "url": "https://doi.org/10.3389/fncel.2019.00342"
+    },
+    {
+      "title": "Single-cell RNA-sequencing and optical electrophysiology of human iPSC-derived cardiomyocytes reveal discordance between cardiac subtype-associated gene expression and electrophysiological phenotypes",
+      "journal": "Stem Cells and Development",
+      "year": 2019,
+      "authors": "Biendarra-Tiegs SM, et al.",
+      "sample": "Human iPSC-derived cardiomyocytes, in vitro",
+      "url": "https://doi.org/10.1089/scd.2019.0030"
+    },
+    {
+      "title": "Characterization of the CACNA1C-R518C missense mutation in the pathobiology of long-QT syndrome using human iPSC cardiomyocytes",
+      "journal": "Circulation: Genomic and Precision Medicine",
+      "year": 2019,
+      "authors": "Estes SI, et al.",
+      "sample": "Human iPSC-derived cardiomyocytes (long-QT syndrome), in vitro",
+      "url": "https://doi.org/10.1161/CIRCGEN.119.002534"
+    },
+    {
+      "title": "Human induced pluripotent stem cell line with genetically encoded fluorescent voltage indicator generated via CRISPR",
+      "journal": "Stem Cells",
+      "year": 2020,
+      "authors": "Sun YH, et al.",
+      "sample": "Human iPSC-derived cardiomyocytes (CRISPR knock-in), in vitro",
+      "url": "https://doi.org/10.1002/stem.3085"
+    },
+    {
+      "title": "Human iPSC-derived non-cardiomyocytes modulate cardiac electrophysiological maturation through connexin 43-mediated cell-cell interactions",
+      "journal": "Stem Cells and Development",
+      "year": 2020,
+      "authors": "Biendarra-Tiegs SM, et al.",
+      "sample": "Human iPSC-derived cardiomyocytes and non-cardiomyocytes co-cultures, in vitro",
+      "url": "https://doi.org/10.1089/scd.2019.0098"
+    },
+    {
+      "title": "Real-time detection of changes in yeast plasma membrane potential using genetically encoded voltage indicator proteins",
+      "journal": "FEMS Yeast Research",
+      "year": 2020,
+      "authors": "Limapichat W, et al.",
+      "sample": "Saccharomyces cerevisiae (yeast), in vitro",
+      "url": "https://doi.org/10.1093/femsyr/foaa041"
+    },
+    {
+      "title": "In vitro testing of voltage indicators: Archon1, ArcLightD, ASAP1, ASAP2s, ASAP3b, Bongwoori-Pos6, BeRST1, FlicR1, and Chi-VSFP-Butterfly",
+      "journal": "eNeuro",
+      "year": 2020,
+      "authors": "Milosevic MM, et al.",
+      "sample": "HEK293 cells, cultured neurons, mouse brain slices",
+      "url": "https://doi.org/10.1523/ENEURO.0060-20.2020"
+    },
+    {
+      "title": "Triclosan disrupts immune cell function by depressing Ca2+ influx following acidification of the cytoplasm",
+      "journal": "Toxicology and Applied Pharmacology",
+      "year": 2020,
+      "authors": "Sangroula S, et al.",
+      "sample": "RBL-2H3 mast cells and Jurkat T cells, in vitro",
+      "url": "https://doi.org/10.1016/j.taap.2020.115205"
+    },
+    {
+      "title": "Analysing bioelectrical phenomena in the Drosophila ovary with genetic tools",
+      "journal": "BMC Developmental Biology",
+      "year": 2020,
+      "authors": "Schotthoefer SK, et al.",
+      "sample": "Drosophila melanogaster ovary follicular epithelium, ex vivo",
+      "url": "https://doi.org/10.1186/s12861-020-00220-6"
+    },
+    {
+      "title": "Promise and potential peril with lumacaftor for the trafficking defective type 2 long-QT syndrome-causative variants",
+      "journal": "Circulation: Genomic and Precision Medicine",
+      "year": 2020,
+      "authors": "O'Hare BJ, et al.",
+      "sample": "Human iPSC-derived cardiomyocytes (LQT2), in vitro",
+      "url": "https://doi.org/10.1161/CIRCGEN.120.002950"
+    },
+    {
+      "title": "GEVI cell-type specific labelling and a manifold learning approach provide evidence for lateral inhibition at the population level in mouse hippocampal CA1",
+      "journal": "European Journal of Neuroscience",
+      "year": 2021,
+      "authors": "Nakajima R, et al.",
+      "sample": "Mouse hippocampal CA1 brain slices, ex vivo",
+      "url": "https://doi.org/10.1111/ejn.15177"
+    },
+    {
+      "title": "Improving the flexibility of genetically encoded voltage indicators via intermolecular FRET",
+      "journal": "Biophysical Journal",
+      "year": 2021,
+      "authors": "Leong LM, et al.",
+      "sample": "HEK293 cells, in vitro",
+      "url": "https://doi.org/10.1016/j.bpj.2021.03.010"
+    },
+    {
+      "title": "Mechanism of ArcLight derived GEVIs involves electrostatic interactions that can affect proton wires",
+      "journal": "Biophysical Journal",
+      "year": 2021,
+      "authors": "Kang BE, et al.",
+      "sample": "HEK293 cells, in vitro",
+      "url": "https://doi.org/10.1016/j.bpj.2021.03.009"
+    },
+    {
+      "title": "Enabling comprehensive optogenetic studies of mouse hearts by simultaneous opto-electrical panoramic mapping and stimulation",
+      "journal": "Nature Communications",
+      "year": 2021,
+      "authors": "Rieger M, et al.",
+      "sample": "Transgenic mouse hearts (ArcLight-Q239), ex vivo",
+      "url": "https://doi.org/10.1038/s41467-021-26039-8"
+    },
+    {
+      "title": "Studying synaptically evoked cortical responses ex vivo with combination of single neuron recording and population voltage imaging",
+      "journal": "Frontiers in Neuroscience",
+      "year": 2021,
+      "authors": "Jang J, et al.",
+      "sample": "Mouse cortex brain slices, ex vivo",
+      "url": "https://doi.org/10.3389/fnins.2021.773883"
+    },
+    {
+      "title": "Visualizing oscillations in brain slices with genetically encoded voltage indicators",
+      "journal": "Frontiers in Neuroanatomy",
+      "year": 2021,
+      "authors": "Rhee JK, et al.",
+      "sample": "Mouse motor cortex brain slices, ex vivo",
+      "url": "https://doi.org/10.3389/fnana.2021.741711"
+    },
+    {
+      "title": "Simultaneous two-photon imaging of action potentials and subthreshold inputs in vivo",
+      "journal": "Nature Communications",
+      "year": 2021,
+      "authors": "Bando Y, et al.",
+      "sample": "Mouse visual cortex neurons (ArcLight-ST variant), in vivo",
+      "url": "https://doi.org/10.1038/s41467-021-27444-9"
+    },
+    {
+      "title": "Voltage imaging in the olfactory bulb using transgenic mouse lines expressing ArcLight",
+      "journal": "Scientific Reports",
+      "year": 2022,
+      "authors": "Platisa J, et al.",
+      "sample": "Transgenic mouse olfactory bulb, in vivo",
+      "url": "https://doi.org/10.1038/s41598-021-04482-3"
+    },
+    {
+      "title": "Conserved amino acids residing outside the voltage field can shift the voltage sensitivity and increase the signal speed and size of Ciona based GEVIs",
+      "journal": "Frontiers in Cell and Developmental Biology",
+      "year": 2022,
+      "authors": "Sepehri Rad M, et al.",
+      "sample": "HEK293 cells, in vitro",
+      "url": "https://doi.org/10.3389/fcell.2022.868143"
+    },
+    {
+      "title": "Recombinant adeno-associated viral vector-mediated gene transfer of hTBX18 generates pacemaker cells from ventricular cardiomyocytes",
+      "journal": "International Journal of Molecular Sciences",
+      "year": 2022,
+      "authors": "Farraha M, et al.",
+      "sample": "Neonatal rat ventricular cardiomyocytes, in vitro",
+      "url": "https://doi.org/10.3390/ijms23169230"
+    },
+    {
+      "title": "Generation of human iPSC line encoding for ArcLight A242",
+      "journal": "Stem Cell Research",
+      "year": 2023,
+      "authors": "Vivekanandan R, et al.",
+      "sample": "Human iPSC line with knock-in ArcLight A242, in vitro",
+      "url": "https://doi.org/10.1016/j.scr.2022.102981"
+    },
+    {
+      "title": "Voltage to calcium transformation enhances direction selectivity in Drosophila T4 neurons",
+      "journal": "Journal of Neuroscience",
+      "year": 2023,
+      "authors": "Mishra A, et al.",
+      "sample": "Drosophila T4 direction-selective neurons, in vivo (two-photon)",
+      "url": "https://doi.org/10.1523/JNEUROSCI.2297-22.2023"
+    },
+    {
+      "title": "Fast two-photon imaging of subcellular voltage dynamics in neuronal tissue with genetically encoded indicators",
+      "journal": "eLife",
+      "year": 2017,
+      "authors": "Chamberland S, et al.",
+      "sample": "Drosophila visual neurons (L2), in vivo; HEK293A cells, in vitro",
+      "url": "https://doi.org/10.7554/eLife.25690"
+    },
+    {
+      "title": "Imaging different cell populations in the mouse olfactory bulb using ArcLight",
+      "journal": "Neurophotonics",
+      "year": 2024,
+      "authors": "Leong LM, et al.",
+      "sample": "Mouse olfactory bulb (multiple cell types), in vivo",
+      "url": "https://doi.org/10.1117/1.NPh.11.3.033402"
+    },
+    {
+      "title": "Generation of a genetically encoded voltage indicator MARINA reporter human iPS cell line using Cas9",
+      "journal": "Stem Cell Research",
+      "year": 2025,
+      "authors": "Petruskeviciu-te A, et al.",
+      "sample": "Human iPSC line with knock-in MARINA, in vitro",
+      "url": "https://doi.org/10.1016/j.scr.2024.103628"
+    }
+  ]
 }

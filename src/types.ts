@@ -8,13 +8,46 @@ export interface GEVI {
   tags: string[];
   paper: string;
   paperUrl: string;
-  brightness: number;
-  speed: number;
-  snr: number;
-  dynamicRange: number;
-  photostability: number;
-  subthreshold: number;
-  overall: number;
+  // Raw data fields — stored in JSON, used to compute scores at runtime.
+  // Each entry has a source (DOI). Multiple entries from different papers are averaged.
+  kinetics?: {
+    on: number;
+    off: number;
+    temperature?: string;
+    source: string;
+  }[];
+  dynamicRangeData?: {
+    deltaF: number;
+    sign: 'positive' | 'negative';
+    source: string;
+  }[];
+  sensitivityData?: {
+    deltaF: number;  // ΔF/F % per action potential
+    source: string;
+  }[];
+  brightnessData?: {
+    ratio: number;
+    reference: string;
+    source: string;
+  }[];
+  photostabilityData?: {
+    brightnessRemaining: number;
+    illumination: string;
+    duration: string;
+    source: string;
+  }[];
+  twoPhoton?: {
+    compatible: boolean;
+    source: string;
+  }[];
+
+  // Computed scores — derived at runtime by geviData.ts, never stored in JSON
+  brightness?: number | null;
+  speed?: number | null;
+  sensitivity?: number | null;
+  dynamicRange?: number | null;
+  photostability?: number | null;
+  overall?: number;
   description: string;
   familyTreePath?: string[] | null;
   parentId?: string;
@@ -40,27 +73,19 @@ export interface GEVI {
       voltage: number[];
       deltaF: number[];
     };
+    additionalCurves?: {
+      name: string;
+      voltage: number[];
+      deltaF: number[];
+    }[];
   };
   researchPapers?: ResearchPaper[];
   addgene?: {
     id: string;
     url: string;
   };
-  kinetics?: {
-    on: number;
-    off: number;
-    temperature: string;
-  };
-  dynamicRangeData?: {
-    deltaF: number;
-    sign: 'positive' | 'negative';
-  };
-  photostabilityData?: {
-    brightnessRemaining: number;
-    illumination: string;
-    duration: string;
-  };
-  paperCount?: number;
+  paperCount?: number;    // computed at runtime from researchPapers.length, never stored in JSON
+  popularity?: number;    // computed at runtime from paperCount, never stored in JSON
 }
 
 export interface ResearchPaper {
@@ -79,7 +104,7 @@ export interface GEVIColor {
   label: string;
 }
 
-export type SortField = 'overall' | 'brightness' | 'speed' | 'snr' | 'dynamicRange' | 'photostability' | 'paperCount' | 'year';
+export type SortField = 'overall' | 'brightness' | 'speed' | 'sensitivity' | 'dynamicRange' | 'photostability' | 'popularity' | 'year';
 
 export type SortOrder = 'asc' | 'desc';
 

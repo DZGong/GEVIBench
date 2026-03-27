@@ -1,6 +1,7 @@
+import { useState, useEffect } from 'react';
 import { ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar } from 'recharts';
 import { BonusBadges } from './BonusBadges';
-import { BookOpen, ExternalLink, Plus, X, Sun, Zap, Activity, TrendingUp, Shield, FileText, Dna } from 'lucide-react';
+import { BookOpen, ExternalLink, Plus, X, Sun, Zap, Activity, TrendingUp, Shield, FileText, Dna, ChevronDown, ChevronUp } from 'lucide-react';
 import { RainbowText, getGEVIColor } from '../utils';
 import { SpectrumViewer, SpectrumData } from '../SpectrumViewer';
 import { VoltageCurveViewer } from '../VoltageCurveViewer';
@@ -10,10 +11,10 @@ import { SampleUsageChart } from './SampleUsageChart';
 const metrics = [
   { key: 'brightness', name: 'Brightness', icon: Sun },
   { key: 'speed', name: 'Speed', icon: Zap },
-  { key: 'snr', name: 'SNR', icon: Activity },
+  { key: 'sensitivity', name: 'Sensitivity', icon: Activity },
   { key: 'dynamicRange', name: 'Range', icon: TrendingUp },
   { key: 'photostability', name: 'Stable', icon: Shield },
-  { key: 'paperCount', name: 'Papers', icon: FileText },
+  { key: 'popularity', name: 'Popularity', icon: FileText },
 ];
 
 interface GEVIDetailProps {
@@ -25,21 +26,44 @@ interface GEVIDetailProps {
   onShowFamilyTree?: () => void;
 }
 
+function sourceToUrl(source: string): string | null {
+  if (!source) return null;
+  if (source.startsWith('doi:')) return `https://doi.org/${source.slice(4)}`;
+  if (source.startsWith('http')) return source;
+  return null;
+}
+
+function SourceLink({ source, darkMode }: { source?: string; darkMode: boolean }) {
+  if (!source) return null;
+  const url = sourceToUrl(source);
+  const label = source.startsWith('doi:') ? source : 'Source';
+  if (!url) return <span className={`text-[10px] ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>{source}</span>;
+  return (
+    <a href={url} target="_blank" rel="noopener noreferrer" className={`text-[10px] whitespace-nowrap ${darkMode ? 'text-blue-400 hover:underline' : 'text-blue-600 hover:underline'}`}>
+      {label} <ExternalLink className="w-2.5 h-2.5 inline" />
+    </a>
+  );
+}
+
 export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, darkMode, onClose, onShowFamilyTree }: GEVIDetailProps) {
+  const [expandedMetrics, setExpandedMetrics] = useState<Record<string, boolean>>({});
+  const toggleMetric = (key: string) => setExpandedMetrics(prev => ({ ...prev, [key]: !prev[key] }));
+  useEffect(() => setExpandedMetrics({}), [gevi.id]);
+
   // Use spectrum data directly from gevi prop
   const spectrumData = gevi.spectrum || null;
 
   const getRadarData = () => [
-    { subject: 'Bright', value: gevi.brightness, fullMark: 100 },
-    { subject: 'Speed', value: gevi.speed, fullMark: 100 },
-    { subject: 'SNR', value: gevi.snr, fullMark: 100 },
-    { subject: 'Range', value: gevi.dynamicRange, fullMark: 100 },
-    { subject: 'Stable', value: gevi.photostability, fullMark: 100 },
-    { subject: 'Papers', value: gevi.paperCount ? Math.min(100, gevi.paperCount * 5) : 0, fullMark: 100 },
+    { subject: 'Bright', value: gevi.brightness ?? 0, fullMark: 100 },
+    { subject: 'Speed', value: gevi.speed ?? 0, fullMark: 100 },
+    { subject: 'Sens', value: gevi.sensitivity ?? 0, fullMark: 100 },
+    { subject: 'Range', value: gevi.dynamicRange ?? 0, fullMark: 100 },
+    { subject: 'Stable', value: gevi.photostability ?? 0, fullMark: 100 },
+    { subject: 'Popularity', value: gevi.popularity ?? 0, fullMark: 100 },
   ];
 
   return (
-    <div className={`border rounded-lg p-4 md:p-6 mb-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
+    <div className={`border rounded-lg p-4 md:p-6 mb-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-paper border-gray-200'}`}>
       {/* Header with close button */}
       <div className="flex items-start justify-between gap-4 mb-4">
         <div className="flex-1">
@@ -51,14 +75,7 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, darkMode, onClo
             <X className="w-5 h-5" />
           </button>
           <h3 className={`text-xl md:text-2xl font-bold mb-1 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-            {getGEVIColor(gevi).color === 'rainbow' ? (
-              <RainbowText text={gevi.name} />
-            ) : (
-              <span style={{ color: getGEVIColor(gevi).color }}>{gevi.name}</span>
-            )}
-            <span className={`text-xs ml-2 font-normal ${darkMode ? 'text-gray-400' : 'text-gray-500'}`} title="Emission wavelength">
-              {getGEVIColor(gevi).label}
-            </span>
+            <span style={{ color: getGEVIColor(gevi).color }}>{gevi.name}</span>
           </h3>
           <p className={`text-sm mb-2 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>{gevi.description}</p>
           <div className="flex flex-wrap gap-2 mb-2">
@@ -79,7 +96,7 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, darkMode, onClo
           )}
         </div>
         <div className="text-center sm:text-right">
-          <div className="text-4xl md:text-5xl font-bold text-blue-400">{gevi.overall}</div>
+          <div className="text-4xl md:text-5xl font-bold text-blue-400">{gevi.overall ?? 'N/A'}</div>
           <div className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Overall</div>
           <button
             onClick={() => onAddToCompare(gevi)}
@@ -105,57 +122,174 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, darkMode, onClo
             </div>
             <div className="flex items-center gap-2">
               <div className={`flex-1 h-1.5 md:h-2 rounded-full overflow-hidden ${darkMode ? 'bg-gray-600' : 'bg-gray-200'}`}>
-                <div className={`h-full rounded-full ${darkMode ? 'bg-blue-400' : 'bg-blue-900'}`} style={{ width: `${gevi[metric.key]}%` }} />
+                <div className={`h-full rounded-full ${darkMode ? 'bg-blue-400' : 'bg-blue-900'}`} style={{ width: `${gevi[metric.key] ?? 0}%` }} />
               </div>
-              <span className={`text-xs md:text-sm font-semibold w-6 md:w-8 text-right ${darkMode ? 'text-white' : 'text-gray-900'}`}>{gevi[metric.key]}</span>
+              <span className={`text-xs md:text-sm font-semibold w-6 md:w-8 text-right ${darkMode ? 'text-white' : 'text-gray-900'}`}>{gevi[metric.key] ?? '—'}</span>
             </div>
-            {/* Show kinetics for Speed metric */}
-            {metric.key === 'speed' && gevi.kinetics && (
+            {/* Speed */}
+            {metric.key === 'speed' && gevi.kinetics?.[0] && (
               <div className={`mt-2 text-[10px] ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
                 <div className="flex items-center gap-2">
                   <span className={darkMode ? 'text-green-400' : 'text-green-600'}>τ_on:</span>
-                  <span>{gevi.kinetics.on} ms</span>
+                  <span>{gevi.kinetics[0].on} ms</span>
                   <span className={darkMode ? 'text-red-400' : 'text-red-600'}>τ_off:</span>
-                  <span>{gevi.kinetics.off} ms</span>
+                  <span>{gevi.kinetics[0].off} ms</span>
+                  {gevi.kinetics[0].temperature && (
+                    <span className={darkMode ? 'text-gray-500' : 'text-gray-400'}>({gevi.kinetics[0].temperature})</span>
+                  )}
                 </div>
-                <div className="mt-0.5 opacity-70">{gevi.kinetics.temperature}</div>
+                <button onClick={() => toggleMetric('speed')} className={`mt-1 flex items-center gap-1 ${darkMode ? 'text-blue-400' : 'text-blue-600'} hover:underline`}>
+                  {expandedMetrics.speed ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
+                  {gevi.kinetics.length} {gevi.kinetics.length === 1 ? 'measurement' : 'measurements'}
+                </button>
+                {expandedMetrics.speed && (
+                  <div className={`mt-1.5 pt-1.5 space-y-1 ${darkMode ? 'border-t border-gray-600' : 'border-t border-gray-300'}`}>
+                    {gevi.kinetics.map((k: any, i: number) => (
+                      <div key={i} className={`py-1 ${i < gevi.kinetics.length - 1 ? (darkMode ? 'border-b border-gray-700' : 'border-b border-gray-200') : ''}`}>
+                        <div className="flex items-center justify-between gap-2">
+                          <span>τ_on: {k.on} ms | τ_off: {k.off} ms{k.temperature ? ` (${k.temperature})` : ''}</span>
+                          <SourceLink source={k.source} darkMode={darkMode} />
+                        </div>
+                        {k.note && <div className={`mt-0.5 italic ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>{k.note}</div>}
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             )}
-            {/* Show dynamic range data for Range metric */}
-            {metric.key === 'dynamicRange' && gevi.dynamicRangeData && (
+            {/* Sensitivity */}
+            {metric.key === 'sensitivity' && gevi.sensitivityData?.[0] && (
+              <div className={`mt-2 text-[10px] ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                <div className="flex items-center gap-2">
+                  <span>ΔF/F per AP:</span>
+                  <span className={darkMode ? 'text-green-400' : 'text-green-600'}>
+                    {gevi.sensitivityData[0].deltaF}%
+                  </span>
+                </div>
+                <button onClick={() => toggleMetric('sensitivity')} className={`mt-1 flex items-center gap-1 ${darkMode ? 'text-blue-400' : 'text-blue-600'} hover:underline`}>
+                  {expandedMetrics.sensitivity ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
+                  {gevi.sensitivityData.length} {gevi.sensitivityData.length === 1 ? 'measurement' : 'measurements'}
+                </button>
+                {expandedMetrics.sensitivity && (
+                  <div className={`mt-1.5 pt-1.5 space-y-1 ${darkMode ? 'border-t border-gray-600' : 'border-t border-gray-300'}`}>
+                    {gevi.sensitivityData.map((s: any, i: number) => (
+                      <div key={i} className={`py-1 ${i < gevi.sensitivityData.length - 1 ? (darkMode ? 'border-b border-gray-700' : 'border-b border-gray-200') : ''}`}>
+                        <div className="flex items-center justify-between gap-2">
+                          <span>ΔF/F per AP: {s.deltaF}%</span>
+                          <SourceLink source={s.source} darkMode={darkMode} />
+                        </div>
+                        {s.note && <div className={`mt-0.5 italic ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>{s.note}</div>}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+            {/* Dynamic Range */}
+            {metric.key === 'dynamicRange' && gevi.dynamicRangeData?.[0] && (
               <div className={`mt-2 text-[10px] ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
                 <div className="flex items-center gap-2">
                   <span>ΔF/F:</span>
-                  <span className={gevi.dynamicRangeData.sign === 'negative' ? (darkMode ? 'text-red-400' : 'text-red-600') : (darkMode ? 'text-green-400' : 'text-green-600')}>
-                    {gevi.dynamicRangeData.sign === 'negative' ? '-' : '+'}{gevi.dynamicRangeData.deltaF}%
+                  <span className={gevi.dynamicRangeData[0].sign === 'negative' ? (darkMode ? 'text-red-400' : 'text-red-600') : (darkMode ? 'text-green-400' : 'text-green-600')}>
+                    {gevi.dynamicRangeData[0].sign === 'negative' ? '-' : '+'}{Math.abs(gevi.dynamicRangeData[0].deltaF)}%
                   </span>
                   <span className="opacity-70">per 100mV</span>
                 </div>
+                <button onClick={() => toggleMetric('dynamicRange')} className={`mt-1 flex items-center gap-1 ${darkMode ? 'text-blue-400' : 'text-blue-600'} hover:underline`}>
+                  {expandedMetrics.dynamicRange ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
+                  {gevi.dynamicRangeData.length} {gevi.dynamicRangeData.length === 1 ? 'measurement' : 'measurements'}
+                </button>
+                {expandedMetrics.dynamicRange && (
+                  <div className={`mt-1.5 pt-1.5 space-y-1 ${darkMode ? 'border-t border-gray-600' : 'border-t border-gray-300'}`}>
+                    {gevi.dynamicRangeData.map((d: any, i: number) => (
+                      <div key={i} className={`py-1 ${i < gevi.dynamicRangeData.length - 1 ? (darkMode ? 'border-b border-gray-700' : 'border-b border-gray-200') : ''}`}>
+                        <div className="flex items-center justify-between gap-2">
+                          <span>
+                            <span className={d.sign === 'negative' ? (darkMode ? 'text-red-400' : 'text-red-600') : (darkMode ? 'text-green-400' : 'text-green-600')}>
+                              {d.sign === 'negative' ? '-' : '+'}{Math.abs(d.deltaF)}%
+                            </span> per 100mV
+                          </span>
+                          <SourceLink source={d.source} darkMode={darkMode} />
+                        </div>
+                        {d.note && <div className={`mt-0.5 italic ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>{d.note}</div>}
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             )}
-            {/* Show photostability data for Stable metric */}
-            {metric.key === 'photostability' && gevi.photostabilityData && (
+            {/* Photostability */}
+            {metric.key === 'photostability' && gevi.photostabilityData?.[0] && (
               <div className={`mt-2 text-[10px] ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
                 <div className="flex items-center gap-2">
                   <span>Remaining:</span>
                   <span className={darkMode ? 'text-green-400' : 'text-green-600'}>
-                    {gevi.photostabilityData.brightnessRemaining}%
+                    {gevi.photostabilityData[0].brightnessRemaining}%
                   </span>
-                  <span className="opacity-70">@ {gevi.photostabilityData.illumination}</span>
+                  <span className="opacity-70">@ {gevi.photostabilityData[0].illumination}</span>
                 </div>
-                <div className="opacity-70">{gevi.photostabilityData.duration}</div>
+                <div className="opacity-70">{gevi.photostabilityData[0].duration}</div>
+                <button onClick={() => toggleMetric('photostability')} className={`mt-1 flex items-center gap-1 ${darkMode ? 'text-blue-400' : 'text-blue-600'} hover:underline`}>
+                  {expandedMetrics.photostability ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
+                  {gevi.photostabilityData.length} {gevi.photostabilityData.length === 1 ? 'measurement' : 'measurements'}
+                </button>
+                {expandedMetrics.photostability && (
+                  <div className={`mt-1.5 pt-1.5 space-y-1 ${darkMode ? 'border-t border-gray-600' : 'border-t border-gray-300'}`}>
+                    {gevi.photostabilityData.map((p: any, i: number) => (
+                      <div key={i} className={`py-1 ${i < gevi.photostabilityData.length - 1 ? (darkMode ? 'border-b border-gray-700' : 'border-b border-gray-200') : ''}`}>
+                        <div className="flex items-center justify-between gap-2">
+                          <span>{p.brightnessRemaining}% remaining @ {p.illumination}, {p.duration}</span>
+                          <SourceLink source={p.source} darkMode={darkMode} />
+                        </div>
+                        {p.note && <div className={`mt-0.5 italic ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>{p.note}</div>}
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             )}
-            {/* Show paper count for Papers metric */}
-            {metric.key === 'paperCount' && gevi.paperCount && (
+            {/* Brightness */}
+            {metric.key === 'brightness' && gevi.brightnessData && gevi.brightnessData.length > 0 && (() => {
+              const egfpEntry = gevi.brightnessData!.find((d: any) => d.reference === 'EGFP');
+              const display = egfpEntry ?? gevi.brightnessData![0];
+              return (
+                <div className={`mt-2 text-[10px] ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                  <div className="flex items-center gap-2">
+                    <span>B_rel:</span>
+                    <span className={darkMode ? 'text-green-400' : 'text-green-600'}>
+                      {display.ratio}×
+                    </span>
+                    <span className="opacity-70">vs {display.reference}</span>
+                  </div>
+                  <button onClick={() => toggleMetric('brightness')} className={`mt-1 flex items-center gap-1 ${darkMode ? 'text-blue-400' : 'text-blue-600'} hover:underline`}>
+                    {expandedMetrics.brightness ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
+                    {gevi.brightnessData!.length} {gevi.brightnessData!.length === 1 ? 'comparison' : 'comparisons'}
+                  </button>
+                  {expandedMetrics.brightness && (
+                    <div className={`mt-1.5 pt-1.5 space-y-1 ${darkMode ? 'border-t border-gray-600' : 'border-t border-gray-300'}`}>
+                      {gevi.brightnessData!.map((b: any, i: number) => (
+                        <div key={i} className={`py-1 ${i < gevi.brightnessData!.length - 1 ? (darkMode ? 'border-b border-gray-700' : 'border-b border-gray-200') : ''}`}>
+                          <div className="flex items-center justify-between gap-2">
+                            <span>{b.ratio}× vs {b.reference}</span>
+                            <SourceLink source={b.source} darkMode={darkMode} />
+                          </div>
+                          {b.note && <div className={`mt-0.5 italic ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>{b.note}</div>}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            })()}
+            {/* Popularity */}
+            {metric.key === 'popularity' && gevi.paperCount !== undefined && (
               <div className={`mt-2 text-[10px] ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
                 <div className="flex items-center gap-2">
-                  <span>Papers:</span>
+                  <span>Independent papers:</span>
                   <span className={darkMode ? 'text-green-400' : 'text-green-600'}>
                     {gevi.paperCount}
                   </span>
                 </div>
-                <div className="opacity-70">papers using this GEVI</div>
               </div>
             )}
           </div>
@@ -166,7 +300,7 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, darkMode, onClo
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mt-6">
         {/* Left column: radar on top, sample chart below */}
         <div className="flex flex-col gap-4">
-          <div className={`border rounded-lg p-4 md:p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
+          <div className={`border rounded-lg p-4 md:p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-paper border-gray-200'}`}>
             <h4 className={`text-sm font-semibold mb-3 md:mb-4 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Performance Profile</h4>
             <div className="h-48 md:h-64">
               <ResponsiveContainer width="100%" height="100%">
@@ -185,7 +319,7 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, darkMode, onClo
 
           {/* Sample Usage Chart */}
           {gevi.researchPapers?.length > 0 && (
-            <div className={`border rounded-lg p-4 md:p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
+            <div className={`border rounded-lg p-4 md:p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-paper border-gray-200'}`}>
               <h4 className={`text-sm font-semibold mb-3 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Sample Usage</h4>
               <SampleUsageChart mode="single" gevi={gevi} darkMode={darkMode} />
             </div>
@@ -202,20 +336,20 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, darkMode, onClo
       </div>
 
       {/* Spectrum Viewer */}
-      <div className={`border rounded-lg p-4 md:p-6 mt-4 md:mt-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
+      <div className={`border rounded-lg p-4 md:p-6 mt-4 md:mt-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-paper border-gray-200'}`}>
         <h4 className={`text-sm font-semibold mb-3 md:mb-4 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Emission Spectrum</h4>
         <SpectrumViewer spectrumData={spectrumData} geviName={gevi.name} darkMode={darkMode} />
       </div>
 
       {/* Voltage Response Curve */}
-      <div className={`border rounded-lg p-4 md:p-6 mt-4 md:mt-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
+      <div className={`border rounded-lg p-4 md:p-6 mt-4 md:mt-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-paper border-gray-200'}`}>
         <h4 className={`text-sm font-semibold mb-3 md:mb-4 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>ΔF/F - Voltage Curve</h4>
         <VoltageCurveViewer voltageData={gevi.voltage || null} geviName={gevi.name} darkMode={darkMode} />
       </div>
 
       {/* Research Papers with Representative Figures */}
       {gevi.researchPapers && gevi.researchPapers.length > 0 && (
-        <div className={`border rounded-lg p-4 md:p-6 mt-4 md:mt-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
+        <div className={`border rounded-lg p-4 md:p-6 mt-4 md:mt-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-paper border-gray-200'}`}>
           <h4 className={`text-sm font-semibold mb-4 flex items-center gap-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
             <BookOpen className="w-4 h-4" />Research Papers Using {gevi.name}
           </h4>

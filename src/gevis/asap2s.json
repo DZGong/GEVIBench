@@ -10,24 +10,82 @@
   ],
   "paper": "eLife 2017",
   "paperUrl": "https://doi.org/10.7554/eLife.25690",
-  "brightness": 65,
-  "speed": 80,
-  "snr": 70,
-  "dynamicRange": 75,
-  "photostability": 70,
-  "subthreshold": 65,
-  "overall": 72,
-  "description": "Optimized ASAP variant with improved plasma membrane targeting and increased dynamic range through mutations in the voltage-sensing domain.",
+  "description": "Higher-sensitivity ASAP1 variant with a charge-neutralizing mutation in the voltage-sensing domain, trading speed for larger responses to enable reliable single-trial spike detection under two-photon imaging.",
   "parentId": "asap1",
-  "kinetics": {
-    "on": 5.2,
-    "off": 24.0,
-    "temperature": "22°C"
+  "addgene": {
+    "id": "101274",
+    "url": "https://www.addgene.org/101274/"
   },
-  "dynamicRangeData": {
-    "deltaF": -38.7,
-    "sign": "negative"
-  },
+  "brightnessData": [
+    {
+      "ratio": 1.11,
+      "reference": "asap3",
+      "source": "doi:10.1016/j.cell.2022.07.013"
+    },
+    {
+      "ratio": 1.0,
+      "reference": "asap1",
+      "source": "doi:10.7554/eLife.25690"
+    }
+  ],
+  "kinetics": [
+    {
+      "on": 5.2,
+      "off": 24.0,
+      "temperature": "22°C",
+      "source": "doi:10.7554/eLife.25690"
+    },
+    {
+      "on": 1.50,
+      "off": 3.40,
+      "temperature": "33-34°C",
+      "source": "doi:10.1016/j.cell.2019.11.004"
+    }
+  ],
+  "dynamicRangeData": [
+    {
+      "deltaF": -38.7,
+      "sign": "negative",
+      "source": "doi:10.7554/eLife.25690"
+    },
+    {
+      "deltaF": -36,
+      "sign": "negative",
+      "source": "doi:10.1016/j.cell.2019.11.004"
+    }
+  ],
+  "sensitivityData": [
+    {
+      "deltaF": 12.2,
+      "source": "doi:10.7554/eLife.25690"
+    },
+    {
+      "deltaF": 15.0,
+      "source": "doi:10.7554/eLife.25690"
+    },
+    {
+      "deltaF": 7,
+      "source": "doi:10.1016/j.cell.2019.11.004"
+    }
+  ],
+  "photostabilityData": [
+    {
+      "brightnessRemaining": 71,
+      "illumination": "11 mW/mm²",
+      "duration": "1 min",
+      "source": "doi:10.7554/eLife.25690"
+    }
+  ],
+  "twoPhoton": [
+    {
+      "compatible": true,
+      "source": "doi:10.7554/eLife.25690"
+    },
+    {
+      "compatible": true,
+      "source": "doi:10.1016/j.cell.2019.11.004"
+    }
+  ],
   "researchPapers": [
     {
       "title": "In Vitro Testing of Voltage Indicators: Archon1, ArcLightD, ASAP1, ASAP2s, ASAP3b, Bongwoori-Pos6, BeRST1, FlicR1, and Chi-VSFP-Butterfly",
@@ -52,6 +110,54 @@
       "year": 2023,
       "sample": "Mouse, cortex; ASAP2s-transgenic brain slices, ex vivo",
       "url": "https://doi.org/10.31083/j.jin2206160"
+    },
+    {
+      "title": "CaMKII Measures the Passage of Time to Coordinate Behavior and Motivational State",
+      "authors": "Thornquist SC, et al.",
+      "journal": "Neuron",
+      "year": 2019,
+      "sample": "Drosophila, abdominal ganglion neurons, ex vivo",
+      "url": "https://doi.org/10.1016/j.neuron.2019.10.018"
+    },
+    {
+      "title": "Biochemical evidence accumulates across neurons to drive a network-level eruption",
+      "authors": "Thornquist SC, et al.",
+      "journal": "Molecular Cell",
+      "year": 2021,
+      "sample": "Drosophila, Corazonin neurons, ex vivo",
+      "url": "https://doi.org/10.1016/j.molcel.2020.12.029"
+    },
+    {
+      "title": "Drosophila TRPγ is required in neuroendocrine cells for post-ingestive food selection",
+      "authors": "Dhakal S, et al.",
+      "journal": "eLife",
+      "year": 2022,
+      "sample": "Drosophila, DH44 neuroendocrine cells, in vivo",
+      "url": "https://doi.org/10.7554/eLife.56726"
+    },
+    {
+      "title": "Triclosan disrupts immune cell function by depressing Ca2+ influx following acidification of the cytoplasm",
+      "authors": "Sangroula S, et al.",
+      "journal": "Toxicology and Applied Pharmacology",
+      "year": 2020,
+      "sample": "RBL mast cells, in vitro",
+      "url": "https://doi.org/10.1016/j.taap.2020.115205"
+    },
+    {
+      "title": "Real-time detection of changes in yeast plasma membrane potential using genetically encoded voltage indicator proteins",
+      "authors": "Limapichat W, et al.",
+      "journal": "FEMS Yeast Research",
+      "year": 2020,
+      "sample": "Saccharomyces cerevisiae, in vitro",
+      "url": "https://doi.org/10.1093/femsyr/foaa041"
+    },
+    {
+      "title": "A dark quencher genetically encodable voltage indicator (dqGEVI) exhibits high fidelity and speed",
+      "authors": "Alich TC, et al.",
+      "journal": "Proceedings of the National Academy of Sciences",
+      "year": 2021,
+      "sample": "HEK293T cells; rat hippocampal neurons, in vitro",
+      "url": "https://doi.org/10.1073/pnas.2020235118"
     }
   ],
   "spectrum": {
