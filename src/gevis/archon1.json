@@ -10,64 +10,13 @@
   ],
   "paper": "Nature Chemical Biology 2018",
   "paperUrl": "https://doi.org/10.1038/s41589-018-0004-9",
-  "brightness": 22,
-  "speed": 29,
-  "snr": 90,
-  "dynamicRange": 97,
-  "photostability": 95,
-  "subthreshold": 75,
-  "overall": 67,
-  "description": "Archon1 is an archaerhodopsin-3-derived genetically encoded voltage indicator developed via robotic directed evolution, achieving a 2.4-fold brightness increase over its template (QuasAr2) with millisecond kinetics and high photostability. It enables imaging of action potentials and millivolt-scale subthreshold events in neurons, brain slices, zebrafish, and C. elegans.",
+  "description": "Robotically evolved archaerhodopsin variant with improved brightness, millisecond kinetics, and exceptional photostability for long-duration recordings.",
   "parentId": "arch",
-  "researchPapers": [
-    {
-      "title": "A robotic multidimensional directed evolution approach applied to fluorescent voltage reporters",
-      "authors": "Piatkevich KD, Jung EE, Straub C, Linghu C, Park D, Suk HJ, Hochbaum DR, Goodwin D, Pnevmatikakis E, Pak N, Kawashima T, Yang CT, Rhoades JL, Shemesh O, Asano S, Yoon YG, Freifeld L, Saulnier JL, Riegler C, Engert F, Hughes T, Drobizhev M, Bhatt DL, Boyden ES",
-      "journal": "Nature Chemical Biology",
-      "year": 2018,
-      "sample": "Cultured neurons, Acute brain slices, Zebrafish larvae, C. elegans",
-      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5866759/"
-    },
-    {
-      "title": "In Vitro Testing of Voltage Indicators: Archon1, ArcLightD, ASAP1, ASAP2s, ASAP3b, Bongwoori-Pos6, BeRST1, FlicR1, and Chi-VSFP-Butterfly",
-      "authors": "Milosevic MM, Jang J, McKimm EJ, Zhu MH, Antic SD",
-      "journal": "eNeuro",
-      "year": 2020,
-      "sample": "HEK293 cells, Cultured cortical neurons",
-      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7540930/"
-    },
-    {
-      "title": "Voltage Imaging of Cardiac Cells and Tissue Using the Genetically Encoded Voltage Sensor Archon1",
-      "authors": "Shroff SN, Das SL, Tseng HA, Noueihed J, Fernandez F, White JA, Chen CS, Han X",
-      "journal": "iScience",
-      "year": 2020,
-      "sample": "hiPSC-derived cardiomyocytes, 3D engineered cardiac tissue",
-      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7160579/"
-    },
-    {
-      "title": "Studying Synaptically Evoked Cortical Responses ex vivo With Combination of a Single Neuron Recording (Whole-Cell) and Population Voltage Imaging (Genetically Encoded Voltage Indicator)",
-      "authors": "Jang J, Zhu MH, Jogdand AH, Antic SD",
-      "journal": "Frontiers in Neuroscience",
-      "year": 2021,
-      "sample": "Mouse cortical brain slices, layer 2/3 pyramidal neurons",
-      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8579014/"
-    }
-  ],
-  "addgene": {
-    "id": "108423",
-    "url": "https://www.addgene.org/108423/"
-  },
   "spectrum": {
     "type": "rhodopsin",
-    "peakEx": 585,
-    "peakEm": 710,
-    "name": "Archon1",
-    "custom": {
-      "ex": [480, 500, 520, 540, 560, 575, 585, 600, 615, 630, 650, 670],
-      "exNorm": [0.08, 0.14, 0.25, 0.48, 0.75, 0.92, 1.00, 0.88, 0.65, 0.38, 0.14, 0.04],
-      "em": [650, 670, 690, 710, 730, 750, 770, 800, 830, 860],
-      "emNorm": [0.18, 0.52, 0.85, 1.00, 0.88, 0.68, 0.45, 0.22, 0.08, 0.02]
-    }
+    "peakEx": 637,
+    "peakEm": 687,
+    "name": "Archon1"
   },
   "voltage": {
     "type": "opsin",
@@ -79,19 +28,178 @@
       "deltaF":  [-34.4, -21.5, -8.6,  0.0,  4.3, 17.2, 30.0, 43.0, 56.0, 65.0, 70.0]
     }
   },
-  "kinetics": {
-    "on": 0.61,
-    "off": 1.1,
-    "temperature": "room temperature"
+  "kinetics": [
+    {
+      "on": 0.61,
+      "off": 1.1,
+      "temperature": "32°C",
+      "source": "doi:10.1038/s41589-018-0004-9"
+    },
+    {
+      "on": 0.61,
+      "off": 1.1,
+      "temperature": "33-34°C",
+      "source": "doi:10.1016/j.cell.2019.11.004"
+    },
+    {
+      "on": 2.5,
+      "off": 2,
+      "source": "doi:10.1101/2021.11.09.467909",
+      "note": "Bi-exponential fast component at 22°C in spiking HEK cells (93% on, 94% off); slow τ_on=13 ms, slow τ_off=17 ms",
+      "temperature": "22°C"
+    }
+  ],
+  "dynamicRangeData": [
+    {
+      "deltaF": 43,
+      "sign": "positive",
+      "source": "doi:10.1038/s41589-018-0004-9"
+    },
+    {
+      "deltaF": 48.6,
+      "sign": "positive",
+      "source": "doi:10.1523/ENEURO.0060-20.2020"
+    },
+    {
+      "deltaF": 81,
+      "sign": "positive",
+      "source": "doi:10.1016/j.cell.2019.11.004"
+    },
+    {
+      "deltaF": 70,
+      "sign": "positive",
+      "source": "doi:10.1101/2021.11.09.467909",
+      "note": "Per 100 mV step in spiking HEK cells at 22°C"
+    }
+  ],
+  "sensitivityData": [
+    {
+      "deltaF": 30,
+      "source": "doi:10.1038/s41589-018-0004-9"
+    },
+    {
+      "deltaF": 30,
+      "source": "doi:10.1016/j.cell.2019.11.004"
+    }
+  ],
+  "brightnessData": [
+    {
+      "ratio": 28,
+      "reference": "arch",
+      "source": "doi:10.1021/acschemneuro.0c00046"
+    },
+    {
+      "ratio": 2.78,
+      "reference": "quasar2",
+      "source": "doi:10.1038/s41589-018-0004-9"
+    }
+  ],
+  "photostabilityData": [
+    {
+      "brightnessRemaining": 95,
+      "illumination": "800 mW/mm²",
+      "duration": "15 min",
+      "source": "doi:10.1038/s41589-018-0004-9"
+    }
+  ],
+  "twoPhoton": [
+    {
+      "compatible": false,
+      "source": "doi:10.1016/j.cell.2019.11.004"
+    }
+  ],
+  "addgene": {
+    "id": "108423",
+    "url": "https://www.addgene.org/108423/"
   },
-  "dynamicRangeData": {
-    "deltaF": 43,
-    "sign": "positive"
-  },
-  "photostabilityData": {
-    "brightnessRemaining": 95,
-    "illumination": "800 mW/mm² at 637 nm",
-    "duration": "900 s"
-  },
-  "paperCount": 4
+  "researchPapers": [
+    {
+      "title": "Rhodopsin-based voltage imaging tools for use in muscles and neurons of Caenorhabditis elegans",
+      "authors": "Azimi Hashemi N, Bergs ACF, Schüler C, Scheiwe AR, Steuer Costa W, Bach M, Liewald JF, Gottschalk A",
+      "journal": "Proceedings of the National Academy of Sciences",
+      "year": 2019,
+      "sample": "C. elegans, body wall muscle, pharyngeal muscle, neurons, in vivo",
+      "url": "https://doi.org/10.1073/pnas.1902443116"
+    },
+    {
+      "title": "In Vitro Testing of Voltage Indicators: Archon1, ArcLightD, ASAP1, ASAP2s, ASAP3b, Bongwoori-Pos6, BeRST1, FlicR1, and Chi-VSFP-Butterfly",
+      "authors": "Milosevic MM, Jang J, McKimm EJ, Zhu MH, Antic SD",
+      "journal": "eNeuro",
+      "year": 2020,
+      "sample": "HEK293 cells, in vitro; Mouse cortical neurons, in vitro",
+      "url": "https://doi.org/10.1523/ENEURO.0060-20.2020"
+    },
+    {
+      "title": "Voltage Imaging of Cardiac Cells and Tissue Using the Genetically Encoded Voltage Sensor Archon1",
+      "authors": "Shroff SN, Das SL, Tseng HA, Noueihed J, Fernandez F, White JA, Chen CS, Han X",
+      "journal": "iScience",
+      "year": 2020,
+      "sample": "hiPSC-derived cardiomyocytes, in vitro; 3D engineered cardiac tissue, in vitro",
+      "url": "https://doi.org/10.1016/j.isci.2020.100974"
+    },
+    {
+      "title": "High-fidelity estimates of spikes and subthreshold waveforms from 1-photon voltage imaging in vivo",
+      "authors": "Xie ME, Adam Y, Fan LZ, Böhm UL, Kinsella I, Zhou D, Rozsa M, Singh A, Svoboda K, Paninski L, Cohen AE",
+      "journal": "Cell Reports",
+      "year": 2021,
+      "sample": "Mouse hippocampus CA1 pyramidal neurons, in vivo; Mouse cortex layer 1 interneurons, in vivo",
+      "url": "https://doi.org/10.1016/j.celrep.2021.108954"
+    },
+    {
+      "title": "Plakophilin-2 truncating variants impair cardiac contractility by disrupting sarcomere stability and organization",
+      "authors": "Zhang K, Cloonan PE, Sundaram S, Liu F, Das SL, Ewoldt JK, Bays JL, Tomp S, Toepfer CN, Marsiglia JDC, Gorham J, Reichart D, Eyckmans J, Seidman JG, Seidman CE, Chen CS",
+      "journal": "Science Advances",
+      "year": 2021,
+      "sample": "hiPSC-derived cardiomyocytes, in vitro",
+      "url": "https://doi.org/10.1126/sciadv.abh3995"
+    },
+    {
+      "title": "Studying Synaptically Evoked Cortical Responses ex vivo With Combination of a Single Neuron Recording (Whole-Cell) and Population Voltage Imaging (Genetically Encoded Voltage Indicator)",
+      "authors": "Jang J, Zhu MH, Jogdand AH, Antic SD",
+      "journal": "Frontiers in Neuroscience",
+      "year": 2021,
+      "sample": "Mouse cortex layer 2/3 pyramidal neurons, acute brain slices, in vitro",
+      "url": "https://doi.org/10.3389/fnins.2021.773883"
+    },
+    {
+      "title": "Neuronal activity drives pathway-specific depolarization of peripheral astrocyte processes",
+      "authors": "Armbruster M, Naskar S, Garcia JP, Sommer M, Kim E, Adam Y, Haydon PG, Boyden ES, Cohen AE, Dulla CG",
+      "journal": "Nature Neuroscience",
+      "year": 2022,
+      "sample": "Mouse cortex astrocytes, acute brain slices, in vitro",
+      "url": "https://doi.org/10.1038/s41593-022-01049-x"
+    },
+    {
+      "title": "Voltage imaging identifies spinal circuits that modulate locomotor adaptation in zebrafish",
+      "authors": "Böhm UL, Kimura Y, Kawashima T, Ahrens MB, Higashijima S, Engert F, Cohen AE",
+      "journal": "Neuron",
+      "year": 2022,
+      "sample": "Zebrafish larvae, spinal cord glutamatergic neurons, in vivo",
+      "url": "https://doi.org/10.1016/j.neuron.2022.01.001"
+    },
+    {
+      "title": "Video-based pooled screening yields improved far-red genetically encoded voltage indicators",
+      "authors": "Tian H, Davis HC, Wong-Campos JD, Park P, Fan LZ, Gmeiner B, Begum S, Werley CA, Borja GB, Upadhyay H, Shah H, Jacques J, Qi Y, Parot V, Deisseroth K, Cohen AE",
+      "journal": "Nature Methods",
+      "year": 2023,
+      "sample": "Mouse cortex NDNF neurons, in vivo; Mouse hippocampus PV neurons, in vivo; Cultured neurons, in vitro",
+      "url": "https://doi.org/10.1038/s41592-022-01743-5"
+    },
+    {
+      "title": "Characterization of two near-infrared genetically encoded voltage indicators",
+      "authors": "Song C, Matlashov ME, Shcherbakova DM, Antic SD, Verkhusha VV, Knöpfel T",
+      "journal": "Neurophotonics",
+      "year": 2024,
+      "sample": "Mouse hippocampal CA3 slices, acute brain slices, in vitro",
+      "url": "https://doi.org/10.1117/1.NPh.11.2.024201"
+    },
+    {
+      "title": "Subthreshold electric fields bidirectionally modulate neurotransmitter release through axon polarization",
+      "authors": "Aberra AS, Miles MW, Hoppa MB",
+      "journal": "Brain Stimulation",
+      "year": 2025,
+      "sample": "Rat hippocampal neurons, dissociated culture, in vitro",
+      "url": "https://doi.org/10.1016/j.brs.2025.103006"
+    }
+  ]
 }

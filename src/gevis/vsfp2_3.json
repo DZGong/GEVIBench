@@ -10,13 +10,6 @@
   ],
   "paper": "Biophysical Journal 2009",
   "paperUrl": "https://doi.org/10.1016/j.bpj.2008.11.073",
-  "brightness": 50,
-  "speed": 58,
-  "snr": 45,
-  "dynamicRange": 42,
-  "photostability": 45,
-  "subthreshold": 42,
-  "overall": 45,
   "description": "Optimized VSFP2 variant with improved plasma membrane targeting and faster response kinetics for imaging in C. elegans neurons.",
   "parentId": "vsfp2",
   "spectrum": {
@@ -27,8 +20,16 @@
   },
   "voltage": {
     "type": "fret",
-    "slope": 18,
+    "slope": 9.5,
     "polarity": "negative",
     "name": "VSFP2.3"
-  }
+  },
+
+  "dynamicRangeData": [
+    {
+      "deltaF": -9.5,
+      "sign": "negative",
+      "source": "doi:10.1038/nmeth.1782"
+    }
+  ]
 }

@@ -73,10 +73,10 @@ export function SearchFilters({
             <option value="overall">Overall</option>
             <option value="brightness">Brightness</option>
             <option value="speed">Speed</option>
-            <option value="snr">SNR</option>
+            <option value="sensitivity">Sensitivity</option>
             <option value="dynamicRange">Dynamic Range</option>
             <option value="photostability">Photostability</option>
-            <option value="paperCount">Papers</option>
+            <option value="popularity">Popularity</option>
             <option value="year">Year</option>
           </select>
         </div>

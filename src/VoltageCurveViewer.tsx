@@ -22,9 +22,16 @@ interface VoltageCustom {
   deltaF: number[];
 }
 
+interface AdditionalCurve {
+  name: string;
+  voltage: number[];
+  deltaF: number[];
+}
+
 export interface VoltageData {
   config?: VoltageConfig;
   custom?: VoltageCustom;
+  additionalCurves?: AdditionalCurve[];
 }
 
 interface VoltageCurveViewerProps {
@@ -86,6 +93,7 @@ export function VoltageCurveViewer({ voltageData, geviName, darkMode = false }: 
   // 2. { type, slope, polarity, name, custom: {...} } - GEVI format
   const voltageConfig = voltageData?.config || voltageData;
   const voltageCustom = voltageData?.custom;
+  const additionalCurves = (voltageData as any)?.additionalCurves as AdditionalCurve[] | undefined;
 
   // Generate voltage curve data from props
   const computedVoltage = useMemo(() => {
@@ -98,11 +106,24 @@ export function VoltageCurveViewer({ voltageData, geviName, darkMode = false }: 
     return generateVoltageCurve(type, slope, polarity);
   }, [voltageConfig, voltageCustom]);
 
+  // Compute additional curves (for chemigenetic GEVIs with multiple dyes)
+  const computedAdditional = useMemo(() => {
+    if (!additionalCurves?.length) return [];
+    return additionalCurves.map(c => ({
+      name: c.name,
+      points: c.voltage.map((v, i) => ({ voltage: v, deltaF: c.deltaF[i] })),
+    }));
+  }, [additionalCurves]);
+
   const config = voltageConfig;
 
-  // Dynamic voltage range based on actual data
-  const dataMinV = computedVoltage ? Math.min(...computedVoltage.map(d => d.voltage)) : -100;
-  const dataMaxV = computedVoltage ? Math.max(...computedVoltage.map(d => d.voltage)) : 40;
+  // Dynamic voltage range based on actual data (include additional curves)
+  const allPoints = [
+    ...(computedVoltage || []),
+    ...computedAdditional.flatMap(c => c.points),
+  ];
+  const dataMinV = allPoints.length ? Math.min(...allPoints.map(d => d.voltage)) : -100;
+  const dataMaxV = allPoints.length ? Math.max(...allPoints.map(d => d.voltage)) : 40;
 
   // Find values at hover voltage
   const hoverData = computedVoltage?.reduce((closest, d) => {
@@ -137,8 +158,8 @@ export function VoltageCurveViewer({ voltageData, geviName, darkMode = false }: 
 
   const minV = dataMinV;
   const maxV = dataMaxV;
-  const rawMinDeltaF = computedVoltage ? Math.min(...computedVoltage.map(d => d.deltaF)) : -50;
-  const rawMaxDeltaF = computedVoltage ? Math.max(...computedVoltage.map(d => d.deltaF)) : 30;
+  const rawMinDeltaF = allPoints.length ? Math.min(...allPoints.map(d => d.deltaF)) : -50;
+  const rawMaxDeltaF = allPoints.length ? Math.max(...allPoints.map(d => d.deltaF)) : 30;
   const deltaFPad = Math.max(5, (rawMaxDeltaF - rawMinDeltaF) * 0.1);
   const minDeltaF = Math.floor(rawMinDeltaF - deltaFPad);
   const maxDeltaF = Math.ceil(rawMaxDeltaF + deltaFPad);
@@ -156,6 +177,21 @@ export function VoltageCurveViewer({ voltageData, geviName, darkMode = false }: 
     }).join(' ');
     return `M ${points}`;
   };
+
+  // Map dye/fluorophore wavelength to a display color
+  const getWavelengthColor = (name: string): string | null => {
+    const m = name.match(/\b(?:JF|AF)(\d{3})\b/i);
+    if (!m) return null;
+    const wl = parseInt(m[1]);
+    if (wl <= 530) return darkMode ? '#22c55e' : '#16a34a'; // green
+    if (wl <= 560) return darkMode ? '#eab308' : '#ca8a04'; // yellow
+    if (wl <= 600) return darkMode ? '#f97316' : '#ea580c'; // orange
+    return darkMode ? '#ef4444' : '#dc2626'; // red
+  };
+
+  // Primary curve color: use dye color for chemigenetic, polarity color otherwise
+  const primaryColor = (config?.name && getWavelengthColor(config.name))
+    || (config?.polarity === 'positive' ? (darkMode ? '#3b82f6' : '#2563eb') : (darkMode ? '#ef4444' : '#dc2626'));
 
   // Get color based on polarity
   const getResponseColor = (deltaF: number) => {
@@ -183,7 +219,7 @@ export function VoltageCurveViewer({ voltageData, geviName, darkMode = false }: 
         ref={containerRef}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        className={`relative cursor-crosshair ${darkMode ? 'bg-gray-900' : 'bg-white'} rounded`}
+        className={`relative cursor-crosshair ${darkMode ? 'bg-gray-900' : 'bg-paper'} rounded`}
       >
         <svg className="w-full block" viewBox={`0 0 ${width} ${height}`}>
           {/* Grid lines - dynamic Y ticks */}
@@ -236,25 +272,49 @@ export function VoltageCurveViewer({ voltageData, geviName, darkMode = false }: 
               strokeDasharray="4"
             />
           )}
-          {/* Voltage curve */}
+          {/* Voltage curve - primary */}
           <path
             d={createPath()}
             fill="none"
-            stroke={config.polarity === 'positive' ? (darkMode ? '#3b82f6' : '#2563eb') : (darkMode ? '#ef4444' : '#dc2626')}
+            stroke={primaryColor}
             strokeWidth="2"
           />
-          {/* Data points */}
+          {/* Data points - primary curve */}
           {computedVoltage && computedVoltage.map((d, i) => (
             <circle
               key={i}
               cx={xScale(d.voltage)}
               cy={yScale(d.deltaF)}
               r="4"
-              fill={config.polarity === 'positive' ? (darkMode ? '#3b82f6' : '#2563eb') : (darkMode ? '#ef4444' : '#dc2626')}
+              fill={primaryColor}
               stroke={darkMode ? '#1f2937' : '#ffffff'}
               strokeWidth="1.5"
             />
           ))}
+          {/* Additional curves (e.g., different dyes for chemigenetic GEVIs) */}
+          {computedAdditional.map((curve, ci) => {
+            const fallbackColors = darkMode
+              ? ['#f59e0b', '#8b5cf6', '#06b6d4', '#ec4899']
+              : ['#d97706', '#7c3aed', '#0891b2', '#db2777'];
+            const color = getWavelengthColor(curve.name) || fallbackColors[ci % fallbackColors.length];
+            const path = 'M ' + curve.points.map(d => `${xScale(d.voltage)},${yScale(d.deltaF)}`).join(' ');
+            return (
+              <g key={`additional-${ci}`}>
+                <path d={path} fill="none" stroke={color} strokeWidth="1.5" strokeDasharray="6 3" />
+                {curve.points.map((d, i) => (
+                  <circle
+                    key={i}
+                    cx={xScale(d.voltage)}
+                    cy={yScale(d.deltaF)}
+                    r="3"
+                    fill={color}
+                    stroke={darkMode ? '#1f2937' : '#ffffff'}
+                    strokeWidth="1"
+                  />
+                ))}
+              </g>
+            );
+          })}
           {/* Hover point */}
           {hoverData && (
             <circle
@@ -272,7 +332,7 @@ export function VoltageCurveViewer({ voltageData, geviName, darkMode = false }: 
         {hoverData && (
           <div
             className={`absolute top-1 left-1/2 transform -translate-x-1/2 px-2 py-1 rounded text-xs ${
-              darkMode ? 'bg-gray-700 text-gray-200' : 'bg-white text-gray-800 shadow'
+              darkMode ? 'bg-gray-700 text-gray-200' : 'bg-paper text-gray-800 shadow'
             }`}
             style={{ pointerEvents: 'none' }}
           >
@@ -286,6 +346,28 @@ export function VoltageCurveViewer({ voltageData, geviName, darkMode = false }: 
         <span className={darkMode ? 'text-gray-500' : 'text-gray-400'}>Membrane Potential (mV)</span>
         <span className={darkMode ? 'text-gray-500' : 'text-gray-400'}>ΔF/F (%)</span>
       </div>
+
+      {/* Legend for multiple curves */}
+      {computedAdditional.length > 0 && (
+        <div className={`mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+          <span className="flex items-center gap-1">
+            <svg width="16" height="8"><line x1="0" y1="4" x2="16" y2="4" stroke={primaryColor} strokeWidth="2" /></svg>
+            {config.name}
+          </span>
+          {computedAdditional.map((curve, ci) => {
+            const fallbackColors = darkMode
+              ? ['#f59e0b', '#8b5cf6', '#06b6d4', '#ec4899']
+              : ['#d97706', '#7c3aed', '#0891b2', '#db2777'];
+            const color = getWavelengthColor(curve.name) || fallbackColors[ci % fallbackColors.length];
+            return (
+              <span key={ci} className="flex items-center gap-1">
+                <svg width="16" height="8"><line x1="0" y1="4" x2="16" y2="4" stroke={color} strokeWidth="1.5" strokeDasharray="4 2" /></svg>
+                {curve.name}
+              </span>
+            );
+          })}
+        </div>
+      )}
 
       {/* Sensitivity */}
       <div className={`mt-2 text-xs ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>

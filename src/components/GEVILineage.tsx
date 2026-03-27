@@ -57,7 +57,7 @@ export function GEVILineage({ gevi, darkMode = false }: GEVILineageProps) {
 
   if (!path || path.length === 0) {
     return (
-      <div className={`border rounded-lg p-4 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
+      <div className={`border rounded-lg p-4 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-paper border-gray-200'}`}>
         <h4 className={`text-sm font-semibold mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
           Genetic Lineage
         </h4>
@@ -85,7 +85,7 @@ export function GEVILineage({ gevi, darkMode = false }: GEVILineageProps) {
   const svgWidth = 180;
 
   return (
-    <div className={`border rounded-lg p-4 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
+    <div className={`border rounded-lg p-4 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-paper border-gray-200'}`}>
       <h4 className={`text-sm font-semibold mb-3 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
         Genetic Lineage
       </h4>

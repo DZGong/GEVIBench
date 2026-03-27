@@ -11,7 +11,7 @@
   "paperUrl": "https://doi.org/10.1002/adbi.202100842",
   "brightness": 30,
   "speed": 40,
-  "snr": 35,
+  "sensitivity": 35,
   "dynamicRange": 32,
   "photostability": 90,
   "subthreshold": 40,

@@ -12,9 +12,21 @@
   ],
   "paper": "Nature Communications 2023",
   "paperUrl": "https://doi.org/10.1038/s41467-023-41975-3",
-  "brightness": 72,
+  "brightness": 67,
+  "brightnessData": [
+    {
+      "ratio": 2.44,
+      "reference": "asap3",
+      "source": "doi:10.1038/s41467-023-41975-3"
+    },
+    {
+      "ratio": 2.2,
+      "reference": "asap2s",
+      "source": "doi:10.1038/s41467-023-41975-3"
+    }
+  ],
   "speed": 82,
-  "snr": 75,
+  "sensitivity": 75,
   "dynamicRange": 78,
   "photostability": 70,
   "subthreshold": 70,
@@ -27,7 +39,8 @@
   },
   "kinetics": {
     "on": 0.54,
-    "off": 1.2
+    "off": 1.2,
+    "temperature": "room temperature"
   },
   "dynamicRangeData": {
     "deltaF": -31.2,
@@ -438,6 +451,12 @@
       "deltaF":  [15.6, 9.4, 0.0, -6.2, -12.5, -21.8, -31.2]
     }
   },
+  "subthresholdData": [
+    {
+      "slope": 0.9,
+      "source": "doi:10.1016/j.neuron.2024.08.019"
+    }
+  ],
   "researchPapers": [
     {
       "title": "Cortex-wide voltage imaging in a sensory cued reaching task reveals fast subnetwork dynamics",

@@ -389,7 +389,7 @@ export function FamilyTreePanel({
     tooltipRadarData = [
       { subject: 'Bright', value: g.brightness    ?? 0, fullMark: 100 },
       { subject: 'Speed',  value: g.speed          ?? 0, fullMark: 100 },
-      { subject: 'SNR',    value: g.snr            ?? 0, fullMark: 100 },
+      { subject: 'Sens',   value: g.sensitivity    ?? 0, fullMark: 100 },
       { subject: 'Range',  value: g.dynamicRange   ?? 0, fullMark: 100 },
       { subject: 'Stable', value: g.photostability ?? 0, fullMark: 100 },
       { subject: 'Papers', value: Math.min(100, (g.paperCount ?? 0) * 5), fullMark: 100 },
@@ -397,7 +397,7 @@ export function FamilyTreePanel({
   }
 
   return (
-    <div className={`rounded-lg border p-4 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
+    <div className={`rounded-lg border p-4 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-paper border-gray-200'}`}>
       <div className="flex items-center gap-2 mb-4">
         <button
           onClick={onCloseDetail}
@@ -516,7 +516,7 @@ export function FamilyTreePanel({
             width: TOOLTIP_W,
           }}
           className={`rounded-lg border shadow-lg p-2.5 ${
-            darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
+            darkMode ? 'bg-gray-800 border-gray-700' : 'bg-paper border-gray-200'
           }`}
           onMouseEnter={() => {
             if (hideTimeout.current) clearTimeout(hideTimeout.current);

@@ -15,12 +15,12 @@
   "paperUrl": "https://doi.org/10.1021/acschemneuro.5c00670",
   "brightness": 55,
   "speed": 60,
-  "snr": 68,
+  "sensitivity": 68,
   "dynamicRange": 82,
   "photostability": 78,
   "subthreshold": 85,
   "overall": 69,
-  "description": "rEstus variant (G138N:T141I, equivalent to ASAP3-Y141I:S318A:Q396R) optimized for fluorescence lifetime imaging (FLIM) with left-shifted voltage sensitivity aligned to physiological resting potentials; enables absolute membrane potential measurement in non-excitable and cancer cells.",
+  "description": "rEstus variant optimized for fluorescence lifetime imaging, enabling absolute membrane potential measurement in non-excitable and cancer cells.",
 
   "parentId": "restus",
 

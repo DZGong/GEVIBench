@@ -10,13 +10,6 @@
   ],
   "paper": "Biophysical Journal 2007",
   "paperUrl": "https://doi.org/10.1371/journal.pone.0000440",
-  "brightness": 45,
-  "speed": 55,
-  "snr": 40,
-  "dynamicRange": 38,
-  "photostability": 40,
-  "subthreshold": 38,
-  "overall": 41,
   "description": "Second-generation VSFP with improved CFP-YFP FRET pair, providing ratiometric voltage sensing for improved signal stability.",
   "parentId": "vsfp1",
   "spectrum": {

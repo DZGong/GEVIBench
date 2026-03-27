@@ -6,14 +6,7 @@
   "tags": ["Ace opsin", "mNeon", "Green", "Sub-millisecond"],
   "paper": "Science 2015",
   "paperUrl": "https://doi.org/10.1126/science.aab0810",
-  "brightness": 68,
-  "speed": 95,
-  "snr": 70,
-  "dynamicRange": 65,
-  "photostability": 55,
-  "subthreshold": 85,
-  "overall": 71,
-  "description": "Ace2N-mNeon is an eFRET GEVI pairing the Acetabularia-derived Ace2N opsin with mNeonGreen. Voltage-dependent changes in opsin absorbance quench mNeon fluorescence via FRET, enabling sub-millisecond spike detection in awake mice and Drosophila with ~18% ΔF/F per 100 mV.",
+  "description": "eFRET voltage indicator pairing the Ace2N opsin with mNeonGreen for sub-millisecond spike detection in awake behaving animals.",
 
   "familyTreePath": ["GEVI", "Opsin", "Opsin-FRET", "ace2n-mneon"],
 
@@ -41,22 +34,94 @@
     }
   },
 
-  "kinetics": {
-    "on": 0.37,
-    "off": 1.5,
-    "temperature": "room temperature"
-  },
+  "kinetics": [
+    {
+      "on": 0.36,
+      "off": 0.42,
+      "temperature": "33-34°C",
+      "source": "doi:10.1126/science.aab0810"
+    },
+    {
+      "on": 2.2,
+      "off": 3.8,
+      "temperature": "33-34°C",
+      "source": "doi:10.1016/j.cell.2019.11.004"
+    },
+    {
+      "on": 0.81,
+      "off": 0.77,
+      "source": "doi:10.1038/s41592-018-0188-7",
+      "note": "Bi-exponential fast component at 22°C in spiking HEK cells (60%* on, 60%* off); slow τ_on=4.6 ms, slow τ_off=5.2 ms",
+      "temperature": "22°C"
+    }
+  ],
 
-  "dynamicRangeData": {
-    "deltaF": -17.9,
-    "sign": "negative"
-  },
+  "dynamicRangeData": [
+    {
+      "deltaF": -17.9,
+      "sign": "negative",
+      "source": "doi:10.1126/science.aab0810"
+    },
+    {
+      "deltaF": -9,
+      "sign": "negative",
+      "source": "doi:10.1016/j.cell.2019.11.004"
+    },
+    {
+      "deltaF": -11.6,
+      "sign": "negative",
+      "source": "doi:10.1038/s41592-018-0188-7",
+      "note": "Per 100 mV step in spiking HEK cells at 22°C"
+    }
+  ],
 
-  "photostabilityData": {
-    "brightnessRemaining": 50,
-    "illumination": "15–50 mW/mm²",
-    "duration": "~30 s"
-  },
+  "sensitivityData": [
+    {
+      "deltaF": 5,
+      "source": "doi:10.1016/j.cell.2019.11.004"
+    },
+    {
+      "deltaF": 4.9,
+      "source": "doi:10.1038/s41557-021-00641-1"
+    }
+  ],
+
+  "subthresholdData": [
+    {
+      "slope": 0.091,
+      "source": "doi:10.1016/j.neuron.2023.03.009"
+    }
+  ],
+
+  "brightnessData": [
+    {
+      "ratio": 4.51,
+      "reference": "EGFP",
+      "source": "doi:10.1038/nmeth.2415"
+    }
+  ],
+
+  "photostabilityData": [
+    {
+      "brightnessRemaining": 79,
+      "illumination": "15 mW/mm²",
+      "duration": "0.5 min",
+      "source": "doi:10.1126/science.aab0810"
+    },
+    {
+      "brightnessRemaining": 50,
+      "illumination": "31 mW/mm²",
+      "duration": "1.5 min",
+      "source": "doi:10.1038/s41557-021-00641-1"
+    }
+  ],
+
+  "twoPhoton": [
+    {
+      "compatible": false,
+      "source": "doi:10.1016/j.cell.2019.11.004"
+    }
+  ],
 
   "researchPapers": [
     {
@@ -90,7 +155,14 @@
       "year": 2024,
       "sample": "Zebrafish embryos, neurons and cardiomyocytes, in vivo",
       "url": "https://doi.org/10.1101/2024.12.12.628143"
+    },
+    {
+      "title": "Imaging high-frequency voltage dynamics in multiple neuron classes of behaving mammals",
+      "authors": "Haziza S, et al.",
+      "journal": "Cell",
+      "year": 2025,
+      "sample": "Mouse, cortex, in vivo",
+      "url": "https://doi.org/10.1016/j.cell.2025.06.028"
     }
-  ],
-  "paperCount": 4
+  ]
 }

@@ -12,7 +12,7 @@
   "paperUrl": "https://doi.org/10.1038/nmeth.1492",
   "brightness": 40,
   "speed": 55,
-  "snr": 38,
+  "sensitivity": 38,
   "dynamicRange": 35,
   "photostability": 45,
   "subthreshold": 38,

@@ -9,13 +9,35 @@
   ],
   "paper": "Nature Methods 2014",
   "paperUrl": "https://doi.org/10.1038/nmeth.3000",
-  "brightness": 15,
+  "brightness": 20,
+  "brightnessData": [
+    {
+      "ratio": 20,
+      "reference": "arch",
+      "source": "doi:10.1021/acschemneuro.0c00046"
+    }
+  ],
   "speed": 98,
-  "snr": 30,
+  "sensitivity": 30,
   "dynamicRange": 25,
   "photostability": 40,
   "subthreshold": 35,
   "overall": 30,
+  "dynamicRangeData": [
+    {
+      "deltaF": 21,
+      "sign": "positive",
+      "source": "doi:10.1038/s41589-018-0004-9"
+    }
+  ],
+  "kinetics": [
+    {
+      "on": 0.05,
+      "off": 0.07,
+      "temperature": "room temperature",
+      "source": "doi:10.1038/s41589-018-0004-9"
+    }
+  ],
   "description": "First quantum dot-like microbial rhodopsin voltage indicator requiring no exogenous fluorophore, enabling fluorescence detection with minimal illumination.",
   "parentId":"arch",
   "spectrum": {

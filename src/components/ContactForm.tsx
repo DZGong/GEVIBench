@@ -39,7 +39,7 @@ export function ContactForm({ darkMode }: ContactFormProps) {
         </p>
       </div>
 
-      <div className={`max-w-xl mx-auto border rounded-lg p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
+      <div className={`max-w-xl mx-auto border rounded-lg p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-paper border-gray-200'}`}>
         {sent ? (
           <div className="text-center py-8">
             <div className="text-4xl mb-4">✅</div>

@@ -5,29 +5,105 @@
   "category": "Opsin GEVI",
   "tags": [
     "Archaerhodopsin",
-    "Green"
+    "Red",
+    "Positive-going",
+    "Dual-function"
   ],
   "paper": "Nature Communications 2014",
   "paperUrl": "https://doi.org/10.1038/ncomms5894",
-  "brightness": 25,
-  "speed": 92,
-  "snr": 35,
-  "dynamicRange": 30,
-  "photostability": 35,
-  "subthreshold": 35,
-  "overall": 34,
-  "description": "Archaerhodopsin-based voltage indicator with improved brightness over early versions.",
-  "parentId":"arch",
+  "description": "Archaerhodopsin-3 variant with enhanced baseline fluorescence and reduced photocurrents, enabling wavelength-specific dual functionality as a voltage sensor under red light and inhibitory actuator under green light.",
+  "parentId": "arch",
+
   "spectrum": {
     "type": "rhodopsin",
     "peakEx": 550,
-    "peakEm": 580,
+    "peakEm": 687,
     "name": "Archer1"
   },
+
   "voltage": {
     "type": "opsin",
-    "slope": 28,
+    "slope": 75,
     "polarity": "positive",
-    "name": "Archer1"
-  }
+    "name": "Archer1",
+    "custom": {
+      "voltage": [-100, -90, -80, -70, -60, -50, -40, -30, -20, -10, 0, 10, 20, 30, 40, 50],
+      "deltaF":  [-23, -15, -8, 0, 8, 16, 25, 34, 43, 50, 57, 63, 70, 75, 80, 85]
+    }
+  },
+
+  "dynamicRangeData": [
+    {
+      "deltaF": 85,
+      "sign": "positive",
+      "source": "doi:10.1038/s41589-018-0004-9"
+    },
+    {
+      "deltaF": 85,
+      "sign": "positive",
+      "source": "doi:10.1038/ncomms5894"
+    }
+  ],
+
+  "sensitivityData": [
+    {
+      "deltaF": 33,
+      "source": "doi:10.1038/ncomms5894"
+    }
+  ],
+
+  "brightnessData": [
+    {
+      "ratio": 10,
+      "reference": "arch",
+      "source": "doi:10.1021/acschemneuro.0c00046"
+    },
+    {
+      "ratio": 3,
+      "reference": "arch",
+      "source": "doi:10.1038/ncomms5894"
+    }
+  ],
+
+  "photostabilityData": [
+    {
+      "brightnessRemaining": 100,
+      "illumination": "880 mW/mm²",
+      "duration": "5 min",
+      "source": "doi:10.1038/ncomms5894"
+    }
+  ],
+
+  "kinetics": [
+    {
+      "on": 0.5,
+      "off": 0.5,
+      "temperature": "room temperature",
+      "source": "doi:10.1038/ncomms5894"
+    }
+  ],
+
+  "addgene": {
+    "id": "60423",
+    "url": "https://www.addgene.org/60423/"
+  },
+
+  "researchPapers": [
+    {
+      "title": "Comparative Evaluation of Genetically Encoded Voltage Indicators",
+      "authors": "Bando Y, et al.",
+      "journal": "Cell Reports",
+      "year": 2019,
+      "sample": "Mouse cortical neurons, in vitro; Mouse visual cortex, in vivo",
+      "url": "https://doi.org/10.1016/j.celrep.2018.12.088"
+    },
+    {
+      "title": "Rational Design of Far-Red Archaerhodopsin-3-Based Fluorescent Genetically Encoded Voltage Indicators: from Elucidation of the Fluorescence Mechanism in Archers to Novel Red-Shifted Variants",
+      "authors": "Nikolaev DM, et al.",
+      "journal": "ACS Physical Chemistry Au",
+      "year": 2024,
+      "sample": "Computational modeling and HEK293T cells, in vitro",
+      "url": "https://doi.org/10.1021/acsphyschemau.3c00073"
+    }
+  ]
 }

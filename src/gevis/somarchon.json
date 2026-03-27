@@ -6,24 +6,19 @@
   "tags": [
     "Archaerhodopsin",
     "Red",
-    "Somatic targeting"
+    "Somatic targeting",
+    "In vivo",
+    "Population imaging"
   ],
   "paper": "Nature 2019",
   "paperUrl": "https://doi.org/10.1038/s41586-019-1641-1",
-  "brightness": 55,
-  "speed": 92,
-  "snr": 58,
-  "dynamicRange": 52,
-  "photostability": 45,
-  "subthreshold": 80,
-  "overall": 64,
-  "description": "SomArchon enables population imaging in awake behaving mice, combining millisecond kinetics with compatibility for optogenetic manipulation.",
-  "parentId":"archon1",
+  "description": "Soma-targeted Archon1 variant for population voltage imaging, compatible with simultaneous optogenetic manipulation across multiple brain regions.",
+  "parentId": "archon1",
 
   "spectrum": {
     "type": "rhodopsin",
-    "peakEx": 560,
-    "peakEm": 590,
+    "peakEx": 585,
+    "peakEm": 710,
     "name": "SomArchon"
   },
   "voltage": {
@@ -31,5 +26,84 @@
     "slope": 32,
     "polarity": "positive",
     "name": "SomArchon"
-  }
+  },
+
+  "kinetics": [
+    {
+      "on": 0.6,
+      "off": 1.1,
+      "source": "doi:10.1038/s41467-022-35314-1"
+    }
+  ],
+
+  "sensitivityData": [
+    {
+      "deltaF": 42,
+      "source": "doi:10.1038/s41586-019-1641-1"
+    }
+  ],
+
+  "addgene": {
+    "id": "126941",
+    "url": "https://www.addgene.org/126941/"
+  },
+
+  "researchPapers": [
+    {
+      "title": "All-optical electrophysiology reveals the role of lateral inhibition in sensory processing in cortical layer 1",
+      "authors": "Fan LZ, Kheifets S, Böhm UL, Wu H, Piatkevich KD, Xie ME, Parot V, Ha Y, Evans KE, Boyden ES, Takesian AE, Cohen AE",
+      "journal": "Cell",
+      "year": 2020,
+      "sample": "Mouse, barrel cortex layer 1 interneurons, in vivo awake",
+      "url": "https://doi.org/10.1016/j.cell.2020.01.001"
+    },
+    {
+      "title": "Large-scale voltage imaging in behaving mice using targeted illumination",
+      "authors": "Xiao S, Lowet E, Gritton HJ, Fabris P, Wang Y, Sherman J, Mount R, Tseng HA, Man HY, Mertz J, Han X",
+      "journal": "iScience",
+      "year": 2021,
+      "sample": "Mouse, visual cortex and hippocampal CA1, in vivo awake; rat cortical neurons, in vitro",
+      "url": "https://doi.org/10.1016/j.isci.2021.103263"
+    },
+    {
+      "title": "Deep brain stimulation creates informational lesion through membrane depolarization in mouse hippocampus",
+      "authors": "Lowet E, Kondabolu K, Zhou S, Mount RA, Ravasio C, Han X",
+      "journal": "Nature Communications",
+      "year": 2022,
+      "sample": "Mouse, hippocampal CA1, in vivo awake",
+      "url": "https://doi.org/10.1038/s41467-022-35314-1"
+    },
+    {
+      "title": "Theta and gamma rhythmic coding through two spike output modes in the hippocampus during spatial navigation",
+      "authors": "Lowet E, Sheehan DJ, Chialva U, De Oliveira Pena R, Mount RA, Xiao S, Zhou SL, Tseng HA, Gritton H, Shroff S, Kondabolu K, Cheung C, Wang Y, Piatkevich KD, Boyden ES, Mertz J, Hasselmo ME, Rotstein HG, Han X",
+      "journal": "Cell Reports",
+      "year": 2023,
+      "sample": "Mouse, hippocampal CA1, in vivo awake head-fixed",
+      "url": "https://doi.org/10.1016/j.celrep.2023.112906"
+    },
+    {
+      "title": "Striatal cholinergic interneuron membrane voltage tracks locomotor rhythms in mice",
+      "authors": "Shroff SN, Lowet E, Sridhar S, Gritton HJ, Abumuaileq M, Tseng HA, Cheung C, Zhou SL, Kondabolu K, Han X",
+      "journal": "Nature Communications",
+      "year": 2023,
+      "sample": "Mouse, striatum cholinergic interneurons and spiny projection neurons, in vivo awake",
+      "url": "https://doi.org/10.1038/s41467-023-39497-z"
+    },
+    {
+      "title": "Large-scale deep tissue voltage imaging with targeted illumination confocal microscopy",
+      "authors": "Xiao S, Cunningham WJ, Kondabolu K, Lowet E, Moya MV, Mount R, Ravasio C, Bortz E, Shaw D, Economo MN, Han X, Mertz J",
+      "journal": "Nature Methods",
+      "year": 2024,
+      "sample": "Mouse, visual cortex, motor cortex, and hippocampal CA1, in vivo awake",
+      "url": "https://doi.org/10.1038/s41592-024-02275-w"
+    },
+    {
+      "title": "Transcranial ultrasound stimulation modulates neuronal membrane potentials across broad timescales in the awake mammalian brain",
+      "authors": "Bortz E, et al.",
+      "journal": "Brain Stimulation",
+      "year": 2025,
+      "sample": "Mouse, cortex, in vivo awake",
+      "url": "https://doi.org/10.1016/j.brs.2025.09.004"
+    }
+  ]
 }

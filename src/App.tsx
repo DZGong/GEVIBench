@@ -2,6 +2,7 @@ import { useState, useCallback } from 'react';
 import { getAllGEVIs } from './geviData';
 import { methodologyContent } from './methodology';
 import { FamilyTreePanel } from './components/FamilyTreePanel';
+import { BrightnessNetworkPanel } from './components/BrightnessNetworkPanel';
 import { Header } from './components/Header';
 import { SearchFilters } from './components/SearchFilters';
 import { GEVIList } from './components/GEVIList';
@@ -34,6 +35,7 @@ function GEVIBenchApp() {
   const [activeTab, setActiveTab] = useState<ViewTab>('database');
   const [compareGEVIs, setCompareGEVIs] = useState<GEVI[]>([]);
   const [showFamilyTree, setShowFamilyTree] = useState(false);
+  const [showBrightnessNetwork, setShowBrightnessNetwork] = useState(false);
   const [showCompareEmpty, setShowCompareEmpty] = useState(false);
 
   // Derived state
@@ -82,12 +84,14 @@ function GEVIBenchApp() {
     setSelectedGEVI(gevi);
     setMobileView('detail');
     setShowFamilyTree(false);
+    setShowBrightnessNetwork(false);
   }, []);
 
   const handleLogoClick = useCallback(() => {
     setSelectedGEVI(null);
     setMobileView('list');
     setShowFamilyTree(false);
+    setShowBrightnessNetwork(false);
     setActiveTab('database');
   }, []);
 
@@ -165,20 +169,20 @@ function GEVIBenchApp() {
         <select
           value={sortConfig.field}
           onChange={(e) => handleSortChange(e.target.value as SortField)}
-          className={`text-xs px-2 py-2 border rounded ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300'}`}
+          className={`text-xs px-2 py-2 border rounded ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-paper border-gray-300'}`}
         >
           <option value="overall">Overall</option>
           <option value="brightness">Brightness</option>
           <option value="speed">Speed</option>
-          <option value="snr">SNR</option>
+          <option value="sensitivity">Sensitivity</option>
           <option value="dynamicRange">Range</option>
           <option value="photostability">Stable</option>
-          <option value="paperCount">Papers</option>
+          <option value="popularity">Popularity</option>
           <option value="year">Year</option>
         </select>
         <button
           onClick={() => handleSortChange(sortConfig.field)}
-          className={`text-xs px-2 py-2 border rounded ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-white border-gray-300'}`}
+          className={`text-xs px-2 py-2 border rounded ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-paper border-gray-300'}`}
           title={sortConfig.order === 'desc' ? 'Ascending' : 'Descending'}
         >
           {sortConfig.order === 'desc' ? '↓' : '↑'}
@@ -199,8 +203,10 @@ function GEVIBenchApp() {
         />
       )}
 
-      {/* Family Tree - full width, outside grid */}
-      {showFamilyTree ? (
+      {/* Brightness Network - full width */}
+      {showBrightnessNetwork ? (
+        <BrightnessNetworkPanel onSelectGEVI={handleSelectGEVI} />
+      ) : showFamilyTree ? (
         <FamilyTreePanel
           darkMode={darkMode}
           onSelectGEVI={handleSelectGEVI}
@@ -242,21 +248,17 @@ function GEVIBenchApp() {
                     <button
                       key={gevi.id}
                       onClick={() => handleSelectGEVI(gevi)}
-                      className={`w-full p-3 text-left border rounded-lg ${darkMode ? 'bg-gray-800 border-gray-700 hover:bg-gray-700' : 'bg-white border-gray-200 hover:bg-gray-50'}`}
+                      className={`w-full p-3 text-left border rounded-lg ${darkMode ? 'bg-gray-800 border-gray-700 hover:bg-gray-700' : 'bg-paper border-gray-200 hover:bg-gray-50'}`}
                     >
                       <div className="flex items-center justify-between mb-1">
                         <div className="flex items-center gap-2 flex-wrap">
                           <span className={`text-xs font-medium ${colors.textMuted}`}>{idx + 1}.</span>
-                          {geviColor.color === 'rainbow' ? (
-                            <RainbowText text={gevi.name} />
-                          ) : (
-                            <span className="font-semibold text-base" style={{ color: geviColor.color }}>{gevi.name}</span>
-                          )}
+                          <span className="font-semibold text-base" style={{ color: geviColor.color }}>{gevi.name}</span>
                           <span className="text-xs px-1.5 py-0.5 bg-blue-900 text-white rounded">{gevi.category}</span>
                         </div>
                         <div className="flex items-center gap-2">
                           <span className={`text-xs px-1.5 py-0.5 rounded ${darkMode ? 'bg-gray-600 text-gray-300' : 'bg-gray-100 text-gray-600'}`}>{gevi.year}</span>
-                          <span className="text-base font-bold text-blue-500">{gevi.overall}</span>
+                          <span className="text-base font-bold text-blue-500">{gevi.overall ?? 'N/A'}</span>
                         </div>
                       </div>
                       <div className={`text-xs ${colors.textTertiary}`}>
@@ -310,7 +312,7 @@ function GEVIBenchApp() {
           Scoring <span className="text-blue-400">Methodology</span>
         </h2>
 
-        <div className={`border rounded-lg p-4 md:p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
+        <div className={`border rounded-lg p-4 md:p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-paper border-gray-200'}`}>
           <div className="space-y-6">
             <div>
               <h3 className={`text-lg font-semibold mb-2 ${colors.text}`}>Overview</h3>
@@ -378,14 +380,14 @@ function GEVIBenchApp() {
 
               {/* SNR Scoring Rule */}
               {renderScoringSection(
-                methodologyContent.scoring.snrScoring.title,
-                methodologyContent.scoring.snrScoring.description,
-                methodologyContent.scoring.snrScoring.formula,
-                methodologyContent.scoring.snrScoring.details,
-                methodologyContent.scoring.snrScoring.benchmarks,
-                (bench) => `Score ${bench.score}: SNR = ${bench.snr} (${bench.example})`,
+                methodologyContent.scoring.sensitivityScoring.title,
+                methodologyContent.scoring.sensitivityScoring.description,
+                methodologyContent.scoring.sensitivityScoring.formula,
+                methodologyContent.scoring.sensitivityScoring.details,
+                methodologyContent.scoring.sensitivityScoring.benchmarks,
+                (bench) => `Score ${bench.score}: ΔF/F/AP = ${bench.dfPerAP}% (${bench.example})`,
                 undefined,
-                methodologyContent.scoring.snrScoring.formulaNote
+                methodologyContent.scoring.sensitivityScoring.formulaNote
               )}
 
               {/* Photostability Scoring Rule */}
@@ -433,7 +435,7 @@ function GEVIBenchApp() {
               <p className={`text-sm ${colors.textSecondary} mb-3`}>{methodologyContent.bonusPoints.description}</p>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                 {methodologyContent.bonusPoints.rules.map((rule: any, i: number) => (
-                  <div key={i} className={`p-3 rounded-lg border ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-white border-gray-200'}`}>
+                  <div key={i} className={`p-3 rounded-lg border ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-paper border-gray-200'}`}>
                     <div className="flex items-center gap-2 mb-2">
                       <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${darkMode ? 'bg-blue-900 text-blue-300' : 'bg-blue-100 text-blue-800'}`}>
                         +{rule.points} pts
@@ -465,7 +467,7 @@ function GEVIBenchApp() {
     <div className={`mt-4 p-3 rounded-lg ${darkMode ? 'bg-gray-700' : 'bg-blue-50'}`}>
       <h4 className={`text-md font-semibold mb-2 ${colors.text}`}>{title}</h4>
       <p className={`text-sm ${colors.textSecondary}`}>{description}</p>
-      <div className={`mt-2 p-2 rounded font-mono text-sm ${darkMode ? 'bg-gray-800 text-green-400' : 'bg-white text-green-700'}`}>
+      <div className={`mt-2 p-2 rounded font-mono text-sm ${darkMode ? 'bg-gray-800 text-green-400' : 'bg-paper text-green-700'}`}>
         {formula}
       </div>
       {formulaNote && (
@@ -495,7 +497,7 @@ function GEVIBenchApp() {
   );
 
   return (
-    <div className={`min-h-screen flex flex-col ${darkMode ? 'bg-gray-900' : 'bg-warm-bg'}`}>
+    <div className={`min-h-screen flex flex-col ${darkMode ? 'bg-gray-900' : 'bg-paper'}`}>
       <Header
         activeTab={activeTab}
         setActiveTab={(tab) => {
@@ -508,6 +510,12 @@ function GEVIBenchApp() {
         onShowFamilyTree={() => {
           setActiveTab('database');
           setShowFamilyTree(true);
+          setShowBrightnessNetwork(false);
+        }}
+        onShowBrightnessNetwork={() => {
+          setActiveTab('database');
+          setShowBrightnessNetwork(true);
+          setShowFamilyTree(false);
         }}
         onShowCompare={() => {
           setActiveTab('database');
@@ -539,7 +547,7 @@ function GEVIBenchApp() {
       )}
 
       {/* Footer */}
-      <footer className={`mt-auto py-4 border-t ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-warm-accent border-warm-border'}`}>
+      <footer className={`mt-auto py-4 border-t ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-gray-50 border-gray-200'}`}>
         <div className="max-w-7xl mx-auto px-4 text-center">
           <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
             © 2026 GEVIBench. Data sourced from published studies.

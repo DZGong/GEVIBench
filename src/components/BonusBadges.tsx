@@ -97,13 +97,13 @@ interface BonusBadgesProps {
   gevi: {
     tags?: string[];
     category?: string;
+    voltage?: { type?: string };
     dynamicRangeData?: {
       sign?: string;
-    };
-    researchPapers?: Array<{
-      title?: string;
-      sample?: string;
-    }>;
+    }[];
+    twoPhoton?: {
+      compatible: boolean;
+    }[];
   };
   size?: 'sm' | 'md' | 'lg';
 }
@@ -113,29 +113,24 @@ export const BonusBadges: React.FC<BonusBadgesProps> = ({ gevi, size = 'md' }) =
 
   const tags = Array.isArray(gevi.tags) ? gevi.tags : [];
 
-  // Check for red-shifted (Far-red tag or similar)
+  // Check for red-shifted (Far-red tag, NIR tag, or chemigenetic sensor)
   if (tags.some(t =>
     t.toLowerCase().includes('far-red') ||
     t.toLowerCase().includes('red') ||
     t.toLowerCase().includes('nir')
-  )) {
+  ) || gevi.voltage?.type === 'chemi') {
     badges.push('redShift');
   }
 
-  // Check for two-photon (Two-photon tag or in research papers)
-  if (tags.some(t => t.toLowerCase().includes('two-photon'))) {
-    badges.push('twoPhoton');
-  } else if (gevi.researchPapers?.some(p =>
-    p.title?.toLowerCase().includes('two-photon') ||
-    p.sample?.toLowerCase().includes('two-photon')
-  )) {
+  // Check for two-photon (from twoPhoton field in JSON)
+  if (gevi.twoPhoton?.some(tp => tp.compatible)) {
     badges.push('twoPhoton');
   }
 
   // Check for positive-going
   if (tags.some(t => t.toLowerCase().includes('positive'))) {
     badges.push('positiveGoing');
-  } else if (gevi.dynamicRangeData?.sign === 'positive') {
+  } else if (gevi.dynamicRangeData?.[0]?.sign === 'positive') {
     badges.push('positiveGoing');
   }
 

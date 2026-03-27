@@ -7,7 +7,7 @@
   "paperUrl": "https://www.nature.com/articles/s41592-023-01796-2",
   "brightness": 75,
   "speed": 88,
-  "snr": 70,
+  "sensitivity": 70,
   "dynamicRange": 68,
   "photostability": 70,
   "subthreshold": 78,

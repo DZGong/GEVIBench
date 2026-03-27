@@ -68,86 +68,82 @@ export const methodologyContent = {
     dynamicRangeScoring: {
       title: "Dynamic Range Scoring (ΔF/F per 100 mV)",
       description: "Dynamic range measures the fractional fluorescence change per 100 mV depolarization. Both positive-going (brightening) and negative-going (dimming) indicators are scored on absolute |ΔF/F|. A square-root transform is used: the perceptual difference between 3% and 10% is larger than between 30% and 40%, but less extreme than a full log scale.",
-      formula: "Dynamic Range Score = min(100, 100 × √(|ΔF/F| / 30%))",
-      formulaNote: "where |ΔF/F| is the absolute fluorescence change per 100 mV. Score reaches 100 at 30% ΔF/F (the current state-of-the-art ceiling).",
+      formula: "Dynamic Range Score = max(0, min(100, 83.33 × log₁₀(|ΔF/F|) − 66.66))",
+      formulaNote: "where |ΔF/F| is the absolute fluorescence change per 100 mV (%). Calibration: 25% → 50, 50% → 75, 100% → 100. Score is 0 below ~4.6% ΔF/F.",
       details: [
         "Take absolute value of ΔF/F so positive- and negative-going indicators are treated equally",
         "Measurements normalized to exactly 100 mV step; larger voltage steps are scaled proportionally",
-        "In vitro (HEK cell) and in vivo ΔF/F are scored separately and averaged when both exist",
-        "Square-root scaling means doubling ΔF/F yields ~41% more score points (not 100%)",
-        "Values above 30% ΔF/F are capped at 100 and flagged for review"
+        "Multiple measurements from different papers are averaged",
+        "Log scaling reflects the fact that going from 25% to 50% ΔF/F is as meaningful as 50% to 100%"
       ],
       benchmarks: [
-        { score: 100, deltaF: 30, example: "JEDI-1P, Voltron2 (top performers)" },
-        { score: 82, deltaF: 20, example: "ASAP4, ASAP3" },
-        { score: 58, deltaF: 10, example: "ArcLight A242, QuasAr3" },
-        { score: 41, deltaF: 5,  example: "First-generation rhodopsin GEVIs" },
-        { score: 18, deltaF: 1,  example: "Early prototype sensors" }
+        { score: 100, deltaF: 100, example: "Exceptional sensors" },
+        { score: 88,  deltaF: 75,  example: "Top-tier sensors" },
+        { score: 75,  deltaF: 50,  example: "JEDI-1P, Voltron2" },
+        { score: 67,  deltaF: 37,  example: "ASAP3, ASAP4" },
+        { score: 50,  deltaF: 25,  example: "ArcLight, first-generation sensors" },
+        { score: 0,   deltaF: 5,   example: "Marginal sensitivity" }
       ]
     },
 
     brightnessScoring: {
       title: "Brightness Scoring",
-      description: "Brightness is expressed as the product of extinction coefficient (EC, M⁻¹cm⁻¹) and quantum yield (QY), normalized to EGFP (EC × QY = 33,400 × 0.60 = 20,040 M⁻¹cm⁻¹, defined as 1.0×). When absolute values are unavailable, pairwise comparisons from head-to-head experiments are used to derive a relative brightness. A logarithmic scale is appropriate because brightness spans more than two orders of magnitude across GEVIs.",
-      formula: "Brightness Score = max(0, min(100, 100 × log₁₀(B_rel / 0.01) / log₁₀(200)))",
-      formulaNote: "where B_rel is brightness relative to EGFP. Score is 0 at 0.01× EGFP and 100 at 2× EGFP.",
+      description: "Brightness is expressed as the product of extinction coefficient (EC, M⁻¹cm⁻¹) and quantum yield (QY), normalized to EGFP (EC × QY = 33,400 × 0.60 = 20,040 M⁻¹cm⁻¹, defined as 1.0×). When absolute values are unavailable, pairwise comparisons from head-to-head experiments are used to derive a relative brightness via graph traversal anchored to EGFP. A logarithmic scale is used because brightness spans more than two orders of magnitude across GEVIs.",
+      formula: "Brightness Score = max(0, min(100, 25 × log₁₀(B_rel) + 60))",
+      formulaNote: "where B_rel is brightness relative to EGFP. EGFP (B_rel = 1.0) scores 60. Score reaches 0 below ~0.004× EGFP and 100 above ~40× EGFP.",
       details: [
-        "EGFP (B_rel = 1.0) scores approximately 87 — bright but not perfect",
-        "Score is 0 for any GEVI dimmer than 0.01× EGFP",
+        "EGFP (B_rel = 1.0) scores 60 — a mid-range anchor, not a ceiling",
         "For cpGFP-based GEVIs, the resting-state brightness is used (not the activated state)",
-        "Brightness values from different publications are harmonized by computing ratios to a shared reference measured in the same experiment",
+        "B_rel is derived from pairwise comparisons across papers, with EGFP as the fixed reference node",
+        "When only non-EGFP comparisons are available, graph traversal infers B_rel through intermediate GEVIs",
         "Log scaling reflects the fact that a 10× increase in photon yield is equally valuable whether going from 0.01→0.1× or 0.1→1×"
       ],
       benchmarks: [
-        { score: 100, brightness: "2.0×", example: "Brighter-than-EGFP fusions (exceptional)" },
-        { score: 87,  brightness: "1.0×", example: "EGFP reference standard" },
-        { score: 73,  brightness: "0.3×", example: "ASAP3, JEDI-1P (moderate-bright GEVIs)" },
-        { score: 44,  brightness: "0.1×", example: "Archon1, QuasAr3 (rhodopsin-based)" },
-        { score: 0,   brightness: "0.01×", example: "Dim sensors below practical threshold" }
+        { score: 76,  brightness: "≤4.5×", example: "Ace2N-mNeon (exceptional chemigenetic)" },
+        { score: 61,  brightness: "1.1×",  example: "ArcLight Q239" },
+        { score: 60,  brightness: "1.0×",  example: "EGFP reference standard" },
+        { score: 57,  brightness: "0.75×", example: "ASAP3" },
+        { score: 35,  brightness: "0.1×",  example: "Archon1, QuasAr3 (rhodopsin-based)" },
+        { score: 10,  brightness: "0.01×", example: "Arch (very dim rhodopsin sensors)" }
       ]
     },
 
-    snrScoring: {
-      title: "SNR Scoring (Action Potential Detection)",
-      description: "SNR measures the peak ΔF/F amplitude of a single action potential divided by the standard deviation of the baseline fluorescence noise. This is the most direct indicator of whether a GEVI can reliably detect single spikes. SNR spans two orders of magnitude across GEVIs and imaging conditions, making a logarithmic scale the most appropriate.",
-      formula: "SNR Score = max(0, min(100, 50 × log₁₀(SNR)))",
-      formulaNote: "where SNR = ΔF/F_AP / σ_baseline. Score is 0 at SNR ≤ 1 (undetectable), 50 at SNR = 10, and 100 at SNR = 100.",
+    sensitivityScoring: {
+      title: "Sensitivity Scoring (ΔF/F per Action Potential)",
+      description: "Sensitivity is measured as the peak ΔF/F amplitude evoked by a single action potential (AP), expressed as a percentage. Unlike SNR, which depends on illumination power and imaging setup, ΔF/F per AP is an intrinsic property of the sensor that can be directly compared across papers. Values range from <0.5% for dim opsin-based sensors to >20% for the brightest GFP-based sensors, motivating a logarithmic scale.",
+      formula: "Sensitivity Score = max(0, min(100, 66.4 × log₁₀(ΔF/F%) − 32.8))",
+      formulaNote: "25% ΔF/F/AP → 60, 50% → 80, 100% → 100. Score is 0 below ~1.5% ΔF/F/AP.",
       details: [
-        "SNR is computed on background-subtracted traces without post-hoc denoising to ensure comparability",
-        "Frame rate is standardized to 500 Hz equivalent; slower frame rates are corrected using shot-noise scaling",
-        "In vivo measurements are preferred; in vitro values are down-weighted by 0.85×",
-        "Both electrophysiology-paired and template-based SNR estimates are accepted",
-        "Log scaling means each 10× improvement in SNR contributes 50 points regardless of absolute level"
+        "ΔF/F per AP is extracted from electrophysiology-paired optical recordings",
+        "In vivo and in vitro values are both accepted; in vivo measurements are preferred where available",
+        "For sensors with negative polarity, the absolute value of ΔF/F is used",
+        "Log scaling ensures equal weight to relative improvements across the full range"
       ],
       benchmarks: [
-        { score: 100, snr: 100, example: "Best-case in vitro conditions" },
-        { score: 85,  snr: 50,  example: "Excellent in vivo performance (top sensors)" },
-        { score: 70,  snr: 20,  example: "JEDI-1P in vivo, ASAP4 in vitro" },
-        { score: 50,  snr: 10,  example: "Reliable single-spike detection threshold" },
-        { score: 34,  snr: 5,   example: "Marginal; requires averaging or denoising" },
-        { score: 0,   snr: 1,   example: "Undetectable single spikes (SNR ≤ 1)" }
+        { score: 100, dfPerAP: 100, example: "Upper bound (100% ΔF/F per AP)" },
+        { score: 80,  dfPerAP: 50,  example: "50% ΔF/F per AP" },
+        { score: 60,  dfPerAP: 25,  example: "25% ΔF/F per AP" },
+        { score: 40,  dfPerAP: 12,  example: "~12% ΔF/F per AP" },
+        { score: 0,   dfPerAP: 1.5, example: "~1.5% ΔF/F per AP (score floor)" }
       ]
     },
 
     photostabilityScoring: {
       title: "Photostability Scoring",
-      description: "Photostability measures the fraction of initial fluorescence remaining after a defined illumination protocol. Because bleaching rate depends on both illumination power and duration, raw measurements are normalized to a standard condition (16 mW/mm², 1 min) using power-law corrections derived from photobleaching kinetics theory.",
-      formula: "Photostability Score = min(100, F_remaining × (1 / t_actual)^0.3 × (16 / P_actual)^0.2 × 100)",
-      formulaNote: "where F_remaining is the fractional fluorescence remaining (0–1), t_actual is illumination duration in minutes, and P_actual is illumination power in mW/mm². Exponent 0.3 reflects sub-linear duration dependence; exponent 0.2 reflects sub-linear power dependence typical of one-photon bleaching.",
+      description: "Photostability measures the fraction of initial fluorescence remaining after a defined illumination protocol. Because bleaching rate depends on both illumination power and duration, raw measurements are normalized to a standard condition (100 mW/mm², 1 min) using exponential corrections derived from first-order photobleaching kinetics.",
+      formula: "k = −ln(F_remaining) / (t · P);  Score = min(100, round(100 · exp(k · (−100)))  =  min(100, round(100 · F_remaining ^ (100 / (t · P))))",
+      formulaNote: "where F_remaining is the fractional fluorescence remaining (0–1), t is illumination duration in minutes, and P is illumination power in mW/mm². Based on the first-order bleaching model F(t) = exp(−k·t·P): k is inferred from the raw measurement, then the score is 100× the predicted F at the standard condition (100 mW/mm², 1 min). Harsher conditions (higher P or longer t) yield a lower apparent bleaching rate k, boosting the normalized score.",
       details: [
-        "Standard condition: 16 mW/mm² for 1 minute at the imaging wavelength",
-        "Measurements at different powers (e.g., 5–50 mW/mm²) are corrected before comparison",
-        "For two-photon imaging, power exponent is changed to 0.4 to reflect the quadratic intensity dependence",
-        "Indicators with monoexponential vs. bi-exponential bleaching are treated separately; fast-phase fraction is penalized",
+        "Standard condition: 100 mW/mm² for 1 minute at the imaging wavelength",
+        "Measurements at different powers or durations are normalized before comparison",
         "Score is capped at 100; no extrapolation beyond measured time points is performed"
       ],
-      example: "JEDI-1P: 64% remaining at 16 mW/mm² for 1 min → Score = 0.64 × (1/1)^0.3 × (16/16)^0.2 × 100 = 64",
+      example: "Archon1: 95% remaining at 800 mW/mm² for 15 min → k = −ln(0.95)/(15×800) = 4.3×10⁻⁶ → Score = 100·exp(−4.3×10⁻⁶×100) ≈ 100. A sensor with 50% remaining at 10 mW/mm² for 1 min → k = 0.0693 → Score = 100·exp(−0.0693×100) ≈ 1.",
       benchmarks: [
-        { score: 100, remaining: "≥100%", example: "No detectable bleaching" },
-        { score: 80,  remaining: "80%",   example: "Excellent (e.g., JEDI-1P at low power)" },
-        { score: 64,  remaining: "64%",   example: "Good (JEDI-1P standard conditions)" },
-        { score: 40,  remaining: "40%",   example: "Moderate (ASAP series, ArcLight)" },
-        { score: 20,  remaining: "20%",   example: "Poor (early GEVIs, bright-field rhodopsins)" }
+        { score: 100, example: "No detectable bleaching at 100 mW/mm², 1 min" },
+        { score: 90,  example: "~90% remaining at 100 mW/mm², 1 min" },
+        { score: 50,  example: "~50% remaining at 100 mW/mm², 1 min" },
+        { score: 10,  example: "~10% remaining at 100 mW/mm², 1 min (poor)" }
       ]
     },
 

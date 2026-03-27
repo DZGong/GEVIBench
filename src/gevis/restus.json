@@ -8,7 +8,7 @@
   "paperUrl": "https://doi.org/10.1002/advs.202307938",
   "brightness": 68,
   "speed": 78,
-  "snr": 80,
+  "sensitivity": 80,
   "dynamicRange": 82,
   "photostability": 72,
   "subthreshold": 78,

@@ -9,14 +9,45 @@
   ],
   "paper": "Nature Methods 2014",
   "paperUrl": "https://doi.org/10.1038/nmeth.3000",
-  "brightness": 20,
-  "speed": 95,
-  "snr": 35,
-  "dynamicRange": 30,
-  "photostability": 45,
-  "subthreshold": 40,
-  "overall": 34,
+  "brightnessData": [
+    {
+      "ratio": 10,
+      "reference": "arch",
+      "source": "doi:10.1021/acschemneuro.0c00046"
+    },
+    {
+      "ratio": 0.417,
+      "reference": "archon1",
+      "source": "doi:10.1038/s41589-018-0004-9"
+    }
+  ],
   "description": "Improved QuasAr variant with brighter fluorescence and better expression in neurons while maintaining ultrafast response to voltage changes.",
+  "kinetics": [
+    {
+      "on": 0.9,
+      "off": 1.6,
+      "temperature": "33-34°C",
+      "source": "doi:10.1016/j.cell.2019.11.004"
+    }
+  ],
+  "dynamicRangeData": [
+    {
+      "deltaF": 46,
+      "sign": "positive",
+      "source": "doi:10.1038/s41589-018-0004-9"
+    },
+    {
+      "deltaF": 46,
+      "sign": "positive",
+      "source": "doi:10.1016/j.cell.2019.11.004"
+    }
+  ],
+  "twoPhoton": [
+    {
+      "compatible": false,
+      "source": "doi:10.1016/j.cell.2019.11.004"
+    }
+  ],
   "parentId": "quasar1",
   "spectrum": {
     "type": "rhodopsin",

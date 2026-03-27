@@ -5,29 +5,72 @@
   "category": "Opsin GEVI",
   "tags": [
     "Archaerhodopsin",
-    "Red"
+    "Red",
+    "Near-infrared"
   ],
-  "paper": "Nature Methods 2018",
-  "paperUrl": "https://doi.org/10.1038/nmeth.4650",
-  "brightness": 30,
-  "speed": 90,
-  "snr": 60,
-  "dynamicRange": 55,
-  "photostability": 45,
-  "subthreshold": 55,
-  "overall": 52,
-  "description": "An improved version of Archon1 with enhanced plasma membrane localization and reduced intracellular aggregation, enabling more reliable neuronal imaging.",
-  "parentId": "archon1",
+  "paper": "Nature Chemical Biology 2018",
+  "paperUrl": "https://doi.org/10.1038/s41589-018-0004-9",
+  "description": "Sibling variant of Archon1 from the same robotic directed evolution screen, selected for superior membrane localization and brightness at the cost of reduced voltage sensitivity.",
+  "parentId": "arch",
   "spectrum": {
     "type": "rhodopsin",
-    "peakEx": 550,
-    "peakEm": 580,
+    "peakEx": 586,
+    "peakEm": 735,
     "name": "Archon2"
   },
   "voltage": {
     "type": "opsin",
-    "slope": 38,
+    "slope": 20,
     "polarity": "positive",
-    "name": "Archon2"
+    "name": "Archon2",
+    "custom": {
+      "voltage": [-80, -70, -60, -40, -20, 0, 20, 40],
+      "deltaF":  [-2, 0, 2, 6, 10, 13, 17, 21]
+    }
+  },
+  "kinetics": [
+    {
+      "on": 0.06,
+      "off": 0.17,
+      "temperature": "32°C",
+      "source": "doi:10.1038/s41589-018-0004-9"
+    }
+  ],
+  "dynamicRangeData": [
+    {
+      "deltaF": 19,
+      "sign": "positive",
+      "source": "doi:10.1038/s41589-018-0004-9"
+    }
+  ],
+  "sensitivityData": [
+    {
+      "deltaF": 18,
+      "source": "doi:10.1038/s41589-018-0004-9"
+    }
+  ],
+  "brightnessData": [
+    {
+      "ratio": 80,
+      "reference": "arch",
+      "source": "doi:10.1021/acschemneuro.0c00046"
+    },
+    {
+      "ratio": 8.01,
+      "reference": "quasar2",
+      "source": "doi:10.1038/s41589-018-0004-9"
+    }
+  ],
+  "photostabilityData": [
+    {
+      "brightnessRemaining": 98,
+      "illumination": "800 mW/mm²",
+      "duration": "1 min",
+      "source": "doi:10.1038/s41589-018-0004-9"
+    }
+  ],
+  "addgene": {
+    "id": "108421",
+    "url": "https://www.addgene.org/108421/"
   }
 }

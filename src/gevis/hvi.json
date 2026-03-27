@@ -1,0 +1,95 @@
+{
+  "id": "hvi",
+  "name": "HVI",
+  "year": 2021,
+  "category": "Chemigenetic GEVI",
+  "tags": ["Ace opsin", "Cy3", "PRIME", "Negative-going"],
+  "paper": "Nature Chemistry 2021",
+  "paperUrl": "https://doi.org/10.1038/s41557-021-00641-1",
+  "description": "Far-red hybrid voltage indicator using bioorthogonal PRIME-IEDDA labeling to site-specifically conjugate organic fluorophores to an Ace2 rhodopsin mutant, achieving −39% ΔF/F₀ per 100 mV with Cy3 and enabling multiplexed all-optical electrophysiology with the far-red Cy5 variant.",
+
+  "familyTreePath": [
+    "GEVI",
+    "Opsin",
+    "Opsin-FRET",
+    "Chemigenetic",
+    "hvi"
+  ],
+
+  "spectrum": {
+    "type": "rhodopsin",
+    "peakEx": 553,
+    "peakEm": 569,
+    "name": "HVI (Cy3)"
+  },
+
+  "voltage": {
+    "type": "chemi",
+    "slope": 39,
+    "polarity": "negative",
+    "name": "HVI (Cy3)",
+    "custom": {
+      "voltage": [-100, -80, -70, -60, -40, -20, 0, 20, 40, 50],
+      "deltaF":  [4, 1, 0, -2, -4, -9, -18, -32, -49, -56]
+    },
+    "additionalCurves": [
+      {
+        "name": "HVI (Cy5)",
+        "voltage": [-100, -80, -70, -60, -40, -20, 0, 20, 40, 50],
+        "deltaF":  [2, 1, 0, -1, -2, -4, -8, -14, -21, -25]
+      }
+    ]
+  },
+
+  "kinetics": [
+    {
+      "on": 1.70,
+      "off": 2.50,
+      "temperature": "34°C",
+      "source": "doi:10.1038/s41557-021-00641-1"
+    }
+  ],
+
+  "dynamicRangeData": [
+    {
+      "deltaF": -39,
+      "sign": "negative",
+      "source": "doi:10.1038/s41557-021-00641-1"
+    }
+  ],
+
+  "sensitivityData": [
+    {
+      "deltaF": 25.3,
+      "source": "doi:10.1038/s41557-021-00641-1"
+    }
+  ],
+
+  "brightnessData": [
+    {
+      "ratio": 0.19,
+      "reference": "voltron",
+      "source": "doi:10.1038/s41557-021-00641-1"
+    }
+  ],
+
+  "photostabilityData": [
+    {
+      "brightnessRemaining": 50,
+      "illumination": "49 mW/mm²",
+      "duration": "7.2 min",
+      "source": "doi:10.1038/s41557-021-00641-1"
+    }
+  ],
+
+  "researchPapers": [
+    {
+      "title": "Positive-going hybrid indicators for voltage imaging in excitable cells and tissues",
+      "authors": "Liu S, et al.",
+      "journal": "Science Advances",
+      "year": 2025,
+      "sample": "Rat, hippocampal neurons, in vitro; mouse, pancreatic islets",
+      "url": "https://doi.org/10.1126/sciadv.ads1807"
+    }
+  ]
+}

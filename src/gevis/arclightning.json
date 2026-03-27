@@ -8,7 +8,7 @@
   "paperUrl": "https://elifesciences.org/articles/10482",
   "brightness": 68,
   "speed": 52,
-  "snr": 58,
+  "sensitivity": 58,
   "dynamicRange": 53,
   "photostability": 48,
   "subthreshold": 53,

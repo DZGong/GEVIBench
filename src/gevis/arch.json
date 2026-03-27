@@ -10,53 +10,64 @@
   ],
   "paper": "Nature Methods 2012",
   "paperUrl": "https://doi.org/10.1038/nmeth.1782",
-  "brightness": 12,
-  "speed": 94,
-  "snr": 40,
-  "dynamicRange": 35,
-  "photostability": 30,
-  "subthreshold": 55,
-  "overall": 42,
-  "description": "Archaerhodopsin-3 (Arch) was the first opsin-based GEVI to demonstrate optical recording of single action potentials in mammalian neurons, achieving sub-millisecond response times but with a very low quantum yield.",
+  "description": "First opsin-based GEVI to demonstrate direct optical recording of action potentials in mammalian neurons, with sub-millisecond response times but very low quantum yield (~0.01%).",
 
   "familyTreePath": ["GEVI", "Opsin", "Opsin-Fluorescent", "arch"],
 
   "spectrum": {
     "type": "rhodopsin",
-    "peakEx": 559,
-    "peakEm": 722,
-    "name": "Arch",
-    "custom": {
-      "ex": [400, 430, 460, 490, 520, 540, 559, 575, 600, 630, 660],
-      "exNorm": [0.05, 0.10, 0.18, 0.30, 0.55, 0.78, 1.00, 0.85, 0.45, 0.15, 0.04],
-      "em": [680, 700, 722, 740, 760, 780, 800, 830, 860, 900],
-      "emNorm": [0.25, 0.65, 1.00, 0.85, 0.62, 0.40, 0.22, 0.10, 0.04, 0.01]
-    }
+    "peakEx": 558,
+    "peakEm": 687,
+    "name": "Arch"
   },
 
   "voltage": {
     "type": "opsin",
-    "slope": 33,
+    "slope": 45,
     "polarity": "positive",
-    "name": "Arch",
-    "custom": {
-      "voltage": [-150, -120, -90, -70, -60, -30, 0, 30, 60, 90, 120, 150],
-      "deltaF":  [-21.1, -13.2, -5.3, 0.0, 2.6, 10.5, 18.4, 26.3, 34.2, 42.1, 50.0, 57.9]
+    "name": "Arch"
+  },
+
+  "kinetics": [
+    {
+      "on": 0.5,
+      "off": 0.5,
+      "temperature": "24°C",
+      "source": "doi:10.1038/nmeth.1782"
     }
-  },
+  ],
 
-  "kinetics": {
-    "on": 0.5,
-    "off": 0.5,
-    "temperature": "room temperature"
-  },
+  "dynamicRangeData": [
+    {
+      "deltaF": 45,
+      "sign": "positive",
+      "source": "doi:10.1038/nmeth.1782"
+    },
+    {
+      "deltaF": 40,
+      "sign": "positive",
+      "source": "doi:10.1038/nmeth.3000"
+    }
+  ],
 
-  "dynamicRangeData": {
-    "deltaF": 26,
-    "sign": "positive"
-  },
+  "photostabilityData": [
+    {
+      "brightnessRemaining": 83,
+      "illumination": "5400 mW/mm²",
+      "duration": "10 min",
+      "source": "doi:10.1038/nmeth.1782"
+    }
+  ],
 
   "researchPapers": [
+    {
+      "title": "Mechanism of voltage-sensitive fluorescence in a microbial rhodopsin",
+      "authors": "Maclaurin D, Venkatachalam V, Lee H, Cohen AE",
+      "journal": "Proceedings of the National Academy of Sciences",
+      "year": 2013,
+      "sample": "HEK293 cells and cultured neurons, in vitro",
+      "url": "https://doi.org/10.1073/pnas.1215595110"
+    },
     {
       "title": "Enhanced archaerhodopsin fluorescent protein voltage indicators",
       "authors": "Gong Y, Li JZ, Schnitzer MJ",
@@ -80,7 +91,38 @@
       "year": 2014,
       "sample": "Cultured rat hippocampal neurons and C. elegans neurons, in vitro/in vivo",
       "url": "https://doi.org/10.1038/ncomms5894"
+    },
+    {
+      "title": "Photoactivated voltage imaging in tissue with an archaerhodopsin-derived reporter",
+      "authors": "Chien MP, Brinks D, Testa-Silva G, Tian H, Brooks FP, Adam Y, Bloxham B, Gmeiner B, Kheifets S, Cohen AE",
+      "journal": "Science Advances",
+      "year": 2021,
+      "sample": "Cultured rat hippocampal neurons, acute mouse brain slices, in vitro/in vivo",
+      "url": "https://doi.org/10.1126/sciadv.abe3216"
+    },
+    {
+      "title": "Rational design of far-red archaerhodopsin-3-based fluorescent genetically encoded voltage indicators: from elucidation of the fluorescence mechanism in Archers to novel red-shifted variants",
+      "authors": "Nikolaev DM, Mironov VN, Metelkina EM, et al.",
+      "journal": "ACS Physical Chemistry Au",
+      "year": 2024,
+      "sample": "Computational modeling and HEK293T cells, in vitro",
+      "url": "https://doi.org/10.1021/acsphyschemau.3c00073"
+    },
+    {
+      "title": "Archaerhodopsin 3 is an ideal template for the engineering of highly fluorescent optogenetic reporters",
+      "authors": "Herasymenko K, Walisinghe D, Konno M, Barneschi L, de Waele I, Sliwa M, Inoue K, Olivucci M, Haacke S",
+      "journal": "Chemical Science",
+      "year": 2025,
+      "sample": "Protein engineering and spectroscopic characterization",
+      "url": "https://doi.org/10.1039/D4SC05120C"
+    },
+    {
+      "title": "Semirational protein engineering yields archaerhodopsin-3-based fluorescent genetically encoded voltage indicators with enhanced brightness and red shifted absorption bands",
+      "authors": "Nikolaev DM, Metelkina EM, Domskii NA, et al.",
+      "journal": "Chemical & Biomedical Engineering",
+      "year": 2025,
+      "sample": "HEK293T cells, in vitro",
+      "url": "https://doi.org/10.1021/cbe.5c00069"
     }
-  ],
-  "paperCount": 3
+  ]
 }

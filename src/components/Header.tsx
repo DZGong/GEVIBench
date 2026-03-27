@@ -1,4 +1,4 @@
-import { Search, Beaker, Moon, Sun, Menu, X, ChevronDown, TreeDeciduous, GitCompare, Github } from 'lucide-react';
+import { Moon, Sun, Menu, X, ChevronDown, TreeDeciduous, GitCompare, Github, Share2 } from 'lucide-react';
 import { useState, useRef, useEffect } from 'react';
 import { useTheme } from '../context/ThemeContext';
 import type { ViewTab } from '../types';
@@ -11,12 +11,13 @@ interface HeaderProps {
   onLogoClick: () => void;
   onShowFamilyTree: () => void;
   onShowCompare: () => void;
+  onShowBrightnessNetwork: () => void;
 }
 
 // Custom logo: hexagon with action potential waveform
 const Logo = ({ darkMode }: { darkMode: boolean }) => {
-  const bg = darkMode ? '#1f2937' : '#fcfaf8';
-  const color = darkMode ? '#60a5fa' : '#2e2b29';
+  const bg = darkMode ? '#1f2937' : '#ffffff';
+  const color = darkMode ? '#60a5fa' : '#1e40af';
   const wavePath = "M1,18 L12,18 C12,18 12.5,1 13.5,1 C14.5,1 15,25 16.5,24.5 C17.5,24 19,18 20,18 L31,18";
   return (
     <svg width="32" height="32" viewBox="0 0 32 32" className="flex-shrink-0" overflow="visible">
@@ -38,13 +39,13 @@ const Logo = ({ darkMode }: { darkMode: boolean }) => {
   );
 };
 
-export function Header({ activeTab, setActiveTab, mobileMenuOpen, setMobileMenuOpen, onLogoClick, onShowFamilyTree, onShowCompare }: HeaderProps) {
+export function Header({ activeTab, setActiveTab, mobileMenuOpen, setMobileMenuOpen, onLogoClick, onShowFamilyTree, onShowCompare, onShowBrightnessNetwork }: HeaderProps) {
   const { darkMode, toggleDarkMode } = useTheme();
   const [toolsMenuOpen, setToolsMenuOpen] = useState(false);
   const toolsMenuRef = useRef<HTMLDivElement>(null);
 
   const tabButtonClass = (tab: ViewTab) =>
-    `text-sm px-3 py-1.5 rounded-md ${activeTab === tab ? (darkMode ? 'bg-gray-700 text-white' : 'bg-warm-text text-warm-bg') : darkMode ? 'text-gray-300 hover:bg-gray-700' : 'text-warm-muted hover:bg-warm-accent'}`;
+    `text-sm px-3 py-1.5 rounded-md ${activeTab === tab ? 'bg-blue-900 text-white' : darkMode ? 'text-gray-300 hover:bg-gray-700' : 'text-gray-600 hover:bg-gray-100'}`;
 
   // Close menu when clicking outside
   useEffect(() => {
@@ -61,18 +62,16 @@ export function Header({ activeTab, setActiveTab, mobileMenuOpen, setMobileMenuO
     setToolsMenuOpen(!toolsMenuOpen);
   };
 
-  const handleToolSelect = (tool: 'family-tree' | 'compare') => {
-    if (tool === 'family-tree') {
-      onShowFamilyTree();
-    } else if (tool === 'compare') {
-      onShowCompare();
-    }
+  const handleToolSelect = (tool: 'family-tree' | 'compare' | 'brightness-network') => {
+    if (tool === 'family-tree') onShowFamilyTree();
+    else if (tool === 'compare') onShowCompare();
+    else if (tool === 'brightness-network') onShowBrightnessNetwork();
     setToolsMenuOpen(false);
     setMobileMenuOpen(false);
   };
 
   return (
-    <header className={`sticky top-0 z-50 border-b ${darkMode ? 'border-gray-700 bg-gray-800' : 'border-warm-border bg-warm-bg'}`}>
+    <header className={`sticky top-0 z-50 border-b ${darkMode ? 'border-gray-700 bg-gray-800' : 'border-gray-200 bg-paper'}`}>
       <div className="max-w-7xl mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -82,8 +81,8 @@ export function Header({ activeTab, setActiveTab, mobileMenuOpen, setMobileMenuO
             <div className="flex items-center gap-2">
               <button onClick={onLogoClick} className="flex items-center gap-2 hover:opacity-80 transition-opacity">
                 <Logo darkMode={darkMode} />
-                <span className={`text-lg font-bold ${darkMode ? 'text-blue-400' : 'text-warm-text'}`}>GEVI</span>
-                <span className={`text-lg font-bold ${darkMode ? 'text-white' : 'text-warm-muted'}`}>Bench</span>
+                <span className="text-lg font-bold text-blue-500">GEVI</span>
+                <span className={`text-lg font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>Bench</span>
               </button>
             </div>
           </div>
@@ -109,12 +108,12 @@ export function Header({ activeTab, setActiveTab, mobileMenuOpen, setMobileMenuO
               {/* Dropdown Menu */}
               {toolsMenuOpen && (
                 <div className={`absolute top-full mt-1 right-0 w-48 rounded-md shadow-lg py-1 z-50 ${
-                  darkMode ? 'bg-gray-800 border border-gray-700' : 'bg-warm-surface border border-warm-border'
+                  darkMode ? 'bg-gray-800 border border-gray-700' : 'bg-paper border border-gray-200'
                 }`}>
                   <button
                     onClick={() => handleToolSelect('compare')}
                     className={`w-full text-left px-4 py-2 text-sm flex items-center gap-2 ${
-                      darkMode ? 'text-gray-300 hover:bg-gray-700' : 'text-warm-text hover:bg-warm-accent'
+                      darkMode ? 'text-gray-300 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100'
                     }`}
                   >
                     <GitCompare className="w-4 h-4" />
@@ -123,11 +122,20 @@ export function Header({ activeTab, setActiveTab, mobileMenuOpen, setMobileMenuO
                   <button
                     onClick={() => handleToolSelect('family-tree')}
                     className={`w-full text-left px-4 py-2 text-sm flex items-center gap-2 ${
-                      darkMode ? 'text-gray-300 hover:bg-gray-700' : 'text-warm-text hover:bg-warm-accent'
+                      darkMode ? 'text-gray-300 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100'
                     }`}
                   >
                     <TreeDeciduous className="w-4 h-4" />
                     Family Tree
+                  </button>
+                  <button
+                    onClick={() => handleToolSelect('brightness-network')}
+                    className={`w-full text-left px-4 py-2 text-sm flex items-center gap-2 ${
+                      darkMode ? 'text-gray-300 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100'
+                    }`}
+                  >
+                    <Share2 className="w-4 h-4" />
+                    Brightness Network
                   </button>
                 </div>
               )}
@@ -143,14 +151,14 @@ export function Header({ activeTab, setActiveTab, mobileMenuOpen, setMobileMenuO
               href="https://github.com/DZGong/GEVIBench"
               target="_blank"
               rel="noopener noreferrer"
-              className={`p-2 rounded-md ${darkMode ? 'text-gray-300 hover:bg-gray-700' : 'text-warm-muted hover:bg-warm-accent'}`}
+              className={`p-2 rounded-md ${darkMode ? 'text-gray-300 hover:bg-gray-700' : 'text-gray-600 hover:bg-gray-100'}`}
               title="GitHub"
             >
               <Github className="w-5 h-5" />
             </a>
             <button
               onClick={toggleDarkMode}
-              className={`p-2 rounded-md ${darkMode ? 'text-gray-300 hover:bg-gray-700' : 'text-warm-muted hover:bg-warm-accent'}`}
+              className={`p-2 rounded-md ${darkMode ? 'text-gray-300 hover:bg-gray-700' : 'text-gray-600 hover:bg-gray-100'}`}
               title={darkMode ? 'Light mode' : 'Dark mode'}
             >
               {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
@@ -164,33 +172,40 @@ export function Header({ activeTab, setActiveTab, mobileMenuOpen, setMobileMenuO
             <div className="flex flex-col gap-2">
               <button
                 onClick={() => { setActiveTab('database'); setMobileMenuOpen(false); }}
-                className={`text-sm px-3 py-2 rounded-md text-left ${activeTab === 'database' ? (darkMode ? 'bg-gray-700 text-white' : 'bg-warm-text text-warm-bg') : darkMode ? 'text-gray-300' : 'text-warm-muted'}`}
+                className={`text-sm px-3 py-2 rounded-md text-left ${activeTab === 'database' ? 'bg-blue-900 text-white' : darkMode ? 'text-gray-300' : 'text-gray-600'}`}
               >
                 Database
               </button>
               <button
                 onClick={() => { setActiveTab('methodology'); setMobileMenuOpen(false); }}
-                className={`text-sm px-3 py-2 rounded-md text-left ${activeTab === 'methodology' ? (darkMode ? 'bg-gray-700 text-white' : 'bg-warm-text text-warm-bg') : darkMode ? 'text-gray-300' : 'text-warm-muted'}`}
+                className={`text-sm px-3 py-2 rounded-md text-left ${activeTab === 'methodology' ? 'bg-blue-900 text-white' : darkMode ? 'text-gray-300' : 'text-gray-600'}`}
               >
                 Methodology
               </button>
               <button
                 onClick={() => { onShowCompare(); setMobileMenuOpen(false); }}
-                className={`text-sm px-3 py-2 rounded-md text-left flex items-center gap-2 ${activeTab === 'tools' ? (darkMode ? 'bg-gray-700 text-white' : 'bg-warm-text text-warm-bg') : darkMode ? 'text-gray-300' : 'text-warm-muted'}`}
+                className={`text-sm px-3 py-2 rounded-md text-left flex items-center gap-2 ${activeTab === 'tools' ? 'bg-blue-900 text-white' : darkMode ? 'text-gray-300' : 'text-gray-600'}`}
               >
                 <GitCompare className="w-4 h-4" />
                 Compare
               </button>
               <button
                 onClick={() => { onShowFamilyTree(); setMobileMenuOpen(false); }}
-                className={`text-sm px-3 py-2 rounded-md text-left flex items-center gap-2 ${activeTab === 'tools' ? (darkMode ? 'bg-gray-700 text-white' : 'bg-warm-text text-warm-bg') : darkMode ? 'text-gray-300' : 'text-warm-muted'}`}
+                className={`text-sm px-3 py-2 rounded-md text-left flex items-center gap-2 ${activeTab === 'tools' ? 'bg-blue-900 text-white' : darkMode ? 'text-gray-300' : 'text-gray-600'}`}
               >
                 <TreeDeciduous className="w-4 h-4" />
                 Family Tree
               </button>
               <button
+                onClick={() => { onShowBrightnessNetwork(); setMobileMenuOpen(false); }}
+                className={`text-sm px-3 py-2 rounded-md text-left flex items-center gap-2 ${activeTab === 'tools' ? 'bg-blue-900 text-white' : darkMode ? 'text-gray-300' : 'text-gray-600'}`}
+              >
+                <Share2 className="w-4 h-4" />
+                Brightness Network
+              </button>
+              <button
                 onClick={() => { setActiveTab('contact'); setMobileMenuOpen(false); }}
-                className={`text-sm px-3 py-2 rounded-md text-left ${activeTab === 'contact' ? (darkMode ? 'bg-gray-700 text-white' : 'bg-warm-text text-warm-bg') : darkMode ? 'text-gray-300' : 'text-warm-muted'}`}
+                className={`text-sm px-3 py-2 rounded-md text-left ${activeTab === 'contact' ? 'bg-blue-900 text-white' : darkMode ? 'text-gray-300' : 'text-gray-600'}`}
               >
                 Contact
               </button>

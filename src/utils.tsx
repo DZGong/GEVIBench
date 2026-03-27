@@ -28,69 +28,29 @@ export function computeSampleSummary(researchPapers?: ResearchPaper[]): Record<s
   return counts;
 }
 
-// Get GEVI color based on emission wavelength/tags - kept for backward compatibility
-export const getGEVIColor = (gevi: { tags?: string[]; category?: string; name: string }): GEVIColor => {
+// Unified color for GEVI titles across the UI
+export const getGEVIColor = (_gevi: { tags?: string[]; category?: string; name: string }): GEVIColor => {
+  return { color: '#002FA7', label: '' };
+};
+
+// Color mapping for family tree nodes — category-based for visual differentiation
+export function getTreeNodeColor(gevi: { name: string; tags?: string[]; category?: string }): string {
   const tags = Array.isArray(gevi.tags) ? gevi.tags : [];
   const category = gevi.category || '';
   const name = gevi.name.toLowerCase();
 
-  // Chemigenetic/dye indicators - rainbow
-  if (category.includes('Chemigenetic') || tags.includes('HaloTag') || tags.includes('Janelia Fluor') || name.includes('voltron') || name.includes('positron')) {
-    return { color: 'rainbow', label: 'Dye' };
-  }
-  // Bioluminescent
-  if (category.includes('Bioluminescent') || tags.includes('Bioluminescent') || tags.includes('Luciferase')) {
-    return { color: COLORS.yellow, label: 'BL' };
-  }
-  // Green (500-550nm)
-  if (tags.includes('Green') || category.includes('VSD-cpGFP') || category.includes('VSD-single')) {
-    return { color: COLORS.green, label: '~510nm' };
-  }
-  // Yellow (550-580nm)
-  if (tags.includes('Yellow') || tags.includes('cpYFP')) {
-    return { color: COLORS.yellow, label: '~530nm' };
-  }
-  // Orange (580-600nm)
-  if (tags.includes('Orange')) {
-    return { color: COLORS.orange, label: '~590nm' };
-  }
-  // Red (600-650nm)
-  if (tags.includes('Red') || tags.includes('RFP')) {
-    return { color: COLORS.red, label: '~610nm' };
-  }
-  // Far-red (650-700nm)
-  if (tags.includes('Far-red') || category.includes('Red FP GEVI')) {
-    return { color: COLORS.farRed, label: '~660nm' };
-  }
-  // NIR (700nm+)
-  if (tags.includes('NIR') || tags.includes('Near-infrared')) {
-    return { color: COLORS.nir, label: '~700nm' };
-  }
-  // Opsin-based
-  if (category.includes('Opsin') || tags.includes('Archaerhodopsin') || tags.includes('Proteorhodopsin')) {
-    return { color: COLORS.farRed, label: '~660nm' };
-  }
-  // eFRET
-  if (category.includes('eFRET')) {
-    return { color: COLORS.green, label: '~510nm' };
-  }
-  // FRET
-  if (category.includes('FRET')) {
-    return { color: COLORS.green, label: '~510nm' };
-  }
-  // Ion channel
-  if (category.includes('Ion-channel')) {
-    return { color: COLORS.green, label: '~510nm' };
-  }
-
-  return { color: COLORS.gray, label: 'N/A' };
-};
-
-// Color mapping for family tree nodes — delegates to getGEVIColor for consistency
-export function getTreeNodeColor(gevi: { name: string; tags?: string[]; category?: string }): string {
-  const { color } = getGEVIColor(gevi);
-  if (color === 'rainbow') return '#d500f9';
-  return color;
+  if (category.includes('Chemigenetic') || tags.includes('HaloTag') || name.includes('voltron') || name.includes('positron')) return '#d500f9';
+  if (category.includes('Bioluminescent') || tags.includes('Luciferase')) return COLORS.yellow;
+  if (tags.includes('Green') || category.includes('VSD-cpGFP') || category.includes('VSD-single')) return COLORS.green;
+  if (tags.includes('Yellow') || tags.includes('cpYFP')) return COLORS.yellow;
+  if (tags.includes('Orange')) return COLORS.orange;
+  if (tags.includes('Red') || tags.includes('RFP')) return COLORS.red;
+  if (tags.includes('Far-red') || category.includes('Red FP GEVI')) return COLORS.farRed;
+  if (tags.includes('NIR') || tags.includes('Near-infrared')) return COLORS.nir;
+  if (category.includes('Opsin') || tags.includes('Archaerhodopsin') || tags.includes('Proteorhodopsin')) return COLORS.farRed;
+  if (category.includes('FRET') || category.includes('eFRET')) return COLORS.green;
+  if (category.includes('Ion-channel')) return COLORS.green;
+  return COLORS.gray;
 }
 
 export function RainbowText({ text }: { text: string }) {

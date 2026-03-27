@@ -6,76 +6,14 @@
   "tags": [
     "cpGFP",
     "Green",
-    "High speed"
+    "High speed",
+    "Two-photon"
   ],
   "paper": "Neuron 2024",
   "paperUrl": "https://doi.org/10.1016/j.neuron.2024.08.019",
-  "brightness": 75,
-  "speed": 85,
-  "snr": 78,
-  "dynamicRange": 85,
-  "photostability": 80,
-  "subthreshold": 72,
-  "overall": 81,
-  "description": "ASAP5 is a fast and responsive voltage indicator with enhanced sensitivity for unitary synaptic events. Features submillisecond kinetics at physiological temperature (0.78 ms activation at 37C) and high voltage sensitivity of -1.3%/mV near resting potential, enabling detection of single synaptic events.",
-  "spectra": {
-    "excitation": 470,
-    "excitationFilter": "482/18 nm bandpass",
-    "emission": 525,
-    "emissionFilter": "525/50 nm bandpass",
-    "peakExcitation": 500,
-    "peakEmission": 515
-  },
-  "kinetics": {
-    "on": 2.61,
-    "off": 4.30,
-    "temperature": "room temperature (23°C)"
-  },
-  "dynamicRangeData": {
-    "deltaF": -57,
-    "sign": "negative"
-  },
-  "applicationNotes": "Optimized for detecting unitary synaptic events (mEPSPs) in cultured neurons and in vivo imaging. Can match chemigenetic indicators (Voltron2) in SNR despite lower brightness due to higher responsivity.",
-  "addgene": {
-    "id": "225709",
-    "url": "https://www.addgene.org/225709/"
-  },
-  "researchPapers": [
-    {
-      "title": "Selective life-long suppression of an odor processing channel in response to critical period experience",
-      "authors": "Leier HC, Jonaitis J, Foden AJ, Wilkov AJ, Ross AE, Van der Linden Costello P, Broihier HT, Dacks AM",
-      "journal": "bioRxiv",
-      "year": 2025,
-      "url": "https://doi.org/10.1101/2025.07.18.665601",
-      "sample": "Drosophila Or42a olfactory sensory neurons"
-    },
-    {
-      "title": "Deep two-photon voltage imaging with adaptive excitation",
-      "authors": "Zhao S, Hebert E, Gruzdeva A, Mahishi D, Takahashi H, Lee S, Hao YA, Lin MZ, Yapici N, Xu C",
-      "journal": "Research Square",
-      "year": 2024,
-      "url": "https://doi.org/10.21203/rs.3.rs-5434919/v1",
-      "sample": "Mouse visual cortex neurons (in vivo, layers 5-6)"
-    },
-    {
-      "title": "A deep learning framework for automated and generalized synaptic event analysis",
-      "authors": "Karelina T, Diehm J, Shewmaker F, Yount JS, Oddo M, Tavakoli N, Vanc A, Lee D, Kim DZ, Ko H",
-      "journal": "eLife",
-      "year": 2025,
-      "url": "https://doi.org/10.7554/eLife.98485",
-      "sample": "Cultured rat hippocampal neurons"
-    },
-    {
-      "title": "Kilohertz-rate two-photon voltage imaging of population dynamics in vivo",
-      "authors": "Zhang M, Liu S, Zhao Y, Zhu Y, Gu X, Kong C, Hu J, Yu H, Wu J, Xu F, Chen L, Mao Y, Li B",
-      "journal": "bioRxiv",
-      "year": 2026,
-      "url": "https://doi.org/10.64898/2025.12.29.696942",
-      "sample": "Mouse cortical neurons (in vivo)"
-    }
-  ],
-  "paperCount": 4,
+  "description": "Latest ASAP-family sensor optimized for detecting unitary synaptic events, with the steepest fluorescence-voltage relationship near resting potential and submillisecond kinetics at physiological temperature.",
   "parentId": "asap3",
+
   "spectrum": {
     "type": "fp",
     "peakEx": 490,
@@ -88,6 +26,7 @@
       "emission": [0.0027, 0.0031, 0.0034, 0.004, 0.0043, 0.0051, 0.0061, 0.0072, 0.0086, 0.0101, 0.0122, 0.0151, 0.0179, 0.022, 0.0266, 0.0318, 0.0384, 0.0461, 0.055, 0.0651, 0.0783, 0.092, 0.109, 0.1266, 0.148, 0.1716, 0.1981, 0.2267, 0.2587, 0.2945, 0.3315, 0.3714, 0.4155, 0.4598, 0.5088, 0.5594, 0.6104, 0.6649, 0.7182, 0.7666, 0.8161, 0.8622, 0.9027, 0.9355, 0.9664, 0.9877, 0.9994, 0.9999, 1.0, 0.9889, 0.9696, 0.9406, 0.906, 0.8711, 0.8345, 0.7934, 0.7509, 0.7149, 0.6802, 0.6504, 0.6208, 0.5966, 0.5698, 0.547, 0.5275, 0.5084, 0.49, 0.4733, 0.4636, 0.4504, 0.4393, 0.4296, 0.4221, 0.4105, 0.4014, 0.3942, 0.3867, 0.381, 0.3693, 0.3621, 0.3583, 0.3476, 0.3393, 0.3295, 0.3223, 0.312, 0.3015, 0.2908, 0.2796, 0.2674, 0.2564, 0.2451, 0.2344, 0.2243, 0.2156, 0.2068, 0.1957, 0.1865, 0.1806, 0.1706, 0.1617, 0.1548, 0.1485, 0.1406, 0.1347, 0.1283, 0.1224, 0.1173, 0.1143, 0.108, 0.1041, 0.0969, 0.0959, 0.092, 0.0883, 0.0843, 0.0813, 0.0787, 0.0759, 0.0737, 0.0712, 0.0687, 0.0653, 0.0645, 0.0633, 0.0594, 0.0591, 0.0558, 0.0544, 0.053, 0.0501, 0.0492, 0.0472, 0.0461, 0.0441, 0.0417, 0.0407, 0.0388, 0.037, 0.0361, 0.0356, 0.0336, 0.0324, 0.0325, 0.0296, 0.0286, 0.0279, 0.0271, 0.0256, 0.0252, 0.0242, 0.0222, 0.022, 0.0223, 0.0208, 0.0199, 0.019, 0.0179, 0.0178, 0.017, 0.0173, 0.0155, 0.0153, 0.0152, 0.0147, 0.0149, 0.0142, 0.0134, 0.0136, 0.0125, 0.0125, 0.012, 0.0118, 0.0119, 0.0113, 0.0111, 0.0109, 0.0108, 0.0104, 0.0102, 0.0102, 0.0096, 0.0099, 0.0096, 0.0087, 0.0097, 0.0088, 0.009, 0.0084, 0.0081, 0.0079, 0.0079, 0.008, 0.0076, 0.0076, 0.0079, 0.008, 0.0071, 0.0078, 0.0075, 0.0073, 0.0071, 0.0073, 0.007]
     }
   },
+
   "voltage": {
     "type": "fp",
     "slope": 14,
@@ -97,5 +36,105 @@
       "voltage": [-120, -100, -80, -70, -50, -30, -10, 0, 10, 30],
       "deltaF":  [19, 13, 6, 0, -17, -33, -46, -51, -54, -57]
     }
-  }
+  },
+
+  "kinetics": [
+    {
+      "on": 0.8,
+      "off": 1.1,
+      "temperature": "37°C",
+      "source": "doi:10.1016/j.neuron.2024.08.019"
+    }
+  ],
+
+  "dynamicRangeData": [
+    {
+      "deltaF": -59,
+      "sign": "negative",
+      "source": "doi:10.1016/j.neuron.2024.08.019"
+    }
+  ],
+
+  "subthresholdData": [
+    {
+      "slope": 1.3,
+      "source": "doi:10.1016/j.neuron.2024.08.019"
+    }
+  ],
+
+  "sensitivityData": [
+    {
+      "deltaF": 28,
+      "source": "doi:10.1016/j.neuron.2024.08.019"
+    }
+  ],
+
+  "brightnessData": [
+    {
+      "ratio": 1.0,
+      "reference": "asap3",
+      "source": "doi:10.1016/j.neuron.2024.08.019"
+    }
+  ],
+
+  "photostabilityData": [
+    {
+      "brightnessRemaining": 80,
+      "illumination": "46 mW/mm²",
+      "duration": "1 min",
+      "source": "doi:10.1016/j.neuron.2024.08.019"
+    }
+  ],
+
+  "twoPhoton": [
+    { "compatible": true, "source": "doi:10.1016/j.neuron.2024.08.019" }
+  ],
+
+  "addgene": {
+    "id": "225709",
+    "url": "https://www.addgene.org/225709/"
+  },
+
+  "researchPapers": [
+    {
+      "title": "Deep two-photon voltage imaging with adaptive excitation",
+      "authors": "Zhao S, Hebert E, Gruzdeva A, Mahishi D, Takahashi H, Lee S, Hao YA, Lin MZ, Yapici N, Xu C",
+      "journal": "Research Square",
+      "year": 2024,
+      "url": "https://doi.org/10.21203/rs.3.rs-5434919/v1",
+      "sample": "Mouse, visual cortex, in vivo"
+    },
+    {
+      "title": "A deep learning framework for automated and generalized synaptic event analysis",
+      "authors": "Karelina T, et al.",
+      "journal": "eLife",
+      "year": 2025,
+      "url": "https://doi.org/10.7554/eLife.98485",
+      "sample": "Rat, hippocampal neurons, in vitro"
+    },
+    {
+      "title": "Selective life-long suppression of an odor processing channel in response to critical period experience",
+      "authors": "Leier HC, et al.",
+      "journal": "bioRxiv",
+      "year": 2025,
+      "url": "https://doi.org/10.1101/2025.07.18.665601",
+      "sample": "Drosophila, olfactory sensory neurons, in vivo"
+    },
+    {
+      "title": "Retroreflective beam multiplexing enables high-throughput two-photon voltage imaging in vivo",
+      "authors": "Liu Z, Han M, Chen Y, Downs NP, Wu J",
+      "journal": "bioRxiv",
+      "year": 2025,
+      "url": "https://doi.org/10.64898/2025.12.09.693349",
+      "sample": "Mouse, visual cortex, hippocampus, in vivo"
+    },
+    {
+      "title": "Kilohertz-rate two-photon voltage imaging of population dynamics in vivo",
+      "authors": "Zhang M, et al.",
+      "journal": "bioRxiv",
+      "year": 2026,
+      "url": "https://doi.org/10.64898/2025.12.29.696942",
+      "sample": "Mouse, cortical neurons, in vivo"
+    }
+  ]
 }

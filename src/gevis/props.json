@@ -5,19 +5,13 @@
   "category": "Opsin GEVI",
   "tags": [
     "Proteorhodopsin",
-    "Green",
-    "Microbial"
+    "NIR",
+    "Microbial",
+    "Bacteria-only"
   ],
   "paper": "Science 2011",
   "paperUrl": "https://doi.org/10.1126/science.1204763",
-  "brightness": 20,
-  "speed": 90,
-  "snr": 25,
-  "dynamicRange": 20,
-  "photostability": 30,
-  "subthreshold": 25,
-  "overall": 28,
-  "description": "First proteorhodopsin-based voltage indicator, establishing the microbial opsin GEVI architecture.",
+  "description": "First proteorhodopsin-based voltage indicator. Demonstrated electrical spiking in E. coli. Very dim but extremely photostable. Only functional in bacteria.",
   "familyTreePath": [
     "GEVI",
     "Opsin",
@@ -26,14 +20,65 @@
   ],
   "spectrum": {
     "type": "rhodopsin",
-    "peakEx": 530,
-    "peakEm": 560,
+    "peakEx": 525,
+    "peakEm": 710,
     "name": "PROPS"
   },
   "voltage": {
     "type": "opsin",
-    "slope": 30,
+    "slope": 150,
     "polarity": "positive",
     "name": "PROPS"
-  }
+  },
+
+  "kinetics": [
+    {
+      "on": 4.7,
+      "off": 4.7,
+      "temperature": "room temperature",
+      "source": "doi:10.1126/science.1204763",
+      "note": "Single exponential time constant of 4.7 ms for voltage step response; on/off not separately reported"
+    }
+  ],
+
+  "dynamicRangeData": [
+    {
+      "deltaF": 150,
+      "sign": "positive",
+      "source": "doi:10.1126/science.1204763",
+      "note": "ΔF/F = 150% per 100 mV, measured via induced transmembrane voltage in E. coli"
+    }
+  ],
+
+  "addgene": {
+    "id": "33780",
+    "url": "https://www.addgene.org/33780/"
+  },
+
+  "researchPapers": [
+    {
+      "title": "Initial photophysical characterization of the proteorhodopsin optical proton sensor (PROPS)",
+      "authors": "Nadeau JL",
+      "journal": "Frontiers in Neuroscience",
+      "year": 2015,
+      "sample": "E. coli, in vitro",
+      "url": "https://doi.org/10.3389/fnins.2015.00315"
+    },
+    {
+      "title": "Voltage-gated calcium flux mediates Escherichia coli mechanosensation",
+      "authors": "Bruni GN, Weekley RA, Dodd BJT, Kralj JM",
+      "journal": "Proceedings of the National Academy of Sciences",
+      "year": 2017,
+      "sample": "E. coli, in vitro",
+      "url": "https://doi.org/10.1073/pnas.1703084114"
+    },
+    {
+      "title": "Membrane voltage dysregulation driven by metabolic dysfunction underlies bactericidal activity of aminoglycosides",
+      "authors": "Bruni GN, Kralj JM",
+      "journal": "eLife",
+      "year": 2020,
+      "sample": "E. coli, in vitro",
+      "url": "https://doi.org/10.7554/eLife.58706"
+    }
+  ]
 }

@@ -11,9 +11,21 @@
   ],
   "paper": "Cell 2022",
   "paperUrl": "https://doi.org/10.1016/j.cell.2022.07.013",
-  "brightness": 72,
+  "brightness": 62,
+  "brightnessData": [
+    {
+      "ratio": 1.67,
+      "reference": "asap3",
+      "source": "doi:10.1016/j.cell.2022.07.013"
+    },
+    {
+      "ratio": 1.5,
+      "reference": "asap2s",
+      "source": "doi:10.1016/j.cell.2022.07.013"
+    }
+  ],
   "speed": 80,
-  "snr": 72,
+  "sensitivity": 72,
   "dynamicRange": 77,
   "photostability": 78,
   "subthreshold": 68,
@@ -56,6 +68,15 @@
     "illumination": "~16 mW/mm²",
     "duration": "2 min"
   },
+  "subthresholdData": [
+    {
+      "slope": 0.7,
+      "source": "doi:10.1016/j.neuron.2024.08.019"
+    }
+  ],
+  "twoPhoton": [
+    { "compatible": true, "source": "doi:10.1016/j.cell.2022.07.013" }
+  ],
   "addgene": {
     "id": "179463",
     "url": "https://www.addgene.org/179463/"

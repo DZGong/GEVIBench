@@ -8,12 +8,12 @@
   "paperUrl": "https://doi.org/10.1101/2024.06.21.599617",
   "brightness": 65,
   "speed": 72,
-  "snr": 70,
+  "sensitivity": 70,
   "dynamicRange": 95,
   "photostability": 75,
   "subthreshold": 65,
   "overall": 75,
-  "description": "ASAP6.1 is a positively tuned ASAP variant engineered by structure-guided saturation mutagenesis at VSD residues F413 and Q414, yielding the largest relative ΔF/F per action potential among ASAP6 variants. It exhibits mono-exponential kinetics (τ_on 3.99 ms, τ_off 4.89 ms at room temperature), with 50% ΔF/F for AP-like waveforms (2 ms FWHM) in HEK293 cells. ASAP6.1 successfully reports spikes from layer 2/3 pyramidal neurons in awake behaving mice by one-photon widefield microscopy (SNR = 14, 500 Hz). It is optimized for extended-duration spike detection in densely labeled neuronal populations.",
+  "description": "Positively tuned ASAP variant with the largest response per action potential among ASAP6 variants, optimized for one-photon widefield imaging in densely labeled neuronal populations.",
   "kinetics": {
     "on": 3.99,
     "off": 4.89,
@@ -23,6 +23,9 @@
     "deltaF": 204,
     "sign": "positive"
   },
+  "twoPhoton": [
+    { "compatible": true, "source": "doi:10.1101/2024.06.21.599617" }
+  ],
   "researchPapers": [],
   "paperCount": 0,
   "parentId": "asap4e",

@@ -16,12 +16,12 @@ interface ComparisonProps {
 
 export function ComparisonPanel({ compareGEVIs, onRemove, darkMode, showEmpty = false, onClose }: ComparisonProps) {
   const getCompareRadarData = () => {
-    const subjects = ['Bright', 'Speed', 'SNR', 'Range', 'Stable', 'Papers'];
+    const subjects = ['Bright', 'Speed', 'Sensitivity', 'Range', 'Stable', 'Papers'];
     return subjects.map((subject, idx) => {
       const data: any = { subject };
       compareGEVIs.forEach((gevi) => {
         const safeName = gevi.name.replace(/[^a-zA-Z0-9]/g, '');
-        const values = [gevi.brightness, gevi.speed, gevi.snr, gevi.dynamicRange, gevi.photostability, Math.min(100, (gevi.paperCount ?? 0) * 5)];
+        const values = [gevi.brightness ?? 0, gevi.speed ?? 0, gevi.sensitivity ?? 0, gevi.dynamicRange ?? 0, gevi.photostability ?? 0, gevi.popularity ?? 0];
         data[safeName] = values[idx];
       });
       return data;
@@ -33,7 +33,7 @@ export function ComparisonPanel({ compareGEVIs, onRemove, darkMode, showEmpty = 
     if (!showEmpty) return null;
 
     return (
-      <div id="compare-panel" className={`border rounded-lg p-4 md:p-6 mb-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
+      <div id="compare-panel" className={`border rounded-lg p-4 md:p-6 mb-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-paper border-gray-200'}`}>
         <div className="flex items-center justify-between mb-4">
           <h3 className={`text-lg font-bold flex items-center gap-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
             <GitCompare className="w-5 h-5" />Compare Sensors (0)
@@ -61,7 +61,7 @@ export function ComparisonPanel({ compareGEVIs, onRemove, darkMode, showEmpty = 
   const getSafeName = (name: string) => name.replace(/[^a-zA-Z0-9]/g, '');
 
   return (
-    <div id="compare-panel" className={`border rounded-lg p-4 md:p-6 mb-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'}`}>
+    <div id="compare-panel" className={`border rounded-lg p-4 md:p-6 mb-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-paper border-gray-200'}`}>
       <div className="flex items-center justify-between mb-4">
         <h3 className={`text-lg font-bold flex items-center gap-2 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
           <GitCompare className="w-5 h-5" />Compare Sensors ({compareGEVIs.length})

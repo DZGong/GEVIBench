@@ -10,13 +10,6 @@
   ],
   "paper": "Nature 2019",
   "paperUrl": "https://doi.org/10.1038/s41586-019-1166-7",
-  "brightness": 40,
-  "speed": 95,
-  "snr": 60,
-  "dynamicRange": 65,
-  "photostability": 45,
-  "subthreshold": 65,
-  "overall": 58,
   "description": "Third-generation QuasAr with orange/far-red shift for improved tissue penetration and reduced phototoxicity in deep imaging applications.",
   "parentId": "quasar2",
   "spectrum": {
@@ -30,5 +23,26 @@
     "slope": 22,
     "polarity": "positive",
     "name": "paQuasAr3"
-  }
+  },
+  "kinetics": [
+    {
+      "on": 0.9,
+      "off": 1.6,
+      "temperature": "33-34°C",
+      "source": "doi:10.1016/j.cell.2019.11.004"
+    }
+  ],
+  "dynamicRangeData": [
+    {
+      "deltaF": 46,
+      "sign": "positive",
+      "source": "doi:10.1016/j.cell.2019.11.004"
+    }
+  ],
+  "twoPhoton": [
+    {
+      "compatible": false,
+      "source": "doi:10.1016/j.cell.2019.11.004"
+    }
+  ]
 }

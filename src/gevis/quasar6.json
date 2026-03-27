@@ -12,7 +12,7 @@
   "paperUrl": "https://doi.org/10.1038/s41592-022-01752-6",
   "brightness": 55,
   "speed": 92,
-  "snr": 65,
+  "sensitivity": 65,
   "dynamicRange": 60,
   "photostability": 55,
   "subthreshold": 60,
@@ -30,5 +30,22 @@
     "slope": 20,
     "polarity": "positive",
     "name": "QuasAr6"
-  }
+  },
+  "kinetics": [
+    {
+      "on": 2.5,
+      "off": 2.1,
+      "source": "doi:10.1101/2021.11.09.467909",
+      "note": "Bi-exponential fast component at 22°C in spiking HEK cells; QuasAr6a data",
+      "temperature": "22°C"
+    }
+  ],
+  "dynamicRangeData": [
+    {
+      "deltaF": 73,
+      "sign": "positive",
+      "source": "doi:10.1101/2021.11.09.467909",
+      "note": "Per 100 mV step in spiking HEK cells at 22°C; QuasAr6a data"
+    }
+  ]
 }

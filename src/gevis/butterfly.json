@@ -7,7 +7,7 @@
   "paperUrl": "https://www.nature.com/articles/srep22618",
   "brightness": 58,
   "speed": 65,
-  "snr": 52,
+  "sensitivity": 52,
   "dynamicRange": 50,
   "photostability": 52,
   "subthreshold": 50,

@@ -198,7 +198,7 @@ export function SpectrumViewer({ spectrumData, geviName, darkMode = false }: Spe
         ref={containerRef}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        className={`relative h-40 cursor-crosshair ${darkMode ? 'bg-gray-900' : 'bg-white'} rounded`}
+        className={`relative h-40 cursor-crosshair ${darkMode ? 'bg-gray-900' : 'bg-paper'} rounded`}
       >
         {/* Excitation curve */}
         <svg className="absolute inset-0 w-full h-full" viewBox="0 0 500 160" preserveAspectRatio="none">
@@ -275,7 +275,7 @@ export function SpectrumViewer({ spectrumData, geviName, darkMode = false }: Spe
         {hoverData && (
           <div
             className={`absolute top-1 left-1/2 transform -translate-x-1/2 px-2 py-1 rounded text-xs ${
-              darkMode ? 'bg-gray-700 text-gray-200' : 'bg-white text-gray-800 shadow'
+              darkMode ? 'bg-gray-700 text-gray-200' : 'bg-paper text-gray-800 shadow'
             }`}
             style={{ pointerEvents: 'none' }}
           >

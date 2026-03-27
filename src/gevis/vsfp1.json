@@ -12,7 +12,7 @@
   "paperUrl": "https://doi.org/10.1046/j.0953-816x.2001.01617.x",
   "brightness": 35,
   "speed": 40,
-  "snr": 30,
+  "sensitivity": 30,
   "dynamicRange": 28,
   "photostability": 35,
   "subthreshold": 30,

@@ -3,29 +3,35 @@
   "name": "Solaris",
   "year": 2024,
   "category": "Chemigenetic GEVI",
-  "tags": ["Ace rhodopsin", "HaloTag", "Janelia Fluor", "Far-red"],
+  "tags": ["Ace rhodopsin", "cpHaloTag", "Janelia Fluor", "Far-red"],
   "paper": "bioRxiv 2024",
   "paperUrl": "https://doi.org/10.1101/2024.02.02.578569",
-  "brightness": 78,
-  "speed": 88,
-  "snr": 78,
-  "dynamicRange": 85,
-  "photostability": 78,
-  "subthreshold": 72,
-  "overall": 80,
-  "description": "Solaris redesigns the Voltron scaffold with a circularly permuted HaloTag insertion into Acetabularia rhodopsin, achieving more than twice the voltage sensitivity of its predecessor and enabling single-trial action potential detection in cultured neurons.",
+  "description": "Chemigenetic hybrid voltage indicator with a circularly permuted HaloTag inserted into the first extracellular loop of Ace rhodopsin, achieving more than two-fold higher sensitivity than Voltron2 across multiple Janelia Fluor dye conjugates.",
 
   "parentId": "voltron",
 
-  "kinetics": {
-    "on": 1.75,
-    "temperature": "room temperature"
-  },
+  "kinetics": [
+    {
+      "on": 1.75,
+      "off": 1.75,
+      "source": "doi:10.1101/2024.02.02.578569"
+    }
+  ],
 
-  "dynamicRangeData": {
-    "deltaF": -60.6,
-    "sign": "negative"
-  },
+  "dynamicRangeData": [
+    {
+      "deltaF": -61,
+      "sign": "negative",
+      "source": "doi:10.1101/2024.02.02.578569"
+    }
+  ],
+
+  "sensitivityData": [
+    {
+      "deltaF": 28.1,
+      "source": "doi:10.1101/2024.02.02.578569"
+    }
+  ],
 
   "spectrum": {
     "type": "rhodopsin",
@@ -42,13 +48,35 @@
 
   "voltage": {
     "type": "chemi",
-    "slope": 61,
+    "slope": 53,
     "polarity": "negative",
-    "name": "Solaris",
+    "name": "Solaris (JF585)",
     "custom": {
-      "voltage": [-120, -90, -70, -50, -30, 0, 30],
-      "deltaF":  [30.3, 12.1, 0.0, -12.1, -24.2, -42.4, -60.6]
-    }
+      "voltage": [-100, -80, -70, -60, -40, -20, 0, 20, 40],
+      "deltaF":  [17, 7, 0, -8, -20, -31, -42, -51, -57]
+    },
+    "additionalCurves": [
+      {
+        "name": "Solaris (JF552)",
+        "voltage": [-100, -80, -70, -60, -40, -20, 0, 20, 40],
+        "deltaF":  [12, 5, 0, -6, -15, -24, -33, -41, -48]
+      },
+      {
+        "name": "Solaris (JF549)",
+        "voltage": [-100, -80, -70, -60, -40, -20, 0, 20, 40],
+        "deltaF":  [8, 3, 0, -4, -10, -16, -23, -29, -34]
+      },
+      {
+        "name": "Solaris (JF525)",
+        "voltage": [-100, -80, -70, -60, -40, -20, 0, 20, 40],
+        "deltaF":  [5, 2, 0, -2, -5, -9, -13, -17, -21]
+      },
+      {
+        "name": "Solaris (JF635)",
+        "voltage": [-100, -80, -70, -60, -40, -20, 0, 20, 40],
+        "deltaF":  [6, 2, 0, -3, -7, -12, -17, -21, -24]
+      }
+    ]
   },
 
   "researchPapers": []

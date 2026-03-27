@@ -10,9 +10,16 @@
   ],
   "paper": "ACS Chemical Neuroscience 2020",
   "paperUrl": "https://dx.doi.org/10.1021/acschemneuro.0c00046",
-  "brightness": 35,
+  "brightness": 55,
+  "brightnessData": [
+    {
+      "ratio": 486,
+      "reference": "arch",
+      "source": "doi:10.1021/acschemneuro.0c00046"
+    }
+  ],
   "speed": 52,
-  "snr": 42,
+  "sensitivity": 42,
   "dynamicRange": 40,
   "photostability": 50,
   "subthreshold": 45,
