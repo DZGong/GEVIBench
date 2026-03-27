@@ -26,7 +26,11 @@
     "type": "opsin",
     "slope": 26.1,
     "polarity": "negative",
-    "name": "Ace2N-mNeon2"
+    "name": "Ace2N-mNeon2",
+    "custom": {
+      "voltage": [-150, -130, -110, -90, -70, -50, -30, -10, 10, 30, 50],
+      "deltaF": [19, 15, 10, 4.5, 0, -7, -15, -23, -28, -30.5, -31.3]
+    }
   },
 
   "kinetics": [
@@ -51,6 +55,23 @@
   "sensitivityData": [
     {
       "deltaF": 16.5,
+      "source": "doi:10.1126/science.abm8797"
+    }
+  ],
+
+  "brightnessData": [
+    {
+      "ratio": 1.1,
+      "reference": "ace2n-mneon",
+      "source": "doi:10.1126/science.abm8797"
+    }
+  ],
+
+  "photostabilityData": [
+    {
+      "brightnessRemaining": 30,
+      "illumination": "25 mW/mm²",
+      "duration": "10 min",
       "source": "doi:10.1126/science.abm8797"
     }
   ],

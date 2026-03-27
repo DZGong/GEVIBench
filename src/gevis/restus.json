@@ -6,34 +6,8 @@
   "tags": ["cpGFP", "Green", "Ultrasensitive", "Non-excitable cells"],
   "paper": "Advanced Science 2024",
   "paperUrl": "https://doi.org/10.1002/advs.202307938",
-  "brightness": 68,
-  "speed": 78,
-  "sensitivity": 80,
-  "dynamicRange": 82,
-  "photostability": 72,
-  "subthreshold": 78,
-  "overall": 76,
   "description": "Variant of ASAP3 optimized for non-excitable cells, shifting voltage sensitivity to match their characteristically negative resting potentials.",
   "parentId": "asap3",
-  "dynamicRangeData": {
-    "deltaF": -48,
-    "sign": "negative"
-  },
-  "addgene": {
-    "id": "209767",
-    "url": "https://www.addgene.org/209767/"
-  },
-  "researchPapers": [
-    {
-      "title": "Absolute Membrane Potential Recording with ASAP-Type Genetically Encoded Voltage Indicators Using Fluorescence Lifetime Imaging",
-      "authors": "Nair AG, et al.",
-      "journal": "ACS Chemical Neuroscience",
-      "year": 2025,
-      "sample": "HEK293T cells; A375 melanoma cells; MCF-7 breast cancer cells, in vitro",
-      "url": "https://doi.org/10.1021/acschemneuro.5c00670"
-    }
-  ],
-  "paperCount": 1,
   "spectrum": {
     "type": "fp",
     "peakEx": 490,
@@ -48,12 +22,75 @@
   },
   "voltage": {
     "type": "fp",
-    "slope": 11,
+    "slope": 15,
     "polarity": "negative",
     "name": "rEstus",
     "custom": {
-      "voltage": [-120, -100, -80, -70, -50, -30, -10, 0, 20, 40, 60],
-      "deltaF":  [9.1, 7.1, 3.1, 0.0, -9.0, -20.7, -32.0, -36.6, -43.0, -46.6, -48.3]
+      "voltage": [-100, -80, -70, -60, -40, -20, 0, 20, 40, 60],
+      "deltaF":  [23, 13, 0, -11, -42, -61, -65, -66, -66, -68]
     }
-  }
+  },
+  "kinetics": [
+    {
+      "on": 2,
+      "off": 20,
+      "temperature": "23°C",
+      "source": "doi:10.1002/advs.202307938"
+    }
+  ],
+  "dynamicRangeData": [
+    {
+      "deltaF": -66,
+      "sign": "negative",
+      "source": "doi:10.1002/advs.202307938"
+    }
+  ],
+  "subthresholdData": [
+    {
+      "slope": 0.50,
+      "source": "doi:10.1002/advs.202307938"
+    }
+  ],
+  "brightnessData": [
+    {
+      "ratio": 2.07,
+      "reference": "asap3",
+      "source": "doi:10.1002/advs.202307938"
+    },
+    {
+      "ratio": 1.712,
+      "reference": "asap3",
+      "source": "doi:10.1021/acschemneuro.5c00670"
+    }
+  ],
+  "addgene": {
+    "id": "209767",
+    "url": "https://www.addgene.org/209767/"
+  },
+  "researchPapers": [
+    {
+      "title": "Absolute Membrane Potential Recording with ASAP-Type Genetically Encoded Voltage Indicators Using Fluorescence Lifetime Imaging",
+      "authors": "Nair AG, et al.",
+      "journal": "ACS Chemical Neuroscience",
+      "year": 2025,
+      "sample": "HEK293T cells; A375 melanoma cells; MCF-7 breast cancer cells, in vitro",
+      "url": "https://doi.org/10.1021/acschemneuro.5c00670"
+    },
+    {
+      "title": "Crosstalk of KCNH1 and KCNH5 gain-of-function mutations leading to epilepsy and neurodevelopmental disorders",
+      "authors": "Bernert A, et al.",
+      "journal": "Molecular Brain",
+      "year": 2026,
+      "sample": "HEK293T cells, in vitro",
+      "url": "https://doi.org/10.1186/s13041-026-01279-1"
+    },
+    {
+      "title": "Generation and characterization of a human induced pluripotent stem cell line (hiPSC) expressing the rEstus voltage sensor under doxycycline induction",
+      "authors": "Malan D, et al.",
+      "journal": "Stem Cell Research",
+      "year": 2026,
+      "sample": "Human iPSC, in vitro",
+      "url": "https://doi.org/10.1016/j.scr.2026.103972"
+    }
+  ]
 }

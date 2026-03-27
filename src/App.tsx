@@ -447,6 +447,12 @@ function GEVIBenchApp() {
                 ))}
               </div>
             </div>
+
+            {/* Weakness Penalty Section */}
+            <div className="mt-6">
+              <h3 className={`text-lg font-semibold mb-2 ${colors.text}`}>{methodologyContent.weaknessPenalty.title}</h3>
+              <p className={`text-sm ${colors.textSecondary}`}>{methodologyContent.weaknessPenalty.description}</p>
+            </div>
           </div>
         </div>
       </div>

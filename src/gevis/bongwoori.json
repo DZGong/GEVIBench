@@ -1,23 +1,17 @@
 {
   "id": "bongwoori",
   "name": "Bongwoori",
-  "year": 2017,
+  "year": 2015,
   "category": "VSD-single FP",
   "tags": [
-    "Ci-VSP",
-    "Green"
+    "pHluorin",
+    "Green",
+    "Ci-VSP"
   ],
-  "paper": "Scientific Reports 2017",
-  "paperUrl": "https://doi.org/10.1038/s41598-017-08731-2",
-  "brightness": 52,
-  "speed": 48,
-  "sensitivity": 45,
-  "dynamicRange": 42,
-  "photostability": 50,
-  "subthreshold": 42,
-  "overall": 45,
-  "description": "Korean-developed VSFP variant with improved expression and signal amplitude in mammalian neurons.",
-  "parentId":"arclight",
+  "paper": "Journal of Neuroscience 2015",
+  "paperUrl": "https://doi.org/10.1523/JNEUROSCI.3008-14.2015",
+  "description": "ArcLight-derived voltage indicator with combinatorial VSD mutations enabling optical resolution of action potentials firing at 60 Hz, using Super Ecliptic pHluorin as the fluorescent reporter.",
+  "parentId": "arclight",
   "spectrum": {
     "type": "fp",
     "peakEx": 490,
@@ -26,8 +20,102 @@
   },
   "voltage": {
     "type": "fp",
-    "slope": 12,
+    "slope": 25,
     "polarity": "negative",
-    "name": "Bongwoori"
-  }
+    "name": "Bongwoori",
+    "custom": {
+      "voltage": [-170, -120, -70, -20, 30, 80, 130],
+      "deltaF": [3, 1, 0, -4, -9, -16, -21]
+    }
+  },
+  "kinetics": [
+    {
+      "on": 17,
+      "off": 14,
+      "temperature": "34°C",
+      "source": "doi:10.1038/s41598-017-08731-2"
+    }
+  ],
+  "dynamicRangeData": [
+    {
+      "deltaF": -10,
+      "sign": "negative",
+      "source": "doi:10.1038/s41598-017-08731-2"
+    }
+  ],
+  "sensitivityData": [
+    {
+      "deltaF": 3.7,
+      "source": "doi:10.1038/s41598-017-08731-2"
+    }
+  ],
+  "brightnessData": [
+    {
+      "ratio": 0.29,
+      "reference": "arclight",
+      "source": "doi:10.1038/s41598-017-08731-2"
+    }
+  ],
+  "photostabilityData": [
+    {
+      "brightnessRemaining": 88,
+      "illumination": "1 mW/mm²",
+      "duration": "1 min",
+      "source": "doi:10.1038/s41598-017-08731-2"
+    }
+  ],
+  "addgene": {
+    "id": "63720",
+    "url": "https://www.addgene.org/63720/"
+  },
+  "researchPapers": [
+    {
+      "title": "Improving a genetically encoded voltage indicator by modifying the cytoplasmic charge composition",
+      "authors": "Lee S, et al.",
+      "journal": "Scientific Reports",
+      "year": 2017,
+      "sample": "HEK293 cells; cultured mouse hippocampal neurons, in vitro",
+      "url": "https://doi.org/10.1038/s41598-017-08731-2"
+    },
+    {
+      "title": "Optical consequences of a genetically-encoded voltage indicator with a pH sensitive fluorescent protein",
+      "authors": "Kang BE, et al.",
+      "journal": "Neuroscience Research",
+      "year": 2019,
+      "sample": "HEK293 cells; cultured hippocampal neurons, in vitro",
+      "url": "https://doi.org/10.1016/j.neures.2018.10.006"
+    },
+    {
+      "title": "Engineering photoactivatability in genetically encoded voltage and pH indicators",
+      "authors": "Lee S, et al.",
+      "journal": "Frontiers in Cellular Neuroscience",
+      "year": 2019,
+      "sample": "HEK293 cells, in vitro",
+      "url": "https://doi.org/10.3389/fncel.2019.00482"
+    },
+    {
+      "title": "Mechanism of ArcLight derived GEVIs involves electrostatic interactions that can affect proton wires",
+      "authors": "Kang BE, et al.",
+      "journal": "Biophysical Journal",
+      "year": 2021,
+      "sample": "HEK293 cells, in vitro",
+      "url": "https://doi.org/10.1016/j.bpj.2021.03.009"
+    },
+    {
+      "title": "Visualizing oscillations in brain slices with genetically encoded voltage indicators",
+      "authors": "Rhee JK, et al.",
+      "journal": "Frontiers in Neuroanatomy",
+      "year": 2021,
+      "sample": "Mouse motor cortex brain slices, ex vivo",
+      "url": "https://doi.org/10.3389/fnana.2021.741711"
+    },
+    {
+      "title": "Imaging electrical activity of retinal ganglion cells with fluorescent voltage and calcium indicator proteins in retinal degenerative rd1 blind mice",
+      "authors": "Jung Y, et al.",
+      "journal": "ACS Chemical Neuroscience",
+      "year": 2025,
+      "sample": "Mouse rd1 retinal ganglion cells, ex vivo",
+      "url": "https://doi.org/10.1021/acschemneuro.5c00740"
+    }
+  ]
 }

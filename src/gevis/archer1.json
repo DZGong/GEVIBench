@@ -78,7 +78,7 @@
     {
       "on": 0.5,
       "off": 0.5,
-      "temperature": "room temperature",
+      "temperature": "25°C",
       "source": "doi:10.1038/ncomms5894"
     }
   ],

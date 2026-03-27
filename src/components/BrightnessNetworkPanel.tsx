@@ -115,8 +115,9 @@ function buildGraph(gevis: GEVI[]): { nodes: GNode[]; edges: GEdge[] } {
   return { nodes, edges };
 }
 
-// ── Force-directed layout (Enhanced Fruchterman-Reingold) ───────────────────
-// EGFP is pinned at the center. Post-simulation collision resolution pass.
+// ── Force-directed layout (organic branching) ───────────────────────────────
+// Produces a tree-like, branching structure radiating from EGFP at center.
+// Short edges, local-only repulsion, no boundary clamping — auto-fit handles viewport.
 
 function forceLayout(
   nodes: GNode[],
@@ -126,9 +127,13 @@ function forceLayout(
 ): Map<string, { x: number; y: number; bfsDist: number }> {
   if (nodes.length === 0) return new Map();
   const N = nodes.length;
-  const K = Math.sqrt((W * H) / N) * 1.5;
 
-  // BFS distances from EGFP — used for initial concentric placement
+  // Short ideal edge length for tight clustering
+  const K = 65;
+  // Repulsion cutoff — only repel nodes within this radius (keeps clusters tight)
+  const REP_CUTOFF = K * 3;
+
+  // BFS distances from EGFP
   const adjIds = new Map<string, string[]>();
   for (const e of edges) {
     if (!adjIds.has(e.a)) adjIds.set(e.a, []);
@@ -145,38 +150,96 @@ function forceLayout(
     }
   }
 
-  // Group by distance; place in concentric rings
-  const byDist = new Map<number, string[]>();
-  for (const node of nodes) {
-    const d = dist.get(node.id) ?? 9999;
-    if (!byDist.has(d)) byDist.set(d, []);
-    byDist.get(d)!.push(node.id);
-  }
-  const maxDist = Math.max(0, ...[...dist.values()].filter(v => v < 9999));
-
+  // Initial placement: BFS-tree layout with angular spread per parent
+  // This gives the simulation a good organic starting shape to refine
   const pos = new Map<string, { x: number; y: number; vx: number; vy: number }>();
-  for (const [d, ids] of byDist) {
-    if (d === 0) { pos.set('EGFP', { x: W / 2, y: H / 2, vx: 0, vy: 0 }); continue; }
-    if (d >= 9999) {
-      ids.forEach((id, i) => pos.set(id, { x: 80 + (i % 8) * 120, y: H - 80, vx: 0, vy: 0 }));
-      continue;
+  const placed = new Set<string>();
+  const childAngle = new Map<string, number>(); // track angle allocation per parent
+
+  pos.set('EGFP', { x: W / 2, y: H / 2, vx: 0, vy: 0 });
+  placed.add('EGFP');
+
+  // BFS placement: each child is placed at an angle offset from its parent
+  const placeQ = ['EGFP'];
+  const parentOf = new Map<string, string>();
+  // Assign BFS parent
+  {
+    const visited = new Set(['EGFP']);
+    const q = ['EGFP'];
+    while (q.length > 0) {
+      const n = q.shift()!;
+      for (const nb of adjIds.get(n) ?? []) {
+        if (!visited.has(nb)) {
+          visited.add(nb);
+          parentOf.set(nb, n);
+          q.push(nb);
+        }
+      }
     }
-    const r = (d / (maxDist + 1)) * Math.min(W, H) * 0.40;
-    ids.forEach((id, i) => {
-      const angle = (2 * Math.PI * i) / ids.length - Math.PI / 2;
-      pos.set(id, { x: W / 2 + r * Math.cos(angle), y: H / 2 + r * Math.sin(angle), vx: 0, vy: 0 });
+  }
+
+  // Count children per node for angular spread
+  const childCount = new Map<string, number>();
+  for (const [child, parent] of parentOf) {
+    childCount.set(parent, (childCount.get(parent) ?? 0) + 1);
+  }
+
+  // Place nodes in BFS order, spreading children around their parent
+  const angleOf = new Map<string, number>(); // angle from center for each node
+  angleOf.set('EGFP', 0);
+  const childIdx = new Map<string, number>();
+
+  const bfsPlace = ['EGFP'];
+  const visitedPlace = new Set(['EGFP']);
+  while (bfsPlace.length > 0) {
+    const n = bfsPlace.shift()!;
+    const nPos = pos.get(n)!;
+    const children = [...(adjIds.get(n) ?? [])].filter(c => parentOf.get(c) === n && !visitedPlace.has(c));
+    const nChildren = children.length;
+
+    // Determine angular sector for children
+    const parentAngle = angleOf.get(n) ?? 0;
+    const isRoot = n === 'EGFP';
+    const spread = isRoot ? 2 * Math.PI : Math.min(Math.PI * 0.8, Math.PI * 0.3 * nChildren);
+    const startAngle = isRoot ? 0 : parentAngle - spread / 2;
+    const edgeLen = K * 1.3;
+
+    children.forEach((child, i) => {
+      const angle = nChildren === 1
+        ? parentAngle + (Math.random() - 0.5) * 0.3
+        : startAngle + (spread * (i + 0.5)) / nChildren;
+      const jitter = (Math.random() - 0.5) * 0.15;
+      const a = angle + jitter;
+      pos.set(child, {
+        x: nPos.x + edgeLen * Math.cos(a),
+        y: nPos.y + edgeLen * Math.sin(a),
+        vx: 0, vy: 0,
+      });
+      angleOf.set(child, a);
+      visitedPlace.add(child);
+      bfsPlace.push(child);
     });
   }
 
-  // FR simulation
-  let temp = Math.min(W, H) * 0.12;
-  const cooling = 0.93;
-  const pad = 80;
+  // Place any disconnected nodes (no BFS path from EGFP)
+  for (const node of nodes) {
+    if (!pos.has(node.id)) {
+      pos.set(node.id, {
+        x: W / 2 + (Math.random() - 0.5) * 200,
+        y: H / 2 + (Math.random() - 0.5) * 200,
+        vx: 0, vy: 0,
+      });
+    }
+  }
 
-  for (let iter = 0; iter < 500; iter++) {
+  // Force simulation: local repulsion + edge attraction, no boundary
+  let temp = K * 1.5;
+  const cooling = 0.95;
+
+  for (let iter = 0; iter < 400; iter++) {
     for (const p of pos.values()) { p.vx = 0; p.vy = 0; }
 
-    // Repulsion (all pairs)
+    // Short-range repulsion only (within REP_CUTOFF)
     const entries = [...pos.entries()];
     for (let i = 0; i < entries.length; i++) {
       for (let j = i + 1; j < entries.length; j++) {
@@ -184,31 +247,28 @@ function forceLayout(
         const [idB, b] = entries[j];
         const dx = a.x - b.x, dy = a.y - b.y;
         const d = Math.max(1, Math.sqrt(dx * dx + dy * dy));
-        const f = K * K / d;
+        if (d > REP_CUTOFF) continue;
+        const f = (K * K) / d;
         if (idA !== 'EGFP') { a.vx += (dx / d) * f; a.vy += (dy / d) * f; }
         if (idB !== 'EGFP') { b.vx -= (dx / d) * f; b.vy -= (dy / d) * f; }
       }
     }
 
-    // Attraction (edges, weakened)
+    // Edge attraction — pull connected nodes toward ideal distance K
     for (const edge of edges) {
       const a = pos.get(edge.a), b = pos.get(edge.b);
       if (!a || !b) continue;
       const dx = b.x - a.x, dy = b.y - a.y;
       const d = Math.max(1, Math.sqrt(dx * dx + dy * dy));
-      const f = (d * d) / K * 0.4;
-      if (edge.a !== 'EGFP') { a.vx += (dx / d) * f; a.vy += (dy / d) * f; }
-      if (edge.b !== 'EGFP') { b.vx -= (dx / d) * f; b.vy -= (dy / d) * f; }
+      const f = (d - K) * 0.4;
+      const fx = (dx / d) * f, fy = (dy / d) * f;
+      if (edge.a !== 'EGFP') { a.vx += fx; a.vy += fy; }
+      if (edge.b !== 'EGFP') { b.vx -= fx; b.vy -= fy; }
     }
 
-    // Mild gravity toward center
-    for (const [id, p] of pos) {
-      if (id === 'EGFP') continue;
-      p.vx += (W / 2 - p.x) * 0.003;
-      p.vy += (H / 2 - p.y) * 0.003;
-    }
+    // No gravity, no boundary — let the graph spread organically
 
-    // Integrate + clamp
+    // Integrate
     for (const [id, p] of pos) {
       if (id === 'EGFP') continue;
       const speed = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
@@ -216,17 +276,15 @@ function forceLayout(
         const move = Math.min(temp, speed);
         p.x += (p.vx / speed) * move;
         p.y += (p.vy / speed) * move;
-        p.x = Math.max(pad, Math.min(W - pad, p.x));
-        p.y = Math.max(pad, Math.min(H - pad, p.y));
       }
     }
     temp *= cooling;
   }
 
-  // Post-simulation collision resolution
-  const MIN_DIST = 70;
+  // Gentle collision resolution (smaller min dist for tighter packing)
+  const MIN_DIST = 45;
   const posEntries = [...pos.entries()];
-  for (let iter = 0; iter < 50; iter++) {
+  for (let iter = 0; iter < 30; iter++) {
     let anyOverlap = false;
     for (let i = 0; i < posEntries.length; i++) {
       for (let j = i + 1; j < posEntries.length; j++) {
@@ -249,15 +307,6 @@ function forceLayout(
             a.y += ny * overlap * 0.5;
             b.x -= nx * overlap * 0.5;
             b.y -= ny * overlap * 0.5;
-          }
-          // Clamp
-          if (idA !== 'EGFP') {
-            a.x = Math.max(pad, Math.min(W - pad, a.x));
-            a.y = Math.max(pad, Math.min(H - pad, a.y));
-          }
-          if (idB !== 'EGFP') {
-            b.x = Math.max(pad, Math.min(W - pad, b.x));
-            b.y = Math.max(pad, Math.min(H - pad, b.y));
           }
         }
       }
@@ -305,7 +354,7 @@ export function BrightnessNetworkPanel({ onSelectGEVI }: Props) {
   const { nodes, edges } = useMemo(() => buildGraph(gevis), [gevis]);
   const positions = useMemo(() => forceLayout(nodes, edges, W, H), [nodes, edges]);
 
-  // Pan / zoom
+  // Pan (no zoom)
   const [tx, setTx] = useState(0);
   const [ty, setTy] = useState(0);
   const [scale, setScale] = useState(1);
@@ -315,27 +364,6 @@ export function BrightnessNetworkPanel({ onSelectGEVI }: Props) {
 
   const dragRef = useRef<{ active: boolean; x: number; y: number }>({ active: false, x: 0, y: 0 });
   const svgRef = useRef<SVGSVGElement>(null);
-
-  // Non-passive wheel listener
-  useEffect(() => {
-    const el = svgRef.current?.parentElement;
-    if (!el) return;
-    const onWheel = (e: WheelEvent) => {
-      e.preventDefault();
-      const rect = el.getBoundingClientRect();
-      const mx = (e.clientX - rect.left - tx) / scale;
-      const my = (e.clientY - rect.top  - ty) / scale;
-      const factor = e.deltaY < 0 ? 1.12 : 1 / 1.12;
-      setScale(s => {
-        const ns = Math.max(0.25, Math.min(4, s * factor));
-        setTx(() => e.clientX - rect.left - mx * ns);
-        setTy(() => e.clientY - rect.top  - my * ns);
-        return ns;
-      });
-    };
-    el.addEventListener('wheel', onWheel, { passive: false });
-    return () => el.removeEventListener('wheel', onWheel);
-  }, [tx, ty, scale]);
 
   const onMouseDown = useCallback((e: React.MouseEvent) => {
     dragRef.current = { active: true, x: e.clientX, y: e.clientY };
@@ -359,15 +387,6 @@ export function BrightnessNetworkPanel({ onSelectGEVI }: Props) {
   const nodeById = useMemo(() => new Map(finalNodes.map(n => [n.id, n])), [finalNodes]);
   const hoveredNode = hoveredId ? nodeById.get(hoveredId) ?? null : null;
 
-  // Compute max BFS distance for ring guides
-  const maxBfsDist = useMemo(() => {
-    let max = 0;
-    for (const n of finalNodes) {
-      if (n.bfsDist < 9999 && n.bfsDist > max) max = n.bfsDist;
-    }
-    return max;
-  }, [finalNodes]);
-
   // Auto-fit graph into viewport on first render
   useEffect(() => {
     if (fitted || finalNodes.length === 0) return;
@@ -385,23 +404,19 @@ export function BrightnessNetworkPanel({ onSelectGEVI }: Props) {
       maxY = Math.max(maxY, n.y + labelPad);
     }
     const gw = maxX - minX, gh = maxY - minY;
-    const s = Math.min(vw / gw, vh / gh, 1.2) * 0.92;
+    const s = Math.min(vw / gw, vh / gh) * 0.69;
     setScale(s);
     setTx((vw - gw * s) / 2 - minX * s);
     setTy((vh - gh * s) / 2 - minY * s);
     setFitted(true);
   }, [finalNodes, fitted]);
 
-  const bg      = darkMode ? '#111827' : '#f8fafc';
+  const bg      = darkMode ? '#1f2937' : '#faf9f6';
   const edgeClr = darkMode ? '#4b5563' : '#cbd5e1';
   const txt     = darkMode ? '#d1d5db' : '#374151';
   const subTxt  = darkMode ? '#6b7280' : '#94a3b8';
-  const ringClr = darkMode ? '#1e293b' : '#e2e8f0';
   const tipBg   = darkMode ? '#1f2937' : '#ffffff';
   const tipBd   = darkMode ? '#374151' : '#e2e8f0';
-
-  const ringSpacing = Math.min(W, H) * 0.18;
-  const cx = W / 2, cy = H / 2;
 
   return (
     <div
@@ -413,7 +428,7 @@ export function BrightnessNetworkPanel({ onSelectGEVI }: Props) {
         <div>
           <h2 className="text-sm font-semibold">Brightness Network</h2>
           <p className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-            Edges show direct brightness comparisons from published papers. Labels show the ratio A&nbsp;/&nbsp;B. Scroll to zoom · drag to pan · click a node to view details.
+            Edges show direct brightness comparisons from published papers. Labels show the ratio A&nbsp;/&nbsp;B. Drag to pan · click a node to view details.
           </p>
         </div>
         <div className={`ml-auto text-xs ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>
@@ -449,14 +464,7 @@ export function BrightnessNetworkPanel({ onSelectGEVI }: Props) {
         <svg ref={svgRef} width="100%" height="100%" style={{ background: bg, display: 'block' }}>
           <g transform={`translate(${tx},${ty}) scale(${scale})`}>
 
-            {/* Decorative concentric ring guides */}
-            {Array.from({ length: maxBfsDist }, (_, i) => i + 1).map(d => (
-              <circle key={`ring-${d}`}
-                cx={cx} cy={cy} r={d * ringSpacing}
-                fill="none" stroke={ringClr} strokeWidth={1}
-                strokeDasharray="4 3" opacity={0.5}
-              />
-            ))}
+
 
             {/* Edges */}
             {edges.map((edge, i) => {
@@ -477,14 +485,14 @@ export function BrightnessNetworkPanel({ onSelectGEVI }: Props) {
                     stroke="transparent" strokeWidth={14} />
                   <line x1={a.x} y1={a.y} x2={b.x} y2={b.y}
                     stroke={isHE || isRel ? '#60a5fa' : edgeClr}
-                    strokeWidth={isHE ? 2.5 : 1.2}
+                    strokeWidth={isHE ? 2.5 : 1.5}
                     opacity={fade ? 0.1 : isHE || isRel ? 0.9 : 0.7}
                   />
-                  {/* Ratio label — always visible */}
+                  {/* Ratio label */}
                   <text x={mx} y={my} textAnchor="middle" dominantBaseline="middle"
-                    fontSize={isHE || isRel ? 9.5 : 8.5}
+                    fontSize={isHE || isRel ? 8.5 : 7.5}
                     fontWeight={isHE || isRel ? '600' : '500'}
-                    fill={isHE ? '#60a5fa' : isRel ? '#60a5fa' : darkMode ? '#6b7280' : '#64748b'}
+                    fill={isHE ? '#60a5fa' : isRel ? '#60a5fa' : darkMode ? '#6b7280' : '#9ca3af'}
                     stroke={bg} strokeWidth={2.5} paintOrder="stroke"
                     opacity={fade ? 0.08 : 1}
                     style={{ userSelect: 'none', pointerEvents: 'none', fontFamily: 'system-ui' }}
@@ -521,15 +529,16 @@ export function BrightnessNetworkPanel({ onSelectGEVI }: Props) {
                   <path d={hexPath(node.r)}
                     fill={node.color}
                     fillOpacity={node.isExternal ? 0.35 : 1}
-                    stroke={isHov ? '#fff' : '#fff'}
-                    strokeWidth={isHov ? 2 : 1.2}
+                    stroke={node.isExternal ? (darkMode ? '#6b7280' : '#9ca3af') : '#fff'}
+                    strokeWidth={node.isEGFP ? 2 : 1.5}
                     strokeDasharray={node.isExternal ? '2.5 1.5' : undefined}
+                    style={node.isEGFP ? { filter: 'drop-shadow(0 0 6px rgba(245,158,11,0.5))' } : node.gevi ? { filter: `drop-shadow(0 0 3px ${node.color})` } : undefined}
                   />
                   {/* Name label below */}
                   <text y={node.r + 13} textAnchor="middle" dominantBaseline="middle"
-                    fontSize={node.isEGFP ? 10.5 : 8.5}
-                    fontWeight={node.isEGFP ? '700' : isHov ? '600' : '500'}
-                    fill={txt}
+                    fontSize={node.isEGFP ? 12 : 9}
+                    fontWeight={node.isEGFP ? '700' : '600'}
+                    fill={node.isEGFP ? (darkMode ? '#93c5fd' : '#2563eb') : darkMode ? '#e5e7eb' : '#374151'}
                     stroke={bg} strokeWidth={2.5} paintOrder="stroke"
                     style={{ userSelect: 'none', pointerEvents: 'none' }}
                   >
@@ -538,8 +547,8 @@ export function BrightnessNetworkPanel({ onSelectGEVI }: Props) {
                   {/* Brightness score below name */}
                   {node.bScore !== null && (
                     <text y={node.r + 24} textAnchor="middle" dominantBaseline="middle"
-                      fontSize={7.5} fontWeight="500"
-                      fill={subTxt}
+                      fontSize={7} fontWeight="500"
+                      fill={darkMode ? '#6b7280' : '#9ca3af'}
                       stroke={bg} strokeWidth={2} paintOrder="stroke"
                       style={{ userSelect: 'none', pointerEvents: 'none' }}
                     >

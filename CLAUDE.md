@@ -129,7 +129,7 @@ All subscores are computed at runtime from raw data. The pipeline:
 | **Brightness** | `max(0, min(100, round(25 × log₁₀(B_rel) + 60)))` | B_rel vs EGFP; EGFP scores 60 |
 | **Photostability** | `min(100, round(100 × F_remaining ^ (100 / (t × P))))` | Standard: 100 mW/mm², 1 min |
 | **Popularity** | `min(100, round(50 × log₁₀(papers + 1)))` | papers = researchPapers.length |
-| **Overall** | Weighted average | Speed 20%, DynRange 20%, Brightness 20%, Sensitivity 15%, Photostability 15%, Popularity 10%; null scores excluded with proportional weight redistribution |
+| **Overall** | Weighted average + penalty | Speed 20%, DynRange 20%, Brightness 20%, Sensitivity 15%, Photostability 15%, Popularity 10%; null scores excluded with proportional weight redistribution; −10 penalty per performance score below 10 |
 
 ### Brightness graph traversal
 

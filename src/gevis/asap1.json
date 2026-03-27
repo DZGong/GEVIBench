@@ -71,6 +71,11 @@
       "ratio": 0.61,
       "reference": "arclight",
       "source": "doi:10.1523/ENEURO.0060-20.2020"
+    },
+    {
+      "ratio": 0.94,
+      "reference": "asap3",
+      "source": "doi:10.1021/acschemneuro.5c00670"
     }
   ],
   "photostabilityData": [
@@ -214,6 +219,14 @@
       "year": 2025,
       "sample": "Human PSC-derived cardiomyocytes, in vitro",
       "url": "https://doi.org/10.1016/j.xpro.2025.104044"
+    },
+    {
+      "title": "Absolute Membrane Potential Recording with ASAP-Type Genetically Encoded Voltage Indicators Using Fluorescence Lifetime Imaging",
+      "authors": "Nair AG, et al.",
+      "journal": "ACS Chemical Neuroscience",
+      "year": 2025,
+      "sample": "HEK293T cells, in vitro",
+      "url": "https://doi.org/10.1021/acschemneuro.5c00670"
     }
   ],
   "spectrum": {

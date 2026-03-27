@@ -44,7 +44,7 @@
     {
       "on": 2.24,
       "off": 1.33,
-      "temperature": "room temperature",
+      "temperature": "25°C",
       "source": "doi:10.1126/sciadv.ads1807"
     }
   ],

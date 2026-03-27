@@ -35,7 +35,7 @@
     {
       "on": 4.7,
       "off": 4.7,
-      "temperature": "room temperature",
+      "temperature": "25°C",
       "source": "doi:10.1126/science.1204763",
       "note": "Single exponential time constant of 4.7 ms for voltage step response; on/off not separately reported"
     }

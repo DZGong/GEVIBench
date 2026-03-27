@@ -7,30 +7,12 @@
     "cpGFP",
     "Green",
     "Two-photon",
-    "JEDI"
+    "JEDI",
+    "Somatic targeting"
   ],
   "paper": "Cell 2022",
   "paperUrl": "https://doi.org/10.1016/j.cell.2022.07.013",
-  "brightness": 62,
-  "brightnessData": [
-    {
-      "ratio": 1.67,
-      "reference": "asap3",
-      "source": "doi:10.1016/j.cell.2022.07.013"
-    },
-    {
-      "ratio": 1.5,
-      "reference": "asap2s",
-      "source": "doi:10.1016/j.cell.2022.07.013"
-    }
-  ],
-  "speed": 80,
-  "sensitivity": 72,
-  "dynamicRange": 77,
-  "photostability": 78,
-  "subthreshold": 68,
-  "overall": 76,
-  "description": "Two-photon optimized GEVI evolved from ASAP2s via high-throughput automated screening, optimized for sustained deep-tissue voltage recording with improved brightness, photostability, and sensitivity.",
+  "description": "Two-photon optimized GEVI evolved from ASAP2s via multiparameter high-throughput screening, enabling sustained deep-tissue voltage recording with improved brightness, photostability, and sensitivity under two-photon illumination.",
   "parentId": "asap2s",
   "spectrum": {
     "type": "fp",
@@ -51,23 +33,56 @@
     "name": "JEDI-2P",
     "custom": {
       "voltage": [-120, -100, -70, -50, -30, 0, 30],
-      "deltaF": [21.5, 12.9, 0.0, -8.6, -17.2, -30.1, -43.0]
+      "deltaF": [22, 13, 0, -9, -17, -30, -43]
     }
   },
-  "kinetics": {
-    "on": 1.5,
-    "off": 2.4,
-    "temperature": "room temperature"
-  },
-  "dynamicRangeData": {
-    "deltaF": -43,
-    "sign": "negative"
-  },
-  "photostabilityData": {
-    "brightnessRemaining": 82,
-    "illumination": "~16 mW/mm²",
-    "duration": "2 min"
-  },
+  "kinetics": [
+    {
+      "on": 0.54,
+      "off": 1.21,
+      "temperature": "32-35°C",
+      "source": "doi:10.1016/j.cell.2022.07.013"
+    },
+    {
+      "on": 1.21,
+      "off": 2.54,
+      "temperature": "21-23°C",
+      "source": "doi:10.1016/j.cell.2022.07.013"
+    }
+  ],
+  "dynamicRangeData": [
+    {
+      "deltaF": -43,
+      "sign": "negative",
+      "source": "doi:10.1016/j.cell.2022.07.013"
+    }
+  ],
+  "sensitivityData": [
+    {
+      "deltaF": 18.2,
+      "source": "doi:10.1016/j.cell.2022.07.013"
+    }
+  ],
+  "brightnessData": [
+    {
+      "ratio": 1.67,
+      "reference": "asap3",
+      "source": "doi:10.1016/j.cell.2022.07.013"
+    },
+    {
+      "ratio": 1.5,
+      "reference": "asap2s",
+      "source": "doi:10.1016/j.cell.2022.07.013"
+    }
+  ],
+  "photostabilityData": [
+    {
+      "brightnessRemaining": 55,
+      "illumination": "16 mW/mm²",
+      "duration": "2 min",
+      "source": "doi:10.1016/j.cell.2022.07.013"
+    }
+  ],
   "subthresholdData": [
     {
       "slope": 0.7,
@@ -77,6 +92,7 @@
   "twoPhoton": [
     { "compatible": true, "source": "doi:10.1016/j.cell.2022.07.013" }
   ],
+
   "addgene": {
     "id": "179463",
     "url": "https://www.addgene.org/179463/"
@@ -105,7 +121,70 @@
       "year": 2024,
       "sample": "Mouse, visual cortex, in vivo",
       "url": "https://doi.org/10.1101/2024.11.15.623698"
+    },
+    {
+      "title": "Two-photon voltage imaging with rhodopsin-based sensors",
+      "authors": "Grimm C, et al.",
+      "journal": "Neuron",
+      "year": 2026,
+      "sample": "HEK293 cells, in vitro; Mouse, cortex and cerebellum, in vivo",
+      "url": "https://doi.org/10.1016/j.neuron.2025.12.014"
+    },
+    {
+      "title": "All-optical voltage interrogation for probing synaptic plasticity in vivo",
+      "authors": "Carolan J, et al.",
+      "journal": "Nature Communications",
+      "year": 2025,
+      "sample": "Mouse, cerebellum, Purkinje cell dendrites, in vivo",
+      "url": "https://doi.org/10.1038/s41467-025-63867-4"
+    },
+    {
+      "title": "FACED 2.0 enables large-scale voltage and calcium imaging in vivo",
+      "authors": "Zhong J, et al.",
+      "journal": "Nature Methods",
+      "year": 2025,
+      "sample": "Mouse, visual cortex L2/3, in vivo; Zebrafish larvae, in vivo",
+      "url": "https://doi.org/10.1038/s41592-025-02925-7"
+    },
+    {
+      "title": "Retroreflective beam multiplexing enables high-throughput two-photon voltage imaging in vivo",
+      "authors": "Liu Z, et al.",
+      "journal": "bioRxiv",
+      "year": 2025,
+      "sample": "Mouse, visual cortex V1, in vivo; Mouse, hippocampus CA1, in vivo",
+      "url": "https://doi.org/10.64898/2025.12.09.693349"
+    },
+    {
+      "title": "Movement-stabilized three-dimensional optical recordings of membrane potential changes and calcium dynamics in hippocampal CA1 dendrites",
+      "authors": "Gonzalez KC, et al.",
+      "journal": "Neuron",
+      "year": 2026,
+      "sample": "Mouse, hippocampus CA1, dendrites and soma, in vivo",
+      "url": "https://doi.org/10.1016/j.neuron.2026.01.004"
+    },
+    {
+      "title": "Kilohertz-rate two-photon voltage imaging of population dynamics in vivo",
+      "authors": "Zhang M, et al.",
+      "journal": "bioRxiv",
+      "year": 2026,
+      "sample": "Mouse, cortex, in vivo",
+      "url": "https://doi.org/10.64898/2025.12.29.696942"
+    },
+    {
+      "title": "Optical constraints on two-photon voltage imaging",
+      "authors": "Brooks FP, et al.",
+      "journal": "Neurophotonics",
+      "year": 2024,
+      "sample": "HEK293 cells, in vitro; Mouse, cortex, in vivo",
+      "url": "https://doi.org/10.1117/1.NPh.11.3.035007"
+    },
+    {
+      "title": "Linking functional activity and connectivity of neuronal circuits via fast cross-layer all-optical physiology",
+      "authors": "Liu C, et al.",
+      "journal": "Cell Reports",
+      "year": 2025,
+      "sample": "Mouse, visual cortex V1 and somatosensory cortex S1, in vivo",
+      "url": "https://doi.org/10.1016/j.celrep.2025.116646"
     }
-  ],
-  "paperCount": 3
+  ]
 }

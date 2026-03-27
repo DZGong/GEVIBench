@@ -10,11 +10,10 @@ function average(scores: number[]): number {
   return Math.round(scores.reduce((a, b) => a + b, 0) / scores.length);
 }
 
-// Parse a temperature string like "33-34°C", "22°C", "room temperature" into a numeric °C value.
+// Parse a temperature string like "33-34°C", "22°C", "25°C" into a numeric °C value.
 // Returns null if unparseable or not provided.
 function parseTemperature(temp?: string): number | null {
   if (!temp) return null;
-  if (/room\s*temp/i.test(temp)) return 22;
   // Match patterns like "33-34°C" (take midpoint), "22°C", "37 °C"
   const rangeMatch = temp.match(/([\d.]+)\s*[-–]\s*([\d.]+)/);
   if (rangeMatch) return (parseFloat(rangeMatch[1]) + parseFloat(rangeMatch[2])) / 2;
@@ -229,7 +228,11 @@ function computeScores(gevi: GEVI, bRelMap: Map<string, number>) {
     if (gevi.twoPhoton?.some(tp => tp.compatible)) bonus += 3;
     if (tags.some(t => t.toLowerCase().includes('positive')) || gevi.dynamicRangeData?.[0]?.sign === 'positive') bonus += 3;
 
-    overall = totalWeight > 0 ? Math.min(100, Math.round(weightedSum / totalWeight) + bonus) : null;
+    // Penalty: -10 for first performance score below 10, capped at -15 total
+    const lowCount = performanceScores.filter(s => s !== null && s !== undefined && s < 10).length;
+    const penalty = lowCount === 0 ? 0 : lowCount === 1 ? -10 : -15;
+
+    overall = totalWeight > 0 ? Math.max(0, Math.min(100, Math.round(weightedSum / totalWeight) + bonus + penalty)) : null;
   }
   return { speed, dynamicRange, sensitivity, brightness, photostability, overall, paperCount, popularity: Math.round(popularity) };
 }

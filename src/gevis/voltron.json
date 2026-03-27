@@ -92,6 +92,11 @@
     {
       "deltaF": 6.16,
       "source": "doi:10.1016/j.neuron.2023.03.009"
+    },
+    {
+      "deltaF": 6.5,
+      "source": "doi:10.1038/s41586-019-1641-1",
+      "note": "Voltron-ST (JF525) in mouse cortex L2/3 brain slices, 1.5 W/mm², n=14 cells. From Piatkevich et al. 2019 Extended Data Fig. 5c"
     }
   ],
 
@@ -108,6 +113,13 @@
       "illumination": "23 mW/mm²",
       "duration": "15 min",
       "source": "doi:10.1126/science.aav6416"
+    },
+    {
+      "brightnessRemaining": 64,
+      "illumination": "1500 mW/mm²",
+      "duration": "1 min",
+      "source": "doi:10.1038/s41586-019-1641-1",
+      "note": "Voltron-ST (JF525) in mouse cortex L2/3 brain slices, n=8 cells. From Piatkevich et al. 2019 Extended Data Fig. 5e"
     }
   ],
 

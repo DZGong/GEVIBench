@@ -35,7 +35,7 @@ export const methodologyContent = {
       "Calculate separate scores for raw data and literature sources",
       "Apply weighted combination: 70% raw data + 30% literature when both available",
       "When only one source exists, use that source with confidence indicator",
-      "Overall score = weighted average of 6 metric scores + bonus points"
+      "Overall score = weighted average of 6 metric scores + bonus points − penalty (−10 for each performance score below 10, reflecting that a critical weakness in any dimension limits practical utility)"
     ],
     confidenceLevels: {
       high: "Multiple independent measurements from ≥2 datasets or papers",
@@ -191,6 +191,13 @@ export const methodologyContent = {
       "Confidence scores indicate data reliability: high (≥2 independent sources), medium (1 source), low (estimate)",
       "External validation welcome — submit your data or flag discrepancies via the GitHub issue tracker"
     ]
+  },
+
+  weaknessPenalty: {
+    title: "Weakness Penalty",
+    description: "A penalty of −10 points is applied to the overall score for each performance metric (speed, dynamic range, brightness, sensitivity, photostability) that scores below 10. This reflects the practical reality that a critical weakness in any single dimension — such as a GEVI too dim to image or too slow to resolve spikes — limits the sensor's real-world utility regardless of how well it performs in other areas. Penalties stack: a sensor with two metrics below 10 receives −20.",
+    threshold: 10,
+    penalty: -10
   },
 
   bonusPoints: {

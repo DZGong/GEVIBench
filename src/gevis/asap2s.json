@@ -40,6 +40,18 @@
       "off": 3.40,
       "temperature": "33-34°C",
       "source": "doi:10.1016/j.cell.2019.11.004"
+    },
+    {
+      "on": 3.78,
+      "off": 7.59,
+      "temperature": "32-35°C",
+      "source": "doi:10.1016/j.cell.2022.07.013"
+    },
+    {
+      "on": 6.39,
+      "off": 12.7,
+      "temperature": "21-23°C",
+      "source": "doi:10.1016/j.cell.2022.07.013"
     }
   ],
   "dynamicRangeData": [

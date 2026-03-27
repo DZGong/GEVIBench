@@ -32,7 +32,7 @@
     {
       "on": 9,
       "off": 17,
-      "temperature": "room temperature",
+      "temperature": "25°C",
       "source": "doi:10.1016/j.neuron.2012.06.040"
     },
     {
@@ -58,6 +58,12 @@
       "deltaF": -29.6,
       "sign": "negative",
       "source": "doi:10.1523/ENEURO.0060-20.2020"
+    },
+    {
+      "deltaF": -32,
+      "sign": "negative",
+      "source": "doi:10.1038/nmeth.3000",
+      "note": "ArcLight A242 in HEK293T cells at 23°C, n=7 cells"
     }
   ],
   "sensitivityData": [
