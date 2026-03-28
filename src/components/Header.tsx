@@ -192,9 +192,6 @@ export function Header({ activeTab, setActiveTab, mobileMenuOpen, setMobileMenuO
               >
                 Contact
               </button>
-              <a href="#" className="text-sm flex items-center gap-1 px-3 py-2 text-ink/60">
-                GitHub
-              </a>
             </div>
           </div>
         )}
