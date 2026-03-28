@@ -5,9 +5,9 @@ export const methodologyContent = {
     title: "Score Components",
     description: "All metrics are extracted from peer-reviewed publications with imaging conditions recorded. Multiple measurements for the same GEVI are averaged.",
     items: [
+      { name: "Brightness",    weight: "20%", description: "EC × QY vs EGFP, graph-resolved, log-scaled" },
       { name: "Speed",         weight: "20%", description: "Log-scaled on τ_on + τ_off (ms)" },
       { name: "Dynamic Range", weight: "20%", description: "|ΔF/F| per 100 mV, log-scaled" },
-      { name: "Brightness",    weight: "20%", description: "EC × QY vs EGFP, graph-resolved, log-scaled" },
       { name: "Sensitivity",   weight: "15%", description: "ΔF/F per action potential, log-scaled" },
       { name: "Photostability",weight: "15%", description: "Brightness remaining after illumination, power-law normalized" },
       { name: "Popularity",    weight: "10%", description: "Research paper count, log-scaled" }
@@ -18,7 +18,7 @@ export const methodologyContent = {
     title: "Scoring Methodology",
     approach: "Each metric is normalized to 0–100 using log or power-law scaling. The overall score is a weighted average plus bonus points minus weakness penalties.",
     steps: [
-      "Weighted average: Speed 20%, Dynamic Range 20%, Brightness 20%, Sensitivity 15%, Photostability 15%, Popularity 10%",
+      "Weighted average: Brightness 20%, Speed 20%, Dynamic Range 20%, Sensitivity 15%, Photostability 15%, Popularity 10%",
       "Missing metrics are excluded; remaining weights redistributed proportionally",
       "Bonus: +3 each for red-shifted, two-photon, positive-going (up to +9)",
       "Penalty: −10 for one performance score below 10, −15 for two or more",

@@ -62,8 +62,8 @@ export const COLORS = {
 export const METRICS = [
   { key: 'brightness', name: 'Brightness', icon: 'Sun' },
   { key: 'speed', name: 'Speed', icon: 'Zap' },
-  { key: 'sensitivity', name: 'ΔF/F/AP', icon: 'Activity' },
-  { key: 'dynamicRange', name: 'Range', icon: 'TrendingUp' },
-  { key: 'photostability', name: 'Stable', icon: 'Shield' },
-  { key: 'paperCount', name: 'Papers', icon: 'FileText' },
+  { key: 'dynamicRange', name: 'Dynamic Range', icon: 'TrendingUp' },
+  { key: 'sensitivity', name: 'Sensitivity', icon: 'Activity' },
+  { key: 'photostability', name: 'Photostability', icon: 'Shield' },
+  { key: 'paperCount', name: 'Popularity', icon: 'FileText' },
 ] as const;

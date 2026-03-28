@@ -15,12 +15,12 @@ interface ComparisonProps {
 
 export function ComparisonPanel({ compareGEVIs, onRemove, showEmpty = false, onClose }: ComparisonProps) {
   const getCompareRadarData = () => {
-    const subjects = ['Bright', 'Speed', 'Sensitivity', 'Range', 'Stable', 'Papers'];
+    const subjects = ['Brightness', 'Speed', 'Dyn. Range', 'Sensitivity', 'Photostab.', 'Popularity'];
     return subjects.map((subject, idx) => {
       const data: any = { subject };
       compareGEVIs.forEach((gevi) => {
         const safeName = gevi.name.replace(/[^a-zA-Z0-9]/g, '');
-        const values = [gevi.brightness ?? 0, gevi.speed ?? 0, gevi.sensitivity ?? 0, gevi.dynamicRange ?? 0, gevi.photostability ?? 0, gevi.popularity ?? 0];
+        const values = [gevi.brightness ?? 0, gevi.speed ?? 0, gevi.dynamicRange ?? 0, gevi.sensitivity ?? 0, gevi.photostability ?? 0, gevi.popularity ?? 0];
         data[safeName] = values[idx];
       });
       return data;

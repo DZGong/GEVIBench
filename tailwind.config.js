@@ -29,7 +29,7 @@ module.exports = {
 					DEFAULT: '#D4AF37',
 				},
 				blush: {
-					DEFAULT: '#FFC0CB',
+					DEFAULT: '#FF91AF',
 				},
 				surface: {
 					DEFAULT: '#fcf9f4',

@@ -352,7 +352,19 @@ function GEVIBenchApp() {
                 ))}
               </ul>
 
-              {/* Kinetics Scoring Rule */}
+              {/* Brightness Scoring Rule */}
+              {renderScoringSection(
+                methodologyContent.scoring.brightnessScoring.title,
+                methodologyContent.scoring.brightnessScoring.description,
+                methodologyContent.scoring.brightnessScoring.formula,
+                methodologyContent.scoring.brightnessScoring.details,
+                methodologyContent.scoring.brightnessScoring.benchmarks,
+                (bench) => `Score ${bench.score}: ${bench.brightness} EGFP (${bench.example})`,
+                undefined,
+                methodologyContent.scoring.brightnessScoring.formulaNote
+              )}
+
+              {/* Speed Scoring Rule */}
               {renderScoringSection(
                 methodologyContent.scoring.kineticsScoring.title,
                 methodologyContent.scoring.kineticsScoring.description,
@@ -376,19 +388,7 @@ function GEVIBenchApp() {
                 methodologyContent.scoring.dynamicRangeScoring.formulaNote
               )}
 
-              {/* Brightness Scoring Rule */}
-              {renderScoringSection(
-                methodologyContent.scoring.brightnessScoring.title,
-                methodologyContent.scoring.brightnessScoring.description,
-                methodologyContent.scoring.brightnessScoring.formula,
-                methodologyContent.scoring.brightnessScoring.details,
-                methodologyContent.scoring.brightnessScoring.benchmarks,
-                (bench) => `Score ${bench.score}: ${bench.brightness} EGFP (${bench.example})`,
-                undefined,
-                methodologyContent.scoring.brightnessScoring.formulaNote
-              )}
-
-              {/* SNR Scoring Rule */}
+              {/* Sensitivity Scoring Rule */}
               {renderScoringSection(
                 methodologyContent.scoring.sensitivityScoring.title,
                 methodologyContent.scoring.sensitivityScoring.description,

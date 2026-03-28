@@ -432,12 +432,12 @@ export function FamilyTreePanel({
     tooltipTags = tags.slice(0, 4);
     tooltipExtraCount = tags.length - tooltipTags.length;
     tooltipRadarData = [
-      { subject: 'Bright', value: g.brightness    ?? 0, fullMark: 100 },
-      { subject: 'Speed',  value: g.speed          ?? 0, fullMark: 100 },
-      { subject: 'Sens',   value: g.sensitivity    ?? 0, fullMark: 100 },
-      { subject: 'Range',  value: g.dynamicRange   ?? 0, fullMark: 100 },
-      { subject: 'Stable', value: g.photostability ?? 0, fullMark: 100 },
-      { subject: 'Papers', value: Math.min(100, (g.paperCount ?? 0) * 5), fullMark: 100 },
+      { subject: 'Brightness',  value: g.brightness    ?? 0, fullMark: 100 },
+      { subject: 'Speed',       value: g.speed          ?? 0, fullMark: 100 },
+      { subject: 'Dyn. Range',  value: g.dynamicRange   ?? 0, fullMark: 100 },
+      { subject: 'Sensitivity', value: g.sensitivity    ?? 0, fullMark: 100 },
+      { subject: 'Photostab.',  value: g.photostability ?? 0, fullMark: 100 },
+      { subject: 'Popularity',  value: Math.min(100, (g.paperCount ?? 0) * 5), fullMark: 100 },
     ];
   }
 

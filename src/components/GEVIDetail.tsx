@@ -11,9 +11,9 @@ import { SampleUsageChart } from './SampleUsageChart';
 const metrics = [
   { key: 'brightness', name: 'Brightness', icon: Sun },
   { key: 'speed', name: 'Speed', icon: Zap },
+  { key: 'dynamicRange', name: 'Dynamic Range', icon: TrendingUp },
   { key: 'sensitivity', name: 'Sensitivity', icon: Activity },
-  { key: 'dynamicRange', name: 'Range', icon: TrendingUp },
-  { key: 'photostability', name: 'Stable', icon: Shield },
+  { key: 'photostability', name: 'Photostability', icon: Shield },
   { key: 'popularity', name: 'Popularity', icon: FileText },
 ];
 
@@ -54,11 +54,11 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
   const spectrumData = gevi.spectrum || null;
 
   const getRadarData = () => [
-    { subject: 'Bright', value: gevi.brightness ?? 0, fullMark: 100 },
+    { subject: 'Brightness', value: gevi.brightness ?? 0, fullMark: 100 },
     { subject: 'Speed', value: gevi.speed ?? 0, fullMark: 100 },
-    { subject: 'Sens', value: gevi.sensitivity ?? 0, fullMark: 100 },
-    { subject: 'Range', value: gevi.dynamicRange ?? 0, fullMark: 100 },
-    { subject: 'Stable', value: gevi.photostability ?? 0, fullMark: 100 },
+    { subject: 'Dyn. Range', value: gevi.dynamicRange ?? 0, fullMark: 100 },
+    { subject: 'Sensitivity', value: gevi.sensitivity ?? 0, fullMark: 100 },
+    { subject: 'Photostab.', value: gevi.photostability ?? 0, fullMark: 100 },
     { subject: 'Popularity', value: gevi.popularity ?? 0, fullMark: 100 },
   ];
 
@@ -77,7 +77,7 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
           <h3 className="text-xl md:text-2xl font-bold mb-1 text-ink">
             <span style={{ color: getGEVIColor(gevi).color }}>{gevi.name}</span>
           </h3>
-          <p className="text-sm mb-2 text-ink/60">{gevi.description}</p>
+          <p className="text-sm mb-2 text-ink/60 font-sans">{gevi.description}</p>
           <div className="flex flex-wrap gap-2 mb-2">
             <span className="text-xs px-2 py-1 bg-klein text-white rounded font-medium">{gevi.category}</span>
             <span className="text-xs px-2 py-1 rounded bg-surface-low text-ink/70">Published {gevi.year}</span>
@@ -385,14 +385,14 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
                     {paper.sample && (
                       <div className="flex flex-wrap gap-1 mt-2">
                         {paper.sample.split(/[,;]/).map((s: string) => s.trim()).filter(Boolean).map((tag: string, i: number) => (
-                          <span key={i} className="text-[10px] px-1.5 py-0.5 rounded bg-teal-50 text-teal-700">{tag}</span>
+                          <span key={i} className="text-[10px] px-1.5 py-0.5 rounded text-ink/70" style={{ backgroundColor: '#FF91AF30' }}>{tag}</span>
                         ))}
                       </div>
                     )}
                     {paper.applications && (
                       <div className="flex flex-wrap gap-1 mt-1">
                         {paper.applications.map((app: string, i: number) => (
-                          <span key={i} className="text-[10px] px-1.5 py-0.5 rounded bg-ink/10 text-ink/60">{app}</span>
+                          <span key={i} className="text-[10px] px-1.5 py-0.5 rounded text-ink/70" style={{ backgroundColor: '#FF91AF30' }}>{app}</span>
                         ))}
                       </div>
                     )}

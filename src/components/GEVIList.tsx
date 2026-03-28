@@ -274,7 +274,7 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
                     })()}
                   </tr>
                   <tr>
-                    <td colSpan={2} className="pl-1 pr-2 pt-0.5 pb-3 text-ink" style={{ fontSize: '12px', lineHeight: '1.3' }}>
+                    <td colSpan={2} className="pl-1 pr-2 pt-0.5 pb-3 text-ink font-sans" style={{ fontSize: '12px', lineHeight: '1.3' }}>
                       {gevi.description}
                     </td>
                   </tr>
@@ -353,7 +353,7 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
                     </td>
                   </tr>
                   <tr>
-                    <td colSpan={7} className="px-1 pt-0.5 pb-3 text-ink" style={{ fontSize: '12px', lineHeight: '1.3' }}>
+                    <td colSpan={7} className="px-1 pt-0.5 pb-3 text-ink font-sans" style={{ fontSize: '12px', lineHeight: '1.3' }}>
                       {gevi.description}
                     </td>
                     <td className="w-4"></td>

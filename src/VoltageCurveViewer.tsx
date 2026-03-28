@@ -188,9 +188,7 @@ export function VoltageCurveViewer({ voltageData, geviName }: VoltageCurveViewer
     return '#dc2626'; // red
   };
 
-  // Primary curve color: use dye color for chemigenetic, polarity color otherwise
-  const primaryColor = (config?.name && getWavelengthColor(config.name))
-    || (config?.polarity === 'positive' ? '#2563eb' : '#dc2626');
+  const primaryColor = '#1c1c19'; // ink
 
   // Get color based on polarity
   const getResponseColor = (deltaF: number) => {
@@ -318,7 +316,7 @@ export function VoltageCurveViewer({ voltageData, geviName }: VoltageCurveViewer
               cx={xScale(hoverData.voltage)}
               cy={yScale(hoverData.deltaF)}
               r="6"
-              fill={getResponseColor(hoverData.deltaF)}
+              fill={primaryColor}
               stroke="white"
               strokeWidth="2"
             />
