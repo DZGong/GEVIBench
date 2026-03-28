@@ -343,8 +343,7 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
       </div>
 
       {/* Spectrum Viewer */}
-      <div className="border rounded-lg p-4 md:p-6 mt-4 md:mt-6 bg-surface border-ink/10">
-        <h4 className="text-sm font-semibold mb-3 md:mb-4 text-ink/70">Emission Spectrum</h4>
+      <div className="mt-4 md:mt-6">
         <SpectrumViewer spectrumData={spectrumData} geviName={gevi.name} />
       </div>
 
