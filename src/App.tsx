@@ -329,13 +329,15 @@ function GEVIBenchApp() {
             </div>
 
             <div>
-              <h3 className={`text-lg font-semibold mb-2 ${colors.text}`}>{methodologyContent.dataSource.title}</h3>
-              <p className={`text-sm text-ink mb-3`}>{methodologyContent.dataSource.description}</p>
+              <h3 className={`text-lg font-semibold mb-2 ${colors.text}`}>{methodologyContent.scoreComponents.title}</h3>
+              <p className={`text-sm text-ink mb-3`}>{methodologyContent.scoreComponents.description}</p>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-                {methodologyContent.dataSource.extractedMetrics.map((item: { metric: string; description: string }, i: number) => (
+                {methodologyContent.scoreComponents.items.map((item: { name: string; weight: string; description: string }, i: number) => (
                   <div key={i} className="p-2 rounded bg-surface">
-                    <div className="text-sm font-medium text-ink">{item.metric}</div>
-                    <div className={`text-xs ${colors.textMuted}`}>{item.description}</div>
+                    <div className="text-sm font-medium text-ink">
+                      {item.name} <span className="text-klein">{item.weight}</span>
+                    </div>
+                    <div className={`text-xs ${colors.textMuted}`}>{highlightNumbers(item.description)}</div>
                   </div>
                 ))}
               </div>
@@ -421,20 +423,6 @@ function GEVIBenchApp() {
                 methodologyContent.scoring.popularityScoring.example,
                 methodologyContent.scoring.popularityScoring.formulaNote
               )}
-            </div>
-
-            <div>
-              <h3 className={`text-lg font-semibold mb-2 ${colors.text}`}>Score Components</h3>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-                {methodologyContent.metrics.items.map((item: { name: string; weight: string; description: string }, i: number) => (
-                  <div key={i} className="p-2 rounded bg-surface">
-                    <div className="text-sm font-medium text-ink">
-                      {item.name} <span className="text-klein">{item.weight}</span>
-                    </div>
-                    <div className={`text-xs ${colors.textMuted}`}>{highlightNumbers(item.description)}</div>
-                  </div>
-                ))}
-              </div>
             </div>
 
             {/* Bonus Points Section */}

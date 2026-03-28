@@ -1,15 +1,16 @@
 export const methodologyContent = {
   overview: "Each GEVI receives a composite score (0–100) from six metrics, all computed at runtime from published data. Logarithmic scaling is used where performance spans orders of magnitude.",
 
-  dataSource: {
-    title: "Data Source",
+  scoreComponents: {
+    title: "Score Components",
     description: "All metrics are extracted from peer-reviewed publications with imaging conditions recorded. Multiple measurements for the same GEVI are averaged.",
-    extractedMetrics: [
-      { metric: "ΔF/F per 100 mV", description: "Fluorescence change per 100 mV step" },
-      { metric: "Kinetics (τ_on / τ_off)", description: "Response time constants (ms)" },
-      { metric: "Brightness", description: "Pairwise ratios relative to EGFP" },
-      { metric: "ΔF/F per AP", description: "Fluorescence change per action potential" },
-      { metric: "Photostability", description: "Brightness remaining after illumination" }
+    items: [
+      { name: "Speed",         weight: "20%", description: "Log-scaled on τ_on + τ_off (ms)" },
+      { name: "Dynamic Range", weight: "20%", description: "|ΔF/F| per 100 mV, log-scaled" },
+      { name: "Brightness",    weight: "20%", description: "EC × QY vs EGFP, graph-resolved, log-scaled" },
+      { name: "Sensitivity",   weight: "15%", description: "ΔF/F per action potential, log-scaled" },
+      { name: "Photostability",weight: "15%", description: "Brightness remaining after illumination, power-law normalized" },
+      { name: "Popularity",    weight: "10%", description: "Research paper count, log-scaled" }
     ]
   },
 
@@ -125,18 +126,6 @@ export const methodologyContent = {
         { score: 15,  papers: 1,   example: "Recent" }
       ]
     }
-  },
-
-  metrics: {
-    title: "Score Components",
-    items: [
-      { name: "Speed",         weight: "20%", description: "Log-scaled on τ_on + τ_off" },
-      { name: "Dynamic Range", weight: "20%", description: "|ΔF/F| per 100 mV, log-scaled" },
-      { name: "Brightness",    weight: "20%", description: "EC × QY vs EGFP, graph-resolved, log-scaled" },
-      { name: "Sensitivity",   weight: "15%", description: "ΔF/F per AP, log-scaled" },
-      { name: "Photostability",weight: "15%", description: "Normalized to 100 mW/mm², 1 min" },
-      { name: "Popularity",    weight: "10%", description: "Research paper count, log-scaled" }
-    ]
   },
 
   transparency: {

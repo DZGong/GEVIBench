@@ -345,7 +345,7 @@ interface Props {
   onSelectGEVI: (gevi: GEVI) => void;
 }
 
-const W = 1400, H = 1000;
+const W = 2100, H = 1500;
 
 export function BrightnessNetworkPanel({ onSelectGEVI }: Props) {
   const gevis = useMemo(() => getAllGEVIs(), []);
@@ -409,7 +409,7 @@ export function BrightnessNetworkPanel({ onSelectGEVI }: Props) {
     setFitted(true);
   }, [finalNodes, fitted]);
 
-  const bg      = '#faf9f6';
+  const bg      = '#ffffff';
   const edgeClr = '#cbd5e1';
   const subTxt  = '#94a3b8';
   const tipBg   = '#ffffff';
@@ -417,7 +417,7 @@ export function BrightnessNetworkPanel({ onSelectGEVI }: Props) {
 
   return (
     <div
-      className="flex flex-col bg-surface text-ink"
+      className="flex flex-col bg-surface-lowest text-ink"
       style={{ height: 'calc(100vh - 61px)' }}
     >
       {/* Header bar */}

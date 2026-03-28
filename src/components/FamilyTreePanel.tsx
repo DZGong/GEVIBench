@@ -442,7 +442,7 @@ export function FamilyTreePanel({
   }
 
   return (
-    <div className="rounded-lg border p-4 bg-surface border-ink/10">
+    <div className="rounded-lg border p-4 bg-surface-lowest border-ink/10">
       <div className="flex items-center gap-2 mb-4">
         <button
           onClick={onCloseDetail}
