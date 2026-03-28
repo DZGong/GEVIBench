@@ -282,7 +282,7 @@ function GEVIBenchApp() {
     formulaNote?: string
   ) => (
     <div className="mt-4 p-3 rounded-lg bg-surface">
-      <h4 className={`text-md font-semibold mb-2 ${colors.text}`}>{title}</h4>
+      <h4 className={`text-md font-semibold mb-2 font-serif ${colors.text}`}>{title}</h4>
       <p className={`text-sm text-ink`}>{highlightNumbers(description)}</p>
       <div className="mt-2 p-2 rounded font-mono text-sm bg-surface-low text-klein">
         {formula}
@@ -317,19 +317,19 @@ function GEVIBenchApp() {
   const renderMethodologyTab = () => (
     <main className="max-w-7xl mx-auto px-4 py-6">
       <div className="max-w-4xl mx-auto">
-        <h2 className={`text-xl md:text-2xl font-bold mb-4 ${colors.text}`}>
+        <h2 className={`text-xl md:text-2xl font-bold mb-4 font-serif ${colors.text}`}>
           Scoring <span className="text-klein">Methodology</span>
         </h2>
 
-        <div className="rounded-lg p-4 md:p-6 bg-surface-lowest">
+        <div className="rounded-lg p-4 md:p-6 bg-surface-lowest font-sans">
           <div className="space-y-6">
             <div>
-              <h3 className={`text-lg font-semibold mb-2 ${colors.text}`}>Overview</h3>
+              <h3 className={`text-lg font-semibold mb-2 font-serif ${colors.text}`}>Overview</h3>
               <p className={`text-sm text-ink`}>{highlightNumbers(methodologyContent.overview)}</p>
             </div>
 
             <div>
-              <h3 className={`text-lg font-semibold mb-2 ${colors.text}`}>{methodologyContent.scoreComponents.title}</h3>
+              <h3 className={`text-lg font-semibold mb-2 font-serif ${colors.text}`}>{methodologyContent.scoreComponents.title}</h3>
               <p className={`text-sm text-ink mb-3`}>{methodologyContent.scoreComponents.description}</p>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
                 {methodologyContent.scoreComponents.items.map((item: { name: string; weight: string; description: string }, i: number) => (
@@ -344,7 +344,7 @@ function GEVIBenchApp() {
             </div>
 
             <div>
-              <h3 className={`text-lg font-semibold mb-2 ${colors.text}`}>Scoring Methodology</h3>
+              <h3 className={`text-lg font-semibold mb-2 font-serif ${colors.text}`}>Scoring Methodology</h3>
               <p className={`text-sm text-ink`}>{highlightNumbers(methodologyContent.scoring.approach)}</p>
               <ul className="list-disc list-inside text-sm space-y-1 mt-2">
                 {methodologyContent.scoring.steps.map((step: string, i: number) => (
@@ -427,7 +427,7 @@ function GEVIBenchApp() {
 
             {/* Bonus Points Section */}
             <div className="mt-6">
-              <h3 className={`text-lg font-semibold mb-2 ${colors.text}`}>{methodologyContent.bonusPoints.title}</h3>
+              <h3 className={`text-lg font-semibold mb-2 font-serif ${colors.text}`}>{methodologyContent.bonusPoints.title}</h3>
               <p className={`text-sm text-ink mb-3`}>{highlightNumbers(methodologyContent.bonusPoints.description)}</p>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                 {methodologyContent.bonusPoints.rules.map((rule: any, i: number) => (
@@ -446,7 +446,7 @@ function GEVIBenchApp() {
 
             {/* Weakness Penalty Section */}
             <div className="mt-6">
-              <h3 className={`text-lg font-semibold mb-2 ${colors.text}`}>{methodologyContent.weaknessPenalty.title}</h3>
+              <h3 className={`text-lg font-semibold mb-2 font-serif ${colors.text}`}>{methodologyContent.weaknessPenalty.title}</h3>
               <p className={`text-sm text-ink`}>{highlightNumbers(methodologyContent.weaknessPenalty.description)}</p>
             </div>
           </div>
