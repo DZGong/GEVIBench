@@ -46,6 +46,7 @@ function SourceLink({ source }: { source?: string }) {
 
 export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShowFamilyTree }: GEVIDetailProps) {
   const [expandedMetrics, setExpandedMetrics] = useState<Record<string, boolean>>({});
+  const [papersExpanded, setPapersExpanded] = useState(true);
   const toggleMetric = (key: string) => setExpandedMetrics(prev => ({ ...prev, [key]: !prev[key] }));
   useEffect(() => setExpandedMetrics({}), [gevi.id]);
 
@@ -356,10 +357,18 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
       {/* Research Papers with Representative Figures */}
       {gevi.researchPapers && gevi.researchPapers.length > 0 && (
         <div className="border rounded-lg p-4 md:p-6 mt-4 md:mt-6 bg-surface border-ink/10">
-          <h4 className="text-sm font-semibold mb-4 flex items-center gap-2 text-ink/70">
-            <BookOpen className="w-4 h-4" />Research Papers Using {gevi.name}
-          </h4>
-          <div className="space-y-4">
+          <button
+            onClick={() => setPapersExpanded(!papersExpanded)}
+            className="w-full text-sm font-semibold flex items-center gap-2 text-ink/70 hover:text-ink transition-colors"
+          >
+            <BookOpen className="w-4 h-4" />
+            Research Papers Using {gevi.name}
+            <span className="text-xs font-normal text-ink/40 ml-1">({gevi.researchPapers.length})</span>
+            <span className="ml-auto">
+              {papersExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+            </span>
+          </button>
+          {papersExpanded && <div className="space-y-4 mt-4">
             {gevi.researchPapers.map((paper: any, idx: number) => (
               <div key={idx} className="p-3 rounded-lg bg-surface-low">
                 <div className="flex gap-4">
@@ -392,7 +401,7 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
                 </div>
               </div>
             ))}
-          </div>
+          </div>}
         </div>
       )}
     </div>
