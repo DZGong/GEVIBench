@@ -145,7 +145,7 @@ export function SpectrumViewer({ spectrumData, geviName }: SpectrumViewerProps) 
 
   if (!config || !computedSpectrum) {
     return (
-      <div className="border rounded-lg p-4 bg-surface-low border-ink/10">
+      <div className="border rounded-lg p-4 bg-surface border-ink/10">
         <h4 className="text-sm font-semibold mb-2 text-ink/70">
           Excitation/Emission Spectrum
         </h4>
@@ -167,7 +167,7 @@ export function SpectrumViewer({ spectrumData, geviName }: SpectrumViewerProps) 
   const toY = (val: number) => plotBottom - val * (plotH - 5);
 
   return (
-    <div className="border rounded-lg p-4 bg-surface-low border-ink/10">
+    <div className="border rounded-lg p-4 bg-surface border-ink/10">
       <h4 className="text-sm font-semibold mb-2 text-ink/70">
         Excitation/Emission Spectrum
         {config.name && <span className="ml-2 font-normal">({config.name})</span>}
