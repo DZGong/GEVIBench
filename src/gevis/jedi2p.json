@@ -100,6 +100,14 @@
   },
   "researchPapers": [
     {
+      "title": "Sustained deep-tissue voltage recording using a fast indicator evolved for two-photon microscopy",
+      "authors": "Liu Z, Lu X, Villette V, et al.",
+      "journal": "Cell",
+      "year": 2022,
+      "sample": "HEK293 cells, in vitro; Mouse, visual cortex L2/3, in vivo; Drosophila, interneurons, ex vivo; Mouse, retina, ex vivo",
+      "url": "https://doi.org/10.1016/j.cell.2022.07.013"
+    },
+    {
       "title": "Scanless two-photon voltage imaging",
       "authors": "Sims RR, et al.",
       "journal": "Nature Communications",

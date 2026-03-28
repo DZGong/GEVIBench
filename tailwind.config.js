@@ -11,6 +11,11 @@ module.exports = {
 				serif: ['"Source Serif 4"', 'ui-serif', 'Georgia', 'Cambria', 'serif'],
 				mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
 			},
+			backgroundColor: {
+				'paper-light': '#FDFCFA',
+				'paper': '#F9F6F1',
+				'paper-dark': '#F0EDE8',
+			},
 			colors: {
 				primary: {
 					DEFAULT: '#2B5D3A',

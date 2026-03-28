@@ -6,7 +6,7 @@
   "tags": ["Ace opsin", "mNeon", "Green"],
   "paper": "Science 2022",
   "paperUrl": "https://doi.org/10.1126/science.abm8797",
-  "description": "Improved eFRET voltage indicator enabling low-power population voltage imaging in awake animals.",
+  "description": "Improved Ace2N-mNeon variant optimized for lower illumination power, making it more practical for population-level voltage imaging.",
   "parentId": "ace2n-mneon",
 
   "spectrum": {
@@ -83,20 +83,28 @@
 
   "researchPapers": [
     {
-      "title": "Prefrontal gamma oscillations engage dynamic cell type-specific configurations to support flexible behavior",
-      "authors": "Phensy AJ, et al.",
-      "journal": "bioRxiv",
-      "year": 2025,
-      "sample": "Mouse, medial prefrontal cortex, in vivo",
-      "url": "https://doi.org/10.1101/2024.03.08.584173"
+      "title": "Dual-polarity voltage imaging of the concurrent dynamics of multiple neuron types",
+      "authors": "Kannan M, Vasan G, Haziza S, Huang C, Chrapkiewicz R, Luo J, Cardin JA, Schnitzer MJ, Pieribone VA",
+      "journal": "Science",
+      "year": 2022,
+      "sample": "Mouse, visual cortex and hippocampus, in vivo; Drosophila, dopamine neurons, in vivo; HEK cells, in vitro",
+      "url": "https://doi.org/10.1126/science.abm8797"
     },
     {
       "title": "Imaging high-frequency voltage dynamics in multiple neuron classes of behaving mammals",
       "authors": "Haziza S, et al.",
       "journal": "Cell",
       "year": 2025,
-      "sample": "Mouse, cortex, in vivo",
+      "sample": "Mouse, visual cortex and hippocampus, in vivo",
       "url": "https://doi.org/10.1016/j.cell.2025.06.028"
+    },
+    {
+      "title": "Prefrontal gamma oscillations engage dynamic cell type-specific configurations to support flexible behavior",
+      "authors": "Phensy AJ, et al.",
+      "journal": "bioRxiv",
+      "year": 2025,
+      "sample": "Mouse, medial prefrontal cortex, in vivo",
+      "url": "https://doi.org/10.1101/2024.03.08.584173"
     }
   ]
 }

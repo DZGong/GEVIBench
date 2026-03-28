@@ -9,7 +9,7 @@
   ],
   "paper": "Nature Neuroscience 2014",
   "paperUrl": "https://doi.org/10.1038/nn.3709",
-  "description": "First-generation ASAP sensor inserting circularly permuted superfolder GFP into a voltage-sensing domain, enabling submillisecond kinetics and faithful tracking of action potentials up to 200 Hz.",
+  "description": "First ASAP sensor, establishing the voltage-sensing domain / circularly permuted GFP architecture for fast, negative-going fluorescence responses to neuronal depolarization.",
   "familyTreePath": [
     "GEVI",
     "VSD",
@@ -24,14 +24,14 @@
     {
       "on": 2.1,
       "off": 2.0,
-      "temperature": "33-34°C",
+      "temperature": "22°C",
       "source": "doi:10.1038/nn.3709"
     },
     {
-      "on": 2.1,
-      "off": 2.0,
-      "temperature": "33-34°C",
-      "source": "doi:10.1126/science.aab0810"
+      "on": 2.9,
+      "off": 2.4,
+      "temperature": "22°C",
+      "source": "doi:10.7554/eLife.25690"
     }
   ],
   "dynamicRangeData": [
@@ -95,7 +95,7 @@
       "brightnessRemaining": 28,
       "illumination": "100 mW/mm²",
       "duration": "1 min",
-      "source": "doi:10.1523/JNEUROSCI.3590-15.2016"
+      "source": "doi:10.1523/JNEUROSCI.3484-15.2016"
     },
     {
       "brightnessRemaining": 72,
@@ -108,6 +108,22 @@
     { "compatible": true, "source": "doi:10.7554/eLife.25690" }
   ],
   "researchPapers": [
+    {
+      "title": "High-fidelity optical reporting of neuronal electrical activity with an ultrafast fluorescent voltage sensor",
+      "authors": "St-Pierre F, Marshall JD, Yang Y, Gong Y, Schnitzer MJ, Lin MZ",
+      "journal": "Nature Neuroscience",
+      "year": 2014,
+      "sample": "HEK293A cells; rat hippocampal neurons, in vitro",
+      "url": "https://doi.org/10.1038/nn.3709"
+    },
+    {
+      "title": "A Bright and Fast Red Fluorescent Protein Voltage Indicator That Reports Neuronal Activity in Organotypic Brain Slices",
+      "authors": "Abdelfattah AS, Farhi SL, Bharioke A, Bharioke A, Boyden ES, Campbell RE",
+      "journal": "Journal of Neuroscience",
+      "year": 2016,
+      "sample": "HEK293 cells; rat hippocampal neurons, in vitro",
+      "url": "https://doi.org/10.1523/JNEUROSCI.3484-15.2016"
+    },
     {
       "title": "Biophysical Characterization of Genetically Encoded Voltage Sensor ASAP1: Dynamic Range Improvement",
       "authors": "Lee EEL, Bezanilla F",

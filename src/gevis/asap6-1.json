@@ -6,7 +6,7 @@
   "tags": ["cpGFP", "Green", "High dynamic range", "Positive"],
   "paper": "bioRxiv 2024",
   "paperUrl": "https://doi.org/10.1101/2024.06.21.599617",
-  "description": "Positively tuned ASAP4-family variant engineered from the ASAP4.1 template with faster mono-exponential onset kinetics and the largest per-AP fluorescence response among positive-going ASAP sensors.",
+  "description": "Positive-going ASAP4-family variant with fast, clean onset kinetics and the largest per-spike fluorescence increase among the ASAP sensor lineage.",
   "parentId": "asap4e",
 
   "spectrum": {

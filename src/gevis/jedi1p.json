@@ -12,7 +12,7 @@
   ],
   "paper": "Nature Communications 2023",
   "paperUrl": "https://doi.org/10.1038/s41467-023-41975-3",
-  "description": "One-photon optimized GEVI evolved from ASAP2s via high-throughput directed evolution, with improved brightness, kinetics, and sensitivity enabling pan-cortical widefield voltage imaging and gamma-frequency tracking in awake mice.",
+  "description": "One-photon optimized voltage indicator evolved from ASAP2s with improved brightness, kinetics, and sensitivity, well-suited for widefield cortical voltage imaging.",
   "parentId": "asap2s",
   "siblingId": "jedi2p",
   "addgene": {
@@ -479,6 +479,14 @@
   },
   "researchPapers": [
     {
+      "title": "Widefield imaging of rapid pan-cortical voltage dynamics with an indicator evolved for one-photon microscopy",
+      "authors": "Lu X, Wang Y, Liu Z, Gou Y, Jaeger D, St-Pierre F",
+      "journal": "Nature Communications",
+      "year": 2023,
+      "sample": "Mouse, cortex, in vivo; HEK293T cells, in vitro; dissociated hippocampal neurons",
+      "url": "https://doi.org/10.1038/s41467-023-41975-3"
+    },
+    {
       "title": "Cortex-wide voltage imaging in a sensory cued reaching task reveals fast subnetwork dynamics",
       "authors": "Wang Y, Kim SH, He EJ, Le Chatelier B, Choi H, Jaeger D",
       "journal": "bioRxiv",
@@ -501,6 +509,14 @@
       "year": 2025,
       "sample": "HEK293T cells, in vitro",
       "url": "https://doi.org/10.1021/acschemneuro.5c00670"
+    },
+    {
+      "title": "An integrated platform for simultaneous wide-field voltage/calcium imaging and fMRI reveals neuronal infraslow dynamics underlying functional connectivity",
+      "authors": "Pan WJ, Daley L, Watters H, Meyer-Baese L, Gopinath K, Jaeger D, Keilholz S",
+      "journal": "bioRxiv",
+      "year": 2026,
+      "sample": "Mouse, cortex, in vivo",
+      "url": "https://doi.org/10.64898/2026.01.26.701889"
     }
   ]
 }

@@ -11,13 +11,13 @@
   ],
   "paper": "Nature Methods 2023",
   "paperUrl": "https://doi.org/10.1038/s41592-022-01743-5",
-  "description": "Archon1 variant evolved through video-based pooled screening with improved signal-to-noise ratio for all-optical electrophysiology in cortical and hippocampal circuits.",
+  "description": "Archon1 variant evolved through video-based pooled screening with improved signal-to-noise ratio, optimized for all-optical electrophysiology.",
   "parentId": "archon1",
   "siblingId": "quasar6b",
 
   "spectrum": {
     "type": "rhodopsin",
-    "peakEx": 580,
+    "peakEx": 590,
     "peakEm": 715,
     "name": "QuasAr6a",
     "custom": {
@@ -89,8 +89,16 @@
 
   "researchPapers": [
     {
+      "title": "Video-based pooled screening yields improved far-red genetically encoded voltage indicators",
+      "authors": "Tian H, Davis HC, Wong-Campos JD, Park P, Fan LZ, Gmeiner B, Begum S, Werley CA, Borja GB, Upadhyay H, Shah H, Jacques J, Qi Y, Parot V, Deisseroth K, Cohen AE",
+      "journal": "Nature Methods",
+      "year": 2023,
+      "sample": "HEK293T cells, in vitro; Cultured rat hippocampal neurons, in vitro; Mouse cortex NDNF interneurons, in vivo; Mouse hippocampus PV interneurons, in vivo",
+      "url": "https://doi.org/10.1038/s41592-022-01743-5"
+    },
+    {
       "title": "Diminishing neuronal acidification by channelrhodopsins with low proton conduction",
-      "authors": "Hayward RF, et al.",
+      "authors": "Hayward RF, Brooks FP 3rd, Yang S, Gao S, Cohen AE",
       "journal": "eLife",
       "year": 2023,
       "sample": "Rat, cultured hippocampal neurons, in vitro; HEK293T cells, in vitro",
@@ -98,7 +106,7 @@
     },
     {
       "title": "Retrograde endocannabinoid signaling at inhibitory synapses in vivo",
-      "authors": "Dudok B, et al.",
+      "authors": "Dudok B, Fan LZ, Farrell JS, Malhotra S, Homidan J, Kim DK, Wenardy C, Ramakrishnan C, Li Y, Deisseroth K, Soltesz I",
       "journal": "Science",
       "year": 2024,
       "sample": "Mouse, hippocampus CA1, in vivo",
@@ -106,7 +114,7 @@
     },
     {
       "title": "Plasmonic Enhancement of Protein Function",
-      "authors": "Locarno M, et al.",
+      "authors": "Locarno M, Dong Q, Meng X, Glessi C, Hettema NM, Brandsma N, Blokhuizen S, Castaneda Garcia A, Ganapathy S, Post M, Schmidt T, van Roemburg L, Xu B, Cho CT, Laan L, Chien M, Brinks D",
       "journal": "bioRxiv",
       "year": 2024,
       "sample": "HEK293T cells, in vitro",

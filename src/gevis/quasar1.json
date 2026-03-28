@@ -10,7 +10,7 @@
   ],
   "paper": "Nature Methods 2014",
   "paperUrl": "https://doi.org/10.1038/nmeth.3000",
-  "description": "First-generation QuasAr with sub-millisecond response times enabling microsecond-precision optical recording of action potential waveforms in cultured neurons.",
+  "description": "First-generation QuasAr with extremely fast response times, enabling high-fidelity optical recording of action potential waveforms.",
 
   "parentId": "arch",
   "siblingId": "quasar2",
@@ -90,5 +90,16 @@
   "addgene": {
     "id": "51629",
     "url": "https://www.addgene.org/51629/"
-  }
+  },
+
+  "researchPapers": [
+    {
+      "title": "All-optical electrophysiology in mammalian neurons using engineered microbial rhodopsins",
+      "authors": "Hochbaum DR, Zhao Y, Farhi SL, Klapoetke NC, Werley CA, Kapoor V, Zou P, Kralj JM, Maclaurin D, Smedemark-Margulies N, Saulnier JL, Boulting GL, Straub C, Cho YK, Melkonian M, Wong GKS, Harrison DJ, Murthy VN, Sabatini BL, Boyden ES, Campbell RE, Cohen AE",
+      "journal": "Nature Methods",
+      "year": 2014,
+      "sample": "HEK293 cells, cultured rat hippocampal neurons, in vitro",
+      "url": "https://doi.org/10.1038/nmeth.3000"
+    }
+  ]
 }

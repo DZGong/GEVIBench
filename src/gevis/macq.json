@@ -10,7 +10,7 @@
   ],
   "paper": "Nature Communications 2014",
   "paperUrl": "https://doi.org/10.1038/ncomms4674",
-  "description": "eFRET GEVI pairing the Leptosphaeria maculans (Mac) rhodopsin with mCitrine, the first demonstration of opsin-FP voltage sensing via FRET in intact brain tissue.",
+  "description": "Opsin-fluorescent protein FRET voltage indicator, the first of its kind to demonstrate voltage sensing in intact brain tissue.",
   "familyTreePath": [
     "GEVI",
     "Opsin",

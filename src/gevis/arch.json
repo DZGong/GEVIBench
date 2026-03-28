@@ -10,7 +10,7 @@
   ],
   "paper": "Nature Methods 2012",
   "paperUrl": "https://doi.org/10.1038/nmeth.1782",
-  "description": "First opsin-based GEVI to demonstrate direct optical recording of action potentials in mammalian neurons, with sub-millisecond response times but very low quantum yield (~0.01%).",
+  "description": "The first archaerhodopsin-based voltage indicator, establishing that microbial opsins can optically report membrane potential, though with extremely dim baseline fluorescence.",
 
   "familyTreePath": ["GEVI", "Opsin", "Opsin-Fluorescent", "arch"],
 

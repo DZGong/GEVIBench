@@ -12,7 +12,7 @@
   ],
   "paper": "Advanced Biology 2021",
   "paperUrl": "https://doi.org/10.1002/adbi.202100842",
-  "description": "First fully autonomous bioluminescent voltage indicator based on a Ciona VSD fused to bacterial luciferase eluxAB and YPet, requiring no exogenous luciferin for long-term voltage imaging in freely moving animals.",
+  "description": "First fully autonomous bioluminescent voltage indicator, generating its own light without any external illumination by pairing a voltage-sensing domain with a self-sufficient luciferase enzyme.",
   "parentId": "vsfp2",
   "spectrum": {
     "type": "fret",

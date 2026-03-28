@@ -11,13 +11,13 @@
   ],
   "paper": "Nature Methods 2023",
   "paperUrl": "https://doi.org/10.1038/s41592-022-01743-5",
-  "description": "Fast-kinetics Archon1 variant evolved through video-based pooled screening, optimized for resolving submillisecond dynamics in fast-spiking neurons such as parvalbumin interneurons.",
+  "description": "Fast-kinetics Archon1 variant evolved through video-based pooled screening, optimized for resolving rapid voltage dynamics in fast-spiking neuron types.",
   "parentId": "archon1",
   "siblingId": "quasar6",
 
   "spectrum": {
     "type": "rhodopsin",
-    "peakEx": 580,
+    "peakEx": 590,
     "peakEm": 715,
     "name": "QuasAr6b",
     "custom": {
@@ -67,9 +67,9 @@
 
   "sensitivityData": [
     {
-      "deltaF": 15,
+      "deltaF": 27,
       "source": "doi:10.1038/s41592-022-01743-5",
-      "note": "Per-spike ΔF/F from high-throughput Optopatch assay in cultured rat hippocampal neurons at room temperature, highest virus titer, n=596 cells. From Extended Data Fig. 5c"
+      "note": "Fractional voltage sensitivity from -70 to +20 mV in cultured rat hippocampal neurons, mean ± S.D. = 27 ± 3%, from Fig. 3c"
     }
   ],
 
@@ -89,12 +89,20 @@
 
   "researchPapers": [
     {
+      "title": "Video-based pooled screening yields improved far-red genetically encoded voltage indicators",
+      "authors": "Tian H, Davis HC, Wong-Campos JD, Park P, Fan LZ, Gmeiner B, Begum S, Werley CA, Borja GB, Upadhyay H, Shah H, Jacques J, Qi Y, Parot V, Deisseroth K, Cohen AE",
+      "journal": "Nature Methods",
+      "year": 2023,
+      "sample": "HEK293T cells, in vitro; Cultured rat hippocampal neurons, in vitro; Mouse cortex NDNF interneurons, in vivo; Mouse hippocampus PV interneurons, in vivo",
+      "url": "https://doi.org/10.1038/s41592-022-01743-5"
+    },
+    {
       "title": "All-optical electrophysiology reveals behavior-dependent dynamics of excitation and inhibition in the hippocampus",
-      "authors": "Yang Q, et al.",
-      "journal": "bioRxiv",
-      "year": 2025,
+      "authors": "Yang Q, Baror-Sebban S, Kipper R, London M, Adam Y",
+      "journal": "Neuron",
+      "year": 2026,
       "sample": "Mouse, hippocampus CA1 PV interneurons, in vivo",
-      "url": "https://doi.org/10.1101/2025.03.20.644347"
+      "url": "https://doi.org/10.1016/j.neuron.2025.12.040"
     }
   ]
 }

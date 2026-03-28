@@ -10,7 +10,7 @@
   ],
   "paper": "PLoS ONE 2008",
   "paperUrl": "https://doi.org/10.1371/journal.pone.0002514",
-  "description": "FRET-based voltage sensor using the wild-type Ci-VSP voltage-sensing domain with Cerulean and Citrine fluorescent proteins, the first VSFP variant to achieve reliable in vivo cortical voltage imaging in transgenic mice.",
+  "description": "FRET-based voltage indicator and the first VSFP variant to achieve reliable in vivo cortical voltage imaging in transgenic mice.",
   "parentId": "vsfp2",
   "spectrum": {
     "type": "fret",

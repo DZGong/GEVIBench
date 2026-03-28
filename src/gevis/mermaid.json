@@ -11,7 +11,7 @@
   ],
   "paper": "Nature Methods 2008",
   "paperUrl": "https://doi.org/10.1038/nmeth.1235",
-  "description": "FRET-based voltage indicator pairing the Ci-VSP voltage-sensing domain with novel coral-derived mUKG donor and mKOk acceptor fluorescent proteins, enabling ratiometric voltage imaging in excitable cells.",
+  "description": "FRET-based voltage indicator using a voltage-sensing domain paired with coral-derived fluorescent proteins for ratiometric voltage imaging in excitable cells.",
   "familyTreePath": [
     "GEVI",
     "VSD",

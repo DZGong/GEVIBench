@@ -6,7 +6,7 @@
   "tags": ["cpGFP", "Green", "High dynamic range", "Positive", "Two-photon"],
   "paper": "bioRxiv 2024",
   "paperUrl": "https://doi.org/10.1101/2024.06.21.599617",
-  "description": "Brightness-optimized sibling of ASAP6.1 derived from the ASAP4b template, operating in a brighter fluorescence range with sufficient dynamic range and SNR for reliable spike detection under both one-photon and two-photon microscopy.",
+  "description": "Brightness-optimized sibling of ASAP6.1, offering a brighter baseline with reliable spike detection under both one-photon and two-photon microscopy.",
   "parentId": "asap4b",
 
   "spectrum": {

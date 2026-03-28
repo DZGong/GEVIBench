@@ -12,7 +12,7 @@
   ],
   "paper": "Science Advances 2025",
   "paperUrl": "https://doi.org/10.1126/sciadv.ads1807",
-  "description": "Positive-going chemigenetic eFRET indicator derived from an Ace2 rhodopsin triple mutant with PRIME-mediated dye conjugation, achieving high voltage sensitivity and superior photostability for simultaneous dual-polarity voltage imaging in pancreatic islets.",
+  "description": "Positive-going chemigenetic voltage indicator using synthetic dye conjugation for high voltage sensitivity and superior photostability, enabling dual-polarity voltage imaging alongside its sibling HVI.",
 
   "parentId": "hvi",
 

@@ -552,5 +552,55 @@
   "addgene": {
     "id": "115554",
     "url": "https://www.addgene.org/115554/"
-  }
+  },
+  "researchPapers": [
+    {
+      "title": "Fast, in vivo voltage imaging using a red fluorescent indicator",
+      "authors": "Kannan M, Vasan G, Huang C, Haziza S, Li JZ, Inan H, Schnitzer MJ, Pieribone VA",
+      "journal": "Nature Methods",
+      "year": 2018,
+      "sample": "HEK cells, cultured neurons, mouse cortex and hippocampus in vivo, Drosophila in vivo",
+      "url": "https://doi.org/10.1038/s41592-018-0188-7"
+    },
+    {
+      "title": "A high-speed, bright, red fluorescent voltage sensor to detect neural activity",
+      "authors": "Beck C, Gong Y",
+      "journal": "Scientific Reports",
+      "year": 2019,
+      "sample": "HEK293T cells, cultured neurons",
+      "url": "https://doi.org/10.1038/s41598-019-52370-8"
+    },
+    {
+      "title": "Screening and Cellular Characterization of Genetically Encoded Voltage Indicators Based on Near-Infrared Fluorescent Proteins",
+      "authors": "Monakhov MV, Matlashov ME, Colavita M, Song C, Shcherbakova DM, Antic SD, Verkhusha VV, Knopfel T",
+      "journal": "ACS Chemical Neuroscience",
+      "year": 2020,
+      "sample": "HEK cells, cultured neurons",
+      "url": "https://doi.org/10.1021/acschemneuro.0c00046"
+    },
+    {
+      "title": "A far-red hybrid voltage indicator enabled by bioorthogonal engineering of rhodopsin on live neurons",
+      "authors": "Liu S, Lin C, Xu Y, Luo H, Peng L, Zeng X, Zheng H, Chen PR, Zou P",
+      "journal": "Nature Chemistry",
+      "year": 2021,
+      "sample": "Rat hippocampal neurons, cultured",
+      "url": "https://doi.org/10.1038/s41557-021-00641-1"
+    },
+    {
+      "title": "Dual-polarity voltage imaging of the concurrent dynamics of multiple neuron types",
+      "authors": "Kannan M, Vasan G, Haziza S, Huang C, Chrapkiewicz R, Luo J, Cardin JA, Schnitzer MJ, Pieribone VA",
+      "journal": "Science",
+      "year": 2022,
+      "sample": "Mouse visual cortex and hippocampus in vivo, Drosophila in vivo",
+      "url": "https://doi.org/10.1126/science.abm8797"
+    },
+    {
+      "title": "Sensitivity optimization of a rhodopsin-based fluorescent voltage indicator",
+      "authors": "Abdelfattah AS, et al.",
+      "journal": "Neuron",
+      "year": 2023,
+      "sample": "HEK293 cells, cultured neurons",
+      "url": "https://doi.org/10.1016/j.neuron.2023.03.009"
+    }
+  ]
 }

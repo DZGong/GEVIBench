@@ -16,7 +16,7 @@ export function SearchFilters({
         placeholder="Search sensors..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        className="w-full pl-10 pr-8 py-2 text-base border rounded-md focus:outline-none focus:border-blue-900 bg-paper border-gray-300 text-gray-900"
+        className="w-full pl-10 pr-8 py-2 text-base border rounded-md focus:outline-none focus:border-blue-900 bg-paper-light border-gray-300 text-gray-900"
       />
       {searchTerm && (
         <button

@@ -10,7 +10,7 @@
   ],
   "paper": "Scientific Reports 2016",
   "paperUrl": "https://doi.org/10.1038/srep23865",
-  "description": "GEVI utilizing a voltage-sensing domain from a proton channel (Hv) of the Chinese Liver Fluke Clonorchis sinensis fused to Super Ecliptic pHluorin A227D, capable of optically reporting membrane potential, intracellular pH, and mapping gap junctions.",
+  "description": "Voltage indicator based on a proton channel voltage-sensing domain, uniquely capable of reporting membrane potential, intracellular pH, and gap junction connectivity in a single construct.",
   "familyTreePath": [
     "GEVI",
     "VSD",

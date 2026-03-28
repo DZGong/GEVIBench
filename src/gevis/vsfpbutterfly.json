@@ -12,7 +12,7 @@
   ],
   "paper": "J. Neurophysiol. 2012",
   "paperUrl": "https://doi.org/10.1152/jn.00452.2012",
-  "description": "FRET-based GEVI with a novel 'Butterfly' topology where the voltage-sensing domain is sandwiched between the mCitrine donor and mKate2 acceptor, enabling ratiometric voltage imaging of cortical population activity in awake behaving mice.",
+  "description": "FRET-based voltage indicator with a novel 'Butterfly' topology sandwiching the voltage-sensing domain between two fluorescent proteins, enabling ratiometric population voltage imaging.",
   "parentId": "vsfp2",
   "spectrum": {
     "type": "fret",

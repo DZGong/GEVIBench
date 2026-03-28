@@ -6,7 +6,7 @@
   "tags": ["Ci-VSP", "NIR FP", "FRET", "Biliverdin"],
   "paper": "ACS Chemical Neuroscience 2020",
   "paperUrl": "https://dx.doi.org/10.1021/acschemneuro.0c00046",
-  "description": "Near-infrared VSFP-Butterfly variant replacing CFP/YFP FRET pair with bacterial phytochrome-derived miRFP670/miRFP720, enabling spectrally orthogonal voltage imaging with blue-light optogenetics and simultaneous calcium imaging with green indicators.",
+  "description": "Near-infrared VSFP-Butterfly variant using bacterial phytochrome-derived fluorescent proteins for FRET-based voltage imaging, enabling spectral compatibility with green calcium indicators and blue-light optogenetics.",
   "parentId": "vsfpbutterfly",
   "spectrum": {
     "type": "nir",
@@ -49,6 +49,10 @@
     {
       "deltaF": 6,
       "source": "doi:10.1021/acschemneuro.0c00046"
+    },
+    {
+      "deltaF": 0.34,
+      "source": "doi:10.1117/1.NPh.11.2.024201"
     }
   ],
   "brightnessData": [
@@ -82,8 +86,16 @@
   },
   "researchPapers": [
     {
+      "title": "Screening and Cellular Characterization of Genetically Encoded Voltage Indicators Based on Near-Infrared Fluorescent Proteins",
+      "authors": "Monakhov MV, Matlashov ME, Colavita M, Song C, Shcherbakova DM, Antic SD, Verkhusha VV, Knöpfel T",
+      "journal": "ACS Chemical Neuroscience",
+      "year": 2020,
+      "sample": "HEK293 cells and mouse cortical/hippocampal neurons, in vitro",
+      "url": "https://doi.org/10.1021/acschemneuro.0c00046"
+    },
+    {
       "title": "Characterization of two near-infrared genetically encoded voltage indicators",
-      "authors": "Song C, et al.",
+      "authors": "Song C, Matlashov ME, Shcherbakova DM, et al.",
       "journal": "Neurophotonics",
       "year": 2024,
       "sample": "Mouse, hippocampal CA3 slices, in vitro",

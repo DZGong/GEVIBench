@@ -201,8 +201,8 @@ function GEVIBenchApp() {
         <>
           {/* Main Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-            {/* GEVI List */}
-            <div className={`${selectedGEVI && filteredGEVIs.length > 0 ? 'col-span-1' : 'col-span-3'}`}>
+            {/* GEVI List — hidden on narrow screens when detail is open */}
+            <div className={`${selectedGEVI && filteredGEVIs.length > 0 ? 'hidden md:block col-span-1' : 'col-span-3'}`}>
               <GEVIList
                 gevis={filteredGEVIs}
                 selectedGEVI={selectedGEVI}
@@ -215,31 +215,19 @@ function GEVIBenchApp() {
               />
             </div>
 
-            {/* Detail Panel - only rendered when there are results (prevents narrow wrapping with 0 results) */}
-            {filteredGEVIs.length > 0 && (
-            <div className={`col-span-1 ${mobileView === 'list' ? 'sm:col-span-2' : 'col-span-1 md:col-span-2'}`}>
-              {selectedGEVI && mobileView === 'detail' && (
-                <>
-                  {mobileView === 'detail' && (
-                    <button
-                      onClick={() => setMobileView('list')}
-                      className={`sm:hidden mb-3 text-sm flex items-center gap-1 ${colors.accent}`}
-                    >
-                      ← Back to list
-                    </button>
-                  )}
-                  <GEVIDetail
-                    gevi={selectedGEVI}
-                    onAddToCompare={addToCompare}
-                    compareGEVIs={compareGEVIs}
-                    onClose={handleLogoClick}
-                    onShowFamilyTree={() => {
-                      setActiveTab('database');
-                      setShowFamilyTree(true);
-                    }}
-                  />
-                </>
-              )}
+            {/* Detail Panel */}
+            {filteredGEVIs.length > 0 && selectedGEVI && (
+            <div className="col-span-1 md:col-span-2">
+              <GEVIDetail
+                gevi={selectedGEVI}
+                onAddToCompare={addToCompare}
+                compareGEVIs={compareGEVIs}
+                onClose={handleLogoClick}
+                onShowFamilyTree={() => {
+                  setActiveTab('database');
+                  setShowFamilyTree(true);
+                }}
+              />
             </div>
             )}
           </div>
@@ -496,7 +484,7 @@ function GEVIBenchApp() {
       )}
 
       {/* Footer */}
-      <footer className="mt-auto py-4 border-t bg-gray-50 border-gray-200">
+      <footer className="mt-auto py-4 border-t bg-paper-dark border-gray-200">
         <div className="max-w-7xl mx-auto px-4 flex items-center justify-center gap-4">
           <p className="text-sm text-gray-500">
             © 2026 GEVIBench. Data sourced from published studies.

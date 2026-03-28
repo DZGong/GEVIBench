@@ -6,7 +6,7 @@
   "tags": ["Ace opsin", "Cy3", "PRIME", "Negative-going"],
   "paper": "Nature Chemistry 2021",
   "paperUrl": "https://doi.org/10.1038/s41557-021-00641-1",
-  "description": "Far-red hybrid voltage indicator using bioorthogonal PRIME-IEDDA labeling to site-specifically conjugate organic fluorophores to an Ace2 rhodopsin mutant, achieving −39% ΔF/F₀ per 100 mV with Cy3 and enabling multiplexed all-optical electrophysiology with the far-red Cy5 variant.",
+  "description": "Chemigenetic voltage indicator that site-specifically conjugates synthetic dyes to an Ace2 rhodopsin, enabling far-red voltage imaging and spectral multiplexing for all-optical electrophysiology.",
 
   "familyTreePath": [
     "GEVI",

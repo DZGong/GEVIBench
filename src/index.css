@@ -25,6 +25,10 @@
 
 
 
+.bg-paper-light {
+  background-color: #FDFCFA;
+}
+
 .bg-paper {
   background-color: #F9F6F1;
 }

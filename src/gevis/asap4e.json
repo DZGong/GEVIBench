@@ -6,7 +6,7 @@
   "tags": ["cpGFP", "Green", "High speed", "Positive", "Two-photon"],
   "paper": "Nature Methods 2023",
   "paperUrl": "https://doi.org/10.1038/s41592-023-01913-z",
-  "description": "Speed-optimized ASAP4 variant that flips the classical ASAP polarity to positive-going, delivering fast kinetics and a massive fluorescence increase for photostable recordings in behaving animals.",
+  "description": "Speed-optimized ASAP4 variant that inverts the classical ASAP polarity to positive-going, delivering fast kinetics and a large fluorescence increase per action potential.",
   "parentId": "asap3",
   "siblingId": "asap4b",
 
@@ -36,10 +36,18 @@
 
   "kinetics": [
     {
+      "on": 3.93,
+      "off": 8.40,
+      "temperature": "22°C",
+      "source": "doi:10.1038/s41592-023-01913-z",
+      "note": "Bi-exponential fast component; τ_on 14% of amplitude, τ_off 20.6% of amplitude. Supplementary Table 1"
+    },
+    {
       "on": 1.49,
       "off": 3.66,
-      "temperature": "25°C",
-      "source": "doi:10.1038/s41592-023-01913-z"
+      "temperature": "37°C",
+      "source": "doi:10.1038/s41592-023-01913-z",
+      "note": "Bi-exponential fast component; τ_on 14.5% of amplitude, τ_off 68.6% of amplitude. Supplementary Table 1"
     }
   ],
 

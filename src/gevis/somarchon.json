@@ -12,7 +12,7 @@
   ],
   "paper": "Nature 2019",
   "paperUrl": "https://doi.org/10.1038/s41586-019-1641-1",
-  "description": "Soma-targeted Archon1 variant enabling routine population voltage imaging of ~13 neurons simultaneously in cortex, hippocampus, and striatum of awake behaving mice with conventional one-photon microscopy.",
+  "description": "Soma-targeted Archon1 variant designed for population voltage imaging, restricting fluorescence to cell bodies to enable simultaneous recording of many neurons with conventional one-photon microscopy.",
   "parentId": "archon1",
 
   "spectrum": {
@@ -27,8 +27,8 @@
     "polarity": "positive",
     "name": "SomArchon",
     "custom": {
-      "voltage": [-100, -60, -20, 0, 20, 60],
-      "deltaF":  [-9, 3, 15, 21, 29, 40]
+      "voltage": [-100, -70, -60, -20, 0, 20, 60],
+      "deltaF":  [-9, 0, 3, 15, 21, 29, 40]
     }
   },
 
@@ -111,6 +111,14 @@
   },
 
   "researchPapers": [
+    {
+      "title": "Population imaging of neural activity in awake behaving mice",
+      "authors": "Piatkevich KD, Bensussen S, Tseng HA, Shroff SN, Lopez-Huerta VG, Park D, Jung EE, Shemesh OA, Straub C, Gritton HJ, Romano MF, Costa E, Sabatini BL, Fu Z, Boyden ES, Han X",
+      "journal": "Nature",
+      "year": 2019,
+      "sample": "Mouse, cortex, hippocampus CA1, and striatum, in vivo awake head-fixed",
+      "url": "https://doi.org/10.1038/s41586-019-1641-1"
+    },
     {
       "title": "All-optical electrophysiology reveals the role of lateral inhibition in sensory processing in cortical layer 1",
       "authors": "Fan LZ, Kheifets S, Bohm UL, Wu H, Piatkevich KD, Xie ME, Parot V, Ha Y, Evans KE, Boyden ES, Takesian AE, Cohen AE",

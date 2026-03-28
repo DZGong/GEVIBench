@@ -11,12 +11,12 @@
   ],
   "paper": "Nature 2019",
   "paperUrl": "https://doi.org/10.1038/s41586-019-1166-7",
-  "description": "Photoactivated QuasAr3 variant enabling simultaneous voltage imaging of multiple neurons in hippocampus of behaving mice.",
+  "description": "Photoactivatable QuasAr3 variant that can be selectively activated to enable simultaneous voltage imaging of multiple neurons.",
   "parentId": "quasar2",
 
   "spectrum": {
     "type": "rhodopsin",
-    "peakEx": 580,
+    "peakEx": 590,
     "peakEm": 715,
     "name": "paQuasAr3",
     "custom": {
@@ -33,8 +33,8 @@
     "polarity": "positive",
     "name": "paQuasAr3",
     "custom": {
-      "voltage": [-75, -60, -40, -20, 0, 20, 40, 60, 75],
-      "deltaF": [-2, 4, 12, 20, 28, 36, 44, 52, 58]
+      "voltage": [-75, -50, -25, 0, 25, 50, 75],
+      "deltaF": [-2, 8, 24, 38, 51, 61, 69]
     }
   },
 
@@ -75,10 +75,18 @@
   "photostabilityData": [
     {
       "brightnessRemaining": 50,
-      "illumination": "12 W/mm²",
+      "illumination": "12000 mW/mm²",
       "duration": "10 min",
       "source": "doi:10.1038/s41586-019-1166-7",
       "note": "Reporter expression recovered within 1 week"
+    }
+  ],
+
+  "subthresholdData": [
+    {
+      "slope": 0.4,
+      "source": "doi:10.1038/s41586-019-1166-7",
+      "note": "0.4%/mV derived from 40 +/- 1.7% per 100 mV voltage sensitivity measured in acute brain slices (Fig. 1g). SNR = 0.93 +/- 0.07 per mV in 1 kHz bandwidth."
     }
   ],
 
@@ -97,6 +105,14 @@
   },
 
   "researchPapers": [
+    {
+      "title": "Voltage imaging and optogenetics reveal behaviour-dependent changes in hippocampal dynamics",
+      "authors": "Adam Y, Kim JJ, Lou S, Zhao Y, Xie ME, Brinks D, Wu H, Mostajo-Radji MA, Kheifets S, Parot V, Chettih S, Williams KJ, Gmeiner B, Farhi SL, Madisen L, Buchanan EK, Kinsella I, Zhou D, Paninski L, Harvey CD, Zeng H, Arlotta P, Campbell RE, Cohen AE",
+      "journal": "Nature",
+      "year": 2019,
+      "sample": "Mouse, hippocampus CA1 and olfactory bulb, in vivo (awake behaving); HEK293T cells and acute brain slices",
+      "url": "https://doi.org/10.1038/s41586-019-1166-7"
+    },
     {
       "title": "All-optical electrophysiology reveals the role of lateral inhibition in sensory processing in cortical layer 1",
       "authors": "Fan LZ, et al.",

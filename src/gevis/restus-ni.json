@@ -12,7 +12,7 @@
   ],
   "paper": "ACS Chemical Neuroscience 2025",
   "paperUrl": "https://doi.org/10.1021/acschemneuro.5c00670",
-  "description": "Variant of rEstus with a left-shifted voltage sensitivity optimized for fluorescence lifetime imaging, enabling absolute membrane potential measurement in non-excitable and cancer cells.",
+  "description": "Variant of rEstus optimized for fluorescence lifetime imaging and absolute membrane potential measurement, particularly suited for non-excitable cells with highly negative resting potentials.",
 
   "parentId": "restus",
 

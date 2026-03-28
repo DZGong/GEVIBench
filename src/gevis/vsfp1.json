@@ -10,7 +10,7 @@
   ],
   "paper": "European Journal of Neuroscience 2001",
   "paperUrl": "https://doi.org/10.1046/j.0953-816x.2001.01617.x",
-  "description": "First genetically encoded voltage indicator using CFP-YFP FRET pair fused to the S4 voltage-sensing domain of Kv2.1 potassium channel, establishing the VSFP architecture for ratiometric optical voltage sensing.",
+  "description": "The first genetically encoded voltage indicator, establishing the VSFP architecture of pairing a voltage-sensing domain with a FRET fluorescent protein pair for ratiometric optical voltage sensing.",
   "familyTreePath": [
     "GEVI",
     "VSD",

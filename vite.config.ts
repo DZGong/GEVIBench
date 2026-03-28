@@ -10,11 +10,11 @@ export default defineConfig({
   },
   plugins: [
     react(),
-    sourceIdentifierPlugin({
-      enabled: !isProd,
+    ...(isProd ? [sourceIdentifierPlugin({
+      enabled: true,
       attributePrefix: 'data-matrix',
       includeProps: true,
-    })
+    })] : []),
   ],
   resolve: {
     alias: {

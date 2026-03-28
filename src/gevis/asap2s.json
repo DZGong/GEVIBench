@@ -10,7 +10,7 @@
   ],
   "paper": "eLife 2017",
   "paperUrl": "https://doi.org/10.7554/eLife.25690",
-  "description": "Higher-sensitivity ASAP1 variant with a charge-neutralizing mutation in the voltage-sensing domain, trading speed for larger responses to enable reliable single-trial spike detection under two-photon imaging.",
+  "description": "Higher-sensitivity ASAP1 variant that trades some speed for larger fluorescence responses, enabling reliable single-trial spike detection especially under two-photon imaging.",
   "parentId": "asap1",
   "addgene": {
     "id": "101274",
@@ -100,6 +100,14 @@
   ],
   "researchPapers": [
     {
+      "title": "Fast two-photon imaging of subcellular voltage dynamics in neuronal tissue with genetically encoded indicators",
+      "authors": "Chamberland S, Yang HH, et al.",
+      "journal": "eLife",
+      "year": 2017,
+      "sample": "HEK293A cells; rat hippocampal neurons; Drosophila L2 neurons; mouse hippocampal slice cultures, in vitro/in vivo",
+      "url": "https://doi.org/10.7554/eLife.25690"
+    },
+    {
       "title": "In Vitro Testing of Voltage Indicators: Archon1, ArcLightD, ASAP1, ASAP2s, ASAP3b, Bongwoori-Pos6, BeRST1, FlicR1, and Chi-VSFP-Butterfly",
       "authors": "Milosevic MM, et al.",
       "journal": "eNeuro",
@@ -170,6 +178,22 @@
       "year": 2021,
       "sample": "HEK293T cells; rat hippocampal neurons, in vitro",
       "url": "https://doi.org/10.1073/pnas.2020235118"
+    },
+    {
+      "title": "Sustained deep-tissue voltage recording using a fast indicator evolved for two-photon microscopy",
+      "authors": "Liu Z, Lu X, et al.",
+      "journal": "Cell",
+      "year": 2022,
+      "sample": "HEK293A cells; mouse hippocampal neurons, in vitro",
+      "url": "https://doi.org/10.1016/j.cell.2022.07.013"
+    },
+    {
+      "title": "Physiological features of parvalbumin-expressing GABAergic interneurons contributing to high-frequency oscillations in the cerebral cortex",
+      "authors": "Milicevic KD, et al.",
+      "journal": "Current Research in Neurobiology",
+      "year": 2023,
+      "sample": "Mouse, cortex; PV-ASAP2s transgenic brain slices, ex vivo",
+      "url": "https://doi.org/10.1016/j.crneur.2023.100121"
     }
   ],
   "spectrum": {

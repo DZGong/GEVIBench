@@ -10,7 +10,7 @@
   ],
   "paper": "PLoS ONE 2007",
   "paperUrl": "https://doi.org/10.1371/journal.pone.0000440",
-  "description": "Enhanced FRET-based voltage sensor using the isolated Ci-VSP voltage-sensing domain with an R217Q mutation to shift V\u2081/\u2082 near resting membrane potential, paired with Cerulean and Citrine fluorescent proteins for ratiometric voltage imaging in excitable cells.",
+  "description": "Improved FRET-based voltage indicator using a voltage-sensing domain tuned to operate near resting membrane potential, enabling ratiometric voltage imaging in excitable cells.",
   "parentId": "vsfp1",
   "spectrum": {
     "type": "fret",

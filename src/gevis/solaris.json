@@ -6,7 +6,7 @@
   "tags": ["Ace rhodopsin", "cpHaloTag", "Janelia Fluor", "Far-red"],
   "paper": "bioRxiv 2024",
   "paperUrl": "https://doi.org/10.1101/2024.02.02.578569",
-  "description": "Chemigenetic hybrid voltage indicator with a circularly permuted HaloTag inserted into the first extracellular loop of Ace rhodopsin, achieving more than two-fold higher sensitivity than Voltron2 across multiple Janelia Fluor dye conjugates.",
+  "description": "Chemigenetic voltage indicator with a novel topology that inserts a dye-binding tag into the rhodopsin itself, achieving substantially higher voltage sensitivity than previous Voltron-family sensors.",
 
   "parentId": "voltron",
 

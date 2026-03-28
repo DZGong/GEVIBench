@@ -11,7 +11,7 @@
   ],
   "paper": "ACS Chemical Neuroscience 2017",
   "paperUrl": "https://doi.org/10.1021/acschemneuro.6b00234",
-  "description": "Positive-going ArcLight variant created by directed evolution, with three mutations in super ecliptic pHluorin that invert signal polarity so fluorescence increases with depolarization.",
+  "description": "Positive-going ArcLight variant created by directed evolution, inverting the signal polarity so fluorescence increases rather than decreases during depolarization.",
   "parentId": "arclight",
 
   "spectrum": {

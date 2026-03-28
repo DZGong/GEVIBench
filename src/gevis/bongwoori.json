@@ -10,7 +10,7 @@
   ],
   "paper": "Journal of Neuroscience 2015",
   "paperUrl": "https://doi.org/10.1523/JNEUROSCI.3008-14.2015",
-  "description": "ArcLight-derived voltage indicator with combinatorial VSD mutations enabling optical resolution of action potentials firing at 60 Hz, using Super Ecliptic pHluorin as the fluorescent reporter.",
+  "description": "ArcLight-derived voltage indicator with an improved voltage-sensing domain that enables optical resolution of fast action potential trains.",
   "parentId": "arclight",
   "spectrum": {
     "type": "fp",

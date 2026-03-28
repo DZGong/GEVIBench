@@ -6,7 +6,7 @@
   "tags": ["Ace opsin", "mNeon", "Green", "Sub-millisecond"],
   "paper": "Science 2015",
   "paperUrl": "https://doi.org/10.1126/science.aab0810",
-  "description": "eFRET voltage indicator pairing the Ace2N opsin with mNeonGreen for sub-millisecond spike detection in awake behaving animals.",
+  "description": "Opsin-fluorescent protein FRET voltage indicator combining an Ace2 opsin with a bright green fluorescent protein, offering fast kinetics for reliable spike detection.",
 
   "familyTreePath": ["GEVI", "Opsin", "Opsin-FRET", "ace2n-mneon"],
 
@@ -38,7 +38,7 @@
     {
       "on": 0.36,
       "off": 0.42,
-      "temperature": "33-34°C",
+      "temperature": "22°C",
       "source": "doi:10.1126/science.aab0810"
     },
     {
@@ -124,6 +124,14 @@
   ],
 
   "researchPapers": [
+    {
+      "title": "High-speed recording of neural spikes in awake mice and flies with a fluorescent voltage sensor",
+      "authors": "Gong Y, et al.",
+      "journal": "Science",
+      "year": 2015,
+      "sample": "Rat hippocampal neurons, in vitro; mouse V1 cortex, in vivo; Drosophila olfactory neurons, in vivo",
+      "url": "https://doi.org/10.1126/science.aab0810"
+    },
     {
       "title": "Long-term optical brain imaging in live adult fruit flies",
       "authors": "Huang C, et al.",

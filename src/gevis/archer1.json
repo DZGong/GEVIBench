@@ -11,7 +11,7 @@
   ],
   "paper": "Nature Communications 2014",
   "paperUrl": "https://doi.org/10.1038/ncomms5894",
-  "description": "Archaerhodopsin-3 variant with enhanced baseline fluorescence and reduced photocurrents, enabling wavelength-specific dual functionality as a voltage sensor under red light and inhibitory actuator under green light.",
+  "description": "Archaerhodopsin variant designed to function as both a voltage indicator and a light-activated neuronal silencer, enabling combined optical readout and control in the same cell.",
   "parentId": "arch",
 
   "spectrum": {
@@ -90,12 +90,36 @@
 
   "researchPapers": [
     {
+      "title": "Archaerhodopsin variants with enhanced voltage-sensitive fluorescence in mammalian and Caenorhabditis elegans neurons",
+      "authors": "Flytzanis NC, Bedbrook CN, Chiu H, Engqvist MKM, Xiao C, Chan KY, Sternberg PW, Arnold FH, Gradinaru V",
+      "journal": "Nature Communications",
+      "year": 2014,
+      "sample": "Cultured rat hippocampal neurons, in vitro; C. elegans AWC-ON neurons, in vivo",
+      "url": "https://doi.org/10.1038/ncomms5894"
+    },
+    {
+      "title": "A robotic multidimensional directed evolution approach applied to fluorescent voltage reporters",
+      "authors": "Piatkevich KD, Jung EE, Straub C, Linghu C, Park D, Suk HJ, Hochbaum DR, Goodwin D, Pnevmatikakis E, Pak N, et al.",
+      "journal": "Nature Chemical Biology",
+      "year": 2018,
+      "sample": "HEK293T cells and cultured rat hippocampal neurons, in vitro",
+      "url": "https://doi.org/10.1038/s41589-018-0004-9"
+    },
+    {
       "title": "Comparative Evaluation of Genetically Encoded Voltage Indicators",
-      "authors": "Bando Y, et al.",
+      "authors": "Bando Y, Sakamoto M, Kim S, Ayzenshtat I, Yuste R",
       "journal": "Cell Reports",
       "year": 2019,
-      "sample": "Mouse cortical neurons, in vitro; Mouse visual cortex, in vivo",
+      "sample": "Mouse cortical neurons, in vitro (excluded from in vivo due to low brightness under LED/2P excitation)",
       "url": "https://doi.org/10.1016/j.celrep.2018.12.088"
+    },
+    {
+      "title": "Screening and Cellular Characterization of Genetically Encoded Voltage Indicators Based on Near-Infrared Fluorescent Proteins",
+      "authors": "Monakhov MV, Matlashov ME, Colavita M, Song C, Shcherbakova DM, Antic SD, Verkhusha VV, Knöpfel T",
+      "journal": "ACS Chemical Neuroscience",
+      "year": 2020,
+      "sample": "HEK293T cells and cultured rat hippocampal neurons, in vitro",
+      "url": "https://doi.org/10.1021/acschemneuro.0c00046"
     },
     {
       "title": "Rational Design of Far-Red Archaerhodopsin-3-Based Fluorescent Genetically Encoded Voltage Indicators: from Elucidation of the Fluorescence Mechanism in Archers to Novel Red-Shifted Variants",

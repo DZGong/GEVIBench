@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react';
 import { getGEVIColor } from '../utils';
 import type { SortConfig, SortField } from '../types';
@@ -124,9 +124,11 @@ function SortHeader({ symbol, desc, field, sortConfig, onSort, className = '' }:
     >
       <div className="flex items-center gap-0.5 justify-center" style={{ fontSize: '14px' }}>
         {symbol}
-        <span style={{ fontSize: '10px' }}>
-          {active ? (sortConfig.order === 'desc' ? '▼' : '▲') : '⇅'}
-        </span>
+        {active && (
+          <span style={{ fontSize: '10px' }}>
+            {sortConfig.order === 'desc' ? '▼' : '▲'}
+          </span>
+        )}
       </div>
       {desc && (
         <div
@@ -145,196 +147,188 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
   const cellBase = 'text-gray-700';
   const dimBase = 'text-gray-400';
   const isNarrow = useIsNarrow();
-  const [metricIdx, setMetricIdx] = useState(0);
-  const currentMetric = METRICS[metricIdx];
+  const [narrowIdx, setNarrowIdx] = useState(0); // 0 = Score, 1-6 = metrics
+  const NARROW_OPTIONS = [
+    { key: 'overall' as const, sortField: 'overall' as SortField, shortLabel: 'Score' },
+    ...METRICS.map(m => ({ key: m.key, sortField: m.sortField, shortLabel: m.shortLabel })),
+  ];
+  const currentNarrow = NARROW_OPTIONS[narrowIdx];
 
-  const rowCls = (gevi: any) =>
-    `cursor-pointer border-b transition-colors ${
+  const groupCls = (gevi: any) =>
+    `cursor-pointer border-b border-gray-100 transition-colors group ${
       selectedGEVI?.id === gevi.id
-        ? 'bg-blue-50'
-        : 'hover:bg-gray-50'
-    } border-gray-100`;
+        ? 'bg-paper-dark'
+        : '[&:hover]:bg-paper-dark'
+    }`;
 
   return (
-    <div className="border rounded-lg overflow-hidden sticky top-24 bg-paper border-gray-200">
+    <div className="border rounded-lg overflow-hidden sticky top-24 bg-paper-light border-gray-200">
       <div className="max-h-[70vh] overflow-y-auto overflow-x-auto">
         {gevis.length === 0 ? (
           <div className="p-8 text-center text-gray-400">
             <div className="text-2xl mb-2">🔍</div>
             <div className="text-sm font-medium">No sensors match</div>
           </div>
-        ) : compact ? (
-          /* Compact table — name + score only */
-          <table className="w-full text-sm">
-            <thead className="sticky top-0 z-10 bg-paper">
-              <tr className="border-b border-gray-200">
-                <th className={`px-2 py-1.5 text-left ${thBase}`} style={{ fontSize: '14px' }}>#</th>
-                <th className={`px-2 py-1.5 text-left ${thBase}`} style={{ fontSize: '14px' }}>Sensor</th>
-                <SortHeader symbol="Score" desc="" field="overall" sortConfig={sortConfig} onSort={onSortChange} />
-              </tr>
-            </thead>
-            <tbody>
-              {gevis.map((gevi: any, idx: number) => {
-                const geviColor = getGEVIColor(gevi);
-                return (
-                  <tr key={gevi.id} onClick={() => onSelect(gevi)} className={rowCls(gevi)}>
-                    <td className={`px-2 py-1.5 ${dimBase}`}>{idx + 1}</td>
-                    <td className="px-2 py-1.5">
-                      <span className="font-semibold" style={{ color: geviColor.color }}>{gevi.name}</span>
-                    </td>
-                    <td className="px-2 py-1.5 text-center font-bold text-blue-500">{gevi.overall ?? '—'}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        ) : isNarrow ? (
+        ) : (compact || isNarrow) ? (
           /* Narrow / mobile view — single swipeable metric column */
           <table className="w-full border-collapse" style={{ fontSize: '14px' }}>
-            <thead className="sticky top-0 z-10 bg-paper">
+            <thead className="sticky top-0 z-10 bg-paper-dark">
               <tr className="border-b border-gray-200">
                 <th className={`pl-2 pr-2 py-2 text-center ${thBase} w-12`} style={{ fontSize: '14px' }}>Rank</th>
                 <th className={`pl-1 pr-0 py-2 text-left ${thBase}`} style={{ fontSize: '14px', width: '1%', whiteSpace: 'nowrap' }}>Sensor ({gevis.length})</th>
                 <th className="px-1 py-2" style={{ minWidth: '80px' }}>
                   <div className="flex items-center justify-center gap-0.5">
                     <button
-                      onClick={() => setMetricIdx((metricIdx - 1 + METRICS.length) % METRICS.length)}
+                      onClick={() => setNarrowIdx((narrowIdx - 1 + NARROW_OPTIONS.length) % NARROW_OPTIONS.length)}
                       className="p-0.5 rounded hover:bg-gray-600/30 text-gray-500"
                     >
                       <ChevronLeft className="w-3.5 h-3.5" />
                     </button>
                     <button
-                      onClick={() => onSortChange(currentMetric.sortField)}
+                      onClick={() => onSortChange(currentNarrow.sortField)}
                       className={`text-center cursor-pointer select-none hover:text-blue-400 transition-colors whitespace-nowrap ${
-                        sortConfig.field === currentMetric.sortField ? 'text-blue-500 font-medium' : 'text-gray-500 font-medium'
+                        sortConfig.field === currentNarrow.sortField ? 'text-blue-500 font-medium' : 'text-gray-500 font-medium'
                       }`}
                     >
-                      <span style={{ fontSize: '14px' }}>{currentMetric.shortLabel}</span>
-                      <span style={{ fontSize: '10px' }} className="ml-0.5">
-                        {sortConfig.field === currentMetric.sortField ? (sortConfig.order === 'desc' ? '▼' : '▲') : '⇅'}
-                      </span>
+                      <span style={{ fontSize: '14px' }}>{currentNarrow.shortLabel}</span>
+                      {sortConfig.field === currentNarrow.sortField && (
+                        <span style={{ fontSize: '10px' }} className="ml-0.5">
+                          {sortConfig.order === 'desc' ? '▼' : '▲'}
+                        </span>
+                      )}
                     </button>
                     <button
-                      onClick={() => setMetricIdx((metricIdx + 1) % METRICS.length)}
+                      onClick={() => setNarrowIdx((narrowIdx + 1) % NARROW_OPTIONS.length)}
                       className="p-0.5 rounded hover:bg-gray-600/30 text-gray-500"
                     >
                       <ChevronRight className="w-3.5 h-3.5" />
                     </button>
                   </div>
                   <div className="flex justify-center gap-0.5 mt-0.5">
-                    {METRICS.map((_, i) => (
+                    {NARROW_OPTIONS.map((_, i) => (
                       <span
                         key={i}
-                        className={`inline-block w-1 h-1 rounded-full ${i === metricIdx ? 'bg-blue-500' : 'bg-gray-300'}`}
+                        className={`inline-block w-1 h-1 rounded-full ${i === narrowIdx ? 'bg-blue-500' : 'bg-gray-300'}`}
                       />
                     ))}
                   </div>
                 </th>
-                <SortHeader symbol="Score" desc="" field="overall" sortConfig={sortConfig} onSort={onSortChange} />
-                <th className={`px-1 py-2 text-center ${thBase}`} style={{ fontSize: '14px' }}>Link</th>
               </tr>
             </thead>
-            <tbody>
-              {gevis.map((gevi: any, idx: number) => {
-                const geviColor = getGEVIColor(gevi);
-                const hasVal = hasMetricValue(gevi, currentMetric.key);
-                return (
-                  <tr key={gevi.id} onClick={() => onSelect(gevi)} className={rowCls(gevi)}>
-                    <td className={`pl-2 pr-2 py-2.5 text-center w-12 ${dimBase}`}>{idx + 1}</td>
-                    <td className="pl-1 pr-0 py-2.5" style={{ width: '1%', whiteSpace: 'nowrap' }}>
+            {gevis.map((gevi: any, idx: number) => {
+              const geviColor = getGEVIColor(gevi);
+              const isScore = currentNarrow.key === 'overall';
+              const hasVal = isScore || hasMetricValue(gevi, currentNarrow.key as MetricKey);
+              return (
+                <tbody key={gevi.id} onClick={() => onSelect(gevi)} className={groupCls(gevi)}>
+                  <tr>
+                    <td className={`pl-2 pr-2 pt-3 pb-0 text-center w-12 tabular-nums ${dimBase}`} rowSpan={2} style={{ fontSize: '16px', verticalAlign: 'middle', ...(idx < 3 ? { color: '#D4AF37', fontWeight: 700 } : {}) }}>{idx + 1}</td>
+                    <td className="pl-1 pr-0 pt-3 pb-0" style={{ width: '1%', whiteSpace: 'nowrap' }}>
                       <span className="font-semibold" style={{ color: geviColor.color }}>{gevi.name}</span>
-                    </td>
-                    <td className={`px-1 py-2.5 text-center tabular-nums ${hasVal ? cellBase : dimBase}`} style={{ fontSize: '12px' }}>
-                      {getMetricValue(gevi, currentMetric.key, dimBase)}
-                    </td>
-                    <td className="px-1 py-2.5 text-center font-bold text-blue-500 tabular-nums">
-                      {gevi.overall ?? '—'}
-                    </td>
-                    <td className="px-1 py-2.5 text-center" style={{ fontSize: '12px' }}>
                       <a
                         href={gevi.paperUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={(e) => e.stopPropagation()}
-                        className="inline-flex items-center gap-0.5 whitespace-nowrap text-blue-900 hover:underline"
+                        className="inline-flex items-center gap-0.5 whitespace-nowrap text-blue-900 hover:underline ml-1.5"
                         title={gevi.paper}
+                        style={{ fontSize: '11px' }}
                       >
                         <ExternalLink className="w-3 h-3" />
                         {extractYear(gevi.paper)}
                       </a>
                     </td>
+                    {isScore ? (
+                      <td className="px-1 pt-3 pb-0 text-center font-bold text-blue-500 tabular-nums" style={{ fontSize: '16px' }}>
+                        {gevi.overall ?? '—'}
+                      </td>
+                    ) : (
+                      <td className={`px-1 pt-3 pb-0 text-center tabular-nums ${hasVal ? cellBase : dimBase}`} style={{ fontSize: '12px' }}>
+                        {getMetricValue(gevi, currentNarrow.key as MetricKey, dimBase)}
+                      </td>
+                    )}
                   </tr>
-                );
-              })}
-            </tbody>
+                  <tr>
+                    <td colSpan={2} className={`pl-1 pr-2 pt-0.5 pb-3 ${dimBase}`} style={{ fontSize: '11px', lineHeight: '1.3' }}>
+                      {gevi.description}
+                    </td>
+                  </tr>
+                </tbody>
+              );
+            })}
           </table>
         ) : (
           /* Full tabular view — wide screens */
           <table className="w-full border-collapse" style={{ fontSize: '14px' }}>
-            <thead className="sticky top-0 z-10 bg-paper">
+            <thead className="sticky top-0 z-10 bg-paper-dark">
               <tr className="border-b border-gray-200">
                 <th className={`pl-2 pr-4 py-2 text-center ${thBase} w-16`} style={{ fontSize: '14px' }}>Rank</th>
                 <th className={`px-1 py-2 text-left ${thBase}`} style={{ fontSize: '14px' }}>Sensor ({gevis.length})</th>
                 {METRICS.map(m => (
                   <SortHeader key={m.key} symbol={m.symbol} desc={m.desc} field={m.sortField} sortConfig={sortConfig} onSort={onSortChange} />
                 ))}
-                <th className="w-6"></th>
+                <th className="w-4"></th>
                 <SortHeader symbol="Score" desc="" field="overall" sortConfig={sortConfig} onSort={onSortChange} />
-                <th className={`px-1 py-2 text-center ${thBase}`} style={{ fontSize: '14px' }}>Link</th>
+                <th className="w-8"></th>
               </tr>
             </thead>
-            <tbody>
-              {gevis.map((gevi: any, idx: number) => {
-                const geviColor = getGEVIColor(gevi);
-                return (
-                  <tr key={gevi.id} onClick={() => onSelect(gevi)} className={rowCls(gevi)}>
-                    <td className={`pl-2 pr-4 py-2.5 text-center w-16 ${dimBase}`}>{idx + 1}</td>
-                    <td className="px-1 py-2.5">
+            {gevis.map((gevi: any, idx: number) => {
+              const geviColor = getGEVIColor(gevi);
+              return (
+                <tbody key={gevi.id} onClick={() => onSelect(gevi)} className={groupCls(gevi)}>
+                  <tr>
+                    <td className={`pl-2 pr-4 pt-3 pb-0 text-center w-16 tabular-nums ${dimBase}`} rowSpan={2} style={{ fontSize: '16px', verticalAlign: 'middle', ...(idx < 3 ? { color: '#D4AF37', fontWeight: 700 } : {}) }}>{idx + 1}</td>
+                    <td className="px-1 pt-3 pb-0">
                       <span className="font-semibold whitespace-nowrap" style={{ color: geviColor.color }}>{gevi.name}</span>
+                      <a
+                        href={gevi.paperUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="inline-flex items-center gap-1 whitespace-nowrap text-blue-900 hover:underline ml-2"
+                        title={gevi.paper}
+                        style={{ fontSize: '11px' }}
+                      >
+                        <ExternalLink className="w-3 h-3" />
+                        <span><span className="italic">{abbreviatePaper(gevi.paper).replace(/\s*\d{4}$/, '')}</span> {extractYear(gevi.paper)}</span>
+                      </a>
                     </td>
                     {METRICS.map(m => (
-                      <td key={m.key} className={`px-1 py-2.5 text-center tabular-nums ${hasMetricValue(gevi, m.key) ? cellBase : dimBase}`} style={{ fontSize: '12px' }}>
+                      <td key={m.key} className={`px-1 pt-3 pb-0 text-center tabular-nums ${hasMetricValue(gevi, m.key) ? cellBase : dimBase}`} style={{ fontSize: '12px' }}>
                         {getMetricValue(gevi, m.key, dimBase)}
                       </td>
                     ))}
-                    <td className="w-6"></td>
-                    <td className="px-1 py-2.5 text-center font-bold text-blue-500 tabular-nums">
+                    <td className="w-4"></td>
+                    <td className="px-2 pt-3 pb-0 text-center font-bold text-blue-500 tabular-nums" rowSpan={2} style={{ fontSize: '16px', verticalAlign: 'middle' }}>
                       {gevi.overall ?? '—'}
                     </td>
-                    <td className="px-1 py-2.5 text-right" style={{ fontSize: '12px' }}>
-                      <div className="flex items-center justify-end gap-1.5">
-                        <a
-                          href={gevi.paperUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onClick={(e) => e.stopPropagation()}
-                          className="flex items-center gap-1 whitespace-nowrap text-blue-900 hover:underline"
-                          title={gevi.paper}
-                        >
-                          <ExternalLink className="w-3 h-3" />
-                          {abbreviatePaper(gevi.paper)}
-                        </a>
-                        <button
-                          onClick={(e) => { e.stopPropagation(); onAddToCompare(gevi); }}
-                          disabled={!!compareGEVIs.find((g: any) => g.id === gevi.id) || compareGEVIs.length >= 5}
-                          className={`${
-                            compareGEVIs.find((g: any) => g.id === gevi.id)
-                              ? 'text-green-500'
-                              : 'text-gray-400 hover:text-green-600'
-                          }`}
-                          title="Add to compare"
-                        >
-                          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <line x1="12" y1="5" x2="12" y2="19"></line>
-                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                          </svg>
-                        </button>
-                      </div>
+                    <td className="px-1 pt-3 pb-0 text-center" rowSpan={2} style={{ verticalAlign: 'middle' }}>
+                      <button
+                        onClick={(e) => { e.stopPropagation(); onAddToCompare(gevi); }}
+                        disabled={!!compareGEVIs.find((g: any) => g.id === gevi.id) || compareGEVIs.length >= 5}
+                        className={`${
+                          compareGEVIs.find((g: any) => g.id === gevi.id)
+                            ? 'text-green-500'
+                            : 'text-gray-400 hover:text-green-600'
+                        }`}
+                        title="Add to compare"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <line x1="12" y1="5" x2="12" y2="19"></line>
+                          <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                      </button>
                     </td>
                   </tr>
-                );
-              })}
-            </tbody>
+                  <tr>
+                    <td colSpan={7} className={`px-1 pt-0.5 pb-3 ${dimBase}`} style={{ fontSize: '11px', lineHeight: '1.3' }}>
+                      {gevi.description}
+                    </td>
+                    <td className="w-4"></td>
+                  </tr>
+                </tbody>
+              );
+            })}
           </table>
         )}
       </div>

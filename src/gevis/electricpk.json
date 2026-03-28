@@ -10,7 +10,7 @@
   ],
   "paper": "PLoS ONE 2012",
   "paperUrl": "https://doi.org/10.1371/journal.pone.0043454",
-  "description": "First CiVSP-based voltage probe using circularly permuted EGFP, achieving submillisecond-scale on-kinetics and a linear fluorescence-voltage relationship suitable for resolving action potentials.",
+  "description": "Early voltage indicator using a circularly permuted GFP inserted into a voltage-sensing domain, producing fast onset kinetics and a linear fluorescence-voltage relationship.",
   "familyTreePath": [
     "GEVI",
     "VSD",

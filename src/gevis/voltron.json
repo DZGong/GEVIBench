@@ -6,7 +6,7 @@
   "tags": ["Ace opsin", "HaloTag", "Janelia Fluor", "Yellow-Green"],
   "paper": "Science 2019",
   "paperUrl": "https://doi.org/10.1126/science.aav6416",
-  "description": "Chemigenetic GEVI combining Ace2 rhodopsin with a HaloTag domain that covalently binds Janelia Fluor dyes, achieving exceptional brightness and photostability for extended in vivo voltage imaging across mice, zebrafish, and Drosophila.",
+  "description": "Chemigenetic voltage indicator combining an opsin with a self-labeling protein tag that covalently binds synthetic fluorescent dyes, achieving exceptional brightness and photostability for extended voltage imaging.",
   "familyTreePath": ["GEVI", "Opsin", "Opsin-FRET", "Chemigenetic", "voltron"],
   "crossBranchParentId": "ace2n-mneon",
 

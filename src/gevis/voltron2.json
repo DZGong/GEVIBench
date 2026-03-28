@@ -11,7 +11,7 @@
   ],
   "paper": "Neuron 2023",
   "paperUrl": "https://doi.org/10.1016/j.neuron.2023.03.009",
-  "description": "Improved chemigenetic GEVI with enhanced sensitivity to action potentials and subthreshold voltage fluctuations, while retaining sub-millisecond kinetics and photostability.",
+  "description": "Improved Voltron with enhanced sensitivity to action potentials and subthreshold voltage fluctuations, retaining fast kinetics and photostability.",
 
   "parentId": "voltron",
 

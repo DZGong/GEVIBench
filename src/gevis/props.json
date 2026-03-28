@@ -11,7 +11,7 @@
   ],
   "paper": "Science 2011",
   "paperUrl": "https://doi.org/10.1126/science.1204763",
-  "description": "First proteorhodopsin-based voltage indicator. Demonstrated electrical spiking in E. coli. Very dim but extremely photostable. Only functional in bacteria.",
+  "description": "First proteorhodopsin-based voltage indicator, demonstrating that this class of microbial opsin can report electrical activity, though only functional in bacteria and extremely dim.",
   "familyTreePath": [
     "GEVI",
     "Opsin",
