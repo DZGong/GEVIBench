@@ -1,8 +1,8 @@
-// Interactive Spectrum Viewer Component - Pure Function
-// Real-time mouse tracking with instant updates
+// Spectrum Viewer Component - Pure Function
+// Shows excitation/emission spectrum curves
 // Accepts spectrum data as props - no internal GEVI lookup
 
-import { useState, useRef, useCallback, useMemo } from 'react';
+import { useMemo } from 'react';
 import { wavelengthToColor } from './utils';
 
 interface SpectrumPoint {
@@ -110,9 +110,6 @@ function generateSpectrum(type: 'fp' | 'rhodopsin' | 'nir' | 'fret' | 'redfp', p
 }
 
 export function SpectrumViewer({ spectrumData, geviName }: SpectrumViewerProps) {
-  const [hoverWavelength, setHoverWavelength] = useState<number | null>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-
   // Support both formats:
   // 1. { config: { type, peakEx, peakEm, name }, custom: {...} } - legacy
   // 2. { type, peakEx, peakEm, name, custom: {...} } - GEVI format
@@ -130,29 +127,21 @@ export function SpectrumViewer({ spectrumData, geviName }: SpectrumViewerProps) 
   const exColor = config?.peakEx ? wavelengthToColor(config.peakEx) : 'rgb(59,130,246)';
   const emColor = config?.peakEm ? wavelengthToColor(config.peakEm) : 'rgb(34,197,94)';
 
-  // Find values at hover wavelength
-  const hoverData = computedSpectrum?.find(d => d.wavelength === hoverWavelength) || null;
+  // Determine wavelength range for x-axis labels
+  const minWl = computedSpectrum?.[0]?.wavelength ?? 350;
+  const maxWl = computedSpectrum?.[computedSpectrum.length - 1]?.wavelength ?? 850;
+  const wlRange = maxWl - minWl;
 
-  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    if (!containerRef.current || !computedSpectrum) return;
-
-    const rect = containerRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const width = rect.width;
-
-    // Map x position to wavelength (350-850nm range)
-    const minWl = 350;
-    const maxWl = 850;
-    const wavelength = Math.round(minWl + (x / width) * (maxWl - minWl));
-
-    if (wavelength >= minWl && wavelength <= maxWl) {
-      setHoverWavelength(wavelength);
+  // Generate ~6 evenly spaced x-axis tick values, rounded to nearest 50
+  const xTicks = useMemo(() => {
+    const ticks: number[] = [];
+    const step = Math.max(50, Math.round(wlRange / 6 / 50) * 50);
+    const start = Math.ceil(minWl / step) * step;
+    for (let v = start; v <= maxWl; v += step) {
+      ticks.push(v);
     }
-  }, [computedSpectrum]);
-
-  const handleMouseLeave = useCallback(() => {
-    setHoverWavelength(null);
-  }, []);
+    return ticks;
+  }, [minWl, maxWl, wlRange]);
 
   if (!config || !computedSpectrum) {
     return (
@@ -167,6 +156,16 @@ export function SpectrumViewer({ spectrumData, geviName }: SpectrumViewerProps) 
     );
   }
 
+  // SVG dimensions with padding for x-axis labels
+  const svgW = 500;
+  const svgH = 180;
+  const plotTop = 0;
+  const plotBottom = 155;
+  const plotH = plotBottom - plotTop;
+
+  const toX = (wl: number) => ((wl - minWl) / wlRange) * svgW;
+  const toY = (val: number) => plotBottom - val * (plotH - 5);
+
   return (
     <div className="border rounded-lg p-4 bg-surface-low border-ink/10">
       <h4 className="text-sm font-semibold mb-2 text-ink/70">
@@ -174,14 +173,8 @@ export function SpectrumViewer({ spectrumData, geviName }: SpectrumViewerProps) 
         {config.name && <span className="ml-2 font-normal">({config.name})</span>}
       </h4>
 
-      <div
-        ref={containerRef}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        className="relative h-40 cursor-crosshair bg-surface rounded"
-      >
-        {/* Excitation curve */}
-        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 500 160" preserveAspectRatio="none">
+      <div className="relative bg-surface rounded">
+        <svg className="w-full block" viewBox={`0 0 ${svgW} ${svgH}`} preserveAspectRatio="xMidYMid meet">
           <defs>
             <linearGradient id="exGradient" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%" stopColor={exColor} stopOpacity="0.6" />
@@ -195,30 +188,24 @@ export function SpectrumViewer({ spectrumData, geviName }: SpectrumViewerProps) 
 
           {/* Excitation area */}
           <path
-            d={`M 0 160 ${computedSpectrum.map((d, i) => {
-              const x = ((d.wavelength - 350) / 500) * 500;
-              const y = 160 - d.excitation * 150;
-              return `L ${x} ${y}`;
-            }).join(' ')} L 500 160 Z`}
+            d={`M 0 ${plotBottom} ${computedSpectrum.map((d) => {
+              return `L ${toX(d.wavelength)} ${toY(d.excitation)}`;
+            }).join(' ')} L ${svgW} ${plotBottom} Z`}
             fill="url(#exGradient)"
           />
 
           {/* Emission area */}
           <path
-            d={`M 0 160 ${computedSpectrum.map((d, i) => {
-              const x = ((d.wavelength - 350) / 500) * 500;
-              const y = 160 - d.emission * 150;
-              return `L ${x} ${y}`;
-            }).join(' ')} L 500 160 Z`}
+            d={`M 0 ${plotBottom} ${computedSpectrum.map((d) => {
+              return `L ${toX(d.wavelength)} ${toY(d.emission)}`;
+            }).join(' ')} L ${svgW} ${plotBottom} Z`}
             fill="url(#emGradient)"
           />
 
           {/* Excitation line */}
           <path
             d={computedSpectrum.map((d, i) => {
-              const x = ((d.wavelength - 350) / 500) * 500;
-              const y = 160 - d.excitation * 150;
-              return `${i === 0 ? 'M' : 'L'} ${x} ${y}`;
+              return `${i === 0 ? 'M' : 'L'} ${toX(d.wavelength)} ${toY(d.excitation)}`;
             }).join(' ')}
             fill="none"
             stroke={exColor}
@@ -228,38 +215,21 @@ export function SpectrumViewer({ spectrumData, geviName }: SpectrumViewerProps) 
           {/* Emission line */}
           <path
             d={computedSpectrum.map((d, i) => {
-              const x = ((d.wavelength - 350) / 500) * 500;
-              const y = 160 - d.emission * 150;
-              return `${i === 0 ? 'M' : 'L'} ${x} ${y}`;
+              return `${i === 0 ? 'M' : 'L'} ${toX(d.wavelength)} ${toY(d.emission)}`;
             }).join(' ')}
             fill="none"
             stroke={emColor}
             strokeWidth="2"
           />
 
-          {/* Hover line */}
-          {hoverWavelength && (
-            <line
-              x1={((hoverWavelength - 350) / 500) * 500}
-              y1="0"
-              x2={((hoverWavelength - 350) / 500) * 500}
-              y2="160"
-              stroke="#d97706"
-              strokeWidth="1"
-              strokeDasharray="4"
-            />
-          )}
+          {/* X-axis wavelength labels */}
+          {xTicks.map(wl => (
+            <g key={wl}>
+              <line x1={toX(wl)} y1={plotBottom} x2={toX(wl)} y2={plotBottom + 4} stroke="#9ca3af" strokeWidth="1" />
+              <text x={toX(wl)} y={svgH - 2} textAnchor="middle" fontSize="10" fill="#6b7280">{wl}</text>
+            </g>
+          ))}
         </svg>
-
-        {/* Hover tooltip */}
-        {hoverData && (
-          <div
-            className="absolute top-1 left-1/2 transform -translate-x-1/2 px-2 py-1 rounded text-xs bg-surface text-ink shadow"
-            style={{ pointerEvents: 'none' }}
-          >
-            {hoverWavelength}nm | Ex: {hoverData.excitation.toFixed(2)} | Em: {hoverData.emission.toFixed(2)}
-          </div>
-        )}
       </div>
 
       {/* Legend */}
