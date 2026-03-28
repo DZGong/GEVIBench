@@ -42,14 +42,14 @@ function hexPath(r: number, cr = r * 0.32): string {
   return parts.join(' ') + ' Z';
 }
 
-const MIN_NODE_WIDTH = 48;
+const MIN_NODE_WIDTH = 42;
 const SIBLING_GAP = 6;
-const LEVEL_HEIGHT = 62;
-const LEVEL_STAGGER_BASE = 40;    // y-stagger (px) applied to first branch sibling at depth 0
-const LEVEL_STAGGER_DECAY = 10;   // stagger shrinks by this amount per depth level
-const TOP_PADDING = 30;
-const NODE_RADIUS_LEAF = 8;
-const NODE_RADIUS_BRANCH = 5;
+const LEVEL_HEIGHT = 55;
+const LEVEL_STAGGER_BASE = 35;    // y-stagger (px) applied to first branch sibling at depth 0
+const LEVEL_STAGGER_DECAY = 9;    // stagger shrinks by this amount per depth level
+const TOP_PADDING = 26;
+const NODE_RADIUS_LEAF = 7;
+const NODE_RADIUS_BRANCH = 4;
 const TOOLTIP_W = 170;
 const TOOLTIP_H = 270;
 
@@ -207,7 +207,7 @@ function layoutTree(node: TreeNode, x: number, y: number, depth = 0): LayoutResu
   }
 
   // Build parent contour = this node + union of all shifted children contours
-  const hw = isRoot ? 10 : isFork ? 2 : (node.geviId ? MIN_NODE_WIDTH / 2 : NODE_RADIUS_BRANCH + 2);
+  const hw = isRoot ? 9 : isFork ? 2 : (node.geviId ? MIN_NODE_WIDTH / 2 : NODE_RADIUS_BRANCH + 2);
   const leftContour = new Map<number, number>([[y, x - hw]]);
   const rightContour = new Map<number, number>([[y, x + hw]]);
   for (let i = 0; i < childLayouts.length; i++) {
@@ -339,7 +339,7 @@ function buildFullTree(gevis: GEVI[]) {
 
   // Find min X to shift everything into positive coordinates
   const minX = Math.min(...result.nodes.map(n => n.x));
-  const padding = 40; // left/right padding
+  const padding = 35; // left/right padding
 
   // Shift all coordinates so minX becomes padding, and override leaf colors with
   // actual GEVI data so colors match the detail panel title.
@@ -388,8 +388,8 @@ export function FamilyTreePanel({
   const hideTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Calculate SVG dimensions with enough padding for labels below deepest nodes
-  const svgWidth = Math.max(800, Math.max(...nodes.map(n => n.x)) + 80);
-  const svgHeight = Math.max(400, Math.max(...nodes.map(n => n.y)) + 50);
+  const svgWidth = Math.max(700, Math.max(...nodes.map(n => n.x)) + 70);
+  const svgHeight = Math.max(350, Math.max(...nodes.map(n => n.y)) + 44);
 
   const handleNodeClick = (geviId?: string) => {
     if (geviId) {
@@ -493,7 +493,7 @@ export function FamilyTreePanel({
           {nodes.map((node, i) => {
             const isLeaf = !!node.geviId;
             const isRoot = i === 0 && node.name === 'GEVI';
-            const radius = isRoot ? 10 : isLeaf ? NODE_RADIUS_LEAF : NODE_RADIUS_BRANCH;
+            const radius = isRoot ? 9 : isLeaf ? NODE_RADIUS_LEAF : NODE_RADIUS_BRANCH;
 
             // Fork nodes are invisible junction points — don't render
             if (node.isFork) return null;
@@ -515,7 +515,7 @@ export function FamilyTreePanel({
               >
                 {/* Hover target (invisible larger hexagon for easier clicking) */}
                 {isLeaf && (
-                  <path d={hexPath(16)} fill="transparent" />
+                  <path d={hexPath(14)} fill="transparent" />
                 )}
                 <path
                   d={hexPath(radius)}
@@ -529,17 +529,17 @@ export function FamilyTreePanel({
                 />
                 <text
                   x={0}
-                  y={isRoot ? -(radius + 4) : isLeaf ? radius + 14 : radius + 12}
+                  y={isRoot ? -(radius + 3) : isLeaf ? radius + 12 : radius + 11}
                   textAnchor="middle"
                   fill={isRoot ? '#002FA7' : isLeaf ? '#374151' : '#6b7280'}
-                  style={{ fontSize: isRoot ? '12px' : isLeaf ? '9px' : '10px', fontWeight: isRoot ? '700' : isLeaf ? '600' : '500' }}
+                  style={{ fontSize: isRoot ? '11px' : isLeaf ? '8px' : '9px', fontWeight: isRoot ? '700' : isLeaf ? '600' : '500' }}
                 >
                   {node.name}
                 </text>
                 {node.year && (
                   <text
                     x={0}
-                    y={radius + 24}
+                    y={radius + 21}
                     textAnchor="middle"
                     fill="#9ca3af"
                     style={{ fontSize: '7px' }}
@@ -569,18 +569,26 @@ export function FamilyTreePanel({
           }}
           onMouseLeave={() => setHoverInfo(null)}
         >
-          {/* Name — click to open detail panel */}
-          <button
-            className="font-bold text-sm mb-0.5 text-left w-full hover:underline cursor-pointer"
-            style={{ color: tooltipNameColor }}
-            onClick={() => { onSelectGEVI(hoverInfo.gevi); setHoverInfo(null); }}
-          >
-            {hoverInfo.gevi.name}
-          </button>
-
-          {/* Year · Category */}
-          <div className="text-[10px] mb-1.5 text-ink/50">
-            {hoverInfo.gevi.year} · {hoverInfo.gevi.category}
+          {/* Header: name left, score right */}
+          <div className="flex items-start justify-between gap-2 mb-1.5">
+            <div className="flex-1 min-w-0">
+              <button
+                className="font-bold text-sm text-left w-full hover:underline cursor-pointer leading-tight"
+                style={{ color: tooltipNameColor }}
+                onClick={() => { onSelectGEVI(hoverInfo.gevi); setHoverInfo(null); }}
+              >
+                {hoverInfo.gevi.name}
+              </button>
+              {hoverInfo.gevi.description && (
+                <p className="text-[9px] text-ink/50 font-sans mt-0.5 line-clamp-2">{hoverInfo.gevi.description}</p>
+              )}
+            </div>
+            {hoverInfo.gevi.overall != null && (
+              <div className="text-right flex-shrink-0">
+                <div className="text-xl font-bold text-klein leading-none">{hoverInfo.gevi.overall}</div>
+                <div className="text-[8px] text-ink/40">Overall</div>
+              </div>
+            )}
           </div>
 
           {/* Tag chips */}
@@ -629,9 +637,6 @@ export function FamilyTreePanel({
         </div>
       )}
 
-      <div className="mt-4 pt-3 border-t text-xs text-center border-ink/10 text-ink/40">
-        Click on nodes to view sensor details
-      </div>
     </div>
   );
 }
