@@ -63,7 +63,7 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
   ];
 
   return (
-    <div className="rounded-lg p-4 md:p-6 mb-6 bg-surface shadow-ambient">
+    <div className="rounded-lg p-4 md:p-6 mb-6 bg-surface-lowest shadow-ambient">
       {/* Header with close button */}
       <div className="flex items-start justify-between gap-4 mb-4">
         <div className="flex-1">
