@@ -197,12 +197,13 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
                   <div className="flex items-center justify-center gap-0.5">
                     <button
                       onClick={() => setNarrowIdx((narrowIdx - 1 + NARROW_OPTIONS.length) % NARROW_OPTIONS.length)}
-                      className="p-0.5 rounded hover:bg-ink/10 text-ink/50"
+                      className="flex-shrink-0 p-0.5 rounded hover:bg-ink/10 text-ink/50"
                     >
                       <ChevronLeft className="w-3.5 h-3.5" />
                     </button>
                     <button
                       onClick={() => onSortChange(currentNarrow.sortField)}
+                      style={{ width: '80px' }}
                       className={`text-center cursor-pointer select-none hover:text-klein transition-colors whitespace-nowrap ${
                         sortConfig.field === currentNarrow.sortField ? 'text-klein font-medium' : 'text-ink font-medium'
                       }`}
@@ -216,7 +217,7 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
                     </button>
                     <button
                       onClick={() => setNarrowIdx((narrowIdx + 1) % NARROW_OPTIONS.length)}
-                      className="p-0.5 rounded hover:bg-ink/10 text-ink/50"
+                      className="flex-shrink-0 p-0.5 rounded hover:bg-ink/10 text-ink/50"
                     >
                       <ChevronRight className="w-3.5 h-3.5" />
                     </button>
