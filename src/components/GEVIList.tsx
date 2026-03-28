@@ -179,7 +179,7 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
     }`;
 
   return (
-    <div className="rounded-lg overflow-hidden bg-surface shadow-ambient">
+    <div className="rounded-lg overflow-hidden bg-surface-lowest shadow-ambient">
       <div className="overflow-x-auto">
         {gevis.length === 0 ? (
           <div className="p-8 text-center text-ink/40">
@@ -238,7 +238,7 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
               const isScore = currentNarrow.key === 'overall';
               const hasVal = isScore || hasMetricValue(gevi, currentNarrow.key as MetricKey);
               return (
-                <tbody key={gevi.id} onClick={() => onSelect(gevi)} className={groupCls(gevi)}>
+                <tbody key={gevi.id} data-gevi-id={gevi.id} onClick={() => onSelect(gevi)} className={groupCls(gevi)}>
                   <tr>
                     <td className={`pl-2 pr-2 pt-3 pb-0 text-center w-12 tabular-nums ${dimBase}`} rowSpan={2} style={{ fontSize: '16px', verticalAlign: 'middle', ...(idx < 3 ? { color: '#D4AF37', fontWeight: 700 } : {}) }}>{idx + 1}</td>
                     <td className="pl-1 pr-0 pt-3 pb-0" style={{ width: '1%', whiteSpace: 'nowrap' }}>
@@ -274,7 +274,7 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
                     })()}
                   </tr>
                   <tr>
-                    <td colSpan={2} className="pl-1 pr-2 pt-0.5 pb-3 text-ink/70" style={{ fontSize: '11px', lineHeight: '1.3' }}>
+                    <td colSpan={2} className="pl-1 pr-2 pt-0.5 pb-3 text-ink" style={{ fontSize: '12px', lineHeight: '1.3' }}>
                       {gevi.description}
                     </td>
                   </tr>
@@ -300,7 +300,7 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
             {gevis.map((gevi: any, idx: number) => {
               const geviColor = getGEVIColor(gevi);
               return (
-                <tbody key={gevi.id} onClick={() => onSelect(gevi)} className={groupCls(gevi)}>
+                <tbody key={gevi.id} data-gevi-id={gevi.id} onClick={() => onSelect(gevi)} className={groupCls(gevi)}>
                   <tr>
                     <td className={`pl-2 pr-4 pt-3 pb-0 text-center w-16 tabular-nums ${dimBase}`} rowSpan={2} style={{ fontSize: '16px', verticalAlign: 'middle', ...(idx < 3 ? { color: '#D4AF37', fontWeight: 700 } : {}) }}>{idx + 1}</td>
                     <td className="px-1 pt-3 pb-0">
@@ -353,7 +353,7 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
                     </td>
                   </tr>
                   <tr>
-                    <td colSpan={7} className="px-1 pt-0.5 pb-3 text-ink/70" style={{ fontSize: '11px', lineHeight: '1.3' }}>
+                    <td colSpan={7} className="px-1 pt-0.5 pb-3 text-ink" style={{ fontSize: '12px', lineHeight: '1.3' }}>
                       {gevi.description}
                     </td>
                     <td className="w-4"></td>

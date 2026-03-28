@@ -6,7 +6,7 @@
   "tags": ["cpGFP", "Green", "High dynamic range", "Positive", "Two-photon"],
   "paper": "Nature Methods 2023",
   "paperUrl": "https://doi.org/10.1038/s41592-023-01913-z",
-  "description": "Bright-optimized sibling of ASAP4e with the same polarity flip, trading some speed for superior baseline brightness and photostability for extended two-photon voltage recordings.",
+  "description": "Bright-optimized ASAP4 variant with superior brightness and photostability for extended two-photon recordings.",
   "parentId": "asap3",
   "siblingId": "asap4e",
 

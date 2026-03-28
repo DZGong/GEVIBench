@@ -6,7 +6,7 @@
   "tags": ["Ace opsin", "HaloTag", "Janelia Fluor", "Positive-going"],
   "paper": "Nature Communications 2020",
   "paperUrl": "https://doi.org/10.1038/s41467-020-17322-1",
-  "description": "Positive-going Voltron variant with inverted fluorescence polarity, enabling dual-color voltage imaging alongside the negative-going Voltron in the same preparation.",
+  "description": "Positive-going Voltron variant with inverted fluorescence polarity.",
 
   "parentId": "voltron",
 

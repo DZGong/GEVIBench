@@ -12,7 +12,7 @@
   ],
   "paper": "Science Advances 2025",
   "paperUrl": "https://doi.org/10.1126/sciadv.ads1807",
-  "description": "Positive-going chemigenetic voltage indicator using synthetic dye conjugation for high voltage sensitivity and superior photostability, enabling dual-polarity voltage imaging alongside its sibling HVI.",
+  "description": "Positive-going variant of chemigenetic voltage indicator HVI.",
 
   "parentId": "hvi",
 

@@ -11,7 +11,7 @@
   ],
   "paper": "Neuron 2024",
   "paperUrl": "https://doi.org/10.1016/j.neuron.2024.08.019",
-  "description": "ASAP-family sensor optimized for detecting small subthreshold voltage events, with the steepest fluorescence-voltage relationship near resting potential and fast kinetics.",
+  "description": "Optimized for detecting subthreshold activity, with the steepest F-V slope near resting potential.",
   "parentId": "asap3",
 
   "spectrum": {

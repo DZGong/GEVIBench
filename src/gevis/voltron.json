@@ -6,7 +6,7 @@
   "tags": ["Ace opsin", "HaloTag", "Janelia Fluor", "Yellow-Green"],
   "paper": "Science 2019",
   "paperUrl": "https://doi.org/10.1126/science.aav6416",
-  "description": "Chemigenetic voltage indicator combining an opsin with a self-labeling protein tag that covalently binds synthetic fluorescent dyes, achieving exceptional brightness and photostability for extended voltage imaging.",
+  "description": "Breakthrough chemigenetic GEVI that binds fluorescent dyes with exceptional brightness and photostability.",
   "familyTreePath": ["GEVI", "Opsin", "Opsin-FRET", "Chemigenetic", "voltron"],
   "crossBranchParentId": "ace2n-mneon",
 

@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo, useRef } from 'react';
 import { Clock } from 'lucide-react';
 import { getAllGEVIs } from './geviData';
 import { methodologyContent } from './methodology';
@@ -58,6 +58,7 @@ function GEVIBenchApp() {
   const [showFamilyTree, setShowFamilyTree] = useState(false);
   const [showBrightnessNetwork, setShowBrightnessNetwork] = useState(false);
   const [showCompareEmpty, setShowCompareEmpty] = useState(false);
+  const sideListRef = useRef<HTMLDivElement>(null);
 
   // Derived state
   const categories = [DEFAULT_CATEGORY, ...new Set(gevis.map(g => g.category))];
@@ -114,6 +115,18 @@ function GEVIBenchApp() {
     setMobileView('detail');
     setShowFamilyTree(false);
     setShowBrightnessNetwork(false);
+    // After render: scroll page to top, then scroll the side list so the selected GEVI is visible
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: 0 });
+      if (sideListRef.current) {
+        const selectedEl = sideListRef.current.querySelector(`[data-gevi-id="${gevi.id}"]`);
+        if (selectedEl) {
+          const container = sideListRef.current;
+          const elTop = (selectedEl as HTMLElement).offsetTop;
+          container.scrollTop = elTop - container.clientHeight / 3;
+        }
+      }
+    });
   }, []);
 
   const handleLogoClick = useCallback(() => {
@@ -201,8 +214,8 @@ function GEVIBenchApp() {
         <>
           {/* Main Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-            {/* GEVI List — hidden on narrow screens when detail is open */}
-            <div className={`${selectedGEVI && filteredGEVIs.length > 0 ? 'hidden md:block col-span-1' : 'col-span-3'}`}>
+            {/* GEVI List — hidden on narrow screens when detail is open; sticky with own scroll when detail open */}
+            <div ref={sideListRef} className={`${selectedGEVI && filteredGEVIs.length > 0 ? 'hidden md:block col-span-1 sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto' : 'col-span-3'}`}>
               <GEVIList
                 gevis={filteredGEVIs}
                 selectedGEVI={selectedGEVI}

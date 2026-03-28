@@ -6,7 +6,7 @@
   "tags": ["cpGFP", "Green", "High speed", "Positive", "Two-photon"],
   "paper": "Nature Methods 2023",
   "paperUrl": "https://doi.org/10.1038/s41592-023-01913-z",
-  "description": "Speed-optimized ASAP4 variant that inverts the classical ASAP polarity to positive-going, delivering fast kinetics and a large fluorescence increase per action potential.",
+  "description": "Speed-optimized ASAP4 variant with fast kinetics and a large fluorescence increase per action potential.",
   "parentId": "asap3",
   "siblingId": "asap4b",
 
