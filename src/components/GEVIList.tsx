@@ -193,8 +193,8 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
           <table className="w-full border-collapse" style={{ fontSize: '14px' }}>
             <thead className="sticky top-0 z-10 bg-paper">
               <tr className="border-b border-gray-200">
-                <th className={`pl-2 pr-4 py-2 text-center ${thBase} w-16`} style={{ fontSize: '14px' }}>Rank</th>
-                <th className={`px-1 py-2 text-left ${thBase}`} style={{ fontSize: '14px' }}>Sensor ({gevis.length})</th>
+                <th className={`pl-2 pr-2 py-2 text-center ${thBase} w-12`} style={{ fontSize: '14px' }}>Rank</th>
+                <th className={`pl-1 pr-0 py-2 text-left ${thBase}`} style={{ fontSize: '14px', width: '1%', whiteSpace: 'nowrap' }}>Sensor ({gevis.length})</th>
                 <th className="px-1 py-2" style={{ minWidth: '80px' }}>
                   <div className="flex items-center justify-center gap-0.5">
                     <button
@@ -240,9 +240,9 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
                 const hasVal = hasMetricValue(gevi, currentMetric.key);
                 return (
                   <tr key={gevi.id} onClick={() => onSelect(gevi)} className={rowCls(gevi)}>
-                    <td className={`pl-2 pr-4 py-2.5 text-center w-16 ${dimBase}`}>{idx + 1}</td>
-                    <td className="px-1 py-2.5">
-                      <span className="font-semibold whitespace-nowrap" style={{ color: geviColor.color }}>{gevi.name}</span>
+                    <td className={`pl-2 pr-2 py-2.5 text-center w-12 ${dimBase}`}>{idx + 1}</td>
+                    <td className="pl-1 pr-0 py-2.5" style={{ width: '1%', whiteSpace: 'nowrap' }}>
+                      <span className="font-semibold" style={{ color: geviColor.color }}>{gevi.name}</span>
                     </td>
                     <td className={`px-1 py-2.5 text-center tabular-nums ${hasVal ? cellBase : dimBase}`} style={{ fontSize: '12px' }}>
                       {getMetricValue(gevi, currentMetric.key, dimBase)}
