@@ -15,7 +15,8 @@
       "on": 1.75,
       "off": 1.75,
       "temperature": "25°C",
-      "source": "doi:10.1101/2024.02.02.578569"
+      "source": "doi:10.1101/2024.02.02.578569",
+      "note": "Paper reports only a single response half-time τ_1/2 = 1.75 ± 0.11 ms for depolarizing step; separate τ_on and τ_off not resolved"
     }
   ],
 
@@ -29,7 +30,7 @@
 
   "sensitivityData": [
     {
-      "deltaF": 28.1,
+      "deltaF": -28.1,
       "source": "doi:10.1101/2024.02.02.578569"
     }
   ],
@@ -80,5 +81,14 @@
     ]
   },
 
-  "researchPapers": []
+  "researchPapers": [
+    {
+      "title": "Solaris: a panel of bright and sensitive hybrid voltage indicators for imaging membrane potential in cultured neurons",
+      "authors": "Yang J, et al.",
+      "journal": "bioRxiv",
+      "year": 2024,
+      "sample": "HEK293T cells; rat hippocampal neurons, in vitro",
+      "url": "https://doi.org/10.1101/2024.02.02.578569"
+    }
+  ]
 }

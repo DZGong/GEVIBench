@@ -79,13 +79,13 @@ export const BonusBadge: React.FC<BonusBadgeProps> = ({ type, size = 'md' }) => 
           {config.iconPaths(config.color)}
         </svg>
       </div>
-      <span className={`${labelSizeClasses[size]} font-medium text-gray-600 dark:text-gray-400`}>
+      <span className={`${labelSizeClasses[size]} font-medium text-ink/60 dark:text-ink/40`}>
         {config.label}
       </span>
 
       {/* Tooltip */}
       <div className="absolute bottom-full mb-2 hidden group-hover:block z-50">
-        <div className="px-2 py-1 text-xs text-white bg-gray-900 rounded whitespace-nowrap">
+        <div className="px-2 py-1 text-xs text-white bg-ink rounded whitespace-nowrap">
           {config.tooltip}
         </div>
       </div>
@@ -138,7 +138,7 @@ export const BonusBadges: React.FC<BonusBadgesProps> = ({ gevi, size = 'md' }) =
 
   return (
     <div className="flex items-start gap-2">
-      <div className="text-xs font-medium text-gray-500 dark:text-gray-400 pt-1">
+      <div className="text-xs font-medium text-ink/50 dark:text-ink/40 pt-1">
         Bonus:
       </div>
       <div className="flex gap-3">

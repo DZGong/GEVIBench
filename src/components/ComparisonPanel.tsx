@@ -4,7 +4,7 @@ import { useState, useRef, useCallback } from 'react';
 import { generateVoltageCurve } from '../VoltageCurveViewer';
 import { SampleUsageChart } from './SampleUsageChart';
 
-const COLORS = ['#3b82f6', '#ef4444', '#22c55e', '#f59e0b', '#8b5cf6'];
+const COLORS = ['#002FA7', '#ef4444', '#22c55e', '#f59e0b', '#8b5cf6'];
 
 interface ComparisonProps {
   compareGEVIs: any[];
@@ -32,23 +32,23 @@ export function ComparisonPanel({ compareGEVIs, onRemove, showEmpty = false, onC
     if (!showEmpty) return null;
 
     return (
-      <div id="compare-panel" className="border rounded-lg p-4 md:p-6 mb-6 bg-paper border-gray-200">
+      <div id="compare-panel" className="border rounded-lg p-4 md:p-6 mb-6 bg-surface border-ink/10">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-lg font-bold flex items-center gap-2 text-gray-900">
+          <h3 className="text-lg font-bold flex items-center gap-2 text-ink">
             <GitCompare className="w-5 h-5" />Compare Sensors (0)
           </h3>
           {onClose && (
-            <button onClick={onClose} className="p-1 rounded hover:bg-gray-100 text-gray-500">
+            <button onClick={onClose} className="p-1 rounded hover:bg-surface-low text-ink/50">
               <X className="w-5 h-5" />
             </button>
           )}
         </div>
-        <div className="flex flex-col items-center justify-center py-12 text-gray-500">
-          <GitCompare className="w-12 h-12 mb-4 text-gray-300" />
+        <div className="flex flex-col items-center justify-center py-12 text-ink/50">
+          <GitCompare className="w-12 h-12 mb-4 text-ink/30" />
           <p className="text-center">
             No sensors selected for comparison.
           </p>
-          <p className="text-sm mt-2 text-gray-400">
+          <p className="text-sm mt-2 text-ink/40">
             Click the <span className="font-semibold">Compare</span> button on any sensor to add it to the comparison.
           </p>
         </div>
@@ -60,13 +60,13 @@ export function ComparisonPanel({ compareGEVIs, onRemove, showEmpty = false, onC
   const getSafeName = (name: string) => name.replace(/[^a-zA-Z0-9]/g, '');
 
   return (
-    <div id="compare-panel" className="border rounded-lg p-4 md:p-6 mb-6 bg-paper border-gray-200">
+    <div id="compare-panel" className="border rounded-lg p-4 md:p-6 mb-6 bg-surface border-ink/10">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-bold flex items-center gap-2 text-gray-900">
+        <h3 className="text-lg font-bold flex items-center gap-2 text-ink">
           <GitCompare className="w-5 h-5" />Compare Sensors ({compareGEVIs.length})
         </h3>
         {onClose && (
-          <button onClick={onClose} className="p-1 rounded hover:bg-gray-100 text-gray-500">
+          <button onClick={onClose} className="p-1 rounded hover:bg-surface-low text-ink/50">
             <X className="w-5 h-5" />
           </button>
         )}
@@ -75,10 +75,10 @@ export function ComparisonPanel({ compareGEVIs, onRemove, showEmpty = false, onC
       {/* Selected GEVIs */}
       <div className="flex flex-wrap gap-2 mb-6">
         {compareGEVIs.map((gevi, idx) => (
-          <div key={gevi.id} className="flex items-center gap-2 px-3 py-2 rounded-lg bg-gray-100">
+          <div key={gevi.id} className="flex items-center gap-2 px-3 py-2 rounded-lg bg-surface-low">
             <div className="w-3 h-3 rounded-full" style={{ backgroundColor: COLORS[idx % COLORS.length] }} />
-            <span className="text-sm font-medium text-gray-700">{gevi.name}</span>
-            <button onClick={() => onRemove(gevi.id)} className="p-1 rounded hover:bg-gray-200 text-gray-500">
+            <span className="text-sm font-medium text-ink/70">{gevi.name}</span>
+            <button onClick={() => onRemove(gevi.id)} className="p-1 rounded hover:bg-surface-low text-ink/50">
               <Trash2 className="w-4 h-4" />
             </button>
           </div>
@@ -89,7 +89,7 @@ export function ComparisonPanel({ compareGEVIs, onRemove, showEmpty = false, onC
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {/* Radar Chart */}
         <div>
-          <h4 className="text-sm font-semibold mb-3 text-gray-700">Performance Radar</h4>
+          <h4 className="text-sm font-semibold mb-3 text-ink/70">Performance Radar</h4>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <RadarChart data={getCompareRadarData()}>
@@ -107,14 +107,14 @@ export function ComparisonPanel({ compareGEVIs, onRemove, showEmpty = false, onC
 
         {/* F-V Curve Comparison */}
         <div>
-          <h4 className="text-sm font-semibold mb-3 text-gray-700">F-V Curve</h4>
+          <h4 className="text-sm font-semibold mb-3 text-ink/70">F-V Curve</h4>
           <FVCurveCompare compareGEVIs={compareGEVIs} COLORS={COLORS} />
         </div>
 
         {/* Sample Usage Comparison */}
         <div>
-          <h4 className="text-sm font-semibold mb-3 text-gray-700">Sample Usage</h4>
-          <div className="border rounded-lg p-4 bg-gray-50 border-gray-200">
+          <h4 className="text-sm font-semibold mb-3 text-ink/70">Sample Usage</h4>
+          <div className="border rounded-lg p-4 bg-surface-low border-ink/10">
             <SampleUsageChart mode="compare" gevis={compareGEVIs} />
           </div>
         </div>
@@ -197,7 +197,7 @@ function FVCurveCompare({ compareGEVIs, COLORS }: { compareGEVIs: any[]; COLORS:
   const hoverData = hoverVoltage !== null ? getDataAtVoltage(hoverVoltage) : [];
 
   return (
-    <div className="border rounded-lg p-3 bg-gray-50 border-gray-200">
+    <div className="border rounded-lg p-3 bg-surface-low border-ink/10">
       <div
         ref={containerRef}
         className="relative cursor-crosshair"
@@ -320,12 +320,12 @@ function FVCurveCompare({ compareGEVIs, COLORS }: { compareGEVIs: any[]; COLORS:
       </div>
 
       {/* Legend and Data Readout */}
-      <div className="mt-2 pt-2 border-t border-gray-600/30">
+      <div className="mt-2 pt-2 border-t border-ink/30">
         <div className="flex flex-wrap gap-3 justify-center mb-2">
           {compareGEVIs.map((gevi, idx) => (
             <div key={gevi.id} className="flex items-center gap-1.5">
               <div className="w-3 h-3 rounded-full" style={{ backgroundColor: COLORS[idx % COLORS.length] }} />
-              <span className="text-xs text-gray-600">{gevi.name}</span>
+              <span className="text-xs text-ink/60">{gevi.name}</span>
             </div>
           ))}
         </div>
@@ -338,7 +338,7 @@ function FVCurveCompare({ compareGEVIs, COLORS }: { compareGEVIs: any[]; COLORS:
               return (
                 <div key={gevi.id} className="flex items-center gap-1.5 text-xs">
                   <div className="w-2 h-2 rounded-full" style={{ backgroundColor: COLORS[geviIdx % COLORS.length] }} />
-                  <span className="text-gray-600">
+                  <span className="text-ink/60">
                     {gevi.name}:
                   </span>
                   <span

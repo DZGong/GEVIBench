@@ -537,5 +537,15 @@
       "slope": 0.018,
       "source": "doi:10.1046/j.0953-816x.2001.01617.x"
     }
+  ],
+  "researchPapers": [
+    {
+      "title": "Design and characterization of a DNA-encoded, voltage-sensitive fluorescent protein",
+      "authors": "Sakai R, Repunte-Canonigo V, Raj CD, Knöpfel T",
+      "journal": "European Journal of Neuroscience",
+      "year": 2001,
+      "sample": "HEK 293 cells, in vitro",
+      "url": "https://doi.org/10.1046/j.0953-816x.2001.01617.x"
+    }
   ]
 }

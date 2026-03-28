@@ -156,11 +156,11 @@ export function SpectrumViewer({ spectrumData, geviName }: SpectrumViewerProps) 
 
   if (!config || !computedSpectrum) {
     return (
-      <div className="border rounded-lg p-4 bg-gray-50 border-gray-200">
-        <h4 className="text-sm font-semibold mb-2 text-gray-700">
+      <div className="border rounded-lg p-4 bg-surface-low border-ink/10">
+        <h4 className="text-sm font-semibold mb-2 text-ink/70">
           Excitation/Emission Spectrum
         </h4>
-        <div className="text-xs text-gray-400">
+        <div className="text-xs text-ink/40">
           No spectrum data available
         </div>
       </div>
@@ -168,8 +168,8 @@ export function SpectrumViewer({ spectrumData, geviName }: SpectrumViewerProps) 
   }
 
   return (
-    <div className="border rounded-lg p-4 bg-gray-50 border-gray-200">
-      <h4 className="text-sm font-semibold mb-2 text-gray-700">
+    <div className="border rounded-lg p-4 bg-surface-low border-ink/10">
+      <h4 className="text-sm font-semibold mb-2 text-ink/70">
         Excitation/Emission Spectrum
         {config.name && <span className="ml-2 font-normal">({config.name})</span>}
       </h4>
@@ -178,7 +178,7 @@ export function SpectrumViewer({ spectrumData, geviName }: SpectrumViewerProps) 
         ref={containerRef}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        className="relative h-40 cursor-crosshair bg-paper rounded"
+        className="relative h-40 cursor-crosshair bg-surface rounded"
       >
         {/* Excitation curve */}
         <svg className="absolute inset-0 w-full h-full" viewBox="0 0 500 160" preserveAspectRatio="none">
@@ -254,7 +254,7 @@ export function SpectrumViewer({ spectrumData, geviName }: SpectrumViewerProps) 
         {/* Hover tooltip */}
         {hoverData && (
           <div
-            className="absolute top-1 left-1/2 transform -translate-x-1/2 px-2 py-1 rounded text-xs bg-paper text-gray-800 shadow"
+            className="absolute top-1 left-1/2 transform -translate-x-1/2 px-2 py-1 rounded text-xs bg-surface text-ink shadow"
             style={{ pointerEvents: 'none' }}
           >
             {hoverWavelength}nm | Ex: {hoverData.excitation.toFixed(2)} | Em: {hoverData.emission.toFixed(2)}
@@ -266,16 +266,16 @@ export function SpectrumViewer({ spectrumData, geviName }: SpectrumViewerProps) 
       <div className="flex gap-4 mt-2 text-xs">
         <div className="flex items-center gap-1">
           <div className="w-3 h-3 rounded" style={{ backgroundColor: exColor }} />
-          <span className="text-gray-600">Excitation</span>
+          <span className="text-ink/60">Excitation</span>
         </div>
         <div className="flex items-center gap-1">
           <div className="w-3 h-3 rounded" style={{ backgroundColor: emColor }} />
-          <span className="text-gray-600">Emission</span>
+          <span className="text-ink/60">Emission</span>
         </div>
       </div>
 
       {/* Peak wavelengths */}
-      <div className="mt-2 text-xs text-gray-400">
+      <div className="mt-2 text-xs text-ink/40">
         Peak Excitation: {config.peakEx}nm | Peak Emission: {config.peakEm}nm
       </div>
     </div>

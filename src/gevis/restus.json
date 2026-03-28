@@ -53,6 +53,11 @@
   ],
   "brightnessData": [
     {
+      "ratio": 0.775,
+      "reference": "EGFP",
+      "source": "doi:10.1002/advs.202307938"
+    },
+    {
       "ratio": 2.07,
       "reference": "asap3",
       "source": "doi:10.1002/advs.202307938"
@@ -68,6 +73,14 @@
     "url": "https://www.addgene.org/209767/"
   },
   "researchPapers": [
+    {
+      "title": "An Ultrasensitive Genetically Encoded Voltage Indicator Uncovers the Electrical Activity of Non-Excitable Cells",
+      "authors": "Rühl P, et al.",
+      "journal": "Advanced Science",
+      "year": 2024,
+      "sample": "HEK293T cells; A375 melanoma cells; MCF-7 breast cancer cells, in vitro",
+      "url": "https://doi.org/10.1002/advs.202307938"
+    },
     {
       "title": "Absolute Membrane Potential Recording with ASAP-Type Genetically Encoded Voltage Indicators Using Fluorescence Lifetime Imaging",
       "authors": "Nair AG, et al.",

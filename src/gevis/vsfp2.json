@@ -520,13 +520,7 @@
     {
       "on": 15,
       "off": 75,
-      "temperature": "35\u00b0C",
-      "source": "doi:10.1371/journal.pone.0000440"
-    },
-    {
-      "on": 71,
-      "off": 96,
-      "temperature": "22\u00b0C",
+      "temperature": "35°C",
       "source": "doi:10.1371/journal.pone.0000440"
     }
   ],
@@ -535,6 +529,24 @@
       "deltaF": 8.6,
       "sign": "positive",
       "source": "doi:10.1371/journal.pone.0000440"
+    }
+  ],
+  "researchPapers": [
+    {
+      "title": "Engineering and characterization of an enhanced fluorescent protein voltage sensor",
+      "authors": "Dimitrov D, He Y, Mutoh H, Baker BJ, Cohen L, Akemann W, Knöpfel T",
+      "journal": "PLoS ONE",
+      "year": 2007,
+      "sample": "PC12 cells (neuroendocrine), in vitro",
+      "url": "https://doi.org/10.1371/journal.pone.0000440"
+    },
+    {
+      "title": "Second and third generation voltage-sensitive fluorescent proteins for monitoring membrane potential",
+      "authors": "Perron A, Mutoh H, Akemann W, Ghimire Gautam S, Dimitrov D, Iwamoto Y, Knöpfel T",
+      "journal": "Frontiers in Molecular Neuroscience",
+      "year": 2009,
+      "sample": "PC12 cells (neuroendocrine), primary hippocampal neurons, in vitro",
+      "url": "https://doi.org/10.3389/neuro.02.005.2009"
     }
   ]
 }

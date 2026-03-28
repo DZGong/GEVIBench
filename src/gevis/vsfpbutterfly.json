@@ -32,15 +32,15 @@
     "polarity": "negative",
     "name": "VSFP-Butterfly",
     "custom": {
-      "voltage": [-140, -120, -100, -80, -60, -40, -20, 0, 20, 40, 60],
-      "deltaF": [6.3, 5.9, 4.8, 2.3, -2.1, -5.7, -7.5, -8.3, -8.6, -8.7, -8.7]
+      "voltage": [-140, -120, -100, -80, -70, -60, -40, -20, 0, 20, 40, 60],
+      "deltaF": [6, 6, 5, 2, 0, -2, -6, -8, -8, -9, -9, -9]
     }
   },
   "kinetics": [
     {
       "on": 7.7,
       "off": 89.9,
-      "temperature": "room temperature",
+      "temperature": "32-34°C",
       "source": "doi:10.1152/jn.00452.2012"
     }
   ],
@@ -49,6 +49,12 @@
       "deltaF": -15,
       "sign": "negative",
       "source": "doi:10.3389/fnmol.2014.00078"
+    },
+    {
+      "deltaF": -3.2,
+      "sign": "negative",
+      "source": "doi:10.1152/jn.00452.2012",
+      "note": "Brain slices, layer 2/3 pyramidal neurons, 12 cells"
     }
   ],
   "sensitivityData": [
@@ -70,7 +76,13 @@
     {
       "ratio": 1.74,
       "reference": "EGFP",
-      "source": "Estimated from mCitrine QY=0.76, EC=77000 vs EGFP QY=0.60, EC=56000"
+      "source": "EC×QY: mCitrine EC=77000, QY=0.76 vs EGFP EC=56000, QY=0.60"
+    }
+  ],
+  "subthresholdData": [
+    {
+      "slope": 0.042,
+      "source": "doi:10.1152/jn.00452.2012"
     }
   ],
   "addgene": {
@@ -78,6 +90,22 @@
     "url": "https://www.addgene.org/47978/"
   },
   "researchPapers": [
+    {
+      "title": "Imaging neural circuit dynamics with a voltage-sensitive fluorescent protein",
+      "authors": "Akemann W, Mutoh H, Perron A, Park YK, Iwamoto Y, Knöpfel T",
+      "journal": "Journal of Neurophysiology",
+      "year": 2012,
+      "sample": "Mouse, somatosensory cortex layer 2/3, in vivo; hippocampus CA3, brain slices; PC12 cells, in vitro",
+      "url": "https://doi.org/10.1152/jn.00452.2012"
+    },
+    {
+      "title": "Exploration of genetically encoded voltage indicators based on a chimeric voltage sensing domain",
+      "authors": "Mishina Y, Mutoh H, Song C, Knöpfel T",
+      "journal": "Frontiers in Molecular Neuroscience",
+      "year": 2014,
+      "sample": "Mouse, somatosensory cortex, in vivo; PC12 and HEK293T cells, in vitro",
+      "url": "https://doi.org/10.3389/fnmol.2014.00078"
+    },
     {
       "title": "Two-photon voltage imaging using a genetically encoded voltage indicator",
       "authors": "Akemann W, et al.",
@@ -117,6 +145,14 @@
       "year": 2016,
       "sample": "Mouse, cortex, in vivo",
       "url": "https://doi.org/10.1093/cercor/bhw200"
+    },
+    {
+      "title": "Transgenic mice for intersectional targeting of neural sensors and effectors with high specificity and performance",
+      "authors": "Madisen L, et al.",
+      "journal": "Neuron",
+      "year": 2015,
+      "sample": "Mouse, cortex, transgenic Ai78(TITL-VSFPB) line, in vivo",
+      "url": "https://doi.org/10.1016/j.neuron.2015.02.022"
     },
     {
       "title": "Transgenic strategies for sparse but strong expression of genetically encoded voltage and calcium indicators",
@@ -167,6 +203,14 @@
       "url": "https://doi.org/10.1038/s41598-018-19925-7"
     },
     {
+      "title": "Single-neuron level one-photon voltage imaging with sparsely targeted genetically encoded voltage indicators",
+      "authors": "Quicke P, et al.",
+      "journal": "Frontiers in Cellular Neuroscience",
+      "year": 2019,
+      "sample": "Mouse, cortex layer 2/3, brain slices",
+      "url": "https://doi.org/10.3389/fncel.2019.00039"
+    },
+    {
       "title": "In vitro testing of voltage indicators: Archon1, ArcLightD, ASAP1, ASAP2s, ASAP3b, Bongwoori-Pos6, BeRST1, FlicR1, and Chi-VSFP-Butterfly",
       "authors": "Milosevic MM, et al.",
       "journal": "eNeuro",
@@ -199,6 +243,14 @@
       "url": "https://doi.org/10.3389/fnins.2021.773883"
     },
     {
+      "title": "Cortex-wide dynamics of intrinsic electrical activities: propagating waves and their interactions",
+      "authors": "Liang Y, Song C, Liu M, Gong P, Zhou C, Knöpfel T",
+      "journal": "Journal of Neuroscience",
+      "year": 2021,
+      "sample": "Mouse, cortex, in vivo, anesthetized, CaMK2A-tTA;chi-VSFP transgenic",
+      "url": "https://doi.org/10.1523/JNEUROSCI.0623-20.2021"
+    },
+    {
       "title": "Combining cortical voltage imaging and hippocampal electrophysiology for investigating global, multi-timescale activity interactions in the brain",
       "authors": "Pedrosa R, et al.",
       "journal": "International Journal of Molecular Sciences",
@@ -207,12 +259,28 @@
       "url": "https://doi.org/10.3390/ijms23126814"
     },
     {
+      "title": "Evoked cortical depolarizations before and after the amyloid plaque accumulation: voltage imaging study",
+      "authors": "Zhu MH, Jogdand AH, Jang J, Nagella SC, Das B, Milosevic MM, Yan R, Antic SD",
+      "journal": "Journal of Alzheimer's Disease",
+      "year": 2022,
+      "sample": "Mouse, cortex, brain slices, Alzheimer's disease model (APPswe/PS1dE9), chi-VSFP transgenic",
+      "url": "https://doi.org/10.3233/JAD-220249"
+    },
+    {
       "title": "Cortical correlates of psychedelic-induced shaking behavior revealed by voltage imaging",
       "authors": "Buchborn T, et al.",
       "journal": "International Journal of Molecular Sciences",
       "year": 2023,
       "sample": "Mouse, cortex layer 2/3, in vivo, awake",
       "url": "https://doi.org/10.3390/ijms24119463"
+    },
+    {
+      "title": "Complexity of cortical wave patterns of the wake mouse cortex",
+      "authors": "Liang Y, Liang J, Song C, Liu M, Knöpfel T, Gong P, Zhou C",
+      "journal": "Nature Communications",
+      "year": 2023,
+      "sample": "Mouse, cortex, in vivo, awake, CaMK2A-tTA;chi-VSFP transgenic",
+      "url": "https://doi.org/10.1038/s41467-023-37088-6"
     },
     {
       "title": "Imaging of evoked cortical depolarizations using either ASAP2s, or chi-VSFP, or Di-4-Anepps, or autofluorescence optical signals",
@@ -229,6 +297,22 @@
       "year": 2024,
       "sample": "Mouse, cortex, in vivo, awake",
       "url": "https://doi.org/10.1523/JNEUROSCI.0298-23.2024"
+    },
+    {
+      "title": "Ex vivo propagation of synaptically-evoked cortical depolarizations in a mouse model of Alzheimer's disease at 20 Hz, 40 Hz, or 83 Hz",
+      "authors": "Patel AA, Zhu MH, Yan R, Antic SD",
+      "journal": "Scientific Reports",
+      "year": 2024,
+      "sample": "Mouse, cortex, brain slices, Alzheimer's disease model (5xFAD), chi-VSFP transgenic",
+      "url": "https://doi.org/10.1038/s41598-024-74262-2"
+    },
+    {
+      "title": "Psychedelic 5-HT2A agonist increases spontaneous and evoked 5-Hz oscillations in visual and retrosplenial cortex",
+      "authors": "White CM, Azimi Z, Staadt R, Song C, Knöpfel T, Jancke D",
+      "journal": "Communications Biology",
+      "year": 2026,
+      "sample": "Mouse, visual cortex; retrosplenial cortex, in vivo, awake",
+      "url": "https://doi.org/10.1038/s42003-025-09492-9"
     }
   ]
 }

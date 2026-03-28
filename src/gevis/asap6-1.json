@@ -3,7 +3,7 @@
   "name": "ASAP6.1",
   "year": 2024,
   "category": "VSD-cpGFP GEVI",
-  "tags": ["cpGFP", "Green", "High dynamic range", "Positive"],
+  "tags": ["cpGFP", "Green", "High dynamic range", "Positive", "Two-photon"],
   "paper": "bioRxiv 2024",
   "paperUrl": "https://doi.org/10.1101/2024.06.21.599617",
   "description": "Positive-going ASAP4-family variant with fast, clean onset kinetics and the largest per-spike fluorescence increase among the ASAP sensor lineage.",
@@ -53,7 +53,13 @@
   "sensitivityData": [
     {
       "deltaF": 50,
-      "source": "doi:10.1101/2024.06.21.599617"
+      "source": "doi:10.1101/2024.06.21.599617",
+      "notes": "2ms FWHM AP waveform, room temperature, HEK293A cells"
+    },
+    {
+      "deltaF": 63,
+      "source": "doi:10.1101/2024.06.21.599617",
+      "notes": "3.5ms FWHM AP waveform, room temperature, HEK293A cells. Supplementary Table 1"
     }
   ],
 
@@ -62,10 +68,34 @@
       "ratio": 1.412,
       "reference": "asap4e",
       "source": "doi:10.1101/2024.06.21.599617"
+    },
+    {
+      "ratio": 0.706,
+      "reference": "asap6b",
+      "source": "doi:10.1101/2024.06.21.599617"
     }
   ],
 
   "twoPhoton": [
-    { "compatible": false, "source": "doi:10.1101/2024.06.21.599617" }
+    { "compatible": true, "source": "doi:10.1101/2024.06.21.599617" }
+  ],
+
+  "researchPapers": [
+    {
+      "title": "Improving positively tuned voltage indicators for brightness and kinetics",
+      "authors": "Lee S, Zhang G, Gomez LC, Testa-Silva G, Hao YA, Hiramoto A, Jiang D, Roth RH, Ding JB, Clandinin TR, Roska B, Feldman D, Ji N, Lin MZ",
+      "journal": "bioRxiv",
+      "year": 2024,
+      "url": "https://doi.org/10.1101/2024.06.21.599617",
+      "sample": "HEK293A cells, cultured rat hippocampal neurons, mouse retina ex vivo, mouse motor cortex in vivo"
+    },
+    {
+      "title": "Synaptic basis of feature selectivity in hippocampal neurons",
+      "authors": "Gonzalez KC, Negrean A, Liao Z, Terada S, Zhang G, Lee S, Ocsai K, Rozsa B, Lin MZ, Polleux F, Losonczy A",
+      "journal": "Nature",
+      "year": 2024,
+      "url": "https://doi.org/10.1038/s41586-024-08325-9",
+      "sample": "Mouse, hippocampus CA1, pyramidal neurons, in vivo two-photon"
+    }
   ]
 }

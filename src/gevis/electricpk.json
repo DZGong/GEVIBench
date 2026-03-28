@@ -2,7 +2,7 @@
   "id": "electricpk",
   "name": "ElectricPk",
   "year": 2012,
-  "category": "VSD-single",
+  "category": "VSD-cpGFP GEVI",
   "tags": [
     "cpEGFP",
     "Green",
@@ -149,5 +149,14 @@
       "source": "estimated from EGFP photostability (cpEGFP shares same chromophore)"
     }
   ],
-  "researchPapers": []
+  "researchPapers": [
+    {
+      "title": "A Fluorescent, Genetically-Encoded Voltage Probe Capable of Resolving Action Potentials",
+      "authors": "Barnett L, Platisa J, Popovic M, Pieribone VA, Hughes T",
+      "journal": "PLoS ONE",
+      "year": 2012,
+      "sample": "HEK293 cells, mouse hippocampal neurons, in vitro",
+      "url": "https://doi.org/10.1371/journal.pone.0043454"
+    }
+  ]
 }

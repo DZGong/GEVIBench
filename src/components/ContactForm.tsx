@@ -24,50 +24,52 @@ export function ContactForm() {
     }
   };
 
+  const inputCls = "w-full px-3 py-2 text-sm font-sans rounded-md focus:outline-none border-b-2 border-ink/10 focus:border-gold bg-transparent text-ink";
+
   return (
     <main className="max-w-7xl mx-auto px-4 py-6">
       <div className="text-center mb-8">
-        <h2 className="text-xl md:text-2xl font-bold mb-2 text-gray-900">
-          Contact & <span className="text-blue-400">Contribute</span>
+        <h2 className="text-xl md:text-2xl font-bold mb-2 text-ink">
+          Contact & <span className="text-klein">Contribute</span>
         </h2>
-        <p className="text-sm md:text-base px-2 max-w-2xl mx-auto text-gray-600">
+        <p className="text-sm md:text-base px-2 max-w-2xl mx-auto text-ink/60">
           Request a new GEVI to be added, report missing sensors, or share relevant papers and resources.
         </p>
       </div>
 
-      <div className="max-w-xl mx-auto border rounded-lg p-6 bg-paper border-gray-200">
+      <div className="max-w-xl mx-auto rounded-lg p-6 bg-surface-low">
         {sent ? (
           <div className="text-center py-8">
             <div className="text-4xl mb-4">✅</div>
-            <h3 className="text-lg font-semibold mb-2 text-gray-900">Message Sent!</h3>
-            <p className="text-gray-600">Thank you for your contribution. We'll get back to you soon.</p>
-            <button onClick={() => setSent(false)} className="mt-4 text-sm px-4 py-2 rounded-md bg-gray-100 text-gray-700 hover:bg-gray-200">
+            <h3 className="text-lg font-semibold mb-2 text-ink">Message Sent!</h3>
+            <p className="text-ink/60">Thank you for your contribution. We'll get back to you soon.</p>
+            <button onClick={() => setSent(false)} className="mt-4 text-sm font-sans px-4 py-2 rounded-md bg-surface text-ink/70 hover:bg-surface-low">
               Send Another Message
             </button>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium mb-1 text-gray-700">Name *</label>
-              <input type="text" required value={form.name} onChange={(e) => setForm({...form, name: e.target.value})} className="w-full px-3 py-2 text-sm border rounded-md focus:outline-none focus:border-blue-900 border-gray-300 text-gray-900" placeholder="Your full name" />
+              <label className="block text-sm font-sans font-medium mb-1 text-ink/70">Name *</label>
+              <input type="text" required value={form.name} onChange={(e) => setForm({...form, name: e.target.value})} className={inputCls} placeholder="Your full name" />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1 text-gray-700">Email *</label>
-              <input type="email" required value={form.email} onChange={(e) => setForm({...form, email: e.target.value})} className="w-full px-3 py-2 text-sm border rounded-md focus:outline-none focus:border-blue-900 border-gray-300 text-gray-900" placeholder="your.email@example.com" />
+              <label className="block text-sm font-sans font-medium mb-1 text-ink/70">Email *</label>
+              <input type="email" required value={form.email} onChange={(e) => setForm({...form, email: e.target.value})} className={inputCls} placeholder="your.email@example.com" />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1 text-gray-700">Position</label>
-              <input type="text" value={form.position} onChange={(e) => setForm({...form, position: e.target.value})} className="w-full px-3 py-2 text-sm border rounded-md focus:outline-none focus:border-blue-900 border-gray-300 text-gray-900" placeholder="e.g., Postdoctoral Researcher" />
+              <label className="block text-sm font-sans font-medium mb-1 text-ink/70">Position</label>
+              <input type="text" value={form.position} onChange={(e) => setForm({...form, position: e.target.value})} className={inputCls} placeholder="e.g., Postdoctoral Researcher" />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1 text-gray-700">Organization</label>
-              <input type="text" value={form.organization} onChange={(e) => setForm({...form, organization: e.target.value})} className="w-full px-3 py-2 text-sm border rounded-md focus:outline-none focus:border-blue-900 border-gray-300 text-gray-900" placeholder="e.g., University of ..." />
+              <label className="block text-sm font-sans font-medium mb-1 text-ink/70">Organization</label>
+              <input type="text" value={form.organization} onChange={(e) => setForm({...form, organization: e.target.value})} className={inputCls} placeholder="e.g., University of ..." />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1 text-gray-700">Message *</label>
-              <textarea required rows={4} value={form.message} onChange={(e) => setForm({...form, message: e.target.value})} className="w-full px-3 py-2 text-sm border rounded-md focus:outline-none focus:border-blue-900 border-gray-300 text-gray-900" placeholder="Please describe the GEVI you'd like to request, or share links to papers/resources..." />
+              <label className="block text-sm font-sans font-medium mb-1 text-ink/70">Message *</label>
+              <textarea required rows={4} value={form.message} onChange={(e) => setForm({...form, message: e.target.value})} className={inputCls} placeholder="Please describe the GEVI you'd like to request, or share links to papers/resources..." />
             </div>
-            <button type="submit" disabled={submitting} className={`w-full py-2 px-4 rounded-md text-white font-medium ${submitting ? 'bg-blue-800' : 'bg-blue-900 hover:bg-blue-800'}`}>
+            <button type="submit" disabled={submitting} className={`w-full py-2 px-4 rounded-md text-white font-sans font-medium ${submitting ? 'bg-klein-light' : 'bg-klein hover:bg-klein-light'}`}>
               {submitting ? 'Sending...' : 'Send Message'}
             </button>
           </form>

@@ -17,7 +17,7 @@
   "spectrum": {
     "type": "rhodopsin",
     "peakEx": 558,
-    "peakEm": 687,
+    "peakEm": 722,
     "name": "Arch"
   },
 
@@ -33,7 +33,8 @@
       "on": 0.5,
       "off": 0.5,
       "temperature": "24°C",
-      "source": "doi:10.1038/nmeth.1782"
+      "source": "doi:10.1038/nmeth.1782",
+      "note": "Sub-millisecond single time constant; on/off not separately resolved at this resolution. Paper reports <1 ms response."
     }
   ],
 
@@ -50,6 +51,15 @@
     }
   ],
 
+  "brightnessData": [
+    {
+      "ratio": 0.000268,
+      "reference": "EGFP",
+      "source": "doi:10.1039/D4SC05120C",
+      "note": "Computed from EC=48900 M⁻¹cm⁻¹ at 559 nm × QY≈1.1×10⁻⁴ (Herasymenko 2025). Reference EGFP EC×QY=20040."
+    }
+  ],
+
   "photostabilityData": [
     {
       "brightnessRemaining": 83,
@@ -60,6 +70,14 @@
   ],
 
   "researchPapers": [
+    {
+      "title": "Optical recording of action potentials in mammalian neurons using a microbial rhodopsin",
+      "authors": "Kralj JM, Douglass AD, Hochbaum DR, Maclaurin D, Cohen AE",
+      "journal": "Nature Methods",
+      "year": 2012,
+      "sample": "Cultured rat hippocampal neurons, HEK293 cells, in vitro",
+      "url": "https://doi.org/10.1038/nmeth.1782"
+    },
     {
       "title": "Mechanism of voltage-sensitive fluorescence in a microbial rhodopsin",
       "authors": "Maclaurin D, Venkatachalam V, Lee H, Cohen AE",
@@ -91,6 +109,14 @@
       "year": 2014,
       "sample": "Cultured rat hippocampal neurons and C. elegans neurons, in vitro/in vivo",
       "url": "https://doi.org/10.1038/ncomms5894"
+    },
+    {
+      "title": "All-optical electrophysiology in mammalian neurons using engineered microbial rhodopsins",
+      "authors": "Hochbaum DR, Zhao Y, Farhi SL, Klapoetke NC, Werley CA, Kapoor V, Zou P, Kralj JM, Maclaurin D, Smedemark-Margulies N, Saulnier JL, Boulting GL, Straub C, Cho YK, Melkonian M, Wong GKS, Harrison DJ, Murthy VN, Sabatini BL, Boyden ES, Campbell RE, Cohen AE",
+      "journal": "Nature Methods",
+      "year": 2014,
+      "sample": "HEK293 cells, cultured rat hippocampal neurons, in vitro",
+      "url": "https://doi.org/10.1038/nmeth.3000"
     },
     {
       "title": "Photoactivated voltage imaging in tissue with an archaerhodopsin-derived reporter",

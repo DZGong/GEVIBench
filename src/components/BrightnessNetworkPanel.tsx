@@ -417,24 +417,24 @@ export function BrightnessNetworkPanel({ onSelectGEVI }: Props) {
 
   return (
     <div
-      className="flex flex-col bg-paper text-gray-900"
+      className="flex flex-col bg-surface text-ink"
       style={{ height: 'calc(100vh - 61px)' }}
     >
       {/* Header bar */}
-      <div className="flex items-center gap-4 px-5 py-2.5 border-b flex-shrink-0 border-gray-200">
+      <div className="flex items-center gap-4 px-5 py-2.5 border-b flex-shrink-0 border-ink/10">
         <div>
           <h2 className="text-sm font-semibold">Brightness Network</h2>
-          <p className="text-xs text-gray-500">
+          <p className="text-xs text-ink/50">
             Edges show direct brightness comparisons from published papers. Labels show the ratio A&nbsp;/&nbsp;B. Drag to pan · click a node to view details.
           </p>
         </div>
-        <div className="ml-auto text-xs text-gray-400">
+        <div className="ml-auto text-xs text-ink/40">
           {nodes.length} nodes · {edges.length} edges
         </div>
       </div>
 
       {/* Legend */}
-      <div className="flex flex-wrap gap-x-5 gap-y-1 px-5 py-1.5 text-xs border-b flex-shrink-0 border-gray-100 text-gray-500">
+      <div className="flex flex-wrap gap-x-5 gap-y-1 px-5 py-1.5 text-xs border-b flex-shrink-0 border-ink/5 text-ink/50">
         {[
           { color: '#f59e0b', label: 'EGFP (anchor)' },
           { color: '#22c55e', label: 'GFP-based' },
@@ -564,35 +564,35 @@ export function BrightnessNetworkPanel({ onSelectGEVI }: Props) {
             style={{ background: tipBg, border: `1px solid ${tipBd}`, minWidth: 190 }}>
             <div className="font-semibold text-sm mb-1.5">{hoveredNode.name}</div>
             {hoveredNode.isEGFP && (
-              <p className="text-gray-500">
+              <p className="text-ink/50">
                 Reference standard — B_rel = 1.00 · Score = 60
               </p>
             )}
             {hoveredNode.isExternal && (
-              <p className="text-gray-500">
+              <p className="text-ink/50">
                 External reference (not in database)
               </p>
             )}
             {!hoveredNode.isEGFP && !hoveredNode.isExternal && (
               <>
-                <div className="text-xs mb-1.5 text-gray-500">
+                <div className="text-xs mb-1.5 text-ink/50">
                   {hoveredNode.gevi?.category}
                 </div>
                 <div className="space-y-0.5">
                   <div className="flex justify-between gap-6">
-                    <span className="text-gray-500">B_rel (vs EGFP)</span>
+                    <span className="text-ink/50">B_rel (vs EGFP)</span>
                     <span className="font-mono font-semibold">
                       {hoveredNode.bRel !== null ? `${hoveredNode.bRel.toFixed(3)}×` : 'unresolved'}
                     </span>
                   </div>
                   <div className="flex justify-between gap-6">
-                    <span className="text-gray-500">Brightness score</span>
+                    <span className="text-ink/50">Brightness score</span>
                     <span className="font-mono font-semibold">
                       {hoveredNode.bScore !== null ? `${hoveredNode.bScore}/100` : 'N/A'}
                     </span>
                   </div>
                 </div>
-                <div className="mt-2 text-xs text-gray-400">
+                <div className="mt-2 text-xs text-ink/40">
                   Click to view GEVI details ↗
                 </div>
               </>

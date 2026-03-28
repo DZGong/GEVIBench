@@ -464,23 +464,30 @@
       "source": "doi:10.1007/s00249-010-0620-0"
     },
     {
+      "on": 72.0,
+      "off": 70.6,
+      "temperature": "30°C",
+      "source": "doi:10.1007/s00249-010-0620-0"
+    },
+    {
       "on": 85.8,
       "off": 137.0,
       "temperature": "25°C",
       "source": "doi:10.1007/s00249-010-0620-0"
-    },
-    {
-      "on": 51.6,
-      "off": 91.6,
-      "temperature": "room temperature",
-      "source": "doi:10.3389/fnmol.2014.00078"
     }
   ],
   "dynamicRangeData": [
     {
-      "deltaF": -9.5,
+      "deltaF": -8.3,
       "sign": "negative",
-      "source": "doi:10.1038/nmeth.1782"
+      "source": "doi:10.1371/journal.pone.0004555",
+      "note": "Donor (Cerulean) channel ΔF/F for +130mV step (-70 to +60 mV) at 35°C, n=5 cells"
+    },
+    {
+      "deltaF": 15.2,
+      "sign": "positive",
+      "source": "doi:10.3389/fnmol.2014.00078",
+      "note": "Ratiometric ΔR/R (acceptor/donor) for full voltage range -140 to +120 mV from holding -70 mV"
     }
   ],
   "photostabilityData": [
@@ -492,7 +499,6 @@
       "note": "Approximated from Cerulean donor FP in vitro τ_irrev=610s at 2 mW/mm²"
     }
   ],
-
   "brightnessData": [
     {
       "ratio": 1.74,
@@ -500,7 +506,6 @@
       "source": "Estimated from Citrine QY=0.76, EC=77000 vs EGFP QY=0.60, EC=56000"
     }
   ],
-
   "sensitivityData": [
     {
       "deltaF": 0.2,
@@ -508,19 +513,54 @@
       "note": "Computational prediction (0.1-0.25% ΔF/F per AP), Akemann et al. 2009 Biophys J simulation"
     }
   ],
-
+  "addgene": {
+    "id": "87948",
+    "url": "https://www.addgene.org/87948/"
+  },
   "researchPapers": [
     {
+      "title": "Engineering of a Genetically Encodable Fluorescent Voltage Sensor Exploiting Fast Ci-VSP Voltage-Sensing Movements",
+      "authors": "Lundby A, Mutoh H, Dimitrov D, Akemann W, Knöpfel T",
+      "journal": "PLoS ONE",
+      "year": 2008,
+      "sample": "PC12 cells, in vitro voltage clamp",
+      "url": "https://doi.org/10.1371/journal.pone.0002514"
+    },
+    {
+      "title": "Biophysical characterization of the fluorescent protein voltage probe VSFP2.3 based on the voltage-sensing domain of Ci-VSP",
+      "authors": "Lundby A, Akemann W, Knöpfel T",
+      "journal": "European Biophysics Journal",
+      "year": 2010,
+      "sample": "PC12 cells, in vitro voltage clamp + sensing current measurements at 25/30/35°C",
+      "url": "https://doi.org/10.1007/s00249-010-0620-0"
+    },
+    {
+      "title": "Spectrally-resolved response properties of the three most advanced FRET based fluorescent protein voltage probes",
+      "authors": "Mutoh H, Perron A, Dimitrov D, Iwamoto Y, Akemann W, Chudakov DM, Knöpfel T",
+      "journal": "PLoS ONE",
+      "year": 2009,
+      "sample": "PC12 cells, in vitro voltage clamp, spectral characterization at 35°C",
+      "url": "https://doi.org/10.1371/journal.pone.0004555"
+    },
+    {
       "title": "Imaging brain electric signals with genetically targeted voltage-sensitive fluorescent proteins",
-      "authors": "Akemann W, et al.",
+      "authors": "Akemann W, Mutoh H, Perron A, Rossier J, Knöpfel T",
       "journal": "Nature Methods",
       "year": 2010,
       "sample": "Mouse, somatosensory cortex layer 2/3, in vivo + brain slices",
       "url": "https://doi.org/10.1038/nmeth.1479"
     },
     {
+      "title": "Exploration of genetically encoded voltage indicators based on a chimeric voltage sensing domain",
+      "authors": "Mishina Y, Mutoh H, Song C, Knöpfel T",
+      "journal": "Frontiers in Molecular Neuroscience",
+      "year": 2014,
+      "sample": "PC12 and HEK cells, in vitro voltage clamp + mouse cortex in vivo",
+      "url": "https://doi.org/10.3389/fnmol.2014.00078"
+    },
+    {
       "title": "Comparative performance of a genetically-encoded voltage indicator and a blue voltage sensitive dye for large scale cortical voltage imaging",
-      "authors": "Mutoh H, et al.",
+      "authors": "Mutoh H, Mishina Y, Gallero-Salas Y, Knöpfel T",
       "journal": "Frontiers in Cellular Neuroscience",
       "year": 2015,
       "sample": "Mouse, somatosensory cortex, in vivo anesthetized",

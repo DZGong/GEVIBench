@@ -1,7 +1,7 @@
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Cell } from 'recharts';
 import { computeSampleSummary, SAMPLE_CATEGORY_ORDER } from '../utils';
 
-const COMPARISON_COLORS = ['#3b82f6', '#ef4444', '#22c55e', '#f59e0b', '#8b5cf6'];
+const COMPARISON_COLORS = ['#002FA7', '#ef4444', '#22c55e', '#f59e0b', '#8b5cf6'];
 
 interface SingleProps {
   mode: 'single';
@@ -19,7 +19,7 @@ const getSafeName = (name: string) => name.replace(/[^a-zA-Z0-9]/g, '');
 
 const axisStyle = { fill: '#6b7280', fontSize: 11 };
 const gridColor = '#e5e7eb';
-const barColor = '#1e40af';
+const barColor = '#002FA7';
 
 export function SampleUsageChart(props: Props) {
   if (props.mode === 'single') {
@@ -29,7 +29,7 @@ export function SampleUsageChart(props: Props) {
       .map(cat => ({ category: cat, count: summary[cat] }));
 
     if (data.length === 0) return (
-      <p className="text-xs text-center py-4 text-gray-400">
+      <p className="text-xs text-center py-4 text-ink/40">
         No sample data available
       </p>
     );
@@ -64,7 +64,7 @@ export function SampleUsageChart(props: Props) {
   );
 
   if (activeCategories.length === 0) return (
-    <p className="text-xs text-center py-4 text-gray-400">
+    <p className="text-xs text-center py-4 text-ink/40">
       No sample data available
     </p>
   );

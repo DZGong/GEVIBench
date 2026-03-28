@@ -64,9 +64,21 @@
   "photostabilityData": [
     {
       "brightnessRemaining": 94.5,
-      "illumination": "480 nm white-light laser",
+      "illumination": "20 uW at 480 nm",
       "duration": "2.2 min",
-      "source": "doi:10.1021/acschemneuro.5c00670"
+      "source": "doi:10.1021/acschemneuro.5c00670",
+      "note": "Confocal FLIM, 5.5% loss over 132 s at -60 mV; power in focal plane, not mW/mm²"
+    }
+  ],
+
+  "researchPapers": [
+    {
+      "title": "Absolute Membrane Potential Recording with ASAP-Type Genetically Encoded Voltage Indicators Using Fluorescence Lifetime Imaging",
+      "authors": "Nair AG, Rodewald M, Bae H, Rühl P, Popp J, Schmitt M, Meyer-Zedler T, Heinemann SH",
+      "journal": "ACS Chemical Neuroscience",
+      "year": 2025,
+      "sample": "HEK293T cells; A375 melanoma cells; MCF-7 breast cancer cells, in vitro",
+      "url": "https://doi.org/10.1021/acschemneuro.5c00670"
     }
   ]
 }

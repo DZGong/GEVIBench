@@ -37,7 +37,7 @@
       "off": 4.7,
       "temperature": "25°C",
       "source": "doi:10.1126/science.1204763",
-      "note": "Single exponential time constant of 4.7 ms for voltage step response; on/off not separately reported"
+      "note": "Single time constant of ~4.7 ms for voltage step response (blink duration FWHM); on/off not separately resolved. Paper states 'response time ~5 ms'."
     }
   ],
 
@@ -56,6 +56,14 @@
   },
 
   "researchPapers": [
+    {
+      "title": "Electrical spiking in Escherichia coli probed with a fluorescent voltage-indicating protein",
+      "authors": "Kralj JM, Hochbaum DR, Douglass AD, Cohen AE",
+      "journal": "Science",
+      "year": 2011,
+      "sample": "E. coli (BW25113 and other strains), in vitro",
+      "url": "https://doi.org/10.1126/science.1204763"
+    },
     {
       "title": "Initial photophysical characterization of the proteorhodopsin optical proton sensor (PROPS)",
       "authors": "Nadeau JL",

@@ -10,18 +10,18 @@ export function SearchFilters({
 }: SearchFiltersProps) {
   return (
     <div className="relative mb-3">
-      <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+      <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-ink/40" />
       <input
         type="text"
         placeholder="Search sensors..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        className="w-full pl-10 pr-8 py-2 text-base border rounded-md focus:outline-none focus:border-blue-900 bg-paper-light border-gray-300 text-gray-900"
+        className="w-full pl-10 pr-8 py-2 text-base font-sans rounded-md focus:outline-none border-b-2 border-ink/10 focus:border-gold bg-transparent text-ink"
       />
       {searchTerm && (
         <button
           onClick={() => setSearchTerm('')}
-          className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+          className="absolute right-3 top-1/2 -translate-y-1/2 text-ink/40 hover:text-ink/60"
           aria-label="Clear search"
         >
           ×

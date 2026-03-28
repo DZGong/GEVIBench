@@ -46,14 +46,8 @@
     {
       "on": 2.8,
       "off": 5.4,
-      "temperature": "33-34°C",
+      "temperature": "22°C",
       "source": "doi:10.1038/ncomms4674"
-    },
-    {
-      "on": 7.53,
-      "off": 5.02,
-      "temperature": "25°C",
-      "source": "doi:10.1073/pnas.1902443116"
     }
   ],
 
@@ -108,12 +102,28 @@
 
   "researchPapers": [
     {
+      "title": "Imaging neural spiking in brain tissue using FRET-opsin protein voltage sensors",
+      "authors": "Gong Y, Wagner MJ, Zhong Li J, Schnitzer MJ",
+      "journal": "Nature Communications",
+      "year": 2014,
+      "sample": "HEK293 cells, cultured neurons, mouse brain slices and in vivo (Purkinje neurons)",
+      "url": "https://doi.org/10.1038/ncomms4674"
+    },
+    {
       "title": "High-speed recording of neural spikes in awake mice and flies with a fluorescent voltage sensor",
       "authors": "Gong Y, et al.",
       "journal": "Science",
       "year": 2015,
       "sample": "HEK293 cells, cultured neurons, in vitro",
       "url": "https://doi.org/10.1126/science.aab0810"
+    },
+    {
+      "title": "Cell-Type-Specific Optical Recording of Membrane Voltage Dynamics in Freely Moving Mice",
+      "authors": "Marshall JD, Li JZ, Zhang Y, Gong Y, St-Pierre F, Lin MZ, Schnitzer MJ",
+      "journal": "Cell",
+      "year": 2016,
+      "sample": "Mouse somatosensory cortex, striatum (D1/D2 MSNs), PV interneurons, in vivo freely moving",
+      "url": "https://doi.org/10.1016/j.cell.2016.11.021"
     },
     {
       "title": "Fast two-photon imaging of subcellular voltage dynamics in neuronal tissue with genetically encoded indicators",

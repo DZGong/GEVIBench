@@ -42,7 +42,7 @@
     {
       "on": 29.2,
       "off": 15.6,
-      "temperature": "25°C",
+      "temperature": "33-35°C",
       "source": "doi:10.1021/acschemneuro.6b00234"
     }
   ],
@@ -90,6 +90,14 @@
   },
 
   "researchPapers": [
+    {
+      "title": "Directed evolution of key residues in fluorescent protein inverses the polarity of voltage sensitivity in the genetically encoded indicator ArcLight",
+      "authors": "Platisa J, Vasan G, Yang A, Pieribone VA",
+      "journal": "ACS Chemical Neuroscience",
+      "year": 2017,
+      "sample": "HEK293 cells and cultured mouse cortical neurons, in vitro",
+      "url": "https://doi.org/10.1021/acschemneuro.6b00234"
+    },
     {
       "title": "Generation of a genetically encoded voltage indicator MARINA reporter human iPS cell line using Cas9 (VULSCi002-A-2)",
       "authors": "Petruskeviciu-te A, et al.",

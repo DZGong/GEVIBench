@@ -31,22 +31,22 @@
     "polarity": "positive",
     "name": "FlicR1",
     "custom": {
-      "voltage": [-100, -90, -80, -70, -60, -50, -40, -30, -20, -10, 0, 10, 20, 30, 40, 50],
-      "deltaF":  [-2.0, -1.3, -0.7, 0, 0.7, 1.4, 2.1, 2.7, 3.4, 4.0, 4.7, 5.3, 6.0, 6.6, 7.3, 7.8]
+      "voltage": [-100, -80, -70, -50, -20, 0, 30, 50],
+      "deltaF":  [-2, -1, 0, 1, 3, 5, 7, 8]
     }
   },
   "kinetics": [
     {
       "on": 3.0,
       "off": 2.8,
-      "temperature": "25°C",
+      "temperature": "22°C",
       "source": "doi:10.1523/JNEUROSCI.3590-15.2016"
     },
     {
-      "on": 3.2,
-      "off": 2.6,
+      "on": 0.74,
+      "off": 0.93,
       "temperature": "34°C",
-      "source": "doi:10.1038/s41592-018-0188-7"
+      "source": "doi:10.1523/JNEUROSCI.3590-15.2016"
     }
   ],
   "dynamicRangeData": [
@@ -86,7 +86,7 @@
   "photostabilityData": [
     {
       "brightnessRemaining": 67,
-      "illumination": "100 mW/mm²",
+      "illumination": "10 mW/mm²",
       "duration": "1 min",
       "source": "doi:10.1523/JNEUROSCI.3590-15.2016"
     }
@@ -96,6 +96,14 @@
     "url": "https://www.addgene.org/74142/"
   },
   "researchPapers": [
+    {
+      "title": "A bright and fast red fluorescent protein voltage indicator that reports neuronal activity in organotypic brain slices",
+      "authors": "Abdelfattah AS, et al.",
+      "journal": "Journal of Neuroscience",
+      "year": 2016,
+      "sample": "HEK293 cells; rat hippocampal neurons, in vitro; rat organotypic brain slices",
+      "url": "https://doi.org/10.1523/JNEUROSCI.3590-15.2016"
+    },
     {
       "title": "Fast, in vivo voltage imaging using a red fluorescent indicator",
       "authors": "Kannan M, et al.",
@@ -119,6 +127,14 @@
       "year": 2020,
       "sample": "HEK293 cells, in vitro",
       "url": "https://doi.org/10.1523/ENEURO.0060-20.2020"
+    },
+    {
+      "title": "Screening and cellular characterization of genetically encoded voltage indicators based on near-infrared fluorescent proteins",
+      "authors": "Piatkevich KD, et al.",
+      "journal": "ACS Chemical Neuroscience",
+      "year": 2020,
+      "sample": "HEK293T cells; cultured neurons, in vitro",
+      "url": "https://doi.org/10.1021/acschemneuro.0c00046"
     }
   ]
 }

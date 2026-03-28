@@ -151,7 +151,7 @@ function GEVIBenchApp() {
         <div className="relative text-center py-4 px-3">
           <button onClick={handleLogoClick} className="hover:opacity-80 transition-opacity">
             <h2 className="font-sans font-bold mb-1 text-white whitespace-nowrap" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.8)', fontSize: 'clamp(16px, 4vw, 24px)' }}>
-              GEVIBench <span className="text-blue-300 font-semibold" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>— Voltage Indicator Benchmark</span>
+              GEVIBench <span className="text-blue-200 font-semibold" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>— Voltage Indicator Benchmark</span>
             </h2>
           </button>
           <p className="text-gray-200 whitespace-nowrap" style={{ textShadow: '0 1px 3px rgba(0,0,0,0.8)', fontSize: 'clamp(11px, 2.5vw, 16px)' }}>
@@ -241,10 +241,10 @@ function GEVIBenchApp() {
     <main className="max-w-7xl mx-auto px-4 py-6">
       <div className="max-w-4xl mx-auto">
         <h2 className={`text-xl md:text-2xl font-bold mb-4 ${colors.text}`}>
-          Scoring <span className="text-blue-400">Methodology</span>
+          Scoring <span className="text-klein">Methodology</span>
         </h2>
 
-        <div className="border rounded-lg p-4 md:p-6 bg-paper border-gray-200">
+        <div className="rounded-lg p-4 md:p-6 bg-surface-low">
           <div className="space-y-6">
             <div>
               <h3 className={`text-lg font-semibold mb-2 ${colors.text}`}>Overview</h3>
@@ -254,12 +254,12 @@ function GEVIBenchApp() {
             <div>
               <h3 className={`text-lg font-semibold mb-2 ${colors.text}`}>Two Data Sources</h3>
               <div className="space-y-4">
-                <div className="p-4 rounded-lg bg-gray-50">
-                  <h4 className="font-medium mb-2 text-gray-800">1. Public Raw Datasets</h4>
+                <div className="p-4 rounded-lg bg-surface">
+                  <h4 className="font-medium mb-2 text-ink">1. Public Raw Datasets</h4>
                   <p className={`text-sm ${colors.textTertiary}`}>{methodologyContent.twoApproaches.rawData.description}</p>
                 </div>
-                <div className="p-4 rounded-lg bg-gray-50">
-                  <h4 className="font-medium mb-2 text-gray-800">2. Published Parameters</h4>
+                <div className="p-4 rounded-lg bg-surface">
+                  <h4 className="font-medium mb-2 text-ink">2. Published Parameters</h4>
                   <p className={`text-sm ${colors.textTertiary}`}>{methodologyContent.twoApproaches.literature.description}</p>
                 </div>
               </div>
@@ -351,9 +351,9 @@ function GEVIBenchApp() {
               <h3 className={`text-lg font-semibold mb-2 ${colors.text}`}>Score Components</h3>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
                 {methodologyContent.metrics.items.map((item: { name: string; weight: string; description: string }, i: number) => (
-                  <div key={i} className="p-2 rounded bg-gray-50">
-                    <div className="text-sm font-medium text-gray-800">
-                      {item.name} <span className="text-blue-500">{item.weight}</span>
+                  <div key={i} className="p-2 rounded bg-surface">
+                    <div className="text-sm font-medium text-ink">
+                      {item.name} <span className="text-klein">{item.weight}</span>
                     </div>
                     <div className={`text-xs ${colors.textMuted}`}>{item.description}</div>
                   </div>
@@ -367,12 +367,12 @@ function GEVIBenchApp() {
               <p className={`text-sm ${colors.textSecondary} mb-3`}>{methodologyContent.bonusPoints.description}</p>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                 {methodologyContent.bonusPoints.rules.map((rule: any, i: number) => (
-                  <div key={i} className="p-3 rounded-lg border bg-paper border-gray-200">
+                  <div key={i} className="p-3 rounded-lg bg-surface">
                     <div className="flex items-center gap-2 mb-2">
-                      <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                      <span className="px-2 py-0.5 rounded-full text-xs font-medium font-sans bg-klein/10 text-klein">
                         +{rule.points} pts
                       </span>
-                      <span className="text-sm font-medium text-gray-800">{rule.name}</span>
+                      <span className="text-sm font-medium text-ink">{rule.name}</span>
                     </div>
                     <div className={`text-xs ${colors.textMuted}`}>{rule.description}</div>
                   </div>
@@ -402,10 +402,10 @@ function GEVIBenchApp() {
     example?: string,
     formulaNote?: string
   ) => (
-    <div className="mt-4 p-3 rounded-lg bg-blue-50">
+    <div className="mt-4 p-3 rounded-lg bg-surface">
       <h4 className={`text-md font-semibold mb-2 ${colors.text}`}>{title}</h4>
       <p className={`text-sm ${colors.textSecondary}`}>{description}</p>
-      <div className="mt-2 p-2 rounded font-mono text-sm bg-paper text-green-700">
+      <div className="mt-2 p-2 rounded font-mono text-sm bg-surface-low text-ink/80">
         {formula}
       </div>
       {formulaNote && (
@@ -435,7 +435,7 @@ function GEVIBenchApp() {
   );
 
   return (
-    <div className="min-h-screen flex flex-col bg-paper">
+    <div className="min-h-screen flex flex-col bg-surface">
       <Header
         activeTab={activeTab}
         setActiveTab={(tab) => {
@@ -484,12 +484,12 @@ function GEVIBenchApp() {
       )}
 
       {/* Footer */}
-      <footer className="mt-auto py-4 border-t bg-paper-dark border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 flex items-center justify-center gap-4">
-          <p className="text-sm text-gray-500">
+      <footer className="mt-auto py-2 bg-surface-low">
+        <div className="max-w-7xl mx-auto px-4 flex items-center justify-center gap-3">
+          <span className="flex items-center gap-1 text-xs font-sans text-ink/40">
             © 2026 GEVIBench. Data sourced from published studies.
-          </p>
-          <span className="flex items-center gap-1 text-xs text-gray-400">
+          </span>
+          <span className="flex items-center gap-1 text-xs font-sans text-ink/40">
             <Clock className="w-3 h-3" />
             Updated {timeAgo(BUILD_DATE)}
           </span>

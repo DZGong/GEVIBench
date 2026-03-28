@@ -442,16 +442,16 @@ export function FamilyTreePanel({
   }
 
   return (
-    <div className="rounded-lg border p-4 bg-paper border-gray-200">
+    <div className="rounded-lg border p-4 bg-surface border-ink/10">
       <div className="flex items-center gap-2 mb-4">
         <button
           onClick={onCloseDetail}
-          className="p-1 rounded-md hover:bg-gray-100 text-gray-500"
+          className="p-1 rounded-md hover:bg-surface-low text-ink/50"
           title="Close and return"
         >
           <X className="w-5 h-5" />
         </button>
-        <h3 className="text-xl font-bold text-gray-900">
+        <h3 className="text-xl font-bold text-ink">
           Genetic Lineage
         </h3>
       </div>
@@ -519,19 +519,19 @@ export function FamilyTreePanel({
                 )}
                 <path
                   d={hexPath(radius)}
-                  fill={isRoot ? '#3b82f6' : isLeaf ? node.color : '#d1d5db'}
+                  fill={isRoot ? '#002FA7' : isLeaf ? node.color : '#d1d5db'}
                   stroke={isRoot ? '#fff' : isLeaf ? '#fff' : '#9ca3af'}
                   strokeWidth={isRoot ? 2 : isLeaf ? 1.5 : 1}
                   opacity={1}
                   style={{
-                    filter: isRoot ? 'drop-shadow(0 0 6px rgba(59,130,246,0.5))' : isLeaf ? `drop-shadow(0 0 3px ${node.color})` : 'none',
+                    filter: isRoot ? 'drop-shadow(0 0 6px rgba(0,47,167,0.5))' : isLeaf ? `drop-shadow(0 0 3px ${node.color})` : 'none',
                   }}
                 />
                 <text
                   x={0}
                   y={isRoot ? -(radius + 4) : isLeaf ? radius + 14 : radius + 12}
                   textAnchor="middle"
-                  fill={isRoot ? '#2563eb' : isLeaf ? '#374151' : '#6b7280'}
+                  fill={isRoot ? '#002FA7' : isLeaf ? '#374151' : '#6b7280'}
                   style={{ fontSize: isRoot ? '12px' : isLeaf ? '9px' : '10px', fontWeight: isRoot ? '700' : isLeaf ? '600' : '500' }}
                 >
                   {node.name}
@@ -563,7 +563,7 @@ export function FamilyTreePanel({
             zIndex: 9999,
             width: TOOLTIP_W,
           }}
-          className="rounded-lg border shadow-lg p-2.5 bg-paper border-gray-200"
+          className="rounded-lg border shadow-ambient p-2.5 bg-surface border-ink/10"
           onMouseEnter={() => {
             if (hideTimeout.current) clearTimeout(hideTimeout.current);
           }}
@@ -579,19 +579,19 @@ export function FamilyTreePanel({
           </button>
 
           {/* Year · Category */}
-          <div className="text-[10px] mb-1.5 text-gray-500">
+          <div className="text-[10px] mb-1.5 text-ink/50">
             {hoverInfo.gevi.year} · {hoverInfo.gevi.category}
           </div>
 
           {/* Tag chips */}
           <div className="flex flex-wrap gap-1 mb-1.5">
             {tooltipTags.map((tag, idx) => (
-              <span key={`${tag}-${idx}`} className="text-[9px] px-1.5 py-0.5 rounded bg-blue-50 text-blue-700">
+              <span key={`${tag}-${idx}`} className="text-[9px] px-1.5 py-0.5 rounded bg-klein/5 text-klein">
                 {tag}
               </span>
             ))}
             {tooltipExtraCount > 0 && (
-              <span className="text-[9px] px-1.5 py-0.5 rounded bg-gray-100 text-gray-500">
+              <span className="text-[9px] px-1.5 py-0.5 rounded bg-surface-low text-ink/50">
                 +{tooltipExtraCount}
               </span>
             )}
@@ -603,7 +603,7 @@ export function FamilyTreePanel({
               href={hoverInfo.gevi.paperUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-xs flex items-center gap-1 mb-1.5 hover:underline text-blue-900"
+              className="text-xs flex items-center gap-1 mb-1.5 hover:underline text-klein"
             >
               <BookOpen className="w-3 h-3 flex-shrink-0" />
               <span className="truncate flex-1">{hoverInfo.gevi.paper}</span>
@@ -612,7 +612,7 @@ export function FamilyTreePanel({
           )}
 
           {/* Divider */}
-          <div className="border-t mb-1 border-gray-100" />
+          <div className="border-t mb-1 border-ink/5" />
 
           {/* Radar chart */}
           <RadarChart width={150} height={130} data={tooltipRadarData}>
@@ -621,15 +621,15 @@ export function FamilyTreePanel({
             <PolarRadiusAxis domain={[0, 100]} tick={false} axisLine={false} />
             <Radar
               dataKey="value"
-              stroke="#1e40af"
-              fill="#1e40af"
+              stroke="#002FA7"
+              fill="#002FA7"
               fillOpacity={0.2}
             />
           </RadarChart>
         </div>
       )}
 
-      <div className="mt-4 pt-3 border-t text-xs text-center border-gray-200 text-gray-400">
+      <div className="mt-4 pt-3 border-t text-xs text-center border-ink/10 text-ink/40">
         Click on nodes to view sensor details
       </div>
     </div>
