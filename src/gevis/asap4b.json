@@ -36,10 +36,18 @@
 
   "kinetics": [
     {
-      "on": 1.53,
-      "off": 1.54,
-      "temperature": "25°C",
-      "source": "doi:10.1038/s41592-023-01913-z"
+      "on": 3.9,
+      "off": 3.9,
+      "temperature": "22°C",
+      "source": "doi:10.1038/s41592-023-01913-z",
+      "notes": "Fast activation component (19% of amplitude); room temperature"
+    },
+    {
+      "on": 1.5,
+      "off": 1.5,
+      "temperature": "37°C",
+      "source": "doi:10.1038/s41592-023-01913-z",
+      "notes": "Fast component at physiological temperature"
     }
   ],
 
@@ -54,7 +62,13 @@
   "sensitivityData": [
     {
       "deltaF": 35,
-      "source": "doi:10.1038/s41592-023-01913-z"
+      "source": "doi:10.1038/s41592-023-01913-z",
+      "notes": "3.5ms FWHM, 100mV AP waveform, room temperature"
+    },
+    {
+      "deltaF": 30,
+      "source": "doi:10.1038/s41592-023-01913-z",
+      "notes": "Naturalistic hippocampal AP waveform, 37°C"
     }
   ],
 
@@ -92,6 +106,14 @@
       "year": 2025,
       "url": "https://doi.org/10.1038/s41593-025-02016-y",
       "sample": "Mouse, CA1 hippocampus, PV and SST interneurons, in vivo"
+    },
+    {
+      "title": "Imaging sensory transmission and neuronal plasticity in primary sensory neurons with a positively tuned voltage indicator",
+      "authors": "Zhang Y, et al.",
+      "journal": "Nature Communications",
+      "year": 2025,
+      "url": "https://doi.org/10.1038/s41467-025-61774-2",
+      "sample": "Mouse, dorsal root ganglia neurons, in vivo"
     }
   ]
 }

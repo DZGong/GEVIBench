@@ -1,4 +1,5 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useMemo } from 'react';
+import { Clock } from 'lucide-react';
 import { getAllGEVIs } from './geviData';
 import { methodologyContent } from './methodology';
 import { FamilyTreePanel } from './components/FamilyTreePanel';
@@ -10,7 +11,7 @@ import { GEVIDetail } from './components/GEVIDetail';
 import { ComparisonPanel } from './components/ComparisonPanel';
 import { ContactForm } from './components/ContactForm';
 import { RainbowText, getGEVIColor } from './utils';
-import { ThemeProvider, useTheme } from './context/ThemeContext';
+import { COLORS } from './constants';
 import type { GEVI, SortField, ViewTab, MobileView, SortConfig } from './types';
 import {
   DEFAULT_CATEGORY,
@@ -19,10 +20,30 @@ import {
   MAX_COMPARE_ITEMS,
 } from './constants';
 
-// Inner component that uses the theme context
-function GEVIBenchApp() {
-  const { darkMode, colors } = useTheme();
+const BUILD_DATE = __BUILD_DATE__;
 
+const colors = COLORS.light;
+
+function timeAgo(dateStr: string): string {
+  const now = new Date();
+  const then = new Date(dateStr);
+  const diffMs = now.getTime() - then.getTime();
+  const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+  if (diffDays === 0) return 'today';
+  if (diffDays === 1) return '1 day ago';
+  if (diffDays < 7) return `${diffDays} days ago`;
+  const diffWeeks = Math.floor(diffDays / 7);
+  if (diffWeeks === 1) return '1 week ago';
+  if (diffWeeks < 4) return `${diffWeeks} weeks ago`;
+  const diffMonths = Math.floor(diffDays / 30);
+  if (diffMonths === 1) return '1 month ago';
+  if (diffMonths < 12) return `${diffMonths} months ago`;
+  const diffYears = Math.floor(diffDays / 365);
+  if (diffYears === 1) return '1 year ago';
+  return `${diffYears} years ago`;
+}
+
+function GEVIBenchApp() {
   // State - load GEVIs synchronously via lazy initializer
   const [gevis] = useState<GEVI[]>(() => getAllGEVIs());
   const [selectedGEVI, setSelectedGEVI] = useState<GEVI | null>(null);
@@ -60,9 +81,17 @@ function GEVIBenchApp() {
         return (a.year - b.year) * multiplier;
       }
 
-      const aVal = a[field] || 0;
-      const bVal = b[field] || 0;
-      return (aVal - bVal) * multiplier;
+      const aVal = a[field] ?? null;
+      const bVal = b[field] ?? null;
+      const aNull = aVal === null || aVal === undefined;
+      const bNull = bVal === null || bVal === undefined;
+
+      // Both null: sort by year descending
+      if (aNull && bNull) return b.year - a.year;
+      // Null values always go to bottom regardless of sort direction
+      if (aNull) return 1;
+      if (bNull) return -1;
+      return ((aVal as number) - (bVal as number)) * multiplier;
     });
 
   // Handlers
@@ -113,19 +142,19 @@ function GEVIBenchApp() {
           loop
           muted
           playsInline
-          className="absolute inset-0 w-full h-48 md:h-32 object-cover"
+          className="absolute inset-0 w-full h-full object-cover"
         >
           <source src="/imgs/spike_mov.mp4" type="video/mp4" />
         </video>
         {/* Dark Overlay for readability */}
                 {/* Title Content */}
-        <div className="relative text-center py-4 md:py-6">
+        <div className="relative text-center py-4 px-3">
           <button onClick={handleLogoClick} className="hover:opacity-80 transition-opacity">
-            <h2 className="text-xl md:text-2xl font-bold mb-2 text-white" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>
-              GEVIBench <span className="text-blue-300" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>— Voltage Indicator Benchmark</span>
+            <h2 className="font-sans font-bold mb-1 text-white whitespace-nowrap" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.8)', fontSize: 'clamp(16px, 4vw, 24px)' }}>
+              GEVIBench <span className="text-blue-300 font-semibold" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>— Voltage Indicator Benchmark</span>
             </h2>
           </button>
-          <p className="text-sm md:text-base px-2 text-gray-200" style={{ textShadow: '0 1px 3px rgba(0,0,0,0.8)' }}>
+          <p className="text-gray-200 whitespace-nowrap" style={{ textShadow: '0 1px 3px rgba(0,0,0,0.8)', fontSize: 'clamp(11px, 2.5vw, 16px)' }}>
             Independent, standardized evaluation from publicly available datasets
           </p>
         </div>
@@ -135,66 +164,15 @@ function GEVIBenchApp() {
         <SearchFilters
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
-          categoryFilter={categoryFilter}
-          setCategoryFilter={setCategoryFilter}
-          yearFilter={yearFilter}
-          setYearFilter={setYearFilter}
-          sortConfig={sortConfig}
-          onSortChange={handleSortChange}
-          categories={categories}
-          years={years}
         />
       )}
 
-      {/* Mobile View Toggle */}
-      <div className={`sm:hidden flex mb-2 gap-2 ${showFamilyTree ? 'hidden' : ''}`}>
-        <div className="flex-1">
-          <button
-            onClick={() => setMobileView('list')}
-            className={`w-1/2 py-2 text-sm font-medium rounded-l-md ${
-              mobileView === 'list' ? 'bg-blue-900 text-white' : `${colors.bgTertiary} ${colors.textSecondary}`
-            }`}
-          >
-            List ({filteredGEVIs.length})
-          </button>
-          <button
-            onClick={() => setMobileView('detail')}
-            className={`w-1/2 py-2 text-sm font-medium rounded-r-md ${
-              mobileView === 'detail' ? 'bg-blue-900 text-white' : `${colors.bgTertiary} ${colors.textSecondary}`
-            }`}
-          >
-            Details
-          </button>
-        </div>
-        <select
-          value={sortConfig.field}
-          onChange={(e) => handleSortChange(e.target.value as SortField)}
-          className={`text-xs px-2 py-2 border rounded ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-paper border-gray-300'}`}
-        >
-          <option value="overall">Overall</option>
-          <option value="brightness">Brightness</option>
-          <option value="speed">Speed</option>
-          <option value="sensitivity">Sensitivity</option>
-          <option value="dynamicRange">Range</option>
-          <option value="photostability">Stable</option>
-          <option value="popularity">Popularity</option>
-          <option value="year">Year</option>
-        </select>
-        <button
-          onClick={() => handleSortChange(sortConfig.field)}
-          className={`text-xs px-2 py-2 border rounded ${darkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-paper border-gray-300'}`}
-          title={sortConfig.order === 'desc' ? 'Ascending' : 'Descending'}
-        >
-          {sortConfig.order === 'desc' ? '↓' : '↑'}
-        </button>
-      </div>
 
       {/* Comparison Panel - only show when there are items or explicitly shown */}
       {(compareGEVIs.length > 0 || showCompareEmpty) && (
         <ComparisonPanel
           compareGEVIs={compareGEVIs}
           onRemove={removeFromCompare}
-          darkMode={darkMode}
           showEmpty={showCompareEmpty}
           onClose={() => {
             setCompareGEVIs([]);
@@ -208,7 +186,6 @@ function GEVIBenchApp() {
         <BrightnessNetworkPanel onSelectGEVI={handleSelectGEVI} />
       ) : showFamilyTree ? (
         <FamilyTreePanel
-          darkMode={darkMode}
           onSelectGEVI={handleSelectGEVI}
           selectedGEVI={selectedGEVI}
           onCloseDetail={() => {
@@ -224,51 +201,19 @@ function GEVIBenchApp() {
         <>
           {/* Main Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-            {/* Sidebar - GEVI List */}
-            <div className={`hidden sm:block ${selectedGEVI && filteredGEVIs.length > 0 ? 'col-span-1' : 'col-span-3'}`}>
+            {/* GEVI List */}
+            <div className={`${selectedGEVI && filteredGEVIs.length > 0 ? 'col-span-1' : 'col-span-3'}`}>
               <GEVIList
                 gevis={filteredGEVIs}
                 selectedGEVI={selectedGEVI}
                 onSelect={handleSelectGEVI}
                 onAddToCompare={addToCompare}
                 compareGEVIs={compareGEVIs}
-                darkMode={darkMode}
                 compact={!!selectedGEVI && filteredGEVIs.length > 0}
                 sortConfig={sortConfig}
                 onSortChange={handleSortChange}
               />
             </div>
-
-            {/* Mobile List View */}
-            {mobileView === 'list' && (
-              <div className="sm:hidden col-span-1 space-y-2">
-                {filteredGEVIs.map((gevi, idx) => {
-                  const geviColor = getGEVIColor(gevi);
-                  return (
-                    <button
-                      key={gevi.id}
-                      onClick={() => handleSelectGEVI(gevi)}
-                      className={`w-full p-3 text-left border rounded-lg ${darkMode ? 'bg-gray-800 border-gray-700 hover:bg-gray-700' : 'bg-paper border-gray-200 hover:bg-gray-50'}`}
-                    >
-                      <div className="flex items-center justify-between mb-1">
-                        <div className="flex items-center gap-2 flex-wrap">
-                          <span className={`text-xs font-medium ${colors.textMuted}`}>{idx + 1}.</span>
-                          <span className="font-semibold text-base" style={{ color: geviColor.color }}>{gevi.name}</span>
-                          <span className="text-xs px-1.5 py-0.5 bg-blue-900 text-white rounded">{gevi.category}</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <span className={`text-xs px-1.5 py-0.5 rounded ${darkMode ? 'bg-gray-600 text-gray-300' : 'bg-gray-100 text-gray-600'}`}>{gevi.year}</span>
-                          <span className="text-base font-bold text-blue-500">{gevi.overall ?? 'N/A'}</span>
-                        </div>
-                      </div>
-                      <div className={`text-xs ${colors.textTertiary}`}>
-                        {gevi.description}
-                      </div>
-                    </button>
-                  );
-                })}
-              </div>
-            )}
 
             {/* Detail Panel - only rendered when there are results (prevents narrow wrapping with 0 results) */}
             {filteredGEVIs.length > 0 && (
@@ -287,7 +232,6 @@ function GEVIBenchApp() {
                     gevi={selectedGEVI}
                     onAddToCompare={addToCompare}
                     compareGEVIs={compareGEVIs}
-                    darkMode={darkMode}
                     onClose={handleLogoClick}
                     onShowFamilyTree={() => {
                       setActiveTab('database');
@@ -312,7 +256,7 @@ function GEVIBenchApp() {
           Scoring <span className="text-blue-400">Methodology</span>
         </h2>
 
-        <div className={`border rounded-lg p-4 md:p-6 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-paper border-gray-200'}`}>
+        <div className="border rounded-lg p-4 md:p-6 bg-paper border-gray-200">
           <div className="space-y-6">
             <div>
               <h3 className={`text-lg font-semibold mb-2 ${colors.text}`}>Overview</h3>
@@ -322,12 +266,12 @@ function GEVIBenchApp() {
             <div>
               <h3 className={`text-lg font-semibold mb-2 ${colors.text}`}>Two Data Sources</h3>
               <div className="space-y-4">
-                <div className={`p-4 rounded-lg ${darkMode ? 'bg-gray-700' : 'bg-gray-50'}`}>
-                  <h4 className={`font-medium mb-2 ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>1. Public Raw Datasets</h4>
+                <div className="p-4 rounded-lg bg-gray-50">
+                  <h4 className="font-medium mb-2 text-gray-800">1. Public Raw Datasets</h4>
                   <p className={`text-sm ${colors.textTertiary}`}>{methodologyContent.twoApproaches.rawData.description}</p>
                 </div>
-                <div className={`p-4 rounded-lg ${darkMode ? 'bg-gray-700' : 'bg-gray-50'}`}>
-                  <h4 className={`font-medium mb-2 ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>2. Published Parameters</h4>
+                <div className="p-4 rounded-lg bg-gray-50">
+                  <h4 className="font-medium mb-2 text-gray-800">2. Published Parameters</h4>
                   <p className={`text-sm ${colors.textTertiary}`}>{methodologyContent.twoApproaches.literature.description}</p>
                 </div>
               </div>
@@ -419,8 +363,8 @@ function GEVIBenchApp() {
               <h3 className={`text-lg font-semibold mb-2 ${colors.text}`}>Score Components</h3>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
                 {methodologyContent.metrics.items.map((item: { name: string; weight: string; description: string }, i: number) => (
-                  <div key={i} className={`p-2 rounded ${darkMode ? 'bg-gray-700' : 'bg-gray-50'}`}>
-                    <div className={`text-sm font-medium ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>
+                  <div key={i} className="p-2 rounded bg-gray-50">
+                    <div className="text-sm font-medium text-gray-800">
                       {item.name} <span className="text-blue-500">{item.weight}</span>
                     </div>
                     <div className={`text-xs ${colors.textMuted}`}>{item.description}</div>
@@ -435,12 +379,12 @@ function GEVIBenchApp() {
               <p className={`text-sm ${colors.textSecondary} mb-3`}>{methodologyContent.bonusPoints.description}</p>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                 {methodologyContent.bonusPoints.rules.map((rule: any, i: number) => (
-                  <div key={i} className={`p-3 rounded-lg border ${darkMode ? 'bg-gray-700 border-gray-600' : 'bg-paper border-gray-200'}`}>
+                  <div key={i} className="p-3 rounded-lg border bg-paper border-gray-200">
                     <div className="flex items-center gap-2 mb-2">
-                      <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${darkMode ? 'bg-blue-900 text-blue-300' : 'bg-blue-100 text-blue-800'}`}>
+                      <span className="px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
                         +{rule.points} pts
                       </span>
-                      <span className={`text-sm font-medium ${darkMode ? 'text-gray-200' : 'text-gray-800'}`}>{rule.name}</span>
+                      <span className="text-sm font-medium text-gray-800">{rule.name}</span>
                     </div>
                     <div className={`text-xs ${colors.textMuted}`}>{rule.description}</div>
                   </div>
@@ -470,10 +414,10 @@ function GEVIBenchApp() {
     example?: string,
     formulaNote?: string
   ) => (
-    <div className={`mt-4 p-3 rounded-lg ${darkMode ? 'bg-gray-700' : 'bg-blue-50'}`}>
+    <div className="mt-4 p-3 rounded-lg bg-blue-50">
       <h4 className={`text-md font-semibold mb-2 ${colors.text}`}>{title}</h4>
       <p className={`text-sm ${colors.textSecondary}`}>{description}</p>
-      <div className={`mt-2 p-2 rounded font-mono text-sm ${darkMode ? 'bg-gray-800 text-green-400' : 'bg-paper text-green-700'}`}>
+      <div className="mt-2 p-2 rounded font-mono text-sm bg-paper text-green-700">
         {formula}
       </div>
       {formulaNote && (
@@ -503,7 +447,7 @@ function GEVIBenchApp() {
   );
 
   return (
-    <div className={`min-h-screen flex flex-col ${darkMode ? 'bg-gray-900' : 'bg-paper'}`}>
+    <div className="min-h-screen flex flex-col bg-paper">
       <Header
         activeTab={activeTab}
         setActiveTab={(tab) => {
@@ -538,10 +482,9 @@ function GEVIBenchApp() {
 
       {activeTab === 'database' && renderDatabaseTab()}
       {activeTab === 'methodology' && renderMethodologyTab()}
-      {activeTab === 'contact' && <ContactForm darkMode={darkMode} />}
+      {activeTab === 'contact' && <ContactForm />}
       {activeTab === 'tools' && (
         <FamilyTreePanel
-          darkMode={darkMode}
           onSelectGEVI={handleSelectGEVI}
           selectedGEVI={selectedGEVI}
           onCloseDetail={() => {
@@ -553,11 +496,15 @@ function GEVIBenchApp() {
       )}
 
       {/* Footer */}
-      <footer className={`mt-auto py-4 border-t ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-gray-50 border-gray-200'}`}>
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+      <footer className="mt-auto py-4 border-t bg-gray-50 border-gray-200">
+        <div className="max-w-7xl mx-auto px-4 flex items-center justify-center gap-4">
+          <p className="text-sm text-gray-500">
             © 2026 GEVIBench. Data sourced from published studies.
           </p>
+          <span className="flex items-center gap-1 text-xs text-gray-400">
+            <Clock className="w-3 h-3" />
+            Updated {timeAgo(BUILD_DATE)}
+          </span>
         </div>
       </footer>
     </div>
@@ -565,11 +512,7 @@ function GEVIBenchApp() {
 }
 
 function App() {
-  return (
-    <ThemeProvider>
-      <GEVIBenchApp />
-    </ThemeProvider>
-  );
+  return <GEVIBenchApp />;
 }
 
 export default App;

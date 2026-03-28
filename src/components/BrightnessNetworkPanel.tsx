@@ -1,5 +1,4 @@
 import { useMemo, useState, useRef, useEffect, useCallback } from 'react';
-import { useTheme } from '../context/ThemeContext';
 import { getAllGEVIs } from '../geviData';
 import { getTreeNodeColor } from '../utils';
 import type { GEVI } from '../types';
@@ -349,7 +348,6 @@ interface Props {
 const W = 1400, H = 1000;
 
 export function BrightnessNetworkPanel({ onSelectGEVI }: Props) {
-  const { darkMode } = useTheme();
   const gevis = useMemo(() => getAllGEVIs(), []);
   const { nodes, edges } = useMemo(() => buildGraph(gevis), [gevis]);
   const positions = useMemo(() => forceLayout(nodes, edges, W, H), [nodes, edges]);
@@ -411,33 +409,32 @@ export function BrightnessNetworkPanel({ onSelectGEVI }: Props) {
     setFitted(true);
   }, [finalNodes, fitted]);
 
-  const bg      = darkMode ? '#1f2937' : '#faf9f6';
-  const edgeClr = darkMode ? '#4b5563' : '#cbd5e1';
-  const txt     = darkMode ? '#d1d5db' : '#374151';
-  const subTxt  = darkMode ? '#6b7280' : '#94a3b8';
-  const tipBg   = darkMode ? '#1f2937' : '#ffffff';
-  const tipBd   = darkMode ? '#374151' : '#e2e8f0';
+  const bg      = '#faf9f6';
+  const edgeClr = '#cbd5e1';
+  const subTxt  = '#94a3b8';
+  const tipBg   = '#ffffff';
+  const tipBd   = '#e2e8f0';
 
   return (
     <div
-      className={`flex flex-col ${darkMode ? 'bg-gray-900 text-white' : 'bg-paper text-gray-900'}`}
+      className="flex flex-col bg-paper text-gray-900"
       style={{ height: 'calc(100vh - 61px)' }}
     >
       {/* Header bar */}
-      <div className={`flex items-center gap-4 px-5 py-2.5 border-b flex-shrink-0 ${darkMode ? 'border-gray-700' : 'border-gray-200'}`}>
+      <div className="flex items-center gap-4 px-5 py-2.5 border-b flex-shrink-0 border-gray-200">
         <div>
           <h2 className="text-sm font-semibold">Brightness Network</h2>
-          <p className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+          <p className="text-xs text-gray-500">
             Edges show direct brightness comparisons from published papers. Labels show the ratio A&nbsp;/&nbsp;B. Drag to pan · click a node to view details.
           </p>
         </div>
-        <div className={`ml-auto text-xs ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>
+        <div className="ml-auto text-xs text-gray-400">
           {nodes.length} nodes · {edges.length} edges
         </div>
       </div>
 
       {/* Legend */}
-      <div className={`flex flex-wrap gap-x-5 gap-y-1 px-5 py-1.5 text-xs border-b flex-shrink-0 ${darkMode ? 'border-gray-700 text-gray-400' : 'border-gray-100 text-gray-500'}`}>
+      <div className="flex flex-wrap gap-x-5 gap-y-1 px-5 py-1.5 text-xs border-b flex-shrink-0 border-gray-100 text-gray-500">
         {[
           { color: '#f59e0b', label: 'EGFP (anchor)' },
           { color: '#22c55e', label: 'GFP-based' },
@@ -492,7 +489,7 @@ export function BrightnessNetworkPanel({ onSelectGEVI }: Props) {
                   <text x={mx} y={my} textAnchor="middle" dominantBaseline="middle"
                     fontSize={isHE || isRel ? 8.5 : 7.5}
                     fontWeight={isHE || isRel ? '600' : '500'}
-                    fill={isHE ? '#60a5fa' : isRel ? '#60a5fa' : darkMode ? '#6b7280' : '#9ca3af'}
+                    fill={isHE ? '#60a5fa' : isRel ? '#60a5fa' : '#9ca3af'}
                     stroke={bg} strokeWidth={2.5} paintOrder="stroke"
                     opacity={fade ? 0.08 : 1}
                     style={{ userSelect: 'none', pointerEvents: 'none', fontFamily: 'system-ui' }}
@@ -529,7 +526,7 @@ export function BrightnessNetworkPanel({ onSelectGEVI }: Props) {
                   <path d={hexPath(node.r)}
                     fill={node.color}
                     fillOpacity={node.isExternal ? 0.35 : 1}
-                    stroke={node.isExternal ? (darkMode ? '#6b7280' : '#9ca3af') : '#fff'}
+                    stroke={node.isExternal ? '#9ca3af' : '#fff'}
                     strokeWidth={node.isEGFP ? 2 : 1.5}
                     strokeDasharray={node.isExternal ? '2.5 1.5' : undefined}
                     style={node.isEGFP ? { filter: 'drop-shadow(0 0 6px rgba(245,158,11,0.5))' } : node.gevi ? { filter: `drop-shadow(0 0 3px ${node.color})` } : undefined}
@@ -538,7 +535,7 @@ export function BrightnessNetworkPanel({ onSelectGEVI }: Props) {
                   <text y={node.r + 13} textAnchor="middle" dominantBaseline="middle"
                     fontSize={node.isEGFP ? 12 : 9}
                     fontWeight={node.isEGFP ? '700' : '600'}
-                    fill={node.isEGFP ? (darkMode ? '#93c5fd' : '#2563eb') : darkMode ? '#e5e7eb' : '#374151'}
+                    fill={node.isEGFP ? '#2563eb' : '#374151'}
                     stroke={bg} strokeWidth={2.5} paintOrder="stroke"
                     style={{ userSelect: 'none', pointerEvents: 'none' }}
                   >
@@ -548,7 +545,7 @@ export function BrightnessNetworkPanel({ onSelectGEVI }: Props) {
                   {node.bScore !== null && (
                     <text y={node.r + 24} textAnchor="middle" dominantBaseline="middle"
                       fontSize={7} fontWeight="500"
-                      fill={darkMode ? '#6b7280' : '#9ca3af'}
+                      fill="#9ca3af"
                       stroke={bg} strokeWidth={2} paintOrder="stroke"
                       style={{ userSelect: 'none', pointerEvents: 'none' }}
                     >
@@ -567,35 +564,35 @@ export function BrightnessNetworkPanel({ onSelectGEVI }: Props) {
             style={{ background: tipBg, border: `1px solid ${tipBd}`, minWidth: 190 }}>
             <div className="font-semibold text-sm mb-1.5">{hoveredNode.name}</div>
             {hoveredNode.isEGFP && (
-              <p className={`${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+              <p className="text-gray-500">
                 Reference standard — B_rel = 1.00 · Score = 60
               </p>
             )}
             {hoveredNode.isExternal && (
-              <p className={`${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+              <p className="text-gray-500">
                 External reference (not in database)
               </p>
             )}
             {!hoveredNode.isEGFP && !hoveredNode.isExternal && (
               <>
-                <div className={`text-xs mb-1.5 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                <div className="text-xs mb-1.5 text-gray-500">
                   {hoveredNode.gevi?.category}
                 </div>
                 <div className="space-y-0.5">
                   <div className="flex justify-between gap-6">
-                    <span className={darkMode ? 'text-gray-400' : 'text-gray-500'}>B_rel (vs EGFP)</span>
+                    <span className="text-gray-500">B_rel (vs EGFP)</span>
                     <span className="font-mono font-semibold">
                       {hoveredNode.bRel !== null ? `${hoveredNode.bRel.toFixed(3)}×` : 'unresolved'}
                     </span>
                   </div>
                   <div className="flex justify-between gap-6">
-                    <span className={darkMode ? 'text-gray-400' : 'text-gray-500'}>Brightness score</span>
+                    <span className="text-gray-500">Brightness score</span>
                     <span className="font-mono font-semibold">
                       {hoveredNode.bScore !== null ? `${hoveredNode.bScore}/100` : 'N/A'}
                     </span>
                   </div>
                 </div>
-                <div className={`mt-2 text-xs ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>
+                <div className="mt-2 text-xs text-gray-400">
                   Click to view GEVI details ↗
                 </div>
               </>

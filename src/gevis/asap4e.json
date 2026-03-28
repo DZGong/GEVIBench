@@ -3,7 +3,7 @@
   "name": "ASAP4e",
   "year": 2023,
   "category": "VSD-cpGFP GEVI",
-  "tags": ["cpGFP", "Green", "High speed", "Positive"],
+  "tags": ["cpGFP", "Green", "High speed", "Positive", "Two-photon"],
   "paper": "Nature Methods 2023",
   "paperUrl": "https://doi.org/10.1038/s41592-023-01913-z",
   "description": "Speed-optimized ASAP4 variant that flips the classical ASAP polarity to positive-going, delivering fast kinetics and a massive fluorescence increase for photostable recordings in behaving animals.",
@@ -55,6 +55,11 @@
     {
       "deltaF": 23,
       "source": "doi:10.1038/s41592-023-01913-z"
+    },
+    {
+      "deltaF": 41,
+      "source": "doi:10.1038/s41592-023-01913-z",
+      "notes": "1ms FWHM AP waveform at 37°C"
     }
   ],
 
@@ -102,6 +107,14 @@
       "year": 2025,
       "url": "https://doi.org/10.1038/s41467-025-61774-2",
       "sample": "Mouse, dorsal root ganglia neurons, in vivo"
+    },
+    {
+      "title": "Retroreflective beam multiplexing enables high-throughput two-photon voltage imaging in vivo",
+      "authors": "Liu Z, Han M, Chen Y, Downs NP, Wu J",
+      "journal": "bioRxiv",
+      "year": 2025,
+      "url": "https://doi.org/10.64898/2025.12.09.693349",
+      "sample": "Mouse, visual cortex and hippocampus, in vivo two-photon"
     }
   ]
 }

@@ -371,7 +371,6 @@ function buildFullTree(gevis: GEVI[]) {
 }
 
 interface FamilyTreePanelProps {
-  darkMode: boolean;
   onSelectGEVI: (gevi: GEVI) => void;
   selectedGEVI: GEVI | null;
   onCloseDetail: () => void;
@@ -380,7 +379,6 @@ interface FamilyTreePanelProps {
 }
 
 export function FamilyTreePanel({
-  darkMode,
   onSelectGEVI,
   onCloseDetail,
 }: FamilyTreePanelProps) {
@@ -444,16 +442,16 @@ export function FamilyTreePanel({
   }
 
   return (
-    <div className={`rounded-lg border p-4 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-paper border-gray-200'}`}>
+    <div className="rounded-lg border p-4 bg-paper border-gray-200">
       <div className="flex items-center gap-2 mb-4">
         <button
           onClick={onCloseDetail}
-          className={`p-1 rounded-md ${darkMode ? 'hover:bg-gray-700 text-gray-400' : 'hover:bg-gray-100 text-gray-500'}`}
+          className="p-1 rounded-md hover:bg-gray-100 text-gray-500"
           title="Close and return"
         >
           <X className="w-5 h-5" />
         </button>
-        <h3 className={`text-xl font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+        <h3 className="text-xl font-bold text-gray-900">
           Genetic Lineage
         </h3>
       </div>
@@ -471,7 +469,7 @@ export function FamilyTreePanel({
                 key={`link_${i}`}
                 d={`M${link.fromX},${link.fromY} C${link.fromX},${midY} ${link.toX},${midY} ${link.toX},${link.toY}`}
                 fill="none"
-                stroke={darkMode ? '#4b5563' : '#cbd5e1'}
+                stroke="#cbd5e1"
                 strokeWidth="1.5"
               />
             );
@@ -484,7 +482,7 @@ export function FamilyTreePanel({
                 key={`xlink_${i}`}
                 d={`M${link.fromX},${link.fromY} C${link.fromX},${midY} ${link.toX},${midY} ${link.toX},${link.toY}`}
                 fill="none"
-                stroke={darkMode ? '#4b5563' : '#cbd5e1'}
+                stroke="#cbd5e1"
                 strokeWidth="1.5"
                 strokeDasharray="6 4"
               />
@@ -521,8 +519,8 @@ export function FamilyTreePanel({
                 )}
                 <path
                   d={hexPath(radius)}
-                  fill={isRoot ? (darkMode ? '#60a5fa' : '#3b82f6') : isLeaf ? node.color : (darkMode ? '#4b5563' : '#d1d5db')}
-                  stroke={isRoot ? '#fff' : isLeaf ? '#fff' : (darkMode ? '#6b7280' : '#9ca3af')}
+                  fill={isRoot ? '#3b82f6' : isLeaf ? node.color : '#d1d5db'}
+                  stroke={isRoot ? '#fff' : isLeaf ? '#fff' : '#9ca3af'}
                   strokeWidth={isRoot ? 2 : isLeaf ? 1.5 : 1}
                   opacity={1}
                   style={{
@@ -533,7 +531,7 @@ export function FamilyTreePanel({
                   x={0}
                   y={isRoot ? -(radius + 4) : isLeaf ? radius + 14 : radius + 12}
                   textAnchor="middle"
-                  fill={isRoot ? (darkMode ? '#93c5fd' : '#2563eb') : darkMode ? (isLeaf ? '#e5e7eb' : '#9ca3af') : (isLeaf ? '#374151' : '#6b7280')}
+                  fill={isRoot ? '#2563eb' : isLeaf ? '#374151' : '#6b7280'}
                   style={{ fontSize: isRoot ? '12px' : isLeaf ? '9px' : '10px', fontWeight: isRoot ? '700' : isLeaf ? '600' : '500' }}
                 >
                   {node.name}
@@ -543,7 +541,7 @@ export function FamilyTreePanel({
                     x={0}
                     y={radius + 24}
                     textAnchor="middle"
-                    fill={darkMode ? '#6b7280' : '#9ca3af'}
+                    fill="#9ca3af"
                     style={{ fontSize: '7px' }}
                   >
                     ({node.year})
@@ -565,9 +563,7 @@ export function FamilyTreePanel({
             zIndex: 9999,
             width: TOOLTIP_W,
           }}
-          className={`rounded-lg border shadow-lg p-2.5 ${
-            darkMode ? 'bg-gray-800 border-gray-700' : 'bg-paper border-gray-200'
-          }`}
+          className="rounded-lg border shadow-lg p-2.5 bg-paper border-gray-200"
           onMouseEnter={() => {
             if (hideTimeout.current) clearTimeout(hideTimeout.current);
           }}
@@ -583,23 +579,19 @@ export function FamilyTreePanel({
           </button>
 
           {/* Year · Category */}
-          <div className={`text-[10px] mb-1.5 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+          <div className="text-[10px] mb-1.5 text-gray-500">
             {hoverInfo.gevi.year} · {hoverInfo.gevi.category}
           </div>
 
           {/* Tag chips */}
           <div className="flex flex-wrap gap-1 mb-1.5">
             {tooltipTags.map((tag, idx) => (
-              <span key={`${tag}-${idx}`} className={`text-[9px] px-1.5 py-0.5 rounded ${
-                darkMode ? 'bg-blue-900/40 text-blue-300' : 'bg-blue-50 text-blue-700'
-              }`}>
+              <span key={`${tag}-${idx}`} className="text-[9px] px-1.5 py-0.5 rounded bg-blue-50 text-blue-700">
                 {tag}
               </span>
             ))}
             {tooltipExtraCount > 0 && (
-              <span className={`text-[9px] px-1.5 py-0.5 rounded ${
-                darkMode ? 'bg-gray-700 text-gray-400' : 'bg-gray-100 text-gray-500'
-              }`}>
+              <span className="text-[9px] px-1.5 py-0.5 rounded bg-gray-100 text-gray-500">
                 +{tooltipExtraCount}
               </span>
             )}
@@ -611,9 +603,7 @@ export function FamilyTreePanel({
               href={hoverInfo.gevi.paperUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className={`text-xs flex items-center gap-1 mb-1.5 hover:underline ${
-                darkMode ? 'text-blue-400' : 'text-blue-900'
-              }`}
+              className="text-xs flex items-center gap-1 mb-1.5 hover:underline text-blue-900"
             >
               <BookOpen className="w-3 h-3 flex-shrink-0" />
               <span className="truncate flex-1">{hoverInfo.gevi.paper}</span>
@@ -622,24 +612,24 @@ export function FamilyTreePanel({
           )}
 
           {/* Divider */}
-          <div className={`border-t mb-1 ${darkMode ? 'border-gray-700' : 'border-gray-100'}`} />
+          <div className="border-t mb-1 border-gray-100" />
 
           {/* Radar chart */}
           <RadarChart width={150} height={130} data={tooltipRadarData}>
-            <PolarGrid stroke={darkMode ? '#4b5563' : '#e5e7eb'} />
+            <PolarGrid stroke="#e5e7eb" />
             <PolarAngleAxis dataKey="subject" tick={{ fontSize: 8 }} />
             <PolarRadiusAxis domain={[0, 100]} tick={false} axisLine={false} />
             <Radar
               dataKey="value"
-              stroke={darkMode ? '#60a5fa' : '#1e40af'}
-              fill={darkMode ? '#60a5fa' : '#1e40af'}
+              stroke="#1e40af"
+              fill="#1e40af"
               fillOpacity={0.2}
             />
           </RadarChart>
         </div>
       )}
 
-      <div className={`mt-4 pt-3 border-t text-xs text-center ${darkMode ? 'border-gray-700 text-gray-500' : 'border-gray-200 text-gray-400'}`}>
+      <div className="mt-4 pt-3 border-t text-xs text-center border-gray-200 text-gray-400">
         Click on nodes to view sensor details
       </div>
     </div>

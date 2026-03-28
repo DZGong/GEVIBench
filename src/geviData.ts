@@ -191,6 +191,31 @@ function computePhotostability(gevi: GEVI): number | null {
 // Compute all derived scores from raw data fields, then compute overall.
 // Weights: Speed 20%, Dynamic Range 20%, Brightness 20%, Sensitivity 15%, Photostability 15%, Popularity 10%
 // Null scores are excluded and remaining weights are normalized proportionally.
+// Select the best kinetics entry using the same temperature preference as speed scoring.
+function selectBestKinetics(gevi: GEVI): { on: number; off: number } | null {
+  if (!gevi.kinetics || gevi.kinetics.length === 0) return null;
+  const withTemp = gevi.kinetics.filter(k => parseTemperature(k.temperature) !== null);
+  const withoutTemp = gevi.kinetics.filter(k => parseTemperature(k.temperature) === null);
+  let selected: typeof gevi.kinetics;
+  if (withTemp.length > 0) {
+    const warm = withTemp.filter(k => parseTemperature(k.temperature)! >= 33);
+    if (warm.length > 0) {
+      selected = warm;
+    } else {
+      const sorted = [...withTemp].sort((a, b) =>
+        Math.abs(parseTemperature(a.temperature)! - 33) - Math.abs(parseTemperature(b.temperature)! - 33)
+      );
+      selected = [sorted[0]];
+    }
+  } else {
+    selected = withoutTemp;
+  }
+  if (selected.length === 0) return null;
+  const avgOn = selected.reduce((s, k) => s + k.on, 0) / selected.length;
+  const avgOff = selected.reduce((s, k) => s + k.off, 0) / selected.length;
+  return { on: avgOn, off: avgOff };
+}
+
 function computeScores(gevi: GEVI, bRelMap: Map<string, number>) {
   const speed          = computeSpeed(gevi);
   const dynamicRange   = computeDynamicRange(gevi);
@@ -199,6 +224,12 @@ function computeScores(gevi: GEVI, bRelMap: Map<string, number>) {
   const photostability = computePhotostability(gevi);
   const paperCount     = gevi.researchPapers?.length ?? 0;
   const popularity     = Math.min(100, 50 * Math.log10(paperCount + 1));
+
+  // Raw display values for tabular ranking
+  const bRel = bRelMap.get(gevi.id) ?? null;
+  const bestKinetics = selectBestKinetics(gevi);
+  const displayTauOn = bestKinetics?.on ?? null;
+  const displayTauOff = bestKinetics?.off ?? null;
 
   const components: { value: number | null; weight: number }[] = [
     { value: speed,          weight: 0.20 },
@@ -236,7 +267,7 @@ function computeScores(gevi: GEVI, bRelMap: Map<string, number>) {
 
     overall = totalWeight > 0 ? Math.max(0, Math.min(100, Math.round(weightedSum / totalWeight) + bonus + penalty)) : null;
   }
-  return { speed, dynamicRange, sensitivity, brightness, photostability, overall, paperCount, popularity: Math.round(popularity) };
+  return { speed, dynamicRange, sensitivity, brightness, photostability, overall, paperCount, popularity: Math.round(popularity), bRel, displayTauOn, displayTauOff };
 }
 
 // Load all GEVIs from modular files (synchronous, uses eager import)

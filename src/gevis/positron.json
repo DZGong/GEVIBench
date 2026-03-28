@@ -39,14 +39,8 @@
       "on": 0.63,
       "off": 0.64,
       "temperature": "25°C",
-      "source": "doi:10.1038/s41467-020-17322-1"
-    },
-    {
-      "on": 0.63,
-      "off": 0.64,
       "source": "doi:10.1038/s41467-020-17322-1",
-      "note": "Bi-exponential fast component at 22°C in spiking HEK cells (85% on, 90% off); slow τ_on=19 ms, slow τ_off=37 ms",
-      "temperature": "22°C"
+      "note": "Bi-exponential fast component in voltage-clamped rat neurons (85% on, 90% off); slow τ_on=19 ms, slow τ_off=37 ms. Imaged at 3.2 kHz."
     }
   ],
 
@@ -100,6 +94,14 @@
   },
 
   "researchPapers": [
+    {
+      "title": "A general approach to engineer positive-going eFRET voltage indicators",
+      "authors": "Abdelfattah AS, et al.",
+      "journal": "Nature Communications",
+      "year": 2020,
+      "sample": "Rat, hippocampal neurons, in vitro; Zebrafish, forebrain, in vivo",
+      "url": "https://doi.org/10.1038/s41467-020-17322-1"
+    },
     {
       "title": "Positive-going hybrid indicators for voltage imaging in excitable cells and tissues",
       "authors": "Liu S, et al.",

@@ -33,7 +33,6 @@ export interface SpectrumData {
 interface SpectrumViewerProps {
   spectrumData?: SpectrumData | null;
   geviName?: string;
-  darkMode?: boolean;
 }
 
 // Generate spectrum data for different protein types
@@ -110,7 +109,7 @@ function generateSpectrum(type: 'fp' | 'rhodopsin' | 'nir' | 'fret' | 'redfp', p
   return data;
 }
 
-export function SpectrumViewer({ spectrumData, geviName, darkMode = false }: SpectrumViewerProps) {
+export function SpectrumViewer({ spectrumData, geviName }: SpectrumViewerProps) {
   const [hoverWavelength, setHoverWavelength] = useState<number | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -157,11 +156,11 @@ export function SpectrumViewer({ spectrumData, geviName, darkMode = false }: Spe
 
   if (!config || !computedSpectrum) {
     return (
-      <div className={`border rounded-lg p-4 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-gray-50 border-gray-200'}`}>
-        <h4 className={`text-sm font-semibold mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+      <div className="border rounded-lg p-4 bg-gray-50 border-gray-200">
+        <h4 className="text-sm font-semibold mb-2 text-gray-700">
           Excitation/Emission Spectrum
         </h4>
-        <div className={`text-xs ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>
+        <div className="text-xs text-gray-400">
           No spectrum data available
         </div>
       </div>
@@ -169,8 +168,8 @@ export function SpectrumViewer({ spectrumData, geviName, darkMode = false }: Spe
   }
 
   return (
-    <div className={`border rounded-lg p-4 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-gray-50 border-gray-200'}`}>
-      <h4 className={`text-sm font-semibold mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+    <div className="border rounded-lg p-4 bg-gray-50 border-gray-200">
+      <h4 className="text-sm font-semibold mb-2 text-gray-700">
         Excitation/Emission Spectrum
         {config.name && <span className="ml-2 font-normal">({config.name})</span>}
       </h4>
@@ -179,7 +178,7 @@ export function SpectrumViewer({ spectrumData, geviName, darkMode = false }: Spe
         ref={containerRef}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        className={`relative h-40 cursor-crosshair ${darkMode ? 'bg-gray-900' : 'bg-paper'} rounded`}
+        className="relative h-40 cursor-crosshair bg-paper rounded"
       >
         {/* Excitation curve */}
         <svg className="absolute inset-0 w-full h-full" viewBox="0 0 500 160" preserveAspectRatio="none">
@@ -245,7 +244,7 @@ export function SpectrumViewer({ spectrumData, geviName, darkMode = false }: Spe
               y1="0"
               x2={((hoverWavelength - 350) / 500) * 500}
               y2="160"
-              stroke={darkMode ? '#f59e0b' : '#d97706'}
+              stroke="#d97706"
               strokeWidth="1"
               strokeDasharray="4"
             />
@@ -255,9 +254,7 @@ export function SpectrumViewer({ spectrumData, geviName, darkMode = false }: Spe
         {/* Hover tooltip */}
         {hoverData && (
           <div
-            className={`absolute top-1 left-1/2 transform -translate-x-1/2 px-2 py-1 rounded text-xs ${
-              darkMode ? 'bg-gray-700 text-gray-200' : 'bg-paper text-gray-800 shadow'
-            }`}
+            className="absolute top-1 left-1/2 transform -translate-x-1/2 px-2 py-1 rounded text-xs bg-paper text-gray-800 shadow"
             style={{ pointerEvents: 'none' }}
           >
             {hoverWavelength}nm | Ex: {hoverData.excitation.toFixed(2)} | Em: {hoverData.emission.toFixed(2)}
@@ -269,16 +266,16 @@ export function SpectrumViewer({ spectrumData, geviName, darkMode = false }: Spe
       <div className="flex gap-4 mt-2 text-xs">
         <div className="flex items-center gap-1">
           <div className="w-3 h-3 rounded" style={{ backgroundColor: exColor }} />
-          <span className={darkMode ? 'text-gray-400' : 'text-gray-600'}>Excitation</span>
+          <span className="text-gray-600">Excitation</span>
         </div>
         <div className="flex items-center gap-1">
           <div className="w-3 h-3 rounded" style={{ backgroundColor: emColor }} />
-          <span className={darkMode ? 'text-gray-400' : 'text-gray-600'}>Emission</span>
+          <span className="text-gray-600">Emission</span>
         </div>
       </div>
 
       {/* Peak wavelengths */}
-      <div className={`mt-2 text-xs ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>
+      <div className="mt-2 text-xs text-gray-400">
         Peak Excitation: {config.peakEx}nm | Peak Emission: {config.peakEm}nm
       </div>
     </div>

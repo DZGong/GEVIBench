@@ -16,8 +16,8 @@
 
   "spectrum": {
     "type": "fp",
-    "peakEx": 490,
-    "peakEm": 510,
+    "peakEx": 505,
+    "peakEm": 525,
     "name": "ASAP5",
     "custom": {
       "minEx": 350,
@@ -40,9 +40,15 @@
 
   "kinetics": [
     {
-      "on": 0.8,
-      "off": 1.1,
+      "on": 0.78,
+      "off": 1.12,
       "temperature": "37°C",
+      "source": "doi:10.1016/j.neuron.2024.08.019"
+    },
+    {
+      "on": 2.61,
+      "off": 4.30,
+      "temperature": "22°C",
       "source": "doi:10.1016/j.neuron.2024.08.019"
     }
   ],
@@ -106,7 +112,7 @@
     },
     {
       "title": "A deep learning framework for automated and generalized synaptic event analysis",
-      "authors": "Karelina T, et al.",
+      "authors": "O'Neill PS, Baccino-Calace M, Rupprecht P, Lee S, Hao YA, Lin MZ, Friedrich RW, Mueller M, Delvendahl I",
       "journal": "eLife",
       "year": 2025,
       "url": "https://doi.org/10.7554/eLife.98485",

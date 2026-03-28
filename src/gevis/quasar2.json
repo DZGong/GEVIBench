@@ -120,6 +120,14 @@
 
   "researchPapers": [
     {
+      "title": "All-optical electrophysiology in mammalian neurons using engineered microbial rhodopsins",
+      "authors": "Hochbaum DR, Zhao Y, Farhi SL, Klapoetke NC, Werley CA, Kapoor V, Zou P, Kralj JM, Maclaurin D, Smedemark-Margulies N, Saulnier JL, Boulting GL, Straub C, Cho YK, Melkonian M, Wong GKS, Harrison DJ, Murthy VN, Sabatini BL, Boyden ES, Campbell RE, Cohen AE",
+      "journal": "Nature Methods",
+      "year": 2014,
+      "sample": "HEK293 cells, cultured rat hippocampal neurons, mouse brain slices, Drosophila in vivo",
+      "url": "https://doi.org/10.1038/nmeth.3000"
+    },
+    {
       "title": "Two-photon lifetime imaging of voltage indicating proteins as a probe of absolute membrane voltage",
       "authors": "Brinks D, Klein AJ, Cohen AE",
       "journal": "Biophysical Journal",
@@ -270,6 +278,30 @@
       "year": 2024,
       "sample": "Mouse DRG sensory neurons, in vitro",
       "url": "https://doi.org/10.1097/j.pain.0000000000003090"
+    },
+    {
+      "title": "A robotic multidimensional directed evolution approach applied to fluorescent voltage reporters",
+      "authors": "Piatkevich KD, Jung EE, Straub C, Linghu C, Park D, Suk HJ, Hochbaum DR, Goodwin D, Pnevmatikakis E, Pak N, Kawashima T, Yang CT, Rhoades JL, Shemesh O, Asano S, Yoon YG, Freifeld L, Saulnier JL, Riegler C, Engert F, Hughes T, Drobizhev M, Szabo B, Ahrens MB, Flavell SW, Sabatini BL, Boyden ES",
+      "journal": "Nature Chemical Biology",
+      "year": 2018,
+      "sample": "HEK293T cells and cultured mouse hippocampal neurons, in vitro",
+      "url": "https://doi.org/10.1038/s41589-018-0004-9"
+    },
+    {
+      "title": "Ultrafast two-photon imaging of a high-gain voltage indicator in awake behaving mice",
+      "authors": "Villette V, Chavarha M, Dimov IK, Bradley J, Pradhan L, Mathieu B, Evans SW, Chamberland S, Shi D, Yang R, Kim BB, Ayon A, Jalil A, St-Pierre F, Schnitzer MJ, Bi G, Toth K, Ding J, Dieudonne S, Lin MZ",
+      "journal": "Cell",
+      "year": 2019,
+      "sample": "HEK293 cells, cultured neurons, and mouse brain in vivo",
+      "url": "https://doi.org/10.1016/j.cell.2019.11.004"
+    },
+    {
+      "title": "Screening and cellular characterization of genetically encoded voltage indicators based on near-infrared fluorescent proteins",
+      "authors": "Monakhov MV, Matlashov ME, Colavita M, Song C, Shcherbakova DM, Antic SD, Verkhusha VV, Knopfel T",
+      "journal": "ACS Chemical Neuroscience",
+      "year": 2020,
+      "sample": "HEK293T cells and cultured mouse hippocampal neurons, in vitro",
+      "url": "https://doi.org/10.1021/acschemneuro.0c00046"
     }
   ]
 }

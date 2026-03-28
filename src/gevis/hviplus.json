@@ -35,8 +35,8 @@
     "polarity": "positive",
     "name": "HVI+ (Cy3b)",
     "custom": {
-      "voltage": [-100, -80, -60, -40, -20, 0, 20, 40, 60, 80, 100],
-      "deltaF":  [-18, -8, 8, 20, 33, 45, 57, 67, 76, 83, 88]
+      "voltage": [-100, -80, -70, -60, -40, -20, 0, 20, 40, 60, 80, 100],
+      "deltaF":  [-18, -8, 0, 8, 20, 33, 45, 57, 67, 76, 83, 88]
     }
   },
 
@@ -85,6 +85,17 @@
       "illumination": "500 mW/mm²",
       "duration": "12.3 min",
       "source": "doi:10.1126/sciadv.ads1807"
+    }
+  ],
+
+  "researchPapers": [
+    {
+      "title": "Positive-going hybrid indicators for voltage imaging in excitable cells and tissues",
+      "authors": "Liu S, et al.",
+      "journal": "Science Advances",
+      "year": 2025,
+      "sample": "Rat, hippocampal neurons, in vitro; rat, cardiomyocytes, in vitro; mouse, pancreatic islets, ex vivo",
+      "url": "https://doi.org/10.1126/sciadv.ads1807"
     }
   ]
 }

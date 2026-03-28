@@ -48,6 +48,10 @@ export interface GEVI {
   dynamicRange?: number | null;
   photostability?: number | null;
   overall?: number;
+  // Raw display values — computed at runtime for tabular ranking
+  bRel?: number | null;           // brightness relative to EGFP (from graph traversal)
+  displayTauOn?: number | null;   // selected τ_on in ms (temperature-preferred)
+  displayTauOff?: number | null;  // selected τ_off in ms (temperature-preferred)
   description: string;
   familyTreePath?: string[] | null;
   parentId?: string;

@@ -131,6 +131,14 @@
 
   "researchPapers": [
     {
+      "title": "Bright and photostable chemigenetic indicators for extended in vivo voltage imaging",
+      "authors": "Abdelfattah AS, Kawashima T, Singh A, et al.",
+      "journal": "Science",
+      "year": 2019,
+      "sample": "Mouse cortex L1, larval zebrafish, Drosophila, in vivo; HEK cells",
+      "url": "https://doi.org/10.1126/science.aav6416"
+    },
+    {
       "title": "High-fidelity estimates of spikes and subthreshold waveforms from 1-photon voltage imaging in vivo",
       "authors": "Xie ME, et al.",
       "journal": "Cell Reports",
@@ -147,20 +155,12 @@
       "url": "https://doi.org/10.1371/journal.pcbi.1008806"
     },
     {
-      "title": "Dynamic assemblies of parvalbumin interneurons in brain oscillations",
-      "authors": "Huang YC, et al.",
-      "journal": "Neuron",
-      "year": 2024,
-      "sample": "Mouse, hippocampal CA1, PV interneurons, in vivo",
-      "url": "https://doi.org/10.1016/j.neuron.2024.05.015"
-    },
-    {
-      "title": "Voltage imaging reveals circuit computations in the raphe underlying serotonin-mediated motor vigor learning",
-      "authors": "Kawashima T, et al.",
-      "journal": "Neuron",
-      "year": 2025,
-      "sample": "Larval zebrafish, serotonergic raphe (DRN), in vivo",
-      "url": "https://doi.org/10.1016/j.neuron.2025.05.017"
+      "title": "Single Photon Kilohertz Frame Rate Imaging of Neural Activity",
+      "authors": "Tian T, Yuan Y, Mitra S, et al.",
+      "journal": "Advanced Science",
+      "year": 2022,
+      "sample": "Rat, hippocampal CA1, acute brain slices, Voltron-JF525",
+      "url": "https://doi.org/10.1002/advs.202203018"
     },
     {
       "title": "Voltage-Seq: all-optical postsynaptic connectome-guided single-cell transcriptomics",
@@ -171,12 +171,36 @@
       "url": "https://doi.org/10.1038/s41592-023-01965-1"
     },
     {
+      "title": "All-optical voltage imaging-guided postsynaptic single-cell transcriptome profiling with Voltage-Seq",
+      "authors": "Csillag V, Noble JC, Calvigioni D, et al.",
+      "journal": "Nature Protocols",
+      "year": 2024,
+      "sample": "Mouse, acute brain slices, Voltron-ST",
+      "url": "https://doi.org/10.1038/s41596-024-01005-y"
+    },
+    {
+      "title": "Dynamic assemblies of parvalbumin interneurons in brain oscillations",
+      "authors": "Huang YC, et al.",
+      "journal": "Neuron",
+      "year": 2024,
+      "sample": "Mouse, hippocampal CA1, PV interneurons, in vivo",
+      "url": "https://doi.org/10.1016/j.neuron.2024.05.015"
+    },
+    {
       "title": "Optical Recordings of Unitary Synaptic Connections Reveal High and Random Local Connectivity between CA3 Pyramidal Cells",
       "authors": "Layous R, et al.",
       "journal": "Journal of Neuroscience",
       "year": 2025,
       "sample": "Rat, hippocampal CA3 pyramidal cells, acute brain slices, Voltron-ST + JF549",
       "url": "https://doi.org/10.1523/JNEUROSCI.0102-25.2025"
+    },
+    {
+      "title": "Voltage imaging reveals circuit computations in the raphe underlying serotonin-mediated motor vigor learning",
+      "authors": "Kawashima T, et al.",
+      "journal": "Neuron",
+      "year": 2025,
+      "sample": "Larval zebrafish, serotonergic raphe (DRN), in vivo",
+      "url": "https://doi.org/10.1016/j.neuron.2025.05.017"
     }
   ]
 }

@@ -29,10 +29,9 @@ import type { GEVI } from '../types';
 
 interface GEVILineageProps {
   gevi: GEVI;
-  darkMode?: boolean;
 }
 
-export function GEVILineage({ gevi, darkMode = false }: GEVILineageProps) {
+export function GEVILineage({ gevi }: GEVILineageProps) {
   const gevis = useMemo(() => getAllGEVIs(), []);
   const geviById = useMemo(() => new Map(gevis.map(g => [g.id, g])), [gevis]);
 
@@ -57,11 +56,11 @@ export function GEVILineage({ gevi, darkMode = false }: GEVILineageProps) {
 
   if (!path || path.length === 0) {
     return (
-      <div className={`border rounded-lg p-4 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-paper border-gray-200'}`}>
-        <h4 className={`text-sm font-semibold mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+      <div className="border rounded-lg p-4 bg-paper border-gray-200">
+        <h4 className="text-sm font-semibold mb-2 text-gray-700">
           Genetic Lineage
         </h4>
-        <div className={`text-xs ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>
+        <div className="text-xs text-gray-400">
           Family information not available
         </div>
       </div>
@@ -85,8 +84,8 @@ export function GEVILineage({ gevi, darkMode = false }: GEVILineageProps) {
   const svgWidth = 180;
 
   return (
-    <div className={`border rounded-lg p-4 ${darkMode ? 'bg-gray-800 border-gray-700' : 'bg-paper border-gray-200'}`}>
-      <h4 className={`text-sm font-semibold mb-3 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+    <div className="border rounded-lg p-4 bg-paper border-gray-200">
+      <h4 className="text-sm font-semibold mb-3 text-gray-700">
         Genetic Lineage
       </h4>
 
@@ -101,7 +100,7 @@ export function GEVILineage({ gevi, darkMode = false }: GEVILineageProps) {
                    ${svgWidth / 2},${(i + 1) * nodeSpacing + 10}
                    ${svgWidth / 2},${(i + 1) * nodeSpacing + 25}`}
               fill="none"
-              stroke={darkMode ? '#4b5563' : '#9ca3af'}
+              stroke="#9ca3af"
               strokeWidth="2"
             />
           ))}
@@ -124,7 +123,7 @@ export function GEVILineage({ gevi, darkMode = false }: GEVILineageProps) {
                   y={-20}
                   textAnchor="middle"
                   style={{ fontSize: '11px', fontWeight: node.isSelected ? 'bold' : 'normal',
-                    fill: darkMode ? 'white' : '#374151' }}
+                    fill: '#374151' }}
                 >
                   {node.name}
                 </text>
@@ -133,7 +132,7 @@ export function GEVILineage({ gevi, darkMode = false }: GEVILineageProps) {
                     x={0}
                     y={-8}
                     textAnchor="middle"
-                    style={{ fontSize: '9px', fill: darkMode ? '#9ca3af' : '#9ca3af' }}
+                    style={{ fontSize: '9px', fill: '#9ca3af' }}
                   >
                     ({node.year})
                   </text>

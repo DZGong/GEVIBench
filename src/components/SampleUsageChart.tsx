@@ -6,25 +6,22 @@ const COMPARISON_COLORS = ['#3b82f6', '#ef4444', '#22c55e', '#f59e0b', '#8b5cf6'
 interface SingleProps {
   mode: 'single';
   gevi: any;
-  darkMode: boolean;
 }
 
 interface CompareProps {
   mode: 'compare';
   gevis: any[];
-  darkMode: boolean;
 }
 
 type Props = SingleProps | CompareProps;
 
 const getSafeName = (name: string) => name.replace(/[^a-zA-Z0-9]/g, '');
 
-const axisStyle = (dark: boolean) => ({ fill: dark ? '#9ca3af' : '#6b7280', fontSize: 11 });
-const gridColor = (dark: boolean) => dark ? '#374151' : '#e5e7eb';
+const axisStyle = { fill: '#6b7280', fontSize: 11 };
+const gridColor = '#e5e7eb';
+const barColor = '#1e40af';
 
 export function SampleUsageChart(props: Props) {
-  const { darkMode } = props;
-
   if (props.mode === 'single') {
     const summary = computeSampleSummary(props.gevi.researchPapers);
     const data = SAMPLE_CATEGORY_ORDER
@@ -32,24 +29,22 @@ export function SampleUsageChart(props: Props) {
       .map(cat => ({ category: cat, count: summary[cat] }));
 
     if (data.length === 0) return (
-      <p className={`text-xs text-center py-4 ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>
+      <p className="text-xs text-center py-4 text-gray-400">
         No sample data available
       </p>
     );
-
-    const barColor = darkMode ? '#60a5fa' : '#1e40af';
 
     return (
       <div className="h-44">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={data} margin={{ top: 4, right: 8, bottom: 4, left: -16 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke={gridColor(darkMode)} vertical={false} />
-            <XAxis dataKey="category" tick={axisStyle(darkMode)} tickLine={false} />
-            <YAxis allowDecimals={false} tick={axisStyle(darkMode)} tickLine={false} axisLine={false} width={28} />
+            <CartesianGrid strokeDasharray="3 3" stroke={gridColor} vertical={false} />
+            <XAxis dataKey="category" tick={axisStyle} tickLine={false} />
+            <YAxis allowDecimals={false} tick={axisStyle} tickLine={false} axisLine={false} width={28} />
             <Tooltip
-              contentStyle={{ backgroundColor: darkMode ? '#1f2937' : '#fff', border: 'none', borderRadius: 6, fontSize: 12 }}
-              labelStyle={{ color: darkMode ? '#d1d5db' : '#111' }}
-              cursor={{ fill: darkMode ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.04)' }}
+              contentStyle={{ backgroundColor: '#fff', border: 'none', borderRadius: 6, fontSize: 12 }}
+              labelStyle={{ color: '#111' }}
+              cursor={{ fill: 'rgba(0,0,0,0.04)' }}
             />
             <Bar dataKey="count" name="Papers" radius={[3, 3, 0, 0]}>
               {data.map((_, i) => <Cell key={i} fill={barColor} />)}
@@ -69,7 +64,7 @@ export function SampleUsageChart(props: Props) {
   );
 
   if (activeCategories.length === 0) return (
-    <p className={`text-xs text-center py-4 ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>
+    <p className="text-xs text-center py-4 text-gray-400">
       No sample data available
     </p>
   );
@@ -84,13 +79,13 @@ export function SampleUsageChart(props: Props) {
     <div className="h-52">
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={data} margin={{ top: 4, right: 8, bottom: 4, left: -16 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke={gridColor(darkMode)} vertical={false} />
-          <XAxis dataKey="category" tick={axisStyle(darkMode)} tickLine={false} />
-          <YAxis allowDecimals={false} tick={axisStyle(darkMode)} tickLine={false} axisLine={false} width={28} />
+          <CartesianGrid strokeDasharray="3 3" stroke={gridColor} vertical={false} />
+          <XAxis dataKey="category" tick={axisStyle} tickLine={false} />
+          <YAxis allowDecimals={false} tick={axisStyle} tickLine={false} axisLine={false} width={28} />
           <Tooltip
-            contentStyle={{ backgroundColor: darkMode ? '#1f2937' : '#fff', border: 'none', borderRadius: 6, fontSize: 12 }}
-            labelStyle={{ color: darkMode ? '#d1d5db' : '#111' }}
-            cursor={{ fill: darkMode ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.04)' }}
+            contentStyle={{ backgroundColor: '#fff', border: 'none', borderRadius: 6, fontSize: 12 }}
+            labelStyle={{ color: '#111' }}
+            cursor={{ fill: 'rgba(0,0,0,0.04)' }}
           />
           <Legend wrapperStyle={{ fontSize: 11 }} />
           {gevis.map((g, i) => (

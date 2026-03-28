@@ -540,7 +540,7 @@ File: `src/gevis/{id}.json`
 
 **Omit optional sections** (`kinetics`, `dynamicRangeData`, `sensitivityData`, `photostabilityData`, `addgene`) if data is not available — do not include them as empty arrays.
 
-**`researchPapers` is NOT optional** — always perform the citing-paper search in step C before writing this field. Only omit it if the GEVI is so new that no citing papers exist yet. Never populate it with just the original paper.
+**`researchPapers` is NOT optional** — always perform the citing-paper search in step C before writing this field. **The original paper (matching `paperUrl`) must always be included as the first entry.** Every GEVI should have at least 1 research paper. Then add all independent papers found via the citing-paper search.
 
 **Tags:** Use concise descriptive tags. Common examples: `"Green"`, `"Red"`, `"cpGFP"`, `"Two-photon"`, `"Somatic targeting"`, `"Positive-going"`, named FP or opsin (e.g. `"mNeon"`, `"Ace opsin"`).
 

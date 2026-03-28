@@ -210,6 +210,38 @@
       "year": 2023,
       "sample": "Mouse, barrel cortex L2/3, in vivo",
       "url": "https://doi.org/10.1101/2023.05.25.542363"
+    },
+    {
+      "title": "High-speed multiplane confocal microscopy for voltage imaging in densely labeled neuronal populations",
+      "authors": "Weber TD, et al.",
+      "journal": "Nature Neuroscience",
+      "year": 2023,
+      "sample": "Mouse, motor cortex, acute brain slices and in vivo, Voltron2-ST JF585",
+      "url": "https://doi.org/10.1038/s41593-023-01408-2"
+    },
+    {
+      "title": "Fast and light-efficient remote focusing for volumetric voltage imaging",
+      "authors": "Bohm UL, Judkewitz B",
+      "journal": "Nature Communications",
+      "year": 2024,
+      "sample": "Zebrafish larvae, spinal cord, in vivo",
+      "url": "https://doi.org/10.1038/s41467-024-53685-5"
+    },
+    {
+      "title": "All-optical reporting of inhibitory receptor driving force in the nervous system",
+      "authors": "Selfe JS, et al.",
+      "journal": "Nature Communications",
+      "year": 2024,
+      "sample": "Mouse, hippocampal organotypic slices and somatosensory cortex L1, in vitro and in vivo, Voltron2-ST",
+      "url": "https://doi.org/10.1038/s41467-024-53074-y"
+    },
+    {
+      "title": "Synchronous ensembles of hippocampal CA1 pyramidal neurons during novel exploration",
+      "authors": "Chen EL, et al.",
+      "journal": "eLife",
+      "year": 2025,
+      "sample": "Mouse, hippocampus CA1 pyramidal neurons, in vivo, Voltron2-ST JF552",
+      "url": "https://doi.org/10.7554/eLife.96718"
     }
   ]
 }

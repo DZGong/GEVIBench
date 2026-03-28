@@ -67,11 +67,6 @@
     {
       "deltaF": -51,
       "sign": "negative",
-      "source": "doi:10.1016/j.cell.2019.11.004"
-    },
-    {
-      "deltaF": -51,
-      "sign": "negative",
       "source": "doi:10.1016/j.cell.2019.11.004",
       "note": "Per 100 mV step in spiking HEK cells at 22°C"
     },
@@ -159,6 +154,14 @@
     "url": "https://www.addgene.org/132331/"
   },
   "researchPapers": [
+    {
+      "title": "Ultrafast Two-Photon Imaging of a High-Gain Voltage Indicator in Awake Behaving Mice",
+      "authors": "Villette V, Chavarha M, et al.",
+      "journal": "Cell",
+      "year": 2019,
+      "sample": "Mouse, visual cortex L2/3, in vivo; Drosophila, olfactory projection neurons, in vivo; HEK293 cells, in vitro",
+      "url": "https://doi.org/10.1016/j.cell.2019.11.004"
+    },
     {
       "title": "Two-Photon Voltage Imaging of Spontaneous Activity from Multiple Neurons Reveals Network Activity in Brain Tissue",
       "authors": "Li B, et al.",
