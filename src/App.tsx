@@ -249,6 +249,70 @@ function GEVIBenchApp() {
     </main>
   );
 
+  // Highlight numbers, formulas, and math symbols in text with klein blue
+  const highlightNumbers = (text: string) => {
+    // Match: numbers (with optional decimals, %, ×, ±, −, negative sign), math expressions,
+    // Greek letters, units (mV, ms, nm, mW/mm², °C, min), variable names (τ_on, τ_off, B_rel, etc.)
+    const pattern = /([−±]?\d+(?:[.,]\d+)?(?:\s*[×·]\s*\d+(?:[.,]\d+)?)*\s*(?:%|×|mV|ms|nm|mW\/mm[²2]|°C|min|pts)?)|(\b(?:τ_(?:on|off|sum)|B_rel|F_remaining|ΔF\/F|EC|QY|log₁₀|exp)\b)|((?:≥|≤|→|↑|↓|÷)\s*\d+(?:[.,]\d+)?(?:\s*(?:%|×|mV|ms|nm|mW\/mm[²2]|°C|min))?)/g;
+    const parts: (string | JSX.Element)[] = [];
+    let lastIndex = 0;
+    let match: RegExpExecArray | null;
+    while ((match = pattern.exec(text)) !== null) {
+      if (match.index > lastIndex) {
+        parts.push(text.slice(lastIndex, match.index));
+      }
+      parts.push(<span key={match.index} className="text-klein font-medium">{match[0]}</span>);
+      lastIndex = match.index + match[0].length;
+    }
+    if (lastIndex < text.length) {
+      parts.push(text.slice(lastIndex));
+    }
+    return parts.length > 0 ? <>{parts}</> : text;
+  };
+
+  // Helper to render scoring sections
+  const renderScoringSection = (
+    title: string,
+    description: string,
+    formula: string,
+    details: string[],
+    benchmarks: { [key: string]: string | number }[],
+    formatBench: (bench: { [key: string]: string | number }) => string,
+    example?: string,
+    formulaNote?: string
+  ) => (
+    <div className="mt-4 p-3 rounded-lg bg-surface">
+      <h4 className={`text-md font-semibold mb-2 ${colors.text}`}>{title}</h4>
+      <p className={`text-sm text-ink`}>{highlightNumbers(description)}</p>
+      <div className="mt-2 p-2 rounded font-mono text-sm bg-surface-low text-klein">
+        {formula}
+      </div>
+      {formulaNote && (
+        <div className="mt-1 text-xs italic text-ink/80">{highlightNumbers(formulaNote)}</div>
+      )}
+      {example && (
+        <div className={`mt-2 text-xs text-ink`}>
+          <span className="font-medium">Example:</span> {highlightNumbers(example)}
+        </div>
+      )}
+      <ul className="list-disc list-inside text-xs space-y-1 mt-2">
+        {details.map((detail: string, i: number) => (
+          <li key={i} className="text-ink/80">{highlightNumbers(detail)}</li>
+        ))}
+      </ul>
+      <div className="mt-3">
+        <span className={`text-xs font-medium text-ink`}>Benchmarks:</span>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 mt-1">
+          {benchmarks.map((bench: { [key: string]: string | number }, i: number) => (
+            <div key={i} className="text-xs text-ink/80">
+              {highlightNumbers(formatBench(bench))}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+
   // Render Methodology Tab
   const renderMethodologyTab = () => (
     <main className="max-w-7xl mx-auto px-4 py-6">
@@ -257,33 +321,32 @@ function GEVIBenchApp() {
           Scoring <span className="text-klein">Methodology</span>
         </h2>
 
-        <div className="rounded-lg p-4 md:p-6 bg-surface-low">
+        <div className="rounded-lg p-4 md:p-6 bg-surface-lowest">
           <div className="space-y-6">
             <div>
               <h3 className={`text-lg font-semibold mb-2 ${colors.text}`}>Overview</h3>
-              <p className={`text-sm ${colors.textSecondary}`}>{methodologyContent.overview}</p>
+              <p className={`text-sm text-ink`}>{highlightNumbers(methodologyContent.overview)}</p>
             </div>
 
             <div>
-              <h3 className={`text-lg font-semibold mb-2 ${colors.text}`}>Two Data Sources</h3>
-              <div className="space-y-4">
-                <div className="p-4 rounded-lg bg-surface">
-                  <h4 className="font-medium mb-2 text-ink">1. Public Raw Datasets</h4>
-                  <p className={`text-sm ${colors.textTertiary}`}>{methodologyContent.twoApproaches.rawData.description}</p>
-                </div>
-                <div className="p-4 rounded-lg bg-surface">
-                  <h4 className="font-medium mb-2 text-ink">2. Published Parameters</h4>
-                  <p className={`text-sm ${colors.textTertiary}`}>{methodologyContent.twoApproaches.literature.description}</p>
-                </div>
+              <h3 className={`text-lg font-semibold mb-2 ${colors.text}`}>{methodologyContent.dataSource.title}</h3>
+              <p className={`text-sm text-ink mb-3`}>{methodologyContent.dataSource.description}</p>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+                {methodologyContent.dataSource.extractedMetrics.map((item: { metric: string; description: string }, i: number) => (
+                  <div key={i} className="p-2 rounded bg-surface">
+                    <div className="text-sm font-medium text-ink">{item.metric}</div>
+                    <div className={`text-xs ${colors.textMuted}`}>{item.description}</div>
+                  </div>
+                ))}
               </div>
             </div>
 
             <div>
               <h3 className={`text-lg font-semibold mb-2 ${colors.text}`}>Scoring Methodology</h3>
-              <p className={`text-sm ${colors.textSecondary}`}>{methodologyContent.scoring.approach}</p>
+              <p className={`text-sm text-ink`}>{highlightNumbers(methodologyContent.scoring.approach)}</p>
               <ul className="list-disc list-inside text-sm space-y-1 mt-2">
                 {methodologyContent.scoring.steps.map((step: string, i: number) => (
-                  <li key={i} className={colors.textTertiary}>{step}</li>
+                  <li key={i} className="text-ink/80">{highlightNumbers(step)}</li>
                 ))}
               </ul>
 
@@ -368,7 +431,7 @@ function GEVIBenchApp() {
                     <div className="text-sm font-medium text-ink">
                       {item.name} <span className="text-klein">{item.weight}</span>
                     </div>
-                    <div className={`text-xs ${colors.textMuted}`}>{item.description}</div>
+                    <div className={`text-xs ${colors.textMuted}`}>{highlightNumbers(item.description)}</div>
                   </div>
                 ))}
               </div>
@@ -377,7 +440,7 @@ function GEVIBenchApp() {
             {/* Bonus Points Section */}
             <div className="mt-6">
               <h3 className={`text-lg font-semibold mb-2 ${colors.text}`}>{methodologyContent.bonusPoints.title}</h3>
-              <p className={`text-sm ${colors.textSecondary} mb-3`}>{methodologyContent.bonusPoints.description}</p>
+              <p className={`text-sm text-ink mb-3`}>{highlightNumbers(methodologyContent.bonusPoints.description)}</p>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                 {methodologyContent.bonusPoints.rules.map((rule: any, i: number) => (
                   <div key={i} className="p-3 rounded-lg bg-surface">
@@ -387,7 +450,7 @@ function GEVIBenchApp() {
                       </span>
                       <span className="text-sm font-medium text-ink">{rule.name}</span>
                     </div>
-                    <div className={`text-xs ${colors.textMuted}`}>{rule.description}</div>
+                    <div className={`text-xs ${colors.textMuted}`}>{highlightNumbers(rule.description)}</div>
                   </div>
                 ))}
               </div>
@@ -396,55 +459,12 @@ function GEVIBenchApp() {
             {/* Weakness Penalty Section */}
             <div className="mt-6">
               <h3 className={`text-lg font-semibold mb-2 ${colors.text}`}>{methodologyContent.weaknessPenalty.title}</h3>
-              <p className={`text-sm ${colors.textSecondary}`}>{methodologyContent.weaknessPenalty.description}</p>
+              <p className={`text-sm text-ink`}>{highlightNumbers(methodologyContent.weaknessPenalty.description)}</p>
             </div>
           </div>
         </div>
       </div>
     </main>
-  );
-
-  // Helper to render scoring sections
-  const renderScoringSection = (
-    title: string,
-    description: string,
-    formula: string,
-    details: string[],
-    benchmarks: { [key: string]: string | number }[],
-    formatBench: (bench: { [key: string]: string | number }) => string,
-    example?: string,
-    formulaNote?: string
-  ) => (
-    <div className="mt-4 p-3 rounded-lg bg-surface">
-      <h4 className={`text-md font-semibold mb-2 ${colors.text}`}>{title}</h4>
-      <p className={`text-sm ${colors.textSecondary}`}>{description}</p>
-      <div className="mt-2 p-2 rounded font-mono text-sm bg-surface-low text-ink/80">
-        {formula}
-      </div>
-      {formulaNote && (
-        <div className={`mt-1 text-xs italic ${colors.textTertiary}`}>{formulaNote}</div>
-      )}
-      {example && (
-        <div className={`mt-2 text-xs ${colors.textSecondary}`}>
-          <span className="font-medium">Example:</span> {example}
-        </div>
-      )}
-      <ul className="list-disc list-inside text-xs space-y-1 mt-2">
-        {details.map((detail: string, i: number) => (
-          <li key={i} className={colors.textTertiary}>{detail}</li>
-        ))}
-      </ul>
-      <div className="mt-3">
-        <span className={`text-xs font-medium ${colors.textSecondary}`}>Benchmarks:</span>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 mt-1">
-          {benchmarks.map((bench: { [key: string]: string | number }, i: number) => (
-            <div key={i} className={`text-xs ${colors.textTertiary}`}>
-              {formatBench(bench)}
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
   );
 
   return (
