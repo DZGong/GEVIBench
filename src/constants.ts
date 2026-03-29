@@ -5,7 +5,7 @@ import type { SortField } from './types';
 // Filter defaults
 export const DEFAULT_CATEGORY = 'All';
 export const DEFAULT_YEAR = 'All';
-export const DEFAULT_SORT: SortField = 'overall';
+export const DEFAULT_SORT: SortField = 'year';
 
 // Comparison
 export const MAX_COMPARE_ITEMS = 5;

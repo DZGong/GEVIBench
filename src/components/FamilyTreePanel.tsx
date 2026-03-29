@@ -399,11 +399,13 @@ interface FamilyTreePanelProps {
   onCloseDetail: () => void;
   compareGEVIs: GEVI[];
   onAddToCompare: (gevi: GEVI) => void;
+  peaceMode?: boolean;
 }
 
 export function FamilyTreePanel({
   onSelectGEVI,
   onCloseDetail,
+  peaceMode = false,
 }: FamilyTreePanelProps) {
   const gevis = useMemo(() => getAllGEVIs(), []);
   const { nodes, links, crossLinks } = useMemo(() => buildFullTree(gevis), [gevis]);
@@ -586,7 +588,7 @@ export function FamilyTreePanel({
             zIndex: 9999,
             width: TOOLTIP_W,
           }}
-          className="rounded-lg border shadow-ambient p-2.5 bg-surface border-ink/10"
+          className="rounded-lg border shadow-ambient p-2.5 bg-surface-low border-ink/10"
           onMouseEnter={() => {
             if (hideTimeout.current) clearTimeout(hideTimeout.current);
           }}
@@ -603,7 +605,7 @@ export function FamilyTreePanel({
                 {hoverInfo.gevi.name}
               </button>
             </div>
-            {hoverInfo.gevi.overall != null && (
+            {!peaceMode && hoverInfo.gevi.overall != null && (
               <div className="text-right flex-shrink-0">
                 <div className="text-xl font-bold text-klein leading-none">{hoverInfo.gevi.overall}</div>
                 <div className="text-[8px] text-ink/40">Overall</div>

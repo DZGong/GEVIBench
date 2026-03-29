@@ -24,6 +24,7 @@ interface GEVIDetailProps {
   compareGEVIs: any[];
   onClose: () => void;
   onShowFamilyTree?: () => void;
+  peaceMode?: boolean;
 }
 
 function sourceToUrl(source: string): string | null {
@@ -50,7 +51,7 @@ function SourceLink({ source }: { source?: string }) {
   );
 }
 
-export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShowFamilyTree }: GEVIDetailProps) {
+export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShowFamilyTree, peaceMode = false }: GEVIDetailProps) {
   const [expandedMetrics, setExpandedMetrics] = useState<Record<string, boolean>>({});
   const [papersExpanded, setPapersExpanded] = useState(false);
   const papersRef = useRef<HTMLDivElement>(null);
@@ -106,8 +107,12 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
           )}
         </div>
         <div className="text-center sm:text-right">
-          <div className="text-4xl md:text-5xl font-bold text-klein">{gevi.overall ?? 'N/A'}</div>
-          <div className="text-sm text-ink">Overall</div>
+          {!peaceMode && (
+            <>
+              <div className="text-4xl md:text-5xl font-bold text-klein">{gevi.overall ?? 'N/A'}</div>
+              <div className="text-sm text-ink">Overall</div>
+            </>
+          )}
           <button
             onClick={() => onAddToCompare(gevi)}
             disabled={compareGEVIs.find(g => g.id === gevi.id) || compareGEVIs.length >= 5}

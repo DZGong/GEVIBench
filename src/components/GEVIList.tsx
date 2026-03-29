@@ -12,6 +12,7 @@ interface GEVIListProps {
   compact?: boolean;
   sortConfig: SortConfig;
   onSortChange: (field: SortField) => void;
+  peaceMode?: boolean;
 }
 
 const journalAbbrevs: Record<string, string> = {
@@ -142,16 +143,22 @@ function SortHeader({ symbol, desc, field, sortConfig, onSort, className = '' }:
   );
 }
 
-export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compareGEVIs, compact = false, sortConfig, onSortChange }: GEVIListProps) {
+export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compareGEVIs, compact = false, sortConfig, onSortChange, peaceMode = false }: GEVIListProps) {
   const thBase = 'font-medium text-ink font-sans';
   const cellBase = 'text-ink/80';
   const dimBase = 'text-ink/40';
   const isNarrow = useIsNarrow();
-  const [narrowIdx, setNarrowIdx] = useState(0); // 0 = Score, 1-6 = metrics
-  const NARROW_OPTIONS = [
-    { key: 'overall' as const, sortField: 'overall' as SortField, shortLabel: 'Score' },
-    ...METRICS.map(m => ({ key: m.key, sortField: m.sortField, shortLabel: m.shortLabel })),
-  ];
+  const [narrowIdx, setNarrowIdx] = useState(0);
+  const NARROW_OPTIONS = peaceMode
+    ? [
+        { key: 'year' as const, sortField: 'year' as SortField, shortLabel: 'Year' },
+        ...METRICS.map(m => ({ key: m.key, sortField: m.sortField, shortLabel: m.shortLabel })),
+      ]
+    : [
+        { key: 'overall' as const, sortField: 'overall' as SortField, shortLabel: 'Score' },
+        ...METRICS.map(m => ({ key: m.key, sortField: m.sortField, shortLabel: m.shortLabel })),
+      ];
+  useEffect(() => { setNarrowIdx(0); }, [peaceMode]);
   const currentNarrow = NARROW_OPTIONS[narrowIdx];
 
   // Compute top-3 GEVI IDs per metric score (include ties at the 3rd-place value)
@@ -236,7 +243,8 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
             {gevis.map((gevi: any, idx: number) => {
               const geviColor = getGEVIColor(gevi);
               const isScore = currentNarrow.key === 'overall';
-              const hasVal = isScore || hasMetricValue(gevi, currentNarrow.key as MetricKey);
+              const isYear = currentNarrow.key === 'year';
+              const hasVal = isScore || isYear || hasMetricValue(gevi, currentNarrow.key as MetricKey);
               return (
                 <tbody key={gevi.id} data-gevi-id={gevi.id} onClick={() => onSelect(gevi)} className={groupCls(gevi)}>
                   <tr>
@@ -259,6 +267,10 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
                     {isScore ? (
                       <td className="px-1 pt-3 pb-0 text-center font-bold text-klein tabular-nums" style={{ fontSize: '16px' }}>
                         {gevi.overall ?? '—'}
+                      </td>
+                    ) : isYear ? (
+                      <td className={`px-1 pt-3 pb-0 text-center tabular-nums ${dimBase}`} style={{ fontSize: '16px' }}>
+                        {gevi.year}
                       </td>
                     ) : (() => {
                       const isTop3 = top3PerMetric[currentNarrow.key]?.has(gevi.id);
@@ -293,7 +305,10 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
                   <SortHeader key={m.key} symbol={m.symbol} desc={m.desc} field={m.sortField} sortConfig={sortConfig} onSort={onSortChange} />
                 ))}
                 <th className="w-4"></th>
-                <SortHeader symbol="Score" desc="" field="overall" sortConfig={sortConfig} onSort={onSortChange} />
+                {peaceMode
+                  ? <SortHeader symbol="Year" desc="" field="year" sortConfig={sortConfig} onSort={onSortChange} />
+                  : <SortHeader symbol="Score" desc="" field="overall" sortConfig={sortConfig} onSort={onSortChange} />
+                }
                 <th className="w-8"></th>
               </tr>
             </thead>
@@ -331,9 +346,15 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
                       );
                     })}
                     <td className="w-4"></td>
-                    <td className="px-2 pt-3 pb-0 text-center font-bold text-klein tabular-nums" rowSpan={2} style={{ fontSize: '16px', verticalAlign: 'middle' }}>
-                      {gevi.overall ?? '—'}
-                    </td>
+                    {peaceMode ? (
+                      <td className={`px-2 pt-3 pb-0 text-center tabular-nums ${dimBase}`} rowSpan={2} style={{ fontSize: '14px', verticalAlign: 'middle' }}>
+                        {gevi.year}
+                      </td>
+                    ) : (
+                      <td className="px-2 pt-3 pb-0 text-center font-bold text-klein tabular-nums" rowSpan={2} style={{ fontSize: '16px', verticalAlign: 'middle' }}>
+                        {gevi.overall ?? '—'}
+                      </td>
+                    )}
                     <td className="px-1 pt-3 pb-0 text-center" rowSpan={2} style={{ verticalAlign: 'middle' }}>
                       <button
                         onClick={(e) => { e.stopPropagation(); onAddToCompare(gevi); }}

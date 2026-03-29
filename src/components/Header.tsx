@@ -1,4 +1,4 @@
-import { Menu, X, ChevronDown, TreeDeciduous, GitCompare, Github, Share2 } from 'lucide-react';
+import { Menu, X, ChevronDown, TreeDeciduous, GitCompare, Github, Share2, Swords, Leaf } from 'lucide-react';
 import { useState, useRef, useEffect } from 'react';
 import type { ViewTab } from '../types';
 
@@ -11,6 +11,8 @@ interface HeaderProps {
   onShowFamilyTree: () => void;
   onShowCompare: () => void;
   onShowBrightnessNetwork: () => void;
+  peaceMode: boolean;
+  setPeaceMode: (v: boolean) => void;
 }
 
 // Logo from external SVG file
@@ -18,7 +20,7 @@ const Logo = () => (
   <img src="/imgs/logo.svg" alt="GEVIBench logo" style={{ height: '32.4px' }} className="w-auto flex-shrink-0" />
 );
 
-export function Header({ activeTab, setActiveTab, mobileMenuOpen, setMobileMenuOpen, onLogoClick, onShowFamilyTree, onShowCompare, onShowBrightnessNetwork }: HeaderProps) {
+export function Header({ activeTab, setActiveTab, mobileMenuOpen, setMobileMenuOpen, onLogoClick, onShowFamilyTree, onShowCompare, onShowBrightnessNetwork, peaceMode, setPeaceMode }: HeaderProps) {
   const [toolsMenuOpen, setToolsMenuOpen] = useState(false);
   const toolsMenuRef = useRef<HTMLDivElement>(null);
 
@@ -124,6 +126,35 @@ export function Header({ activeTab, setActiveTab, mobileMenuOpen, setMobileMenuO
               </button>
             </nav>
 
+            <div className="relative group">
+              <button
+                onClick={() => setPeaceMode(!peaceMode)}
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full label transition-colors ${
+                  peaceMode
+                    ? 'bg-green-100 text-green-700 hover:bg-green-200'
+                    : 'bg-klein/10 text-klein hover:bg-klein/20'
+                }`}
+              >
+                {peaceMode ? <Leaf className="w-3.5 h-3.5" /> : <Swords className="w-3.5 h-3.5" />}
+                {peaceMode ? 'Peace' : 'Arena'}
+              </button>
+              <div className="pointer-events-none absolute right-0 top-full mt-2 w-56 rounded-md shadow-ambient px-3 py-2.5 z-50 opacity-0 group-hover:opacity-100 transition-opacity bg-surface-low border border-ink/10">
+                {peaceMode ? (
+                  <>
+                    <p className="text-xs font-semibold text-green-700 mb-1">Peace Mode</p>
+                    <p className="text-xs text-ink/70 font-sans leading-snug">Scores are hidden. Sensors are listed by publication year — explore without rankings.</p>
+                    <p className="text-xs text-ink/50 font-sans mt-1.5">Click to switch to Arena Mode.</p>
+                  </>
+                ) : (
+                  <>
+                    <p className="text-xs font-semibold text-klein mb-1">Arena Mode</p>
+                    <p className="text-xs text-ink/70 font-sans leading-snug">Sensors are ranked by overall score — a weighted combination of brightness, speed, dynamic range, and more.</p>
+                    <p className="text-xs text-ink/50 font-sans mt-1.5">Click to switch to Peace Mode.</p>
+                  </>
+                )}
+              </div>
+            </div>
+
             <a
               href="https://github.com/DZGong/GEVIBench"
               target="_blank"
@@ -178,6 +209,15 @@ export function Header({ activeTab, setActiveTab, mobileMenuOpen, setMobileMenuO
                 className={`label px-3 py-2 text-left border-b-2 ${activeTab === 'contact' ? 'text-klein border-gold' : 'text-ink border-transparent'}`}
               >
                 Contact
+              </button>
+              <button
+                onClick={() => { setPeaceMode(!peaceMode); setMobileMenuOpen(false); }}
+                className={`label px-3 py-2 text-left flex items-center gap-2 rounded-full ${
+                  peaceMode ? 'text-green-700' : 'text-klein'
+                }`}
+              >
+                {peaceMode ? <Leaf className="w-4 h-4" /> : <Swords className="w-4 h-4" />}
+                {peaceMode ? 'Peace Mode' : 'Arena Mode'}
               </button>
             </div>
           </div>

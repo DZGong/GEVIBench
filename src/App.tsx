@@ -58,6 +58,11 @@ function GEVIBenchApp() {
   const [showFamilyTree, setShowFamilyTree] = useState(false);
   const [showBrightnessNetwork, setShowBrightnessNetwork] = useState(false);
   const [showCompareEmpty, setShowCompareEmpty] = useState(false);
+  const [peaceMode, setPeaceMode] = useState(true);
+  const handleSetPeaceMode = useCallback((v: boolean) => {
+    setPeaceMode(v);
+    setSortConfig({ field: v ? 'year' : 'overall', order: 'desc' });
+  }, []);
   const sideListRef = useRef<HTMLDivElement>(null);
 
   // Derived state
@@ -196,7 +201,7 @@ function GEVIBenchApp() {
 
       {/* Brightness Network - full width */}
       {showBrightnessNetwork ? (
-        <BrightnessNetworkPanel onSelectGEVI={handleSelectGEVI} onClose={() => setShowBrightnessNetwork(false)} />
+        <BrightnessNetworkPanel onSelectGEVI={handleSelectGEVI} onClose={() => setShowBrightnessNetwork(false)} peaceMode={peaceMode} />
       ) : showFamilyTree ? (
         <FamilyTreePanel
           onSelectGEVI={handleSelectGEVI}
@@ -209,6 +214,7 @@ function GEVIBenchApp() {
           }}
           compareGEVIs={compareGEVIs}
           onAddToCompare={addToCompare}
+          peaceMode={peaceMode}
         />
       ) : (
         <>
@@ -225,6 +231,7 @@ function GEVIBenchApp() {
                 compact={!!selectedGEVI && filteredGEVIs.length > 0}
                 sortConfig={sortConfig}
                 onSortChange={handleSortChange}
+                peaceMode={peaceMode}
               />
             </div>
 
@@ -236,6 +243,7 @@ function GEVIBenchApp() {
                 onAddToCompare={addToCompare}
                 compareGEVIs={compareGEVIs}
                 onClose={handleLogoClick}
+                peaceMode={peaceMode}
                 onShowFamilyTree={() => {
                   setActiveTab('database');
                   setShowFamilyTree(true);
@@ -461,6 +469,8 @@ function GEVIBenchApp() {
         mobileMenuOpen={mobileMenuOpen}
         setMobileMenuOpen={setMobileMenuOpen}
         onLogoClick={handleLogoClick}
+        peaceMode={peaceMode}
+        setPeaceMode={handleSetPeaceMode}
         onShowFamilyTree={() => {
           setActiveTab('database');
           setShowFamilyTree(true);
@@ -496,6 +506,7 @@ function GEVIBenchApp() {
           }}
           compareGEVIs={compareGEVIs}
           onAddToCompare={addToCompare}
+          peaceMode={peaceMode}
         />
       )}
 

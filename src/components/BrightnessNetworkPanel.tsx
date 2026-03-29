@@ -362,11 +362,12 @@ function formatRatio(ratio: number): string {
 interface Props {
   onSelectGEVI: (gevi: GEVI) => void;
   onClose: () => void;
+  peaceMode?: boolean;
 }
 
 const W = 2100, H = 1500;
 
-export function BrightnessNetworkPanel({ onSelectGEVI, onClose }: Props) {
+export function BrightnessNetworkPanel({ onSelectGEVI, onClose, peaceMode = false }: Props) {
   const gevis = useMemo(() => getAllGEVIs(), []);
   const { nodes, edges } = useMemo(() => buildGraph(gevis), [gevis]);
   const positions = useMemo(() => forceLayout(nodes, edges, W, H), [nodes, edges]);
@@ -632,7 +633,7 @@ export function BrightnessNetworkPanel({ onSelectGEVI, onClose }: Props) {
         return (
           <div
             style={{ position: 'fixed', left: tipLeft, top: tipTop, zIndex: 9999, width: TOOLTIP_W }}
-            className="rounded-lg border shadow-ambient p-2.5 bg-surface border-ink/10"
+            className="rounded-lg border shadow-ambient p-2.5 bg-surface-low border-ink/10"
             onMouseEnter={() => { if (hideTimeout.current) clearTimeout(hideTimeout.current); }}
             onMouseLeave={() => setHoverInfo(null)}
           >
@@ -646,7 +647,7 @@ export function BrightnessNetworkPanel({ onSelectGEVI, onClose }: Props) {
                   {g.name}
                 </button>
               </div>
-              {g.overall != null && (
+              {!peaceMode && g.overall != null && (
                 <div className="text-right flex-shrink-0">
                   <div className="text-xl font-bold text-klein leading-none">{g.overall}</div>
                   <div className="text-[8px] text-ink/40">Overall</div>
