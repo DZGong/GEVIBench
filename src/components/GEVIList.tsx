@@ -193,8 +193,8 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
               <tr className="border-b border-surface">
                 <th className={`pl-2 pr-2 py-2 text-center ${thBase} w-12`} style={{ fontSize: '14px' }}>Rank</th>
                 <th className={`pl-1 pr-0 py-2 text-left ${thBase}`} style={{ fontSize: '14px', width: '1%', whiteSpace: 'nowrap' }}>Sensor ({gevis.length})</th>
-                <th className="px-1 py-2" style={{ minWidth: '80px' }}>
-                  <div className="flex items-center justify-center gap-0.5">
+                <th className="px-1 py-2" style={{ minWidth: '150px' }}>
+                  <div className="flex items-center justify-center gap-2">
                     <button
                       onClick={() => setNarrowIdx((narrowIdx - 1 + NARROW_OPTIONS.length) % NARROW_OPTIONS.length)}
                       className="flex-shrink-0 p-0.5 rounded hover:bg-ink/10 text-ink/50"
@@ -203,7 +203,7 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
                     </button>
                     <button
                       onClick={() => onSortChange(currentNarrow.sortField)}
-                      style={{ width: '100px' }}
+                      style={{ minWidth: '100px' }}
                       className={`text-center cursor-pointer select-none hover:text-klein transition-colors whitespace-nowrap ${
                         sortConfig.field === currentNarrow.sortField ? 'text-klein font-medium' : 'text-ink font-medium'
                       }`}
