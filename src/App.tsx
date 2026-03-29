@@ -280,7 +280,7 @@ function GEVIBenchApp() {
     example?: string,
     formulaNote?: string
   ) => (
-    <div className="mt-4 p-3 rounded-lg bg-surface">
+    <div className="mt-4 p-3 rounded-lg bg-surface-low">
       <h4 className={`text-md font-semibold mb-2 font-serif ${colors.text}`}>{title}</h4>
       <p className={`text-sm text-ink`}>{highlightNumbers(description)}</p>
       <div className="mt-2 p-2 rounded font-mono text-sm bg-surface-low text-klein">
@@ -332,7 +332,7 @@ function GEVIBenchApp() {
               <p className={`text-sm text-ink mb-3`}>{methodologyContent.scoreComponents.description}</p>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
                 {methodologyContent.scoreComponents.items.map((item: { name: string; weight: string; description: string }, i: number) => (
-                  <div key={i} className="p-2 rounded bg-surface">
+                  <div key={i} className="p-2 rounded bg-surface-low">
                     <div className="text-sm font-medium text-ink">
                       {item.name} <span className="text-klein">{item.weight}</span>
                     </div>
@@ -430,7 +430,7 @@ function GEVIBenchApp() {
               <p className={`text-sm text-ink mb-3`}>{highlightNumbers(methodologyContent.bonusPoints.description)}</p>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                 {methodologyContent.bonusPoints.rules.map((rule: any, i: number) => (
-                  <div key={i} className="p-3 rounded-lg bg-surface">
+                  <div key={i} className="p-3 rounded-lg bg-surface-low">
                     <div className="flex items-center gap-2 mb-2">
                       <span className="px-2 py-0.5 rounded-full text-xs font-medium font-sans bg-klein/10 text-klein">
                         +{rule.points} pts
