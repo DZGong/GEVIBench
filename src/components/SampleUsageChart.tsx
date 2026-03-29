@@ -1,7 +1,7 @@
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Cell } from 'recharts';
 import { computeSampleSummary, SAMPLE_CATEGORY_ORDER } from '../utils';
 
-const COMPARISON_COLORS = ['#a4192a', '#ef4444', '#22c55e', '#f59e0b', '#8b5cf6'];
+const COMPARISON_COLORS = ['#002FA7', '#ef4444', '#22c55e', '#f59e0b', '#8b5cf6'];
 
 interface SingleProps {
   mode: 'single';
@@ -11,6 +11,7 @@ interface SingleProps {
 interface CompareProps {
   mode: 'compare';
   gevis: any[];
+  hideLegend?: boolean;
 }
 
 type Props = SingleProps | CompareProps;
@@ -87,7 +88,7 @@ export function SampleUsageChart(props: Props) {
             labelStyle={{ color: '#111' }}
             cursor={{ fill: 'rgba(0,0,0,0.04)' }}
           />
-          <Legend wrapperStyle={{ fontSize: 11 }} />
+          {!props.hideLegend && <Legend wrapperStyle={{ fontSize: 11 }} />}
           {gevis.map((g, i) => (
             <Bar key={g.id} dataKey={getSafeName(g.name)} name={g.name} fill={COMPARISON_COLORS[i % COMPARISON_COLORS.length]} radius={[3, 3, 0, 0]} />
           ))}

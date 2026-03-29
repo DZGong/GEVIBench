@@ -389,34 +389,26 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
           {papersExpanded && <div className="space-y-4 mt-4">
             {gevi.researchPapers.map((paper: any, idx: number) => (
               <div key={idx} className="p-3 rounded-lg bg-surface-low">
-                <div className="flex gap-4">
-                  {/* Representative figure placeholder */}
-                  <div className="w-24 h-24 flex-shrink-0 rounded bg-ink/10 flex items-center justify-center">
-                    <span className="text-xs text-ink">Fig</span>
-                  </div>
-                  <div className="flex-1">
-                    <a href={paper.url} target="_blank" rel="noopener noreferrer" className="text-[14px] font-medium text-klein hover:underline">
-                      {paper.title}
-                    </a>
-                    <div className="text-xs mt-1 text-ink">
-                      {paper.authors} • <span className="font-medium italic">{paper.journal}</span>{paper.year && ` • ${paper.year}`}
-                    </div>
-                    {paper.sample && (
-                      <div className="flex flex-wrap gap-1 mt-2">
-                        {paper.sample.split(/[,;]/).map((s: string) => s.trim()).filter(Boolean).map((tag: string, i: number) => (
-                          <span key={i} className="text-[10px] px-1.5 py-0.5 rounded text-ink" style={{ backgroundColor: '#FF91AF30' }}>{tag}</span>
-                        ))}
-                      </div>
-                    )}
-                    {paper.applications && (
-                      <div className="flex flex-wrap gap-1 mt-1">
-                        {paper.applications.map((app: string, i: number) => (
-                          <span key={i} className="text-[10px] px-1.5 py-0.5 rounded text-ink" style={{ backgroundColor: '#FF91AF30' }}>{app}</span>
-                        ))}
-                      </div>
-                    )}
-                  </div>
+                <a href={paper.url} target="_blank" rel="noopener noreferrer" className="text-[14px] font-medium text-klein hover:underline">
+                  {paper.title}
+                </a>
+                <div className="text-xs mt-1 text-ink">
+                  {paper.authors} • <span className="font-medium italic">{paper.journal}</span>{paper.year && ` • ${paper.year}`}
                 </div>
+                {paper.sample && (
+                  <div className="flex flex-wrap gap-1 mt-2">
+                    {paper.sample.split(/[,;]/).map((s: string) => s.trim()).filter(Boolean).map((tag: string, i: number) => (
+                      <span key={i} className="text-[10px] px-1.5 py-0.5 rounded text-ink" style={{ backgroundColor: '#FF91AF30' }}>{tag}</span>
+                    ))}
+                  </div>
+                )}
+                {paper.applications && (
+                  <div className="flex flex-wrap gap-1 mt-1">
+                    {paper.applications.map((app: string, i: number) => (
+                      <span key={i} className="text-[10px] px-1.5 py-0.5 rounded text-ink" style={{ backgroundColor: '#FF91AF30' }}>{app}</span>
+                    ))}
+                  </div>
+                )}
               </div>
             ))}
           </div>}

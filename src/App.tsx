@@ -163,7 +163,7 @@ function GEVIBenchApp() {
           <button onClick={handleLogoClick} className="hover:opacity-80 transition-opacity">
             <h2 className="font-bold mb-1 whitespace-nowrap" style={{ fontSize: 'clamp(16px, 4vw, 24px)' }}>
               <span className="text-white">GEVI</span><span className="text-white">Bench</span>
-              <span className="font-sans font-normal text-gray-200" style={{ fontSize: 'clamp(12px, 3vw, 20px)' }}> — Voltage Indicator Benchmark</span>
+              <span className="font-sans font-bold text-gray-200" style={{ fontSize: 'clamp(12px, 3vw, 20px)' }}> — Voltage Indicator Benchmark</span>
             </h2>
           </button>
           <p className="font-sans text-gray-300 whitespace-nowrap" style={{ fontSize: 'clamp(11px, 2.5vw, 15px)' }}>
@@ -252,7 +252,7 @@ function GEVIBenchApp() {
   const highlightNumbers = (text: string) => {
     // Match: numbers (with optional decimals, %, ×, ±, −, negative sign), math expressions,
     // Greek letters, units (mV, ms, nm, mW/mm², °C, min), variable names (τ_on, τ_off, B_rel, etc.)
-    const pattern = /([−±]?\d+(?:[.,]\d+)?(?:\s*[×·]\s*\d+(?:[.,]\d+)?)*\s*(?:%|×|mV|ms|nm|mW\/mm[²2]|°C|min|pts)?)|(\b(?:τ_(?:on|off|sum)|B_rel|F_remaining|ΔF\/F|EC|QY|log₁₀|exp)\b)|((?:≥|≤|→|↑|↓|÷)\s*\d+(?:[.,]\d+)?(?:\s*(?:%|×|mV|ms|nm|mW\/mm[²2]|°C|min))?)/g;
+    const pattern = /([−±]?\d+(?:[.,]\d+)?(?:\s*[×·]\s*\d+(?:[.,]\d+)?)*\s*(?:%|×|mV|ms|nm|mW\/mm[²2]|°C|min|pts)?)|(\b(?:τ_(?:on|off|sum)|B\/B_EGFP|B_rel|F_remaining|ΔF\/F|EC|QY|log₁₀|exp)\b)|((?:≥|≤|→|↑|↓|÷)\s*\d+(?:[.,]\d+)?(?:\s*(?:%|×|mV|ms|nm|mW\/mm[²2]|°C|min))?)/g;
     const parts: (string | JSX.Element)[] = [];
     let lastIndex = 0;
     let match: RegExpExecArray | null;
@@ -287,7 +287,7 @@ function GEVIBenchApp() {
         {formula}
       </div>
       {formulaNote && (
-        <div className="mt-1 text-xs italic text-ink/80">{highlightNumbers(formulaNote)}</div>
+        <div className="mt-1 text-xs italic text-ink">{highlightNumbers(formulaNote)}</div>
       )}
       {example && (
         <div className={`mt-2 text-xs text-ink`}>
@@ -296,14 +296,14 @@ function GEVIBenchApp() {
       )}
       <ul className="list-disc list-inside text-xs space-y-1 mt-2">
         {details.map((detail: string, i: number) => (
-          <li key={i} className="text-ink/80">{highlightNumbers(detail)}</li>
+          <li key={i} className="text-ink">{highlightNumbers(detail)}</li>
         ))}
       </ul>
       <div className="mt-3">
         <span className={`text-xs font-medium text-ink`}>Benchmarks:</span>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 mt-1">
           {benchmarks.map((bench: { [key: string]: string | number }, i: number) => (
-            <div key={i} className="text-xs text-ink/80">
+            <div key={i} className="text-xs text-ink">
               {highlightNumbers(formatBench(bench))}
             </div>
           ))}
@@ -328,26 +328,21 @@ function GEVIBenchApp() {
             </div>
 
             <div>
-              <h3 className={`text-lg font-semibold mb-2 font-serif ${colors.text}`}>{methodologyContent.scoreComponents.title}</h3>
+              <h3 className={`text-lg font-semibold mb-2 font-serif ${colors.text}`}>Scoring Methodology</h3>
               <p className={`text-sm text-ink mb-3`}>{methodologyContent.scoreComponents.description}</p>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-2 mb-4">
                 {methodologyContent.scoreComponents.items.map((item: { name: string; weight: string; description: string }, i: number) => (
                   <div key={i} className="p-2 rounded bg-surface-low">
                     <div className="text-sm font-medium text-ink">
                       {item.name} <span className="text-klein">{item.weight}</span>
                     </div>
-                    <div className={`text-xs ${colors.textMuted}`}>{highlightNumbers(item.description)}</div>
+                    <div className="text-xs text-ink">{highlightNumbers(item.description)}</div>
                   </div>
                 ))}
               </div>
-            </div>
-
-            <div>
-              <h3 className={`text-lg font-semibold mb-2 font-serif ${colors.text}`}>Scoring Methodology</h3>
-              <p className={`text-sm text-ink`}>{highlightNumbers(methodologyContent.scoring.approach)}</p>
-              <ul className="list-disc list-inside text-sm space-y-1 mt-2">
-                {methodologyContent.scoring.steps.map((step: string, i: number) => (
-                  <li key={i} className="text-ink/80">{highlightNumbers(step)}</li>
+              <ul className="list-disc list-inside text-sm space-y-1">
+                {methodologyContent.scoring.steps.slice(1).map((step: string, i: number) => (
+                  <li key={i} className="text-ink">{highlightNumbers(step)}</li>
                 ))}
               </ul>
 
@@ -382,7 +377,7 @@ function GEVIBenchApp() {
                 methodologyContent.scoring.dynamicRangeScoring.formula,
                 methodologyContent.scoring.dynamicRangeScoring.details,
                 methodologyContent.scoring.dynamicRangeScoring.benchmarks,
-                (bench) => `Score ${bench.score}: ΔF/F=${bench.deltaF}% (${bench.example})`,
+                (bench) => `Score ${bench.score}: ΔF/F ${typeof bench.deltaF === 'string' ? bench.deltaF : `= ${bench.deltaF}`}% (${bench.example})`,
                 undefined,
                 methodologyContent.scoring.dynamicRangeScoring.formulaNote
               )}
@@ -394,7 +389,7 @@ function GEVIBenchApp() {
                 methodologyContent.scoring.sensitivityScoring.formula,
                 methodologyContent.scoring.sensitivityScoring.details,
                 methodologyContent.scoring.sensitivityScoring.benchmarks,
-                (bench) => `Score ${bench.score}: ΔF/F/AP = ${bench.dfPerAP}% (${bench.example})`,
+                (bench) => `Score ${bench.score}: ΔF/F/AP ${typeof bench.dfPerAP === 'string' ? bench.dfPerAP : `= ${bench.dfPerAP}`}% (${bench.example})`,
                 undefined,
                 methodologyContent.scoring.sensitivityScoring.formulaNote
               )}
@@ -418,7 +413,7 @@ function GEVIBenchApp() {
                 methodologyContent.scoring.popularityScoring.formula,
                 methodologyContent.scoring.popularityScoring.details,
                 methodologyContent.scoring.popularityScoring.benchmarks,
-                (bench) => `Score ${bench.score}: ${bench.papers} papers (${bench.example})`,
+                (bench) => `Score ${bench.score}: ${bench.papers} papers`,
                 methodologyContent.scoring.popularityScoring.example,
                 methodologyContent.scoring.popularityScoring.formulaNote
               )}
@@ -437,7 +432,7 @@ function GEVIBenchApp() {
                       </span>
                       <span className="text-sm font-medium text-ink">{rule.name}</span>
                     </div>
-                    <div className={`text-xs ${colors.textMuted}`}>{highlightNumbers(rule.description)}</div>
+                    <div className="text-xs text-ink">{highlightNumbers(rule.description)}</div>
                   </div>
                 ))}
               </div>

@@ -32,7 +32,7 @@ export function ComparisonPanel({ compareGEVIs, onRemove, showEmpty = false, onC
     if (!showEmpty) return null;
 
     return (
-      <div id="compare-panel" className="border rounded-lg p-4 md:p-6 mb-6 bg-surface border-ink/10">
+      <div id="compare-panel" className="border rounded-lg p-4 md:p-6 mb-6 bg-surface-lowest border-ink/10">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-lg font-bold flex items-center gap-2 text-ink">
             <GitCompare className="w-5 h-5" />Compare Sensors (0)
@@ -60,7 +60,7 @@ export function ComparisonPanel({ compareGEVIs, onRemove, showEmpty = false, onC
   const getSafeName = (name: string) => name.replace(/[^a-zA-Z0-9]/g, '');
 
   return (
-    <div id="compare-panel" className="border rounded-lg p-4 md:p-6 mb-6 bg-surface border-ink/10">
+    <div id="compare-panel" className="border rounded-lg p-4 md:p-6 mb-6 bg-surface-lowest border-ink/10">
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-lg font-bold flex items-center gap-2 text-ink">
           <GitCompare className="w-5 h-5" />Compare Sensors ({compareGEVIs.length})
@@ -90,18 +90,29 @@ export function ComparisonPanel({ compareGEVIs, onRemove, showEmpty = false, onC
         {/* Radar Chart */}
         <div>
           <h4 className="text-sm font-semibold mb-3 text-ink/70">Performance Radar</h4>
-          <div className="h-64">
-            <ResponsiveContainer width="100%" height="100%">
-              <RadarChart data={getCompareRadarData()}>
-                <PolarGrid stroke="#e5e7eb" />
-                <PolarAngleAxis dataKey="subject" tick={{ fill: '#374151', fontSize: 12 }} />
-                <PolarRadiusAxis angle={30} domain={[0, 100]} tick={{ fill: '#9ca3af', fontSize: 10 }} />
+          <div className="border rounded-lg p-3 bg-surface-low border-ink/10">
+            <div className="h-64">
+              <ResponsiveContainer width="100%" height="100%">
+                <RadarChart data={getCompareRadarData()}>
+                  <PolarGrid stroke="#e5e7eb" />
+                  <PolarAngleAxis dataKey="subject" tick={{ fill: '#374151', fontSize: 12 }} />
+                  <PolarRadiusAxis angle={30} domain={[0, 100]} tick={{ fill: '#9ca3af', fontSize: 10 }} />
+                  {compareGEVIs.map((gevi, idx) => (
+                    <Radar key={gevi.id} name={gevi.name} dataKey={getSafeName(gevi.name)} stroke={COLORS[idx % COLORS.length]} fill={COLORS[idx % COLORS.length]} fillOpacity={0.2} />
+                  ))}
+                </RadarChart>
+              </ResponsiveContainer>
+            </div>
+            <div className="mt-2 pt-2 border-t border-ink/10">
+              <div className="flex flex-wrap gap-3 justify-center">
                 {compareGEVIs.map((gevi, idx) => (
-                  <Radar key={gevi.id} name={gevi.name} dataKey={getSafeName(gevi.name)} stroke={COLORS[idx % COLORS.length]} fill={COLORS[idx % COLORS.length]} fillOpacity={0.2} />
+                  <div key={gevi.id} className="flex items-center gap-1.5">
+                    <div className="w-3 h-3 rounded-full" style={{ backgroundColor: COLORS[idx % COLORS.length] }} />
+                    <span className="text-xs text-ink/60">{gevi.name}</span>
+                  </div>
                 ))}
-                <Legend />
-              </RadarChart>
-            </ResponsiveContainer>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -114,8 +125,18 @@ export function ComparisonPanel({ compareGEVIs, onRemove, showEmpty = false, onC
         {/* Sample Usage Comparison */}
         <div>
           <h4 className="text-sm font-semibold mb-3 text-ink/70">Sample Usage</h4>
-          <div className="border rounded-lg p-4 bg-surface-low border-ink/10">
-            <SampleUsageChart mode="compare" gevis={compareGEVIs} />
+          <div className="border rounded-lg p-3 bg-surface-low border-ink/10">
+            <SampleUsageChart mode="compare" gevis={compareGEVIs} hideLegend />
+            <div className="mt-2 pt-2 border-t border-ink/10">
+              <div className="flex flex-wrap gap-3 justify-center">
+                {compareGEVIs.map((gevi, idx) => (
+                  <div key={gevi.id} className="flex items-center gap-1.5">
+                    <div className="w-3 h-3 rounded-full" style={{ backgroundColor: COLORS[idx % COLORS.length] }} />
+                    <span className="text-xs text-ink/60">{gevi.name}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -131,23 +152,6 @@ function FVCurveCompare({ compareGEVIs, COLORS }: { compareGEVIs: any[]; COLORS:
   const width = 500;
   const height = 256;
   const padding = { top: 15, right: 15, bottom: 30, left: 45 };
-
-  const minV = -100;
-  const maxV = 40;
-  const minDeltaF = -50;
-  const maxDeltaF = 30;
-  const chartWidth = width - padding.left - padding.right;
-  const chartHeight = height - padding.top - padding.bottom;
-
-  const xScale = (v: number) => padding.left + ((v - minV) / (maxV - minV)) * chartWidth;
-  const yScale = (d: number) => padding.top + chartHeight - ((d - minDeltaF) / (maxDeltaF - minDeltaF)) * chartHeight;
-
-  const createPath = (voltageData: { voltage: number; deltaF: number }[]) => {
-    const points = voltageData.map(d => {
-      return `${xScale(d.voltage)},${yScale(d.deltaF)}`;
-    }).join(' ');
-    return `M ${points}`;
-  };
 
   // Generate curve data for each GEVI, preferring custom data
   const getVoltageData = (gevi: any) => {
@@ -166,6 +170,60 @@ function FVCurveCompare({ compareGEVIs, COLORS }: { compareGEVIs: any[]; COLORS:
     gevi,
     data: getVoltageData(gevi)
   }));
+
+  // Auto-scale X axis from data with padding
+  const allVoltages = allVoltageData.flatMap(({ data }) => data.map(d => d.voltage));
+  const vDataMin = Math.min(...allVoltages);
+  const vDataMax = Math.max(...allVoltages);
+  const xPad = Math.max(5, (vDataMax - vDataMin) * 0.05);
+  const xRawRange = vDataMax - vDataMin + 2 * xPad;
+  const xStep = xRawRange <= 40 ? 10 : xRawRange <= 100 ? 20 : xRawRange <= 200 ? 40 : 50;
+  const minV = Math.floor((vDataMin - xPad) / xStep) * xStep;
+  const maxV = Math.ceil((vDataMax + xPad) / xStep) * xStep;
+
+  const xTicks: number[] = [];
+  for (let v = minV; v <= maxV; v += xStep) {
+    xTicks.push(v);
+  }
+  if (minV < 0 && maxV > 0 && !xTicks.includes(0)) {
+    xTicks.push(0);
+    xTicks.sort((a, b) => a - b);
+  }
+
+  // Auto-scale Y axis from data with 10% padding
+  const allDeltaF = allVoltageData.flatMap(({ data }) => data.map(d => d.deltaF));
+  const dataMin = Math.min(...allDeltaF);
+  const dataMax = Math.max(...allDeltaF);
+  const yPad = Math.max(5, (dataMax - dataMin) * 0.1);
+  // Round to nearest nice step (multiples of 5, 10, 25, 50...)
+  const rawRange = dataMax - dataMin + 2 * yPad;
+  const yStep = rawRange <= 20 ? 5 : rawRange <= 50 ? 10 : rawRange <= 100 ? 25 : 50;
+  const minDeltaF = Math.floor((dataMin - yPad) / yStep) * yStep;
+  const maxDeltaF = Math.ceil((dataMax + yPad) / yStep) * yStep;
+
+  // Generate Y-axis ticks
+  const yTicks: number[] = [];
+  for (let v = minDeltaF; v <= maxDeltaF; v += yStep) {
+    yTicks.push(v);
+  }
+  // Always include 0 if within range
+  if (minDeltaF < 0 && maxDeltaF > 0 && !yTicks.includes(0)) {
+    yTicks.push(0);
+    yTicks.sort((a, b) => a - b);
+  }
+
+  const chartWidth = width - padding.left - padding.right;
+  const chartHeight = height - padding.top - padding.bottom;
+
+  const xScale = (v: number) => padding.left + ((v - minV) / (maxV - minV)) * chartWidth;
+  const yScale = (d: number) => padding.top + chartHeight - ((d - minDeltaF) / (maxDeltaF - minDeltaF)) * chartHeight;
+
+  const createPath = (voltageData: { voltage: number; deltaF: number }[]) => {
+    const points = voltageData.map(d => {
+      return `${xScale(d.voltage)},${yScale(d.deltaF)}`;
+    }).join(' ');
+    return `M ${points}`;
+  };
 
   // Find data at hover voltage
   const getDataAtVoltage = (voltage: number) => {
@@ -217,7 +275,7 @@ function FVCurveCompare({ compareGEVIs, COLORS }: { compareGEVIs: any[]; COLORS:
           />
 
           {/* Grid lines */}
-          {[-50, -25, 0, 30].map(v => (
+          {yTicks.map(v => (
             <line
               key={v}
               x1={padding.left}
@@ -230,7 +288,7 @@ function FVCurveCompare({ compareGEVIs, COLORS }: { compareGEVIs: any[]; COLORS:
           ))}
 
           {/* Y-axis labels */}
-          {[-50, -25, 0, 30].map(v => (
+          {yTicks.map(v => (
             <text
               key={v}
               x={padding.left - 8}
@@ -244,7 +302,7 @@ function FVCurveCompare({ compareGEVIs, COLORS }: { compareGEVIs: any[]; COLORS:
           ))}
 
           {/* X-axis */}
-          {[-80, -60, -40, -20, 0, 20].map(v => (
+          {xTicks.map(v => (
             <g key={v}>
               <line
                 x1={xScale(v)}
@@ -320,7 +378,7 @@ function FVCurveCompare({ compareGEVIs, COLORS }: { compareGEVIs: any[]; COLORS:
       </div>
 
       {/* Legend and Data Readout */}
-      <div className="mt-2 pt-2 border-t border-ink/30">
+      <div className="mt-2 pt-2 border-t border-ink/10">
         <div className="flex flex-wrap gap-3 justify-center mb-2">
           {compareGEVIs.map((gevi, idx) => (
             <div key={gevi.id} className="flex items-center gap-1.5">
