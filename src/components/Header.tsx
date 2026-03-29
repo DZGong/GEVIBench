@@ -59,7 +59,7 @@ export function Header({ activeTab, setActiveTab, mobileMenuOpen, setMobileMenuO
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
             <div className="hidden lg:flex items-center gap-2">
-              <button onClick={onLogoClick} className="flex flex-col items-center hover:opacity-80 transition-opacity">
+              <button onClick={onLogoClick} className="flex flex-col items-center hover:opacity-70">
                 <Logo />
                 <span className="text-xs font-bold leading-tight mt-0.5"><span className="text-klein">GEVI</span><span className="text-ink">Bench</span></span>
               </button>
@@ -68,7 +68,7 @@ export function Header({ activeTab, setActiveTab, mobileMenuOpen, setMobileMenuO
 
           {/* Centered logo on mobile */}
           <div className="lg:hidden absolute left-1/2 -translate-x-1/2">
-            <button onClick={onLogoClick} className="flex flex-col items-center hover:opacity-80 transition-opacity">
+            <button onClick={onLogoClick} className="flex flex-col items-center hover:opacity-70">
               <Logo />
               <span className="text-xs font-bold leading-tight mt-0.5"><span className="text-klein">GEVI</span><span className="text-ink">Bench</span></span>
             </button>

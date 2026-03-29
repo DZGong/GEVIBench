@@ -149,15 +149,13 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
   const dimBase = 'text-ink/40';
   const isNarrow = useIsNarrow();
   const [narrowIdx, setNarrowIdx] = useState(0);
-  const NARROW_OPTIONS = peaceMode
-    ? [
-        { key: 'year' as const, sortField: 'year' as SortField, shortLabel: 'Year' },
-        ...METRICS.map(m => ({ key: m.key, sortField: m.sortField, shortLabel: m.shortLabel })),
-      ]
-    : [
-        { key: 'overall' as const, sortField: 'overall' as SortField, shortLabel: 'Score' },
-        ...METRICS.map(m => ({ key: m.key, sortField: m.sortField, shortLabel: m.shortLabel })),
-      ];
+  const NARROW_OPTIONS = useMemo(() => {
+    const metricOptions = METRICS.map(m => ({ key: m.key, sortField: m.sortField, shortLabel: m.shortLabel }));
+    const first = peaceMode
+      ? { key: 'year' as const, sortField: 'year' as SortField, shortLabel: 'Year' }
+      : { key: 'overall' as const, sortField: 'overall' as SortField, shortLabel: 'Score' };
+    return [first, ...metricOptions];
+  }, [peaceMode]);
   useEffect(() => { setNarrowIdx(0); }, [peaceMode]);
   const currentNarrow = NARROW_OPTIONS[narrowIdx];
 
