@@ -15,7 +15,7 @@ interface HeaderProps {
 
 // Logo from external SVG file
 const Logo = () => (
-  <img src="/logo.svg" alt="GEVIBench logo" style={{ height: '36px' }} className="w-auto flex-shrink-0" />
+  <img src="/imgs/logo.svg" alt="GEVIBench logo" style={{ height: '32.4px' }} className="w-auto flex-shrink-0" />
 );
 
 export function Header({ activeTab, setActiveTab, mobileMenuOpen, setMobileMenuOpen, onLogoClick, onShowFamilyTree, onShowCompare, onShowBrightnessNetwork }: HeaderProps) {
