@@ -203,12 +203,12 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
                     </button>
                     <button
                       onClick={() => onSortChange(currentNarrow.sortField)}
-                      style={{ width: '80px' }}
+                      style={{ width: '100px' }}
                       className={`text-center cursor-pointer select-none hover:text-klein transition-colors whitespace-nowrap ${
                         sortConfig.field === currentNarrow.sortField ? 'text-klein font-medium' : 'text-ink font-medium'
                       }`}
                     >
-                      <span style={{ fontSize: '14px' }}>{currentNarrow.shortLabel}</span>
+                      <span style={{ fontSize: '14px' }}>{currentNarrow.key === 'overall' ? 'Score' : METRICS.find(m => m.key === currentNarrow.key)?.symbol ?? currentNarrow.shortLabel}</span>
                       {sortConfig.field === currentNarrow.sortField && (
                         <span style={{ fontSize: '12px' }} className="ml-0.5">
                           {sortConfig.order === 'desc' ? '▼' : '▲'}
