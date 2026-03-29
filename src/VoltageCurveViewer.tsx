@@ -188,7 +188,7 @@ export function VoltageCurveViewer({ voltageData, geviName }: VoltageCurveViewer
     return '#dc2626'; // red
   };
 
-  const primaryColor = '#1c1c19'; // ink
+  const primaryColor = '#002FA7'; // klein blue
 
   // Get color based on polarity
   const getResponseColor = (deltaF: number) => {
@@ -203,7 +203,7 @@ export function VoltageCurveViewer({ voltageData, geviName }: VoltageCurveViewer
   if (!config || !computedVoltage) {
     return (
       <div className="border rounded-lg p-4 bg-surface-low border-ink/10">
-        <div className="text-xs text-ink/40">
+        <div className="text-xs text-ink">
           No voltage curve data available
         </div>
       </div>
@@ -216,7 +216,7 @@ export function VoltageCurveViewer({ voltageData, geviName }: VoltageCurveViewer
         ref={containerRef}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        className="relative cursor-crosshair bg-surface rounded"
+        className="relative cursor-crosshair bg-surface-low rounded"
       >
         <svg className="w-full block" viewBox={`0 0 ${width} ${height}`}>
           {/* Grid lines - dynamic Y ticks */}
@@ -239,7 +239,7 @@ export function VoltageCurveViewer({ voltageData, geviName }: VoltageCurveViewer
               y={height - 10}
               textAnchor="middle"
               fontSize="11"
-              fill="#6b7280"
+              fill="#1c1c19"
             >
               {v}
             </text>
@@ -252,7 +252,7 @@ export function VoltageCurveViewer({ voltageData, geviName }: VoltageCurveViewer
               y={yScale(v) + 4}
               textAnchor="end"
               fontSize="11"
-              fill="#6b7280"
+              fill="#1c1c19"
             >
               {v}%
             </text>
@@ -326,7 +326,7 @@ export function VoltageCurveViewer({ voltageData, geviName }: VoltageCurveViewer
         {/* Hover tooltip */}
         {hoverData && (
           <div
-            className="absolute top-1 left-1/2 transform -translate-x-1/2 px-2 py-1 rounded text-xs bg-surface text-ink shadow"
+            className="absolute top-1 left-1/2 transform -translate-x-1/2 px-2 py-1 rounded text-xs bg-surface-low text-ink shadow"
             style={{ pointerEvents: 'none' }}
           >
             {hoverData.voltage}mV | {hoverData.deltaF.toFixed(2)}% ΔF/F
@@ -336,13 +336,13 @@ export function VoltageCurveViewer({ voltageData, geviName }: VoltageCurveViewer
 
       {/* Axis labels */}
       <div className="flex justify-between mt-1 text-xs">
-        <span className="text-ink/40">Membrane Potential (mV)</span>
-        <span className="text-ink/40">ΔF/F (%)</span>
+        <span className="text-ink">Membrane Potential (mV)</span>
+        <span className="text-ink">ΔF/F (%)</span>
       </div>
 
       {/* Legend for multiple curves */}
       {computedAdditional.length > 0 && (
-        <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs text-ink/50">
+        <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-xs text-ink">
           <span className="flex items-center gap-1">
             <svg width="16" height="8"><line x1="0" y1="4" x2="16" y2="4" stroke={primaryColor} strokeWidth="2" /></svg>
             {config.name}
@@ -361,7 +361,7 @@ export function VoltageCurveViewer({ voltageData, geviName }: VoltageCurveViewer
       )}
 
       {/* Sensitivity */}
-      <div className="mt-2 text-xs text-ink/40">
+      <div className="mt-2 text-xs text-ink">
         Sensitivity: ~{sensitivity}% per 100mV | Response: {config.polarity === 'positive' ? 'Positive (↑ depolarization = ↑ fluorescence)' : 'Negative (↑ depolarization = ↓ fluorescence)'}
       </div>
     </div>

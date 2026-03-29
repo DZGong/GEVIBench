@@ -29,7 +29,7 @@ export function computeSampleSummary(researchPapers?: ResearchPaper[]): Record<s
 
 // Unified color for GEVI titles across the UI
 export const getGEVIColor = (_gevi: { tags?: string[]; category?: string; name: string }): GEVIColor => {
-  return { color: '#002FA7', label: '' };
+  return { color: '#a4192a', label: '' };
 };
 
 // Convert a wavelength (nm) to an approximate visible color
@@ -48,9 +48,19 @@ export function wavelengthToColor(nm: number): string {
   if      (nm >= 380 && nm < 420) factor = 0.4 + 0.6 * (nm - 380) / 40;
   else if (nm > 700 && nm <= 750) factor = 0.4 + 0.6 * (750 - nm) / 50;
 
-  const R = Math.round(255 * Math.min(1, r) * factor);
-  const G = Math.round(255 * Math.min(1, g) * factor);
-  const B = Math.round(255 * Math.min(1, b) * factor);
+  let R = Math.round(255 * Math.min(1, r) * factor);
+  let G = Math.round(255 * Math.min(1, g) * factor);
+  let B = Math.round(255 * Math.min(1, b) * factor);
+
+  // Desaturate greens (490–580nm) — mix 30% toward luminance gray
+  if (nm >= 490 && nm < 580) {
+    const gray = Math.round(0.299 * R + 0.587 * G + 0.114 * B);
+    const mix = 0.30;
+    R = Math.round(R + (gray - R) * mix);
+    G = Math.round(G + (gray - G) * mix);
+    B = Math.round(B + (gray - B) * mix);
+  }
+
   return `rgb(${R},${G},${B})`;
 }
 

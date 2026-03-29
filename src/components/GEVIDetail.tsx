@@ -42,7 +42,7 @@ function SourceLink({ source }: { source?: string }) {
     const citationMap = getDoiCitationMap();
     label = citationMap[doi] || source;
   }
-  if (!url) return <span className="text-[10px] text-ink/40">{source}</span>;
+  if (!url) return <span className="text-[10px] text-ink">{source}</span>;
   return (
     <a href={url} target="_blank" rel="noopener noreferrer" className="text-[10px] whitespace-nowrap text-klein hover:underline">
       {label} <ExternalLink className="w-2.5 h-2.5 inline" />
@@ -84,36 +84,37 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
       <div className="flex items-start justify-between gap-4 mb-4">
         <div className="flex-1">
           <h3 className="text-xl md:text-2xl font-bold mb-1 text-ink">
-            <span style={{ color: getGEVIColor(gevi).color }}>{gevi.name}</span>
+            <span className="text-ink">{gevi.name}</span>
           </h3>
-          <p className="text-sm mb-2 text-ink/60 font-sans">{gevi.description}</p>
+          <p className="text-sm mb-2 text-ink font-sans">{gevi.description}</p>
           <div className="flex flex-wrap gap-2 mb-2">
             <span className="text-xs px-2 py-1 bg-klein text-white rounded font-medium">{gevi.category}</span>
-            <span className="text-xs px-2 py-1 rounded bg-surface-low text-ink/70">Published {gevi.year}</span>
+            <span className="text-xs px-2 py-1 rounded text-ink" style={{ backgroundColor: '#FF91AF30' }}>Published {gevi.year}</span>
           </div>
-          <a href={gevi.paperUrl} target="_blank" rel="noopener noreferrer" className="text-sm flex items-center gap-1 text-klein hover:underline">
+          <a href={gevi.paperUrl} target="_blank" rel="noopener noreferrer" className="text-sm inline-flex items-center gap-1 text-klein hover:underline">
             <BookOpen className="w-4 h-4" />{gevi.paper}<ExternalLink className="w-3 h-3" />
           </a>
+          <br />
           {gevi.addgene ? (
-            <a href={gevi.addgene.url} target="_blank" rel="noopener noreferrer" className="text-sm flex items-center gap-1 text-green-700 hover:underline">
+            <a href={gevi.addgene.url} target="_blank" rel="noopener noreferrer" className="text-sm inline-flex items-center gap-1 text-green-700 hover:underline">
               <Dna className="w-4 h-4" /> Addgene #{gevi.addgene.id}<ExternalLink className="w-3 h-3" />
             </a>
           ) : (
-            <span className="text-sm flex items-center gap-1 text-ink/40">
+            <span className="text-sm inline-flex items-center gap-1 text-ink/40">
               <Dna className="w-4 h-4" /> Addgene: Coming soon
             </span>
           )}
         </div>
         <div className="text-center sm:text-right">
           <div className="text-4xl md:text-5xl font-bold text-klein">{gevi.overall ?? 'N/A'}</div>
-          <div className="text-sm text-ink/50">Overall</div>
+          <div className="text-sm text-ink">Overall</div>
           <button
             onClick={() => onAddToCompare(gevi)}
             disabled={compareGEVIs.find(g => g.id === gevi.id) || compareGEVIs.length >= 5}
             className={`mt-2 text-xs px-2 py-1 rounded border flex items-center gap-1 mx-auto sm:mx-0 ${
               compareGEVIs.find(g => g.id === gevi.id)
                 ? 'text-green-500 border-green-500'
-                : 'border-ink/15 text-ink/60 hover:text-green-600'
+                : 'border-ink/15 text-ink/60 hover:text-gold hover:border-gold'
             }`}
           >
             <Plus className="w-3 h-3" /> {compareGEVIs.find(g => g.id === gevi.id) ? 'Added' : 'Compare'}
@@ -127,11 +128,11 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
           <div key={metric.key} className="rounded-lg p-2 md:p-3 bg-surface-low">
             <div className="flex items-center gap-1.5 mb-1.5">
               <metric.icon className="w-3 h-3" />
-              <span className="text-xs md:text-sm font-medium text-ink/70">{metric.name}</span>
+              <span className="text-xs md:text-sm font-medium text-ink">{metric.name}</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="flex-1 h-1.5 md:h-2 rounded-full overflow-hidden bg-ink/10">
-                <div className="h-full rounded-full bg-klein" style={{ width: `${gevi[metric.key] ?? 0}%` }} />
+                <div className="h-full rounded-full bg-gold" style={{ width: `${gevi[metric.key] ?? 0}%` }} />
               </div>
               <span className="text-xs md:text-sm font-semibold w-6 md:w-8 text-right text-ink">{gevi[metric.key] ?? '—'}</span>
             </div>
@@ -142,7 +143,7 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
                   <span className="text-ink">τ<sub>on</sub>/τ<sub>off</sub>:</span>
                   <span className="text-ink font-semibold">{gevi.kinetics[0].on}/{gevi.kinetics[0].off} ms</span>
                   {gevi.kinetics[0].temperature && (
-                    <span className="text-ink/40">({gevi.kinetics[0].temperature})</span>
+                    <span className="text-ink">({gevi.kinetics[0].temperature})</span>
                   )}
                 </div>
                 <button onClick={() => toggleMetric('speed')} className="mt-1 flex items-center gap-1 text-klein hover:underline">
@@ -157,7 +158,7 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
                           <span>τ<sub>on</sub>/τ<sub>off</sub>: {k.on}/{k.off} ms{k.temperature ? ` (${k.temperature})` : ''}</span>
                           <SourceLink source={k.source} />
                         </div>
-                        {k.note && <div className="mt-0.5 italic text-ink/40">{k.note}</div>}
+                        {k.note && <div className="mt-0.5 italic text-ink">{k.note}</div>}
                       </div>
                     ))}
                   </div>
@@ -185,7 +186,7 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
                           <span>ΔF/F<sub>AP</sub>: {s.deltaF}%</span>
                           <SourceLink source={s.source} />
                         </div>
-                        {s.note && <div className="mt-0.5 italic text-ink/40">{s.note}</div>}
+                        {s.note && <div className="mt-0.5 italic text-ink">{s.note}</div>}
                       </div>
                     ))}
                   </div>
@@ -200,7 +201,7 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
                   <span className="text-ink font-semibold">
                     {gevi.dynamicRangeData[0].sign === 'negative' ? '-' : '+'}{Math.abs(gevi.dynamicRangeData[0].deltaF)}%
                   </span>
-                  <span className="text-ink/50">per 100mV</span>
+                  <span className="text-ink">per 100mV</span>
                 </div>
                 <button onClick={() => toggleMetric('dynamicRange')} className="mt-1 flex items-center gap-1 text-klein hover:underline">
                   {expandedMetrics.dynamicRange ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
@@ -218,7 +219,7 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
                           </span>
                           <SourceLink source={d.source} />
                         </div>
-                        {d.note && <div className="mt-0.5 italic text-ink/40">{d.note}</div>}
+                        {d.note && <div className="mt-0.5 italic text-ink">{d.note}</div>}
                       </div>
                     ))}
                   </div>
@@ -227,7 +228,7 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
             )}
             {/* Photostability */}
             {metric.key === 'photostability' && gevi.photostabilityData === 'bioluminescent' && (
-              <div className="mt-2 text-[10px] text-ink/50">
+              <div className="mt-2 text-[10px] text-ink">
                 <div className="flex items-center gap-2">
                   <span>Bioluminescent — no photobleaching</span>
                 </div>
@@ -240,9 +241,9 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
                   <span className="text-ink font-semibold">
                     {gevi.photostabilityData[0].brightnessRemaining}%
                   </span>
-                  <span className="text-ink/50">@ {gevi.photostabilityData[0].illumination}</span>
+                  <span className="text-ink">@ {gevi.photostabilityData[0].illumination}</span>
                 </div>
-                <div className="text-ink/50">{gevi.photostabilityData[0].duration}</div>
+                <div className="text-ink">{gevi.photostabilityData[0].duration}</div>
                 <button onClick={() => toggleMetric('photostability')} className="mt-1 flex items-center gap-1 text-klein hover:underline">
                   {expandedMetrics.photostability ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
                   {gevi.photostabilityData.length} {gevi.photostabilityData.length === 1 ? 'measurement' : 'measurements'}
@@ -255,7 +256,7 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
                           <span>F<sub>remain</sub>: {p.brightnessRemaining}% @ {p.illumination}, {p.duration}</span>
                           <SourceLink source={p.source} />
                         </div>
-                        {p.note && <div className="mt-0.5 italic text-ink/40">{p.note}</div>}
+                        {p.note && <div className="mt-0.5 italic text-ink">{p.note}</div>}
                       </div>
                     ))}
                   </div>
@@ -273,7 +274,7 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
                     <span className="text-ink font-semibold">
                       {display.ratio}×
                     </span>
-                    <span className="text-ink/50">vs {display.reference}</span>
+                    <span className="text-ink">vs {display.reference}</span>
                   </div>
                   <button onClick={() => toggleMetric('brightness')} className="mt-1 flex items-center gap-1 text-klein hover:underline">
                     {expandedMetrics.brightness ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
@@ -287,7 +288,7 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
                             <span>{b.ratio}× vs {b.reference}</span>
                             <SourceLink source={b.source} />
                           </div>
-                          {b.note && <div className="mt-0.5 italic text-ink/40">{b.note}</div>}
+                          {b.note && <div className="mt-0.5 italic text-ink">{b.note}</div>}
                         </div>
                       ))}
                     </div>
@@ -325,8 +326,8 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mt-6">
         {/* Left column: radar on top, sample chart below */}
         <div className="flex flex-col gap-4">
-          <div className="border rounded-lg p-4 md:p-6 bg-surface border-ink/10">
-            <h4 className="text-sm font-semibold mb-3 md:mb-4 text-ink/70">Performance Profile</h4>
+          <div className="border rounded-lg p-4 md:p-6 bg-surface-low border-ink/10">
+            <h4 className="text-sm font-semibold mb-3 md:mb-4 text-ink">Performance Profile</h4>
             <div className="h-48 md:h-64">
               <ResponsiveContainer width="100%" height="100%">
                 <RadarChart data={getRadarData()}>
@@ -344,8 +345,8 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
 
           {/* Sample Usage Chart */}
           {gevi.researchPapers?.length > 0 && (
-            <div className="border rounded-lg p-4 md:p-6 bg-surface border-ink/10">
-              <h4 className="text-sm font-semibold mb-3 text-ink/70">Sample Usage</h4>
+            <div className="border rounded-lg p-4 md:p-6 bg-surface-low border-ink/10">
+              <h4 className="text-sm font-semibold mb-3 text-ink">Sample Usage</h4>
               <SampleUsageChart mode="single" gevi={gevi} />
             </div>
           )}
@@ -366,21 +367,21 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
       </div>
 
       {/* Voltage Response Curve */}
-      <div className="border rounded-lg p-4 md:p-6 mt-4 md:mt-6 bg-surface border-ink/10">
-        <h4 className="text-sm font-semibold mb-3 md:mb-4 text-ink/70">ΔF/F - Voltage Curve</h4>
+      <div className="border rounded-lg p-4 md:p-6 mt-4 md:mt-6 bg-surface-low border-ink/10">
+        <h4 className="text-sm font-semibold mb-3 md:mb-4 text-ink">ΔF/F - Voltage Curve</h4>
         <VoltageCurveViewer voltageData={gevi.voltage || null} geviName={gevi.name} />
       </div>
 
       {/* Research Papers with Representative Figures */}
       {gevi.researchPapers && gevi.researchPapers.length > 0 && (
-        <div ref={papersRef} className="border rounded-lg p-4 md:p-6 mt-4 md:mt-6 bg-surface border-ink/10">
+        <div ref={papersRef} className="border rounded-lg p-4 md:p-6 mt-4 md:mt-6 bg-surface-low border-ink/10">
           <button
             onClick={() => setPapersExpanded(!papersExpanded)}
-            className="w-full text-sm font-semibold flex items-center gap-2 text-ink/70 hover:text-ink transition-colors"
+            className="w-full text-sm font-semibold flex items-center gap-2 text-ink hover:text-ink transition-colors"
           >
             <BookOpen className="w-4 h-4" />
             Research Papers Using {gevi.name}
-            <span className="text-xs font-normal text-ink/40 ml-1">({gevi.researchPapers.length})</span>
+            <span className="text-xs font-normal text-ink ml-1">({gevi.researchPapers.length})</span>
             <span className="ml-auto">
               {papersExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
             </span>
@@ -391,26 +392,26 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
                 <div className="flex gap-4">
                   {/* Representative figure placeholder */}
                   <div className="w-24 h-24 flex-shrink-0 rounded bg-ink/10 flex items-center justify-center">
-                    <span className="text-xs text-ink/50">Fig</span>
+                    <span className="text-xs text-ink">Fig</span>
                   </div>
                   <div className="flex-1">
                     <a href={paper.url} target="_blank" rel="noopener noreferrer" className="text-[14px] font-medium text-klein hover:underline">
                       {paper.title}
                     </a>
-                    <div className="text-xs mt-1 text-ink/60">
+                    <div className="text-xs mt-1 text-ink">
                       {paper.authors} • <span className="font-medium italic">{paper.journal}</span>{paper.year && ` • ${paper.year}`}
                     </div>
                     {paper.sample && (
                       <div className="flex flex-wrap gap-1 mt-2">
                         {paper.sample.split(/[,;]/).map((s: string) => s.trim()).filter(Boolean).map((tag: string, i: number) => (
-                          <span key={i} className="text-[10px] px-1.5 py-0.5 rounded text-ink/70" style={{ backgroundColor: '#FF91AF30' }}>{tag}</span>
+                          <span key={i} className="text-[10px] px-1.5 py-0.5 rounded text-ink" style={{ backgroundColor: '#FF91AF30' }}>{tag}</span>
                         ))}
                       </div>
                     )}
                     {paper.applications && (
                       <div className="flex flex-wrap gap-1 mt-1">
                         {paper.applications.map((app: string, i: number) => (
-                          <span key={i} className="text-[10px] px-1.5 py-0.5 rounded text-ink/70" style={{ backgroundColor: '#FF91AF30' }}>{app}</span>
+                          <span key={i} className="text-[10px] px-1.5 py-0.5 rounded text-ink" style={{ backgroundColor: '#FF91AF30' }}>{app}</span>
                         ))}
                       </div>
                     )}

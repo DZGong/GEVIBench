@@ -12,12 +12,12 @@ module.exports = {
 				mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
 			},
 			backgroundColor: {
-				'surface': '#fcf9f4',
-				'surface-low': '#f6f3ee',
+				'surface': '#f5f0e8',
+				'surface-low': '#fdfcfa',
 				'surface-lowest': '#ffffff',
-				'paper-light': '#fcf9f4',
-				'paper': '#fcf9f4',
-				'paper-dark': '#f6f3ee',
+				'paper-light': '#f5f0e8',
+				'paper': '#f5f0e8',
+				'paper-dark': '#fdfcfa',
 			},
 			colors: {
 				ink: '#1c1c19',
@@ -32,8 +32,8 @@ module.exports = {
 					DEFAULT: '#FF91AF',
 				},
 				surface: {
-					DEFAULT: '#fcf9f4',
-					low: '#f6f3ee',
+					DEFAULT: '#f5f0e8',
+					low: '#fdfcfa',
 					lowest: '#ffffff',
 				},
 			},

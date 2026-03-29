@@ -1,7 +1,35 @@
 import { useMemo, useState, useRef, useEffect, useCallback } from 'react';
+import { X, BookOpen, ExternalLink } from 'lucide-react';
+import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar } from 'recharts';
 import { getAllGEVIs } from '../geviData';
 import { getTreeNodeColor } from '../utils';
 import type { GEVI } from '../types';
+
+// Journal name abbreviations for tooltip display
+const JOURNAL_ABBREV: Record<string, string> = {
+  'Nature Methods': 'Nat. Methods',
+  'Nature Neuroscience': 'Nat. Neurosci.',
+  'Nature Communications': 'Nat. Commun.',
+  'Nature Chemical Biology': 'Nat. Chem. Biol.',
+  'Nature Chemistry': 'Nat. Chem.',
+  'Journal of Neuroscience': 'J. Neurosci.',
+  'European Journal of Neuroscience': 'Eur. J. Neurosci.',
+  'ACS Chemical Neuroscience': 'ACS Chem. Neurosci.',
+  'Scientific Reports': 'Sci. Rep.',
+  'Science Advances': 'Sci. Adv.',
+  'Advanced Biology': 'Adv. Biol.',
+  'Advanced Science': 'Adv. Sci.',
+};
+
+function abbreviatePaper(paper: string): string {
+  for (const [full, abbrev] of Object.entries(JOURNAL_ABBREV)) {
+    if (paper.includes(full)) return paper.replace(full, abbrev);
+  }
+  return paper;
+}
+
+const TOOLTIP_W = 170;
+const TOOLTIP_H = 270;
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -328,26 +356,17 @@ function formatRatio(ratio: number): string {
   return `1/${inv.toFixed(1)}`;
 }
 
-// Small inline hexagon SVG for legend
-function LegendHex({ color, dashed }: { color: string; dashed?: boolean }) {
-  return (
-    <svg width="11" height="12" viewBox="-6 -7 12 14" className="inline-block flex-shrink-0" style={{ verticalAlign: 'middle' }}>
-      <path d={hexPath(6, 1.8)} fill={color} fillOpacity={dashed ? 0.35 : 1}
-        stroke={dashed ? color : 'none'} strokeWidth={dashed ? 0.8 : 0}
-        strokeDasharray={dashed ? '1.5 1' : undefined} />
-    </svg>
-  );
-}
 
 // ── Component ─────────────────────────────────────────────────────────────────
 
 interface Props {
   onSelectGEVI: (gevi: GEVI) => void;
+  onClose: () => void;
 }
 
 const W = 2100, H = 1500;
 
-export function BrightnessNetworkPanel({ onSelectGEVI }: Props) {
+export function BrightnessNetworkPanel({ onSelectGEVI, onClose }: Props) {
   const gevis = useMemo(() => getAllGEVIs(), []);
   const { nodes, edges } = useMemo(() => buildGraph(gevis), [gevis]);
   const positions = useMemo(() => forceLayout(nodes, edges, W, H), [nodes, edges]);
@@ -356,9 +375,10 @@ export function BrightnessNetworkPanel({ onSelectGEVI }: Props) {
   const [tx, setTx] = useState(0);
   const [ty, setTy] = useState(0);
   const [scale, setScale] = useState(1);
-  const [hoveredId, setHoveredId] = useState<string | null>(null);
-  const [hoveredEdgeIdx, setHoveredEdgeIdx] = useState<number | null>(null);
+  const [hoverInfo, setHoverInfo] = useState<{ node: GNode & { x: number; y: number; r: number }; x: number; y: number } | null>(null);
+  const hoveredId = hoverInfo?.node.id ?? null;
   const [fitted, setFitted] = useState(false);
+  const hideTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const dragRef = useRef<{ active: boolean; x: number; y: number }>({ active: false, x: 0, y: 0 });
   const svgRef = useRef<SVGSVGElement>(null);
@@ -383,16 +403,9 @@ export function BrightnessNetworkPanel({ onSelectGEVI }: Props) {
   }), [nodes, positions]);
 
   const nodeById = useMemo(() => new Map(finalNodes.map(n => [n.id, n])), [finalNodes]);
-  const hoveredNode = hoveredId ? nodeById.get(hoveredId) ?? null : null;
 
-  // Auto-fit graph into viewport on first render
-  useEffect(() => {
-    if (fitted || finalNodes.length === 0) return;
-    const el = svgRef.current?.parentElement;
-    if (!el) return;
-    const rect = el.getBoundingClientRect();
-    const vw = rect.width, vh = rect.height;
-    if (vw === 0 || vh === 0) return;
+  // Graph bounding box (in layout coords)
+  const graphBounds = useMemo(() => {
     const labelPad = 40;
     let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
     for (const n of finalNodes) {
@@ -401,58 +414,78 @@ export function BrightnessNetworkPanel({ onSelectGEVI }: Props) {
       maxX = Math.max(maxX, n.x + labelPad);
       maxY = Math.max(maxY, n.y + labelPad);
     }
-    const gw = maxX - minX, gh = maxY - minY;
-    const s = Math.min(vw / gw, vh / gh) * 0.69;
-    setScale(s);
-    setTx((vw - gw * s) / 2 - minX * s);
-    setTy((vh - gh * s) / 2 - minY * s);
+    return { minX, minY, maxX, maxY, gw: maxX - minX, gh: maxY - minY };
+  }, [finalNodes]);
+
+  // Canvas height adapts to graph aspect ratio: fill available width, derive height
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [canvasHeight, setCanvasHeight] = useState(600);
+
+  const fitToViewport = useCallback(() => {
+    if (finalNodes.length === 0) return;
+    const el = containerRef.current;
+    if (!el) return;
+    const vw = el.clientWidth;
+    if (vw === 0 || graphBounds.gw === 0) return;
+    // Scale to fill width, derive height from graph aspect ratio
+    const s = vw / graphBounds.gw * 0.95;
+    const derivedH = graphBounds.gh * s;
+    // Clamp between 300px and 85vh
+    const maxH = window.innerHeight * 0.85;
+    const h = Math.max(300, Math.min(derivedH, maxH));
+    setCanvasHeight(h);
+    // Now fit within the actual canvas dimensions
+    const finalScale = Math.min(vw / graphBounds.gw, h / graphBounds.gh) * 0.95;
+    setScale(finalScale);
+    setTx((vw - graphBounds.gw * finalScale) / 2 - graphBounds.minX * finalScale);
+    setTy((h - graphBounds.gh * finalScale) / 2 - graphBounds.minY * finalScale);
+  }, [finalNodes, graphBounds]);
+
+  // Initial fit
+  useEffect(() => {
+    if (fitted || finalNodes.length === 0) return;
+    fitToViewport();
     setFitted(true);
-  }, [finalNodes, fitted]);
+  }, [finalNodes, fitted, fitToViewport]);
+
+  // Re-fit on container resize
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const observer = new ResizeObserver(() => fitToViewport());
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [fitToViewport]);
 
   const bg      = '#ffffff';
   const edgeClr = '#cbd5e1';
-  const subTxt  = '#94a3b8';
-  const tipBg   = '#ffffff';
-  const tipBd   = '#e2e8f0';
 
   return (
     <div
       className="flex flex-col bg-surface-lowest text-ink"
-      style={{ height: 'calc(100vh - 61px)' }}
     >
       {/* Header bar */}
       <div className="flex items-center gap-4 px-5 py-2.5 border-b flex-shrink-0 border-ink/10">
-        <div>
-          <h2 className="text-sm font-semibold">Brightness Network</h2>
-          <p className="text-xs text-ink/50">
-            Edges show direct brightness comparisons from published papers. Labels show the ratio A&nbsp;/&nbsp;B. Drag to pan · click a node to view details.
-          </p>
-        </div>
+        <button
+          onClick={onClose}
+          className="p-1 rounded-md hover:bg-surface-low text-ink/50"
+          title="Close and return"
+        >
+          <X className="w-5 h-5" />
+        </button>
+        <h3 className="text-xl font-bold text-ink">Brightness Network</h3>
         <div className="ml-auto text-xs text-ink/40">
           {nodes.length} nodes · {edges.length} edges
         </div>
       </div>
 
-      {/* Legend */}
-      <div className="flex flex-wrap gap-x-5 gap-y-1 px-5 py-1.5 text-xs border-b flex-shrink-0 border-ink/5 text-ink/50">
-        {[
-          { color: '#f59e0b', label: 'EGFP (anchor)' },
-          { color: '#22c55e', label: 'GFP-based' },
-          { color: '#d500f9', label: 'Chemigenetic' },
-          { color: '#7f1d1d', label: 'Opsin-based' },
-          { color: '#6b7280', label: 'External ref.', dashed: true },
-        ].map(({ color, label, dashed }) => (
-          <span key={label} className="flex items-center gap-1.5">
-            <LegendHex color={color} dashed={dashed} />
-            {label}
-          </span>
-        ))}
-      </div>
+
 
       {/* Canvas */}
       <div
-        className="flex-1 overflow-hidden relative"
-        style={{ cursor: dragRef.current.active ? 'grabbing' : 'grab' }}
+        ref={containerRef}
+        className="overflow-hidden relative"
+        style={{ cursor: dragRef.current.active ? 'grabbing' : 'grab', height: canvasHeight }}
         onMouseDown={onMouseDown}
         onMouseMove={onMouseMove}
         onMouseUp={onMouseUp}
@@ -463,34 +496,42 @@ export function BrightnessNetworkPanel({ onSelectGEVI }: Props) {
 
 
 
-            {/* Edges */}
+            {/* Arrowhead markers */}
+            <defs>
+              <marker id="arrow-default" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+                <path d="M0,0 L8,3 L0,6 Z" fill={edgeClr} />
+              </marker>
+              <marker id="arrow-highlight" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+                <path d="M0,0 L8,3 L0,6 Z" fill="#60a5fa" />
+              </marker>
+            </defs>
+
+            {/* Edges — directed: a measured itself as ratio× of b, arrow points a→b */}
             {edges.map((edge, i) => {
               const a = nodeById.get(edge.a), b = nodeById.get(edge.b);
               if (!a || !b) return null;
+              const dx = b.x - a.x, dy = b.y - a.y;
+              const d = Math.max(1, Math.sqrt(dx * dx + dy * dy));
+              const nx = dx / d, ny = dy / d;
+              const pad = 16;
+              const x1 = a.x + nx * pad, y1 = a.y + ny * pad;
+              const x2 = b.x - nx * pad, y2 = b.y - ny * pad;
               const mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
-              const isHE = hoveredEdgeIdx === i;
               const isRel = hoveredId === edge.a || hoveredId === edge.b;
-              const fade = (hoveredId || hoveredEdgeIdx !== null) && !isHE && !isRel;
+              const fade = hoveredId && !isRel;
               return (
-                <g key={i}
-                  onMouseEnter={() => setHoveredEdgeIdx(i)}
-                  onMouseLeave={() => setHoveredEdgeIdx(null)}
-                  style={{ cursor: 'default' }}
-                >
-                  {/* Wide invisible hit area */}
-                  <line x1={a.x} y1={a.y} x2={b.x} y2={b.y}
-                    stroke="transparent" strokeWidth={14} />
-                  <line x1={a.x} y1={a.y} x2={b.x} y2={b.y}
-                    stroke={isHE || isRel ? '#60a5fa' : edgeClr}
-                    strokeWidth={isHE ? 2.5 : 1.5}
-                    opacity={fade ? 0.1 : isHE || isRel ? 0.9 : 0.7}
+                <g key={i}>
+                  <line x1={x1} y1={y1} x2={x2} y2={y2}
+                    stroke={isRel ? '#60a5fa' : edgeClr}
+                    strokeWidth={isRel ? 2.5 : 1.5}
+                    opacity={fade ? 0.1 : isRel ? 0.9 : 0.7}
+                    markerEnd={`url(#arrow-${isRel ? 'highlight' : 'default'})`}
                   />
-                  {/* Ratio label */}
                   <text x={mx} y={my} textAnchor="middle" dominantBaseline="middle"
-                    fontSize={isHE || isRel ? 8.5 : 7.5}
-                    fontWeight={isHE || isRel ? '600' : '500'}
-                    fill={isHE ? '#60a5fa' : isRel ? '#60a5fa' : '#9ca3af'}
-                    stroke={bg} strokeWidth={2.5} paintOrder="stroke"
+                    fontSize={isRel ? 11 : 10}
+                    fontWeight={isRel ? '700' : '600'}
+                    fill={isRel ? '#3b82f6' : '#64748b'}
+                    stroke={bg} strokeWidth={3} paintOrder="stroke"
                     opacity={fade ? 0.08 : 1}
                     style={{ userSelect: 'none', pointerEvents: 'none', fontFamily: 'system-ui' }}
                   >
@@ -503,14 +544,17 @@ export function BrightnessNetworkPanel({ onSelectGEVI }: Props) {
             {/* Nodes */}
             {finalNodes.map(node => {
               const isHov = hoveredId === node.id;
-              const isRelE = hoveredEdgeIdx !== null &&
-                (edges[hoveredEdgeIdx]?.a === node.id || edges[hoveredEdgeIdx]?.b === node.id);
-              const fade = (hoveredId || hoveredEdgeIdx !== null) && !isHov && !isRelE;
+              const fade = hoveredId && !isHov;
               return (
                 <g key={node.id}
                   transform={`translate(${node.x},${node.y})`}
-                  onMouseEnter={() => setHoveredId(node.id)}
-                  onMouseLeave={() => setHoveredId(null)}
+                  onMouseEnter={(e: React.MouseEvent) => {
+                    if (hideTimeout.current) clearTimeout(hideTimeout.current);
+                    setHoverInfo({ node, x: e.clientX, y: e.clientY });
+                  }}
+                  onMouseLeave={() => {
+                    hideTimeout.current = setTimeout(() => setHoverInfo(null), 120);
+                  }}
                   onClick={() => node.gevi && onSelectGEVI(node.gevi)}
                   style={{ cursor: node.gevi ? 'pointer' : 'default' }}
                   opacity={fade ? 0.15 : 1}
@@ -558,48 +602,96 @@ export function BrightnessNetworkPanel({ onSelectGEVI }: Props) {
           </g>
         </svg>
 
-        {/* Hover tooltip — fixed at top-right */}
-        {hoveredNode && (
-          <div className="absolute top-3 right-3 pointer-events-none z-20 rounded-lg shadow-xl p-3 text-xs"
-            style={{ background: tipBg, border: `1px solid ${tipBd}`, minWidth: 190 }}>
-            <div className="font-semibold text-sm mb-1.5">{hoveredNode.name}</div>
-            {hoveredNode.isEGFP && (
-              <p className="text-ink/50">
-                Reference standard — B_rel = 1.00 · Score = 60
-              </p>
-            )}
-            {hoveredNode.isExternal && (
-              <p className="text-ink/50">
-                External reference (not in database)
-              </p>
-            )}
-            {!hoveredNode.isEGFP && !hoveredNode.isExternal && (
-              <>
-                <div className="text-xs mb-1.5 text-ink/50">
-                  {hoveredNode.gevi?.category}
-                </div>
-                <div className="space-y-0.5">
-                  <div className="flex justify-between gap-6">
-                    <span className="text-ink/50">B_rel (vs EGFP)</span>
-                    <span className="font-mono font-semibold">
-                      {hoveredNode.bRel !== null ? `${hoveredNode.bRel.toFixed(3)}×` : 'unresolved'}
-                    </span>
-                  </div>
-                  <div className="flex justify-between gap-6">
-                    <span className="text-ink/50">Brightness score</span>
-                    <span className="font-mono font-semibold">
-                      {hoveredNode.bScore !== null ? `${hoveredNode.bScore}/100` : 'N/A'}
-                    </span>
-                  </div>
-                </div>
-                <div className="mt-2 text-xs text-ink/40">
-                  Click to view GEVI details ↗
-                </div>
-              </>
-            )}
-          </div>
-        )}
       </div>
+
+      {hoverInfo && hoverInfo.node.gevi && (() => {
+        const g = hoverInfo.node.gevi!;
+        const GAP = 14;
+        let tipLeft = hoverInfo.x < window.innerWidth / 2
+          ? hoverInfo.x + GAP
+          : hoverInfo.x - GAP - TOOLTIP_W;
+        tipLeft = Math.max(8, Math.min(tipLeft, window.innerWidth - TOOLTIP_W - 8));
+        let tipTop = hoverInfo.y < window.innerHeight * 3 / 5
+          ? hoverInfo.y + GAP
+          : hoverInfo.y - GAP - TOOLTIP_H;
+        tipTop = Math.max(8, Math.min(tipTop, window.innerHeight - TOOLTIP_H - 8));
+
+        const nameColor = getTreeNodeColor(g);
+        const tags = Array.isArray(g.tags) ? g.tags : [];
+        const tooltipTags = tags.slice(0, 4);
+        const tooltipExtraCount = tags.length - tooltipTags.length;
+        const radarData = [
+          { subject: 'Brightness',  value: g.brightness    ?? 0, fullMark: 100 },
+          { subject: 'Speed',       value: g.speed          ?? 0, fullMark: 100 },
+          { subject: 'Dyn. Range',  value: g.dynamicRange   ?? 0, fullMark: 100 },
+          { subject: 'Sensitivity', value: g.sensitivity    ?? 0, fullMark: 100 },
+          { subject: 'Photostab.',  value: g.photostability ?? 0, fullMark: 100 },
+          { subject: 'Popularity',  value: Math.min(100, (g.paperCount ?? 0) * 5), fullMark: 100 },
+        ];
+
+        return (
+          <div
+            style={{ position: 'fixed', left: tipLeft, top: tipTop, zIndex: 9999, width: TOOLTIP_W }}
+            className="rounded-lg border shadow-ambient p-2.5 bg-surface border-ink/10"
+            onMouseEnter={() => { if (hideTimeout.current) clearTimeout(hideTimeout.current); }}
+            onMouseLeave={() => setHoverInfo(null)}
+          >
+            <div className="flex items-start justify-between gap-2 mb-1.5">
+              <div className="flex-1 min-w-0">
+                <button
+                  className="font-bold text-sm text-left w-full hover:underline cursor-pointer leading-tight"
+                  style={{ color: nameColor }}
+                  onClick={() => { onSelectGEVI(g); setHoverInfo(null); }}
+                >
+                  {g.name}
+                </button>
+              </div>
+              {g.overall != null && (
+                <div className="text-right flex-shrink-0">
+                  <div className="text-xl font-bold text-klein leading-none">{g.overall}</div>
+                  <div className="text-[8px] text-ink/40">Overall</div>
+                </div>
+              )}
+            </div>
+
+            <div className="flex flex-wrap gap-1 mb-1.5">
+              {tooltipTags.map((tag, idx) => (
+                <span key={`${tag}-${idx}`} className="text-[9px] px-1.5 py-0.5 rounded bg-klein/5 text-klein">
+                  {tag}
+                </span>
+              ))}
+              {tooltipExtraCount > 0 && (
+                <span className="text-[9px] px-1.5 py-0.5 rounded bg-surface-low text-ink/50">
+                  +{tooltipExtraCount}
+                </span>
+              )}
+            </div>
+
+            {g.paperUrl && g.paper && (
+              <a
+                href={g.paperUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs flex items-center gap-1 mb-1.5 hover:underline text-klein"
+              >
+                <BookOpen className="w-3 h-3 flex-shrink-0" />
+                <span className="truncate flex-1">{abbreviatePaper(g.paper)}</span>
+                <ExternalLink className="w-3 h-3 flex-shrink-0" />
+              </a>
+            )}
+
+            <div className="border-t mb-1 border-ink/5" />
+
+            <RadarChart width={150} height={130} data={radarData}>
+              <PolarGrid stroke="#e5e7eb" />
+              <PolarAngleAxis dataKey="subject" tick={{ fontSize: 8 }} />
+              <PolarRadiusAxis domain={[0, 100]} tick={false} axisLine={false} />
+              <Radar dataKey="value" stroke="#002FA7" fill="#002FA7" fillOpacity={0.2} />
+            </RadarChart>
+          </div>
+        );
+      })()}
+
     </div>
   );
 }

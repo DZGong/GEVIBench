@@ -149,7 +149,6 @@ function GEVIBenchApp() {
     <main className="w-full max-w-7xl mx-auto px-4 py-3">
       {/* Title Panel with Video Background */}
       <div className="relative rounded-xl overflow-hidden mb-3 -mt-1">
-        {/* Video Background */}
         <video
           autoPlay
           loop
@@ -159,15 +158,15 @@ function GEVIBenchApp() {
         >
           <source src="/imgs/spike_mov.mp4" type="video/mp4" />
         </video>
-        {/* Dark Overlay for readability */}
-                {/* Title Content */}
+        <div className="absolute inset-0 bg-black/25" />
         <div className="relative text-center py-4 px-3">
           <button onClick={handleLogoClick} className="hover:opacity-80 transition-opacity">
-            <h2 className="font-sans font-bold mb-1 text-white whitespace-nowrap" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.8)', fontSize: 'clamp(16px, 4vw, 24px)' }}>
-              GEVIBench <span className="text-blue-200 font-semibold" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>— Voltage Indicator Benchmark</span>
+            <h2 className="font-bold mb-1 whitespace-nowrap" style={{ fontSize: 'clamp(16px, 4vw, 24px)' }}>
+              <span className="text-white">GEVI</span><span className="text-white">Bench</span>
+              <span className="font-sans font-normal text-gray-200" style={{ fontSize: 'clamp(12px, 3vw, 20px)' }}> — Voltage Indicator Benchmark</span>
             </h2>
           </button>
-          <p className="text-gray-200 whitespace-nowrap" style={{ textShadow: '0 1px 3px rgba(0,0,0,0.8)', fontSize: 'clamp(11px, 2.5vw, 16px)' }}>
+          <p className="font-sans text-gray-300 whitespace-nowrap" style={{ fontSize: 'clamp(11px, 2.5vw, 15px)' }}>
             Independent, standardized evaluation from publicly available datasets
           </p>
         </div>
@@ -196,7 +195,7 @@ function GEVIBenchApp() {
 
       {/* Brightness Network - full width */}
       {showBrightnessNetwork ? (
-        <BrightnessNetworkPanel onSelectGEVI={handleSelectGEVI} />
+        <BrightnessNetworkPanel onSelectGEVI={handleSelectGEVI} onClose={() => setShowBrightnessNetwork(false)} />
       ) : showFamilyTree ? (
         <FamilyTreePanel
           onSelectGEVI={handleSelectGEVI}
@@ -456,7 +455,7 @@ function GEVIBenchApp() {
   );
 
   return (
-    <div className="min-h-screen flex flex-col bg-surface">
+    <div className="min-h-screen flex flex-col bg-surface-low">
       <Header
         activeTab={activeTab}
         setActiveTab={(tab) => {

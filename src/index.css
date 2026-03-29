@@ -8,7 +8,7 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: #1c1c19;
-    background-color: #fcf9f4;
+    background-color: #fdfcfa;
     line-height: 1.6;
   }
 
@@ -18,8 +18,8 @@
     --color-klein: #002FA7;
     --color-gold: #D4AF37;
     --color-blush: #FF91AF;
-    --color-surface: #fcf9f4;
-    --color-surface-low: #f6f3ee;
+    --color-surface: #f5f0e8;
+    --color-surface-low: #fdfcfa;
     --color-surface-lowest: #ffffff;
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
@@ -34,15 +34,15 @@
 }
 
 .bg-paper-light {
-  background-color: #fcf9f4;
+  background-color: #f5f0e8;
 }
 
 .bg-paper {
-  background-color: #fcf9f4;
+  background-color: #f5f0e8;
 }
 
 .bg-paper-dark {
-  background-color: #f6f3ee;
+  background-color: #faf8f5;
 }
 
 img {
@@ -59,4 +59,5 @@ img {
   text-transform: uppercase;
   letter-spacing: 0.05em;
   font-size: 0.75rem;
+  font-weight: 700;
 }

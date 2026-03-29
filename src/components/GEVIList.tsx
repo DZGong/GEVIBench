@@ -125,7 +125,7 @@ function SortHeader({ symbol, desc, field, sortConfig, onSort, className = '' }:
       <div className="flex items-center gap-0.5 justify-center" style={{ fontSize: '14px' }}>
         {symbol}
         {active && (
-          <span style={{ fontSize: '10px' }}>
+          <span style={{ fontSize: '12px' }}>
             {sortConfig.order === 'desc' ? '▼' : '▲'}
           </span>
         )}
@@ -172,7 +172,7 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
   }, [gevis]);
 
   const groupCls = (gevi: any) =>
-    `cursor-pointer transition-colors group ${
+    `cursor-pointer transition-colors group border-b border-surface ${
       selectedGEVI?.id === gevi.id
         ? 'bg-surface-low'
         : '[&:hover]:bg-surface-low'
@@ -189,8 +189,8 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
         ) : (compact || isNarrow) ? (
           /* Narrow / mobile view — single swipeable metric column */
           <table className="w-full border-collapse" style={{ fontSize: '14px' }}>
-            <thead className="sticky top-0 z-10 bg-surface-low">
-              <tr className="border-b border-ink/5">
+            <thead className="sticky top-0 z-10 bg-surface">
+              <tr className="border-b border-surface">
                 <th className={`pl-2 pr-2 py-2 text-center ${thBase} w-12`} style={{ fontSize: '14px' }}>Rank</th>
                 <th className={`pl-1 pr-0 py-2 text-left ${thBase}`} style={{ fontSize: '14px', width: '1%', whiteSpace: 'nowrap' }}>Sensor ({gevis.length})</th>
                 <th className="px-1 py-2" style={{ minWidth: '80px' }}>
@@ -210,7 +210,7 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
                     >
                       <span style={{ fontSize: '14px' }}>{currentNarrow.shortLabel}</span>
                       {sortConfig.field === currentNarrow.sortField && (
-                        <span style={{ fontSize: '10px' }} className="ml-0.5">
+                        <span style={{ fontSize: '12px' }} className="ml-0.5">
                           {sortConfig.order === 'desc' ? '▼' : '▲'}
                         </span>
                       )}
@@ -242,7 +242,7 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
                   <tr>
                     <td className={`pl-2 pr-2 pt-3 pb-0 text-center w-12 tabular-nums ${dimBase}`} rowSpan={2} style={{ fontSize: '16px', verticalAlign: 'middle', ...(idx < 3 ? { color: '#D4AF37', fontWeight: 700 } : {}) }}>{idx + 1}</td>
                     <td className="pl-1 pr-0 pt-3 pb-0" style={{ width: '1%', whiteSpace: 'nowrap' }}>
-                      <span className="font-semibold" style={{ color: geviColor.color }}>{gevi.name}</span>
+                      <span className="font-bold text-ink">{gevi.name}</span>
                       <a
                         href={gevi.paperUrl}
                         target="_blank"
@@ -250,7 +250,7 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
                         onClick={(e) => e.stopPropagation()}
                         className="inline-flex items-center gap-0.5 whitespace-nowrap text-klein hover:underline ml-1.5"
                         title={gevi.paper}
-                        style={{ fontSize: '11px' }}
+                        style={{ fontSize: '12px' }}
                       >
                         <ExternalLink className="w-3 h-3" />
                         {extractYear(gevi.paper)}
@@ -263,7 +263,7 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
                     ) : (() => {
                       const isTop3 = top3PerMetric[currentNarrow.key]?.has(gevi.id);
                       return (
-                        <td className={`px-1 pt-3 pb-0 text-center tabular-nums ${hasVal ? cellBase : dimBase}`} style={{ fontSize: '12px' }}>
+                        <td className={`px-1 pt-3 pb-0 text-center tabular-nums ${hasVal ? cellBase : dimBase}`} style={{ fontSize: '14px' }}>
                           {isTop3 ? (
                             <span className="inline-block px-1.5 py-0.5 rounded-md" style={{ backgroundColor: '#FF91AF30' }}>
                               {getMetricValue(gevi, currentNarrow.key as MetricKey, dimBase)}
@@ -285,8 +285,8 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
         ) : (
           /* Full tabular view — wide screens */
           <table className="w-full border-collapse" style={{ fontSize: '14px' }}>
-            <thead className="sticky top-0 z-10 bg-surface-low">
-              <tr className="border-b border-ink/5">
+            <thead className="sticky top-0 z-10 bg-surface">
+              <tr className="border-b border-surface">
                 <th className={`pl-2 pr-4 py-2 text-center ${thBase} w-16`} style={{ fontSize: '14px' }}>Rank</th>
                 <th className={`px-1 py-2 text-left ${thBase}`} style={{ fontSize: '14px' }}>Sensor ({gevis.length})</th>
                 {METRICS.map(m => (
@@ -304,7 +304,7 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
                   <tr>
                     <td className={`pl-2 pr-4 pt-3 pb-0 text-center w-16 tabular-nums ${dimBase}`} rowSpan={2} style={{ fontSize: '16px', verticalAlign: 'middle', ...(idx < 3 ? { color: '#D4AF37', fontWeight: 700 } : {}) }}>{idx + 1}</td>
                     <td className="px-1 pt-3 pb-0">
-                      <span className="font-semibold whitespace-nowrap" style={{ color: geviColor.color }}>{gevi.name}</span>
+                      <span className="font-bold whitespace-nowrap text-ink">{gevi.name}</span>
                       <a
                         href={gevi.paperUrl}
                         target="_blank"
@@ -312,7 +312,7 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
                         onClick={(e) => e.stopPropagation()}
                         className="inline-flex items-center gap-1 whitespace-nowrap text-klein hover:underline ml-2"
                         title={gevi.paper}
-                        style={{ fontSize: '11px' }}
+                        style={{ fontSize: '12px' }}
                       >
                         <ExternalLink className="w-3 h-3" />
                         <span><span className="italic">{abbreviatePaper(gevi.paper).replace(/\s*\d{4}$/, '')}</span> {extractYear(gevi.paper)}</span>
@@ -321,7 +321,7 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
                     {METRICS.map(m => {
                       const isTop3 = top3PerMetric[m.key]?.has(gevi.id);
                       return (
-                        <td key={m.key} className={`px-1 pt-3 pb-0 text-center tabular-nums ${hasMetricValue(gevi, m.key) ? cellBase : dimBase}`} style={{ fontSize: '12px' }}>
+                        <td key={m.key} className={`px-1 pt-3 pb-0 text-center tabular-nums ${hasMetricValue(gevi, m.key) ? cellBase : dimBase}`} style={{ fontSize: '14px' }}>
                           {isTop3 ? (
                             <span className="inline-block px-1.5 py-0.5 rounded-md" style={{ backgroundColor: '#FF91AF30' }}>
                               {getMetricValue(gevi, m.key, dimBase)}

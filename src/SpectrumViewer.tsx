@@ -127,9 +127,11 @@ export function SpectrumViewer({ spectrumData, geviName }: SpectrumViewerProps) 
   const exColor = config?.peakEx ? wavelengthToColor(config.peakEx) : 'rgb(59,130,246)';
   const emColor = config?.peakEm ? wavelengthToColor(config.peakEm) : 'rgb(34,197,94)';
 
-  // Determine wavelength range for x-axis labels
-  const minWl = computedSpectrum?.[0]?.wavelength ?? 350;
-  const maxWl = computedSpectrum?.[computedSpectrum.length - 1]?.wavelength ?? 850;
+  // Determine wavelength range for x-axis: default 350–700, expand if data exceeds
+  const dataMinWl = computedSpectrum?.[0]?.wavelength ?? 350;
+  const dataMaxWl = computedSpectrum?.[computedSpectrum.length - 1]?.wavelength ?? 700;
+  const minWl = Math.min(350, dataMinWl);
+  const maxWl = Math.max(700, dataMaxWl);
   const wlRange = maxWl - minWl;
 
   // Generate ~6 evenly spaced x-axis tick values, rounded to nearest 50
@@ -145,11 +147,11 @@ export function SpectrumViewer({ spectrumData, geviName }: SpectrumViewerProps) 
 
   if (!config || !computedSpectrum) {
     return (
-      <div className="border rounded-lg p-4 bg-surface border-ink/10">
-        <h4 className="text-sm font-semibold mb-2 text-ink/70">
+      <div className="border rounded-lg p-4 bg-surface-low border-ink/10">
+        <h4 className="text-sm font-semibold mb-2 text-ink">
           Excitation/Emission Spectrum
         </h4>
-        <div className="text-xs text-ink/40">
+        <div className="text-xs text-ink">
           No spectrum data available
         </div>
       </div>
@@ -167,13 +169,13 @@ export function SpectrumViewer({ spectrumData, geviName }: SpectrumViewerProps) 
   const toY = (val: number) => plotBottom - val * (plotH - 5);
 
   return (
-    <div className="border rounded-lg p-4 bg-surface border-ink/10">
-      <h4 className="text-sm font-semibold mb-2 text-ink/70">
+    <div className="border rounded-lg p-4 bg-surface-low border-ink/10">
+      <h4 className="text-sm font-semibold mb-2 text-ink">
         Excitation/Emission Spectrum
         {config.name && <span className="ml-2 font-normal">({config.name})</span>}
       </h4>
 
-      <div className="relative bg-surface rounded">
+      <div className="relative bg-surface-low rounded">
         <svg className="w-full block" viewBox={`0 0 ${svgW} ${svgH}`} preserveAspectRatio="xMidYMid meet">
           <defs>
             <linearGradient id="exGradient" x1="0" y1="0" x2="0" y2="1">
@@ -222,6 +224,9 @@ export function SpectrumViewer({ spectrumData, geviName }: SpectrumViewerProps) 
             strokeWidth="2"
           />
 
+          {/* X-axis line */}
+          <line x1={0} y1={plotBottom} x2={svgW} y2={plotBottom} stroke="#9ca3af" strokeWidth="1" />
+
           {/* X-axis wavelength labels */}
           {xTicks.map(wl => (
             <g key={wl}>
@@ -236,16 +241,16 @@ export function SpectrumViewer({ spectrumData, geviName }: SpectrumViewerProps) 
       <div className="flex gap-4 mt-2 text-xs">
         <div className="flex items-center gap-1">
           <div className="w-3 h-3 rounded" style={{ backgroundColor: exColor }} />
-          <span className="text-ink/60">Excitation</span>
+          <span className="text-ink">Excitation</span>
         </div>
         <div className="flex items-center gap-1">
           <div className="w-3 h-3 rounded" style={{ backgroundColor: emColor }} />
-          <span className="text-ink/60">Emission</span>
+          <span className="text-ink">Emission</span>
         </div>
       </div>
 
       {/* Peak wavelengths */}
-      <div className="mt-2 text-xs text-ink/40">
+      <div className="mt-2 text-xs text-ink">
         Peak Excitation: {config.peakEx}nm | Peak Emission: {config.peakEm}nm
       </div>
     </div>

@@ -1,7 +1,7 @@
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Cell } from 'recharts';
 import { computeSampleSummary, SAMPLE_CATEGORY_ORDER } from '../utils';
 
-const COMPARISON_COLORS = ['#002FA7', '#ef4444', '#22c55e', '#f59e0b', '#8b5cf6'];
+const COMPARISON_COLORS = ['#a4192a', '#ef4444', '#22c55e', '#f59e0b', '#8b5cf6'];
 
 interface SingleProps {
   mode: 'single';

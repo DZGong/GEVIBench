@@ -56,7 +56,7 @@ export function GEVILineage({ gevi }: GEVILineageProps) {
 
   if (!path || path.length === 0) {
     return (
-      <div className="border rounded-lg p-4 bg-surface border-ink/10">
+      <div className="rounded-lg p-4 bg-surface-low">
         <h4 className="text-sm font-semibold mb-2 text-ink/70">
           Genetic Lineage
         </h4>
@@ -84,7 +84,7 @@ export function GEVILineage({ gevi }: GEVILineageProps) {
   const svgWidth = 180;
 
   return (
-    <div className="border rounded-lg p-4 bg-surface border-ink/10">
+    <div className="rounded-lg p-4 bg-surface-low">
       <h4 className="text-sm font-semibold mb-3 text-ink/70">
         Genetic Lineage
       </h4>

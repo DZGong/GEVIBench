@@ -13,37 +13,17 @@ interface HeaderProps {
   onShowBrightnessNetwork: () => void;
 }
 
-// Custom logo: hexagon with action potential waveform
-const Logo = () => {
-  const bg = '#fcf9f4';
-  const color = '#002FA7';
-  const wavePath = "M1,18 L12,18 C12,18 12.5,1 13.5,1 C14.5,1 15,25 16.5,24.5 C17.5,24 19,18 20,18 L31,18";
-  return (
-    <svg width="32" height="32" viewBox="0 0 32 32" className="flex-shrink-0" overflow="visible">
-      {/* Hexagon — back layer, slightly faded */}
-      <path
-        d="M16 2 L28 9 L28 23 L16 30 L4 23 L4 9 Z"
-        fill="none"
-        stroke={color}
-        strokeWidth="2"
-        strokeLinejoin="round"
-        strokeLinecap="round"
-        strokeOpacity="0.45"
-      />
-      {/* Gap knock-out: background-colored halo punches through hexagon border */}
-      <path d={wavePath} fill="none" stroke={bg} strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
-      {/* Waveform — front layer, full color */}
-      <path d={wavePath} fill="none" stroke={color} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-};
+// Logo from external SVG file
+const Logo = () => (
+  <img src="/logo.svg" alt="GEVIBench logo" style={{ height: '36px' }} className="w-auto flex-shrink-0" />
+);
 
 export function Header({ activeTab, setActiveTab, mobileMenuOpen, setMobileMenuOpen, onLogoClick, onShowFamilyTree, onShowCompare, onShowBrightnessNetwork }: HeaderProps) {
   const [toolsMenuOpen, setToolsMenuOpen] = useState(false);
   const toolsMenuRef = useRef<HTMLDivElement>(null);
 
   const tabButtonClass = (tab: ViewTab) =>
-    `text-sm font-sans px-3 py-1.5 rounded-md ${activeTab === tab ? 'bg-klein text-white' : 'text-ink/70 hover:bg-surface-low'}`;
+    `label px-3 py-1.5 border-b-2 transition-colors ${activeTab === tab ? 'text-klein border-gold' : 'text-ink border-transparent hover:text-klein'}`;
 
   // Close menu when clicking outside
   useEffect(() => {
@@ -69,74 +49,81 @@ export function Header({ activeTab, setActiveTab, mobileMenuOpen, setMobileMenuO
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-surface/80 backdrop-blur-[12px]">
+    <header className="sticky top-0 z-50 bg-surface backdrop-blur-[12px]">
       <div className="max-w-7xl mx-auto px-4 py-3">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between relative">
           <div className="flex items-center gap-3">
             <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="lg:hidden p-2">
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
-            <div className="flex items-center gap-2">
-              <button onClick={onLogoClick} className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+            <div className="hidden lg:flex items-center gap-2">
+              <button onClick={onLogoClick} className="flex flex-col items-center hover:opacity-80 transition-opacity">
                 <Logo />
-                <span className="text-lg font-bold text-klein">GEVI</span>
-                <span className="text-lg font-bold text-ink">Bench</span>
+                <span className="text-xs font-bold leading-tight mt-0.5"><span className="text-klein">GEVI</span><span className="text-ink">Bench</span></span>
               </button>
             </div>
           </div>
 
-          <nav className="hidden lg:flex items-center gap-2">
-            <button onClick={() => setActiveTab('database')} className={tabButtonClass('database')}>
-              Database
+          {/* Centered logo on mobile */}
+          <div className="lg:hidden absolute left-1/2 -translate-x-1/2">
+            <button onClick={onLogoClick} className="flex flex-col items-center hover:opacity-80 transition-opacity">
+              <Logo />
+              <span className="text-xs font-bold leading-tight mt-0.5"><span className="text-klein">GEVI</span><span className="text-ink">Bench</span></span>
             </button>
-            <button onClick={() => setActiveTab('methodology')} className={tabButtonClass('methodology')}>
-              Methodology
-            </button>
-
-            {/* Tools Dropdown */}
-            <div className="relative" ref={toolsMenuRef}>
-              <button
-                onClick={handleToolsClick}
-                className={`${tabButtonClass('tools')} flex items-center gap-1`}
-              >
-                Tools
-                <ChevronDown className={`w-3 h-3 transition-transform ${toolsMenuOpen ? 'rotate-180' : ''}`} />
-              </button>
-
-              {/* Dropdown Menu */}
-              {toolsMenuOpen && (
-                <div className="absolute top-full mt-1 right-0 w-48 rounded-md shadow-ambient py-1 z-50 bg-surface-lowest">
-                  <button
-                    onClick={() => handleToolSelect('compare')}
-                    className="w-full text-left px-4 py-2 text-sm flex items-center gap-2 text-ink/70 hover:bg-surface-low"
-                  >
-                    <GitCompare className="w-4 h-4" />
-                    Compare
-                  </button>
-                  <button
-                    onClick={() => handleToolSelect('family-tree')}
-                    className="w-full text-left px-4 py-2 text-sm flex items-center gap-2 text-ink/70 hover:bg-surface-low"
-                  >
-                    <TreeDeciduous className="w-4 h-4" />
-                    Family Tree
-                  </button>
-                  <button
-                    onClick={() => handleToolSelect('brightness-network')}
-                    className="w-full text-left px-4 py-2 text-sm flex items-center gap-2 text-ink/70 hover:bg-surface-low"
-                  >
-                    <Share2 className="w-4 h-4" />
-                    Brightness Network
-                  </button>
-                </div>
-              )}
-            </div>
-
-            <button onClick={() => setActiveTab('contact')} className={tabButtonClass('contact')}>
-              Contact
-            </button>
-          </nav>
+          </div>
 
           <div className="flex items-center gap-2">
+            <nav className="hidden lg:flex items-center gap-2">
+              <button onClick={() => setActiveTab('database')} className={tabButtonClass('database')}>
+                Database
+              </button>
+              <button onClick={() => setActiveTab('methodology')} className={tabButtonClass('methodology')}>
+                Methodology
+              </button>
+
+              {/* Tools Dropdown */}
+              <div className="relative" ref={toolsMenuRef}>
+                <button
+                  onClick={handleToolsClick}
+                  className={`${tabButtonClass('tools')} flex items-center gap-1`}
+                >
+                  Tools
+                  <ChevronDown className={`w-3 h-3 transition-transform ${toolsMenuOpen ? 'rotate-180' : ''}`} />
+                </button>
+
+                {/* Dropdown Menu */}
+                {toolsMenuOpen && (
+                  <div className="absolute top-full mt-1 right-0 w-48 rounded-md shadow-ambient py-1 z-50 bg-surface-lowest">
+                    <button
+                      onClick={() => handleToolSelect('compare')}
+                      className="w-full text-left px-4 py-2 text-sm flex items-center gap-2 text-ink/70 hover:bg-surface-low"
+                    >
+                      <GitCompare className="w-4 h-4" />
+                      Compare
+                    </button>
+                    <button
+                      onClick={() => handleToolSelect('family-tree')}
+                      className="w-full text-left px-4 py-2 text-sm flex items-center gap-2 text-ink/70 hover:bg-surface-low"
+                    >
+                      <TreeDeciduous className="w-4 h-4" />
+                      Family Tree
+                    </button>
+                    <button
+                      onClick={() => handleToolSelect('brightness-network')}
+                      className="w-full text-left px-4 py-2 text-sm flex items-center gap-2 text-ink/70 hover:bg-surface-low"
+                    >
+                      <Share2 className="w-4 h-4" />
+                      Brightness Network
+                    </button>
+                  </div>
+                )}
+              </div>
+
+              <button onClick={() => setActiveTab('contact')} className={tabButtonClass('contact')}>
+                Contact
+              </button>
+            </nav>
+
             <a
               href="https://github.com/DZGong/GEVIBench"
               target="_blank"
@@ -155,40 +142,40 @@ export function Header({ activeTab, setActiveTab, mobileMenuOpen, setMobileMenuO
             <div className="flex flex-col gap-2">
               <button
                 onClick={() => { setActiveTab('database'); setMobileMenuOpen(false); }}
-                className={`text-sm px-3 py-2 rounded-md text-left ${activeTab === 'database' ? 'bg-klein text-white' : 'text-ink/60'}`}
+                className={`label px-3 py-2 text-left border-b-2 ${activeTab === 'database' ? 'text-klein border-gold' : 'text-ink border-transparent'}`}
               >
                 Database
               </button>
               <button
                 onClick={() => { setActiveTab('methodology'); setMobileMenuOpen(false); }}
-                className={`text-sm px-3 py-2 rounded-md text-left ${activeTab === 'methodology' ? 'bg-klein text-white' : 'text-ink/60'}`}
+                className={`label px-3 py-2 text-left border-b-2 ${activeTab === 'methodology' ? 'text-klein border-gold' : 'text-ink border-transparent'}`}
               >
                 Methodology
               </button>
               <button
                 onClick={() => { onShowCompare(); setMobileMenuOpen(false); }}
-                className={`text-sm px-3 py-2 rounded-md text-left flex items-center gap-2 ${activeTab === 'tools' ? 'bg-klein text-white' : 'text-ink/60'}`}
+                className={`label px-3 py-2 text-left flex items-center gap-2 border-b-2 ${activeTab === 'tools' ? 'text-klein border-gold' : 'text-ink border-transparent'}`}
               >
                 <GitCompare className="w-4 h-4" />
                 Compare
               </button>
               <button
                 onClick={() => { onShowFamilyTree(); setMobileMenuOpen(false); }}
-                className={`text-sm px-3 py-2 rounded-md text-left flex items-center gap-2 ${activeTab === 'tools' ? 'bg-klein text-white' : 'text-ink/60'}`}
+                className={`label px-3 py-2 text-left flex items-center gap-2 border-b-2 ${activeTab === 'tools' ? 'text-klein border-gold' : 'text-ink border-transparent'}`}
               >
                 <TreeDeciduous className="w-4 h-4" />
                 Family Tree
               </button>
               <button
                 onClick={() => { onShowBrightnessNetwork(); setMobileMenuOpen(false); }}
-                className={`text-sm px-3 py-2 rounded-md text-left flex items-center gap-2 ${activeTab === 'tools' ? 'bg-klein text-white' : 'text-ink/60'}`}
+                className={`label px-3 py-2 text-left flex items-center gap-2 border-b-2 ${activeTab === 'tools' ? 'text-klein border-gold' : 'text-ink border-transparent'}`}
               >
                 <Share2 className="w-4 h-4" />
                 Brightness Network
               </button>
               <button
                 onClick={() => { setActiveTab('contact'); setMobileMenuOpen(false); }}
-                className={`text-sm px-3 py-2 rounded-md text-left ${activeTab === 'contact' ? 'bg-klein text-white' : 'text-ink/60'}`}
+                className={`label px-3 py-2 text-left border-b-2 ${activeTab === 'contact' ? 'text-klein border-gold' : 'text-ink border-transparent'}`}
               >
                 Contact
               </button>
