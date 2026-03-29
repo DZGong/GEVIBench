@@ -167,7 +167,7 @@ function GEVIBenchApp() {
             </h2>
           </button>
           <p className="font-sans text-gray-300 whitespace-nowrap" style={{ fontSize: 'clamp(11px, 2.5vw, 15px)' }}>
-            Independent, standardized evaluation from publicly available datasets
+            Standardized evaluation from published studies · Updated daily
           </p>
         </div>
       </div>
@@ -176,6 +176,7 @@ function GEVIBenchApp() {
         <SearchFilters
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
+          totalCount={gevis.length}
         />
       )}
 
