@@ -4,12 +4,11 @@
   "year": 2012,
   "category": "VSD-single FP",
   "tags": [
-    "pHluorin",
-    "Green"
+    "pHluorin"
   ],
   "paper": "Neuron 2012",
   "paperUrl": "https://www.cell.com/neuron/fulltext/S0896-6273(12)00704-0",
-  "description": "Classic genetically encoded voltage indicator using a voltage-sensing domain fused to pH-sensitive GFP, producing large fluorescence decreases during depolarization.",
+  "description": "Classic GEVI using a VSD fused to pH-sensitive GFP.",
   "familyTreePath": [
     "GEVI",
     "VSD",
@@ -465,19 +464,19 @@
     {
       "on": 9,
       "off": 17,
-      "temperature": "25\u00b0C",
+      "temperature": "25°C",
       "source": "doi:10.1016/j.neuron.2012.06.040"
     },
     {
       "on": 28,
       "off": 104,
-      "temperature": "22-23\u00b0C",
+      "temperature": "22-23°C",
       "source": "doi:10.1016/j.cell.2019.11.004"
     },
     {
       "on": 15,
       "off": 45,
-      "temperature": "33-34\u00b0C",
+      "temperature": "33-34°C",
       "source": "doi:10.1038/nn.3709"
     }
   ],
@@ -496,7 +495,7 @@
       "deltaF": -32,
       "sign": "negative",
       "source": "doi:10.1038/nmeth.3000",
-      "note": "ArcLight A242 in HEK293T cells at 23\u00b0C, n=7 cells"
+      "note": "ArcLight A242 in HEK293T cells at 23°C, n=7 cells"
     }
   ],
   "sensitivityData": [
@@ -520,13 +519,13 @@
   "photostabilityData": [
     {
       "brightnessRemaining": 82,
-      "illumination": "100 mW/mm\u00b2",
+      "illumination": "100 mW/mm²",
       "duration": "1 min",
       "source": "doi:10.1523/JNEUROSCI.3590-15.2016"
     },
     {
       "brightnessRemaining": 77,
-      "illumination": "11 mW/mm\u00b2",
+      "illumination": "11 mW/mm²",
       "duration": "1 min",
       "source": "doi:10.7554/eLife.25690"
     }

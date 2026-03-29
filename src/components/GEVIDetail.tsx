@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar } from 'recharts';
 import { BonusBadges } from './BonusBadges';
 import { BookOpen, ExternalLink, Plus, X, Sun, Zap, Activity, TrendingUp, Shield, FileText, Dna, ChevronDown, ChevronUp } from 'lucide-react';
@@ -7,6 +7,7 @@ import { SpectrumViewer, SpectrumData } from '../SpectrumViewer';
 import { VoltageCurveViewer } from '../VoltageCurveViewer';
 import { GEVILineage } from './GEVILineage';
 import { SampleUsageChart } from './SampleUsageChart';
+import { getDoiCitationMap } from '../geviData';
 
 const metrics = [
   { key: 'brightness', name: 'Brightness', icon: Sun },
@@ -35,7 +36,12 @@ function sourceToUrl(source: string): string | null {
 function SourceLink({ source }: { source?: string }) {
   if (!source) return null;
   const url = sourceToUrl(source);
-  const label = source.startsWith('doi:') ? source : 'Source';
+  let label = 'Source';
+  if (source.startsWith('doi:')) {
+    const doi = source.slice(4);
+    const citationMap = getDoiCitationMap();
+    label = citationMap[doi] || source;
+  }
   if (!url) return <span className="text-[10px] text-ink/40">{source}</span>;
   return (
     <a href={url} target="_blank" rel="noopener noreferrer" className="text-[10px] whitespace-nowrap text-klein hover:underline">
@@ -46,7 +52,8 @@ function SourceLink({ source }: { source?: string }) {
 
 export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShowFamilyTree }: GEVIDetailProps) {
   const [expandedMetrics, setExpandedMetrics] = useState<Record<string, boolean>>({});
-  const [papersExpanded, setPapersExpanded] = useState(true);
+  const [papersExpanded, setPapersExpanded] = useState(false);
+  const papersRef = useRef<HTMLDivElement>(null);
   const toggleMetric = (key: string) => setExpandedMetrics(prev => ({ ...prev, [key]: !prev[key] }));
   useEffect(() => setExpandedMetrics({}), [gevi.id]);
 
@@ -64,16 +71,18 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
 
   return (
     <div className="rounded-lg p-4 md:p-6 mb-6 bg-surface-lowest shadow-ambient">
-      {/* Header with close button */}
+      {/* Close button */}
+      <button
+        onClick={onClose}
+        className="mb-2 p-1 rounded-md hover:bg-surface-low text-ink/50"
+        title="Close and return to list"
+      >
+        <X className="w-5 h-5" />
+      </button>
+
+      {/* Header: name + info left, score right */}
       <div className="flex items-start justify-between gap-4 mb-4">
         <div className="flex-1">
-          <button
-            onClick={onClose}
-            className="mb-2 p-1 rounded-md hover:bg-surface-low text-ink/50"
-            title="Close and return to list"
-          >
-            <X className="w-5 h-5" />
-          </button>
           <h3 className="text-xl md:text-2xl font-bold mb-1 text-ink">
             <span style={{ color: getGEVIColor(gevi).color }}>{gevi.name}</span>
           </h3>
@@ -128,12 +137,10 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
             </div>
             {/* Speed */}
             {metric.key === 'speed' && gevi.kinetics?.[0] && (
-              <div className="mt-2 text-[10px] text-ink/50">
+              <div className="mt-2 text-[10px]">
                 <div className="flex items-center gap-2">
-                  <span className="text-green-600">τ_on:</span>
-                  <span>{gevi.kinetics[0].on} ms</span>
-                  <span className="text-red-600">τ_off:</span>
-                  <span>{gevi.kinetics[0].off} ms</span>
+                  <span className="text-ink">τ<sub>on</sub>/τ<sub>off</sub>:</span>
+                  <span className="text-ink font-semibold">{gevi.kinetics[0].on}/{gevi.kinetics[0].off} ms</span>
                   {gevi.kinetics[0].temperature && (
                     <span className="text-ink/40">({gevi.kinetics[0].temperature})</span>
                   )}
@@ -147,7 +154,7 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
                     {gevi.kinetics.map((k: any, i: number) => (
                       <div key={i} className={`py-1 ${i < gevi.kinetics.length - 1 ? 'border-b border-ink/10' : ''}`}>
                         <div className="flex items-center justify-between gap-2">
-                          <span>τ_on: {k.on} ms | τ_off: {k.off} ms{k.temperature ? ` (${k.temperature})` : ''}</span>
+                          <span>τ<sub>on</sub>/τ<sub>off</sub>: {k.on}/{k.off} ms{k.temperature ? ` (${k.temperature})` : ''}</span>
                           <SourceLink source={k.source} />
                         </div>
                         {k.note && <div className="mt-0.5 italic text-ink/40">{k.note}</div>}
@@ -159,10 +166,10 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
             )}
             {/* Sensitivity */}
             {metric.key === 'sensitivity' && gevi.sensitivityData?.[0] && (
-              <div className="mt-2 text-[10px] text-ink/50">
+              <div className="mt-2 text-[10px]">
                 <div className="flex items-center gap-2">
-                  <span>ΔF/F per AP:</span>
-                  <span className="text-green-600">
+                  <span className="text-ink">ΔF/F<sub>AP</sub>:</span>
+                  <span className="text-ink font-semibold">
                     {gevi.sensitivityData[0].deltaF}%
                   </span>
                 </div>
@@ -175,7 +182,7 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
                     {gevi.sensitivityData.map((s: any, i: number) => (
                       <div key={i} className={`py-1 ${i < gevi.sensitivityData.length - 1 ? 'border-b border-ink/10' : ''}`}>
                         <div className="flex items-center justify-between gap-2">
-                          <span>ΔF/F per AP: {s.deltaF}%</span>
+                          <span>ΔF/F<sub>AP</sub>: {s.deltaF}%</span>
                           <SourceLink source={s.source} />
                         </div>
                         {s.note && <div className="mt-0.5 italic text-ink/40">{s.note}</div>}
@@ -187,13 +194,13 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
             )}
             {/* Dynamic Range */}
             {metric.key === 'dynamicRange' && gevi.dynamicRangeData?.[0] && (
-              <div className="mt-2 text-[10px] text-ink/50">
+              <div className="mt-2 text-[10px]">
                 <div className="flex items-center gap-2">
-                  <span>ΔF/F:</span>
-                  <span className={gevi.dynamicRangeData[0].sign === 'negative' ? 'text-red-600' : 'text-green-600'}>
+                  <span className="text-ink">ΔF/F:</span>
+                  <span className="text-ink font-semibold">
                     {gevi.dynamicRangeData[0].sign === 'negative' ? '-' : '+'}{Math.abs(gevi.dynamicRangeData[0].deltaF)}%
                   </span>
-                  <span className="opacity-70">per 100mV</span>
+                  <span className="text-ink/50">per 100mV</span>
                 </div>
                 <button onClick={() => toggleMetric('dynamicRange')} className="mt-1 flex items-center gap-1 text-klein hover:underline">
                   {expandedMetrics.dynamicRange ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
@@ -227,15 +234,15 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
               </div>
             )}
             {metric.key === 'photostability' && Array.isArray(gevi.photostabilityData) && gevi.photostabilityData?.[0] && (
-              <div className="mt-2 text-[10px] text-ink/50">
+              <div className="mt-2 text-[10px]">
                 <div className="flex items-center gap-2">
-                  <span>Remaining:</span>
-                  <span className="text-green-600">
+                  <span className="text-ink">F<sub>remain</sub>:</span>
+                  <span className="text-ink font-semibold">
                     {gevi.photostabilityData[0].brightnessRemaining}%
                   </span>
-                  <span className="opacity-70">@ {gevi.photostabilityData[0].illumination}</span>
+                  <span className="text-ink/50">@ {gevi.photostabilityData[0].illumination}</span>
                 </div>
-                <div className="opacity-70">{gevi.photostabilityData[0].duration}</div>
+                <div className="text-ink/50">{gevi.photostabilityData[0].duration}</div>
                 <button onClick={() => toggleMetric('photostability')} className="mt-1 flex items-center gap-1 text-klein hover:underline">
                   {expandedMetrics.photostability ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
                   {gevi.photostabilityData.length} {gevi.photostabilityData.length === 1 ? 'measurement' : 'measurements'}
@@ -245,7 +252,7 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
                     {gevi.photostabilityData.map((p: any, i: number) => (
                       <div key={i} className={`py-1 ${i < gevi.photostabilityData.length - 1 ? 'border-b border-ink/10' : ''}`}>
                         <div className="flex items-center justify-between gap-2">
-                          <span>{p.brightnessRemaining}% remaining @ {p.illumination}, {p.duration}</span>
+                          <span>F<sub>remain</sub>: {p.brightnessRemaining}% @ {p.illumination}, {p.duration}</span>
                           <SourceLink source={p.source} />
                         </div>
                         {p.note && <div className="mt-0.5 italic text-ink/40">{p.note}</div>}
@@ -260,13 +267,13 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
               const egfpEntry = gevi.brightnessData!.find((d: any) => d.reference === 'EGFP');
               const display = egfpEntry ?? gevi.brightnessData![0];
               return (
-                <div className="mt-2 text-[10px] text-ink/50">
+                <div className="mt-2 text-[10px]">
                   <div className="flex items-center gap-2">
-                    <span>B_rel:</span>
-                    <span className="text-green-600">
+                    <span className="text-ink">B/B<sub>EGFP</sub>:</span>
+                    <span className="text-ink font-semibold">
                       {display.ratio}×
                     </span>
-                    <span className="opacity-70">vs {display.reference}</span>
+                    <span className="text-ink/50">vs {display.reference}</span>
                   </div>
                   <button onClick={() => toggleMetric('brightness')} className="mt-1 flex items-center gap-1 text-klein hover:underline">
                     {expandedMetrics.brightness ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
@@ -290,13 +297,24 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
             })()}
             {/* Popularity */}
             {metric.key === 'popularity' && gevi.paperCount !== undefined && (
-              <div className="mt-2 text-[10px] text-ink/50">
+              <div className="mt-2 text-[10px]">
                 <div className="flex items-center gap-2">
-                  <span>Independent papers:</span>
-                  <span className="text-green-600">
+                  <span className="text-ink">N<sub>paper</sub>:</span>
+                  <span className="text-ink font-semibold">
                     {gevi.paperCount}
                   </span>
                 </div>
+                {gevi.researchPapers && gevi.researchPapers.length > 0 && (
+                  <button
+                    className="mt-1.5 text-klein hover:underline cursor-pointer"
+                    onClick={() => {
+                      setPapersExpanded(true);
+                      setTimeout(() => papersRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+                    }}
+                  >
+                    View papers →
+                  </button>
+                )}
               </div>
             )}
           </div>
@@ -355,7 +373,7 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
 
       {/* Research Papers with Representative Figures */}
       {gevi.researchPapers && gevi.researchPapers.length > 0 && (
-        <div className="border rounded-lg p-4 md:p-6 mt-4 md:mt-6 bg-surface border-ink/10">
+        <div ref={papersRef} className="border rounded-lg p-4 md:p-6 mt-4 md:mt-6 bg-surface border-ink/10">
           <button
             onClick={() => setPapersExpanded(!papersExpanded)}
             className="w-full text-sm font-semibold flex items-center gap-2 text-ink/70 hover:text-ink transition-colors"

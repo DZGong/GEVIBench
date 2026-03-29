@@ -4,14 +4,13 @@
   "year": 2011,
   "category": "Opsin GEVI",
   "tags": [
-    "Proteorhodopsin",
-    "NIR",
+    "NIR FP",
     "Microbial",
     "Bacteria-only"
   ],
   "paper": "Science 2011",
   "paperUrl": "https://doi.org/10.1126/science.1204763",
-  "description": "First proteorhodopsin-based voltage indicator, demonstrating that this class of microbial opsin can report electrical activity, though only functional in bacteria and extremely dim.",
+  "description": "First microbial opsin-based voltage indicator, though only functional in bacteria and extremely dim.",
   "familyTreePath": [
     "GEVI",
     "Opsin",
@@ -30,7 +29,6 @@
     "polarity": "positive",
     "name": "PROPS"
   },
-
   "kinetics": [
     {
       "on": 4.7,
@@ -40,7 +38,6 @@
       "note": "Single time constant of ~4.7 ms for voltage step response (blink duration FWHM); on/off not separately resolved. Paper states 'response time ~5 ms'."
     }
   ],
-
   "dynamicRangeData": [
     {
       "deltaF": 150,
@@ -49,12 +46,10 @@
       "note": "ΔF/F = 150% per 100 mV, measured via induced transmembrane voltage in E. coli"
     }
   ],
-
   "addgene": {
     "id": "33780",
     "url": "https://www.addgene.org/33780/"
   },
-
   "researchPapers": [
     {
       "title": "Electrical spiking in Escherichia coli probed with a fluorescent voltage-indicating protein",

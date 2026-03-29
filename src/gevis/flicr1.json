@@ -11,7 +11,7 @@
   ],
   "paper": "Journal of Neuroscience 2016",
   "paperUrl": "https://doi.org/10.1523/JNEUROSCI.3590-15.2016",
-  "description": "Red fluorescent voltage indicator using the same voltage-sensing domain as ArcLight, providing fast kinetics and spectral compatibility with blue-light optogenetic tools.",
+  "description": "Red fluorescent GEVI using the same voltage-sensing domain as ArcLight.",
   "parentId": "electricpk",
   "spectrum": {
     "type": "fp",

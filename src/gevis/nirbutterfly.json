@@ -6,7 +6,7 @@
   "tags": ["Ci-VSP", "NIR FP", "FRET", "Biliverdin"],
   "paper": "ACS Chemical Neuroscience 2020",
   "paperUrl": "https://dx.doi.org/10.1021/acschemneuro.0c00046",
-  "description": "Near-infrared VSFP-Butterfly variant using bacterial phytochrome-derived fluorescent proteins for FRET-based voltage imaging, enabling spectral compatibility with green calcium indicators and blue-light optogenetics.",
+  "description": "Near-infrared VSFP-Butterfly variant using bacterial phytochrome-derived fluorescent proteins.",
   "parentId": "vsfpbutterfly",
   "spectrum": {
     "type": "nir",

@@ -4,15 +4,11 @@
   "year": 2023,
   "category": "VSD-cpGFP GEVI",
   "tags": [
-    "cpGFP",
-    "Green",
-    "JEDI",
-    "One-photon",
-    "Somatic targeting"
+    "cpGFP"
   ],
   "paper": "Nature Communications 2023",
   "paperUrl": "https://doi.org/10.1038/s41467-023-41975-3",
-  "description": "One-photon optimized voltage indicator evolved from ASAP2s with improved brightness, kinetics, and sensitivity, well-suited for widefield cortical voltage imaging.",
+  "description": "One-photon optimized GEVI evolved from ASAP2s with improved brightness, kinetics, and sensitivity.",
   "parentId": "asap2s",
   "siblingId": "jedi2p",
   "addgene": {
@@ -22,7 +18,7 @@
   "kinetics": [
     {
       "on": 0.54,
-      "off": 1.20,
+      "off": 1.2,
       "temperature": "32-35°C",
       "source": "doi:10.1038/s41467-023-41975-3"
     },
@@ -64,7 +60,7 @@
       "source": "doi:10.1038/s41467-023-41975-3"
     },
     {
-      "ratio": 1.710,
+      "ratio": 1.71,
       "reference": "asap3",
       "source": "doi:10.1021/acschemneuro.5c00670"
     }
@@ -473,8 +469,22 @@
     "polarity": "negative",
     "name": "JEDI-1P",
     "custom": {
-      "voltage": [-100, -70, -40, -10, 20, 50],
-      "deltaF": [9, 0, -16, -32, -46, -56]
+      "voltage": [
+        -100,
+        -70,
+        -40,
+        -10,
+        20,
+        50
+      ],
+      "deltaF": [
+        9,
+        0,
+        -16,
+        -32,
+        -46,
+        -56
+      ]
     }
   },
   "researchPapers": [

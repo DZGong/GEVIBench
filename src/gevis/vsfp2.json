@@ -10,7 +10,7 @@
   ],
   "paper": "PLoS ONE 2007",
   "paperUrl": "https://doi.org/10.1371/journal.pone.0000440",
-  "description": "Improved FRET-based voltage indicator using a voltage-sensing domain tuned to operate near resting membrane potential, enabling ratiometric voltage imaging in excitable cells.",
+  "description": "VSFP variant tuned to operate near resting membrane potential.",
   "parentId": "vsfp1",
   "spectrum": {
     "type": "fret",

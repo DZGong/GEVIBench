@@ -12,7 +12,7 @@
   ],
   "paper": "Advanced Biology 2021",
   "paperUrl": "https://doi.org/10.1002/adbi.202100842",
-  "description": "First fully autonomous bioluminescent voltage indicator, generating its own light without any external illumination by pairing a voltage-sensing domain with a self-sufficient luciferase enzyme.",
+  "description": "First autonomous bioluminescent voltage indicator by pairing a VSD with a self-sufficient luciferase enzyme.",
   "parentId": "vsfp2",
   "spectrum": {
     "type": "fret",

@@ -5,16 +5,12 @@
   "category": "Opsin GEVI",
   "tags": [
     "Archaerhodopsin",
-    "Red",
-    "Somatic targeting",
-    "In vivo",
-    "Population imaging"
+    "Red"
   ],
   "paper": "Nature 2019",
   "paperUrl": "https://doi.org/10.1038/s41586-019-1641-1",
-  "description": "Soma-targeted Archon1 variant designed for population voltage imaging, restricting fluorescence to cell bodies to enable simultaneous recording of many neurons with conventional one-photon microscopy.",
+  "description": "Soma-targeted Archon1 variant designed for population voltage imaging.",
   "parentId": "archon1",
-
   "spectrum": {
     "type": "rhodopsin",
     "peakEx": 585,
@@ -27,11 +23,26 @@
     "polarity": "positive",
     "name": "SomArchon",
     "custom": {
-      "voltage": [-100, -70, -60, -20, 0, 20, 60],
-      "deltaF":  [-9, 0, 3, 15, 21, 29, 40]
+      "voltage": [
+        -100,
+        -70,
+        -60,
+        -20,
+        0,
+        20,
+        60
+      ],
+      "deltaF": [
+        -9,
+        0,
+        3,
+        15,
+        21,
+        29,
+        40
+      ]
     }
   },
-
   "kinetics": [
     {
       "on": 0.6,
@@ -40,7 +51,6 @@
       "source": "doi:10.1038/s41467-022-35314-1"
     }
   ],
-
   "dynamicRangeData": [
     {
       "deltaF": 30,
@@ -48,7 +58,6 @@
       "source": "doi:10.1038/s41586-019-1641-1"
     }
   ],
-
   "sensitivityData": [
     {
       "deltaF": 45,
@@ -68,7 +77,6 @@
       "note": "Mean ΔF/F per AP in mouse cortex L2/3 brain slices, 1.5 W/mm², n=14 cells. From Extended Data Fig. 5c source data"
     }
   ],
-
   "photostabilityData": [
     {
       "brightnessRemaining": 50,
@@ -91,7 +99,6 @@
       "note": "From Supplementary Figure 2, n=8 cells, 617 nm LED excitation"
     }
   ],
-
   "brightnessData": [
     {
       "ratio": 1.0,
@@ -104,12 +111,10 @@
       "source": "doi:10.1021/acschemneuro.0c00046"
     }
   ],
-
   "addgene": {
     "id": "126941",
     "url": "https://www.addgene.org/126941/"
   },
-
   "researchPapers": [
     {
       "title": "Population imaging of neural activity in awake behaving mice",

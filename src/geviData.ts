@@ -301,3 +301,27 @@ export function getAllGEVIs(): GEVI[] {
   geviCache = rawGevis.map(gevi => ({ ...gevi, ...computeScores(gevi, bRelMap) }));
   return geviCache;
 }
+
+// Build DOI -> "LastName Year" citation map from all researchPapers
+let citationCache: Record<string, string> | null = null;
+export function getDoiCitationMap(): Record<string, string> {
+  if (citationCache) return citationCache;
+  const gevis = getAllGEVIs();
+  const map: Record<string, string> = {};
+  for (const gevi of gevis) {
+    for (const rp of gevi.researchPapers ?? []) {
+      if (!rp.url) continue;
+      const m = rp.url.match(/doi\.org\/(10\..+)/);
+      if (!m) continue;
+      const doi = m[1];
+      if (map[doi]) continue;
+      const authors = rp.authors ?? '';
+      const first = authors.split(',')[0].split(' and ')[0].trim();
+      const parts = first.split(/\s+/);
+      const lastName = parts[0] || '';
+      if (lastName && rp.year) map[doi] = `${lastName} ${rp.year}`;
+    }
+  }
+  citationCache = map;
+  return map;
+}

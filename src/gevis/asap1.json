@@ -4,12 +4,11 @@
   "year": 2014,
   "category": "VSD-cpGFP GEVI",
   "tags": [
-    "cpGFP",
-    "Green"
+    "cpGFP"
   ],
   "paper": "Nature Neuroscience 2014",
   "paperUrl": "https://doi.org/10.1038/nn.3709",
-  "description": "First ASAP sensor, establishing the voltage-sensing domain / circularly permuted GFP architecture for fast, negative-going fluorescence responses to neuronal depolarization.",
+  "description": "First ASAP sensor, establishing the VSD/cpGFP architecture for fast, negative-going fluorescence responses to voltage.",
   "familyTreePath": [
     "GEVI",
     "VSD",
@@ -81,13 +80,13 @@
   "photostabilityData": [
     {
       "brightnessRemaining": 74,
-      "illumination": "0.12 mW/mm\u00b2",
+      "illumination": "0.12 mW/mm²",
       "duration": "15 min",
       "source": "doi:10.1038/nn.3709"
     },
     {
       "brightnessRemaining": 91,
-      "illumination": "15 mW/mm\u00b2",
+      "illumination": "15 mW/mm²",
       "duration": "0.5 min",
       "source": "doi:10.1126/science.aab0810"
     },
@@ -105,7 +104,10 @@
     }
   ],
   "twoPhoton": [
-    { "compatible": true, "source": "doi:10.7554/eLife.25690" }
+    {
+      "compatible": true,
+      "source": "doi:10.7554/eLife.25690"
+    }
   ],
   "researchPapers": [
     {

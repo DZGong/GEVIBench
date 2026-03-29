@@ -5,29 +5,29 @@
   "category": "Opsin GEVI",
   "tags": [
     "Archaerhodopsin",
-    "Red",
-    "Fast kinetics"
+    "Red"
   ],
   "paper": "Nature Methods 2012",
   "paperUrl": "https://doi.org/10.1038/nmeth.1782",
   "description": "The first archaerhodopsin-based voltage indicator, establishing that microbial opsins can optically report membrane potential, though with extremely dim baseline fluorescence.",
-
-  "familyTreePath": ["GEVI", "Opsin", "Opsin-Fluorescent", "arch"],
-
+  "familyTreePath": [
+    "GEVI",
+    "Opsin",
+    "Opsin-Fluorescent",
+    "arch"
+  ],
   "spectrum": {
     "type": "rhodopsin",
     "peakEx": 558,
     "peakEm": 722,
     "name": "Arch"
   },
-
   "voltage": {
     "type": "opsin",
     "slope": 45,
     "polarity": "positive",
     "name": "Arch"
   },
-
   "kinetics": [
     {
       "on": 0.5,
@@ -37,7 +37,6 @@
       "note": "Sub-millisecond single time constant; on/off not separately resolved at this resolution. Paper reports <1 ms response."
     }
   ],
-
   "dynamicRangeData": [
     {
       "deltaF": 45,
@@ -50,7 +49,6 @@
       "source": "doi:10.1038/nmeth.3000"
     }
   ],
-
   "brightnessData": [
     {
       "ratio": 0.000268,
@@ -59,7 +57,6 @@
       "note": "Computed from EC=48900 M⁻¹cm⁻¹ at 559 nm × QY≈1.1×10⁻⁴ (Herasymenko 2025). Reference EGFP EC×QY=20040."
     }
   ],
-
   "photostabilityData": [
     {
       "brightnessRemaining": 83,
@@ -68,7 +65,6 @@
       "source": "doi:10.1038/nmeth.1782"
     }
   ],
-
   "researchPapers": [
     {
       "title": "Optical recording of action potentials in mammalian neurons using a microbial rhodopsin",

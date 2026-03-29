@@ -9,6 +9,29 @@ import { getAllGEVIs } from '../geviData';
 import type { GEVI, TreeNode } from '../types';
 import { getTreeNodeColor } from '../utils';
 
+// Journal name abbreviations for tooltip display
+const JOURNAL_ABBREV: Record<string, string> = {
+  'Nature Methods': 'Nat. Methods',
+  'Nature Neuroscience': 'Nat. Neurosci.',
+  'Nature Communications': 'Nat. Commun.',
+  'Nature Chemical Biology': 'Nat. Chem. Biol.',
+  'Nature Chemistry': 'Nat. Chem.',
+  'Journal of Neuroscience': 'J. Neurosci.',
+  'European Journal of Neuroscience': 'Eur. J. Neurosci.',
+  'ACS Chemical Neuroscience': 'ACS Chem. Neurosci.',
+  'Scientific Reports': 'Sci. Rep.',
+  'Science Advances': 'Sci. Adv.',
+  'Advanced Biology': 'Adv. Biol.',
+  'Advanced Science': 'Adv. Sci.',
+};
+
+function abbreviatePaper(paper: string): string {
+  for (const [full, abbrev] of Object.entries(JOURNAL_ABBREV)) {
+    if (paper.includes(full)) return paper.replace(full, abbrev);
+  }
+  return paper;
+}
+
 // Layout constants (all units are SVG pixels)
 //
 // Tree width is driven by: each leaf occupies MIN_NODE_WIDTH px horizontally,
@@ -579,9 +602,6 @@ export function FamilyTreePanel({
               >
                 {hoverInfo.gevi.name}
               </button>
-              {hoverInfo.gevi.description && (
-                <p className="text-[9px] text-ink/50 font-sans mt-0.5 line-clamp-2">{hoverInfo.gevi.description}</p>
-              )}
             </div>
             {hoverInfo.gevi.overall != null && (
               <div className="text-right flex-shrink-0">
@@ -614,7 +634,7 @@ export function FamilyTreePanel({
               className="text-xs flex items-center gap-1 mb-1.5 hover:underline text-klein"
             >
               <BookOpen className="w-3 h-3 flex-shrink-0" />
-              <span className="truncate flex-1">{hoverInfo.gevi.paper}</span>
+              <span className="truncate flex-1">{abbreviatePaper(hoverInfo.gevi.paper)}</span>
               <ExternalLink className="w-3 h-3 flex-shrink-0" />
             </a>
           )}

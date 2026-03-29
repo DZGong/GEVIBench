@@ -4,13 +4,12 @@
   "year": 2001,
   "category": "VSD-FRET GEVI",
   "tags": [
-    "Kv2.1",
     "CFP/YFP",
     "FRET"
   ],
   "paper": "European Journal of Neuroscience 2001",
   "paperUrl": "https://doi.org/10.1046/j.0953-816x.2001.01617.x",
-  "description": "The first genetically encoded voltage indicator, establishing the VSFP architecture of pairing a voltage-sensing domain with a FRET fluorescent protein pair for ratiometric optical voltage sensing.",
+  "description": "The first genetically encoded voltage indicator, establishing the VSFP architecture of pairing a voltage-sensing domain with a FRET fluorescent protein pair.",
   "familyTreePath": [
     "GEVI",
     "VSD",
@@ -521,7 +520,7 @@
     {
       "on": 0.74,
       "off": 0.74,
-      "temperature": "25-28\u00b0C",
+      "temperature": "25-28°C",
       "source": "doi:10.1046/j.0953-816x.2001.01617.x"
     }
   ],
