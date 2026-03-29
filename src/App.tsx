@@ -321,7 +321,7 @@ function GEVIBenchApp() {
           Scoring <span className="text-klein">Methodology</span>
         </h2>
 
-        <div className="rounded-lg p-4 md:p-6 bg-surface-lowest font-sans">
+        <div className="rounded-lg p-4 md:p-6 bg-surface-lowest font-sans text-justify">
           <div className="space-y-6">
             <div>
               <h3 className={`text-lg font-semibold mb-2 font-serif ${colors.text}`}>Overview</h3>
