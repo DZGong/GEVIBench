@@ -246,17 +246,23 @@ export function ScatterPlotPanel({ onSelectGEVI, onClose, peaceMode = false }: P
   const showSpeedLegend = xAxis === 'speed' || yAxis === 'speed';
   const isSpeedVsSpeed = xAxis === 'speed' && yAxis === 'speed';
 
-  // SVG mouse: find nearest point within 20px
+  // SVG mouse: use getScreenCTM to correctly map screen→SVG coords (handles
+  // preserveAspectRatio letterboxing, CSS transforms, zoom, etc.)
   const handleSvgMouseMove = useCallback((e: React.MouseEvent<SVGSVGElement>) => {
     if (!svgRef.current) return;
-    const rect = svgRef.current.getBoundingClientRect();
-    const mx = (e.clientX - rect.left) * (W / rect.width);
-    const my = (e.clientY - rect.top) * (H / rect.height);
+    const ctm = svgRef.current.getScreenCTM();
+    if (!ctm) return;
+    const pt = svgRef.current.createSVGPoint();
+    pt.x = e.clientX;
+    pt.y = e.clientY;
+    const svgPt = pt.matrixTransform(ctm.inverse());
+
+    // Find nearest dot in SVG space; threshold = 12px in SVG coords
     let best: PlotPoint | null = null;
-    let bestDist = 400;
+    let bestDist = 144;
     for (const p of points) {
       const { cx, cy } = toSvg(p);
-      const dist = (mx - cx) ** 2 + (my - cy) ** 2;
+      const dist = (svgPt.x - cx) ** 2 + (svgPt.y - cy) ** 2;
       if (dist < bestDist) { bestDist = dist; best = p; }
     }
     if (hideTimer.current) clearTimeout(hideTimer.current);

@@ -378,6 +378,15 @@ export function BrightnessNetworkPanel({ onSelectGEVI, onClose, peaceMode = fals
   const [scale, setScale] = useState(1);
   const [hoverInfo, setHoverInfo] = useState<{ node: GNode & { x: number; y: number; r: number }; x: number; y: number } | null>(null);
   const hoveredId = hoverInfo?.node.id ?? null;
+  const neighborIds = useMemo(() => {
+    if (!hoveredId) return new Set<string>();
+    const s = new Set<string>();
+    for (const e of edges) {
+      if (e.a === hoveredId) s.add(e.b);
+      if (e.b === hoveredId) s.add(e.a);
+    }
+    return s;
+  }, [hoveredId, edges]);
   const [fitted, setFitted] = useState(false);
   const hideTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -545,7 +554,8 @@ export function BrightnessNetworkPanel({ onSelectGEVI, onClose, peaceMode = fals
             {/* Nodes */}
             {finalNodes.map(node => {
               const isHov = hoveredId === node.id;
-              const fade = hoveredId && !isHov;
+              const isNeighbor = neighborIds.has(node.id);
+              const fade = hoveredId && !isHov && !isNeighbor;
               return (
                 <g key={node.id}
                   transform={`translate(${node.x},${node.y})`}
@@ -564,6 +574,11 @@ export function BrightnessNetworkPanel({ onSelectGEVI, onClose, peaceMode = fals
                   {isHov && (
                     <path d={hexPath(node.r + 4)} fill="none"
                       stroke={node.color} strokeWidth={1.5} opacity={0.5} />
+                  )}
+                  {/* Neighbor ring */}
+                  {isNeighbor && !isHov && (
+                    <path d={hexPath(node.r + 3)} fill="none"
+                      stroke="#60a5fa" strokeWidth={1} opacity={0.6} />
                   )}
                   {/* Invisible larger hit area */}
                   <path d={hexPath(node.r + 6)} fill="transparent" />
