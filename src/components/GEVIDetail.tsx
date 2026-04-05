@@ -9,6 +9,10 @@ import { GEVILineage } from './GEVILineage';
 import { SampleUsageChart } from './SampleUsageChart';
 import { getDoiCitationMap } from '../geviData';
 
+function formatRatio(ratio: number): string {
+  return parseFloat(ratio.toPrecision(2)).toString();
+}
+
 const metrics = [
   { key: 'brightness', name: 'Brightness', icon: Sun },
   { key: 'speed', name: 'Speed', icon: Zap },
@@ -277,7 +281,7 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
                   <div className="flex items-center gap-2">
                     <span className="text-ink">B/B<sub>EGFP</sub>:</span>
                     <span className="text-ink font-semibold">
-                      {display.ratio}×
+                      {formatRatio(display.ratio)}×
                     </span>
                     <span className="text-ink">vs {display.reference}</span>
                   </div>
@@ -290,7 +294,7 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
                       {gevi.brightnessData!.map((b: any, i: number) => (
                         <div key={i} className={`py-1 ${i < gevi.brightnessData!.length - 1 ? 'border-b border-ink/10' : ''}`}>
                           <div className="flex items-center justify-between gap-2">
-                            <span>{b.ratio}× vs {b.reference}</span>
+                            <span>{formatRatio(b.ratio)}× vs {b.reference}</span>
                             <SourceLink source={b.source} />
                           </div>
                           {b.note && <div className="mt-0.5 italic text-ink">{b.note}</div>}

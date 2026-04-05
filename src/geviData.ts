@@ -295,6 +295,32 @@ export function getAllGEVIs(): GEVI[] {
     rawGevis.push(raw as unknown as GEVI);
   }
 
+  // Augment brightnessData with reverse comparisons from other GEVIs.
+  // If GEVI B has { ratio, reference: A }, then A should also show { ratio: 1/ratio, reference: B }.
+  // This ensures both sides of a comparison are visible on each GEVI's detail page.
+  const reverseEntries = new Map<string, { ratio: number; reference: string; source: string }[]>();
+  for (const gevi of rawGevis) {
+    if (!gevi.brightnessData) continue;
+    for (const entry of gevi.brightnessData) {
+      if (entry.ratio <= 0) continue;
+      if (!reverseEntries.has(entry.reference)) reverseEntries.set(entry.reference, []);
+      reverseEntries.get(entry.reference)!.push({
+        ratio: 1 / entry.ratio,
+        reference: gevi.id,
+        source: entry.source,
+      });
+    }
+  }
+  for (const gevi of rawGevis) {
+    const extras = reverseEntries.get(gevi.id);
+    if (!extras?.length) continue;
+    const existingRefs = new Set((gevi.brightnessData ?? []).map(e => e.reference));
+    const newEntries = extras.filter(e => !existingRefs.has(e.reference));
+    if (newEntries.length > 0) {
+      gevi.brightnessData = [...(gevi.brightnessData ?? []), ...newEntries];
+    }
+  }
+
   // Build B_rel map across all GEVIs before scoring (enables graph traversal for brightness)
   const bRelMap = buildBrelMap(rawGevis);
 

@@ -4,6 +4,7 @@
 // Accepts voltage data as props - no internal GEVI lookup
 
 import { useState, useRef, useCallback, useMemo } from 'react';
+import { getDoiCitationMap } from './geviData';
 
 interface VoltagePoint {
   voltage: number;  // mV
@@ -32,6 +33,7 @@ export interface VoltageData {
   config?: VoltageConfig;
   custom?: VoltageCustom;
   additionalCurves?: AdditionalCurve[];
+  source?: string;
 }
 
 interface VoltageCurveViewerProps {
@@ -364,6 +366,24 @@ export function VoltageCurveViewer({ voltageData, geviName }: VoltageCurveViewer
       <div className="mt-2 text-xs text-ink">
         Sensitivity: ~{sensitivity}% per 100mV | Response: {config.polarity === 'positive' ? 'Positive (↑ depolarization = ↑ fluorescence)' : 'Negative (↑ depolarization = ↓ fluorescence)'}
       </div>
+
+      {/* Source */}
+      {voltageData?.source && (() => {
+        const source = voltageData.source!;
+        const doi = source.startsWith('doi:') ? source.slice(4) : null;
+        const citationMap = getDoiCitationMap();
+        const label = doi ? (citationMap[doi] || source) : source;
+        const url = doi ? `https://doi.org/${doi}` : null;
+        return (
+          <div className="mt-1 text-[10px] text-ink/50">
+            Source:{' '}
+            {url
+              ? <a href={url} target="_blank" rel="noopener noreferrer" className="hover:underline text-klein">{label}</a>
+              : <span>{label}</span>
+            }
+          </div>
+        );
+      })()}
     </div>
   );
 }

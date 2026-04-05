@@ -3,7 +3,7 @@ export const methodologyContent = {
 
   scoreComponents: {
     title: "Score Components",
-    description: "All metrics are extracted from peer-reviewed publications with imaging conditions recorded. Multiple measurements for the same GEVI are averaged.",
+    description: "All metrics are extracted from published studies with imaging conditions recorded. Multiple measurements for the same GEVI are averaged.",
     items: [
       { name: "Brightness",    weight: "20%", description: "Relative brightness vs EGFP, graph-resolved, log-scaled" },
       { name: "Speed",         weight: "20%", description: "Log-scaled on τ_on + τ_off (ms)" },
@@ -96,8 +96,8 @@ export const methodologyContent = {
       example: "",
       benchmarks: [
         { score: 100, remaining: "100%", example: "Quasar2/3" },
-        { score: 90,  remaining: "~80%", example: "ASAP3" },
-        { score: 50,  remaining: "~60%", example: "ASAP5" },
+        { score: 80,  remaining: "~80%", example: "ASAP3" },
+        { score: 60,  remaining: "~60%", example: "ASAP5" },
         { score: 10,  remaining: "~10%", example: "Arclight" }
       ]
     },

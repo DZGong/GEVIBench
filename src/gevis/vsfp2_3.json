@@ -454,7 +454,12 @@
     "type": "fret",
     "slope": 10,
     "polarity": "negative",
-    "name": "VSFP2.3"
+    "name": "VSFP2.3",
+    "source": "doi:10.1371/journal.pone.0004555",
+    "custom": {
+      "voltage": [-140, -120, -100, -80, -70, -60, -40, -20, 0, 20, 40, 60],
+      "deltaF": [-1, -1, 0, 0, 0, 0, 1, 2, 2, 3, 3, 4]
+    }
   },
   "kinetics": [
     {

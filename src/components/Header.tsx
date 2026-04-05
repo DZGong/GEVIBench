@@ -25,7 +25,7 @@ export function Header({ activeTab, setActiveTab, mobileMenuOpen, setMobileMenuO
   const toolsMenuRef = useRef<HTMLDivElement>(null);
 
   const tabButtonClass = (tab: ViewTab) =>
-    `label px-3 py-1.5 border-b-2 transition-colors ${activeTab === tab ? 'text-klein border-gold' : 'text-ink border-transparent hover:text-klein'}`;
+    `label px-3 py-1.5 border-b-2 transition-colors ${activeTab === tab ? 'text-klein border-gold' : 'text-ink border-transparent hover:text-klein hover:border-gold/40'}`;
 
   // Close menu when clicking outside
   useEffect(() => {
