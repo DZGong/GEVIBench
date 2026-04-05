@@ -4,6 +4,7 @@ import { getAllGEVIs } from './geviData';
 import { methodologyContent } from './methodology';
 import { FamilyTreePanel } from './components/FamilyTreePanel';
 import { BrightnessNetworkPanel } from './components/BrightnessNetworkPanel';
+import { ScatterPlotPanel } from './components/ScatterPlotPanel';
 import { Header } from './components/Header';
 import { SearchFilters } from './components/SearchFilters';
 import { GEVIList } from './components/GEVIList';
@@ -57,6 +58,7 @@ function GEVIBenchApp() {
   const [compareGEVIs, setCompareGEVIs] = useState<GEVI[]>([]);
   const [showFamilyTree, setShowFamilyTree] = useState(false);
   const [showBrightnessNetwork, setShowBrightnessNetwork] = useState(false);
+  const [showScatterPlot, setShowScatterPlot] = useState(false);
   const [showCompareEmpty, setShowCompareEmpty] = useState(false);
   const [peaceMode, setPeaceMode] = useState(true);
   const handleSetPeaceMode = useCallback((v: boolean) => {
@@ -120,6 +122,7 @@ function GEVIBenchApp() {
     setMobileView('detail');
     setShowFamilyTree(false);
     setShowBrightnessNetwork(false);
+    setShowScatterPlot(false);
     // After render: scroll page to top, then scroll the side list so the selected GEVI is visible
     requestAnimationFrame(() => {
       window.scrollTo({ top: 0 });
@@ -139,6 +142,7 @@ function GEVIBenchApp() {
     setMobileView('list');
     setShowFamilyTree(false);
     setShowBrightnessNetwork(false);
+    setShowScatterPlot(false);
     setActiveTab('database');
   }, []);
 
@@ -199,8 +203,10 @@ function GEVIBenchApp() {
         />
       )}
 
-      {/* Brightness Network - full width */}
-      {showBrightnessNetwork ? (
+      {/* Full-width tool panels */}
+      {showScatterPlot ? (
+        <ScatterPlotPanel onSelectGEVI={handleSelectGEVI} onClose={() => setShowScatterPlot(false)} peaceMode={peaceMode} />
+      ) : showBrightnessNetwork ? (
         <BrightnessNetworkPanel onSelectGEVI={handleSelectGEVI} onClose={() => setShowBrightnessNetwork(false)} peaceMode={peaceMode} />
       ) : showFamilyTree ? (
         <FamilyTreePanel
@@ -480,6 +486,13 @@ function GEVIBenchApp() {
           setActiveTab('database');
           setShowBrightnessNetwork(true);
           setShowFamilyTree(false);
+          setShowScatterPlot(false);
+        }}
+        onShowScatterPlot={() => {
+          setActiveTab('database');
+          setShowScatterPlot(true);
+          setShowFamilyTree(false);
+          setShowBrightnessNetwork(false);
         }}
         onShowCompare={() => {
           setActiveTab('database');

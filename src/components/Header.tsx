@@ -1,4 +1,4 @@
-import { Menu, X, ChevronDown, TreeDeciduous, GitCompare, Github, Share2, Swords, Leaf } from 'lucide-react';
+import { Menu, X, ChevronDown, TreeDeciduous, GitCompare, Github, Share2, Swords, Leaf, ScatterChart } from 'lucide-react';
 import { useState, useRef, useEffect } from 'react';
 import type { ViewTab } from '../types';
 
@@ -11,6 +11,7 @@ interface HeaderProps {
   onShowFamilyTree: () => void;
   onShowCompare: () => void;
   onShowBrightnessNetwork: () => void;
+  onShowScatterPlot: () => void;
   peaceMode: boolean;
   setPeaceMode: (v: boolean) => void;
 }
@@ -20,7 +21,7 @@ const Logo = () => (
   <img src="/imgs/logo.svg" alt="GEVIBench logo" style={{ height: '32.4px' }} className="w-auto flex-shrink-0" />
 );
 
-export function Header({ activeTab, setActiveTab, mobileMenuOpen, setMobileMenuOpen, onLogoClick, onShowFamilyTree, onShowCompare, onShowBrightnessNetwork, peaceMode, setPeaceMode }: HeaderProps) {
+export function Header({ activeTab, setActiveTab, mobileMenuOpen, setMobileMenuOpen, onLogoClick, onShowFamilyTree, onShowCompare, onShowBrightnessNetwork, onShowScatterPlot, peaceMode, setPeaceMode }: HeaderProps) {
   const [toolsMenuOpen, setToolsMenuOpen] = useState(false);
   const toolsMenuRef = useRef<HTMLDivElement>(null);
 
@@ -42,10 +43,11 @@ export function Header({ activeTab, setActiveTab, mobileMenuOpen, setMobileMenuO
     setToolsMenuOpen(!toolsMenuOpen);
   };
 
-  const handleToolSelect = (tool: 'family-tree' | 'compare' | 'brightness-network') => {
+  const handleToolSelect = (tool: 'family-tree' | 'compare' | 'brightness-network' | 'scatter-plot') => {
     if (tool === 'family-tree') onShowFamilyTree();
     else if (tool === 'compare') onShowCompare();
     else if (tool === 'brightness-network') onShowBrightnessNetwork();
+    else if (tool === 'scatter-plot') onShowScatterPlot();
     setToolsMenuOpen(false);
     setMobileMenuOpen(false);
   };
@@ -116,6 +118,13 @@ export function Header({ activeTab, setActiveTab, mobileMenuOpen, setMobileMenuO
                     >
                       <Share2 className="w-4 h-4" />
                       Brightness Network
+                    </button>
+                    <button
+                      onClick={() => handleToolSelect('scatter-plot')}
+                      className="w-full text-left px-4 py-2 text-sm flex items-center gap-2 text-ink/70 hover:bg-surface-low"
+                    >
+                      <ScatterChart className="w-4 h-4" />
+                      Performance Scatter
                     </button>
                   </div>
                 )}
@@ -203,6 +212,13 @@ export function Header({ activeTab, setActiveTab, mobileMenuOpen, setMobileMenuO
               >
                 <Share2 className="w-4 h-4" />
                 Brightness Network
+              </button>
+              <button
+                onClick={() => { onShowScatterPlot(); setMobileMenuOpen(false); }}
+                className={`label px-3 py-2 text-left flex items-center gap-2 border-b-2 ${activeTab === 'tools' ? 'text-klein border-gold' : 'text-ink border-transparent'}`}
+              >
+                <ScatterChart className="w-4 h-4" />
+                Performance Scatter
               </button>
               <button
                 onClick={() => { setActiveTab('contact'); setMobileMenuOpen(false); }}
