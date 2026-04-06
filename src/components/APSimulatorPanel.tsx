@@ -485,7 +485,7 @@ export function APSimulatorPanel({}: Props) {
                 </button>
               ))}
             </div>
-            <div className="flex flex-col gap-1">
+            <div className="hidden lg:flex flex-col gap-1">
               {([
                 ['gNa', <><span className="italic">g</span><sub>Na</sub></>, 'mS/cm²', customGNa, setCustomGNa, 10, 300, 10] as const,
                 ['gK', <><span className="italic">g</span><sub>K</sub></>, 'mS/cm²', customGK, setCustomGK, 5, 100, 5] as const,
