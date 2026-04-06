@@ -3,9 +3,36 @@
 // SNR = peak ΔF/F / shot-noise σ, where σ = 100% / √(photons/frame).
 // Brightness enters twice: as the noise floor (shot noise) and indirectly via peakDeltaF through kinetics filtering.
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import { getAllGEVIs } from '../geviData';
 import type { GEVI } from '../types';
+
+// Number input that allows clearing the field while typing, clamping on blur.
+function NumInput({ value, onChange, min, max, step, className, ...rest }:
+  { value: number; onChange: (v: number) => void; min?: number; max?: number; step?: number; className?: string } & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'value' | 'type'>) {
+  const [draft, setDraft] = useState<string | null>(null);
+  const commit = useCallback(() => {
+    if (draft === null) return;
+    let v = Number(draft);
+    if (isNaN(v) || draft.trim() === '') v = min ?? 0;
+    if (min != null) v = Math.max(min, v);
+    if (max != null) v = Math.min(max, v);
+    if (step != null && step >= 1) v = Math.round(v / step) * step;
+    onChange(v);
+    setDraft(null);
+  }, [draft, min, max, step, onChange]);
+  return (
+    <input
+      type="number" min={min} max={max} step={step}
+      value={draft !== null ? draft : value}
+      onChange={e => setDraft(e.target.value)}
+      onBlur={commit}
+      onKeyDown={e => { if (e.key === 'Enter') commit(); }}
+      className={className}
+      {...rest}
+    />
+  );
+}
 
 // ─── Hodgkin-Huxley Model ───────────────────────────────────────────────────
 // Standard HH equations (Hodgkin & Huxley 1952, J Physiol 117:500-544)
@@ -191,6 +218,7 @@ interface SimParams {
   polarity: 'positive' | 'negative';
   bRel: number;
   estimated: boolean;
+  tauBleach: number | null;  // bleaching time constant at 1 mW/mm², in ms
 }
 
 function extractSimParams(gevi: GEVI): SimParams | null {
@@ -220,7 +248,22 @@ function extractSimParams(gevi: GEVI): SimParams | null {
   const calibFactor = computeCalibFactor(tauOn, tauOff, polarity);
   const fTargetMax = peakDeltaF * calibFactor;
 
-  return { tauOn, tauOff, peakDeltaF, fTargetMax, polarity, bRel, estimated };
+  // Extract bleaching time constant (ms) at 1 mW/mm²
+  // τ_bleach at power P: remaining = exp(-T/τ), so τ = -T/ln(remaining/100)
+  // Scale linearly with power: τ_at_1mW = τ_at_P * P
+  let tauBleach: number | null = null;
+  if (gevi.photostabilityData?.length) {
+    const pd = gevi.photostabilityData[0];
+    const remaining = pd.brightnessRemaining;
+    if (remaining > 0 && remaining < 100) {
+      const durMs = parseFloat(pd.duration) * 60 * 1000; // "X min" → ms
+      const power = parseFloat(pd.illumination);          // "X mW/mm²"
+      const tauAtP = -durMs / Math.log(remaining / 100);
+      tauBleach = tauAtP * power; // normalize to 1 mW/mm²
+    }
+  }
+
+  return { tauOn, tauOff, peakDeltaF, fTargetMax, polarity, bRel, estimated, tauBleach };
 }
 
 // First-order ODE: dF/dt = (F_target - F) / τ, with adaptive τ_on / τ_off
@@ -303,13 +346,15 @@ export function APSimulatorPanel({}: Props) {
   const [customGK, setCustomGK] = useState(AP_PRESETS.normal.gK);
   const [customGL, setCustomGL] = useState(AP_PRESETS.normal.gL);
   const [customStim, setCustomStim] = useState(AP_PRESETS.normal.Iext);
-  const [nAPs, setNAPs] = useState(3);
+  const [nAPs, setNAPs] = useState(5);
   const [apInterval, setApInterval] = useState(50);   // ms
   const [frameRateKHz, setFrameRateKHz] = useState(1); // kHz
   const [illumination, setIllumination] = useState(100); // mW/mm²
   const [showNoise, setShowNoise] = useState(true);
   const [noiseSeed, setNoiseSeed] = useState(0);
   const [invertNeg, setInvertNeg] = useState(true);
+  const [showDeltaF, setShowDeltaF] = useState(false);
+  const [showBleach, setShowBleach] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
 
   const frameTime = 1 / frameRateKHz; // ms per frame
@@ -388,15 +433,46 @@ export function APSimulatorPanel({}: Props) {
   const SVG_H = 370;
   const VOLT_H = 60;          // px reserved for voltage trace band at top
   const VOLT_SEP = 6;         // gap between voltage band and ΔF/F chart
-  const PAD = { top: VOLT_H + VOLT_SEP + 4, right: 48, bottom: 44, left: 62 };
+  const PAD = { top: VOLT_H + VOLT_SEP + 4, right: 48, bottom: 54, left: 62 };
   const chartW = SVG_W - PAD.left - PAD.right;
   const chartH = SVG_H - PAD.top - PAD.bottom;
 
+  // Apply bleaching decay and/or convert ΔF/F → F
+  const displayTraces = useMemo(() => traces.map(t => {
+    let clean = t.cleanSampled;
+    let noisy = t.noisySampled;
+    const b = t.params.bRel;
+    const tau = t.params.tauBleach;
+
+    // Bleaching: multiply baseline fluorescence by exp(-t*I/τ_bleach)
+    // In ΔF/F mode the baseline decays, reducing apparent signal amplitude
+    // In F mode the entire trace decays toward zero
+    if (showBleach && tau && tau > 0) {
+      const tauAtIllum = tau / illumination; // ms at current illumination
+      clean = clean.map((v, i) => {
+        const tMs = i * frameTime;
+        const decay = Math.exp(-tMs / tauAtIllum);
+        return !showDeltaF ? b * decay * (1 + v / 100) : v * decay;
+      });
+      noisy = noisy.map((v, i) => {
+        const tMs = i * frameTime;
+        const decay = Math.exp(-tMs / tauAtIllum);
+        return !showDeltaF ? b * decay * (1 + v / 100) : v * decay;
+      });
+    } else if (!showDeltaF) {
+      clean = clean.map(v => b * (1 + v / 100));
+      noisy = noisy.map(v => b * (1 + v / 100));
+    }
+
+    return { ...t, cleanSampled: clean, noisySampled: noisy };
+  }), [traces, showDeltaF, showBleach, illumination, frameTime]);
+
   // Y-axis range always based on clean traces so noise doesn't compress signal visually
-  const allDeltaFs = traces.flatMap(t => t.cleanSampled);
+  const allDeltaFs = displayTraces.flatMap(t => t.cleanSampled);
   const rawMinY = allDeltaFs.length ? Math.min(...allDeltaFs) : -10;
   const rawMaxY = allDeltaFs.length ? Math.max(...allDeltaFs) :  10;
-  const yPad = Math.max(2, (rawMaxY - rawMinY) * 0.18);
+  const range = rawMaxY - rawMinY;
+  const yPad = showDeltaF ? Math.max(2, range * 0.18) : Math.max(range * 0.15, 0.02);
   const minY = rawMinY - yPad;
   const maxY = rawMaxY + yPad;
 
@@ -418,14 +494,29 @@ export function APSimulatorPanel({}: Props) {
 
   const yTicks = useMemo(() => {
     const range = maxY - minY;
-    const step = range < 10 ? 2 : range < 25 ? 5 : range < 60 ? 10 : range < 120 ? 20 : 50;
+    let step: number;
+    if (range < 0.1) step = 0.02;
+    else if (range < 0.25) step = 0.05;
+    else if (range < 0.5) step = 0.1;
+    else if (range < 2) step = 0.5;
+    else if (range < 10) step = 2;
+    else if (range < 25) step = 5;
+    else if (range < 60) step = 10;
+    else if (range < 120) step = 20;
+    else step = 50;
     const ticks: number[] = [];
-    for (let v = Math.ceil(minY / step) * step; v <= maxY; v += step) ticks.push(v);
+    const start = Math.ceil(minY / step);
+    const end = Math.floor(maxY / step);
+    for (let i = start; i <= end; i++) ticks.push(+(i * step).toFixed(10));
     return ticks;
   }, [minY, maxY]);
 
   const xTicks = useMemo(() => {
-    const step = totalTime <= 20 ? 5 : totalTime <= 60 ? 10 : totalTime <= 150 ? 25 : 50;
+    // Target ~6-10 ticks regardless of total time
+    const raw = totalTime / 7;
+    const mag = Math.pow(10, Math.floor(Math.log10(raw)));
+    const norm = raw / mag;
+    const step = mag * (norm < 1.5 ? 1 : norm < 3.5 ? 2 : norm < 7.5 ? 5 : 10);
     const ticks: number[] = [];
     for (let t = 0; t <= totalTime; t += step) ticks.push(Math.round(t));
     return ticks;
@@ -433,11 +524,34 @@ export function APSimulatorPanel({}: Props) {
 
   const noisyLinePath = (sampled: number[]) => {
     if (!sampled.length) return '';
-    return sampled.map((val, i) => {
-      const x = xScale((i + 0.5) * frameTime).toFixed(1);
-      const y = yScale(val).toFixed(1);
-      return i === 0 ? `M ${x} ${y}` : `L ${x} ${y}`;
-    }).join(' ');
+    const maxPts = 1400;
+    if (sampled.length <= maxPts) {
+      return sampled.map((val, i) => {
+        const x = xScale((i + 0.5) * frameTime).toFixed(1);
+        const y = yScale(val).toFixed(1);
+        return i === 0 ? `M ${x} ${y}` : `L ${x} ${y}`;
+      }).join(' ');
+    }
+    // Min/max decimation: for each bucket, emit the min and max to preserve spikes
+    const bucketSize = sampled.length / (maxPts / 2);
+    const pts: string[] = [];
+    for (let b = 0; b < maxPts / 2; b++) {
+      const start = Math.floor(b * bucketSize);
+      const end = Math.min(Math.floor((b + 1) * bucketSize), sampled.length);
+      let minV = Infinity, maxV = -Infinity, minI = start, maxI = start;
+      for (let i = start; i < end; i++) {
+        if (sampled[i] < minV) { minV = sampled[i]; minI = i; }
+        if (sampled[i] > maxV) { maxV = sampled[i]; maxI = i; }
+      }
+      // Emit in temporal order
+      const [first, second] = minI < maxI ? [minI, maxI] : [maxI, minI];
+      for (const i of [first, second]) {
+        const x = xScale((i + 0.5) * frameTime).toFixed(1);
+        const y = yScale(sampled[i]).toFixed(1);
+        pts.push(pts.length === 0 ? `M ${x} ${y}` : `L ${x} ${y}`);
+      }
+    }
+    return pts.join(' ');
   };
 
   const filteredGevis = useMemo(() =>
@@ -494,10 +608,10 @@ export function APSimulatorPanel({}: Props) {
               ] as const).map(([key, label, unit, value, setter, min, max, step]) => (
                 <div key={key} className="flex items-center gap-2">
                   <span className="text-[10px] text-ink w-10 text-right font-mono">{label}</span>
-                  <input type="number" min={min} max={max} step={step} value={value}
-                    onChange={e => {
+                  <NumInput min={min as number} max={max as number} step={step as number} value={value as number}
+                    onChange={v => {
                       setApPreset(null);
-                      (setter as (v: number) => void)(Math.max(min as number, Math.min(max as number, Number(e.target.value) || (min as number))));
+                      (setter as (v: number) => void)(v);
                     }}
                     className="w-16 text-xs px-1.5 py-0.5 rounded border border-ink/10 bg-surface outline-none focus:border-klein/40" />
                   <span className="text-[9px] text-ink">{unit}</span>
@@ -506,15 +620,15 @@ export function APSimulatorPanel({}: Props) {
             </div>
             <div className="flex items-center gap-2 mt-2">
               <span className="text-xs text-ink w-14">Count</span>
-              <input type="number" min={1} max={10} value={nAPs}
-                onChange={e => setNAPs(Math.max(1, Math.min(10, Math.round(Number(e.target.value) || 1))))}
+              <NumInput min={1} max={100} step={1} value={nAPs}
+                onChange={v => setNAPs(Math.round(v))}
                 className="w-16 text-xs px-2 py-1 rounded border border-ink/10 bg-surface outline-none focus:border-klein/40" />
             </div>
             {nAPs > 1 && (
               <div className="flex items-center gap-2 mt-1">
                 <span className="text-xs text-ink w-14">Interval</span>
-                <input type="number" min={5} max={500} step={5} value={apInterval}
-                  onChange={e => setApInterval(Math.max(5, Math.min(500, Math.round(Number(e.target.value) || 50))))}
+                <NumInput min={5} max={500} step={5} value={apInterval}
+                  onChange={v => setApInterval(Math.round(v))}
                   className="w-16 text-xs px-2 py-1 rounded border border-ink/10 bg-surface outline-none focus:border-klein/40" />
                 <span className="text-xs text-ink">ms</span>
               </div>
@@ -526,15 +640,15 @@ export function APSimulatorPanel({}: Props) {
             <div className="text-[11px] font-semibold text-ink uppercase tracking-wide mb-1.5">Imaging</div>
             <div className="flex items-center gap-2 mb-1.5">
               <span className="text-xs text-ink w-14">Frame rate</span>
-              <input type="number" min={0.1} max={20} step={0.1} value={frameRateKHz}
-                onChange={e => setFrameRateKHz(Math.max(0.1, Math.min(20, Number(e.target.value) || 1)))}
+              <NumInput min={0.1} max={20} step={0.1} value={frameRateKHz}
+                onChange={v => setFrameRateKHz(v)}
                 className="w-16 text-xs px-2 py-1 rounded border border-ink/10 bg-surface outline-none focus:border-klein/40" />
               <span className="text-xs text-ink">kHz</span>
             </div>
             <div className="flex items-center gap-2">
               <span className="text-xs text-ink w-14">Illumin.</span>
-              <input type="number" min={10} max={5000} step={10} value={illumination}
-                onChange={e => setIllumination(Math.max(10, Math.min(5000, Math.round(Number(e.target.value) || 100))))}
+              <NumInput min={10} max={5000} step={10} value={illumination}
+                onChange={v => setIllumination(Math.round(v))}
                 className="w-16 text-xs px-2 py-1 rounded border border-ink/10 bg-surface outline-none focus:border-klein/40" />
               <span className="text-xs text-ink">mW/mm²</span>
             </div>
@@ -542,8 +656,8 @@ export function APSimulatorPanel({}: Props) {
 
           {/* Display */}
           <div className="col-span-2 lg:col-span-1">
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
-              <div className="text-[11px] font-semibold text-ink uppercase tracking-wide">Display</div>
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 lg:flex-col lg:items-start lg:gap-1">
+              <div className="text-[11px] font-semibold text-ink uppercase tracking-wide lg:mb-0.5">Display</div>
               <label className="flex items-center gap-1.5 text-xs text-ink cursor-pointer">
                 <input type="checkbox" checked={showNoise} onChange={e => { setShowNoise(e.target.checked); if (e.target.checked) setNoiseSeed(s => s + 1); }} />
                 Shot noise
@@ -551,6 +665,14 @@ export function APSimulatorPanel({}: Props) {
               <label className="flex items-center gap-1.5 text-xs text-ink cursor-pointer">
                 <input type="checkbox" checked={invertNeg} onChange={e => setInvertNeg(e.target.checked)} />
                 Invert neg.
+              </label>
+              <label className="flex items-center gap-1.5 text-xs text-ink cursor-pointer">
+                <input type="checkbox" checked={showDeltaF} onChange={e => setShowDeltaF(e.target.checked)} />
+                Show ΔF/F
+              </label>
+              <label className="flex items-center gap-1.5 text-xs text-ink cursor-pointer">
+                <input type="checkbox" checked={showBleach} onChange={e => setShowBleach(e.target.checked)} />
+                Bleach
               </label>
             </div>
           </div>
@@ -641,81 +763,68 @@ export function APSimulatorPanel({}: Props) {
               ))}
 
               {/* Traces */}
-              {traces.map(({ cleanSampled, noisySampled, color }) => (
+              {displayTraces.map(({ cleanSampled, noisySampled, color }) => (
                 <g key={color}>
                   <path d={noisyLinePath(showNoise ? noisySampled : cleanSampled)} fill="none" stroke={color}
                     strokeWidth="1.5" opacity={0.9} />
                 </g>
               ))}
 
-              {/* ΔF/F Y labels (left) */}
+              {/* Y labels (left) */}
               {yTicks.map(v => (
                 <text key={v} x={PAD.left - 5} y={yScale(v) + 4}
-                  textAnchor="end" fontSize="11" fill="#9ca3af">{v}%</text>
+                  textAnchor="end" fontSize="11" fill="#9ca3af">{showDeltaF ? `${v}%` : v.toFixed(2)}</text>
               ))}
 
               {/* X labels */}
               {xTicks.map(t => (
-                <text key={t} x={xScale(t)} y={SVG_H - 6}
+                <text key={t} x={xScale(t)} y={SVG_H - 16}
                   textAnchor="middle" fontSize="11" fill="#9ca3af">{t}</text>
               ))}
 
               {/* Axis labels */}
-              <text x={SVG_W / 2} y={SVG_H - 0} textAnchor="middle" fontSize="11" fill="#9ca3af">
+              <text x={SVG_W / 2} y={SVG_H - 2} textAnchor="middle" fontSize="11" fill="#9ca3af">
                 Time (ms)
               </text>
               <text x={10} y={SVG_H / 2} textAnchor="middle" fontSize="11" fill="#9ca3af"
                 transform={`rotate(-90, 10, ${SVG_H / 2})`}>
-                ΔF/F (%)
+                {showDeltaF ? 'ΔF/F (%)' : 'F (rel. EGFP)'}
               </text>
             </svg>
-          </div>
 
-          {/* SNR Table */}
-          {traces.length > 0 && (
-            <div className="rounded-lg border border-ink/10 bg-surface-low overflow-hidden">
-              <table className="w-full text-xs">
-                <thead>
-                  <tr className="border-b border-ink/10 bg-surface">
-                    <th className="text-left px-3 py-2 font-semibold text-ink">GEVI</th>
-                    <th className="text-right px-3 py-2 font-semibold text-ink">τ_on</th>
-                    <th className="text-right px-3 py-2 font-semibold text-ink">τ_off</th>
-                    <th className="text-right px-3 py-2 font-semibold text-ink">Peak ΔF/F</th>
-                    <th className="text-right px-3 py-2 font-semibold text-ink">B_rel</th>
-                    <th className="text-right px-3 py-2 font-semibold text-ink">SNR</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {[...traces].sort((a, b) => b.snr - a.snr).map(({ gevi, params, cleanSampled, snr, color }) => {
-                    const peak = Math.max(...cleanSampled.map(Math.abs));
-                    return (
-                      <tr key={gevi.id} className="border-b border-ink/5 last:border-0">
-                        <td className="px-3 py-1.5">
-                          <span className="flex items-center gap-2">
-                            <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: color }} />
-                            <span className="font-medium text-ink">{gevi.name}</span>
-                            {params.estimated && <span className="text-ink text-[9px]">~est</span>}
+            {/* Legend */}
+            {traces.length > 0 && (
+              <div className="flex flex-wrap gap-x-4 gap-y-1 mt-1.5 px-1">
+                {[...traces].sort((a, b) => b.snr - a.snr).map(({ gevi, params, cleanSampled, snr, color }) => {
+                  const peak = Math.max(...cleanSampled.map(Math.abs));
+                  // Bleach: remaining % at end of trace
+                  const totalTimeMs = cleanSampled.length * frameTime;
+                  const bleachRemaining = params.tauBleach && params.tauBleach > 0
+                    ? Math.exp(-totalTimeMs * illumination / params.tauBleach) * 100
+                    : null;
+                  return (
+                    <div key={gevi.id} className="flex items-center gap-1.5 text-[10px] text-ink">
+                      <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ backgroundColor: color }} />
+                      <span className="font-semibold">{gevi.name}</span>
+                      <span className="text-ink/60">
+                        τ {params.tauOn.toFixed(1)}/{params.tauOff.toFixed(1)}ms
+                        · {peak.toFixed(1)}%
+                        · B {params.bRel.toFixed(2)}
+                        · <span className={`font-semibold ${snr >= 5 ? 'text-green-600' : snr >= 2 ? 'text-yellow-600' : 'text-red-500'}`}>
+                            SNR {snr.toFixed(1)}
                           </span>
-                        </td>
-                        <td className="px-3 py-1.5 text-right text-ink">{params.tauOn.toFixed(1)} ms</td>
-                        <td className="px-3 py-1.5 text-right text-ink">{params.tauOff.toFixed(1)} ms</td>
-                        <td className="px-3 py-1.5 text-right text-ink">{peak.toFixed(1)}%</td>
-                        <td className="px-3 py-1.5 text-right text-ink">{params.bRel.toFixed(2)}</td>
-                        <td className={`px-3 py-1.5 text-right font-semibold tabular-nums ${snr >= 5 ? 'text-green-600' : snr >= 2 ? 'text-yellow-600' : 'text-red-500'}`}>
-                          {snr.toFixed(1)}
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-              <div className="px-3 py-1.5 text-[10px] text-ink border-t border-ink/5">
-                AP waveform: Hodgkin-Huxley 1952 with temperature scaling φ.
-                Shot noise σ = 100% / √(photons/frame).
-                SNR = simulated peak ΔF/F / σ.
+                        {bleachRemaining !== null && (
+                          <> · <span className={`${bleachRemaining >= 80 ? 'text-green-600' : bleachRemaining >= 50 ? 'text-yellow-600' : 'text-red-500'}`}>
+                            Bleach {bleachRemaining.toFixed(0)}%
+                          </span></>
+                        )}
+                      </span>
+                    </div>
+                  );
+                })}
               </div>
-            </div>
-          )}
+            )}
+          </div>
 
           {traces.length === 0 && (
             <div className="flex-1 flex items-center justify-center text-sm text-ink">
