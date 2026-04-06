@@ -466,7 +466,7 @@ export function APSimulatorPanel({}: Props) {
 
       <div className="flex flex-col lg:flex-row gap-4 flex-1 min-h-0 overflow-y-auto lg:overflow-y-visible">
         {/* ── Left: controls ── */}
-        <div className="w-full lg:w-60 flex-shrink-0 flex flex-col gap-4 bg-surface-low rounded-lg p-3">
+        <div className="w-full lg:w-60 flex-shrink-0 grid grid-cols-2 lg:grid-cols-1 gap-3 lg:gap-4 bg-surface-low rounded-lg p-3">
 
           {/* Action Potential */}
           <div>
@@ -554,7 +554,7 @@ export function APSimulatorPanel({}: Props) {
           </div>
 
           {/* GEVI selector */}
-          <div className="flex-1 min-h-0 flex flex-col">
+          <div className="col-span-2 lg:col-span-1 flex-1 min-h-0 flex flex-col">
             <div className="text-[11px] font-semibold text-ink uppercase tracking-wide mb-1">
               GEVIs <span className="font-normal text-ink">({selectedIds.length}/6)</span>
             </div>
@@ -563,7 +563,7 @@ export function APSimulatorPanel({}: Props) {
               onChange={e => setSearchQuery(e.target.value)}
               className="w-full text-xs px-2 py-1 rounded border border-ink/10 bg-surface mb-1 outline-none focus:border-klein/40"
             />
-            <div className="overflow-y-auto flex flex-col gap-0.5 max-h-64">
+            <div className="overflow-y-auto flex flex-col gap-0.5 max-h-40 lg:max-h-64">
               {filteredGevis.map(g => {
                 const idx = selectedIds.indexOf(g.id);
                 const isSelected = idx !== -1;
