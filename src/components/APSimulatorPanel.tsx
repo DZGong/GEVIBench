@@ -541,16 +541,18 @@ export function APSimulatorPanel({}: Props) {
           </div>
 
           {/* Display */}
-          <div>
-            <div className="text-[11px] font-semibold text-ink uppercase tracking-wide mb-1.5">Display</div>
-            <label className="flex items-center gap-2 text-xs text-ink cursor-pointer mb-1">
-              <input type="checkbox" checked={showNoise} onChange={e => { setShowNoise(e.target.checked); if (e.target.checked) setNoiseSeed(s => s + 1); }} />
-              Show shot noise
-            </label>
-            <label className="flex items-center gap-2 text-xs text-ink cursor-pointer">
-              <input type="checkbox" checked={invertNeg} onChange={e => setInvertNeg(e.target.checked)} />
-              Invert negative-going
-            </label>
+          <div className="col-span-2 lg:col-span-1">
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
+              <div className="text-[11px] font-semibold text-ink uppercase tracking-wide">Display</div>
+              <label className="flex items-center gap-1.5 text-xs text-ink cursor-pointer">
+                <input type="checkbox" checked={showNoise} onChange={e => { setShowNoise(e.target.checked); if (e.target.checked) setNoiseSeed(s => s + 1); }} />
+                Shot noise
+              </label>
+              <label className="flex items-center gap-1.5 text-xs text-ink cursor-pointer">
+                <input type="checkbox" checked={invertNeg} onChange={e => setInvertNeg(e.target.checked)} />
+                Invert neg.
+              </label>
+            </div>
           </div>
 
           {/* GEVI selector */}
@@ -563,7 +565,7 @@ export function APSimulatorPanel({}: Props) {
               onChange={e => setSearchQuery(e.target.value)}
               className="w-full text-xs px-2 py-1 rounded border border-ink/10 bg-surface mb-1 outline-none focus:border-klein/40"
             />
-            <div className="overflow-y-auto flex flex-col gap-0.5 max-h-40 lg:max-h-64">
+            <div className="overflow-y-auto grid grid-cols-2 lg:grid-cols-1 gap-0.5 max-h-40 lg:max-h-64">
               {filteredGevis.map(g => {
                 const idx = selectedIds.indexOf(g.id);
                 const isSelected = idx !== -1;
