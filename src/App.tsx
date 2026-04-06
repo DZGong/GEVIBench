@@ -247,9 +247,9 @@ function GEVIBenchApp() {
         <div className="absolute inset-0 bg-black/25" />
         <div className="relative text-center py-4 px-3">
           <button onClick={handleLogoClick} className="hover:opacity-80 transition-opacity">
-            <h2 className="font-bold mb-1 whitespace-nowrap" style={{ fontSize: 'clamp(16px, 4vw, 24px)' }}>
+            <h2 className="font-semibold mb-1 whitespace-nowrap" style={{ fontSize: 'clamp(16px, 4vw, 24px)' }}>
               <span className="text-white">GEVI</span><span className="text-white">Bench</span>
-              <span className="font-sans font-bold text-gray-200" style={{ fontSize: 'clamp(12px, 3vw, 20px)' }}> — Voltage Indicator Benchmark</span>
+              <span className="font-sans font-semibold text-gray-200" style={{ fontSize: 'clamp(12px, 3vw, 20px)' }}> — Voltage Indicator Benchmark</span>
             </h2>
           </button>
           <p className="font-sans text-gray-300 whitespace-nowrap" style={{ fontSize: 'clamp(11px, 2.5vw, 15px)' }}>

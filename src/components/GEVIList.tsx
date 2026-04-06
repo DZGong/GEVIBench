@@ -248,7 +248,7 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
                   <tr>
                     <td className={`pl-2 pr-2 pt-3 pb-0 text-center w-12 tabular-nums ${dimBase}`} rowSpan={2} style={{ fontSize: '16px', verticalAlign: 'middle', ...(idx < 3 && gevi[sortConfig.field] != null ? { color: '#D4AF37', fontWeight: 700 } : {}) }}>{sortConfig.field === 'year' || gevi[sortConfig.field] != null ? idx + 1 : '-'}</td>
                     <td className="pl-1 pr-0 pt-3 pb-0" style={{ width: '1%', whiteSpace: 'nowrap' }}>
-                      <span className="font-bold text-ink">{gevi.name}</span>
+                      <span className="font-semibold text-ink">{gevi.name}</span>
                       <a
                         href={gevi.paperUrl}
                         target="_blank"
@@ -263,7 +263,7 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
                       </a>
                     </td>
                     {isScore ? (
-                      <td className="px-1 pt-3 pb-0 text-center font-bold text-klein tabular-nums" style={{ fontSize: '16px' }}>
+                      <td className="px-1 pt-3 pb-0 text-center font-semibold text-klein tabular-nums" style={{ fontSize: '16px' }}>
                         {gevi.overall ?? '—'}
                       </td>
                     ) : isYear ? (
@@ -317,7 +317,7 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
                   <tr>
                     <td className={`pl-2 pr-4 pt-3 pb-0 text-center w-16 tabular-nums ${dimBase}`} rowSpan={2} style={{ fontSize: '16px', verticalAlign: 'middle', ...(idx < 3 && gevi[sortConfig.field] != null ? { color: '#D4AF37', fontWeight: 700 } : {}) }}>{sortConfig.field === 'year' || gevi[sortConfig.field] != null ? idx + 1 : '-'}</td>
                     <td className="px-1 pt-3 pb-0">
-                      <span className="font-bold whitespace-nowrap text-ink">{gevi.name}</span>
+                      <span className="font-semibold whitespace-nowrap text-ink">{gevi.name}</span>
                       <a
                         href={gevi.paperUrl}
                         target="_blank"
@@ -349,7 +349,7 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
                         {gevi.year}
                       </td>
                     ) : (
-                      <td className="px-2 pt-3 pb-0 text-center font-bold text-klein tabular-nums" rowSpan={2} style={{ fontSize: '16px', verticalAlign: 'middle' }}>
+                      <td className="px-2 pt-3 pb-0 text-center font-semibold text-klein tabular-nums" rowSpan={2} style={{ fontSize: '16px', verticalAlign: 'middle' }}>
                         {gevi.overall ?? '—'}
                       </td>
                     )}

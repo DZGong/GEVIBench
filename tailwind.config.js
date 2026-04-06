@@ -7,8 +7,8 @@ module.exports = {
 	theme: {
 		extend: {
 			fontFamily: {
-				sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-				serif: ['"Noto Serif"', 'ui-serif', 'Georgia', 'Cambria', 'serif'],
+				sans: ['Rubik', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+				serif: ['Rubik', 'ui-sans-serif', 'system-ui', 'sans-serif'],
 				mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
 			},
 			backgroundColor: {

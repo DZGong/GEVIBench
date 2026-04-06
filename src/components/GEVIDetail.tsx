@@ -87,7 +87,7 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
       {/* Header: name + info left, score right */}
       <div className="flex items-start justify-between gap-4 mb-4">
         <div className="flex-1">
-          <h3 className="text-xl md:text-2xl font-bold mb-1 text-ink">
+          <h3 className="text-xl md:text-2xl font-semibold mb-1 text-ink">
             <span className="text-ink">{gevi.name}</span>
           </h3>
           <p className="text-sm mb-2 text-ink font-sans">{gevi.description}</p>
