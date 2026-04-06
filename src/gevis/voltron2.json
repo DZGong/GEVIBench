@@ -724,7 +724,9 @@
                 -36
             ]
         },
-        "source": "doi:10.1126/sciadv.adp5763"
+        "source": "doi:10.1016/j.neuron.2023.03.009",
+        "sourceImage": "/fv-sources/voltron2.jpg",
+        "sourceFigure": "Fig. 2B"
     },
     "kinetics": [
         {

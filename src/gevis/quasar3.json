@@ -413,7 +413,9 @@
                 69
             ]
         },
-        "source": "doi:10.1038/s41586-019-1166-7"
+        "source": "doi:10.1038/s41586-019-1166-7",
+        "sourceImage": "/fv-sources/quasar3.jpg",
+        "sourceFigure": "Ext. Data Fig. 3c"
     },
     "kinetics": [
         {

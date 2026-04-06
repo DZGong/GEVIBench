@@ -725,7 +725,9 @@
                 25
             ]
         },
-        "source": "doi:10.1038/s41467-020-17322-1"
+        "source": "doi:10.1038/s41467-020-17322-1",
+        "sourceImage": "/fv-sources/positron.jpg",
+        "sourceFigure": "Fig. 2a"
     },
     "kinetics": [
         {

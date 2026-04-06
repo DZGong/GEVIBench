@@ -42,7 +42,9 @@
                 40
             ]
         },
-        "source": "doi:10.1038/s41586-019-1641-1"
+        "source": "doi:10.1038/s41586-019-1641-1",
+        "sourceImage": "/fv-sources/somarchon.jpg",
+        "sourceFigure": "Fig. 1g"
     },
     "kinetics": [
         {

@@ -397,7 +397,9 @@
                 -14.0
             ]
         },
-        "source": "doi:10.1038/ncomms4674"
+        "source": "doi:10.1038/ncomms4674",
+        "sourceImage": "/fv-sources/macq.jpg",
+        "sourceFigure": "Fig. 3b"
     },
     "kinetics": [
         {

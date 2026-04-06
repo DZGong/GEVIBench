@@ -83,6 +83,9 @@ export interface GEVI {
       voltage: number[];
       deltaF: number[];
     }[];
+    source?: string;
+    sourceImage?: string;
+    sourceFigure?: string;
   };
   researchPapers?: ResearchPaper[];
   addgene?: {

@@ -61,7 +61,9 @@
                 85
             ]
         },
-        "source": "doi:10.1038/ncomms5894"
+        "source": "doi:10.1038/ncomms5894",
+        "sourceImage": "/fv-sources/archer1.jpg",
+        "sourceFigure": "Fig. 1d"
     },
     "dynamicRangeData": [
         {

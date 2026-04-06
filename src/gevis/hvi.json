@@ -499,7 +499,9 @@
                 ]
             }
         ],
-        "source": "doi:10.1038/s41557-021-00641-1"
+        "source": "doi:10.1038/s41557-021-00641-1",
+        "sourceImage": "/fv-sources/hvi.jpg",
+        "sourceFigure": "Fig. 2b"
     },
     "kinetics": [
         {

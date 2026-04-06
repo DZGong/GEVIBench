@@ -502,7 +502,9 @@
                 -14
             ]
         },
-        "source": "doi:10.1038/s41592-018-0188-7"
+        "source": "doi:10.1038/s41592-018-0188-7",
+        "sourceImage": "/fv-sources/varnam.jpg",
+        "sourceFigure": "Fig. 2b"
     },
     "kinetics": [
         {

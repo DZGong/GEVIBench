@@ -690,7 +690,9 @@
                 -43
             ]
         },
-        "source": "doi:10.1016/j.cell.2022.07.013"
+        "source": "doi:10.1016/j.cell.2022.07.013",
+        "sourceImage": "/fv-sources/jedi2p.jpg",
+        "sourceFigure": "Fig. 2B"
     },
     "kinetics": [
         {

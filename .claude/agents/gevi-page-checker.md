@@ -40,6 +40,8 @@ Check whether each of these raw data fields exists and is non-empty:
 | `subthresholdData` | Array of `{ slope, source }` | Missing — note as "optional but preferred" |
 | `spectrum.custom` | Object with `minEm`, `emission`, optionally `minEx`, `excitation` | Missing or absent |
 | `voltage.custom` | Object with `voltage` and `deltaF` arrays | Missing or absent |
+| `voltage.sourceImage` | String path to `public/fv-sources/{id}.jpg` | Missing — needs cropped figure from PMC |
+| `voltage.sourceFigure` | String like `"Fig. 2E"` | Missing |
 | `researchPapers` | Array of paper objects | Missing, empty, or suspiciously short for a well-cited GEVI. **The original paper (matching `paperUrl`) must always be included as the first entry.** Every GEVI should have at least 1 paper. |
 | `addgene` | Object with `id` and `url` | Missing — note as "optional" |
 
@@ -167,10 +169,29 @@ Real F-V curves often have slight asymmetry, noise, or saturation plateaus that 
 
 Check: compute the second derivative of the deltaF array. If it changes sign exactly once (single inflection point) and the curve is perfectly monotonic, it may be fabricated.
 
-**3d. Baseline normalization check:**
+**3d. Missing source:**
+Check that `voltage.source` exists and is a `doi:...` string. This is a top-level field inside `voltage` (not inside `voltage.custom`) that identifies which paper the F-V curve was read from. If absent, flag: "Missing `voltage.source` — add the DOI of the paper the F-V data was read from."
+
+**3f. Missing source figure inset:**
+Check that `voltage.sourceImage` and `voltage.sourceFigure` exist. The F-V panel displays a small inset thumbnail of the original figure from the paper so users can visually verify the data.
+- If `sourceImage` is missing, flag: "Missing F-V source figure inset — create one from PMC."
+- If `sourceImage` is set, verify the file exists at `public/{sourceImage path}` via `Glob`.
+- If `sourceFigure` is missing, flag: "Missing `voltage.sourceFigure` — add the figure label (e.g., 'Fig. 2E')."
+
+**How to fix missing source figure inset:**
+1. Find the paper on PMC: `WebFetch: https://pubmed.ncbi.nlm.nih.gov/?term={DOI}` to get the PMCID
+2. Fetch the PMC page to find figure image URLs
+3. Download the figure containing the F-V curve
+4. Use Python PIL to crop just the F-V panel. Iterate on crop coordinates until only the F-V plot is visible.
+5. Save to `public/fv-sources/{gevi-id}.jpg` (JPEG, quality=90)
+6. Set `voltage.sourceImage` to `"/fv-sources/{gevi-id}.jpg"` and `voltage.sourceFigure` to the figure label (e.g., `"Fig. 2E"`)
+
+If the paper is not on PMC (no free full text), skip and note in the report.
+
+**3e. Baseline normalization check:**
 Verify that `deltaF` at -70mV equals 0 (or the closest voltage to -70mV has deltaF near 0). If not, flag: "F-V curve not normalized to -70mV baseline."
 
-**3e. Polarity consistency:**
+**3g. Polarity consistency:**
 Check that `voltage.polarity` matches the actual direction of `deltaF` values:
 - `"negative"` → deltaF should decrease (become more negative) with depolarization
 - `"positive"` → deltaF should increase with depolarization
@@ -298,6 +319,9 @@ After completing all checks, write all fixes to the JSON file:
 - [ ] No score fields in JSON
 - [ ] `brightnessData` entries each have `ratio`, `reference`, and `source`
 - [ ] `photostabilityData.illumination` contains a parseable mW/mm² value; `duration` contains a parseable time
+- [ ] `voltage.source` is present and is a `doi:...` string
+- [ ] `voltage.sourceImage` points to an existing file in `public/fv-sources/`
+- [ ] `voltage.sourceFigure` is present (e.g., `"Fig. 2E"`)
 - [ ] `voltage.custom.deltaF` at -70mV is normalized to 0
 
 ---
@@ -319,6 +343,7 @@ All rules from the curator agent apply here. In particular:
 - Ascending voltage order
 - -70mV point explicitly included with deltaF = 0
 - Round to nearest integer
+- **`voltage.source` is mandatory** — top-level field inside `voltage` (not inside `custom`), set to the DOI of the paper the curve was digitized from (e.g. `"doi:10.1073/pnas.1215595110"`). Displayed as a clickable citation in the UI.
 
 ### Brightness data (`brightnessData`)
 - `ratio` = sensor/reference

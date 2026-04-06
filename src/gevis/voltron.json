@@ -808,7 +808,9 @@
                 ]
             }
         ],
-        "source": "doi:10.1126/science.aav6416"
+        "source": "doi:10.1126/science.aav6416",
+        "sourceImage": "/fv-sources/voltron.jpg",
+        "sourceFigure": "Fig. 1E"
     },
     "kinetics": [
         {

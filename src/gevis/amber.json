@@ -510,7 +510,9 @@
                 200
             ]
         },
-        "source": "doi:10.1002/adbi.202100842"
+        "source": "doi:10.1002/adbi.202100842",
+        "sourceImage": "/fv-sources/amber.jpg",
+        "sourceFigure": "Fig. 2B"
     },
     "kinetics": [
         {

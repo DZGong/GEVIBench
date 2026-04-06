@@ -471,7 +471,9 @@
                 -57
             ]
         },
-        "source": "doi:10.21203/rs.3.rs-5434919/v1"
+        "source": "doi:10.1016/j.neuron.2024.08.019",
+        "sourceImage": "/fv-sources/asap5.jpg",
+        "sourceFigure": "Fig. 1D"
     },
     "kinetics": [
         {

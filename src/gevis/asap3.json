@@ -471,7 +471,9 @@
                 -51
             ]
         },
-        "source": "doi:10.1016/j.cell.2019.11.004"
+        "source": "doi:10.1016/j.cell.2019.11.004",
+        "sourceImage": "/fv-sources/asap3.jpg",
+        "sourceFigure": "Fig. 2A"
     },
     "kinetics": [
         {

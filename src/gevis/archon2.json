@@ -606,7 +606,9 @@
                 21
             ]
         },
-        "source": "doi:10.1038/s41589-018-0004-9"
+        "source": "doi:10.1038/s41589-018-0004-9",
+        "sourceImage": "/fv-sources/archon2.jpg",
+        "sourceFigure": "Fig. 2e"
     },
     "kinetics": [
         {

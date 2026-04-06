@@ -3,7 +3,7 @@
 // FPbase-style vertical SVG tree (root at top, descendants below)
 
 import { useMemo, useState, useRef } from 'react';
-import { X, BookOpen, ExternalLink } from 'lucide-react';
+import { BookOpen, ExternalLink } from 'lucide-react';
 import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar } from 'recharts';
 import { getAllGEVIs } from '../geviData';
 import type { GEVI, TreeNode } from '../types';
@@ -396,7 +396,6 @@ function buildFullTree(gevis: GEVI[]) {
 interface FamilyTreePanelProps {
   onSelectGEVI: (gevi: GEVI) => void;
   selectedGEVI: GEVI | null;
-  onCloseDetail: () => void;
   compareGEVIs: GEVI[];
   onAddToCompare: (gevi: GEVI) => void;
   peaceMode?: boolean;
@@ -404,7 +403,6 @@ interface FamilyTreePanelProps {
 
 export function FamilyTreePanel({
   onSelectGEVI,
-  onCloseDetail,
   peaceMode = false,
 }: FamilyTreePanelProps) {
   const gevis = useMemo(() => getAllGEVIs(), []);
@@ -469,20 +467,16 @@ export function FamilyTreePanel({
   return (
     <div className="rounded-lg border p-4 bg-surface-lowest border-ink/10">
       <div className="flex items-center gap-2 mb-4">
-        <button
-          onClick={onCloseDetail}
-          className="p-1 rounded-md hover:bg-surface-low text-ink/50"
-          title="Close and return"
-        >
-          <X className="w-5 h-5" />
-        </button>
-        <h3 className="text-xl font-bold text-ink">
-          Genetic Lineage
-        </h3>
+        <div>
+          <h3 className="text-lg font-bold text-klein">Family Tree</h3>
+          <p className="text-xs text-ink mt-0.5">
+            Evolutionary lineage of genetically encoded voltage indicators, from founding scaffolds to latest variants.
+          </p>
+        </div>
       </div>
 
       {/* Scrollable container - auto height, horizontal scroll only */}
-      <div className="overflow-x-auto overflow-y-hidden border rounded-lg">
+      <div className="overflow-x-auto overflow-y-hidden border rounded-lg bg-surface-low">
         <div className="flex justify-center" style={{ minWidth: svgWidth }}>
         <svg width={svgWidth} height={svgHeight} className="block">
 

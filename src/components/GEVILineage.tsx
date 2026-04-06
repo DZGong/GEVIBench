@@ -56,8 +56,8 @@ export function GEVILineage({ gevi }: GEVILineageProps) {
 
   if (!path || path.length === 0) {
     return (
-      <div className="rounded-lg p-4 bg-surface-low">
-        <h4 className="text-sm font-semibold mb-2 text-ink/70">
+      <div className="rounded-lg p-4 bg-surface-low border border-ink/10 inline-block">
+        <h4 className="text-sm font-semibold mb-2 text-ink text-center">
           Genetic Lineage
         </h4>
         <div className="text-xs text-ink/40">
@@ -80,12 +80,13 @@ export function GEVILineage({ gevi }: GEVILineageProps) {
   });
 
   const nodeSpacing = 80;
-  const svgHeight = pathNodes.length * nodeSpacing + 50;
+  const topPad = 45;
+  const svgHeight = pathNodes.length * nodeSpacing + topPad + 25;
   const svgWidth = 180;
 
   return (
-    <div className="rounded-lg p-4 bg-surface-low">
-      <h4 className="text-sm font-semibold mb-3 text-ink/70">
+    <div className="rounded-lg p-4 bg-surface-low border border-ink/10 inline-block">
+      <h4 className="text-sm font-semibold mb-3 text-ink text-center">
         Genetic Lineage
       </h4>
 
@@ -95,10 +96,10 @@ export function GEVILineage({ gevi }: GEVILineageProps) {
           {pathNodes.slice(0, -1).map((_node, i) => (
             <path
               key={`v_link_${i}`}
-              d={`M${svgWidth / 2},${i * nodeSpacing + 25}
-                  C${svgWidth / 2},${i * nodeSpacing + 40}
-                   ${svgWidth / 2},${(i + 1) * nodeSpacing + 10}
-                   ${svgWidth / 2},${(i + 1) * nodeSpacing + 25}`}
+              d={`M${svgWidth / 2},${i * nodeSpacing + topPad}
+                  C${svgWidth / 2},${i * nodeSpacing + topPad + 15}
+                   ${svgWidth / 2},${(i + 1) * nodeSpacing + topPad - 15}
+                   ${svgWidth / 2},${(i + 1) * nodeSpacing + topPad}`}
               fill="none"
               stroke="#9ca3af"
               strokeWidth="2"
@@ -106,9 +107,9 @@ export function GEVILineage({ gevi }: GEVILineageProps) {
           ))}
 
           {pathNodes.map((node, i) => {
-            const color = node.geviData ? getTreeNodeColor(node.geviData) : '#9ca3af';
+            const color = node.geviData ? getTreeNodeColor(node.geviData) : node.name === 'GEVI' ? '#002FA7' : '#9ca3af';
             const radius = node.isSelected ? 12 : 8;
-            const y = i * nodeSpacing + 25;
+            const y = i * nodeSpacing + topPad;
             return (
               <g key={`v_node_${i}`} transform={`translate(${svgWidth / 2}, ${y})`}>
                 <path

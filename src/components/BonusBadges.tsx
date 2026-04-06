@@ -106,9 +106,10 @@ interface BonusBadgesProps {
     }[];
   };
   size?: 'sm' | 'md' | 'lg';
+  vertical?: boolean;
 }
 
-export const BonusBadges: React.FC<BonusBadgesProps> = ({ gevi, size = 'md' }) => {
+export const BonusBadges: React.FC<BonusBadgesProps> = ({ gevi, size = 'md', vertical = false }) => {
   const badges: ('redShift' | 'twoPhoton' | 'positiveGoing')[] = [];
 
   const tags = Array.isArray(gevi.tags) ? gevi.tags : [];
@@ -137,11 +138,11 @@ export const BonusBadges: React.FC<BonusBadgesProps> = ({ gevi, size = 'md' }) =
   if (badges.length === 0) return null;
 
   return (
-    <div className="flex items-start gap-2">
+    <div className={`flex ${vertical ? 'flex-col items-center' : 'items-start'} gap-2`}>
       <div className="text-xs font-medium text-ink/50 dark:text-ink/40 pt-1">
         Bonus:
       </div>
-      <div className="flex gap-3">
+      <div className={`flex ${vertical ? 'flex-col' : ''} gap-3`}>
         {badges.map(badge => (
           <BonusBadge key={badge} type={badge} size={size} />
         ))}

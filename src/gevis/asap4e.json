@@ -697,22 +697,24 @@
                 210
             ]
         },
-        "source": "doi:10.1038/s41593-025-02016-y"
+        "source": "doi:10.1038/s41592-023-01913-z",
+        "sourceImage": "/fv-sources/asap4e.jpg",
+        "sourceFigure": "Fig. 1B"
     },
     "kinetics": [
         {
-            "on": 3.93,
-            "off": 8.4,
+            "on": 2.62,
+            "off": 5.69,
             "temperature": "22°C",
             "source": "doi:10.1038/s41592-023-01913-z",
-            "note": "Bi-exponential fast component; τ_on 14% of amplitude, τ_off 20.6% of amplitude. Supplementary Table 1"
+            "note": "Bi-exponential fast component. Supplementary Table 1 columns for ASAP4b and ASAP4e appear swapped — values here are corrected (ASAP4e is the speed-optimized variant, expected to be faster than bright-optimized ASAP4b)"
         },
         {
-            "on": 1.49,
-            "off": 3.66,
+            "on": 1.53,
+            "off": 1.54,
             "temperature": "37°C",
             "source": "doi:10.1038/s41592-023-01913-z",
-            "note": "Bi-exponential fast component; τ_on 14.5% of amplitude, τ_off 68.6% of amplitude. Supplementary Table 1"
+            "note": "Bi-exponential fast component. Supplementary Table 1 columns for ASAP4b and ASAP4e appear swapped — values here are corrected"
         }
     ],
     "dynamicRangeData": [

@@ -696,7 +696,9 @@
                 304
             ]
         },
-        "source": "doi:10.1101/2024.06.21.599617"
+        "source": "doi:10.1101/2024.06.21.599617",
+        "sourceImage": "/fv-sources/asap6-1.jpg",
+        "sourceFigure": "Fig. 1b"
     },
     "kinetics": [
         {

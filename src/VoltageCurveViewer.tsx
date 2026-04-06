@@ -34,6 +34,8 @@ export interface VoltageData {
   custom?: VoltageCustom;
   additionalCurves?: AdditionalCurve[];
   source?: string;
+  sourceImage?: string;
+  sourceFigure?: string;
 }
 
 interface VoltageCurveViewerProps {
@@ -87,6 +89,7 @@ export function generateVoltageCurve(type: 'opsin' | 'fp' | 'fret' | 'red' | 'ch
 
 export function VoltageCurveViewer({ voltageData, geviName }: VoltageCurveViewerProps) {
   const [hoverVoltage, setHoverVoltage] = useState<number | null>(null);
+  const [insetExpanded, setInsetExpanded] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Support both formats:
@@ -325,6 +328,27 @@ export function VoltageCurveViewer({ voltageData, geviName }: VoltageCurveViewer
           )}
         </svg>
 
+        {/* Source figure inset — positive-going: bottom-right, negative-going: top-right */}
+        {voltageData?.sourceImage && (
+          <button
+            onClick={() => setInsetExpanded(true)}
+            className="absolute border border-ink/20 rounded shadow-sm hover:shadow-md transition-shadow bg-white overflow-hidden"
+            title={`View source: ${voltageData.sourceFigure || 'Original figure'}`}
+            style={{
+              width: '18%',
+              aspectRatio: '105/75',
+              right: '1%',
+              ...(config.polarity === 'negative' ? { top: '12%' } : { bottom: '18%' }),
+            }}
+          >
+            <img
+              src={voltageData.sourceImage}
+              alt="Source figure"
+              className="w-full h-full object-cover"
+            />
+          </button>
+        )}
+
         {/* Hover tooltip */}
         {hoverData && (
           <div
@@ -334,6 +358,7 @@ export function VoltageCurveViewer({ voltageData, geviName }: VoltageCurveViewer
             {hoverData.voltage}mV | {hoverData.deltaF.toFixed(2)}% ΔF/F
           </div>
         )}
+
       </div>
 
       {/* Axis labels */}
@@ -381,9 +406,39 @@ export function VoltageCurveViewer({ voltageData, geviName }: VoltageCurveViewer
               ? <a href={url} target="_blank" rel="noopener noreferrer" className="hover:underline text-klein">{label}</a>
               : <span>{label}</span>
             }
+            {voltageData.sourceFigure && <span> — {voltageData.sourceFigure}</span>}
           </div>
         );
       })()}
+
+      {/* Expanded lightbox */}
+      {insetExpanded && voltageData?.sourceImage && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60"
+          onClick={() => setInsetExpanded(false)}
+        >
+          <div className="relative max-w-lg" onClick={e => e.stopPropagation()}>
+            <img
+              src={voltageData.sourceImage}
+              alt={`Source: ${voltageData.sourceFigure || 'Original figure'}`}
+              className="rounded-lg shadow-xl max-h-[80vh]"
+            />
+            <div className="absolute bottom-0 left-0 right-0 bg-black/70 text-white text-xs px-3 py-1.5 rounded-b-lg">
+              {voltageData.sourceFigure || 'Source figure'}
+              {voltageData.source && (() => {
+                const doi = voltageData.source!.startsWith('doi:') ? voltageData.source!.slice(4) : null;
+                return doi ? (
+                  <> — <a href={`https://doi.org/${doi}`} target="_blank" rel="noopener noreferrer" className="underline text-blue-300">{doi}</a></>
+                ) : null;
+              })()}
+            </div>
+            <button
+              onClick={() => setInsetExpanded(false)}
+              className="absolute -top-2 -right-2 w-6 h-6 bg-white text-black rounded-full text-xs font-bold shadow flex items-center justify-center"
+            >×</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -268,6 +268,9 @@ Chemigenetic GEVIs are typically characterized with multiple synthetic dyes (e.g
   "slope": 23,
   "polarity": "negative",
   "name": "Voltron (JF525)",
+  "source": "doi:10.1038/s41592-019-0417-0",
+  "sourceImage": "/fv-sources/voltron.jpg",
+  "sourceFigure": "Fig. 1D",
   "custom": {
     "voltage": [-100, -80, -70, -60, -40, -20, 0, 30, 50],
     "deltaF":  [7, 4, 0, -2, -7, -12, -17, -23, -28]
@@ -289,6 +292,9 @@ For non-chemigenetic GEVIs (no multiple dyes), omit `additionalCurves`:
   "slope": 12,
   "polarity": "negative",
   "name": "ASAP3",
+  "source": "doi:10.1016/j.cell.2019.11.004",
+  "sourceImage": "/fv-sources/asap3.jpg",
+  "sourceFigure": "Fig. 1E",
   "custom": {
     "voltage": [-100, -80, -70, -60, -40, -20, 0, 30, 50],
     "deltaF":  [6, 3, 0, -2, -6, -10, -15, -21, -25]
@@ -302,6 +308,17 @@ For non-chemigenetic GEVIs (no multiple dyes), omit `additionalCurves`:
 - List voltage values in ascending order
 - Include the −70 mV point explicitly (ΔF/F = 0 after normalization)
 - Round each value to nearest integer (for values read from figures, sub-integer precision is false precision)
+- **Always set `voltage.source`** to the DOI of the paper the F-V curve was read from (e.g., `"doi:10.1073/pnas.1215595110"`). This is a top-level field inside `voltage`, not inside `voltage.custom`. It is displayed as a clickable citation in the F-V curve panel.
+- **Always set `voltage.sourceFigure`** to the figure number the F-V data was read from (e.g., `"Fig. 2E"`, `"Fig. 1D"`).
+- **Always create a source figure inset image.** The F-V curve panel displays a small inset thumbnail of the original figure from the paper. To create it:
+  1. Find the paper on PubMed Central (PMC). Search: `https://pubmed.ncbi.nlm.nih.gov/?term={DOI}`
+  2. Get the PMCID and find the figure image URL from the PMC page (format: `https://cdn.ncbi.nlm.nih.gov/pmc/blobs/.../filename.jpg`)
+  3. Download the full figure image
+  4. Use Python PIL to crop just the F-V curve panel from the figure. Iterate on the crop coordinates until only the F-V plot is visible (no adjacent panels). Save as JPEG with quality=90.
+  5. Save the cropped image to `public/fv-sources/{gevi-id}.jpg`
+  6. Set `voltage.sourceImage` to `"/fv-sources/{gevi-id}.jpg"` in the JSON
+
+  If the paper is not available on PMC (no free full text), skip the inset and omit `sourceImage`.
 
 In the output summary, note the source: `voltage.custom: read from Fig. 1E (9 data points per curve, 4 dye curves)`.
 
@@ -448,6 +465,9 @@ File: `src/gevis/{id}.json`
     "slope": 20,         // always positive integer (magnitude only); polarity is set separately
     "polarity": "positive|negative",
     "name": "GEVI Name",
+    "source": "doi:10.xxxx/...",
+    "sourceImage": "/fv-sources/gevi-id.jpg",   // cropped F-V figure from paper
+    "sourceFigure": "Fig. 1D",
     "custom": {
       // MUST be two parallel arrays — NOT an array of objects like [{"voltage":..., "dff":...}]
       "voltage": [-120, -100, -70, -50, -30, 0, 30],
@@ -619,6 +639,8 @@ Update any incorrect raw data fields. Do not set score fields (`speed`, `dynamic
 - [ ] No score fields in JSON (`speed`, `dynamicRange`, `sensitivity`, `brightness`, `photostability`, `overall` are all computed automatically)
 - [ ] `brightnessData` entries each have `ratio`, `reference`, and `source` — no extra fields
 - [ ] `photostabilityData.illumination` contains a parseable mW/mm² value; `duration` contains a parseable time in min or s
+- [ ] `voltage.sourceImage` points to a file in `public/fv-sources/` and the file exists
+- [ ] `voltage.sourceFigure` is set (e.g., `"Fig. 2E"`)
 
 ---
 

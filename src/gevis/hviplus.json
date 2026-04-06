@@ -465,7 +465,9 @@
                 88
             ]
         },
-        "source": "doi:10.1126/sciadv.ads1807"
+        "source": "doi:10.1126/sciadv.ads1807",
+        "sourceImage": "/fv-sources/hviplus.jpg",
+        "sourceFigure": "Fig. 2E"
     },
     "kinetics": [
         {

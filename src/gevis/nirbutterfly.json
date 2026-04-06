@@ -459,7 +459,9 @@
                 -12
             ]
         },
-        "source": "doi:10.1021/acschemneuro.0c00046"
+        "source": "doi:10.1021/acschemneuro.0c00046",
+        "sourceImage": "/fv-sources/nirbutterfly.jpg",
+        "sourceFigure": "Fig. 3b"
     },
     "kinetics": [
         {

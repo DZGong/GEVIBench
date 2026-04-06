@@ -891,6 +891,8 @@
                 -17.5
             ]
         },
-        "source": "doi:10.1038/nn.3709"
+        "source": "doi:10.1038/nn.3709",
+        "sourceImage": "/fv-sources/asap1.jpg",
+        "sourceFigure": "Fig. 1d"
     }
 }

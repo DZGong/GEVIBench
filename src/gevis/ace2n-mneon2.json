@@ -547,7 +547,9 @@
                 -31.3
             ]
         },
-        "source": "doi:10.1126/science.abm8797"
+        "source": "doi:10.1126/science.abm8797",
+        "sourceImage": "/fv-sources/ace2n-mneon2.jpg",
+        "sourceFigure": "Fig. 1D"
     },
     "kinetics": [
         {

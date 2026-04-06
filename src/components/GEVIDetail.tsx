@@ -2,11 +2,10 @@ import { useState, useEffect, useRef } from 'react';
 import { ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar } from 'recharts';
 import { BonusBadges } from './BonusBadges';
 import { BookOpen, ExternalLink, Plus, X, Sun, Zap, Activity, TrendingUp, Shield, FileText, Dna, ChevronDown, ChevronUp } from 'lucide-react';
-import { RainbowText, getGEVIColor } from '../utils';
+import { RainbowText, getGEVIColor, computeSampleSummary, SAMPLE_CATEGORY_ORDER } from '../utils';
 import { SpectrumViewer, SpectrumData } from '../SpectrumViewer';
 import { VoltageCurveViewer } from '../VoltageCurveViewer';
 import { GEVILineage } from './GEVILineage';
-import { SampleUsageChart } from './SampleUsageChart';
 import { getDoiCitationMap } from '../geviData';
 
 function formatRatio(ratio: number): string {
@@ -306,73 +305,79 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
               );
             })()}
             {/* Popularity */}
-            {metric.key === 'popularity' && gevi.paperCount !== undefined && (
-              <div className="mt-2 text-[10px]">
-                <div className="flex items-center gap-2">
-                  <span className="text-ink">N<sub>paper</sub>:</span>
-                  <span className="text-ink font-semibold">
-                    {gevi.paperCount}
-                  </span>
+            {metric.key === 'popularity' && gevi.paperCount !== undefined && (() => {
+              const sampleSummary = computeSampleSummary(gevi.researchPapers);
+              const sampleEntries = SAMPLE_CATEGORY_ORDER
+                .filter(cat => sampleSummary[cat] > 0)
+                .map(cat => ({ category: cat, count: sampleSummary[cat] }));
+              const totalMeasurements = sampleEntries.reduce((s, e) => s + e.count, 0);
+              return (
+                <div className="mt-2 text-[10px]">
+                  <div className="flex items-center gap-2">
+                    <span className="text-ink">N<sub>paper</sub>:</span>
+                    <span className="text-ink font-semibold">
+                      {gevi.paperCount}
+                    </span>
+                  </div>
+                  {totalMeasurements > 0 && (
+                    <>
+                      <button onClick={() => toggleMetric('popularity')} className="mt-1 flex items-center gap-1 text-klein hover:underline">
+                        {expandedMetrics.popularity ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
+                        Sampled in {totalMeasurements} {totalMeasurements === 1 ? 'measurement' : 'measurements'}
+                      </button>
+                      {expandedMetrics.popularity && (
+                        <div className="mt-1.5 pt-1.5 space-y-1 border-t border-ink/15">
+                          {sampleEntries.map((e, i) => (
+                            <div key={e.category} className={`flex items-center justify-between py-0.5 ${i < sampleEntries.length - 1 ? 'border-b border-ink/10' : ''}`}>
+                              <span className="text-ink">{e.category}</span>
+                              <span className="text-ink font-semibold">{e.count}</span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </>
+                  )}
                 </div>
-                {gevi.researchPapers && gevi.researchPapers.length > 0 && (
-                  <button
-                    className="mt-1.5 text-klein hover:underline cursor-pointer"
-                    onClick={() => {
-                      setPapersExpanded(true);
-                      setTimeout(() => papersRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
-                    }}
-                  >
-                    View papers →
-                  </button>
-                )}
-              </div>
-            )}
+              );
+            })()}
           </div>
         ))}
       </div>
 
       {/* Radar Chart + Sample Usage | Lineage */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mt-6">
+      <div className="flex flex-col md:flex-row gap-4 md:gap-6 mt-6">
         {/* Left column: radar on top, sample chart below */}
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 flex-1 min-w-0">
           <div className="border rounded-lg p-4 md:p-6 bg-surface-low border-ink/10">
             <h4 className="text-sm font-semibold mb-3 md:mb-4 text-ink">Performance Profile</h4>
-            <div className="h-48 md:h-64">
-              <ResponsiveContainer width="100%" height="100%">
-                <RadarChart data={getRadarData()}>
-                  <PolarGrid stroke="#e5e7eb" />
-                  <PolarAngleAxis dataKey="subject" tick={{ fill: '#374151', fontSize: 10 }} />
-                  <PolarRadiusAxis angle={30} domain={[0, 100]} tick={{ fill: '#9ca3af', fontSize: 9 }} />
-                  <Radar name={gevi.name} dataKey="value" stroke="#1e40af" fill="#1e40af" fillOpacity={0.2} />
-                </RadarChart>
-              </ResponsiveContainer>
-            </div>
-            <div className="mt-4">
-              <BonusBadges gevi={gevi} size="md" />
+            <div className="flex items-center gap-4">
+              <div className="h-48 md:h-64 flex-1 min-w-0">
+                <ResponsiveContainer width="100%" height="100%">
+                  <RadarChart data={getRadarData()}>
+                    <PolarGrid stroke="#e5e7eb" />
+                    <PolarAngleAxis dataKey="subject" tick={{ fill: '#374151', fontSize: 10 }} />
+                    <PolarRadiusAxis angle={30} domain={[0, 100]} tick={{ fill: '#9ca3af', fontSize: 9 }} />
+                    <Radar name={gevi.name} dataKey="value" stroke="#1e40af" fill="#1e40af" fillOpacity={0.2} />
+                  </RadarChart>
+                </ResponsiveContainer>
+              </div>
+              <BonusBadges gevi={gevi} size="md" vertical />
             </div>
           </div>
 
-          {/* Sample Usage Chart */}
-          {gevi.researchPapers?.length > 0 && (
-            <div className="border rounded-lg p-4 md:p-6 bg-surface-low border-ink/10">
-              <h4 className="text-sm font-semibold mb-3 text-ink">Sample Usage</h4>
-              <SampleUsageChart mode="single" gevi={gevi} />
-            </div>
-          )}
+          {/* Spectrum Viewer */}
+          <div>
+            <SpectrumViewer spectrumData={spectrumData} geviName={gevi.name} />
+          </div>
         </div>
 
         {/* Right column: Genetic Lineage */}
         <div
-          className={`cursor-pointer ${onShowFamilyTree ? 'hover:ring-2 hover:ring-blue-500/50 rounded-lg' : ''}`}
+          className={`flex-shrink-0 cursor-pointer ${onShowFamilyTree ? 'hover:ring-2 hover:ring-blue-500/50 rounded-lg' : ''}`}
           onClick={onShowFamilyTree}
         >
           <GEVILineage gevi={gevi} />
         </div>
-      </div>
-
-      {/* Spectrum Viewer */}
-      <div className="mt-4 md:mt-6">
-        <SpectrumViewer spectrumData={spectrumData} geviName={gevi.name} />
       </div>
 
       {/* Voltage Response Curve */}

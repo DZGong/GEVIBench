@@ -611,7 +611,9 @@
                 8
             ]
         },
-        "source": "doi:10.1523/JNEUROSCI.3590-15.2016"
+        "source": "doi:10.1523/JNEUROSCI.3590-15.2016",
+        "sourceImage": "/fv-sources/flicr1.jpg",
+        "sourceFigure": "Fig. 3D"
     },
     "kinetics": [
         {

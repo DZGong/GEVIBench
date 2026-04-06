@@ -1,5 +1,4 @@
 import { useMemo, useState, useRef, useCallback, useEffect } from 'react';
-import { X } from 'lucide-react';
 import { getAllGEVIs } from '../geviData';
 import { getTreeNodeColor } from '../utils';
 import type { GEVI } from '../types';
@@ -190,11 +189,10 @@ function DiamondMarker({ cx, cy, r, fill, stroke, strokeWidth }: { cx: number; c
 
 interface Props {
   onSelectGEVI: (gevi: GEVI) => void;
-  onClose: () => void;
   peaceMode?: boolean;
 }
 
-export function ScatterPlotPanel({ onSelectGEVI, onClose, peaceMode = false }: Props) {
+export function ScatterPlotPanel({ onSelectGEVI, peaceMode = false }: Props) {
   const gevis = useMemo(() => getAllGEVIs(), []);
 
   const [xAxis, setXAxis] = useState<AxisKey>('brightness');
@@ -276,16 +274,20 @@ export function ScatterPlotPanel({ onSelectGEVI, onClose, peaceMode = false }: P
   const xCfg = AXES[xAxis], yCfg = AXES[yAxis];
 
   return (
-    <div className="flex flex-col bg-surface-lowest text-ink">
+    <div className="flex flex-col rounded-lg border p-4 bg-surface-lowest border-ink/10 text-ink">
       {/* Header */}
-      <div className="flex items-center gap-4 px-5 py-2.5 border-b flex-shrink-0 border-ink/10">
-        <button onClick={onClose} className="p-1 rounded-md hover:bg-surface-low text-ink/50">
-          <X className="w-5 h-5" />
-        </button>
-        <h3 className="text-xl font-bold text-ink">Performance Scatter</h3>
+      <div className="flex items-center gap-4 mb-4">
+        <div>
+          <h3 className="text-lg font-bold text-klein">Performance Scatter</h3>
+          <p className="text-xs text-ink mt-0.5">
+            Compare GEVI performance metrics on customizable axes with linear or logarithmic scaling.
+          </p>
+        </div>
         <div className="ml-auto text-xs text-ink/40">{points.length} data points · {gevis.length} GEVIs</div>
       </div>
 
+      {/* Inner container */}
+      <div className="border rounded-lg bg-surface-low overflow-hidden">
       {/* Controls */}
       <div className="flex flex-wrap items-center gap-x-8 gap-y-2 px-5 py-3 border-b border-ink/10">
         {/* X axis */}
@@ -423,6 +425,7 @@ export function ScatterPlotPanel({ onSelectGEVI, onClose, peaceMode = false }: P
           })}
         </svg>
       </div>
+      </div>{/* end inner container */}
 
       {/* Hover tooltip */}
       {hover && (() => {

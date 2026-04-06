@@ -472,7 +472,9 @@
                 -79
             ]
         },
-        "source": "doi:10.1021/acschemneuro.5c00670"
+        "source": "doi:10.1021/acschemneuro.5c00670",
+        "sourceImage": "/fv-sources/restus-ni.jpg",
+        "sourceFigure": "Fig. 1F"
     },
     "dynamicRangeData": [
         {

@@ -271,7 +271,9 @@
                 26
             ]
         },
-        "source": "doi:10.1038/srep42398"
+        "source": "doi:10.1038/srep42398",
+        "sourceImage": "/fv-sources/lotusv.jpg",
+        "sourceFigure": "Fig. 2b"
     },
     "kinetics": [
         {

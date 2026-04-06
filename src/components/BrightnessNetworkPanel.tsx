@@ -1,5 +1,5 @@
 import { useMemo, useState, useRef, useEffect, useCallback } from 'react';
-import { X, BookOpen, ExternalLink } from 'lucide-react';
+import { BookOpen, ExternalLink } from 'lucide-react';
 import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar } from 'recharts';
 import { getAllGEVIs } from '../geviData';
 import { getTreeNodeColor } from '../utils';
@@ -361,13 +361,12 @@ function formatRatio(ratio: number): string {
 
 interface Props {
   onSelectGEVI: (gevi: GEVI) => void;
-  onClose: () => void;
   peaceMode?: boolean;
 }
 
 const W = 2100, H = 1500;
 
-export function BrightnessNetworkPanel({ onSelectGEVI, onClose, peaceMode = false }: Props) {
+export function BrightnessNetworkPanel({ onSelectGEVI, peaceMode = false }: Props) {
   const gevis = useMemo(() => getAllGEVIs(), []);
   const { nodes, edges } = useMemo(() => buildGraph(gevis), [gevis]);
   const positions = useMemo(() => forceLayout(nodes, edges, W, H), [nodes, edges]);
@@ -467,41 +466,37 @@ export function BrightnessNetworkPanel({ onSelectGEVI, onClose, peaceMode = fals
     return () => observer.disconnect();
   }, [fitToViewport]);
 
-  const bg      = '#ffffff';
+  const bg      = '#fdfcfa';
   const edgeClr = '#cbd5e1';
 
   return (
     <div
-      className="flex flex-col bg-surface-lowest text-ink"
+      className="flex flex-col rounded-lg border p-4 bg-surface-lowest border-ink/10 text-ink"
     >
-      {/* Header bar */}
-      <div className="flex items-center gap-4 px-5 py-2.5 border-b flex-shrink-0 border-ink/10">
-        <button
-          onClick={onClose}
-          className="p-1 rounded-md hover:bg-surface-low text-ink/50"
-          title="Close and return"
-        >
-          <X className="w-5 h-5" />
-        </button>
-        <h3 className="text-xl font-bold text-ink">Brightness Network</h3>
+      {/* Header */}
+      <div className="flex items-center gap-4 mb-4">
+        <div>
+          <h3 className="text-lg font-bold text-klein">Brightness Network</h3>
+          <p className="text-xs text-ink mt-0.5">
+            Graph of relative brightness measurements across GEVIs, anchored to EGFP via BFS traversal.
+          </p>
+        </div>
         <div className="ml-auto text-xs text-ink/40">
           {nodes.length} nodes · {edges.length} edges
         </div>
       </div>
 
-
-
       {/* Canvas */}
       <div
         ref={containerRef}
-        className="overflow-hidden relative"
+        className="overflow-hidden relative border rounded-lg bg-surface-low"
         style={{ cursor: dragRef.current.active ? 'grabbing' : 'grab', height: canvasHeight }}
         onMouseDown={onMouseDown}
         onMouseMove={onMouseMove}
         onMouseUp={onMouseUp}
         onMouseLeave={onMouseUp}
       >
-        <svg ref={svgRef} width="100%" height="100%" style={{ background: bg, display: 'block' }}>
+        <svg ref={svgRef} width="100%" height="100%" style={{ display: 'block' }}>
           <g transform={`translate(${tx},${ty}) scale(${scale})`}>
 
 

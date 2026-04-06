@@ -470,7 +470,9 @@
                 -68
             ]
         },
-        "source": "doi:10.1002/advs.202307938"
+        "source": "doi:10.1002/advs.202307938",
+        "sourceImage": "/fv-sources/restus.jpg",
+        "sourceFigure": "Fig. 1C"
     },
     "kinetics": [
         {

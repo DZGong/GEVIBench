@@ -869,7 +869,9 @@
                 ]
             }
         ],
-        "source": "doi:10.1101/2024.02.02.578569"
+        "source": "doi:10.1101/2024.02.02.578569",
+        "sourceImage": "/fv-sources/solaris.jpg",
+        "sourceFigure": "Fig. 1C"
     },
     "researchPapers": [
         {

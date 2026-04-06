@@ -1,10 +1,11 @@
-import { useState, useCallback, useMemo, useRef } from 'react';
+import { useState, useCallback, useMemo, useRef, useEffect } from 'react';
 import { Clock } from 'lucide-react';
 import { getAllGEVIs } from './geviData';
 import { methodologyContent } from './methodology';
 import { FamilyTreePanel } from './components/FamilyTreePanel';
 import { BrightnessNetworkPanel } from './components/BrightnessNetworkPanel';
 import { ScatterPlotPanel } from './components/ScatterPlotPanel';
+import { APSimulatorPanel } from './components/APSimulatorPanel';
 import { Header } from './components/Header';
 import { SearchFilters } from './components/SearchFilters';
 import { GEVIList } from './components/GEVIList';
@@ -59,6 +60,7 @@ function GEVIBenchApp() {
   const [showFamilyTree, setShowFamilyTree] = useState(false);
   const [showBrightnessNetwork, setShowBrightnessNetwork] = useState(false);
   const [showScatterPlot, setShowScatterPlot] = useState(false);
+  const [showAPSimulator, setShowAPSimulator] = useState(false);
   const [showCompareEmpty, setShowCompareEmpty] = useState(false);
   const [peaceMode, setPeaceMode] = useState(true);
   const handleSetPeaceMode = useCallback((v: boolean) => {
@@ -66,6 +68,77 @@ function GEVIBenchApp() {
     setSortConfig({ field: v ? 'year' : 'overall', order: 'desc' });
   }, []);
   const sideListRef = useRef<HTMLDivElement>(null);
+
+  // URL ↔ state sync
+  const applyUrl = useCallback((path: string, skipScroll?: boolean) => {
+    const geviMatch = path.match(/^\/gevi\/(.+)$/);
+    if (geviMatch) {
+      const id = geviMatch[1];
+      const found = gevis.find(g => g.id === id);
+      if (found) {
+        setSelectedGEVI(found);
+        setActiveTab('database');
+        setMobileView('detail');
+        setShowFamilyTree(false);
+        setShowBrightnessNetwork(false);
+        setShowScatterPlot(false);
+        setShowAPSimulator(false);
+        if (!skipScroll) requestAnimationFrame(() => window.scrollTo({ top: 0 }));
+        return;
+      }
+    }
+    if (path === '/methodology') {
+      setActiveTab('methodology');
+      setSelectedGEVI(null);
+    } else if (path === '/contact') {
+      setActiveTab('contact');
+      setSelectedGEVI(null);
+    } else if (path === '/family-tree') {
+      setActiveTab('database');
+      setSelectedGEVI(null);
+      setShowFamilyTree(true);
+      setShowBrightnessNetwork(false);
+      setShowScatterPlot(false);
+      setShowAPSimulator(false);
+    } else if (path === '/brightness-network') {
+      setActiveTab('database');
+      setSelectedGEVI(null);
+      setShowBrightnessNetwork(true);
+      setShowFamilyTree(false);
+      setShowScatterPlot(false);
+      setShowAPSimulator(false);
+    } else if (path === '/scatter-plot') {
+      setActiveTab('database');
+      setSelectedGEVI(null);
+      setShowScatterPlot(true);
+      setShowFamilyTree(false);
+      setShowBrightnessNetwork(false);
+      setShowAPSimulator(false);
+    } else if (path === '/ap-simulator') {
+      setActiveTab('database');
+      setSelectedGEVI(null);
+      setShowAPSimulator(true);
+      setShowFamilyTree(false);
+      setShowBrightnessNetwork(false);
+      setShowScatterPlot(false);
+    } else {
+      setActiveTab('database');
+      setSelectedGEVI(null);
+      setMobileView('list');
+    }
+  }, [gevis]);
+
+  // On mount: apply initial URL
+  useEffect(() => {
+    applyUrl(window.location.pathname, true);
+  }, [applyUrl]);
+
+  // Listen for back/forward
+  useEffect(() => {
+    const onPopState = () => applyUrl(window.location.pathname);
+    window.addEventListener('popstate', onPopState);
+    return () => window.removeEventListener('popstate', onPopState);
+  }, [applyUrl]);
 
   // Derived state
   const categories = [DEFAULT_CATEGORY, ...new Set(gevis.map(g => g.category))];
@@ -123,6 +196,8 @@ function GEVIBenchApp() {
     setShowFamilyTree(false);
     setShowBrightnessNetwork(false);
     setShowScatterPlot(false);
+    setShowAPSimulator(false);
+    window.history.pushState(null, '', `/gevi/${gevi.id}`);
     // After render: scroll page to top, then scroll the side list so the selected GEVI is visible
     requestAnimationFrame(() => {
       window.scrollTo({ top: 0 });
@@ -143,7 +218,9 @@ function GEVIBenchApp() {
     setShowFamilyTree(false);
     setShowBrightnessNetwork(false);
     setShowScatterPlot(false);
+    setShowAPSimulator(false);
     setActiveTab('database');
+    window.history.pushState(null, '', '/');
   }, []);
 
   const handleSortChange = useCallback((field: SortField) => {
@@ -181,7 +258,7 @@ function GEVIBenchApp() {
         </div>
       </div>
 
-      {!showFamilyTree && (
+      {!showFamilyTree && !showBrightnessNetwork && !showScatterPlot && !showAPSimulator && (
         <SearchFilters
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
@@ -204,20 +281,16 @@ function GEVIBenchApp() {
       )}
 
       {/* Full-width tool panels */}
-      {showScatterPlot ? (
-        <ScatterPlotPanel onSelectGEVI={handleSelectGEVI} onClose={() => setShowScatterPlot(false)} peaceMode={peaceMode} />
+      {showAPSimulator ? (
+        <APSimulatorPanel />
+      ) : showScatterPlot ? (
+        <ScatterPlotPanel onSelectGEVI={handleSelectGEVI} peaceMode={peaceMode} />
       ) : showBrightnessNetwork ? (
-        <BrightnessNetworkPanel onSelectGEVI={handleSelectGEVI} onClose={() => setShowBrightnessNetwork(false)} peaceMode={peaceMode} />
+        <BrightnessNetworkPanel onSelectGEVI={handleSelectGEVI} peaceMode={peaceMode} />
       ) : showFamilyTree ? (
         <FamilyTreePanel
           onSelectGEVI={handleSelectGEVI}
           selectedGEVI={selectedGEVI}
-          onCloseDetail={() => {
-            setShowFamilyTree(false);
-            if (selectedGEVI) {
-              setMobileView('detail');
-            }
-          }}
           compareGEVIs={compareGEVIs}
           onAddToCompare={addToCompare}
           peaceMode={peaceMode}
@@ -253,6 +326,7 @@ function GEVIBenchApp() {
                 onShowFamilyTree={() => {
                   setActiveTab('database');
                   setShowFamilyTree(true);
+                  window.history.pushState(null, '', '/family-tree');
                 }}
               />
             </div>
@@ -470,7 +544,15 @@ function GEVIBenchApp() {
         activeTab={activeTab}
         setActiveTab={(tab) => {
           setActiveTab(tab);
-          if (tab === 'database') setShowFamilyTree(false);
+          if (tab === 'database') {
+            setShowFamilyTree(false);
+            setShowBrightnessNetwork(false);
+            setShowScatterPlot(false);
+            setShowAPSimulator(false);
+            window.history.pushState(null, '', '/');
+          } else {
+            window.history.pushState(null, '', `/${tab}`);
+          }
         }}
         mobileMenuOpen={mobileMenuOpen}
         setMobileMenuOpen={setMobileMenuOpen}
@@ -481,22 +563,42 @@ function GEVIBenchApp() {
           setActiveTab('database');
           setShowFamilyTree(true);
           setShowBrightnessNetwork(false);
+          setShowScatterPlot(false);
+          setShowAPSimulator(false);
+          window.history.pushState(null, '', '/family-tree');
         }}
         onShowBrightnessNetwork={() => {
           setActiveTab('database');
           setShowBrightnessNetwork(true);
           setShowFamilyTree(false);
           setShowScatterPlot(false);
+          setShowAPSimulator(false);
+          window.history.pushState(null, '', '/brightness-network');
         }}
         onShowScatterPlot={() => {
           setActiveTab('database');
           setShowScatterPlot(true);
           setShowFamilyTree(false);
           setShowBrightnessNetwork(false);
+          setShowAPSimulator(false);
+          window.history.pushState(null, '', '/scatter-plot');
+        }}
+        onShowAPSimulator={() => {
+          setActiveTab('database');
+          setShowAPSimulator(true);
+          setShowFamilyTree(false);
+          setShowBrightnessNetwork(false);
+          setShowScatterPlot(false);
+          window.history.pushState(null, '', '/ap-simulator');
         }}
         onShowCompare={() => {
           setActiveTab('database');
+          setShowFamilyTree(false);
+          setShowBrightnessNetwork(false);
+          setShowScatterPlot(false);
+          setShowAPSimulator(false);
           setShowCompareEmpty(true);
+          window.history.pushState(null, '', '/');
           // Scroll to comparison panel if there are items
           if (compareGEVIs.length > 0) {
             const comparePanel = document.getElementById('compare-panel');
@@ -514,9 +616,6 @@ function GEVIBenchApp() {
         <FamilyTreePanel
           onSelectGEVI={handleSelectGEVI}
           selectedGEVI={selectedGEVI}
-          onCloseDetail={() => {
-            setSelectedGEVI(null);
-          }}
           compareGEVIs={compareGEVIs}
           onAddToCompare={addToCompare}
           peaceMode={peaceMode}

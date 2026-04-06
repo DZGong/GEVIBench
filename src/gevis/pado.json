@@ -453,7 +453,9 @@
                 -10
             ]
         },
-        "source": "doi:10.1038/srep23865"
+        "source": "doi:10.1038/srep23865",
+        "sourceImage": "/fv-sources/pado.jpg",
+        "sourceFigure": "Fig. 2a"
     },
     "kinetics": [
         {

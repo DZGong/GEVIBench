@@ -452,7 +452,9 @@
                 -21
             ]
         },
-        "source": "doi:10.1523/JNEUROSCI.3008-14.2015"
+        "source": "doi:10.1523/JNEUROSCI.3008-14.2015",
+        "sourceImage": "/fv-sources/bongwoori.jpg",
+        "sourceFigure": "Fig. 6B"
     },
     "kinetics": [
         {
