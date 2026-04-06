@@ -473,7 +473,7 @@ export function APSimulatorPanel({}: Props) {
   const rawMinY = allDeltaFs.length ? Math.min(...allDeltaFs) : -10;
   const rawMaxY = allDeltaFs.length ? Math.max(...allDeltaFs) :  10;
   const range = rawMaxY - rawMinY;
-  const yPad = showDeltaF ? Math.max(2, range * 0.18) : Math.max(range * 0.15, 0.02);
+  const yPad = showDeltaF ? Math.max(2, range * 0.18) : Math.max(range, Math.abs(rawMaxY), Math.abs(rawMinY), 0.001) * 0.15;
   const minY = rawMinY - yPad;
   const maxY = rawMaxY + yPad;
 
@@ -586,7 +586,8 @@ export function APSimulatorPanel({}: Props) {
           {/* ── Desktop: all param rows visible ── */}
           <div className="hidden lg:flex flex-col gap-2">
             <div className="flex items-center gap-2">
-              <span className="text-xs text-ink w-[72px] flex-shrink-0">Spike speed</span>
+              <span className="text-xs text-ink flex-shrink-0">Spike speed</span>
+              <div className="flex-1" />
               <select value={apPreset ?? ''} onChange={e => {
                 const key = e.target.value;
                 const cfg = AP_PRESETS[key];
@@ -597,35 +598,41 @@ export function APSimulatorPanel({}: Props) {
                   <option key={key} value={key}>{cfg.label}</option>
                 ))}
               </select>
+              <span className="text-[9px] text-ink w-[46px]" />
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-xs text-ink w-[72px] flex-shrink-0">Spike count</span>
+              <span className="text-xs text-ink flex-shrink-0">Spike count</span>
+              <div className="flex-1" />
               <NumInput min={1} max={100} step={1} value={nAPs}
                 onChange={v => setNAPs(Math.round(v))}
                 className="w-16 text-xs px-2 py-1 rounded border border-ink/10 bg-surface outline-none focus:border-klein/40" />
+              <span className="text-[9px] text-ink w-[46px]" />
             </div>
             {nAPs > 1 && (
               <div className="flex items-center gap-2">
-                <span className="text-xs text-ink w-[72px] flex-shrink-0">Spike interval</span>
+                <span className="text-xs text-ink flex-shrink-0">Spike interval</span>
+                <div className="flex-1" />
                 <NumInput min={5} max={500} step={5} value={apInterval}
                   onChange={v => setApInterval(Math.round(v))}
                   className="w-16 text-xs px-2 py-1 rounded border border-ink/10 bg-surface outline-none focus:border-klein/40" />
-                <span className="text-[9px] text-ink">ms</span>
+                <span className="text-[9px] text-ink w-[46px]">ms</span>
               </div>
             )}
             <div className="flex items-center gap-2">
-              <span className="text-xs text-ink w-[72px] flex-shrink-0">Frame rate</span>
+              <span className="text-xs text-ink flex-shrink-0">Frame rate</span>
+              <div className="flex-1" />
               <NumInput min={0.1} max={20} step={0.1} value={frameRateKHz}
                 onChange={v => setFrameRateKHz(v)}
                 className="w-16 text-xs px-2 py-1 rounded border border-ink/10 bg-surface outline-none focus:border-klein/40" />
-              <span className="text-[9px] text-ink">kHz</span>
+              <span className="text-[9px] text-ink w-[46px]">kHz</span>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-xs text-ink w-[72px] flex-shrink-0">Illumination</span>
+              <span className="text-xs text-ink flex-shrink-0">Illumination</span>
+              <div className="flex-1" />
               <NumInput min={10} max={5000} step={10} value={illumination}
                 onChange={v => setIllumination(Math.round(v))}
                 className="w-16 text-xs px-2 py-1 rounded border border-ink/10 bg-surface outline-none focus:border-klein/40" />
-              <span className="text-[9px] text-ink">mW/mm²</span>
+              <span className="text-[9px] text-ink w-[46px]">mW/mm²</span>
             </div>
           </div>
 
