@@ -464,9 +464,9 @@ export function APSimulatorPanel({}: Props) {
         </div>
       </div>
 
-      <div className="flex gap-4 flex-1 min-h-0 overflow-y-auto lg:overflow-y-visible">
+      <div className="flex flex-col lg:flex-row gap-4 flex-1 min-h-0 overflow-y-auto lg:overflow-y-visible">
         {/* ── Left: controls ── */}
-        <div className="w-60 flex-shrink-0 flex flex-col gap-4 bg-surface-low rounded-lg p-3">
+        <div className="w-full lg:w-60 flex-shrink-0 flex flex-col gap-4 bg-surface-low rounded-lg p-3">
 
           {/* Action Potential */}
           <div>
@@ -591,7 +591,7 @@ export function APSimulatorPanel({}: Props) {
 
           {/* Fluorescence trace chart */}
           <div className="rounded-lg border border-ink/10 bg-surface-low p-2">
-            <p className="text-[10px] text-ink font-mono text-center mb-1">
+            <p className="hidden md:block text-[10px] text-ink font-mono text-center mb-1">
               <span className="italic">C</span><sub>m</sub> d<span className="italic">V</span>/d<span className="italic">t</span>{' = '}
               <span className="italic">I</span><sub>ext</sub>{' − '}
               <span className="italic">g</span><sub>Na</sub><span className="italic">m</span><sup>3</sup><span className="italic">h</span>(<span className="italic">V</span>−<span className="italic">E</span><sub>Na</sub>){' − '}
