@@ -346,15 +346,15 @@ export function APSimulatorPanel({}: Props) {
   const [customGK, setCustomGK] = useState(AP_PRESETS.normal.gK);
   const [customGL, setCustomGL] = useState(AP_PRESETS.normal.gL);
   const [customStim, setCustomStim] = useState(AP_PRESETS.normal.Iext);
-  const [nAPs, setNAPs] = useState(5);
-  const [apInterval, setApInterval] = useState(50);   // ms
+  const [nAPs, setNAPs] = useState(10);
+  const [apInterval, setApInterval] = useState(100);   // ms
   const [frameRateKHz, setFrameRateKHz] = useState(1); // kHz
   const [illumination, setIllumination] = useState(100); // mW/mm²
   const [showNoise, setShowNoise] = useState(true);
   const [noiseSeed, setNoiseSeed] = useState(0);
   const [invertNeg, setInvertNeg] = useState(true);
   const [showDeltaF, setShowDeltaF] = useState(false);
-  const [showBleach, setShowBleach] = useState(false);
+  const [showBleach, setShowBleach] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [mobileApParam, setMobileApParam] = useState<'preset' | 'count' | 'interval'>('preset');
   const [mobileImgParam, setMobileImgParam] = useState<'frameRate' | 'illumination'>('frameRate');
@@ -728,7 +728,7 @@ export function APSimulatorPanel({}: Props) {
               <div className="text-[11px] font-semibold text-ink uppercase tracking-wide lg:mb-0.5">Display</div>
               <label className="flex items-center gap-1.5 text-xs text-ink cursor-pointer">
                 <input type="checkbox" checked={showNoise} onChange={e => { setShowNoise(e.target.checked); if (e.target.checked) setNoiseSeed(s => s + 1); }} />
-                Shot noise
+                Noise
               </label>
               <label className="flex items-center gap-1.5 text-xs text-ink cursor-pointer">
                 <input type="checkbox" checked={invertNeg} onChange={e => setInvertNeg(e.target.checked)} />
@@ -736,7 +736,7 @@ export function APSimulatorPanel({}: Props) {
               </label>
               <label className="flex items-center gap-1.5 text-xs text-ink cursor-pointer">
                 <input type="checkbox" checked={showDeltaF} onChange={e => setShowDeltaF(e.target.checked)} />
-                Show ΔF/F
+                ΔF/F
               </label>
               <label className="flex items-center gap-1.5 text-xs text-ink cursor-pointer">
                 <input type="checkbox" checked={showBleach} onChange={e => setShowBleach(e.target.checked)} />
