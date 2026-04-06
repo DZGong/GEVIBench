@@ -555,8 +555,8 @@ export function APSimulatorPanel({}: Props) {
             </div>
           </div>
 
-          {/* GEVI selector */}
-          <div className="col-span-2 lg:col-span-1 flex-1 min-h-0 flex flex-col">
+          {/* GEVI selector — desktop only here, mobile shows below chart */}
+          <div className="hidden lg:flex col-span-2 lg:col-span-1 flex-1 min-h-0 flex-col">
             <div className="text-[11px] font-semibold text-ink uppercase tracking-wide mb-1">
               GEVIs <span className="font-normal text-ink">({selectedIds.length}/6)</span>
             </div>
@@ -722,6 +722,36 @@ export function APSimulatorPanel({}: Props) {
               Select GEVIs from the left panel to simulate.
             </div>
           )}
+        </div>
+
+        {/* GEVI selector — mobile only, below chart */}
+        <div className="lg:hidden flex flex-col bg-surface-low rounded-lg p-3">
+          <div className="text-[11px] font-semibold text-ink uppercase tracking-wide mb-1">
+            GEVIs <span className="font-normal text-ink">({selectedIds.length}/6)</span>
+          </div>
+          <input
+            type="text" placeholder="Search..." value={searchQuery}
+            onChange={e => setSearchQuery(e.target.value)}
+            className="w-full text-xs px-2 py-1 rounded border border-ink/10 bg-surface mb-1 outline-none focus:border-klein/40"
+          />
+          <div className="overflow-y-auto grid grid-cols-3 gap-0.5 max-h-28">
+            {filteredGevis.map(g => {
+              const idx = selectedIds.indexOf(g.id);
+              const isSelected = idx !== -1;
+              const color = isSelected ? TRACE_COLORS[idx % TRACE_COLORS.length] : undefined;
+              const disabled = !isSelected && selectedIds.length >= 6;
+              return (
+                <button key={g.id} onClick={() => toggleGEVI(g.id)} disabled={disabled}
+                  className={`flex items-center gap-2 text-left px-2 py-1 rounded text-xs w-full transition-colors
+                    ${isSelected ? 'bg-surface text-ink' : 'text-ink hover:bg-surface-low'}
+                    ${disabled ? 'opacity-30 cursor-not-allowed' : ''}`}>
+                  <span className="w-2.5 h-2.5 rounded-full flex-shrink-0 border"
+                    style={{ backgroundColor: color ?? 'transparent', borderColor: color ?? '#d1d5db' }} />
+                  <span className="flex-1 truncate">{g.name}</span>
+                </button>
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>
