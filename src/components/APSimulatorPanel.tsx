@@ -356,6 +356,8 @@ export function APSimulatorPanel({}: Props) {
   const [showDeltaF, setShowDeltaF] = useState(false);
   const [showBleach, setShowBleach] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [mobileApParam, setMobileApParam] = useState<'preset' | 'count' | 'interval'>('preset');
+  const [mobileImgParam, setMobileImgParam] = useState<'frameRate' | 'illumination'>('frameRate');
 
   const frameTime = 1 / frameRateKHz; // ms per frame
 
@@ -585,7 +587,7 @@ export function APSimulatorPanel({}: Props) {
           {/* Action Potential */}
           <div>
             <div className="text-[11px] font-semibold text-ink uppercase tracking-wide mb-1.5">Action Potential</div>
-            <div className="flex rounded overflow-hidden border border-ink/20 mb-2">
+            <div className="hidden lg:flex rounded overflow-hidden border border-ink/20 mb-2">
               {Object.entries(AP_PRESETS).map(([key, cfg], i, arr) => (
                 <button key={key} onClick={() => {
                   setApPreset(key);
@@ -599,6 +601,7 @@ export function APSimulatorPanel({}: Props) {
                 </button>
               ))}
             </div>
+            {/* Desktop: show all HH params */}
             <div className="hidden lg:flex flex-col gap-1">
               {([
                 ['gNa', <><span className="italic">g</span><sub>Na</sub></>, 'mS/cm²', customGNa, setCustomGNa, 10, 300, 10] as const,
@@ -618,39 +621,103 @@ export function APSimulatorPanel({}: Props) {
                 </div>
               ))}
             </div>
-            <div className="flex items-center gap-2 mt-2">
-              <span className="text-xs text-ink w-14">Count</span>
-              <NumInput min={1} max={100} step={1} value={nAPs}
-                onChange={v => setNAPs(Math.round(v))}
-                className="w-16 text-xs px-2 py-1 rounded border border-ink/10 bg-surface outline-none focus:border-klein/40" />
+            {/* Desktop: show all AP params */}
+            <div className="hidden lg:flex flex-col gap-1 mt-2">
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-ink w-14">Count</span>
+                <NumInput min={1} max={100} step={1} value={nAPs}
+                  onChange={v => setNAPs(Math.round(v))}
+                  className="w-16 text-xs px-2 py-1 rounded border border-ink/10 bg-surface outline-none focus:border-klein/40" />
+              </div>
+              {nAPs > 1 && (
+                <div className="flex items-center gap-2">
+                  <span className="text-xs text-ink w-14">Interval</span>
+                  <NumInput min={5} max={500} step={5} value={apInterval}
+                    onChange={v => setApInterval(Math.round(v))}
+                    className="w-16 text-xs px-2 py-1 rounded border border-ink/10 bg-surface outline-none focus:border-klein/40" />
+                  <span className="text-xs text-ink">ms</span>
+                </div>
+              )}
             </div>
-            {nAPs > 1 && (
-              <div className="flex items-center gap-2 mt-1">
-                <span className="text-xs text-ink w-14">Interval</span>
+            {/* Mobile: dropdown to pick AP param */}
+            <div className="flex lg:hidden items-center gap-2 mt-1">
+              <select value={mobileApParam} onChange={e => setMobileApParam(e.target.value as 'preset' | 'count' | 'interval')}
+                className="text-xs px-1.5 py-1 rounded border border-ink/10 bg-surface outline-none">
+                <option value="preset">Speed</option>
+                <option value="count">Count</option>
+                <option value="interval">Interval (ms)</option>
+              </select>
+              {mobileApParam === 'preset' && (
+                <select value={apPreset ?? ''} onChange={e => {
+                  const key = e.target.value;
+                  const cfg = AP_PRESETS[key];
+                  if (cfg) {
+                    setApPreset(key);
+                    setCustomGNa(cfg.gNa);
+                    setCustomGK(cfg.gK);
+                    setCustomGL(cfg.gL);
+                    setCustomStim(cfg.Iext);
+                  }
+                }}
+                  className="text-xs px-1.5 py-1 rounded border border-ink/10 bg-surface outline-none">
+                  {Object.entries(AP_PRESETS).map(([key, cfg]) => (
+                    <option key={key} value={key}>{cfg.label}</option>
+                  ))}
+                </select>
+              )}
+              {mobileApParam === 'count' && (
+                <NumInput min={1} max={100} step={1} value={nAPs}
+                  onChange={v => setNAPs(Math.round(v))}
+                  className="w-16 text-xs px-2 py-1 rounded border border-ink/10 bg-surface outline-none focus:border-klein/40" />
+              )}
+              {mobileApParam === 'interval' && (<>
                 <NumInput min={5} max={500} step={5} value={apInterval}
                   onChange={v => setApInterval(Math.round(v))}
                   className="w-16 text-xs px-2 py-1 rounded border border-ink/10 bg-surface outline-none focus:border-klein/40" />
                 <span className="text-xs text-ink">ms</span>
-              </div>
-            )}
+              </>)}
+            </div>
           </div>
 
           {/* Imaging */}
           <div>
             <div className="text-[11px] font-semibold text-ink uppercase tracking-wide mb-1.5">Imaging</div>
-            <div className="flex items-center gap-2 mb-1.5">
-              <span className="text-xs text-ink w-14">Frame rate</span>
-              <NumInput min={0.1} max={20} step={0.1} value={frameRateKHz}
-                onChange={v => setFrameRateKHz(v)}
-                className="w-16 text-xs px-2 py-1 rounded border border-ink/10 bg-surface outline-none focus:border-klein/40" />
-              <span className="text-xs text-ink">kHz</span>
+            {/* Desktop: show all imaging params */}
+            <div className="hidden lg:flex flex-col gap-1.5">
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-ink w-14">Frame rate</span>
+                <NumInput min={0.1} max={20} step={0.1} value={frameRateKHz}
+                  onChange={v => setFrameRateKHz(v)}
+                  className="w-16 text-xs px-2 py-1 rounded border border-ink/10 bg-surface outline-none focus:border-klein/40" />
+                <span className="text-xs text-ink">kHz</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-ink w-14">Illumin.</span>
+                <NumInput min={10} max={5000} step={10} value={illumination}
+                  onChange={v => setIllumination(Math.round(v))}
+                  className="w-16 text-xs px-2 py-1 rounded border border-ink/10 bg-surface outline-none focus:border-klein/40" />
+                <span className="text-xs text-ink">mW/mm²</span>
+              </div>
             </div>
-            <div className="flex items-center gap-2">
-              <span className="text-xs text-ink w-14">Illumin.</span>
-              <NumInput min={10} max={5000} step={10} value={illumination}
-                onChange={v => setIllumination(Math.round(v))}
-                className="w-16 text-xs px-2 py-1 rounded border border-ink/10 bg-surface outline-none focus:border-klein/40" />
-              <span className="text-xs text-ink">mW/mm²</span>
+            {/* Mobile: dropdown to pick imaging param */}
+            <div className="flex lg:hidden items-center gap-2">
+              <select value={mobileImgParam} onChange={e => setMobileImgParam(e.target.value as 'frameRate' | 'illumination')}
+                className="text-xs px-1.5 py-1 rounded border border-ink/10 bg-surface outline-none">
+                <option value="frameRate">Frame rate</option>
+                <option value="illumination">Illumination</option>
+              </select>
+              {mobileImgParam === 'frameRate' && (<>
+                <NumInput min={0.1} max={20} step={0.1} value={frameRateKHz}
+                  onChange={v => setFrameRateKHz(v)}
+                  className="w-16 text-xs px-2 py-1 rounded border border-ink/10 bg-surface outline-none focus:border-klein/40" />
+                <span className="text-xs text-ink">kHz</span>
+              </>)}
+              {mobileImgParam === 'illumination' && (<>
+                <NumInput min={10} max={5000} step={10} value={illumination}
+                  onChange={v => setIllumination(Math.round(v))}
+                  className="w-16 text-xs px-2 py-1 rounded border border-ink/10 bg-surface outline-none focus:border-klein/40" />
+                <span className="text-xs text-ink">mW/mm²</span>
+              </>)}
             </div>
           </div>
 
