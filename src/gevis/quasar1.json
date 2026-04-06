@@ -415,7 +415,9 @@
                 38
             ]
         },
-        "source": "doi:10.1038/nmeth.3000"
+        "source": "doi:10.1038/nmeth.3000",
+        "sourceImage": "/fv-sources/quasar1.jpg",
+        "sourceFigure": "Fig. 1c"
     },
     "kinetics": [
         {

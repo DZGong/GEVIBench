@@ -459,7 +459,9 @@
                 -30
             ]
         },
-        "source": "doi:10.1016/j.neuron.2012.06.040"
+        "source": "doi:10.1016/j.neuron.2012.06.040",
+        "sourceImage": "/fv-sources/arclight.jpg",
+        "sourceFigure": "Fig. 1C"
     },
     "kinetics": [
         {

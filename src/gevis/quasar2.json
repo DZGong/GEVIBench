@@ -496,7 +496,9 @@
                 108
             ]
         },
-        "source": "doi:10.1038/nmeth.3000"
+        "source": "doi:10.1038/nmeth.3000",
+        "sourceImage": "/fv-sources/quasar2.jpg",
+        "sourceFigure": "Fig. 1c"
     },
     "researchPapers": [
         {

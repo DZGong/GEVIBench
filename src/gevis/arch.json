@@ -57,7 +57,9 @@
                 21
             ]
         },
-        "source": "doi:10.1073/pnas.1215595110"
+        "source": "doi:10.1073/pnas.1215595110",
+        "sourceImage": "/fv-sources/arch.jpg",
+        "sourceFigure": "Fig. 2A"
     },
     "kinetics": [
         {

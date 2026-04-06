@@ -515,7 +515,9 @@
                 3.8
             ]
         },
-        "source": "doi:10.1046/j.0953-816x.2001.01617.x"
+        "source": "doi:10.1046/j.0953-816x.2001.01617.x",
+        "sourceImage": "/fv-sources/vsfp1.jpg",
+        "sourceFigure": "Fig. 3B"
     },
     "kinetics": [
         {

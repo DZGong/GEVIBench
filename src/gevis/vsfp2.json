@@ -515,7 +515,9 @@
                 3.6
             ]
         },
-        "source": "doi:10.1371/journal.pone.0000440"
+        "source": "doi:10.1371/journal.pone.0000440",
+        "sourceImage": "/fv-sources/vsfp2.jpg",
+        "sourceFigure": "Fig. 3B"
     },
     "kinetics": [
         {
