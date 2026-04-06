@@ -565,7 +565,7 @@ export function APSimulatorPanel({}: Props) {
               onChange={e => setSearchQuery(e.target.value)}
               className="w-full text-xs px-2 py-1 rounded border border-ink/10 bg-surface mb-1 outline-none focus:border-klein/40"
             />
-            <div className="overflow-y-auto grid grid-cols-2 lg:grid-cols-1 gap-0.5 max-h-40 lg:max-h-64">
+            <div className="overflow-y-auto grid grid-cols-3 lg:grid-cols-1 gap-0.5 max-h-40 lg:max-h-64">
               {filteredGevis.map(g => {
                 const idx = selectedIds.indexOf(g.id);
                 const isSelected = idx !== -1;
