@@ -2,6 +2,7 @@
 // Provides unified access to GEVI data from modular JSON files in src/gevis/
 
 import type { GEVI } from './types';
+import geviGitDates from 'virtual:gevi-git-dates';
 
 // Cache for loaded GEVIs
 let geviCache: GEVI[] | null = null;
@@ -324,7 +325,11 @@ export function getAllGEVIs(): GEVI[] {
   // Build B_rel map across all GEVIs before scoring (enables graph traversal for brightness)
   const bRelMap = buildBrelMap(rawGevis);
 
-  geviCache = rawGevis.map(gevi => ({ ...gevi, ...computeScores(gevi, bRelMap) }));
+  geviCache = rawGevis.map(gevi => ({
+    ...gevi,
+    lastUpdated: (geviGitDates as Record<string, string>)[gevi.id] || undefined,
+    ...computeScores(gevi, bRelMap),
+  }));
   return geviCache;
 }
 
