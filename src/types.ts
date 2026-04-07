@@ -88,6 +88,7 @@ export interface GEVI {
     sourceFigure?: string;
   };
   researchPapers?: ResearchPaper[];
+  lastUpdated?: string;  // ISO date string, e.g. "2026-04-06"
   addgene?: {
     id: string;
     url: string;

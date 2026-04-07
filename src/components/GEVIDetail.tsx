@@ -94,6 +94,9 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
           <div className="flex flex-wrap gap-2 mb-2">
             <span className="text-xs px-2 py-1 bg-klein text-white rounded font-medium">{gevi.category}</span>
             <span className="text-xs px-2 py-1 rounded text-ink" style={{ backgroundColor: '#FF91AF30' }}>Published {gevi.year}</span>
+            {gevi.lastUpdated && (
+              <span className="text-xs px-2 py-1 rounded text-ink/50 bg-ink/5">Updated {gevi.lastUpdated}</span>
+            )}
           </div>
           <a href={gevi.paperUrl} target="_blank" rel="noopener noreferrer" className="text-sm inline-flex items-center gap-1 text-klein hover:underline">
             <BookOpen className="w-4 h-4" />{gevi.paper}<ExternalLink className="w-3 h-3" />

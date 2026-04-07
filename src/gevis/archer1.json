@@ -1,160 +1,161 @@
 {
-    "id": "archer1",
+  "id": "archer1",
+  "name": "Archer1",
+  "year": 2014,
+  "category": "Opsin GEVI",
+  "tags": [
+    "Archaerhodopsin",
+    "Red",
+    "Positive-going"
+  ],
+  "paper": "Nature Communications 2014",
+  "paperUrl": "https://doi.org/10.1038/ncomms5894",
+  "description": "Archaerhodopsin variant functioning as both a voltage indicator and a light-activated neuronal silencer.",
+  "parentId": "arch",
+  "spectrum": {
+    "type": "rhodopsin",
+    "peakEx": 550,
+    "peakEm": 687,
+    "name": "Archer1"
+  },
+  "voltage": {
+    "type": "opsin",
+    "slope": 75,
+    "polarity": "positive",
     "name": "Archer1",
-    "year": 2014,
-    "category": "Opsin GEVI",
-    "tags": [
-        "Archaerhodopsin",
-        "Red",
-        "Positive-going"
-    ],
-    "paper": "Nature Communications 2014",
-    "paperUrl": "https://doi.org/10.1038/ncomms5894",
-    "description": "Archaerhodopsin variant functioning as both a voltage indicator and a light-activated neuronal silencer.",
-    "parentId": "arch",
-    "spectrum": {
-        "type": "rhodopsin",
-        "peakEx": 550,
-        "peakEm": 687,
-        "name": "Archer1"
+    "custom": {
+      "voltage": [
+        -100,
+        -90,
+        -80,
+        -70,
+        -60,
+        -50,
+        -40,
+        -30,
+        -20,
+        -10,
+        0,
+        10,
+        20,
+        30,
+        40,
+        50
+      ],
+      "deltaF": [
+        -23,
+        -15,
+        -8,
+        0,
+        8,
+        16,
+        25,
+        34,
+        43,
+        50,
+        57,
+        63,
+        70,
+        75,
+        80,
+        85
+      ]
     },
-    "voltage": {
-        "type": "opsin",
-        "slope": 75,
-        "polarity": "positive",
-        "name": "Archer1",
-        "custom": {
-            "voltage": [
-                -100,
-                -90,
-                -80,
-                -70,
-                -60,
-                -50,
-                -40,
-                -30,
-                -20,
-                -10,
-                0,
-                10,
-                20,
-                30,
-                40,
-                50
-            ],
-            "deltaF": [
-                -23,
-                -15,
-                -8,
-                0,
-                8,
-                16,
-                25,
-                34,
-                43,
-                50,
-                57,
-                63,
-                70,
-                75,
-                80,
-                85
-            ]
-        },
-        "source": "doi:10.1038/ncomms5894",
-        "sourceImage": "/fv-sources/archer1.jpg",
-        "sourceFigure": "Fig. 1d"
+    "source": "doi:10.1038/ncomms5894",
+    "sourceImage": "/fv-sources/archer1.jpg",
+    "sourceFigure": "Fig. 1d"
+  },
+  "dynamicRangeData": [
+    {
+      "deltaF": 85,
+      "sign": "positive",
+      "source": "doi:10.1038/s41589-018-0004-9"
     },
-    "dynamicRangeData": [
-        {
-            "deltaF": 85,
-            "sign": "positive",
-            "source": "doi:10.1038/s41589-018-0004-9"
-        },
-        {
-            "deltaF": 85,
-            "sign": "positive",
-            "source": "doi:10.1038/ncomms5894"
-        }
-    ],
-    "sensitivityData": [
-        {
-            "deltaF": 33,
-            "source": "doi:10.1038/ncomms5894"
-        }
-    ],
-    "brightnessData": [
-        {
-            "ratio": 10,
-            "reference": "arch",
-            "source": "doi:10.1021/acschemneuro.0c00046"
-        },
-        {
-            "ratio": 3,
-            "reference": "arch",
-            "source": "doi:10.1038/ncomms5894"
-        }
-    ],
-    "photostabilityData": [
-        {
-            "brightnessRemaining": 100,
-            "illumination": "880 mW/mm²",
-            "duration": "5 min",
-            "source": "doi:10.1038/ncomms5894"
-        }
-    ],
-    "kinetics": [
-        {
-            "on": 0.5,
-            "off": 0.5,
-            "temperature": "25°C",
-            "source": "doi:10.1038/ncomms5894"
-        }
-    ],
-    "addgene": {
-        "id": "60423",
-        "url": "https://www.addgene.org/60423/"
+    {
+      "deltaF": 85,
+      "sign": "positive",
+      "source": "doi:10.1038/ncomms5894"
+    }
+  ],
+  "sensitivityData": [
+    {
+      "deltaF": 33,
+      "source": "doi:10.1038/ncomms5894"
+    }
+  ],
+  "brightnessData": [
+    {
+      "ratio": 10,
+      "reference": "arch",
+      "source": "doi:10.1021/acschemneuro.0c00046"
     },
-    "researchPapers": [
-        {
-            "title": "Archaerhodopsin variants with enhanced voltage-sensitive fluorescence in mammalian and Caenorhabditis elegans neurons",
-            "authors": "Flytzanis NC, Bedbrook CN, Chiu H, Engqvist MKM, Xiao C, Chan KY, Sternberg PW, Arnold FH, Gradinaru V",
-            "journal": "Nature Communications",
-            "year": 2014,
-            "sample": "Cultured rat hippocampal neurons, in vitro; C. elegans AWC-ON neurons, in vivo",
-            "url": "https://doi.org/10.1038/ncomms5894"
-        },
-        {
-            "title": "A robotic multidimensional directed evolution approach applied to fluorescent voltage reporters",
-            "authors": "Piatkevich KD, Jung EE, Straub C, Linghu C, Park D, Suk HJ, Hochbaum DR, Goodwin D, Pnevmatikakis E, Pak N, et al.",
-            "journal": "Nature Chemical Biology",
-            "year": 2018,
-            "sample": "HEK293T cells and cultured rat hippocampal neurons, in vitro",
-            "url": "https://doi.org/10.1038/s41589-018-0004-9"
-        },
-        {
-            "title": "Comparative Evaluation of Genetically Encoded Voltage Indicators",
-            "authors": "Bando Y, Sakamoto M, Kim S, Ayzenshtat I, Yuste R",
-            "journal": "Cell Reports",
-            "year": 2019,
-            "sample": "Mouse cortical neurons, in vitro (excluded from in vivo due to low brightness under LED/2P excitation)",
-            "url": "https://doi.org/10.1016/j.celrep.2018.12.088"
-        },
-        {
-            "title": "Screening and Cellular Characterization of Genetically Encoded Voltage Indicators Based on Near-Infrared Fluorescent Proteins",
-            "authors": "Monakhov MV, Matlashov ME, Colavita M, Song C, Shcherbakova DM, Antic SD, Verkhusha VV, Knöpfel T",
-            "journal": "ACS Chemical Neuroscience",
-            "year": 2020,
-            "sample": "HEK293T cells and cultured rat hippocampal neurons, in vitro",
-            "url": "https://doi.org/10.1021/acschemneuro.0c00046"
-        },
-        {
-            "title": "Rational Design of Far-Red Archaerhodopsin-3-Based Fluorescent Genetically Encoded Voltage Indicators: from Elucidation of the Fluorescence Mechanism in Archers to Novel Red-Shifted Variants",
-            "authors": "Nikolaev DM, et al.",
-            "journal": "ACS Physical Chemistry Au",
-            "year": 2024,
-            "sample": "Computational modeling and HEK293T cells, in vitro",
-            "url": "https://doi.org/10.1021/acsphyschemau.3c00073"
-        }
-    ]
+    {
+      "ratio": 3,
+      "reference": "arch",
+      "source": "doi:10.1038/ncomms5894"
+    }
+  ],
+  "photostabilityData": [
+    {
+      "brightnessRemaining": 100,
+      "illumination": "880 mW/mm²",
+      "duration": "5 min",
+      "source": "doi:10.1038/ncomms5894"
+    }
+  ],
+  "kinetics": [
+    {
+      "on": 0.5,
+      "off": 0.5,
+      "temperature": "25°C",
+      "source": "doi:10.1038/ncomms5894"
+    }
+  ],
+  "addgene": {
+    "id": "60423",
+    "url": "https://www.addgene.org/60423/"
+  },
+  "researchPapers": [
+    {
+      "title": "Archaerhodopsin variants with enhanced voltage-sensitive fluorescence in mammalian and Caenorhabditis elegans neurons",
+      "authors": "Flytzanis NC, Bedbrook CN, Chiu H, Engqvist MKM, Xiao C, Chan KY, Sternberg PW, Arnold FH, Gradinaru V",
+      "journal": "Nature Communications",
+      "year": 2014,
+      "sample": "Cultured rat hippocampal neurons, in vitro; C. elegans AWC-ON neurons, in vivo",
+      "url": "https://doi.org/10.1038/ncomms5894"
+    },
+    {
+      "title": "A robotic multidimensional directed evolution approach applied to fluorescent voltage reporters",
+      "authors": "Piatkevich KD, Jung EE, Straub C, Linghu C, Park D, Suk HJ, Hochbaum DR, Goodwin D, Pnevmatikakis E, Pak N, et al.",
+      "journal": "Nature Chemical Biology",
+      "year": 2018,
+      "sample": "HEK293T cells and cultured rat hippocampal neurons, in vitro",
+      "url": "https://doi.org/10.1038/s41589-018-0004-9"
+    },
+    {
+      "title": "Comparative Evaluation of Genetically Encoded Voltage Indicators",
+      "authors": "Bando Y, Sakamoto M, Kim S, Ayzenshtat I, Yuste R",
+      "journal": "Cell Reports",
+      "year": 2019,
+      "sample": "Mouse cortical neurons, in vitro (excluded from in vivo due to low brightness under LED/2P excitation)",
+      "url": "https://doi.org/10.1016/j.celrep.2018.12.088"
+    },
+    {
+      "title": "Screening and Cellular Characterization of Genetically Encoded Voltage Indicators Based on Near-Infrared Fluorescent Proteins",
+      "authors": "Monakhov MV, Matlashov ME, Colavita M, Song C, Shcherbakova DM, Antic SD, Verkhusha VV, Knöpfel T",
+      "journal": "ACS Chemical Neuroscience",
+      "year": 2020,
+      "sample": "HEK293T cells and cultured rat hippocampal neurons, in vitro",
+      "url": "https://doi.org/10.1021/acschemneuro.0c00046"
+    },
+    {
+      "title": "Rational Design of Far-Red Archaerhodopsin-3-Based Fluorescent Genetically Encoded Voltage Indicators: from Elucidation of the Fluorescence Mechanism in Archers to Novel Red-Shifted Variants",
+      "authors": "Nikolaev DM, et al.",
+      "journal": "ACS Physical Chemistry Au",
+      "year": 2024,
+      "sample": "Computational modeling and HEK293T cells, in vitro",
+      "url": "https://doi.org/10.1021/acsphyschemau.3c00073"
+    }
+  ],
+  "lastUpdated": "2026-04-06"
 }
