@@ -274,7 +274,7 @@ export function ScatterPlotPanel({ onSelectGEVI, peaceMode = false }: Props) {
   const xCfg = AXES[xAxis], yCfg = AXES[yAxis];
 
   return (
-    <div className="flex flex-col rounded-lg border p-4 bg-surface-lowest border-ink/10 text-ink">
+    <div className="flex flex-col rounded-lg border-2 p-4 bg-surface-lowest border-gold/40 shadow-md text-ink">
       {/* Header */}
       <div className="flex items-center gap-4 mb-4">
         <div>

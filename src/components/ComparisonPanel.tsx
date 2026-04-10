@@ -32,7 +32,7 @@ export function ComparisonPanel({ compareGEVIs, onRemove, showEmpty = false, onC
     if (!showEmpty) return null;
 
     return (
-      <div id="compare-panel" className="border rounded-lg p-4 md:p-6 mb-6 bg-surface-lowest border-ink/10">
+      <div id="compare-panel" className="border-2 rounded-lg p-4 md:p-6 mb-6 bg-surface-lowest border-gold/40 shadow-md">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-lg font-bold flex items-center gap-2 text-ink">
             <GitCompare className="w-5 h-5" />Compare Sensors (0)
@@ -60,7 +60,7 @@ export function ComparisonPanel({ compareGEVIs, onRemove, showEmpty = false, onC
   const getSafeName = (name: string) => name.replace(/[^a-zA-Z0-9]/g, '');
 
   return (
-    <div id="compare-panel" className="border rounded-lg p-4 md:p-6 mb-6 bg-surface-lowest border-ink/10">
+    <div id="compare-panel" className="border-2 rounded-lg p-4 md:p-6 mb-6 bg-surface-lowest border-gold/40 shadow-md">
       <div className="flex items-center justify-between mb-4">
         <h3 className="text-lg font-bold flex items-center gap-2 text-ink">
           <GitCompare className="w-5 h-5" />Compare Sensors ({compareGEVIs.length})

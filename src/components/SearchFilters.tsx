@@ -17,7 +17,7 @@ export function SearchFilters({
         placeholder={totalCount ? `Search ${totalCount} sensors...` : 'Search sensors...'}
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        className="w-full pl-10 pr-8 py-2 text-base font-sans rounded-md focus:outline-none border-b-2 border-ink/10 focus:border-gold bg-surface-lowest text-ink"
+        className="w-full pl-10 pr-8 py-2 text-base font-sans rounded-md border-2 border-gold/40 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/30 shadow-md bg-surface-lowest text-ink transition-colors"
       />
       {searchTerm && (
         <button

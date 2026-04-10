@@ -568,7 +568,7 @@ export function APSimulatorPanel({}: Props) {
   };
 
   return (
-    <div className="flex flex-col h-full bg-surface-lowest rounded-lg p-4">
+    <div className="flex flex-col h-full bg-surface-lowest rounded-lg border-2 border-gold/40 shadow-md p-4">
       {/* Header */}
       <div className="flex items-start justify-between mb-4">
         <div>

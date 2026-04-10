@@ -24,7 +24,7 @@ export function ContactForm() {
     }
   };
 
-  const inputCls = "w-full px-3 py-2 text-sm font-sans rounded-md focus:outline-none border-b-2 border-ink/10 focus:border-gold bg-transparent text-ink";
+  const inputCls = "w-full px-3 py-2 text-sm font-sans rounded-md border border-ink/15 focus:outline-none focus:border-gold focus:ring-1 focus:ring-gold/30 bg-transparent text-ink transition-colors";
 
   return (
     <main className="max-w-7xl mx-auto px-4 py-6">
@@ -37,7 +37,7 @@ export function ContactForm() {
         </p>
       </div>
 
-      <div className="max-w-xl mx-auto rounded-lg p-6 bg-surface-low">
+      <div className="max-w-xl mx-auto rounded-lg p-6 bg-surface-low border-2 border-gold/40 shadow-md">
         {sent ? (
           <div className="text-center py-8">
             <div className="text-4xl mb-4">✅</div>

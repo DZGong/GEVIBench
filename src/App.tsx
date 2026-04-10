@@ -14,6 +14,7 @@ import { ComparisonPanel } from './components/ComparisonPanel';
 import { ContactForm } from './components/ContactForm';
 import { RainbowText, getGEVIColor } from './utils';
 import { COLORS } from './constants';
+import { getSpikeTextureDataURI } from './spikeTexture';
 import type { GEVI, SortField, ViewTab, MobileView, SortConfig } from './types';
 import {
   DEFAULT_CATEGORY,
@@ -409,7 +410,7 @@ function GEVIBenchApp() {
           Scoring <span className="text-klein">Methodology</span>
         </h2>
 
-        <div className="rounded-lg p-4 md:p-6 bg-surface-lowest font-sans text-justify">
+        <div className="rounded-lg p-4 md:p-6 bg-surface-lowest font-sans text-justify border-2 border-gold/40 shadow-md">
           <div className="space-y-6">
             <div>
               <h3 className={`text-lg font-semibold mb-2 font-serif ${colors.text}`}>Overview</h3>
@@ -539,7 +540,8 @@ function GEVIBenchApp() {
   );
 
   return (
-    <div className="min-h-screen flex flex-col bg-surface-low">
+    <div className="min-h-screen flex flex-col">
+      <div className="spike-trace-layer" style={{ backgroundImage: getSpikeTextureDataURI() }} aria-hidden="true" />
       <Header
         activeTab={activeTab}
         setActiveTab={(tab) => {

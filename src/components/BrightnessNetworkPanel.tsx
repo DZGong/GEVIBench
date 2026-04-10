@@ -132,7 +132,7 @@ function buildGraph(gevis: GEVI[]): { nodes: GNode[]; edges: GEdge[] } {
       name: gevi?.name ?? id,
       bRel,
       bScore,
-      color: id === 'EGFP' ? '#f59e0b' : gevi ? getTreeNodeColor(gevi) : '#6b7280',
+      color: id === 'EGFP' ? '#22c55e' : gevi ? getTreeNodeColor(gevi) : '#6b7280',
       isEGFP: id === 'EGFP',
       isExternal: !gevi && id !== 'EGFP',
       gevi,
@@ -471,7 +471,7 @@ export function BrightnessNetworkPanel({ onSelectGEVI, peaceMode = false }: Prop
 
   return (
     <div
-      className="flex flex-col rounded-lg border p-4 bg-surface-lowest border-ink/10 text-ink"
+      className="flex flex-col rounded-lg border-2 p-4 bg-surface-lowest border-gold/40 shadow-md text-ink"
     >
       {/* Header */}
       <div className="flex items-center gap-4 mb-4">
@@ -584,7 +584,7 @@ export function BrightnessNetworkPanel({ onSelectGEVI, peaceMode = false }: Prop
                     stroke={node.isExternal ? '#9ca3af' : '#fff'}
                     strokeWidth={node.isEGFP ? 2 : 1.5}
                     strokeDasharray={node.isExternal ? '2.5 1.5' : undefined}
-                    style={node.isEGFP ? { filter: 'drop-shadow(0 0 6px rgba(245,158,11,0.5))' } : node.gevi ? { filter: `drop-shadow(0 0 3px ${node.color})` } : undefined}
+                    style={node.isEGFP ? { filter: 'drop-shadow(0 0 6px rgba(34,197,94,0.5))' } : node.gevi ? { filter: `drop-shadow(0 0 3px ${node.color})` } : undefined}
                   />
                   {/* Name label below */}
                   <text y={node.r + 13} textAnchor="middle" dominantBaseline="middle"

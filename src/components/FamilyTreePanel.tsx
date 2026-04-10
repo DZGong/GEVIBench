@@ -465,7 +465,7 @@ export function FamilyTreePanel({
   }
 
   return (
-    <div className="rounded-lg border p-4 bg-surface-lowest border-ink/10">
+    <div className="rounded-lg border-2 p-4 bg-surface-lowest border-gold/40 shadow-md">
       <div className="flex items-center gap-2 mb-4">
         <div>
           <h3 className="text-lg font-bold text-klein">Family Tree</h3>
