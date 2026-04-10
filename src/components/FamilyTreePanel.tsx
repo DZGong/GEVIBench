@@ -65,12 +65,12 @@ function hexPath(r: number, cr = r * 0.32): string {
   return parts.join(' ') + ' Z';
 }
 
-const MIN_NODE_WIDTH = 42;
-const SIBLING_GAP = 6;
-const LEVEL_HEIGHT = 55;
-const LEVEL_STAGGER_BASE = 35;    // y-stagger (px) applied to first branch sibling at depth 0
-const LEVEL_STAGGER_DECAY = 9;    // stagger shrinks by this amount per depth level
-const TOP_PADDING = 26;
+const MIN_NODE_WIDTH = 50;
+const SIBLING_GAP = 7;
+const LEVEL_HEIGHT = 66;
+const LEVEL_STAGGER_BASE = 42;    // y-stagger (px) applied to first branch sibling at depth 0
+const LEVEL_STAGGER_DECAY = 11;   // stagger shrinks by this amount per depth level
+const TOP_PADDING = 31;
 const NODE_RADIUS_LEAF = 7;
 const NODE_RADIUS_BRANCH = 4;
 const TOOLTIP_W = 170;
@@ -362,7 +362,7 @@ function buildFullTree(gevis: GEVI[]) {
 
   // Find min X to shift everything into positive coordinates
   const minX = Math.min(...result.nodes.map(n => n.x));
-  const padding = 35; // left/right padding
+  const padding = 42; // left/right padding
 
   // Shift all coordinates so minX becomes padding, and override leaf colors with
   // actual GEVI data so colors match the detail panel title.
