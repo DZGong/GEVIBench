@@ -475,10 +475,9 @@ export function FamilyTreePanel({
         </div>
       </div>
 
-      {/* Scrollable container - auto height, horizontal scroll only */}
-      <div className="overflow-x-auto overflow-y-hidden border rounded-lg bg-surface-low">
-        <div className="flex justify-center" style={{ minWidth: svgWidth }}>
-        <svg width={svgWidth} height={svgHeight} className="block">
+      {/* Responsive container - scales SVG to fit available width */}
+      <div className="overflow-hidden border rounded-lg bg-surface-low">
+        <svg viewBox={`0 0 ${svgWidth} ${svgHeight}`} className="block w-full h-auto">
 
           {/* Links - curved paths */}
           {links.map((link, i) => {
@@ -570,7 +569,6 @@ export function FamilyTreePanel({
             );
           })}
         </svg>
-        </div>
       </div>
 
       {hoverInfo && (
