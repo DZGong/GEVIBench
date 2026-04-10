@@ -71,8 +71,8 @@ const LEVEL_HEIGHT = 66;
 const LEVEL_STAGGER_BASE = 42;    // y-stagger (px) applied to first branch sibling at depth 0
 const LEVEL_STAGGER_DECAY = 11;   // stagger shrinks by this amount per depth level
 const TOP_PADDING = 31;
-const NODE_RADIUS_LEAF = 7;
-const NODE_RADIUS_BRANCH = 4;
+const NODE_RADIUS_LEAF = 8;
+const NODE_RADIUS_BRANCH = 5;
 const TOOLTIP_W = 170;
 const TOOLTIP_H = 270;
 
@@ -230,7 +230,7 @@ function layoutTree(node: TreeNode, x: number, y: number, depth = 0): LayoutResu
   }
 
   // Build parent contour = this node + union of all shifted children contours
-  const hw = isRoot ? 9 : isFork ? 2 : (node.geviId ? MIN_NODE_WIDTH / 2 : NODE_RADIUS_BRANCH + 2);
+  const hw = isRoot ? 11 : isFork ? 2 : (node.geviId ? MIN_NODE_WIDTH / 2 : NODE_RADIUS_BRANCH + 2);
   const leftContour = new Map<number, number>([[y, x - hw]]);
   const rightContour = new Map<number, number>([[y, x + hw]]);
   for (let i = 0; i < childLayouts.length; i++) {
@@ -488,7 +488,7 @@ export function FamilyTreePanel({
                 d={`M${link.fromX},${link.fromY} C${link.fromX},${midY} ${link.toX},${midY} ${link.toX},${link.toY}`}
                 fill="none"
                 stroke="#cbd5e1"
-                strokeWidth="1.5"
+                strokeWidth="1.8"
               />
             );
           })}
@@ -501,7 +501,7 @@ export function FamilyTreePanel({
                 d={`M${link.fromX},${link.fromY} C${link.fromX},${midY} ${link.toX},${midY} ${link.toX},${link.toY}`}
                 fill="none"
                 stroke="#cbd5e1"
-                strokeWidth="1.5"
+                strokeWidth="1.8"
                 strokeDasharray="6 4"
               />
             );
@@ -511,7 +511,7 @@ export function FamilyTreePanel({
           {nodes.map((node, i) => {
             const isLeaf = !!node.geviId;
             const isRoot = i === 0 && node.name === 'GEVI';
-            const radius = isRoot ? 9 : isLeaf ? NODE_RADIUS_LEAF : NODE_RADIUS_BRANCH;
+            const radius = isRoot ? 11 : isLeaf ? NODE_RADIUS_LEAF : NODE_RADIUS_BRANCH;
 
             // Fork nodes are invisible junction points — don't render
             if (node.isFork) return null;
@@ -533,13 +533,13 @@ export function FamilyTreePanel({
               >
                 {/* Hover target (invisible larger hexagon for easier clicking) */}
                 {isLeaf && (
-                  <path d={hexPath(14)} fill="transparent" />
+                  <path d={hexPath(17)} fill="transparent" />
                 )}
                 <path
                   d={hexPath(radius)}
                   fill={isRoot ? '#002FA7' : isLeaf ? node.color : '#d1d5db'}
                   stroke={isRoot ? '#fff' : isLeaf ? '#fff' : '#9ca3af'}
-                  strokeWidth={isRoot ? 2 : isLeaf ? 1.5 : 1}
+                  strokeWidth={isRoot ? 2.4 : isLeaf ? 1.8 : 1.2}
                   opacity={1}
                   style={{
                     filter: isRoot ? 'drop-shadow(0 0 6px rgba(0,47,167,0.5))' : isLeaf ? `drop-shadow(0 0 3px ${node.color})` : 'none',
@@ -547,20 +547,20 @@ export function FamilyTreePanel({
                 />
                 <text
                   x={0}
-                  y={isRoot ? -(radius + 3) : isLeaf ? radius + 12 : radius + 11}
+                  y={isRoot ? -(radius + 4) : isLeaf ? radius + 14 : radius + 13}
                   textAnchor="middle"
                   fill={isRoot ? '#002FA7' : isLeaf ? '#374151' : '#6b7280'}
-                  style={{ fontSize: isRoot ? '11px' : isLeaf ? '8px' : '9px', fontWeight: isRoot ? '700' : isLeaf ? '600' : '500' }}
+                  style={{ fontSize: isRoot ? '13px' : isLeaf ? '10px' : '11px', fontWeight: isRoot ? '700' : isLeaf ? '600' : '500' }}
                 >
                   {node.name}
                 </text>
                 {node.year && (
                   <text
                     x={0}
-                    y={radius + 21}
+                    y={radius + 25}
                     textAnchor="middle"
                     fill="#9ca3af"
-                    style={{ fontSize: '7px' }}
+                    style={{ fontSize: '8px' }}
                   >
                     ({node.year})
                   </text>
