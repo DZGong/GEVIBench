@@ -1,5 +1,5 @@
-// Compact vertical lineage display shown in the GEVI detail panel.
-// Driven purely by gevi.familyTreePath — no FamilyTree.tsx needed.
+// Compact lineage display shown in the GEVI detail panel.
+// Horizontal on narrow screens, vertical on md+.
 
 import { useMemo } from 'react';
 
@@ -79,10 +79,18 @@ export function GEVILineage({ gevi }: GEVILineageProps) {
     };
   });
 
-  const nodeSpacing = 80;
-  const topPad = 45;
-  const svgHeight = pathNodes.length * nodeSpacing + topPad + 25;
-  const svgWidth = 180;
+  // Vertical layout params (md+)
+  const vNodeSpacing = 80;
+  const vTopPad = 45;
+  const vSvgHeight = pathNodes.length * vNodeSpacing + vTopPad + 25;
+  const vSvgWidth = 180;
+
+  // Horizontal layout params (narrow)
+  const hNodeSpacing = 90;
+  const hLeftPad = 50;
+  const hSvgWidth = pathNodes.length * hNodeSpacing + hLeftPad + 30;
+  const hSvgHeight = 70;
+  const hCy = 35;
 
   return (
     <div className="rounded-lg p-4 bg-surface-low border border-ink/10 inline-block">
@@ -90,28 +98,80 @@ export function GEVILineage({ gevi }: GEVILineageProps) {
         Genetic Lineage
       </h4>
 
-      <div className="overflow-auto">
-        <svg width={svgWidth} height={svgHeight} className="mx-auto">
+      {/* Horizontal layout — narrow screens */}
+      <div className="overflow-x-auto md:hidden">
+        <svg width={hSvgWidth} height={hSvgHeight} className="mx-auto">
+          {pathNodes.slice(0, -1).map((_node, i) => {
+            const x1 = i * hNodeSpacing + hLeftPad;
+            const x2 = (i + 1) * hNodeSpacing + hLeftPad;
+            return (
+              <path
+                key={`h_link_${i}`}
+                d={`M${x1},${hCy} C${x1 + 15},${hCy} ${x2 - 15},${hCy} ${x2},${hCy}`}
+                fill="none"
+                stroke="#9ca3af"
+                strokeWidth="2"
+              />
+            );
+          })}
+          {pathNodes.map((node, i) => {
+            const color = node.geviData ? getTreeNodeColor(node.geviData) : node.name === 'GEVI' ? '#002FA7' : '#9ca3af';
+            const radius = node.isSelected ? 12 : 8;
+            const x = i * hNodeSpacing + hLeftPad;
+            return (
+              <g key={`h_node_${i}`} transform={`translate(${x}, ${hCy})`}>
+                <path
+                  d={hexPath(radius)}
+                  fill={color}
+                  stroke={node.isSelected ? '#fff' : 'none'}
+                  strokeWidth={node.isSelected ? 2 : 0}
+                  style={{ filter: node.isSelected ? `drop-shadow(0 0 8px ${color})` : 'none' }}
+                />
+                <text
+                  x={0}
+                  y={-20}
+                  textAnchor="middle"
+                  style={{ fontSize: '10px', fontWeight: node.isSelected ? 'bold' : 'normal', fill: '#374151' }}
+                >
+                  {node.name}
+                </text>
+                {node.year && (
+                  <text
+                    x={0}
+                    y={24}
+                    textAnchor="middle"
+                    style={{ fontSize: '8px', fill: '#9ca3af' }}
+                  >
+                    ({node.year})
+                  </text>
+                )}
+              </g>
+            );
+          })}
+        </svg>
+      </div>
 
+      {/* Vertical layout — md+ screens */}
+      <div className="overflow-auto hidden md:block">
+        <svg width={vSvgWidth} height={vSvgHeight} className="mx-auto">
           {pathNodes.slice(0, -1).map((_node, i) => (
             <path
               key={`v_link_${i}`}
-              d={`M${svgWidth / 2},${i * nodeSpacing + topPad}
-                  C${svgWidth / 2},${i * nodeSpacing + topPad + 15}
-                   ${svgWidth / 2},${(i + 1) * nodeSpacing + topPad - 15}
-                   ${svgWidth / 2},${(i + 1) * nodeSpacing + topPad}`}
+              d={`M${vSvgWidth / 2},${i * vNodeSpacing + vTopPad}
+                  C${vSvgWidth / 2},${i * vNodeSpacing + vTopPad + 15}
+                   ${vSvgWidth / 2},${(i + 1) * vNodeSpacing + vTopPad - 15}
+                   ${vSvgWidth / 2},${(i + 1) * vNodeSpacing + vTopPad}`}
               fill="none"
               stroke="#9ca3af"
               strokeWidth="2"
             />
           ))}
-
           {pathNodes.map((node, i) => {
             const color = node.geviData ? getTreeNodeColor(node.geviData) : node.name === 'GEVI' ? '#002FA7' : '#9ca3af';
             const radius = node.isSelected ? 12 : 8;
-            const y = i * nodeSpacing + topPad;
+            const y = i * vNodeSpacing + vTopPad;
             return (
-              <g key={`v_node_${i}`} transform={`translate(${svgWidth / 2}, ${y})`}>
+              <g key={`v_node_${i}`} transform={`translate(${vSvgWidth / 2}, ${y})`}>
                 <path
                   d={hexPath(radius)}
                   fill={color}
