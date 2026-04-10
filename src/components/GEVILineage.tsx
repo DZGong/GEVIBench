@@ -93,13 +93,13 @@ export function GEVILineage({ gevi }: GEVILineageProps) {
   const hCy = 35;
 
   return (
-    <div className="rounded-lg p-4 bg-surface-low border border-ink/10 inline-block">
+    <div className="rounded-lg p-4 bg-surface-low border border-ink/10 md:inline-block overflow-hidden">
       <h4 className="text-sm font-semibold mb-3 text-ink text-center">
         Genetic Lineage
       </h4>
 
       {/* Horizontal layout — narrow screens */}
-      <div className="overflow-x-auto md:hidden">
+      <div className="overflow-x-auto -mx-2 px-2 md:hidden">
         <svg width={hSvgWidth} height={hSvgHeight} className="mx-auto">
           {pathNodes.slice(0, -1).map((_node, i) => {
             const x1 = i * hNodeSpacing + hLeftPad;
