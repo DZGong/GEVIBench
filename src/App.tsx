@@ -254,7 +254,7 @@ function GEVIBenchApp() {
             </h2>
           </button>
           <p className="font-sans text-gray-300 whitespace-nowrap" style={{ fontSize: 'clamp(11px, 2.5vw, 15px)' }}>
-            Standardized evaluation from published studies · Updated daily
+            Standardized evaluation from published studies
           </p>
         </div>
       </div>
