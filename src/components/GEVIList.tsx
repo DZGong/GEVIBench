@@ -196,7 +196,7 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
           <table className="w-full border-collapse" style={{ fontSize: '14px' }}>
             <thead className="sticky top-0 z-10 bg-surface">
               <tr className="border-b border-surface">
-                <th className={`pl-2 pr-2 py-2 text-center ${thBase} w-12`} style={{ fontSize: '14px' }}>Rank</th>
+                <th className={`pl-2 pr-2 py-2 text-center ${thBase} w-12`} style={{ fontSize: '14px' }}>{peaceMode ? '#' : 'Rank'}</th>
                 <th className={`pl-1 pr-0 py-2 text-left ${thBase}`} style={{ fontSize: '14px', width: '1%', whiteSpace: 'nowrap' }}>Sensor ({gevis.length})</th>
                 <th className="px-1 py-2" style={{ minWidth: '150px' }}>
                   <div className="flex items-center justify-center gap-2">
@@ -297,7 +297,7 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
           <table className="w-full border-collapse" style={{ fontSize: '14px' }}>
             <thead className="sticky top-0 z-10 bg-surface">
               <tr className="border-b border-surface">
-                <th className={`pl-2 pr-4 py-2 text-center ${thBase} w-16`} style={{ fontSize: '14px' }}>Rank</th>
+                <th className={`pl-2 pr-4 py-2 text-center ${thBase} w-16`} style={{ fontSize: '14px' }}>{peaceMode ? '#' : 'Rank'}</th>
                 <th className={`px-1 py-2 text-left ${thBase}`} style={{ fontSize: '14px' }}>Sensor ({gevis.length})</th>
                 {METRICS.map(m => (
                   <SortHeader key={m.key} symbol={m.symbol} desc={m.desc} field={m.sortField} sortConfig={sortConfig} onSort={onSortChange} />
