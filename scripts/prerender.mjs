@@ -147,7 +147,28 @@ for (const page of staticPages) {
   renderPage(page);
 }
 
+// --- Inject link directory into the main index.html for crawler discoverability ---
+let mainHtml = readFileSync(join(DIST, 'index.html'), 'utf-8');
+const linkLines = [
+  '<noscript><div style="max-width:800px;margin:0 auto;padding:20px;font-family:sans-serif">',
+  '<h1>GEVIBench — Genetically Encoded Voltage Indicator Benchmark</h1>',
+  '<p>Compare 47+ voltage indicators by speed, brightness, sensitivity, dynamic range, photostability, and popularity.</p>',
+  '<h2>All Sensors</h2><ul>',
+];
+for (const gevi of gevis) {
+  const id = gevi.id || basename(gevi._file, '.json');
+  const name = gevi.name || id;
+  linkLines.push(`<li><a href="/gevi/${escHtml(id)}">${escHtml(name)}</a> — ${escHtml(gevi.description || '')}</li>`);
+}
+linkLines.push('</ul>');
+linkLines.push('<h2>Tools & Info</h2><ul>');
+linkLines.push('<li><a href="/methodology">Scoring Methodology</a></li>');
+linkLines.push('<li><a href="/contact">Contact & Contribute</a></li>');
+linkLines.push('</ul></div></noscript>');
+mainHtml = mainHtml.replace('</body>', linkLines.join('\n') + '\n</body>');
+writeFileSync(join(DIST, 'index.html'), mainHtml);
+
 // --- Summary ---
 const geviCount = gevis.length;
 const totalPages = geviCount + staticPages.length;
-console.log(`✓ Prerendered ${totalPages} pages (${geviCount} GEVIs + ${staticPages.length} static)`);
+console.log(`✓ Prerendered ${totalPages} pages (${geviCount} GEVIs + ${staticPages.length} static + homepage links)`);
