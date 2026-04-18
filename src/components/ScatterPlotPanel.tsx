@@ -6,6 +6,7 @@ import type { GEVI } from '../types';
 // ── Types ─────────────────────────────────────────────────────────────────────
 
 type AxisKey = 'brightness' | 'speed' | 'dynamicRange' | 'sensitivity' | 'photostability' | 'popularity' | 'year';
+type SizeAxis = AxisKey | 'none';
 type PointKind = 'normal' | 'tauOn' | 'tauOff';
 
 interface AxisConfig {
@@ -92,6 +93,26 @@ function getRawValue(gevi: GEVI, axis: AxisKey): number | null {
     default:
       return null;
   }
+}
+
+// Raw value for the size dimension. For speed, returns τ in ms (bigger τ = slower);
+// the caller inverts this for sizing so larger markers = faster kinetics.
+function getSizeRawValue(gevi: GEVI, axis: AxisKey, pt: PlotPoint, xAxis: AxisKey, yAxis: AxisKey): number | null {
+  if (axis === 'speed') {
+    if (xAxis === 'speed' && yAxis === 'speed') return pt.x + pt.y;
+    if (xAxis === 'speed') return pt.x;
+    if (yAxis === 'speed') return pt.y;
+    if (gevi.displayTauOn == null || gevi.displayTauOff == null) return null;
+    return gevi.displayTauOn + gevi.displayTauOff;
+  }
+  return getRawValue(gevi, axis);
+}
+
+// Map a raw value to the quantity encoded by marker size (bigger = "better").
+// Speed inverts τ so smaller τ → larger marker.
+function sizeEncoded(raw: number | null, axis: AxisKey): number | null {
+  if (raw == null || raw <= 0) return null;
+  return axis === 'speed' ? 1 / raw : raw;
 }
 
 function generatePoints(gevis: GEVI[], xAxis: AxisKey, yAxis: AxisKey): PlotPoint[] {
@@ -197,8 +218,10 @@ export function ScatterPlotPanel({ onSelectGEVI, peaceMode = false }: Props) {
 
   const [xAxis, setXAxis] = useState<AxisKey>('brightness');
   const [yAxis, setYAxis] = useState<AxisKey>('speed');
+  const [sizeAxis, setSizeAxis] = useState<SizeAxis>('none');
   const [xLog, setXLog] = useState(true);
   const [yLog, setYLog] = useState(true);
+  const [sizeLog, setSizeLog] = useState(true);
   const [hover, setHover] = useState<HoverInfo | null>(null);
   const hideTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const svgRef = useRef<SVGSVGElement>(null);
@@ -206,8 +229,40 @@ export function ScatterPlotPanel({ onSelectGEVI, peaceMode = false }: Props) {
   // Sync log defaults when axis changes
   useEffect(() => { setXLog(AXES[xAxis].defaultLog); }, [xAxis]);
   useEffect(() => { setYLog(AXES[yAxis].defaultLog); }, [yAxis]);
+  useEffect(() => { if (sizeAxis !== 'none') setSizeLog(AXES[sizeAxis].defaultLog); }, [sizeAxis]);
 
   const points = useMemo(() => generatePoints(gevis, xAxis, yAxis), [gevis, xAxis, yAxis]);
+
+  // Size-dimension values: raw (for tooltip display) and encoded (for marker size).
+  const sizeRaw = useMemo(() => {
+    if (sizeAxis === 'none') return null;
+    return points.map(p => getSizeRawValue(p.gevi, sizeAxis, p, xAxis, yAxis));
+  }, [points, sizeAxis, xAxis, yAxis]);
+
+  const sizeEnc = useMemo(() => {
+    if (!sizeRaw || sizeAxis === 'none') return null;
+    return sizeRaw.map(v => sizeEncoded(v, sizeAxis));
+  }, [sizeRaw, sizeAxis]);
+
+  const { sMin, sMax } = useMemo(() => {
+    if (!sizeEnc) return { sMin: 1, sMax: 1 };
+    const valid = sizeEnc.filter((v): v is number => v != null && v > 0);
+    if (valid.length < 2) return { sMin: 1, sMax: 1 };
+    return { sMin: Math.min(...valid), sMax: Math.max(...valid) };
+  }, [sizeEnc]);
+
+  const R_MIN = 3, R_MAX = 14, R_DEFAULT = 5;
+
+  const getRadius = useCallback((i: number): number => {
+    if (!sizeEnc) return R_DEFAULT;
+    const v = sizeEnc[i];
+    if (v == null || v <= 0 || sMin === sMax) return v == null ? R_MIN * 0.8 : R_DEFAULT;
+    const norm = sizeLog
+      ? (Math.log10(v) - Math.log10(sMin)) / (Math.log10(sMax) - Math.log10(sMin))
+      : (v - sMin) / (sMax - sMin);
+    const n = Math.max(0, Math.min(1, norm));
+    return R_MIN + Math.sqrt(n) * (R_MAX - R_MIN);
+  }, [sizeEnc, sizeLog, sMin, sMax]);
 
   // Axis ranges with padding
   const { xMin, xMax, yMin, yMax } = useMemo(() => {
@@ -255,17 +310,20 @@ export function ScatterPlotPanel({ onSelectGEVI, peaceMode = false }: Props) {
     pt.y = e.clientY;
     const svgPt = pt.matrixTransform(ctm.inverse());
 
-    // Find nearest dot in SVG space; threshold = 12px in SVG coords
+    // Find nearest dot in SVG space; per-point threshold scales with marker radius.
     let best: PlotPoint | null = null;
-    let bestDist = 144;
-    for (const p of points) {
+    let bestDist = Infinity;
+    for (let i = 0; i < points.length; i++) {
+      const p = points[i];
       const { cx, cy } = toSvg(p);
       const dist = (svgPt.x - cx) ** 2 + (svgPt.y - cy) ** 2;
-      if (dist < bestDist) { bestDist = dist; best = p; }
+      const r = getRadius(i);
+      const threshold = Math.max(144, (r + 4) ** 2);
+      if (dist < threshold && dist < bestDist) { bestDist = dist; best = p; }
     }
     if (hideTimer.current) clearTimeout(hideTimer.current);
     setHover(best ? { point: best, cx: e.clientX, cy: e.clientY } : null);
-  }, [points, toSvg]);
+  }, [points, toSvg, getRadius]);
 
   const handleSvgMouseLeave = useCallback(() => {
     hideTimer.current = setTimeout(() => setHover(null), 80);
@@ -320,6 +378,25 @@ export function ScatterPlotPanel({ onSelectGEVI, peaceMode = false }: Props) {
             <button onClick={() => setYLog(false)} className={`px-2 py-1 ${!yLog ? 'bg-klein text-white' : 'bg-surface-low text-ink/60 hover:bg-surface'}`}>Linear</button>
             <button onClick={() => setYLog(true)}  className={`px-2 py-1 ${yLog  ? 'bg-klein text-white' : 'bg-surface-low text-ink/60 hover:bg-surface'}`}>Log</button>
           </div>
+        </div>
+
+        {/* Size axis */}
+        <div className="flex items-center gap-2">
+          <span className="text-xs font-semibold text-ink/60">Size</span>
+          <select
+            value={sizeAxis}
+            onChange={e => setSizeAxis(e.target.value as SizeAxis)}
+            className="text-xs border border-ink/20 rounded px-2 py-1 bg-surface-low text-ink focus:outline-none"
+          >
+            <option value="none">None</option>
+            {AXIS_KEYS.map(k => <option key={k} value={k}>{AXES[k].label}{k === 'speed' ? ' (1/τ)' : ''}</option>)}
+          </select>
+          {sizeAxis !== 'none' && (
+            <div className="flex rounded overflow-hidden border border-ink/20 text-xs">
+              <button onClick={() => setSizeLog(false)} className={`px-2 py-1 ${!sizeLog ? 'bg-klein text-white' : 'bg-surface-low text-ink/60 hover:bg-surface'}`}>Linear</button>
+              <button onClick={() => setSizeLog(true)}  className={`px-2 py-1 ${sizeLog  ? 'bg-klein text-white' : 'bg-surface-low text-ink/60 hover:bg-surface'}`}>Log</button>
+            </div>
+          )}
         </div>
 
         {/* Speed legend */}
@@ -416,12 +493,15 @@ export function ScatterPlotPanel({ onSelectGEVI, peaceMode = false }: Props) {
             if (cy < PAD.top - 2 || cy > PAD.top + CH + 2) return null;
             const color = getTreeNodeColor(p.gevi);
             const isHov = hover?.point === p;
-            const r = isHov ? 7 : 5;
+            const baseR = getRadius(i);
+            const r = isHov ? baseR + 2 : baseR;
             const sw = isHov ? 2 : 1.5;
-            const stroke = isHov ? '#fff' : '#fff';
-            return p.kind === 'tauOff'
-              ? <DiamondMarker key={i} cx={cx} cy={cy} r={r} fill={color} stroke={stroke} strokeWidth={sw} />
-              : <CircleMarker  key={i} cx={cx} cy={cy} r={r} fill={color} stroke={stroke} strokeWidth={sw} />;
+            const noSize = sizeAxis !== 'none' && sizeEnc != null && (sizeEnc[i] == null);
+            const opacity = noSize ? 0.35 : 1;
+            const marker = p.kind === 'tauOff'
+              ? <DiamondMarker cx={cx} cy={cy} r={r} fill={color} stroke="#fff" strokeWidth={sw} />
+              : <CircleMarker  cx={cx} cy={cy} r={r} fill={color} stroke="#fff" strokeWidth={sw} />;
+            return <g key={i} opacity={opacity}>{marker}</g>;
           })}
         </svg>
       </div>
@@ -430,10 +510,12 @@ export function ScatterPlotPanel({ onSelectGEVI, peaceMode = false }: Props) {
       {/* Hover tooltip */}
       {hover && (() => {
         const { point: p, cx: mx, cy: my } = hover;
-        const TW = 160, TH = 80, GAP = 12;
+        const TW = 170, TH = 96, GAP = 12;
         const left = mx + TW + GAP > window.innerWidth ? mx - TW - GAP : mx + GAP;
         const top  = my + TH + GAP > window.innerHeight ? my - TH - GAP : my + GAP;
         const kindLabel = p.kind === 'tauOn' ? ' (τ_on)' : p.kind === 'tauOff' ? ' (τ_off)' : '';
+        const hoverIdx = points.indexOf(p);
+        const sizeVal = sizeAxis !== 'none' && sizeRaw ? sizeRaw[hoverIdx] : null;
         return (
           <div
             style={{ position: 'fixed', left, top, width: TW, zIndex: 9999, pointerEvents: 'none' }}
@@ -445,6 +527,11 @@ export function ScatterPlotPanel({ onSelectGEVI, peaceMode = false }: Props) {
             <div className="text-[10px] text-ink/70 space-y-0.5">
               <div>{xCfg.label}: {xCfg.fmt(p.x)}</div>
               <div>{yCfg.label}: {yCfg.fmt(p.y)}</div>
+              {sizeAxis !== 'none' && (
+                <div>
+                  {AXES[sizeAxis].label}: {sizeVal != null ? AXES[sizeAxis].fmt(sizeVal) : '—'}
+                </div>
+              )}
             </div>
             {!peaceMode && p.gevi.overall != null && (
               <div className="text-[10px] text-ink/40 mt-1">Overall: {p.gevi.overall}</div>
