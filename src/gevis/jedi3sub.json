@@ -1,23 +1,22 @@
 {
-  "id": "asap4e",
-  "name": "ASAP4e",
-  "year": 2023,
+  "id": "jedi3sub",
+  "name": "JEDI-3sub",
+  "year": 2026,
   "category": "VSD-cpGFP GEVI",
   "tags": [
     "cpGFP",
-    "Positive-going",
     "Two-photon"
   ],
-  "paper": "Nature Methods 2023",
-  "paperUrl": "https://doi.org/10.1038/s41592-023-01913-z",
-  "description": "Speed-optimized ASAP4 variant with fast kinetics and a large fluorescence increase per action potential.",
-  "parentId": "asap3",
-  "siblingId": "asap4b",
+  "paper": "Nature Methods 2026",
+  "paperUrl": "https://doi.org/10.1038/s41592-026-03043-8",
+  "description": "JEDI-2P variant engineered for two-photon detection of subthreshold voltage fluctuations with enhanced responsiveness across the physiological voltage range.",
+  "parentId": "jedi2p",
+  "siblingId": "jedi3hyp",
   "spectrum": {
     "type": "fp",
-    "peakEx": 490,
-    "peakEm": 513,
-    "name": "ASAP4e",
+    "peakEx": 489,
+    "peakEm": 511,
+    "name": "JEDI-3sub",
     "custom": {
       "minEx": 300,
       "excitation": [
@@ -327,101 +326,7 @@
         0.003,
         0.0033,
         0.0031,
-        0.004,
-        0.0039,
-        0.0043,
-        0.0038,
-        0.0047,
-        0.0034,
-        0.0042,
-        0.0038,
-        0.0045,
-        0.0041,
-        0.0038,
-        0.0038,
-        0.0041,
-        0.005,
-        0.0041,
-        0.0044,
-        0.0027,
-        0.0041,
-        0.0028,
-        0.0032,
-        0.0026,
-        0.0035,
-        0.0037,
-        0.0038,
-        0.0041,
-        0.0037,
-        0.0045,
-        0.0032,
-        0.0033,
-        0.003,
-        0.0034,
-        0.0027,
-        0.0023,
-        0.0022,
-        0.0031,
-        0.0022,
-        0.0028,
-        0.0019,
-        0.0023,
-        0.0023,
-        0.002,
-        0.003,
-        0.003,
-        0.0034,
-        0.0043,
-        0.0033,
-        0.0038,
-        0.0031,
-        0.0038,
-        0.0032,
-        0.0035,
-        0.0033,
-        0.0033,
-        0.004,
-        0.0029,
-        0.0029,
-        0.0032,
-        0.0033,
-        0.0033,
-        0.0032,
-        0.0027,
-        0.0019,
-        0.0025,
-        0.0026,
-        0.0034,
-        0.0028,
-        0.0036,
-        0.0041,
-        0.0036,
-        0.003,
-        0.0021,
-        0.001,
-        0.0004,
-        0.0022,
-        0.0009,
-        0.0015,
-        0.0004,
-        0.0007,
-        0.001,
-        0.0013,
-        0.0016,
-        0.0014,
-        0.0018,
-        0.0005,
-        0.0017,
-        0.0004,
-        0.0012,
-        0.0012,
-        0.0002,
-        0.0011,
-        0.0021,
-        0.0022,
-        0.0023,
-        0.0022,
-        0.0017
+        0.004
       ],
       "minEm": 463,
       "emission": [
@@ -668,138 +573,99 @@
   },
   "voltage": {
     "type": "fp",
-    "slope": 21,
-    "polarity": "positive",
-    "name": "ASAP4e",
+    "slope": 15,
+    "polarity": "negative",
+    "name": "JEDI-3sub",
+    "source": "doi:10.1038/s41592-026-03043-8",
+    "sourceFigure": "Fig. 1h (main panel) and Supplementary Fig. 3C (33°C)",
     "custom": {
       "voltage": [
         -120,
         -100,
         -80,
         -70,
+        -60,
         -50,
         -30,
-        -10,
         0,
-        10,
-        30
+        30,
+        50
       ],
       "deltaF": [
-        -40,
-        -28,
-        -12,
+        58,
+        25,
+        10,
         0,
-        35,
-        80,
-        140,
-        165,
-        188,
-        210
+        -15,
+        -28,
+        -45,
+        -55,
+        -60,
+        -62
       ]
-    },
-    "source": "doi:10.1038/s41592-023-01913-z",
-    "sourceImage": "/fv-sources/asap4e.jpg",
-    "sourceFigure": "Fig. 1B"
+    }
   },
   "kinetics": [
     {
-      "on": 2.62,
-      "off": 5.69,
-      "temperature": "22\u00b0C",
-      "source": "doi:10.1038/s41592-023-01913-z",
-      "note": "Bi-exponential fast component. Supplementary Table 1 columns for ASAP4b and ASAP4e appear swapped \u2014 values here are corrected (ASAP4e is the speed-optimized variant, expected to be faster than bright-optimized ASAP4b)"
-    },
-    {
-      "on": 1.53,
-      "off": 1.54,
-      "temperature": "37\u00b0C",
-      "source": "doi:10.1038/s41592-023-01913-z",
-      "note": "Bi-exponential fast component. Supplementary Table 1 columns for ASAP4b and ASAP4e appear swapped \u2014 values here are corrected"
-    },
-    {
-      "on": 2.6,
-      "off": 6.7,
-      "temperature": "33\u00b0C",
-      "source": "doi:10.64898/2026.04.07.717088"
+      "on": 0.63,
+      "off": 2.23,
+      "temperature": "33°C",
+      "source": "doi:10.1038/s41592-026-03043-8"
     }
   ],
   "dynamicRangeData": [
     {
-      "deltaF": 210,
-      "sign": "positive",
-      "source": "doi:10.1038/s41592-023-01913-z"
-    },
-    {
-      "deltaF": 148,
-      "sign": "positive",
-      "source": "doi:10.64898/2026.04.07.717088"
+      "deltaF": -63.5,
+      "sign": "negative",
+      "source": "doi:10.1038/s41592-026-03043-8",
+      "note": "Response to a 100-mV depolarizing step from -70 mV in HEK293A cells (main text). Fig. 1h shows ΔF/F ≈ -62% at +30 mV (saturating)."
     }
   ],
   "sensitivityData": [
     {
-      "deltaF": 23,
-      "source": "doi:10.1038/s41592-023-01913-z"
-    },
-    {
-      "deltaF": 41,
-      "source": "doi:10.1038/s41592-023-01913-z",
-      "notes": "1ms FWHM AP waveform at 37\u00b0C"
+      "deltaF": 42.8,
+      "source": "doi:10.1038/s41592-026-03043-8"
     }
   ],
   "brightnessData": [
     {
-      "ratio": 0.362,
-      "reference": "asap3",
-      "source": "doi:10.1038/s41592-023-01913-z"
+      "ratio": 0.96,
+      "reference": "jedi2p",
+      "source": "doi:10.1038/s41592-026-03043-8"
     },
     {
-      "ratio": 0.5,
-      "reference": "forces1",
-      "source": "doi:10.64898/2026.04.07.717088"
+      "ratio": 1.39,
+      "reference": "asap5",
+      "source": "doi:10.1038/s41592-026-03043-8"
     }
   ],
   "photostabilityData": [
     {
-      "brightnessRemaining": 100,
-      "illumination": "100 mW/mm\u00b2",
-      "duration": "1 min",
-      "source": "doi:10.1038/s41592-023-01913-z"
+      "brightnessRemaining": 50,
+      "illumination": "37 mW/mm²",
+      "duration": "6 min",
+      "source": "doi:10.1038/s41592-026-03043-8",
+      "note": "~50% fluorescence remaining after 6 min under 2P resonant scanning (940 nm, 37 mW at sample plane, 440 Hz) at 23°C in HEK293-Kir2.1 cells (Fig. 1e, n = 4). Comparable to JEDI-2P (~48-50%) and JEDI3hyp (~52%) in the same experiment (Fig. 1f, similar across 29-100 mW range)."
     }
   ],
   "twoPhoton": [
     {
       "compatible": true,
-      "source": "doi:10.1038/s41592-023-01913-z"
+      "source": "doi:10.1038/s41592-026-03043-8"
     }
   ],
   "addgene": {
-    "id": "201031",
-    "url": "https://www.addgene.org/201031/"
+    "id": "246619",
+    "url": "https://www.addgene.org/246619/"
   },
   "researchPapers": [
     {
-      "title": "Voltage imaging reveals hippocampal inhibitory dynamics shaping pyramidal memory-encoding sequences",
-      "authors": "Taxidis J, et al.",
-      "journal": "Nature Neuroscience",
-      "year": 2025,
-      "url": "https://doi.org/10.1038/s41593-025-02016-y",
-      "sample": "Mouse, hippocampus CA1, PV and SST interneurons, in vivo"
-    },
-    {
-      "title": "Imaging sensory transmission and neuronal plasticity in primary sensory neurons with a positively tuned voltage indicator",
-      "authors": "Zhang Y, et al.",
-      "journal": "Nature Communications",
-      "year": 2025,
-      "url": "https://doi.org/10.1038/s41467-025-61774-2",
-      "sample": "Mouse, dorsal root ganglia neurons, in vivo"
-    },
-    {
-      "title": "Retroreflective beam multiplexing enables high-throughput two-photon voltage imaging in vivo",
-      "authors": "Liu Z, Han M, Chen Y, Downs NP, Wu J",
-      "journal": "bioRxiv",
-      "year": 2025,
-      "url": "https://doi.org/10.64898/2025.12.09.693349",
-      "sample": "Mouse, visual cortex and hippocampus, in vivo two-photon"
+      "title": "Designer indicators for two-photon recording of subthreshold voltage dynamics",
+      "authors": "Land MA, Galdamez M, Villette V, Zhu J, Lu X, Marosi M, et al.",
+      "journal": "Nature Methods",
+      "year": 2026,
+      "sample": "HEK293 cells, in vitro; Rat, cultured hippocampal neurons, in vitro; Mouse, visual cortex L2/3, in vivo",
+      "url": "https://doi.org/10.1038/s41592-026-03043-8"
     }
   ]
 }

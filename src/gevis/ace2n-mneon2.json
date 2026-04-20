@@ -617,6 +617,14 @@
       "year": 2025,
       "sample": "Mouse, medial prefrontal cortex, in vivo",
       "url": "https://doi.org/10.1101/2024.03.08.584173"
+    },
+    {
+      "title": "Bright and Photostable Voltage Sensors Derived from mBaoJin",
+      "authors": "Zhang H, Zhou S, Kuzmicheva TP, Subach OM, Grimm C, Eom M, Baror-Sebban S, Adam Y, Yoon YG, Emilliani V, Subach FV, Piatkevich KD",
+      "journal": "bioRxiv",
+      "year": 2025,
+      "sample": "HeLa cells; Mouse, primary hippocampal neurons, in vitro; Mouse, hippocampus CA1, in vivo (benchmark comparison against ElectraON/ElectraOFF)",
+      "url": "https://doi.org/10.1101/2025.05.30.657123"
     }
   ]
 }

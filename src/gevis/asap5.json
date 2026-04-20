@@ -494,6 +494,12 @@
       "deltaF": -59,
       "sign": "negative",
       "source": "doi:10.1016/j.neuron.2024.08.019"
+    },
+    {
+      "deltaF": -35.2,
+      "sign": "negative",
+      "source": "doi:10.1038/s41592-026-03043-8",
+      "note": "Response to a 100-mV depolarizing step from -70 mV at 33°C in HEK293A cells under 2P illumination (Extended Data Fig. 1b, n = 7 cells). Reduced response relative to JEDI-2P (41.8%) under 2P."
     }
   ],
   "subthresholdData": [
@@ -573,6 +579,14 @@
       "year": 2026,
       "url": "https://doi.org/10.64898/2025.12.29.696942",
       "sample": "Mouse, cortical neurons, in vivo"
+    },
+    {
+      "title": "Designer indicators for two-photon recording of subthreshold voltage dynamics",
+      "authors": "Land MA, Galdamez M, Villette V, Zhu J, Lu X, Marosi M, et al.",
+      "journal": "Nature Methods",
+      "year": 2026,
+      "sample": "HEK293 cells, in vitro; Mouse, visual cortex L2/3, in vivo",
+      "url": "https://doi.org/10.1038/s41592-026-03043-8"
     }
   ]
 }

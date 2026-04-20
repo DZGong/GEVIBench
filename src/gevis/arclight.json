@@ -517,6 +517,10 @@
     {
       "deltaF": 2.6,
       "source": "doi:10.1021/acschemneuro.6b00234"
+    },
+    {
+      "deltaF": 2.7,
+      "source": "doi:10.1038/s41598-017-08731-2"
     }
   ],
   "photostabilityData": [

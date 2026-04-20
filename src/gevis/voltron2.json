@@ -926,6 +926,14 @@
       "year": 2025,
       "sample": "Mouse, hippocampus CA1 pyramidal neurons, in vivo, Voltron2-ST JF552",
       "url": "https://doi.org/10.7554/eLife.96718"
+    },
+    {
+      "title": "A novel rhodopsin-based voltage indicator for simultaneous two-photon optical recording with GCaMP in vivo",
+      "authors": "Villette V, et al.",
+      "journal": "bioRxiv",
+      "year": 2024,
+      "sample": "Rat, hippocampal neurons, in vitro; mouse, cerebellum Golgi cells, in vivo, two-photon, Voltron2-ST JF552",
+      "url": "https://doi.org/10.1101/2024.11.15.623698"
     }
   ]
 }
