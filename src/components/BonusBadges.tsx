@@ -16,10 +16,10 @@ const badgeConfig = {
         <path d="M14 9L17 12L14 15" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
       </>
     ),
-    tooltip: 'Red-shifted for deep tissue imaging (+3 pts)'
+    tooltip: 'Red-shifted for deep tissue imaging'
   },
   twoPhoton: {
-    label: '2-Photon',
+    label: '2-Photon validated',
     color: '#8b5cf6',
     // Two photon dots converging to a point, centered at (12,12)
     iconPaths: (color: string) => (
@@ -30,10 +30,10 @@ const badgeConfig = {
         <circle cx="12" cy="15" r="1.5" fill={color} />
       </>
     ),
-    tooltip: 'Two-photon verified (+3 pts)'
+    tooltip: 'Two-photon verified'
   },
   positiveGoing: {
-    label: 'Positive',
+    label: 'Positive going',
     color: '#22c55e',
     // Plus sign centered at (12,12)
     iconPaths: (color: string) => (
@@ -42,7 +42,7 @@ const badgeConfig = {
         <path d="M12 8V16" stroke={color} strokeWidth="1.5" strokeLinecap="round" />
       </>
     ),
-    tooltip: 'Positive-going signal (+3 pts)'
+    tooltip: 'Positive-going signal'
   }
 };
 
@@ -107,9 +107,26 @@ interface BonusBadgesProps {
   };
   size?: 'sm' | 'md' | 'lg';
   vertical?: boolean;
+  // 'hex' = original hexagon+label icons. 'pill' = compact colored text pills suitable for a tag row.
+  variant?: 'hex' | 'pill';
 }
 
-export const BonusBadges: React.FC<BonusBadgesProps> = ({ gevi, size = 'md', vertical = false }) => {
+const BonusPill: React.FC<{ type: 'redShift' | 'twoPhoton' | 'positiveGoing' }> = ({ type }) => {
+  const config = badgeConfig[type];
+  return (
+    <span
+      className="group relative text-xs px-2 py-1 rounded font-medium cursor-help"
+      style={{ backgroundColor: `${config.color}20`, color: config.color }}
+    >
+      {config.label}
+      <span className="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-1 hidden group-hover:block z-50 whitespace-nowrap px-2 py-1 text-xs text-white bg-ink rounded">
+        {config.tooltip}
+      </span>
+    </span>
+  );
+};
+
+export const BonusBadges: React.FC<BonusBadgesProps> = ({ gevi, size = 'md', vertical = false, variant = 'hex' }) => {
   const badges: ('redShift' | 'twoPhoton' | 'positiveGoing')[] = [];
 
   const tags = Array.isArray(gevi.tags) ? gevi.tags : [];
@@ -137,10 +154,20 @@ export const BonusBadges: React.FC<BonusBadgesProps> = ({ gevi, size = 'md', ver
 
   if (badges.length === 0) return null;
 
+  if (variant === 'pill') {
+    return (
+      <>
+        {badges.map(badge => (
+          <BonusPill key={badge} type={badge} />
+        ))}
+      </>
+    );
+  }
+
   return (
     <div className={`flex ${vertical ? 'flex-col items-center' : 'items-start'} gap-2`}>
       <div className="text-xs font-medium text-ink/50 dark:text-ink/40 pt-1">
-        Bonus:
+        Features:
       </div>
       <div className={`flex ${vertical ? 'flex-col' : ''} gap-3`}>
         {badges.map(badge => (

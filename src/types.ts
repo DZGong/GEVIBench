@@ -41,17 +41,14 @@ export interface GEVI {
     source: string;
   }[];
 
-  // Computed scores — derived at runtime by geviData.ts, never stored in JSON
-  brightness?: number | null;
-  speed?: number | null;
-  sensitivity?: number | null;
-  dynamicRange?: number | null;
-  photostability?: number | null;
-  overall?: number;
-  // Raw display values — computed at runtime for tabular ranking
-  bRel?: number | null;           // brightness relative to EGFP (from graph traversal)
-  displayTauOn?: number | null;   // selected τ_on in ms (temperature-preferred)
-  displayTauOff?: number | null;  // selected τ_off in ms (temperature-preferred)
+  // Raw derived values — computed at runtime for tabular display + sorting
+  bRel?: number | null;                  // brightness relative to EGFP (from graph traversal)
+  displayTauOn?: number | null;          // selected τ_on in ms (temperature-preferred)
+  displayTauOff?: number | null;         // selected τ_off in ms (temperature-preferred)
+  displayTauSum?: number | null;         // τ_on + τ_off, for speed sorting
+  displayDynamicRange?: number | null;   // median |ΔF/F| across entries
+  displaySensitivity?: number | null;    // median |ΔF/F| per AP across entries
+  displayPhotostab?: number | null;      // normalized % remaining @ 100 mW/mm², 1 min
   description: string;
   familyTreePath?: string[] | null;
   parentId?: string;
@@ -93,8 +90,7 @@ export interface GEVI {
     id: string;
     url: string;
   };
-  paperCount?: number;    // computed at runtime from researchPapers.length, never stored in JSON
-  popularity?: number;    // computed at runtime from paperCount, never stored in JSON
+  paperCount?: number;    // computed at runtime from researchPapers.length
 }
 
 export interface ResearchPaper {
@@ -113,7 +109,16 @@ export interface GEVIColor {
   label: string;
 }
 
-export type SortField = 'overall' | 'brightness' | 'speed' | 'sensitivity' | 'dynamicRange' | 'photostability' | 'popularity' | 'year';
+export type SortField =
+  | 'year'
+  | 'paperCount'
+  | 'bRel'
+  | 'displayTauOn'
+  | 'displayTauOff'
+  | 'displayTauSum'
+  | 'displayDynamicRange'
+  | 'displaySensitivity'
+  | 'displayPhotostab';
 
 export type SortOrder = 'asc' | 'desc';
 
@@ -122,7 +127,7 @@ export interface SortConfig {
   order: SortOrder;
 }
 
-export type ViewTab = 'database' | 'methodology' | 'contact' | 'tools';
+export type ViewTab = 'database' | 'contact' | 'tools';
 
 export type MobileView = 'list' | 'detail';
 

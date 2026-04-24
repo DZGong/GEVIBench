@@ -4,7 +4,6 @@
 
 import { useMemo, useState, useRef } from 'react';
 import { BookOpen, ExternalLink } from 'lucide-react';
-import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar } from 'recharts';
 import { getAllGEVIs } from '../geviData';
 import type { GEVI, TreeNode } from '../types';
 import { getTreeNodeColor } from '../utils';
@@ -68,13 +67,40 @@ function hexPath(r: number, cr = r * 0.32): string {
 const MIN_NODE_WIDTH = 50;
 const SIBLING_GAP = 7;
 const LEVEL_HEIGHT = 66;
-const LEVEL_STAGGER_BASE = 42;    // y-stagger (px) applied to first branch sibling at depth 0
-const LEVEL_STAGGER_DECAY = 11;   // stagger shrinks by this amount per depth level
+const DEPTH_STAGGER_UNIT = 11;    // per-level droop for deep branch children
+const MAX_STAGGER = 44;           // cap stagger so the tree doesn't grow unboundedly tall
+
+// Manual post-layout subtree shifts, keyed by the tree-node key (geviId for leaf/dual
+// nodes, path segment for pure branches). The shift is applied after algorithmic
+// packing completes, so it does NOT push sibling subtrees — the shifted branch
+// visually overlaps into neighboring empty space.
+const MANUAL_SUBTREE_SHIFTS: Record<string, { dx: number; dy: number }> = {
+  vsfp1: { dx: 0, dy: 44 },
+  'VSD-FRET': { dx: 30, dy: 0 },
+  arclight: { dx: 0, dy: 33 },
+  _fork_quasar1_quasar2: { dx: -57, dy: 44 },
+  _fork_archon1_archon2: { dx: -57, dy: -44 },
+  _fork_quasar6_quasar6b: { dx: 0, dy: 44 },
+  'Opsin-FRET': { dx: -80, dy: 0 },
+  Chemigenetic: { dx: -60, dy: 88 },
+  'ace2n-mneon': { dx: 0, dy: 44 },
+  macq: { dx: 66, dy: 0 },
+  arch: { dx: 0, dy: -44 },
+  varnam: { dx: 0, dy: 22 },
+  cephid: { dx: 0, dy: 0 },
+  varnam2: { dx: 0, dy: 0 },
+  'ace2n-mneon2': { dx: 0, dy: 110 },
+  voltron2: { dx: 0, dy: 22 },
+  hvi: { dx: 0, dy: 44 },
+  voltron: { dx: 0, dy: -22 },
+  '2photron': { dx: 0, dy: 44 },
+  solaris: { dx: 0, dy: 44 },
+};
 const TOP_PADDING = 31;
 const NODE_RADIUS_LEAF = 8;
 const NODE_RADIUS_BRANCH = 5;
 const TOOLTIP_W = 170;
-const TOOLTIP_H = 270;
+const TOOLTIP_H = 130;
 
 interface LayoutNode {
   id: string;
@@ -109,8 +135,15 @@ interface HoverInfo {
   y: number;
 }
 
+// Depth of a subtree measured in edges to the deepest leaf (0 for a leaf).
+function subtreeDepth(node: TreeNode): number {
+  if (!node.children || Object.keys(node.children).length === 0) return 0;
+  let maxChild = 0;
+  for (const c of Object.values(node.children)) maxChild = Math.max(maxChild, subtreeDepth(c));
+  return 1 + maxChild;
+}
+
 // Recursively compute subtree layout using contour-based (profile-based) packing.
-// depth: distance from root (used to scale stagger — more aggressive near root)
 function layoutTree(node: TreeNode, x: number, y: number, depth = 0): LayoutResult {
   const nodes: LayoutNode[] = [];
   const links: LayoutLink[] = [];
@@ -135,20 +168,19 @@ function layoutTree(node: TreeNode, x: number, y: number, depth = 0): LayoutResu
   // Fork nodes use reduced vertical spacing for the Y-fork effect
   const forkLevelHeight = Math.round(LEVEL_HEIGHT * 0.45);
 
-  // Stagger amount decays with depth: large near root, zero for deep nodes.
-  // Leaf children (no grandchildren) get NO stagger — they stay at the same y
-  // so sibling leaves always align horizontally.
-  const effectiveStagger = Math.max(0, LEVEL_STAGGER_BASE - depth * LEVEL_STAGGER_DECAY);
-
-  // First pass: layout each child subtree at x=0 to get contours and structure
+  // First pass: layout each child subtree at x=0 to get contours and structure.
+  // Branch children droop by their subtree depth: a branch whose descendants run
+  // N levels deep gets pushed N × DEPTH_STAGGER_UNIT below its parent's child level,
+  // while leaves and shallow branches stay at the parent level. This lets deep
+  // subtrees clear the packing proximity threshold (LEVEL_HEIGHT) relative to
+  // shallow siblings, so shallow siblings can slide horizontally into the space
+  // the deep subtree would otherwise block.
   const childLayouts: { key: string; result: LayoutResult }[] = [];
-  let branchChildIndex = 0;
   for (let i = 0; i < childKeys.length; i++) {
     const key = childKeys[i];
     const childNode = node.children[key];
     const childIsBranch = !!(childNode.children && Object.keys(childNode.children).length > 0);
-    const stagger = childIsBranch ? branchChildIndex * effectiveStagger : 0;
-    if (childIsBranch) branchChildIndex++;
+    const stagger = childIsBranch ? Math.min(subtreeDepth(childNode) * DEPTH_STAGGER_UNIT, MAX_STAGGER) : 0;
     const levelH = isFork ? forkLevelHeight : LEVEL_HEIGHT;
     const childY = y + levelH + stagger;
     const result = layoutTree(childNode, 0, childY, depth + 1);
@@ -200,33 +232,36 @@ function layoutTree(node: TreeNode, x: number, y: number, depth = 0): LayoutResu
 
   // Fourth pass: apply offsets to all child nodes and links
   for (let i = 0; i < childLayouts.length; i++) {
-    const { result } = childLayouts[i];
+    const { key, result } = childLayouts[i];
     const offsetX = offsets[i];
+    const manual = MANUAL_SUBTREE_SHIFTS[key];
+    const extraDx = manual?.dx ?? 0;
+    const extraDy = manual?.dy ?? 0;
 
     for (const cn of result.nodes) {
-      nodes.push({ ...cn, x: cn.x + offsetX });
+      nodes.push({ ...cn, x: cn.x + offsetX + extraDx, y: cn.y + extraDy });
     }
     for (const cl of result.links) {
       links.push({
-        fromX: cl.fromX + offsetX,
-        fromY: cl.fromY,
-        toX: cl.toX + offsetX,
-        toY: cl.toY,
+        fromX: cl.fromX + offsetX + extraDx,
+        fromY: cl.fromY + extraDy,
+        toX: cl.toX + offsetX + extraDx,
+        toY: cl.toY + extraDy,
       });
     }
 
-    // Link from parent to this child subtree root
+    // Link from parent (unshifted) to this child subtree root (shifted)
     const childRootNode = result.nodes[0];
     const fromOffset = isFork ? 0 : NODE_RADIUS_BRANCH + 2;
     const toOffset = childRootNode.isFork ? 0 : NODE_RADIUS_BRANCH + 2;
     links.push({
       fromX: x,
       fromY: y + fromOffset,
-      toX: childRootNode.x + offsetX,
-      toY: childRootNode.y - toOffset,
+      toX: childRootNode.x + offsetX + extraDx,
+      toY: childRootNode.y + extraDy - toOffset,
     });
 
-    maxY = Math.max(maxY, result.maxY);
+    maxY = Math.max(maxY, result.maxY + extraDy);
   }
 
   // Build parent contour = this node + union of all shifted children contours
@@ -340,6 +375,34 @@ function buildTreeFromPaths(gevis: GEVI[]): TreeNode {
   }
   groupSiblings(root);
 
+  // Manual sibling-order overrides: [parentKey, orderedChildKeys[]]. Keys not listed
+  // keep their existing relative order and come after the listed ones.
+  const SIBLING_ORDER_OVERRIDES: [string, string[]][] = [
+    ['VSD-FRET', ['lotusv', 'vsfp1', 'mermaid']],
+    ['arclight', ['marina', 'bongwoori', 'harclight1']],
+    ['varnam', ['varnam2', 'cephid']],
+    ['Opsin-FRET', ['ace2n-mneon', 'macq', 'Chemigenetic']],
+    ['archon1', ['_fork_quasar6_quasar6b', 'somarchon']],
+    ['Opsin-Fluorescent', ['arch', 'props']],
+  ];
+  function findNode(n: TreeNode, key: string): TreeNode | null {
+    if (!n.children) return null;
+    if (n.children[key]) return n.children[key];
+    for (const c of Object.values(n.children)) {
+      const hit = findNode(c, key);
+      if (hit) return hit;
+    }
+    return null;
+  }
+  for (const [parentKey, order] of SIBLING_ORDER_OVERRIDES) {
+    const parent = parentKey === 'GEVI' ? root : findNode(root, parentKey);
+    if (!parent?.children) continue;
+    const reordered: Record<string, TreeNode> = {};
+    for (const k of order) if (parent.children[k]) reordered[k] = parent.children[k];
+    for (const [k, v] of Object.entries(parent.children)) if (!(k in reordered)) reordered[k] = v;
+    parent.children = reordered;
+  }
+
   // Prune empty children objects.
   function prune(n: TreeNode) {
     if (!n.children) return;
@@ -379,6 +442,61 @@ function buildFullTree(gevis: GEVI[]) {
     toY: l.toY,
   }));
 
+  // Node-only shifts: move the node itself without shifting its subtree.
+  // Parent→node link's endpoint and node→children links' start points are updated,
+  // so connecting lines remain attached to the repositioned node.
+  const NODE_ONLY_SHIFTS: Record<string, { dx: number; dy: number }> = {
+    Chemigenetic: { dx: 60, dy: -44 },
+  };
+  for (const [name, { dx, dy }] of Object.entries(NODE_ONLY_SHIFTS)) {
+    const node = shiftedNodes.find(n => n.name === name);
+    if (!node) continue;
+    const oldX = node.x;
+    const oldFromY = node.y + NODE_RADIUS_BRANCH + 2;
+    const oldToY = node.y - NODE_RADIUS_BRANCH - 2;
+    node.x += dx;
+    node.y += dy;
+    for (const l of shiftedLinks) {
+      if (l.fromX === oldX && l.fromY === oldFromY) { l.fromX = node.x; l.fromY = node.y + NODE_RADIUS_BRANCH + 2; }
+      if (l.toX === oldX && l.toY === oldToY) { l.toX = node.x; l.toY = node.y - NODE_RADIUS_BRANCH - 2; }
+    }
+  }
+
+  // Center branch nodes between pairs of their children (node-only, link endpoints updated).
+  const CENTER_BETWEEN: [string, string, string][] = [
+    ['VSD', 'VSD-FRET', 'VSD-single'],
+    ['Opsin', 'Opsin-Fluorescent', 'Opsin-FRET'],
+  ];
+  for (const [name, leftName, rightName] of CENTER_BETWEEN) {
+    const node = shiftedNodes.find(n => n.name === name);
+    const left = shiftedNodes.find(n => n.name === leftName);
+    const right = shiftedNodes.find(n => n.name === rightName);
+    if (!node || !left || !right) continue;
+    const oldX = node.x;
+    const newX = (left.x + right.x) / 2;
+    node.x = newX;
+    const fromY = node.y + NODE_RADIUS_BRANCH + 2;
+    const toY = node.y - NODE_RADIUS_BRANCH - 2;
+    for (const l of shiftedLinks) {
+      if (l.fromX === oldX && l.fromY === fromY) l.fromX = newX;
+      if (l.toX === oldX && l.toY === toY) l.toX = newX;
+    }
+  }
+
+  // Center GEVI root at the horizontal midpoint of the entire tree.
+  const geviRoot = shiftedNodes.find(n => n.name === 'GEVI');
+  if (geviRoot) {
+    const allMinX = Math.min(...shiftedNodes.map(n => n.x));
+    const allMaxX = Math.max(...shiftedNodes.map(n => n.x));
+    const oldX = geviRoot.x;
+    const newX = (allMinX + allMaxX) / 2;
+    geviRoot.x = newX;
+    const fromY = geviRoot.y + NODE_RADIUS_BRANCH + 2;
+    for (const l of shiftedLinks) {
+      if (l.fromX === oldX && l.fromY === fromY) l.fromX = newX;
+    }
+  }
+
   const crossLinks: LayoutLink[] = [];
   for (const gevi of gevis) {
     if (!gevi.crossBranchParentId) continue;
@@ -398,12 +516,10 @@ interface FamilyTreePanelProps {
   selectedGEVI: GEVI | null;
   compareGEVIs: GEVI[];
   onAddToCompare: (gevi: GEVI) => void;
-  peaceMode?: boolean;
 }
 
 export function FamilyTreePanel({
   onSelectGEVI,
-  peaceMode = false,
 }: FamilyTreePanelProps) {
   const gevis = useMemo(() => getAllGEVIs(), []);
   const { nodes, links, crossLinks } = useMemo(() => buildFullTree(gevis), [gevis]);
@@ -429,7 +545,6 @@ export function FamilyTreePanel({
   let tooltipNameColor = '';
   let tooltipTags: string[] = [];
   let tooltipExtraCount = 0;
-  let tooltipRadarData: { subject: string; value: number; fullMark: number }[] = [];
   if (hoverInfo) {
     const g = hoverInfo.gevi;
 
@@ -454,14 +569,6 @@ export function FamilyTreePanel({
     const tags = Array.isArray(g.tags) ? g.tags : [];
     tooltipTags = tags.slice(0, 4);
     tooltipExtraCount = tags.length - tooltipTags.length;
-    tooltipRadarData = [
-      { subject: 'Brightness',  value: g.brightness    ?? 0, fullMark: 100 },
-      { subject: 'Speed',       value: g.speed          ?? 0, fullMark: 100 },
-      { subject: 'Dyn. Range',  value: g.dynamicRange   ?? 0, fullMark: 100 },
-      { subject: 'Sensitivity', value: g.sensitivity    ?? 0, fullMark: 100 },
-      { subject: 'Photostab.',  value: g.photostability ?? 0, fullMark: 100 },
-      { subject: 'Popularity',  value: Math.min(100, (g.paperCount ?? 0) * 5), fullMark: 100 },
-    ];
   }
 
   return (
@@ -597,12 +704,7 @@ export function FamilyTreePanel({
                 {hoverInfo.gevi.name}
               </button>
             </div>
-            {!peaceMode && hoverInfo.gevi.overall != null && (
-              <div className="text-right flex-shrink-0">
-                <div className="text-xl font-bold text-klein leading-none">{hoverInfo.gevi.overall}</div>
-                <div className="text-[8px] text-ink/40">Overall</div>
-              </div>
-            )}
+            <div className="text-right flex-shrink-0 text-[10px] text-ink/50">{hoverInfo.gevi.year}</div>
           </div>
 
           {/* Tag chips */}
@@ -633,21 +735,6 @@ export function FamilyTreePanel({
             </a>
           )}
 
-          {/* Divider */}
-          <div className="border-t mb-1 border-ink/5" />
-
-          {/* Radar chart */}
-          <RadarChart width={150} height={130} data={tooltipRadarData}>
-            <PolarGrid stroke="#e5e7eb" />
-            <PolarAngleAxis dataKey="subject" tick={{ fontSize: 8 }} />
-            <PolarRadiusAxis domain={[0, 100]} tick={false} axisLine={false} />
-            <Radar
-              dataKey="value"
-              stroke="#002FA7"
-              fill="#002FA7"
-              fillOpacity={0.2}
-            />
-          </RadarChart>
         </div>
       )}
 

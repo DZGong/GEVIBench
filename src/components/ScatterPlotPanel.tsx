@@ -1,17 +1,19 @@
 import { useMemo, useState, useRef, useCallback, useEffect } from 'react';
+import { ChevronDown } from 'lucide-react';
 import { getAllGEVIs } from '../geviData';
 import { getTreeNodeColor } from '../utils';
 import type { GEVI } from '../types';
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
-type AxisKey = 'brightness' | 'speed' | 'dynamicRange' | 'sensitivity' | 'photostability' | 'popularity' | 'year';
+type AxisKey = 'brightness' | 'tauOn' | 'tauOff' | 'dynamicRange' | 'sensitivity' | 'photostability' | 'year';
 type SizeAxis = AxisKey | 'none';
-type PointKind = 'normal' | 'tauOn' | 'tauOff';
+
+type LabelPart = { text: string; sub?: boolean };
 
 interface AxisConfig {
-  label: string;
-  unit: string;
+  labelParts: LabelPart[];     // rendered in SVG via <tspan> (for real subscripts)
+  labelText: string;           // plain-text form for <select> options and tooltips
   defaultLog: boolean;
   fmt: (v: number) => string;
 }
@@ -20,7 +22,6 @@ interface PlotPoint {
   x: number;
   y: number;
   gevi: GEVI;
-  kind: PointKind;
 }
 
 interface HoverInfo {
@@ -31,17 +32,95 @@ interface HoverInfo {
 
 // ── Axis configs ──────────────────────────────────────────────────────────────
 
+const tauFmt = (v: number) => (v < 1 ? v.toPrecision(2) : v < 10 ? v.toFixed(1) : Math.round(v).toString()) + ' ms';
+
 const AXES: Record<AxisKey, AxisConfig> = {
-  brightness:     { label: 'Brightness',     unit: 'B/B_EGFP',  defaultLog: true,  fmt: v => v < 0.01 ? v.toExponential(1) : parseFloat(v.toPrecision(2)).toString() + '×' },
-  speed:          { label: 'Speed (τ)',       unit: 'ms',        defaultLog: true,  fmt: v => (v < 1 ? v.toPrecision(2) : v < 10 ? v.toFixed(1) : Math.round(v).toString()) + ' ms' },
-  dynamicRange:   { label: 'Dynamic Range',   unit: '%ΔF/F',     defaultLog: false, fmt: v => Math.round(v) + '%' },
-  sensitivity:    { label: 'Sensitivity',     unit: '%/AP',      defaultLog: false, fmt: v => parseFloat(v.toPrecision(2)).toString() + '%' },
-  photostability: { label: 'Photostability',  unit: '% remain',  defaultLog: false, fmt: v => Math.round(v) + '%' },
-  popularity:     { label: 'Popularity',      unit: 'papers',    defaultLog: false, fmt: v => Math.round(v) + ' papers' },
-  year:           { label: 'Year',            unit: '',          defaultLog: false, fmt: v => Math.round(v).toString() },
+  brightness:     { labelParts: [{ text: 'B/B' }, { text: 'EGFP', sub: true }],                   labelText: 'B/B_EGFP',         defaultLog: true,  fmt: v => v < 0.01 ? v.toExponential(1) : parseFloat(v.toPrecision(2)).toString() + '×' },
+  tauOn:          { labelParts: [{ text: 'τ' }, { text: 'on', sub: true }, { text: ' (ms)' }],    labelText: 'τ_on (ms)',        defaultLog: true,  fmt: tauFmt },
+  tauOff:         { labelParts: [{ text: 'τ' }, { text: 'off', sub: true }, { text: ' (ms)' }],   labelText: 'τ_off (ms)',       defaultLog: true,  fmt: tauFmt },
+  dynamicRange:   { labelParts: [{ text: 'ΔF/F per 100mV' }],                                     labelText: 'ΔF/F per 100mV',   defaultLog: false, fmt: v => Math.round(v) + '%' },
+  sensitivity:    { labelParts: [{ text: 'ΔF/F per AP' }],                                        labelText: 'ΔF/F per AP',      defaultLog: false, fmt: v => parseFloat(v.toPrecision(2)).toString() + '%' },
+  photostability: { labelParts: [{ text: 'F' }, { text: 'remain', sub: true }, { text: '%' }],    labelText: 'F_remain%',        defaultLog: false, fmt: v => Math.round(v) + '%' },
+  year:           { labelParts: [{ text: 'Year' }],                                               labelText: 'Year',             defaultLog: false, fmt: v => Math.round(v).toString() },
 };
 
 const AXIS_KEYS = Object.keys(AXES) as AxisKey[];
+
+// Render a subscripted axis label as SVG <tspan>s. `baseline-shift="sub"` keeps
+// subscripts correctly positioned even when the parent <text> is rotated (Y axis).
+function renderAxisLabel(parts: LabelPart[]) {
+  return parts.map((p, i) => (
+    <tspan key={i} baselineShift={p.sub ? 'sub' : undefined} fontSize={p.sub ? '80%' : undefined}>
+      {p.text}
+    </tspan>
+  ));
+}
+
+// HTML variant of the same label — uses real <sub>, safe inside buttons/menus.
+function renderHtmlLabel(parts: LabelPart[]) {
+  return parts.map((p, i) => (p.sub ? <sub key={i}>{p.text}</sub> : <span key={i}>{p.text}</span>));
+}
+
+// Custom dropdown that supports rich labels (HTML <sub>), since <select><option>
+// only accepts plain text. Closes on outside click or Escape.
+function LabelDropdown<T extends string>({
+  value,
+  onChange,
+  options,
+}: {
+  value: T;
+  onChange: (v: T) => void;
+  options: { key: T; parts: LabelPart[]; suffix?: string }[];
+}) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const onDocMouse = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    };
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setOpen(false); };
+    document.addEventListener('mousedown', onDocMouse);
+    document.addEventListener('keydown', onKey);
+    return () => {
+      document.removeEventListener('mousedown', onDocMouse);
+      document.removeEventListener('keydown', onKey);
+    };
+  }, [open]);
+
+  const current = options.find(o => o.key === value);
+
+  return (
+    <div className="relative" ref={ref}>
+      <button
+        type="button"
+        onClick={() => setOpen(o => !o)}
+        className="text-xs border border-ink/20 rounded px-2 py-1 bg-surface-low text-ink focus:outline-none flex items-center gap-1.5"
+      >
+        <span>{current ? renderHtmlLabel(current.parts) : null}{current?.suffix}</span>
+        <ChevronDown className="w-3 h-3 opacity-50" />
+      </button>
+      {open && (
+        <div className="absolute z-50 mt-1 left-0 bg-surface-lowest border border-ink/20 rounded shadow-md py-1 min-w-full whitespace-nowrap">
+          {options.map(o => {
+            const selected = o.key === value;
+            return (
+              <button
+                key={o.key}
+                type="button"
+                onClick={() => { onChange(o.key); setOpen(false); }}
+                className={`block w-full text-left text-xs px-3 py-1 ${selected ? 'bg-klein/10 text-klein font-medium' : 'text-ink'} hover:bg-klein hover:text-white`}
+              >
+                {renderHtmlLabel(o.parts)}{o.suffix}
+              </button>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
 
 // ── Raw value extraction ──────────────────────────────────────────────────────
 
@@ -61,6 +140,10 @@ function getRawValue(gevi: GEVI, axis: AxisKey): number | null {
   switch (axis) {
     case 'brightness':
       return gevi.bRel != null && gevi.bRel > 0 ? gevi.bRel : null;
+    case 'tauOn':
+      return gevi.displayTauOn != null && gevi.displayTauOn > 0 ? gevi.displayTauOn : null;
+    case 'tauOff':
+      return gevi.displayTauOff != null && gevi.displayTauOff > 0 ? gevi.displayTauOff : null;
     case 'dynamicRange': {
       if (!gevi.dynamicRangeData?.length) return null;
       return Math.max(...gevi.dynamicRangeData.map(d => Math.abs(d.deltaF)));
@@ -86,8 +169,6 @@ function getRawValue(gevi: GEVI, axis: AxisKey): number | null {
       const { e } = parsed[0];
       return normalizePhotostability(e.brightnessRemaining, e.illumination, e.duration);
     }
-    case 'popularity':
-      return gevi.paperCount != null ? gevi.paperCount : null;
     case 'year':
       return gevi.year != null ? gevi.year : null;
     default:
@@ -95,52 +176,20 @@ function getRawValue(gevi: GEVI, axis: AxisKey): number | null {
   }
 }
 
-// Raw value for the size dimension. For speed, returns τ in ms (bigger τ = slower);
-// the caller inverts this for sizing so larger markers = faster kinetics.
-function getSizeRawValue(gevi: GEVI, axis: AxisKey, pt: PlotPoint, xAxis: AxisKey, yAxis: AxisKey): number | null {
-  if (axis === 'speed') {
-    if (xAxis === 'speed' && yAxis === 'speed') return pt.x + pt.y;
-    if (xAxis === 'speed') return pt.x;
-    if (yAxis === 'speed') return pt.y;
-    if (gevi.displayTauOn == null || gevi.displayTauOff == null) return null;
-    return gevi.displayTauOn + gevi.displayTauOff;
-  }
-  return getRawValue(gevi, axis);
-}
-
 // Map a raw value to the quantity encoded by marker size (bigger = "better").
-// Speed inverts τ so smaller τ → larger marker.
+// τ axes are inverted so smaller τ → larger marker (faster kinetics).
 function sizeEncoded(raw: number | null, axis: AxisKey): number | null {
   if (raw == null || raw <= 0) return null;
-  return axis === 'speed' ? 1 / raw : raw;
+  return (axis === 'tauOn' || axis === 'tauOff') ? 1 / raw : raw;
 }
 
 function generatePoints(gevis: GEVI[], xAxis: AxisKey, yAxis: AxisKey): PlotPoint[] {
   const pts: PlotPoint[] = [];
   for (const gevi of gevis) {
-    const isXSpeed = xAxis === 'speed';
-    const isYSpeed = yAxis === 'speed';
-
-    if (isXSpeed && isYSpeed) {
-      // (τ_on, τ_off) as a single point showing kinetics pair
-      const on = gevi.displayTauOn, off = gevi.displayTauOff;
-      if (on != null && off != null) pts.push({ x: on, y: off, gevi, kind: 'normal' });
-    } else if (isXSpeed) {
-      const yVal = getRawValue(gevi, yAxis);
-      if (yVal == null) continue;
-      if (gevi.displayTauOn != null) pts.push({ x: gevi.displayTauOn, y: yVal, gevi, kind: 'tauOn' });
-      if (gevi.displayTauOff != null) pts.push({ x: gevi.displayTauOff, y: yVal, gevi, kind: 'tauOff' });
-    } else if (isYSpeed) {
-      const xVal = getRawValue(gevi, xAxis);
-      if (xVal == null) continue;
-      if (gevi.displayTauOn != null) pts.push({ x: xVal, y: gevi.displayTauOn, gevi, kind: 'tauOn' });
-      if (gevi.displayTauOff != null) pts.push({ x: xVal, y: gevi.displayTauOff, gevi, kind: 'tauOff' });
-    } else {
-      const xVal = getRawValue(gevi, xAxis);
-      const yVal = getRawValue(gevi, yAxis);
-      if (xVal == null || yVal == null) continue;
-      pts.push({ x: xVal, y: yVal, gevi, kind: 'normal' });
-    }
+    const xVal = getRawValue(gevi, xAxis);
+    const yVal = getRawValue(gevi, yAxis);
+    if (xVal == null || yVal == null) continue;
+    pts.push({ x: xVal, y: yVal, gevi });
   }
   return pts;
 }
@@ -201,23 +250,17 @@ function CircleMarker({ cx, cy, r, fill, stroke, strokeWidth }: { cx: number; cy
   return <circle cx={cx} cy={cy} r={r} fill={fill} stroke={stroke} strokeWidth={strokeWidth} />;
 }
 
-function DiamondMarker({ cx, cy, r, fill, stroke, strokeWidth }: { cx: number; cy: number; r: number; fill: string; stroke: string; strokeWidth: number }) {
-  const d = r * 1.3;
-  return <path d={`M${cx},${cy - d} L${cx + d},${cy} L${cx},${cy + d} L${cx - d},${cy} Z`} fill={fill} stroke={stroke} strokeWidth={strokeWidth} />;
-}
-
 // ── Component ─────────────────────────────────────────────────────────────────
 
 interface Props {
   onSelectGEVI: (gevi: GEVI) => void;
-  peaceMode?: boolean;
 }
 
-export function ScatterPlotPanel({ onSelectGEVI, peaceMode = false }: Props) {
+export function ScatterPlotPanel({ onSelectGEVI }: Props) {
   const gevis = useMemo(() => getAllGEVIs(), []);
 
   const [xAxis, setXAxis] = useState<AxisKey>('brightness');
-  const [yAxis, setYAxis] = useState<AxisKey>('speed');
+  const [yAxis, setYAxis] = useState<AxisKey>('tauOn');
   const [sizeAxis, setSizeAxis] = useState<SizeAxis>('none');
   const [xLog, setXLog] = useState(true);
   const [yLog, setYLog] = useState(true);
@@ -236,8 +279,8 @@ export function ScatterPlotPanel({ onSelectGEVI, peaceMode = false }: Props) {
   // Size-dimension values: raw (for tooltip display) and encoded (for marker size).
   const sizeRaw = useMemo(() => {
     if (sizeAxis === 'none') return null;
-    return points.map(p => getSizeRawValue(p.gevi, sizeAxis, p, xAxis, yAxis));
-  }, [points, sizeAxis, xAxis, yAxis]);
+    return points.map(p => getRawValue(p.gevi, sizeAxis));
+  }, [points, sizeAxis]);
 
   const sizeEnc = useMemo(() => {
     if (!sizeRaw || sizeAxis === 'none') return null;
@@ -296,9 +339,6 @@ export function ScatterPlotPanel({ onSelectGEVI, peaceMode = false }: Props) {
   const xTicks = useMemo(() => makeTicks(xMin, xMax, xLog), [xMin, xMax, xLog]);
   const yTicks = useMemo(() => makeTicks(yMin, yMax, yLog), [yMin, yMax, yLog]);
 
-  const showSpeedLegend = xAxis === 'speed' || yAxis === 'speed';
-  const isSpeedVsSpeed = xAxis === 'speed' && yAxis === 'speed';
-
   // SVG mouse: use getScreenCTM to correctly map screen→SVG coords (handles
   // preserveAspectRatio letterboxing, CSS transforms, zoom, etc.)
   const handleSvgMouseMove = useCallback((e: React.MouseEvent<SVGSVGElement>) => {
@@ -351,13 +391,11 @@ export function ScatterPlotPanel({ onSelectGEVI, peaceMode = false }: Props) {
         {/* X axis */}
         <div className="flex items-center gap-2">
           <span className="text-xs font-semibold text-ink/60 w-5">X</span>
-          <select
+          <LabelDropdown<AxisKey>
             value={xAxis}
-            onChange={e => setXAxis(e.target.value as AxisKey)}
-            className="text-xs border border-ink/20 rounded px-2 py-1 bg-surface-low text-ink focus:outline-none"
-          >
-            {AXIS_KEYS.map(k => <option key={k} value={k}>{AXES[k].label}</option>)}
-          </select>
+            onChange={setXAxis}
+            options={AXIS_KEYS.map(k => ({ key: k, parts: AXES[k].labelParts }))}
+          />
           <div className="flex rounded overflow-hidden border border-ink/20 text-xs">
             <button onClick={() => setXLog(false)} className={`px-2 py-1 ${!xLog ? 'bg-klein text-white' : 'bg-surface-low text-ink/60 hover:bg-surface'}`}>Linear</button>
             <button onClick={() => setXLog(true)}  className={`px-2 py-1 ${xLog  ? 'bg-klein text-white' : 'bg-surface-low text-ink/60 hover:bg-surface'}`}>Log</button>
@@ -367,13 +405,11 @@ export function ScatterPlotPanel({ onSelectGEVI, peaceMode = false }: Props) {
         {/* Y axis */}
         <div className="flex items-center gap-2">
           <span className="text-xs font-semibold text-ink/60 w-5">Y</span>
-          <select
+          <LabelDropdown<AxisKey>
             value={yAxis}
-            onChange={e => setYAxis(e.target.value as AxisKey)}
-            className="text-xs border border-ink/20 rounded px-2 py-1 bg-surface-low text-ink focus:outline-none"
-          >
-            {AXIS_KEYS.map(k => <option key={k} value={k}>{AXES[k].label}</option>)}
-          </select>
+            onChange={setYAxis}
+            options={AXIS_KEYS.map(k => ({ key: k, parts: AXES[k].labelParts }))}
+          />
           <div className="flex rounded overflow-hidden border border-ink/20 text-xs">
             <button onClick={() => setYLog(false)} className={`px-2 py-1 ${!yLog ? 'bg-klein text-white' : 'bg-surface-low text-ink/60 hover:bg-surface'}`}>Linear</button>
             <button onClick={() => setYLog(true)}  className={`px-2 py-1 ${yLog  ? 'bg-klein text-white' : 'bg-surface-low text-ink/60 hover:bg-surface'}`}>Log</button>
@@ -383,14 +419,18 @@ export function ScatterPlotPanel({ onSelectGEVI, peaceMode = false }: Props) {
         {/* Size axis */}
         <div className="flex items-center gap-2">
           <span className="text-xs font-semibold text-ink/60">Size</span>
-          <select
+          <LabelDropdown<SizeAxis>
             value={sizeAxis}
-            onChange={e => setSizeAxis(e.target.value as SizeAxis)}
-            className="text-xs border border-ink/20 rounded px-2 py-1 bg-surface-low text-ink focus:outline-none"
-          >
-            <option value="none">None</option>
-            {AXIS_KEYS.map(k => <option key={k} value={k}>{AXES[k].label}{k === 'speed' ? ' (1/τ)' : ''}</option>)}
-          </select>
+            onChange={setSizeAxis}
+            options={[
+              { key: 'none', parts: [{ text: 'None' }] },
+              ...AXIS_KEYS.map(k => ({
+                key: k as SizeAxis,
+                parts: AXES[k].labelParts,
+                suffix: (k === 'tauOn' || k === 'tauOff') ? ' (1/τ)' : undefined,
+              })),
+            ]}
+          />
           {sizeAxis !== 'none' && (
             <div className="flex rounded overflow-hidden border border-ink/20 text-xs">
               <button onClick={() => setSizeLog(false)} className={`px-2 py-1 ${!sizeLog ? 'bg-klein text-white' : 'bg-surface-low text-ink/60 hover:bg-surface'}`}>Linear</button>
@@ -399,22 +439,6 @@ export function ScatterPlotPanel({ onSelectGEVI, peaceMode = false }: Props) {
           )}
         </div>
 
-        {/* Speed legend */}
-        {showSpeedLegend && !isSpeedVsSpeed && (
-          <div className="flex items-center gap-3 text-xs text-ink/60">
-            <span className="flex items-center gap-1.5">
-              <svg width="12" height="12"><circle cx="6" cy="6" r="5" fill="#6b7280" /></svg>
-              τ<sub>on</sub>
-            </span>
-            <span className="flex items-center gap-1.5">
-              <svg width="12" height="12"><path d="M6,1 L11,6 L6,11 L1,6 Z" fill="#6b7280" /></svg>
-              τ<sub>off</sub>
-            </span>
-          </div>
-        )}
-        {isSpeedVsSpeed && (
-          <span className="text-xs text-ink/50 italic">X = τ<sub>on</sub>, Y = τ<sub>off</sub></span>
-        )}
       </div>
 
       {/* Chart */}
@@ -472,9 +496,9 @@ export function ScatterPlotPanel({ onSelectGEVI, peaceMode = false }: Props) {
             );
           })}
 
-          {/* X axis label */}
-          <text x={PAD.left + CW / 2} y={H - 4} textAnchor="middle" fontSize="11" fill="#374151" fontWeight="600">
-            {xCfg.label}{xCfg.unit ? ` (${xCfg.unit})` : ''}
+          {/* X axis label — baseline lifted so subscripts don't get clipped by the viewBox bottom */}
+          <text x={PAD.left + CW / 2} y={H - 14} textAnchor="middle" fontSize="11" fill="#374151" fontWeight="600">
+            {renderAxisLabel(xCfg.labelParts)}
           </text>
 
           {/* Y axis label — rotated */}
@@ -483,7 +507,7 @@ export function ScatterPlotPanel({ onSelectGEVI, peaceMode = false }: Props) {
             transform={`translate(12, ${PAD.top + CH / 2}) rotate(-90)`}
             textAnchor="middle" fontSize="11" fill="#374151" fontWeight="600"
           >
-            {yCfg.label}{yCfg.unit ? ` (${yCfg.unit})` : ''}
+            {renderAxisLabel(yCfg.labelParts)}
           </text>
 
           {/* Data points */}
@@ -498,10 +522,24 @@ export function ScatterPlotPanel({ onSelectGEVI, peaceMode = false }: Props) {
             const sw = isHov ? 2 : 1.5;
             const noSize = sizeAxis !== 'none' && sizeEnc != null && (sizeEnc[i] == null);
             const opacity = noSize ? 0.35 : 1;
-            const marker = p.kind === 'tauOff'
-              ? <DiamondMarker cx={cx} cy={cy} r={r} fill={color} stroke="#fff" strokeWidth={sw} />
-              : <CircleMarker  cx={cx} cy={cy} r={r} fill={color} stroke="#fff" strokeWidth={sw} />;
-            return <g key={i} opacity={opacity}>{marker}</g>;
+            return (
+              <g key={i} opacity={opacity}>
+                <CircleMarker cx={cx} cy={cy} r={r} fill={color} stroke="#fff" strokeWidth={sw} />
+                <text
+                  x={cx + r + 2}
+                  y={cy + 2}
+                  fontSize={7}
+                  fontWeight="600"
+                  fill="#374151"
+                  stroke="white"
+                  strokeWidth={2}
+                  paintOrder="stroke"
+                  style={{ userSelect: 'none', pointerEvents: 'none' }}
+                >
+                  {p.gevi.name}
+                </text>
+              </g>
+            );
           })}
         </svg>
       </div>
@@ -513,7 +551,6 @@ export function ScatterPlotPanel({ onSelectGEVI, peaceMode = false }: Props) {
         const TW = 170, TH = 96, GAP = 12;
         const left = mx + TW + GAP > window.innerWidth ? mx - TW - GAP : mx + GAP;
         const top  = my + TH + GAP > window.innerHeight ? my - TH - GAP : my + GAP;
-        const kindLabel = p.kind === 'tauOn' ? ' (τ_on)' : p.kind === 'tauOff' ? ' (τ_off)' : '';
         const hoverIdx = points.indexOf(p);
         const sizeVal = sizeAxis !== 'none' && sizeRaw ? sizeRaw[hoverIdx] : null;
         return (
@@ -522,20 +559,17 @@ export function ScatterPlotPanel({ onSelectGEVI, peaceMode = false }: Props) {
             className="rounded-lg border shadow-ambient px-3 py-2 bg-surface-low border-ink/10"
           >
             <div className="font-bold text-sm mb-1" style={{ color: getTreeNodeColor(p.gevi) }}>
-              {p.gevi.name}{kindLabel}
+              {p.gevi.name}
             </div>
             <div className="text-[10px] text-ink/70 space-y-0.5">
-              <div>{xCfg.label}: {xCfg.fmt(p.x)}</div>
-              <div>{yCfg.label}: {yCfg.fmt(p.y)}</div>
+              <div>{renderHtmlLabel(xCfg.labelParts)}: {xCfg.fmt(p.x)}</div>
+              <div>{renderHtmlLabel(yCfg.labelParts)}: {yCfg.fmt(p.y)}</div>
               {sizeAxis !== 'none' && (
                 <div>
-                  {AXES[sizeAxis].label}: {sizeVal != null ? AXES[sizeAxis].fmt(sizeVal) : '—'}
+                  {renderHtmlLabel(AXES[sizeAxis].labelParts)}: {sizeVal != null ? AXES[sizeAxis].fmt(sizeVal) : '—'}
                 </div>
               )}
             </div>
-            {!peaceMode && p.gevi.overall != null && (
-              <div className="text-[10px] text-ink/40 mt-1">Overall: {p.gevi.overall}</div>
-            )}
           </div>
         );
       })()}

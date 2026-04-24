@@ -1,7 +1,6 @@
 import { useState, useCallback, useMemo, useRef, useEffect } from 'react';
 import { Clock } from 'lucide-react';
 import { getAllGEVIs } from './geviData';
-import { methodologyContent } from './methodology';
 import { FamilyTreePanel } from './components/FamilyTreePanel';
 import { BrightnessNetworkPanel } from './components/BrightnessNetworkPanel';
 import { ScatterPlotPanel } from './components/ScatterPlotPanel';
@@ -63,11 +62,6 @@ function GEVIBenchApp() {
   const [showScatterPlot, setShowScatterPlot] = useState(false);
   const [showAPSimulator, setShowAPSimulator] = useState(false);
   const [showCompareEmpty, setShowCompareEmpty] = useState(false);
-  const [peaceMode, setPeaceMode] = useState(true);
-  const handleSetPeaceMode = useCallback((v: boolean) => {
-    setPeaceMode(v);
-    setSortConfig({ field: v ? 'year' : 'overall', order: 'desc' });
-  }, []);
   const sideListRef = useRef<HTMLDivElement>(null);
 
   // URL ↔ state sync
@@ -88,10 +82,7 @@ function GEVIBenchApp() {
         return;
       }
     }
-    if (path === '/methodology') {
-      setActiveTab('methodology');
-      setSelectedGEVI(null);
-    } else if (path === '/contact') {
+    if (path === '/contact') {
       setActiveTab('contact');
       setSelectedGEVI(null);
     } else if (path === '/family-tree') {
@@ -285,16 +276,15 @@ function GEVIBenchApp() {
       {showAPSimulator ? (
         <APSimulatorPanel />
       ) : showScatterPlot ? (
-        <ScatterPlotPanel onSelectGEVI={handleSelectGEVI} peaceMode={peaceMode} />
+        <ScatterPlotPanel onSelectGEVI={handleSelectGEVI} />
       ) : showBrightnessNetwork ? (
-        <BrightnessNetworkPanel onSelectGEVI={handleSelectGEVI} peaceMode={peaceMode} />
+        <BrightnessNetworkPanel onSelectGEVI={handleSelectGEVI} />
       ) : showFamilyTree ? (
         <FamilyTreePanel
           onSelectGEVI={handleSelectGEVI}
           selectedGEVI={selectedGEVI}
           compareGEVIs={compareGEVIs}
           onAddToCompare={addToCompare}
-          peaceMode={peaceMode}
         />
       ) : (
         <>
@@ -311,7 +301,6 @@ function GEVIBenchApp() {
                 compact={!!selectedGEVI && filteredGEVIs.length > 0}
                 sortConfig={sortConfig}
                 onSortChange={handleSortChange}
-                peaceMode={peaceMode}
               />
             </div>
 
@@ -323,7 +312,6 @@ function GEVIBenchApp() {
                 onAddToCompare={addToCompare}
                 compareGEVIs={compareGEVIs}
                 onClose={handleLogoClick}
-                peaceMode={peaceMode}
                 onShowFamilyTree={() => {
                   setActiveTab('database');
                   setShowFamilyTree(true);
@@ -335,207 +323,6 @@ function GEVIBenchApp() {
           </div>
         </>
       )}
-    </main>
-  );
-
-  // Highlight numbers, formulas, and math symbols in text with klein blue
-  const highlightNumbers = (text: string) => {
-    // Match: numbers (with optional decimals, %, ×, ±, −, negative sign), math expressions,
-    // Greek letters, units (mV, ms, nm, mW/mm², °C, min), variable names (τ_on, τ_off, B_rel, etc.)
-    const pattern = /([−±]?\d+(?:[.,]\d+)?(?:\s*[×·]\s*\d+(?:[.,]\d+)?)*\s*(?:%|×|mV|ms|nm|mW\/mm[²2]|°C|min|pts)?)|(\b(?:τ_(?:on|off|sum)|B\/B_EGFP|B_rel|F_remaining|ΔF\/F|EC|QY|log₁₀|exp)\b)|((?:≥|≤|→|↑|↓|÷)\s*\d+(?:[.,]\d+)?(?:\s*(?:%|×|mV|ms|nm|mW\/mm[²2]|°C|min))?)/g;
-    const parts: (string | JSX.Element)[] = [];
-    let lastIndex = 0;
-    let match: RegExpExecArray | null;
-    while ((match = pattern.exec(text)) !== null) {
-      if (match.index > lastIndex) {
-        parts.push(text.slice(lastIndex, match.index));
-      }
-      parts.push(<span key={match.index} className="text-klein font-medium">{match[0]}</span>);
-      lastIndex = match.index + match[0].length;
-    }
-    if (lastIndex < text.length) {
-      parts.push(text.slice(lastIndex));
-    }
-    return parts.length > 0 ? <>{parts}</> : text;
-  };
-
-  // Helper to render scoring sections
-  const renderScoringSection = (
-    title: string,
-    description: string,
-    formula: string,
-    details: string[],
-    benchmarks: { [key: string]: string | number }[],
-    formatBench: (bench: { [key: string]: string | number }) => string,
-    example?: string,
-    formulaNote?: string
-  ) => (
-    <div className="mt-4 p-3 rounded-lg bg-surface-low">
-      <h4 className={`text-md font-semibold mb-2 font-serif ${colors.text}`}>{title}</h4>
-      <p className={`text-sm text-ink`}>{highlightNumbers(description)}</p>
-      <div className="mt-2 p-2 rounded font-mono text-sm bg-surface-low text-klein">
-        {formula}
-      </div>
-      {formulaNote && (
-        <div className="mt-1 text-xs italic text-ink">{highlightNumbers(formulaNote)}</div>
-      )}
-      {example && (
-        <div className={`mt-2 text-xs text-ink`}>
-          <span className="font-medium">Example:</span> {highlightNumbers(example)}
-        </div>
-      )}
-      <ul className="list-disc list-inside text-xs space-y-1 mt-2">
-        {details.map((detail: string, i: number) => (
-          <li key={i} className="text-ink">{highlightNumbers(detail)}</li>
-        ))}
-      </ul>
-      <div className="mt-3">
-        <span className={`text-xs font-medium text-ink`}>Benchmarks:</span>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-1 mt-1">
-          {benchmarks.map((bench: { [key: string]: string | number }, i: number) => (
-            <div key={i} className="text-xs text-ink">
-              {highlightNumbers(formatBench(bench))}
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-
-  // Render Methodology Tab
-  const renderMethodologyTab = () => (
-    <main className="max-w-7xl mx-auto px-4 py-6">
-      <div className="max-w-4xl mx-auto">
-        <h2 className={`text-xl md:text-2xl font-bold mb-4 font-serif ${colors.text}`}>
-          Scoring <span className="text-klein">Methodology</span>
-        </h2>
-
-        <div className="rounded-lg p-4 md:p-6 bg-surface-lowest font-sans text-justify border-2 border-gold/40 shadow-md">
-          <div className="space-y-6">
-            <div>
-              <h3 className={`text-lg font-semibold mb-2 font-serif ${colors.text}`}>Overview</h3>
-              <p className={`text-sm text-ink`}>{highlightNumbers(methodologyContent.overview)}</p>
-            </div>
-
-            <div>
-              <h3 className={`text-lg font-semibold mb-2 font-serif ${colors.text}`}>Scoring Methodology</h3>
-              <p className={`text-sm text-ink mb-3`}>{methodologyContent.scoreComponents.description}</p>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-2 mb-4">
-                {methodologyContent.scoreComponents.items.map((item: { name: string; weight: string; description: string }, i: number) => (
-                  <div key={i} className="p-2 rounded bg-surface-low">
-                    <div className="text-sm font-medium text-ink">
-                      {item.name} <span className="text-klein">{item.weight}</span>
-                    </div>
-                    <div className="text-xs text-ink">{highlightNumbers(item.description)}</div>
-                  </div>
-                ))}
-              </div>
-              <ul className="list-disc list-inside text-sm space-y-1">
-                {methodologyContent.scoring.steps.slice(1).map((step: string, i: number) => (
-                  <li key={i} className="text-ink">{highlightNumbers(step)}</li>
-                ))}
-              </ul>
-
-              {/* Brightness Scoring Rule */}
-              {renderScoringSection(
-                methodologyContent.scoring.brightnessScoring.title,
-                methodologyContent.scoring.brightnessScoring.description,
-                methodologyContent.scoring.brightnessScoring.formula,
-                methodologyContent.scoring.brightnessScoring.details,
-                methodologyContent.scoring.brightnessScoring.benchmarks,
-                (bench) => `Score ${bench.score}: ${bench.brightness} EGFP (${bench.example})`,
-                undefined,
-                methodologyContent.scoring.brightnessScoring.formulaNote
-              )}
-
-              {/* Speed Scoring Rule */}
-              {renderScoringSection(
-                methodologyContent.scoring.kineticsScoring.title,
-                methodologyContent.scoring.kineticsScoring.description,
-                methodologyContent.scoring.kineticsScoring.formula,
-                methodologyContent.scoring.kineticsScoring.details,
-                methodologyContent.scoring.kineticsScoring.benchmarks,
-                (bench) => `Score ${bench.score}: τ_on=${bench.tau_on}ms, τ_off=${bench.tau_off}ms (${bench.example})`,
-                undefined,
-                methodologyContent.scoring.kineticsScoring.formulaNote
-              )}
-
-              {/* Dynamic Range Scoring Rule */}
-              {renderScoringSection(
-                methodologyContent.scoring.dynamicRangeScoring.title,
-                methodologyContent.scoring.dynamicRangeScoring.description,
-                methodologyContent.scoring.dynamicRangeScoring.formula,
-                methodologyContent.scoring.dynamicRangeScoring.details,
-                methodologyContent.scoring.dynamicRangeScoring.benchmarks,
-                (bench) => `Score ${bench.score}: ΔF/F ${typeof bench.deltaF === 'string' ? bench.deltaF : `= ${bench.deltaF}`}% (${bench.example})`,
-                undefined,
-                methodologyContent.scoring.dynamicRangeScoring.formulaNote
-              )}
-
-              {/* Sensitivity Scoring Rule */}
-              {renderScoringSection(
-                methodologyContent.scoring.sensitivityScoring.title,
-                methodologyContent.scoring.sensitivityScoring.description,
-                methodologyContent.scoring.sensitivityScoring.formula,
-                methodologyContent.scoring.sensitivityScoring.details,
-                methodologyContent.scoring.sensitivityScoring.benchmarks,
-                (bench) => `Score ${bench.score}: ΔF/F/AP ${typeof bench.dfPerAP === 'string' ? bench.dfPerAP : `= ${bench.dfPerAP}`}% (${bench.example})`,
-                undefined,
-                methodologyContent.scoring.sensitivityScoring.formulaNote
-              )}
-
-              {/* Photostability Scoring Rule */}
-              {renderScoringSection(
-                methodologyContent.scoring.photostabilityScoring.title,
-                methodologyContent.scoring.photostabilityScoring.description,
-                methodologyContent.scoring.photostabilityScoring.formula,
-                methodologyContent.scoring.photostabilityScoring.details,
-                methodologyContent.scoring.photostabilityScoring.benchmarks,
-                (bench) => `Score ${bench.score}: ${bench.remaining} remaining (${bench.example})`,
-                methodologyContent.scoring.photostabilityScoring.example,
-                methodologyContent.scoring.photostabilityScoring.formulaNote
-              )}
-
-              {/* Popularity Scoring Rule */}
-              {renderScoringSection(
-                methodologyContent.scoring.popularityScoring.title,
-                methodologyContent.scoring.popularityScoring.description,
-                methodologyContent.scoring.popularityScoring.formula,
-                methodologyContent.scoring.popularityScoring.details,
-                methodologyContent.scoring.popularityScoring.benchmarks,
-                (bench) => `Score ${bench.score}: ${bench.papers} papers`,
-                methodologyContent.scoring.popularityScoring.example,
-                methodologyContent.scoring.popularityScoring.formulaNote
-              )}
-            </div>
-
-            {/* Bonus Points Section */}
-            <div className="mt-6">
-              <h3 className={`text-lg font-semibold mb-2 font-serif ${colors.text}`}>{methodologyContent.bonusPoints.title}</h3>
-              <p className={`text-sm text-ink mb-3`}>{highlightNumbers(methodologyContent.bonusPoints.description)}</p>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                {methodologyContent.bonusPoints.rules.map((rule: any, i: number) => (
-                  <div key={i} className="p-3 rounded-lg bg-surface-low">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="px-2 py-0.5 rounded-full text-xs font-medium font-sans bg-klein/10 text-klein">
-                        +{rule.points} pts
-                      </span>
-                      <span className="text-sm font-medium text-ink">{rule.name}</span>
-                    </div>
-                    <div className="text-xs text-ink">{highlightNumbers(rule.description)}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Weakness Penalty Section */}
-            <div className="mt-6">
-              <h3 className={`text-lg font-semibold mb-2 font-serif ${colors.text}`}>{methodologyContent.weaknessPenalty.title}</h3>
-              <p className={`text-sm text-ink`}>{highlightNumbers(methodologyContent.weaknessPenalty.description)}</p>
-            </div>
-          </div>
-        </div>
-      </div>
     </main>
   );
 
@@ -559,8 +346,6 @@ function GEVIBenchApp() {
         mobileMenuOpen={mobileMenuOpen}
         setMobileMenuOpen={setMobileMenuOpen}
         onLogoClick={handleLogoClick}
-        peaceMode={peaceMode}
-        setPeaceMode={handleSetPeaceMode}
         onShowFamilyTree={() => {
           setActiveTab('database');
           setShowFamilyTree(true);
@@ -612,7 +397,6 @@ function GEVIBenchApp() {
       />
 
       {activeTab === 'database' && renderDatabaseTab()}
-      {activeTab === 'methodology' && renderMethodologyTab()}
       {activeTab === 'contact' && <ContactForm />}
       {activeTab === 'tools' && (
         <FamilyTreePanel
@@ -620,7 +404,6 @@ function GEVIBenchApp() {
           selectedGEVI={selectedGEVI}
           compareGEVIs={compareGEVIs}
           onAddToCompare={addToCompare}
-          peaceMode={peaceMode}
         />
       )}
 

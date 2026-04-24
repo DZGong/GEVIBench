@@ -1,8 +1,7 @@
-import { ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, Legend } from 'recharts';
 import { Trash2, GitCompare, X } from 'lucide-react';
-import { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import { generateVoltageCurve } from '../VoltageCurveViewer';
-import { SampleUsageChart } from './SampleUsageChart';
+import { DistributionRadar } from './DistributionRadar';
 
 const COLORS = ['#002FA7', '#ef4444', '#22c55e', '#f59e0b', '#8b5cf6'];
 
@@ -13,20 +12,22 @@ interface ComparisonProps {
   onClose?: () => void;
 }
 
-export function ComparisonPanel({ compareGEVIs, onRemove, showEmpty = false, onClose }: ComparisonProps) {
-  const getCompareRadarData = () => {
-    const subjects = ['Brightness', 'Speed', 'Dyn. Range', 'Sensitivity', 'Photostab.', 'Popularity'];
-    return subjects.map((subject, idx) => {
-      const data: any = { subject };
-      compareGEVIs.forEach((gevi) => {
-        const safeName = gevi.name.replace(/[^a-zA-Z0-9]/g, '');
-        const values = [gevi.brightness ?? 0, gevi.speed ?? 0, gevi.dynamicRange ?? 0, gevi.sensitivity ?? 0, gevi.photostability ?? 0, gevi.popularity ?? 0];
-        data[safeName] = values[idx];
-      });
-      return data;
-    });
-  };
+function fmtTau(v: number): string {
+  if (v < 1) return v.toFixed(2);
+  if (v < 10) return v.toFixed(1);
+  return Math.round(v).toString();
+}
 
+const RAW_METRICS: { key: string; symbol: React.ReactNode; fmt: (g: any) => string }[] = [
+  { key: 'bRel',    symbol: <>B/B<sub>EGFP</sub></>,   fmt: g => g.bRel != null ? `${g.bRel.toFixed(2)}×` : '—' },
+  { key: 'tauOn',   symbol: <>τ<sub>on</sub> (ms)</>,  fmt: g => g.displayTauOn != null ? fmtTau(g.displayTauOn) : '—' },
+  { key: 'dr',      symbol: <>ΔF/F per 100mV</>,       fmt: g => g.displayDynamicRange != null ? `${g.displayDynamicRange.toFixed(1)}%` : '—' },
+  { key: 'sens',    symbol: <>ΔF/F per AP</>,          fmt: g => g.displaySensitivity != null ? `${g.displaySensitivity.toFixed(1)}%` : '—' },
+  { key: 'photo',   symbol: <>F<sub>remain</sub>%</>,  fmt: g => g.displayPhotostab != null ? `${Math.round(g.displayPhotostab)}%` : '—' },
+  { key: 'tauOff',  symbol: <>τ<sub>off</sub> (ms)</>, fmt: g => g.displayTauOff != null ? fmtTau(g.displayTauOff) : '—' },
+];
+
+export function ComparisonPanel({ compareGEVIs, onRemove, showEmpty = false, onClose }: ComparisonProps) {
   // Show empty state when no GEVIs selected and showEmpty is true
   if (compareGEVIs.length === 0) {
     if (!showEmpty) return null;
@@ -56,9 +57,6 @@ export function ComparisonPanel({ compareGEVIs, onRemove, showEmpty = false, onC
     );
   }
 
-  // Create a safe name for dataKey
-  const getSafeName = (name: string) => name.replace(/[^a-zA-Z0-9]/g, '');
-
   return (
     <div id="compare-panel" className="border-2 rounded-lg p-4 md:p-6 mb-6 bg-surface-lowest border-gold/40 shadow-md">
       <div className="flex items-center justify-between mb-4">
@@ -85,48 +83,58 @@ export function ComparisonPanel({ compareGEVIs, onRemove, showEmpty = false, onC
         ))}
       </div>
 
-      {/* Charts side by side */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {/* Radar Chart */}
-        <div>
-          <h4 className="text-sm font-semibold mb-3 text-ink/70">Performance Radar</h4>
-          <div className="border rounded-lg p-3 bg-surface-low border-ink/10">
-            <div className="h-64">
-              <ResponsiveContainer width="100%" height="100%">
-                <RadarChart data={getCompareRadarData()}>
-                  <PolarGrid stroke="#e5e7eb" />
-                  <PolarAngleAxis dataKey="subject" tick={{ fill: '#374151', fontSize: 12 }} />
-                  <PolarRadiusAxis angle={30} domain={[0, 100]} tick={{ fill: '#9ca3af', fontSize: 10 }} />
-                  {compareGEVIs.map((gevi, idx) => (
-                    <Radar key={gevi.id} name={gevi.name} dataKey={getSafeName(gevi.name)} stroke={COLORS[idx % COLORS.length]} fill={COLORS[idx % COLORS.length]} fillOpacity={0.2} />
-                  ))}
-                </RadarChart>
-              </ResponsiveContainer>
-            </div>
-            <div className="mt-2 pt-2 border-t border-ink/10">
-              <div className="flex flex-wrap gap-3 justify-center">
-                {compareGEVIs.map((gevi, idx) => (
-                  <div key={gevi.id} className="flex items-center gap-1.5">
-                    <div className="w-3 h-3 rounded-full" style={{ backgroundColor: COLORS[idx % COLORS.length] }} />
-                    <span className="text-xs text-ink/60">{gevi.name}</span>
-                  </div>
+      {/* Raw values comparison */}
+      <div className="mb-4 border rounded-lg p-3 overflow-x-auto bg-surface-low border-ink/10">
+        <h4 className="text-sm font-semibold mb-2 text-ink/70">Raw Values</h4>
+        <table className="w-full text-xs" style={{ borderCollapse: 'collapse' }}>
+          <thead>
+            <tr className="text-ink/60">
+              <th className="text-left px-2 py-1.5 font-medium">GEVI</th>
+              {RAW_METRICS.map(m => (
+                <th key={m.key} className="text-center px-2 py-1.5 font-medium whitespace-nowrap">
+                  {m.symbol}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {compareGEVIs.map((gevi, idx) => (
+              <tr key={gevi.id} className="border-t border-ink/5">
+                <td
+                  className="px-2 py-1.5 font-medium whitespace-nowrap"
+                  style={{ color: COLORS[idx % COLORS.length] }}
+                >
+                  {gevi.name}
+                </td>
+                {RAW_METRICS.map(m => (
+                  <td key={m.key} className="px-2 py-1.5 text-center tabular-nums text-ink">
+                    {m.fmt(gevi)}
+                  </td>
                 ))}
-              </div>
-            </div>
-          </div>
-        </div>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
 
+      {/* Charts side by side */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* F-V Curve Comparison */}
         <div>
-          <h4 className="text-sm font-semibold mb-3 text-ink/70">F-V Curve</h4>
+          <h4 className="text-sm font-semibold mb-3 text-ink/70">ΔF/F - Voltage Curve</h4>
           <FVCurveCompare compareGEVIs={compareGEVIs} COLORS={COLORS} />
         </div>
 
-        {/* Sample Usage Comparison */}
+        {/* Performance Profile (raw-data radar) */}
         <div>
-          <h4 className="text-sm font-semibold mb-3 text-ink/70">Sample Usage</h4>
+          <h4 className="text-sm font-semibold mb-3 text-ink/70">Performance Profile</h4>
           <div className="border rounded-lg p-3 bg-surface-low border-ink/10">
-            <SampleUsageChart mode="compare" gevis={compareGEVIs} hideLegend />
+            <div className="h-64">
+              <DistributionRadar
+                gevis={compareGEVIs}
+                colors={compareGEVIs.map((_, idx) => COLORS[idx % COLORS.length])}
+              />
+            </div>
             <div className="mt-2 pt-2 border-t border-ink/10">
               <div className="flex flex-wrap gap-3 justify-center">
                 {compareGEVIs.map((gevi, idx) => (

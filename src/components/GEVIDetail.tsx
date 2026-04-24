@@ -1,11 +1,10 @@
-import { useState, useEffect, useRef } from 'react';
-import { ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar } from 'recharts';
+import { useState, useRef } from 'react';
 import { BonusBadges } from './BonusBadges';
-import { BookOpen, ExternalLink, Plus, X, Sun, Zap, Activity, TrendingUp, Shield, FileText, Dna, ChevronDown, ChevronUp } from 'lucide-react';
-import { RainbowText, getGEVIColor, computeSampleSummary, SAMPLE_CATEGORY_ORDER } from '../utils';
+import { BookOpen, ExternalLink, Plus, X, Sun, Zap, Activity, TrendingUp, Shield, Dna, ChevronDown, ChevronUp, StickyNote } from 'lucide-react';
 import { SpectrumViewer, SpectrumData } from '../SpectrumViewer';
 import { VoltageCurveViewer } from '../VoltageCurveViewer';
 import { GEVILineage } from './GEVILineage';
+import { DistributionRadar } from './DistributionRadar';
 import { getDoiCitationMap } from '../geviData';
 
 function formatRatio(ratio: number): string {
@@ -13,12 +12,12 @@ function formatRatio(ratio: number): string {
 }
 
 const metrics = [
-  { key: 'brightness', name: 'Brightness', icon: Sun },
-  { key: 'speed', name: 'Speed', icon: Zap },
-  { key: 'dynamicRange', name: 'Dynamic Range', icon: TrendingUp },
-  { key: 'sensitivity', name: 'Sensitivity', icon: Activity },
-  { key: 'photostability', name: 'Photostability', icon: Shield },
-  { key: 'popularity', name: 'Popularity', icon: FileText },
+  { key: 'brightness', name: <>B/B<sub>EGFP</sub></>, icon: Sun },
+  { key: 'tauOn', name: <>τ<sub>on</sub> (ms)</>, icon: Zap },
+  { key: 'dynamicRange', name: <>ΔF/F per 100mV</>, icon: TrendingUp },
+  { key: 'sensitivity', name: <>ΔF/F per AP</>, icon: Activity },
+  { key: 'photostability', name: <>F<sub>remain</sub>%</>, icon: Shield },
+  { key: 'tauOff', name: <>τ<sub>off</sub> (ms)</>, icon: Zap },
 ];
 
 interface GEVIDetailProps {
@@ -27,7 +26,6 @@ interface GEVIDetailProps {
   compareGEVIs: any[];
   onClose: () => void;
   onShowFamilyTree?: () => void;
-  peaceMode?: boolean;
 }
 
 function sourceToUrl(source: string): string | null {
@@ -35,6 +33,18 @@ function sourceToUrl(source: string): string | null {
   if (source.startsWith('doi:')) return `https://doi.org/${source.slice(4)}`;
   if (source.startsWith('http')) return source;
   return null;
+}
+
+function NoteTip({ note }: { note?: string }) {
+  if (!note) return null;
+  return (
+    <span className="group relative inline-flex items-center">
+      <StickyNote className="w-3 h-3 text-ink/40 hover:text-ink/70 cursor-help" />
+      <span className="pointer-events-none absolute bottom-full right-0 mb-1 hidden group-hover:block z-50 w-56 px-2 py-1 text-[10px] italic text-white bg-ink rounded shadow-md normal-case leading-snug whitespace-normal">
+        {note}
+      </span>
+    </span>
+  );
 }
 
 function SourceLink({ source }: { source?: string }) {
@@ -54,24 +64,12 @@ function SourceLink({ source }: { source?: string }) {
   );
 }
 
-export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShowFamilyTree, peaceMode = false }: GEVIDetailProps) {
-  const [expandedMetrics, setExpandedMetrics] = useState<Record<string, boolean>>({});
+export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShowFamilyTree }: GEVIDetailProps) {
   const [papersExpanded, setPapersExpanded] = useState(false);
   const papersRef = useRef<HTMLDivElement>(null);
-  const toggleMetric = (key: string) => setExpandedMetrics(prev => ({ ...prev, [key]: !prev[key] }));
-  useEffect(() => setExpandedMetrics({}), [gevi.id]);
 
   // Use spectrum data directly from gevi prop
   const spectrumData = gevi.spectrum || null;
-
-  const getRadarData = () => [
-    { subject: 'Brightness', value: gevi.brightness ?? 0, fullMark: 100 },
-    { subject: 'Speed', value: gevi.speed ?? 0, fullMark: 100 },
-    { subject: 'Dyn. Range', value: gevi.dynamicRange ?? 0, fullMark: 100 },
-    { subject: 'Sensitivity', value: gevi.sensitivity ?? 0, fullMark: 100 },
-    { subject: 'Photostab.', value: gevi.photostability ?? 0, fullMark: 100 },
-    { subject: 'Popularity', value: gevi.popularity ?? 0, fullMark: 100 },
-  ];
 
   return (
     <div className="rounded-lg p-4 md:p-6 mb-6 bg-surface-lowest shadow-ambient">
@@ -96,7 +94,7 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
           <p className="text-sm mb-2 text-ink font-sans">{gevi.description}</p>
           <div className="flex flex-wrap gap-2 mb-2">
             <span className="text-xs px-2 py-1 bg-klein text-white rounded font-medium">{gevi.category}</span>
-            <span className="text-xs px-2 py-1 rounded text-ink" style={{ backgroundColor: '#FF91AF30' }}>Published {gevi.year}</span>
+            <BonusBadges gevi={gevi} variant="pill" />
           </div>
           <a href={gevi.paperUrl} target="_blank" rel="noopener noreferrer" className="text-sm inline-flex items-center gap-1 text-klein hover:underline">
             <BookOpen className="w-4 h-4" />{gevi.paper}<ExternalLink className="w-3 h-3" />
@@ -113,12 +111,6 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
           )}
         </div>
         <div className="text-center sm:text-right">
-          {!peaceMode && (
-            <>
-              <div className="text-4xl md:text-5xl font-bold text-klein">{gevi.overall ?? 'N/A'}</div>
-              <div className="text-sm text-ink">Overall</div>
-            </>
-          )}
           <button
             onClick={() => onAddToCompare(gevi)}
             disabled={compareGEVIs.find(g => g.id === gevi.id) || compareGEVIs.length >= 5}
@@ -141,100 +133,72 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
               <metric.icon className="w-3 h-3" />
               <span className="text-xs md:text-sm font-medium text-ink">{metric.name}</span>
             </div>
-            <div className="flex items-center gap-2">
-              <div className="flex-1 h-1.5 md:h-2 rounded-full overflow-hidden bg-ink/10">
-                <div className="h-full rounded-full bg-gold" style={{ width: `${gevi[metric.key] ?? 0}%` }} />
-              </div>
-              <span className="text-xs md:text-sm font-semibold w-6 md:w-8 text-right text-ink">{gevi[metric.key] ?? '—'}</span>
-            </div>
-            {/* Speed */}
-            {metric.key === 'speed' && gevi.kinetics?.[0] && (
-              <div className="mt-2 text-[10px]">
-                <div className="flex items-center gap-2">
-                  <span className="text-ink">τ<sub>on</sub>/τ<sub>off</sub>:</span>
-                  <span className="text-ink font-semibold">{gevi.kinetics[0].on}/{gevi.kinetics[0].off} ms</span>
-                  {gevi.kinetics[0].temperature && (
-                    <span className="text-ink">({gevi.kinetics[0].temperature})</span>
-                  )}
-                </div>
-                <button onClick={() => toggleMetric('speed')} className="mt-1 flex items-center gap-1 text-klein hover:underline">
-                  {expandedMetrics.speed ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
-                  {gevi.kinetics.length} {gevi.kinetics.length === 1 ? 'measurement' : 'measurements'}
-                </button>
-                {expandedMetrics.speed && (
-                  <div className="mt-1.5 pt-1.5 space-y-1 border-t border-ink/15">
-                    {gevi.kinetics.map((k: any, i: number) => (
-                      <div key={i} className={`py-1 ${i < gevi.kinetics.length - 1 ? 'border-b border-ink/10' : ''}`}>
-                        <div className="flex items-center justify-between gap-2">
-                          <span>τ<sub>on</sub>/τ<sub>off</sub>: {k.on}/{k.off} ms{k.temperature ? ` (${k.temperature})` : ''}</span>
-                          <SourceLink source={k.source} />
-                        </div>
-                        {k.note && <div className="mt-0.5 italic text-ink">{k.note}</div>}
-                      </div>
-                    ))}
+            {/* τ_on */}
+            {metric.key === 'tauOn' && gevi.kinetics?.length > 0 && (
+              <div className="mt-2 text-[10px] space-y-1">
+                {gevi.kinetics.map((k: any, i: number) => (
+                  <div key={i} className={`py-1 ${i < gevi.kinetics.length - 1 ? 'border-b border-ink/10' : ''}`}>
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-ink"><span className="font-semibold">{k.on} ms</span>{k.temperature ? ` (${k.temperature})` : ''}</span>
+                      <span className="flex items-center gap-1.5">
+                        <NoteTip note={k.note} />
+                        <SourceLink source={k.source} />
+                      </span>
+                    </div>
                   </div>
-                )}
+                ))}
+              </div>
+            )}
+            {/* τ_off */}
+            {metric.key === 'tauOff' && gevi.kinetics?.length > 0 && (
+              <div className="mt-2 text-[10px] space-y-1">
+                {gevi.kinetics.map((k: any, i: number) => (
+                  <div key={i} className={`py-1 ${i < gevi.kinetics.length - 1 ? 'border-b border-ink/10' : ''}`}>
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-ink"><span className="font-semibold">{k.off} ms</span>{k.temperature ? ` (${k.temperature})` : ''}</span>
+                      <span className="flex items-center gap-1.5">
+                        <NoteTip note={k.note} />
+                        <SourceLink source={k.source} />
+                      </span>
+                    </div>
+                  </div>
+                ))}
               </div>
             )}
             {/* Sensitivity */}
-            {metric.key === 'sensitivity' && gevi.sensitivityData?.[0] && (
-              <div className="mt-2 text-[10px]">
-                <div className="flex items-center gap-2">
-                  <span className="text-ink">ΔF/F<sub>AP</sub>:</span>
-                  <span className="text-ink font-semibold">
-                    {gevi.sensitivityData[0].deltaF}%
-                  </span>
-                </div>
-                <button onClick={() => toggleMetric('sensitivity')} className="mt-1 flex items-center gap-1 text-klein hover:underline">
-                  {expandedMetrics.sensitivity ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
-                  {gevi.sensitivityData.length} {gevi.sensitivityData.length === 1 ? 'measurement' : 'measurements'}
-                </button>
-                {expandedMetrics.sensitivity && (
-                  <div className="mt-1.5 pt-1.5 space-y-1 border-t border-ink/15">
-                    {gevi.sensitivityData.map((s: any, i: number) => (
-                      <div key={i} className={`py-1 ${i < gevi.sensitivityData.length - 1 ? 'border-b border-ink/10' : ''}`}>
-                        <div className="flex items-center justify-between gap-2">
-                          <span>ΔF/F<sub>AP</sub>: {s.deltaF}%</span>
-                          <SourceLink source={s.source} />
-                        </div>
-                        {s.note && <div className="mt-0.5 italic text-ink">{s.note}</div>}
-                      </div>
-                    ))}
+            {metric.key === 'sensitivity' && gevi.sensitivityData?.length > 0 && (
+              <div className="mt-2 text-[10px] space-y-1">
+                {gevi.sensitivityData.map((s: any, i: number) => (
+                  <div key={i} className={`py-1 ${i < gevi.sensitivityData.length - 1 ? 'border-b border-ink/10' : ''}`}>
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-ink">ΔF/F<sub>AP</sub>: <span className="font-semibold">{s.deltaF}%</span></span>
+                      <span className="flex items-center gap-1.5">
+                        <NoteTip note={s.note} />
+                        <SourceLink source={s.source} />
+                      </span>
+                    </div>
                   </div>
-                )}
+                ))}
               </div>
             )}
             {/* Dynamic Range */}
-            {metric.key === 'dynamicRange' && gevi.dynamicRangeData?.[0] && (
-              <div className="mt-2 text-[10px]">
-                <div className="flex items-center gap-2">
-                  <span className="text-ink">ΔF/F:</span>
-                  <span className="text-ink font-semibold">
-                    {gevi.dynamicRangeData[0].sign === 'negative' ? '-' : '+'}{Math.abs(gevi.dynamicRangeData[0].deltaF)}%
-                  </span>
-                  <span className="text-ink">per 100mV</span>
-                </div>
-                <button onClick={() => toggleMetric('dynamicRange')} className="mt-1 flex items-center gap-1 text-klein hover:underline">
-                  {expandedMetrics.dynamicRange ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
-                  {gevi.dynamicRangeData.length} {gevi.dynamicRangeData.length === 1 ? 'measurement' : 'measurements'}
-                </button>
-                {expandedMetrics.dynamicRange && (
-                  <div className="mt-1.5 pt-1.5 space-y-1 border-t border-ink/15">
-                    {gevi.dynamicRangeData.map((d: any, i: number) => (
-                      <div key={i} className={`py-1 ${i < gevi.dynamicRangeData.length - 1 ? 'border-b border-ink/10' : ''}`}>
-                        <div className="flex items-center justify-between gap-2">
-                          <span>
-                            <span className={d.sign === 'negative' ? 'text-red-600' : 'text-green-600'}>
-                              {d.sign === 'negative' ? '-' : '+'}{Math.abs(d.deltaF)}%
-                            </span> per 100mV
-                          </span>
-                          <SourceLink source={d.source} />
-                        </div>
-                        {d.note && <div className="mt-0.5 italic text-ink">{d.note}</div>}
-                      </div>
-                    ))}
+            {metric.key === 'dynamicRange' && gevi.dynamicRangeData?.length > 0 && (
+              <div className="mt-2 text-[10px] space-y-1">
+                {gevi.dynamicRangeData.map((d: any, i: number) => (
+                  <div key={i} className={`py-1 ${i < gevi.dynamicRangeData.length - 1 ? 'border-b border-ink/10' : ''}`}>
+                    <div className="flex items-center justify-between gap-2">
+                      <span>
+                        <span className={`font-semibold ${d.sign === 'negative' ? 'text-red-600' : 'text-green-600'}`}>
+                          {d.sign === 'negative' ? '-' : '+'}{Math.abs(d.deltaF)}%
+                        </span> <span className="text-ink">per 100mV</span>
+                      </span>
+                      <span className="flex items-center gap-1.5">
+                        <NoteTip note={d.note} />
+                        <SourceLink source={d.source} />
+                      </span>
+                    </div>
                   </div>
-                )}
+                ))}
               </div>
             )}
             {/* Photostability */}
@@ -245,104 +209,37 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
                 </div>
               </div>
             )}
-            {metric.key === 'photostability' && Array.isArray(gevi.photostabilityData) && gevi.photostabilityData?.[0] && (
-              <div className="mt-2 text-[10px]">
-                <div className="flex items-center gap-2">
-                  <span className="text-ink">F<sub>remain</sub>:</span>
-                  <span className="text-ink font-semibold">
-                    {gevi.photostabilityData[0].brightnessRemaining}%
-                  </span>
-                  <span className="text-ink">@ {gevi.photostabilityData[0].illumination}</span>
-                </div>
-                <div className="text-ink">{gevi.photostabilityData[0].duration}</div>
-                <button onClick={() => toggleMetric('photostability')} className="mt-1 flex items-center gap-1 text-klein hover:underline">
-                  {expandedMetrics.photostability ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
-                  {gevi.photostabilityData.length} {gevi.photostabilityData.length === 1 ? 'measurement' : 'measurements'}
-                </button>
-                {expandedMetrics.photostability && (
-                  <div className="mt-1.5 pt-1.5 space-y-1 border-t border-ink/15">
-                    {gevi.photostabilityData.map((p: any, i: number) => (
-                      <div key={i} className={`py-1 ${i < gevi.photostabilityData.length - 1 ? 'border-b border-ink/10' : ''}`}>
-                        <div className="flex items-center justify-between gap-2">
-                          <span>F<sub>remain</sub>: {p.brightnessRemaining}% @ {p.illumination}, {p.duration}</span>
-                          <SourceLink source={p.source} />
-                        </div>
-                        {p.note && <div className="mt-0.5 italic text-ink">{p.note}</div>}
-                      </div>
-                    ))}
+            {metric.key === 'photostability' && Array.isArray(gevi.photostabilityData) && gevi.photostabilityData.length > 0 && (
+              <div className="mt-2 text-[10px] space-y-1">
+                {gevi.photostabilityData.map((p: any, i: number) => (
+                  <div key={i} className={`py-1 ${i < gevi.photostabilityData.length - 1 ? 'border-b border-ink/10' : ''}`}>
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-ink">F<sub>remain</sub>: <span className="font-semibold">{p.brightnessRemaining}%</span> @ {p.illumination}, {p.duration}</span>
+                      <span className="flex items-center gap-1.5">
+                        <NoteTip note={p.note} />
+                        <SourceLink source={p.source} />
+                      </span>
+                    </div>
                   </div>
-                )}
+                ))}
               </div>
             )}
             {/* Brightness */}
-            {metric.key === 'brightness' && gevi.brightnessData && gevi.brightnessData.length > 0 && (() => {
-              const egfpEntry = gevi.brightnessData!.find((d: any) => d.reference === 'EGFP');
-              const display = egfpEntry ?? gevi.brightnessData![0];
-              return (
-                <div className="mt-2 text-[10px]">
-                  <div className="flex items-center gap-2">
-                    <span className="text-ink">B/B<sub>EGFP</sub>:</span>
-                    <span className="text-ink font-semibold">
-                      {formatRatio(display.ratio)}×
-                    </span>
-                    <span className="text-ink">vs {display.reference}</span>
-                  </div>
-                  <button onClick={() => toggleMetric('brightness')} className="mt-1 flex items-center gap-1 text-klein hover:underline">
-                    {expandedMetrics.brightness ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
-                    {gevi.brightnessData!.length} {gevi.brightnessData!.length === 1 ? 'comparison' : 'comparisons'}
-                  </button>
-                  {expandedMetrics.brightness && (
-                    <div className="mt-1.5 pt-1.5 space-y-1 border-t border-ink/15">
-                      {gevi.brightnessData!.map((b: any, i: number) => (
-                        <div key={i} className={`py-1 ${i < gevi.brightnessData!.length - 1 ? 'border-b border-ink/10' : ''}`}>
-                          <div className="flex items-center justify-between gap-2">
-                            <span>{formatRatio(b.ratio)}× vs {b.reference}</span>
-                            <SourceLink source={b.source} />
-                          </div>
-                          {b.note && <div className="mt-0.5 italic text-ink">{b.note}</div>}
-                        </div>
-                      ))}
+            {metric.key === 'brightness' && gevi.brightnessData && gevi.brightnessData.length > 0 && (
+              <div className="mt-2 text-[10px] space-y-1">
+                {gevi.brightnessData.map((b: any, i: number) => (
+                  <div key={i} className={`py-1 ${i < gevi.brightnessData.length - 1 ? 'border-b border-ink/10' : ''}`}>
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-ink"><span className="font-semibold">{formatRatio(b.ratio)}×</span> vs {b.reference}</span>
+                      <span className="flex items-center gap-1.5">
+                        <NoteTip note={b.note} />
+                        <SourceLink source={b.source} />
+                      </span>
                     </div>
-                  )}
-                </div>
-              );
-            })()}
-            {/* Popularity */}
-            {metric.key === 'popularity' && gevi.paperCount !== undefined && (() => {
-              const sampleSummary = computeSampleSummary(gevi.researchPapers);
-              const sampleEntries = SAMPLE_CATEGORY_ORDER
-                .filter(cat => sampleSummary[cat] > 0)
-                .map(cat => ({ category: cat, count: sampleSummary[cat] }));
-              const totalMeasurements = sampleEntries.reduce((s, e) => s + e.count, 0);
-              return (
-                <div className="mt-2 text-[10px]">
-                  <div className="flex items-center gap-2">
-                    <span className="text-ink">N<sub>paper</sub>:</span>
-                    <span className="text-ink font-semibold">
-                      {gevi.paperCount}
-                    </span>
                   </div>
-                  {totalMeasurements > 0 && (
-                    <>
-                      <button onClick={() => toggleMetric('popularity')} className="mt-1 flex items-center gap-1 text-klein hover:underline">
-                        {expandedMetrics.popularity ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
-                        Sampled in {totalMeasurements} {totalMeasurements === 1 ? 'measurement' : 'measurements'}
-                      </button>
-                      {expandedMetrics.popularity && (
-                        <div className="mt-1.5 pt-1.5 space-y-1 border-t border-ink/15">
-                          {sampleEntries.map((e, i) => (
-                            <div key={e.category} className={`flex items-center justify-between py-0.5 ${i < sampleEntries.length - 1 ? 'border-b border-ink/10' : ''}`}>
-                              <span className="text-ink">{e.category}</span>
-                              <span className="text-ink font-semibold">{e.count}</span>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </>
-                  )}
-                </div>
-              );
-            })()}
+                ))}
+              </div>
+            )}
           </div>
         ))}
       </div>
@@ -353,18 +250,8 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
         <div className="flex flex-col gap-4 flex-1 min-w-0">
           <div className="border rounded-lg p-4 md:p-6 bg-surface-low border-ink/10">
             <h4 className="text-sm font-semibold mb-3 md:mb-4 text-ink">Performance Profile</h4>
-            <div className="flex items-center gap-4">
-              <div className="h-48 md:h-64 flex-1 min-w-0">
-                <ResponsiveContainer width="100%" height="100%">
-                  <RadarChart data={getRadarData()}>
-                    <PolarGrid stroke="#e5e7eb" />
-                    <PolarAngleAxis dataKey="subject" tick={{ fill: '#374151', fontSize: 10 }} />
-                    <PolarRadiusAxis angle={30} domain={[0, 100]} tick={{ fill: '#9ca3af', fontSize: 9 }} />
-                    <Radar name={gevi.name} dataKey="value" stroke="#1e40af" fill="#1e40af" fillOpacity={0.2} />
-                  </RadarChart>
-                </ResponsiveContainer>
-              </div>
-              <BonusBadges gevi={gevi} size="md" vertical />
+            <div className="w-full aspect-[6/5]">
+              <DistributionRadar gevi={gevi} />
             </div>
           </div>
 

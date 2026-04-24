@@ -7,80 +7,15 @@ import geviGitDates from 'virtual:gevi-git-dates';
 // Cache for loaded GEVIs
 let geviCache: GEVI[] | null = null;
 
-function average(scores: number[]): number {
-  return Math.round(scores.reduce((a, b) => a + b, 0) / scores.length);
-}
-
 // Parse a temperature string like "33-34°C", "22°C", "25°C" into a numeric °C value.
 // Returns null if unparseable or not provided.
 function parseTemperature(temp?: string): number | null {
   if (!temp) return null;
-  // Match patterns like "33-34°C" (take midpoint), "22°C", "37 °C"
   const rangeMatch = temp.match(/([\d.]+)\s*[-–]\s*([\d.]+)/);
   if (rangeMatch) return (parseFloat(rangeMatch[1]) + parseFloat(rangeMatch[2])) / 2;
   const singleMatch = temp.match(/([\d.]+)/);
   if (singleMatch) return parseFloat(singleMatch[1]);
   return null;
-}
-
-// Speed: max(0, min(100, 63.6 × log₁₀(30 / τ_sum)))
-// Temperature selection: prefer entries ≥33°C; if none, use entry closest to 33°C;
-// if no temperature data at all, average all entries.
-function computeSpeed(gevi: GEVI): number | null {
-  if (!gevi.kinetics || gevi.kinetics.length === 0) return null;
-
-  // Separate entries by temperature availability
-  const withTemp = gevi.kinetics.filter(k => parseTemperature(k.temperature) !== null);
-  const withoutTemp = gevi.kinetics.filter(k => parseTemperature(k.temperature) === null);
-
-  let selected: typeof gevi.kinetics;
-  if (withTemp.length > 0) {
-    // Filter to entries ≥33°C
-    const warm = withTemp.filter(k => parseTemperature(k.temperature)! >= 33);
-    if (warm.length > 0) {
-      selected = warm;
-    } else {
-      // No entries ≥33°C: pick the one closest to 33°C
-      const sorted = [...withTemp].sort((a, b) =>
-        Math.abs(parseTemperature(a.temperature)! - 33) - Math.abs(parseTemperature(b.temperature)! - 33)
-      );
-      selected = [sorted[0]];
-    }
-  } else {
-    // No temperature data at all: use all entries
-    selected = withoutTemp;
-  }
-
-  const scores = selected.map(({ on, off }) => {
-    const tauSum = on + off;
-    if (tauSum <= 0) return null;
-    return Math.max(0, Math.min(100, Math.round(63.6 * Math.log10(30 / tauSum))));
-  }).filter((s): s is number => s !== null);
-  return scores.length > 0 ? average(scores) : null;
-}
-
-// Dynamic Range: score = max(0, min(100, 83.33 × log₁₀(|ΔF/F|) − 66.66))
-// Calibration: 25% → 50, 50% → 75, 100% → 100
-function computeDynamicRange(gevi: GEVI): number | null {
-  if (!gevi.dynamicRangeData || gevi.dynamicRangeData.length === 0) return null;
-  const scores = gevi.dynamicRangeData.map(({ deltaF }) => {
-    const absDF = Math.abs(deltaF);
-    if (absDF <= 0) return 0;
-    return Math.max(0, Math.min(100, Math.round(83.33 * Math.log10(absDF) - 66.66)));
-  });
-  return average(scores);
-}
-
-// Sensitivity (ΔF/F per AP): max(0, min(100, 66.4 × log₁₀(|ΔF/F|%) − 32.8))
-// Calibration: 25% → 60, 50% → 80, 100% → 100
-function computeSensitivity(gevi: GEVI): number | null {
-  if (!gevi.sensitivityData || gevi.sensitivityData.length === 0) return null;
-  const scores = gevi.sensitivityData.map(({ deltaF }) => {
-    const absDF = Math.abs(deltaF);
-    if (absDF <= 0) return null;
-    return Math.max(0, Math.min(100, Math.round(66.4 * Math.log10(absDF) - 32.8)));
-  }).filter((s): s is number => s !== null);
-  return scores.length > 0 ? average(scores) : null;
 }
 
 // Build B_rel map via BFS from EGFP through the brightness comparison graph.
@@ -135,64 +70,9 @@ function buildBrelMap(gevis: GEVI[]): Map<string, number> {
   return resolved;
 }
 
-// Brightness: max(0, min(100, 25 × log₁₀(B_rel) + 60)) where B_rel is ratio vs EGFP.
-// B_rel is resolved via graph traversal through all brightness comparisons.
-function computeBrightness(gevi: GEVI, bRelMap: Map<string, number>): number | null {
-  const bRel = bRelMap.get(gevi.id);
-  if (bRel === undefined || bRel <= 0) return null;
-  return Math.max(0, Math.min(100, Math.round(25 * Math.log10(bRel) + 60)));
-}
-
-// Photostability: normalize to standard condition (100 mW/mm², 1 min).
-// First-order bleaching model: F(t) = exp(-k·t·P), k = -ln(F) / (t·P)
-//   F_std = exp(-k · 100 · 1) = exp(100 · ln(F_remaining) / (t · P))
-//         = F_remaining ^ (100 / (t · P))
-// If multiple measurements, select the one with duration closest to 1 min,
-// breaking ties by intensity closest to 10 mW/mm².
-function photostabilityScore(brightnessRemaining: number, illumination: string, duration: string): number {
-  const fRemaining = brightnessRemaining / 100;
-  const powerMatch = illumination.match(/([\d.]+)\s*mW\/mm[²2]/);
-  const power = powerMatch ? parseFloat(powerMatch[1]) : 100;
-  let minutes = 1;
-  const minMatch = duration.match(/([\d.]+)\s*min/);
-  const secMatch = duration.match(/([\d.]+)\s*s\b/i);
-  if (minMatch) minutes = parseFloat(minMatch[1]);
-  else if (secMatch) minutes = parseFloat(secMatch[1]) / 60;
-  const exponent = 100 / (minutes * power);
-  return Math.min(100, Math.round(Math.pow(fRemaining, exponent) * 100));
-}
-
-function computePhotostability(gevi: GEVI): number | null {
-  // Bioluminescent GEVIs have no photobleaching — score 100
-  if (gevi.photostabilityData === 'bioluminescent') return 100;
-  if (!gevi.photostabilityData || !Array.isArray(gevi.photostabilityData) || gevi.photostabilityData.length === 0) return null;
-
-  const withParsed = gevi.photostabilityData.map(entry => {
-    const powerMatch = entry.illumination.match(/([\d.]+)\s*mW\/mm[²2]/);
-    const power = powerMatch ? parseFloat(powerMatch[1]) : 100;
-    let minutes = 1;
-    const minMatch = entry.duration.match(/([\d.]+)\s*min/);
-    const secMatch = entry.duration.match(/([\d.]+)\s*s\b/i);
-    if (minMatch) minutes = parseFloat(minMatch[1]);
-    else if (secMatch) minutes = parseFloat(secMatch[1]) / 60;
-    return { entry, minutes, power };
-  });
-
-  // Pick the entry closest to 1 min, breaking ties by closest to 10 mW/mm²
-  withParsed.sort((a, b) => {
-    const dDuration = Math.abs(a.minutes - 1) - Math.abs(b.minutes - 1);
-    if (dDuration !== 0) return dDuration;
-    return Math.abs(a.power - 10) - Math.abs(b.power - 10);
-  });
-
-  const { entry } = withParsed[0];
-  return photostabilityScore(entry.brightnessRemaining, entry.illumination, entry.duration);
-}
-
-// Compute all derived scores from raw data fields, then compute overall.
-// Weights: Speed 20%, Dynamic Range 20%, Brightness 20%, Sensitivity 15%, Photostability 15%, Popularity 10%
-// Null scores are excluded and remaining weights are normalized proportionally.
-// Select the best kinetics entry using the same temperature preference as speed scoring.
+// Select the kinetics entry set matching the temperature preference:
+// prefer entries ≥33°C; else closest to 33°C; else all entries.
+// Returns average (on, off) across selected entries.
 function selectBestKinetics(gevi: GEVI): { on: number; off: number } | null {
   if (!gevi.kinetics || gevi.kinetics.length === 0) return null;
   const withTemp = gevi.kinetics.filter(k => parseTemperature(k.temperature) !== null);
@@ -217,58 +97,34 @@ function selectBestKinetics(gevi: GEVI): { on: number; off: number } | null {
   return { on: avgOn, off: avgOff };
 }
 
-function computeScores(gevi: GEVI, bRelMap: Map<string, number>) {
-  const speed          = computeSpeed(gevi);
-  const dynamicRange   = computeDynamicRange(gevi);
-  const sensitivity    = computeSensitivity(gevi);
-  const brightness     = computeBrightness(gevi, bRelMap);
-  const photostability = computePhotostability(gevi);
-  const paperCount     = gevi.researchPapers?.length ?? 0;
-  const popularity     = Math.min(100, 50 * Math.log10(paperCount + 1));
-
-  // Raw display values for tabular ranking
+// Compute raw derived values used for display + sorting in the scoreless UI.
+// No 0-100 score mapping — these are measured quantities.
+function computeDisplayValues(gevi: GEVI, bRelMap: Map<string, number>) {
   const bRel = bRelMap.get(gevi.id) ?? null;
   const bestKinetics = selectBestKinetics(gevi);
   const displayTauOn = bestKinetics?.on ?? null;
   const displayTauOff = bestKinetics?.off ?? null;
+  const displayTauSum = bestKinetics ? bestKinetics.on + bestKinetics.off : null;
 
-  const components: { value: number | null; weight: number }[] = [
-    { value: speed,          weight: 0.20 },
-    { value: dynamicRange,   weight: 0.20 },
-    { value: brightness,     weight: 0.20 },
-    { value: sensitivity,    weight: 0.15 },
-    { value: photostability, weight: 0.15 },
-    { value: popularity,     weight: 0.10 },
-  ];
+  const drEntries = (gevi.dynamicRangeData ?? []).map(d => Math.abs(d.deltaF)).filter(v => v > 0);
+  const displayDynamicRange = median(drEntries);
 
-  const performanceScores = [speed, dynamicRange, sensitivity, brightness, photostability];
-  const hasAllPerformanceScores = performanceScores.every(v => v !== null && v !== undefined);
+  const sensEntries = (gevi.sensitivityData ?? []).map(d => Math.abs(d.deltaF)).filter(v => v > 0);
+  const displaySensitivity = median(sensEntries);
 
-  let overall: number | null = null;
-  if (hasAllPerformanceScores) {
-    let weightedSum = 0;
-    let totalWeight = 0;
-    for (const { value, weight } of components) {
-      if (value !== null && value !== undefined) {
-        weightedSum += value * weight;
-        totalWeight += weight;
-      }
-    }
-
-    const tags = Array.isArray(gevi.tags) ? gevi.tags : [];
-    let bonus = 0;
-    if (tags.some(t => t.toLowerCase().includes('far-red') || t.toLowerCase().includes('red') || t.toLowerCase().includes('nir')) ||
-        gevi.voltage?.type === 'chemi') bonus += 3;
-    if (gevi.twoPhoton?.some(tp => tp.compatible)) bonus += 3;
-    if (tags.some(t => t.toLowerCase().includes('positive')) || gevi.dynamicRangeData?.[0]?.sign === 'positive') bonus += 3;
-
-    // Penalty: -10 for first performance score below 10, capped at -15 total
-    const lowCount = performanceScores.filter(s => s !== null && s !== undefined && s < 10).length;
-    const penalty = lowCount === 0 ? 0 : lowCount === 1 ? -10 : -15;
-
-    overall = totalWeight > 0 ? Math.max(0, Math.min(100, Math.round(weightedSum / totalWeight) + bonus + penalty)) : null;
+  let displayPhotostab: number | null;
+  if (gevi.photostabilityData === 'bioluminescent') {
+    displayPhotostab = 100;
+  } else if (Array.isArray(gevi.photostabilityData) && gevi.photostabilityData.length > 0) {
+    const normalized = gevi.photostabilityData.map(normalizePhotostability).filter(v => v > 0);
+    displayPhotostab = median(normalized);
+  } else {
+    displayPhotostab = null;
   }
-  return { speed, dynamicRange, sensitivity, brightness, photostability, overall, paperCount, popularity: Math.round(popularity), bRel, displayTauOn, displayTauOff };
+
+  const paperCount = gevi.researchPapers?.length ?? 0;
+
+  return { bRel, displayTauOn, displayTauOff, displayTauSum, displayDynamicRange, displaySensitivity, displayPhotostab, paperCount };
 }
 
 // Load all GEVIs from modular files (synchronous, uses eager import)
@@ -328,9 +184,114 @@ export function getAllGEVIs(): GEVI[] {
   geviCache = rawGevis.map(gevi => ({
     ...gevi,
     lastUpdated: (geviGitDates as Record<string, string>)[gevi.id] || undefined,
-    ...computeScores(gevi, bRelMap),
+    ...computeDisplayValues(gevi, bRelMap),
   }));
   return geviCache;
+}
+
+// ============================================================================
+// Distribution radar — raw-data axes for the scoreless DistributionRadar chart.
+// Each axis exposes the representative raw value per GEVI plus the per-GEVI
+// array of all raw entries for the current GEVI's "stars".
+// ============================================================================
+
+export type DistributionAxisKey = 'tauOn' | 'tauOff' | 'dynamicRange' | 'sensitivity' | 'brightness' | 'photostability';
+
+export interface DistributionAxisSpec {
+  key: DistributionAxisKey;
+  label: string;
+  unit: string;
+  invert: boolean;  // true → smaller raw is "better" (outer); only speed
+}
+
+export interface AxisDistribution {
+  spec: DistributionAxisSpec;
+  min: number;  // min raw value across population (excluding nulls)
+  max: number;  // max raw value across population
+  repValues: Map<string, number>;  // geviId → representative raw value for the backdrop
+}
+
+export const DISTRIBUTION_AXES: DistributionAxisSpec[] = [
+  { key: 'tauOn',          label: 'τ_on',         unit: 'ms',            invert: true },
+  { key: 'dynamicRange',   label: 'Dyn. Range',   unit: '% ΔF/F',        invert: false },
+  { key: 'sensitivity',    label: 'Sensitivity',  unit: '% ΔF/F per AP', invert: false },
+  { key: 'brightness',     label: 'Brightness',   unit: '× EGFP',        invert: false },
+  { key: 'photostability', label: 'Photostab.',   unit: '%/min @100mW',  invert: false },
+  { key: 'tauOff',         label: 'τ_off',        unit: 'ms',            invert: true },
+];
+
+function median(values: number[]): number | null {
+  if (values.length === 0) return null;
+  const sorted = [...values].sort((a, b) => a - b);
+  const mid = Math.floor(sorted.length / 2);
+  return sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
+}
+
+// Normalize a photostability entry to 1 min @ 100 mW/mm² as a % of initial brightness.
+// Uses first-order bleaching: F_std = F_remaining ^ (100 / (t · P))
+function normalizePhotostability(entry: { brightnessRemaining: number; illumination: string; duration: string }): number {
+  const fRemaining = entry.brightnessRemaining / 100;
+  const powerMatch = entry.illumination.match(/([\d.]+)\s*mW\/mm[²2]/);
+  const power = powerMatch ? parseFloat(powerMatch[1]) : 100;
+  let minutes = 1;
+  const minMatch = entry.duration.match(/([\d.]+)\s*min/);
+  const secMatch = entry.duration.match(/([\d.]+)\s*s\b/i);
+  if (minMatch) minutes = parseFloat(minMatch[1]);
+  else if (secMatch) minutes = parseFloat(secMatch[1]) / 60;
+  const exponent = 100 / (minutes * power);
+  return Math.min(100, Math.pow(fRemaining, exponent) * 100);
+}
+
+// All raw entries for a single GEVI on a single axis (used for "stars" of the current GEVI).
+export function getRawEntriesForGEVI(gevi: GEVI, key: DistributionAxisKey): number[] {
+  switch (key) {
+    case 'tauOn':
+      return (gevi.kinetics ?? []).map(k => k.on).filter(v => v > 0);
+    case 'tauOff':
+      return (gevi.kinetics ?? []).map(k => k.off).filter(v => v > 0);
+    case 'dynamicRange':
+      return (gevi.dynamicRangeData ?? []).map(d => Math.abs(d.deltaF)).filter(v => v > 0);
+    case 'sensitivity':
+      return (gevi.sensitivityData ?? []).map(d => Math.abs(d.deltaF)).filter(v => v > 0);
+    case 'brightness': {
+      const b = gevi.bRel;
+      return (b !== null && b !== undefined && b > 0) ? [b] : [];
+    }
+    case 'photostability': {
+      if (gevi.photostabilityData === 'bioluminescent') return [100];
+      if (!Array.isArray(gevi.photostabilityData)) return [];
+      return gevi.photostabilityData.map(normalizePhotostability).filter(v => v > 0);
+    }
+  }
+}
+
+// Representative value per GEVI for the population backdrop.
+// Speed uses temperature-preferred selection; others use median of raw entries.
+function getRepresentativeValue(gevi: GEVI, key: DistributionAxisKey): number | null {
+  if (key === 'tauOn' || key === 'tauOff') {
+    const best = selectBestKinetics(gevi);
+    if (!best) return null;
+    const v = key === 'tauOn' ? best.on : best.off;
+    return v > 0 ? v : null;
+  }
+  return median(getRawEntriesForGEVI(gevi, key));
+}
+
+// Build per-axis distribution across all GEVIs. Call once, pass to DistributionRadar.
+let axisDistributionCache: AxisDistribution[] | null = null;
+export function getAxisDistributions(): AxisDistribution[] {
+  if (axisDistributionCache) return axisDistributionCache;
+  const gevis = getAllGEVIs();
+  axisDistributionCache = DISTRIBUTION_AXES.map(spec => {
+    const repValues = new Map<string, number>();
+    for (const gevi of gevis) {
+      const v = getRepresentativeValue(gevi, spec.key);
+      if (v !== null && v > 0) repValues.set(gevi.id, v);
+    }
+    const all = [...repValues.values()];
+    return { spec, min: Math.min(...all), max: Math.max(...all), repValues };
+  });
+  return axisDistributionCache;
 }
 
 // Build DOI -> "LastName Year" citation map from all researchPapers

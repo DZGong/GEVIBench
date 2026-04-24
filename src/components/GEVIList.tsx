@@ -12,7 +12,6 @@ interface GEVIListProps {
   compact?: boolean;
   sortConfig: SortConfig;
   onSortChange: (field: SortField) => void;
-  peaceMode?: boolean;
 }
 
 const journalAbbrevs: Record<string, string> = {
@@ -45,15 +44,16 @@ function fmtTau(v: number): string {
   return Math.round(v).toString();
 }
 
-type MetricKey = 'brightness' | 'speed' | 'dynamicRange' | 'sensitivity' | 'photostability' | 'popularity';
+type MetricKey = 'brightness' | 'tauOn' | 'tauOff' | 'dynamicRange' | 'sensitivity' | 'photostability';
 
-const METRICS: { key: MetricKey; sortField: SortField; label: string; shortLabel: string; symbol: React.ReactNode; desc: string }[] = [
-  { key: 'brightness', sortField: 'brightness', label: 'Brightness', shortLabel: 'B/B_EGFP', symbol: <>B/B<sub>EGFP</sub></>, desc: 'brightness vs EGFP' },
-  { key: 'speed', sortField: 'speed', label: 'Kinetics', shortLabel: 'τ_on/τ_off', symbol: <>τ<sub>on</sub>/τ<sub>off</sub> (ms)</>, desc: '' },
-  { key: 'dynamicRange', sortField: 'dynamicRange', label: 'Dynamic Range', shortLabel: 'ΔF/F 100mV', symbol: 'ΔF/F per 100mV', desc: '' },
-  { key: 'sensitivity', sortField: 'sensitivity', label: 'Sensitivity', shortLabel: 'ΔF/F AP', symbol: 'ΔF/F per AP', desc: '' },
-  { key: 'photostability', sortField: 'photostability', label: 'Photostability', shortLabel: 'F_remain%', symbol: <>F<sub>remain</sub>%</>, desc: '100mW/mm² 1min illumination' },
-  { key: 'popularity', sortField: 'popularity', label: 'Papers', shortLabel: 'Paper#', symbol: <>N<sub>paper</sub></>, desc: 'Number of papers that used the sensor' },
+// invert: true → smaller raw value ranks higher (only τ-based metrics)
+const METRICS: { key: MetricKey; sortField: SortField; rawField: keyof any; invert?: boolean; label: string; shortLabel: string; symbol: React.ReactNode; desc: string }[] = [
+  { key: 'brightness',    sortField: 'bRel',                 rawField: 'bRel',                label: 'Brightness',    shortLabel: 'B/B_EGFP',    symbol: <>B/B<sub>EGFP</sub></>, desc: 'brightness vs EGFP' },
+  { key: 'tauOn',         sortField: 'displayTauOn',         rawField: 'displayTauOn',        invert: true, label: 'τ_on', shortLabel: 'τ_on', symbol: <>τ<sub>on</sub> (ms)</>, desc: 'temperature-preferred activation time constant' },
+  { key: 'tauOff',        sortField: 'displayTauOff',        rawField: 'displayTauOff',       invert: true, label: 'τ_off', shortLabel: 'τ_off', symbol: <>τ<sub>off</sub> (ms)</>, desc: 'temperature-preferred decay time constant' },
+  { key: 'dynamicRange',  sortField: 'displayDynamicRange',  rawField: 'displayDynamicRange', label: 'Dynamic Range', shortLabel: 'ΔF/F 100mV',  symbol: 'ΔF/F per 100mV', desc: 'median |ΔF/F| across entries' },
+  { key: 'sensitivity',   sortField: 'displaySensitivity',   rawField: 'displaySensitivity',  label: 'Sensitivity',   shortLabel: 'ΔF/F AP',     symbol: 'ΔF/F per AP', desc: 'median across entries' },
+  { key: 'photostability',sortField: 'displayPhotostab',     rawField: 'displayPhotostab',    label: 'Photostability',shortLabel: 'F_remain%',   symbol: <>F<sub>remain</sub>%</>, desc: '100mW/mm² 1min (normalized)' },
 ];
 
 function useIsNarrow(breakpoint = 768) {
@@ -68,14 +68,14 @@ function useIsNarrow(breakpoint = 768) {
   return narrow;
 }
 
-function getMetricValue(gevi: any, key: MetricKey, dimBase: string): React.ReactNode {
+function getMetricValue(gevi: any, key: MetricKey, _dimBase: string): React.ReactNode {
   switch (key) {
     case 'brightness':
       return gevi.bRel != null ? `${gevi.bRel.toFixed(2)}×` : '—';
-    case 'speed':
-      return gevi.displayTauOn != null
-        ? <span>{fmtTau(gevi.displayTauOn)}<span className={dimBase}>/</span>{fmtTau(gevi.displayTauOff)}</span>
-        : '—';
+    case 'tauOn':
+      return gevi.displayTauOn != null ? fmtTau(gevi.displayTauOn) : '—';
+    case 'tauOff':
+      return gevi.displayTauOff != null ? fmtTau(gevi.displayTauOff) : '—';
     case 'dynamicRange': {
       const dr = gevi.dynamicRangeData?.[0];
       return dr ? `${dr.deltaF > 0 ? '+' : ''}${dr.deltaF}%` : '—';
@@ -85,20 +85,18 @@ function getMetricValue(gevi: any, key: MetricKey, dimBase: string): React.React
       return sens ? `${sens.deltaF}%` : '—';
     }
     case 'photostability':
-      return gevi.photostability != null ? `${gevi.photostability}%` : '—';
-    case 'popularity':
-      return gevi.paperCount || 0;
+      return gevi.displayPhotostab != null ? `${Math.round(gevi.displayPhotostab)}%` : '—';
   }
 }
 
 function hasMetricValue(gevi: any, key: MetricKey): boolean {
   switch (key) {
     case 'brightness': return gevi.bRel != null;
-    case 'speed': return gevi.displayTauOn != null;
+    case 'tauOn': return gevi.displayTauOn != null;
+    case 'tauOff': return gevi.displayTauOff != null;
     case 'dynamicRange': return !!gevi.dynamicRangeData?.[0];
     case 'sensitivity': return !!gevi.sensitivityData?.[0];
-    case 'photostability': return gevi.photostability != null;
-    case 'popularity': return true;
+    case 'photostability': return gevi.displayPhotostab != null;
   }
 }
 
@@ -143,7 +141,7 @@ function SortHeader({ symbol, desc, field, sortConfig, onSort, className = '' }:
   );
 }
 
-export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compareGEVIs, compact = false, sortConfig, onSortChange, peaceMode = false }: GEVIListProps) {
+export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compareGEVIs, compact = false, sortConfig, onSortChange }: GEVIListProps) {
   const thBase = 'font-medium text-ink font-sans';
   const cellBase = 'text-ink/80';
   const dimBase = 'text-ink/40';
@@ -151,26 +149,27 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
   const [narrowIdx, setNarrowIdx] = useState(0);
   const NARROW_OPTIONS = useMemo(() => {
     const metricOptions = METRICS.map(m => ({ key: m.key, sortField: m.sortField, shortLabel: m.shortLabel }));
-    const first = peaceMode
-      ? { key: 'year' as const, sortField: 'year' as SortField, shortLabel: 'Year' }
-      : { key: 'overall' as const, sortField: 'overall' as SortField, shortLabel: 'Score' };
+    const first = { key: 'year' as const, sortField: 'year' as SortField, shortLabel: 'Year' };
     return [first, ...metricOptions];
-  }, [peaceMode]);
-  useEffect(() => { setNarrowIdx(0); }, [peaceMode]);
+  }, []);
   const currentNarrow = NARROW_OPTIONS[narrowIdx];
 
-  // Compute top-3 GEVI IDs per metric score (include ties at the 3rd-place value)
+  // Compute top-3 GEVI IDs per raw metric (include ties at the 3rd-place value).
+  // invert=true metrics (τ-based) rank smaller values higher.
   const top3PerMetric = useMemo(() => {
     const result: Record<string, Set<string>> = {};
     for (const m of METRICS) {
+      const dir = m.invert ? 1 : -1;
       const sorted = [...gevis]
-        .filter(g => g[m.key] != null)
-        .sort((a, b) => (b[m.key] as number) - (a[m.key] as number));
+        .filter(g => g[m.rawField] != null)
+        .sort((a, b) => ((a[m.rawField] as number) - (b[m.rawField] as number)) * dir);
       if (sorted.length < 3) {
         result[m.key] = new Set(sorted.map(g => g.id));
       } else {
-        const cutoff = sorted[2][m.key] as number;
-        result[m.key] = new Set(sorted.filter(g => (g[m.key] as number) >= cutoff).map(g => g.id));
+        const cutoff = sorted[2][m.rawField] as number;
+        result[m.key] = new Set(
+          sorted.filter(g => m.invert ? (g[m.rawField] as number) <= cutoff : (g[m.rawField] as number) >= cutoff).map(g => g.id)
+        );
       }
     }
     return result;
@@ -196,7 +195,7 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
           <table className="w-full border-collapse" style={{ fontSize: '14px' }}>
             <thead className="sticky top-0 z-10 bg-surface">
               <tr className="border-b border-surface">
-                <th className={`pl-2 pr-2 py-2 text-center ${thBase} w-12`} style={{ fontSize: '14px' }}>{peaceMode ? '#' : 'Rank'}</th>
+                <th className={`pl-2 pr-2 py-2 text-center ${thBase} w-12`} style={{ fontSize: '14px' }}>#</th>
                 <th className={`pl-1 pr-0 py-2 text-left ${thBase}`} style={{ fontSize: '14px', width: '1%', whiteSpace: 'nowrap' }}>Sensor ({gevis.length})</th>
                 <th className="px-1 py-2" style={{ minWidth: '150px' }}>
                   <div className="flex items-center justify-center gap-2">
@@ -213,7 +212,7 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
                         sortConfig.field === currentNarrow.sortField ? 'text-klein font-medium' : 'text-ink font-medium'
                       }`}
                     >
-                      <span style={{ fontSize: '14px' }}>{currentNarrow.key === 'overall' ? 'Score' : METRICS.find(m => m.key === currentNarrow.key)?.symbol ?? currentNarrow.shortLabel}</span>
+                      <span style={{ fontSize: '14px' }}>{currentNarrow.key === 'year' ? 'Year' : METRICS.find(m => m.key === currentNarrow.key)?.symbol ?? currentNarrow.shortLabel}</span>
                       {sortConfig.field === currentNarrow.sortField && (
                         <span style={{ fontSize: '12px' }} className="ml-0.5">
                           {sortConfig.order === 'desc' ? '▼' : '▲'}
@@ -240,9 +239,8 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
             </thead>
             {gevis.map((gevi: any, idx: number) => {
               const geviColor = getGEVIColor(gevi);
-              const isScore = currentNarrow.key === 'overall';
               const isYear = currentNarrow.key === 'year';
-              const hasVal = isScore || isYear || hasMetricValue(gevi, currentNarrow.key as MetricKey);
+              const hasVal = isYear || hasMetricValue(gevi, currentNarrow.key as MetricKey);
               return (
                 <tbody key={gevi.id} data-gevi-id={gevi.id} onClick={() => onSelect(gevi)} className={groupCls(gevi)}>
                   <tr>
@@ -262,11 +260,7 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
                         {extractYear(gevi.paper)}
                       </a>
                     </td>
-                    {isScore ? (
-                      <td className="px-1 pt-3 pb-0 text-center font-semibold text-klein tabular-nums" style={{ fontSize: '16px' }}>
-                        {gevi.overall ?? '—'}
-                      </td>
-                    ) : isYear ? (
+                    {isYear ? (
                       <td className={`px-1 pt-3 pb-0 text-center tabular-nums ${dimBase}`} style={{ fontSize: '16px' }}>
                         {gevi.year}
                       </td>
@@ -297,16 +291,13 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
           <table className="w-full border-collapse" style={{ fontSize: '14px' }}>
             <thead className="sticky top-0 z-10 bg-surface">
               <tr className="border-b border-surface">
-                <th className={`pl-2 pr-4 py-2 text-center ${thBase} w-16`} style={{ fontSize: '14px' }}>{peaceMode ? '#' : 'Rank'}</th>
+                <th className={`pl-2 pr-4 py-2 text-center ${thBase} w-16`} style={{ fontSize: '14px' }}>#</th>
                 <th className={`px-1 py-2 text-left ${thBase}`} style={{ fontSize: '14px' }}>Sensor ({gevis.length})</th>
                 {METRICS.map(m => (
                   <SortHeader key={m.key} symbol={m.symbol} desc={m.desc} field={m.sortField} sortConfig={sortConfig} onSort={onSortChange} />
                 ))}
                 <th className="w-4"></th>
-                {peaceMode
-                  ? <SortHeader symbol="Year" desc="" field="year" sortConfig={sortConfig} onSort={onSortChange} />
-                  : <SortHeader symbol="Score" desc="" field="overall" sortConfig={sortConfig} onSort={onSortChange} />
-                }
+                <SortHeader symbol="Year" desc="" field="year" sortConfig={sortConfig} onSort={onSortChange} />
                 <th className="w-8"></th>
               </tr>
             </thead>
@@ -344,15 +335,9 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
                       );
                     })}
                     <td className="w-4"></td>
-                    {peaceMode ? (
-                      <td className={`px-2 pt-3 pb-0 text-center tabular-nums ${dimBase}`} rowSpan={2} style={{ fontSize: '14px', verticalAlign: 'middle' }}>
-                        {gevi.year}
-                      </td>
-                    ) : (
-                      <td className="px-2 pt-3 pb-0 text-center font-semibold text-klein tabular-nums" rowSpan={2} style={{ fontSize: '16px', verticalAlign: 'middle' }}>
-                        {gevi.overall ?? '—'}
-                      </td>
-                    )}
+                    <td className={`px-2 pt-3 pb-0 text-center tabular-nums ${dimBase}`} rowSpan={2} style={{ fontSize: '14px', verticalAlign: 'middle' }}>
+                      {gevi.year}
+                    </td>
                     <td className="px-1 pt-3 pb-0 text-center" rowSpan={2} style={{ verticalAlign: 'middle' }}>
                       <button
                         onClick={(e) => { e.stopPropagation(); onAddToCompare(gevi); }}

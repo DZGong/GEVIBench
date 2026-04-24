@@ -1,6 +1,5 @@
 import { useMemo, useState, useRef, useEffect, useCallback } from 'react';
 import { BookOpen, ExternalLink } from 'lucide-react';
-import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar } from 'recharts';
 import { getAllGEVIs } from '../geviData';
 import { getTreeNodeColor } from '../utils';
 import type { GEVI } from '../types';
@@ -29,7 +28,7 @@ function abbreviatePaper(paper: string): string {
 }
 
 const TOOLTIP_W = 170;
-const TOOLTIP_H = 270;
+const TOOLTIP_H = 130;
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -37,7 +36,6 @@ interface GNode {
   id: string;
   name: string;
   bRel: number | null;
-  bScore: number | null;
   color: string;
   isEGFP: boolean;
   isExternal: boolean; // referenced but not in the DB (e.g. "arch")
@@ -124,14 +122,10 @@ function buildGraph(gevis: GEVI[]): { nodes: GNode[]; edges: GEdge[] } {
   const nodes: GNode[] = [...nodeSet].map(id => {
     const gevi = geviMap.get(id) ?? null;
     const bRel = bRelMap.get(id) ?? null;
-    const bScore = bRel !== null
-      ? Math.max(0, Math.min(100, Math.round(25 * Math.log10(bRel) + 60)))
-      : null;
     return {
       id,
       name: gevi?.name ?? id,
       bRel,
-      bScore,
       color: id === 'EGFP' ? '#22c55e' : gevi ? getTreeNodeColor(gevi) : '#6b7280',
       isEGFP: id === 'EGFP',
       isExternal: !gevi && id !== 'EGFP',
@@ -361,12 +355,11 @@ function formatRatio(ratio: number): string {
 
 interface Props {
   onSelectGEVI: (gevi: GEVI) => void;
-  peaceMode?: boolean;
 }
 
 const W = 2100, H = 1500;
 
-export function BrightnessNetworkPanel({ onSelectGEVI, peaceMode = false }: Props) {
+export function BrightnessNetworkPanel({ onSelectGEVI }: Props) {
   const gevis = useMemo(() => getAllGEVIs(), []);
   const { nodes, edges } = useMemo(() => buildGraph(gevis), [gevis]);
   const positions = useMemo(() => forceLayout(nodes, edges, W, H), [nodes, edges]);
@@ -596,15 +589,15 @@ export function BrightnessNetworkPanel({ onSelectGEVI, peaceMode = false }: Prop
                   >
                     {node.name}
                   </text>
-                  {/* Brightness score below name */}
-                  {node.bScore !== null && (
+                  {/* B_rel below name */}
+                  {node.bRel !== null && (
                     <text y={node.r + 24} textAnchor="middle" dominantBaseline="middle"
                       fontSize={7} fontWeight="500"
                       fill="#9ca3af"
                       stroke={bg} strokeWidth={2} paintOrder="stroke"
                       style={{ userSelect: 'none', pointerEvents: 'none' }}
                     >
-                      {node.bScore}
+                      {node.bRel.toFixed(2)}×
                     </text>
                   )}
                 </g>
@@ -631,14 +624,6 @@ export function BrightnessNetworkPanel({ onSelectGEVI, peaceMode = false }: Prop
         const tags = Array.isArray(g.tags) ? g.tags : [];
         const tooltipTags = tags.slice(0, 4);
         const tooltipExtraCount = tags.length - tooltipTags.length;
-        const radarData = [
-          { subject: 'Brightness',  value: g.brightness    ?? 0, fullMark: 100 },
-          { subject: 'Speed',       value: g.speed          ?? 0, fullMark: 100 },
-          { subject: 'Dyn. Range',  value: g.dynamicRange   ?? 0, fullMark: 100 },
-          { subject: 'Sensitivity', value: g.sensitivity    ?? 0, fullMark: 100 },
-          { subject: 'Photostab.',  value: g.photostability ?? 0, fullMark: 100 },
-          { subject: 'Popularity',  value: Math.min(100, (g.paperCount ?? 0) * 5), fullMark: 100 },
-        ];
 
         return (
           <div
@@ -657,12 +642,7 @@ export function BrightnessNetworkPanel({ onSelectGEVI, peaceMode = false }: Prop
                   {g.name}
                 </button>
               </div>
-              {!peaceMode && g.overall != null && (
-                <div className="text-right flex-shrink-0">
-                  <div className="text-xl font-bold text-klein leading-none">{g.overall}</div>
-                  <div className="text-[8px] text-ink/40">Overall</div>
-                </div>
-              )}
+              <div className="text-right flex-shrink-0 text-[10px] text-ink/50">{g.year}</div>
             </div>
 
             <div className="flex flex-wrap gap-1 mb-1.5">
@@ -691,14 +671,6 @@ export function BrightnessNetworkPanel({ onSelectGEVI, peaceMode = false }: Prop
               </a>
             )}
 
-            <div className="border-t mb-1 border-ink/5" />
-
-            <RadarChart width={150} height={130} data={radarData}>
-              <PolarGrid stroke="#e5e7eb" />
-              <PolarAngleAxis dataKey="subject" tick={{ fontSize: 8 }} />
-              <PolarRadiusAxis domain={[0, 100]} tick={false} axisLine={false} />
-              <Radar dataKey="value" stroke="#002FA7" fill="#002FA7" fillOpacity={0.2} />
-            </RadarChart>
           </div>
         );
       })()}

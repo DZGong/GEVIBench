@@ -252,7 +252,7 @@ function extractSimParams(gevi: GEVI): SimParams | null {
   // τ_bleach at power P: remaining = exp(-T/τ), so τ = -T/ln(remaining/100)
   // Scale linearly with power: τ_at_1mW = τ_at_P * P
   let tauBleach: number | null = null;
-  if (gevi.photostabilityData?.length) {
+  if (Array.isArray(gevi.photostabilityData) && gevi.photostabilityData.length) {
     const pd = gevi.photostabilityData[0];
     const remaining = pd.brightnessRemaining;
     if (remaining > 0 && remaining < 100) {
@@ -334,7 +334,7 @@ export function APSimulatorPanel({}: Props) {
   const simulatable = useMemo(() =>
     allGevis
       .filter(g => extractSimParams(g) !== null)
-      .sort((a, b) => (b.overall ?? 0) - (a.overall ?? 0)),
+      .sort((a, b) => b.year - a.year),
     [allGevis]
   );
 

@@ -9,6 +9,23 @@ Working directory: `/Users/dzgong/Documents/GEVIBench/vnet-benchmark`
 
 ---
 
+## Branch Structure
+
+The repo has **two long-lived branches** with intentionally different philosophies:
+
+| Branch | Purpose | Scoring |
+|--------|---------|---------|
+| **`main`** | Objective reference: raw measured data only, no subjective ranking | **No scores.** Display values are measured quantities (τ in ms, ΔF/F %, B_rel vs EGFP, etc.). No 0–100 mapping, no weighted overall score, no bonus points, no penalties. |
+| **`arena`** | Opinionated comparison: scored + ranked for quick selection | Keeps the full scoring pipeline (weighted overall, subscore formulas, bonus points, weakness penalty). |
+
+**When working on this repo:**
+- Default to `main` — the public site serves the objective view.
+- If a change adds, removes, or renames a *score field* or a scoring formula, it belongs on `arena`, not here.
+- Raw-data edits (JSON files in `src/gevis/`, curator fixes, new papers, spectra, voltage curves) apply to **both** branches — cherry-pick or merge as needed.
+- `src/methodology.ts` is retained on `main` as documentation/reference but is **not imported** anywhere. It is actively used on `arena`. Do not delete it from `main`.
+
+---
+
 ## Tech Stack
 
 - **React 18** + **TypeScript** + **Vite** + **Tailwind CSS v3**
@@ -27,8 +44,8 @@ Working directory: `/Users/dzgong/Documents/GEVIBench/vnet-benchmark`
 src/
 ├── App.tsx                  # Root component; all state lives here; state-based routing
 ├── types.ts                 # All TypeScript interfaces (GEVI, ResearchPaper, ViewTab, etc.)
-├── geviData.ts              # Score computation engine; loads + processes all JSON files
-├── methodology.ts           # Human-readable methodology text (rendered in Methodology tab)
+├── geviData.ts              # Loads JSON files; builds B_rel brightness graph; computes raw display values
+├── methodology.ts           # Retained from the arena branch (scoring reference); NOT imported on main
 ├── constants.ts             # Shared constants (colors, filters, etc.)
 ├── gevis/                   # One JSON file per GEVI (~48 files)
 │   ├── asap3.json
@@ -66,6 +83,8 @@ selectedGEVI: GEVI | null      // which GEVI is shown in detail panel
 
 Tools (Family Tree, Brightness Network, Compare) are accessible from the **Tools** dropdown in the header. They render inside the `database` tab by replacing the normal list+detail layout.
 
+`ViewTab` on `main` is `'database' | 'contact' | 'tools'` — no `'methodology'` entry (that lives on `arena`).
+
 ---
 
 ## GEVI JSON Schema
@@ -90,7 +109,8 @@ Each file in `src/gevis/*.json` follows this schema (see `types.ts` for the auth
   "spectrum": { "type": "fp", "peakEx": 505, "peakEm": 525, "name": "ASAP3", "custom": {...} },
   "voltage": { "type": "fp", "slope": 12, "polarity": "negative", "name": "ASAP3", "custom": {...} },
 
-  // Raw data (arrays; scores computed at runtime — NEVER hardcode scores in JSON):
+  // Raw measured data (arrays). On main, these are displayed as-is. On arena, they feed the scoring engine.
+  // NEVER hardcode derived or scored values in JSON — only raw measurements with a source DOI.
   "kinetics": [{ "on": 0.94, "off": 3.79, "source": "doi:..." }],
   "dynamicRangeData": [{ "deltaF": -51, "sign": "negative", "source": "doi:..." }],
   "sensitivityData": [{ "deltaF": 8.5, "source": "doi:..." }],
@@ -103,33 +123,28 @@ Each file in `src/gevis/*.json` follows this schema (see `types.ts` for the auth
 ```
 
 ### Critical rules for JSON files
-- **Never set score fields** (`speed`, `dynamicRange`, `sensitivity`, `brightness`, `photostability`, `overall`, `paperCount`, `popularity`) in JSON — all computed at runtime by `geviData.ts`
+- **Never set derived/scored fields** in JSON. The following are computed at runtime and must not appear in source JSON:
+  - `main` + `arena`: `bRel`, `displayTauOn`, `displayTauOff`, `displayTauSum`, `displayDynamicRange`, `displaySensitivity`, `displayPhotostab`, `paperCount`
+  - `arena` only: `speed`, `dynamicRange`, `sensitivity`, `brightness`, `photostability`, `overall`, `popularity`
 - **Omit empty arrays** — if no kinetics data exists, omit the `kinetics` field entirely
 - `id` must match filename and last element of `familyTreePath` if used
 - `voltage.custom.deltaF` at −70 mV must be normalized to 0
 
 ---
 
-## Score Computation (`geviData.ts`)
+## Data Processing (`geviData.ts`)
 
-All subscores are computed at runtime from raw data. The pipeline:
+On `main`, `geviData.ts` loads raw data and computes **display values only** — no 0–100 scoring. The pipeline:
 
 1. Load all JSON files via `import.meta.glob('./gevis/*.json', { eager: true })`
 2. Normalize legacy single-object fields to arrays (old files may have `kinetics: {...}` instead of `[{...}]`)
-3. Build brightness B_rel map via BFS graph traversal across all `brightnessData` entries
-4. Compute all subscores per GEVI
+3. Augment `brightnessData` with reverse comparisons so both sides of a pairwise ratio are visible
+4. Build the B_rel map via BFS graph traversal across all `brightnessData` entries
+5. Compute raw display values per GEVI: `bRel`, `displayTauOn/Off/Sum` (temperature-preferred kinetics), `displayDynamicRange` (median |ΔF/F|), `displaySensitivity`, `displayPhotostab` (normalized to 100 mW/mm², 1 min)
 
-### Scoring formulas
+Sorting and tabular display use these raw values directly (units are ms, %, ×EGFP, %/min). There is no weighted overall score on `main`.
 
-| Score | Formula | Notes |
-|-------|---------|-------|
-| **Speed** | `max(0, min(100, round(63.6 × log₁₀(30 / (τ_on + τ_off)))))` | τ in ms; score 0 when τ_sum ≥ 30 ms |
-| **Dynamic Range** | `max(0, min(100, round(83.33 × log₁₀(|ΔF/F|) − 66.66)))` | ΔF/F in %; 25%→50, 50%→75, 100%→100 |
-| **Sensitivity** | `max(0, min(100, round(66.4 × log₁₀(|ΔF/F|) − 32.8)))` | ΔF/F per AP; 25%→60, 50%→80, 100%→100 |
-| **Brightness** | `max(0, min(100, round(25 × log₁₀(B_rel) + 60)))` | B_rel vs EGFP; EGFP scores 60 |
-| **Photostability** | `min(100, round(100 × F_remaining ^ (100 / (t × P))))` | Standard: 100 mW/mm², 1 min |
-| **Popularity** | `min(100, round(50 × log₁₀(papers + 1)))` | papers = researchPapers.length |
-| **Overall** | Weighted average + penalty | Speed 20%, DynRange 20%, Brightness 20%, Sensitivity 15%, Photostability 15%, Popularity 10%; null scores excluded with proportional weight redistribution; −10 penalty per performance score below 10 |
+> For the scoring formulas (speed, dynamic range, brightness, sensitivity, photostability, popularity, weighted overall, bonus, weakness penalty), see the `arena` branch — specifically `src/methodology.ts` and the scoring block of `src/geviData.ts` on that branch.
 
 ### Brightness graph traversal
 
@@ -177,7 +192,7 @@ The `FamilyTreePanel` renders a vertical FPbase-style layout using custom SVG wi
 ## Brightness Network
 
 `BrightnessNetworkPanel.tsx` renders a force-directed graph of brightness comparisons between GEVIs:
-- Nodes = GEVIs (size scaled by brightness score; color from `getTreeNodeColor`)
+- Nodes = GEVIs (size scaled by `bRel`; color from `getTreeNodeColor`)
 - Edges = `brightnessData` entries (labeled with ratio)
 - EGFP pinned at center
 - Layout: Fruchterman-Reingold algorithm (350 iterations), BFS-based concentric ring initialization

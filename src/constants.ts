@@ -61,9 +61,8 @@ export const COLORS = {
 // Metrics configuration (used by GEVIDetail)
 export const METRICS = [
   { key: 'brightness', name: 'Brightness', icon: 'Sun' },
-  { key: 'speed', name: 'Speed', icon: 'Zap' },
+  { key: 'speed', name: 'Kinetics', icon: 'Zap' },
   { key: 'dynamicRange', name: 'Dynamic Range', icon: 'TrendingUp' },
   { key: 'sensitivity', name: 'Sensitivity', icon: 'Activity' },
   { key: 'photostability', name: 'Photostability', icon: 'Shield' },
-  { key: 'paperCount', name: 'Popularity', icon: 'FileText' },
 ] as const;
