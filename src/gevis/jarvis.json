@@ -12,7 +12,7 @@
   ],
   "paper": "Neuron 2026",
   "paperUrl": "https://doi.org/10.1016/j.neuron.2025.12.014",
-  "description": "Variant of pAce in which the fluorophore is replaced by the ultra-bright AausFP1, yielding a high-contrast positive-going FRET-opsin indicator compatible with one- and two-photon voltage imaging.",
+  "description": "Variant of pAce with the ultra-bright AausFP1 fluorophore, yielding a high-contrast positive-going FRET-opsin indicator compatible with 2P voltage imaging.",
   "parentId": "pace",
   "spectrum": {
     "type": "rhodopsin",
@@ -668,6 +668,12 @@
       "brightnessRemaining": 99,
       "illumination": "10 mW/mm\u00b2",
       "duration": "1 min",
+      "source": "doi:10.1016/j.neuron.2025.12.014"
+    }
+  ],
+  "twoPhoton": [
+    {
+      "compatible": true,
       "source": "doi:10.1016/j.neuron.2025.12.014"
     }
   ],

@@ -6,7 +6,7 @@
   "tags": ["cpGFP", "Green", "Positive-going", "Two-photon"],
   "paper": "bioRxiv 2026",
   "paperUrl": "https://doi.org/10.64898/2026.04.07.717088",
-  "description": "Positive-going variant evolved from JEDI-2P with substantially larger spike responses, high intrinsic brightness, and repolarization kinetics tuned for sub-kilohertz two-photon imaging on standard resonant-scanning microscopes.",
+  "description": "Positive-going variant evolved from JEDI-2P with substantially larger spike responses, high intrinsic brightness, and repolarization kinetics tuned for 2P imaging.",
 
   "parentId": "jedi2p",
 

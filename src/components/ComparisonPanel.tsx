@@ -21,10 +21,10 @@ function fmtTau(v: number): string {
 const RAW_METRICS: { key: string; symbol: React.ReactNode; fmt: (g: any) => string }[] = [
   { key: 'bRel',    symbol: <>B/B<sub>EGFP</sub></>,   fmt: g => g.bRel != null ? `${g.bRel.toFixed(2)}×` : '—' },
   { key: 'tauOn',   symbol: <>τ<sub>on</sub> (ms)</>,  fmt: g => g.displayTauOn != null ? fmtTau(g.displayTauOn) : '—' },
+  { key: 'tauOff',  symbol: <>τ<sub>off</sub> (ms)</>, fmt: g => g.displayTauOff != null ? fmtTau(g.displayTauOff) : '—' },
   { key: 'dr',      symbol: <>ΔF/F per 100mV</>,       fmt: g => g.displayDynamicRange != null ? `${g.displayDynamicRange.toFixed(1)}%` : '—' },
   { key: 'sens',    symbol: <>ΔF/F per AP</>,          fmt: g => g.displaySensitivity != null ? `${g.displaySensitivity.toFixed(1)}%` : '—' },
   { key: 'photo',   symbol: <>F<sub>remain</sub>%</>,  fmt: g => g.displayPhotostab != null ? `${Math.round(g.displayPhotostab)}%` : '—' },
-  { key: 'tauOff',  symbol: <>τ<sub>off</sub> (ms)</>, fmt: g => g.displayTauOff != null ? fmtTau(g.displayTauOff) : '—' },
 ];
 
 export function ComparisonPanel({ compareGEVIs, onRemove, showEmpty = false, onClose }: ComparisonProps) {

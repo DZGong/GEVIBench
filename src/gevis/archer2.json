@@ -10,7 +10,7 @@
   ],
   "paper": "Nature Communications 2014",
   "paperUrl": "https://doi.org/10.1038/ncomms5894",
-  "description": "Archaerhodopsin variant with an additional chromophore-distorting mutation that further suppresses photocurrents at the expense of slower kinetics and lower sensitivity than its sibling variant.",
+  "description": "Archaerhodopsin variant that further suppresses photocurrents at the expense of slower kinetics and lower sensitivity than its Archer1.",
   "parentId": "arch",
   "siblingId": "archer1",
   "spectrum": {

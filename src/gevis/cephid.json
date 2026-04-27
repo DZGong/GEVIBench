@@ -13,7 +13,7 @@
   ],
   "paper": "Science Advances 2023",
   "paperUrl": "https://doi.org/10.1126/sciadv.adi4208",
-  "description": "Red opsin-FRET voltage indicator pair featuring RFP donor insertion into the first extracellular loop of Ace rhodopsin for large voltage-dependent response with improved brightness (Cepheid1b) or photostability (Cepheid1s).",
+  "description": "Red opsin-FRET voltage indicator pair featuring RFP donor insertion into the first extracellular loop of Ace rhodopsin for large voltage-dependent response with improved brightness or photostability.",
   "parentId": "varnam",
   "spectrum": {
     "type": "rhodopsin",

@@ -11,7 +11,7 @@
   ],
   "paper": "bioRxiv 2024",
   "paperUrl": "https://doi.org/10.1101/2024.11.15.623698",
-  "description": "Chemigenetic voltage indicator built from Klebsormidium nitens rhodopsin and HaloTag, engineered for two-photon voltage imaging alongside green calcium indicators in awake behaving mice.",
+  "description": "Chemigenetic voltage indicator built from Klebsormidium nitens rhodopsin and HaloTag, engineered for two-photon voltage imaging.",
   "parentId": "voltron",
   "spectrum": {
     "type": "rhodopsin",
@@ -784,6 +784,12 @@
       "illumination": "25.7 mW (objective output), 1035 nm 2P ULoVE",
       "duration": "10 min",
       "note": "Qualitative durability only — paper reports routine 10+ min in vivo recordings from V1 L2/3 neurons under 2P ULoVE; no % remaining or bleaching curve published.",
+      "source": "doi:10.1101/2024.11.15.623698"
+    }
+  ],
+  "twoPhoton": [
+    {
+      "compatible": true,
       "source": "doi:10.1101/2024.11.15.623698"
     }
   ],

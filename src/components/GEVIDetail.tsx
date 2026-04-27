@@ -14,10 +14,10 @@ function formatRatio(ratio: number): string {
 const metrics = [
   { key: 'brightness', name: <>B/B<sub>EGFP</sub></>, icon: Sun },
   { key: 'tauOn', name: <>τ<sub>on</sub> (ms)</>, icon: Zap },
+  { key: 'tauOff', name: <>τ<sub>off</sub> (ms)</>, icon: Zap },
   { key: 'dynamicRange', name: <>ΔF/F per 100mV</>, icon: TrendingUp },
   { key: 'sensitivity', name: <>ΔF/F per AP</>, icon: Activity },
   { key: 'photostability', name: <>F<sub>remain</sub>%</>, icon: Shield },
-  { key: 'tauOff', name: <>τ<sub>off</sub> (ms)</>, icon: Zap },
 ];
 
 interface GEVIDetailProps {
@@ -224,10 +224,20 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
                 ))}
               </div>
             )}
-            {/* Brightness */}
-            {metric.key === 'brightness' && gevi.brightnessData && gevi.brightnessData.length > 0 && (
+            {/* Brightness — derived B/B_EGFP first (computed via the brightness graph), then raw entries */}
+            {metric.key === 'brightness' && (gevi.bRel != null || gevi.brightnessData?.length > 0) && (
               <div className="mt-2 text-[10px] space-y-1">
-                {gevi.brightnessData.map((b: any, i: number) => (
+                {gevi.bRel != null && (
+                  <div className={`py-1 ${gevi.brightnessData?.length > 0 ? 'border-b border-ink/10' : ''}`}>
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-ink">
+                        <span className="font-semibold">{formatRatio(gevi.bRel)}×</span> vs EGFP
+                        <span className="text-ink/40 ml-1">(derived)</span>
+                      </span>
+                    </div>
+                  </div>
+                )}
+                {gevi.brightnessData?.map((b: any, i: number) => (
                   <div key={i} className={`py-1 ${i < gevi.brightnessData.length - 1 ? 'border-b border-ink/10' : ''}`}>
                     <div className="flex items-center justify-between gap-2">
                       <span className="text-ink"><span className="font-semibold">{formatRatio(b.ratio)}×</span> vs {b.reference}</span>
