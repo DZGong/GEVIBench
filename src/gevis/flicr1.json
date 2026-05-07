@@ -620,47 +620,55 @@
       "on": 3,
       "off": 2.8,
       "temperature": "22°C",
-      "source": "doi:10.1523/JNEUROSCI.3590-15.2016"
+      "source": "doi:10.1523/JNEUROSCI.3590-15.2016",
+      "sourceFigure": "Table 1"
     },
     {
       "on": 0.74,
       "off": 0.93,
       "temperature": "34°C",
-      "source": "doi:10.1523/JNEUROSCI.3590-15.2016"
+      "source": "doi:10.1523/JNEUROSCI.3590-15.2016",
+      "sourceFigure": "Table 1"
     }
   ],
   "dynamicRangeData": [
     {
       "deltaF": 6.6,
       "sign": "positive",
-      "source": "doi:10.1523/JNEUROSCI.3590-15.2016"
+      "source": "doi:10.1523/JNEUROSCI.3590-15.2016",
+      "sourceFigure": "Fig. 3D"
     },
     {
       "deltaF": 2.54,
       "sign": "positive",
-      "source": "doi:10.1523/ENEURO.0060-20.2020"
+      "source": "doi:10.1523/ENEURO.0060-20.2020",
+      "sourceFigure": "Fig. 2D"
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 2.6,
-      "source": "doi:10.1523/JNEUROSCI.3590-15.2016"
+      "source": "doi:10.1523/JNEUROSCI.3590-15.2016",
+      "sourceFigure": "Fig. 5D"
     },
     {
       "deltaF": 1.4,
-      "source": "doi:10.1038/s41598-019-52370-8"
+      "source": "doi:10.1038/s41598-019-52370-8",
+      "sourceFigure": "Fig. 3d"
     }
   ],
   "brightnessData": [
     {
       "ratio": 1458,
       "reference": "arch",
-      "source": "doi:10.1021/acschemneuro.0c00046"
+      "source": "doi:10.1021/acschemneuro.0c00046",
+      "sourceFigure": "Table 1"
     },
     {
       "ratio": 0.15,
       "reference": "ace2n-mneon",
-      "source": "doi:10.1038/s41592-018-0188-7"
+      "source": "doi:10.1038/s41592-018-0188-7",
+      "sourceFigure": "Fig. 1j"
     }
   ],
   "photostabilityData": [
@@ -668,7 +676,8 @@
       "brightnessRemaining": 67,
       "illumination": "10 mW/mm²",
       "duration": "1 min",
-      "source": "doi:10.1523/JNEUROSCI.3590-15.2016"
+      "source": "doi:10.1523/JNEUROSCI.3590-15.2016",
+      "sourceFigure": "Fig. 3I"
     }
   ],
   "addgene": {

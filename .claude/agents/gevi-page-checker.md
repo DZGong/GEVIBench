@@ -32,12 +32,12 @@ Check whether each of these raw data fields exists and is non-empty:
 
 | Field | Required format | Flag if... |
 |-------|----------------|------------|
-| `kinetics` | Array of `{ on, off, temperature, source }` | Missing entirely, empty array, missing `source`, or missing `temperature` |
-| `dynamicRangeData` | Array of `{ deltaF, sign, source }` | Missing entirely, empty array, or missing `source` |
-| `sensitivityData` | Array of `{ deltaF, source }` | Missing entirely or empty |
-| `brightnessData` | Array of `{ ratio, reference, source }` | Missing entirely or empty |
-| `photostabilityData` | Array or `"bioluminescent"` | Missing entirely or empty |
-| `subthresholdData` | Array of `{ slope, source }` | Missing — note as "optional but preferred" |
+| `kinetics` | Array of `{ on, off, temperature, source, sourceFigure }` | Missing entirely, empty array, missing `source`, missing `temperature`, or missing `sourceFigure` |
+| `dynamicRangeData` | Array of `{ deltaF, sign, source, sourceFigure }` | Missing entirely, empty array, missing `source`, or missing `sourceFigure` |
+| `sensitivityData` | Array of `{ deltaF, source, sourceFigure }` | Missing entirely, empty, or missing `sourceFigure` |
+| `brightnessData` | Array of `{ ratio, reference, source, sourceFigure }` | Missing entirely, empty, or missing `sourceFigure` |
+| `photostabilityData` | Array or `"bioluminescent"` | Missing entirely, empty, or missing `sourceFigure` on any entry |
+| `subthresholdData` | Array of `{ slope, source, sourceFigure }` | Missing — note as "optional but preferred" |
 | `spectrum.custom` | Object with `minEm`, `emission`, optionally `minEx`, `excitation` | Missing or absent |
 | `voltage.custom` | Object with `voltage` and `deltaF` arrays | Missing or absent |
 | `voltage.sourceImage` | String path to `public/fv-sources/{id}.jpg` | Missing — needs cropped figure from PMC |
@@ -232,12 +232,14 @@ For each missing performance field identified in Step 1, search the paper for:
 
 | Missing field | What to look for in the paper |
 |---------------|-------------------------------|
-| `kinetics` | τ_on, τ_off, activation/deactivation time constants. Check supplementary tables. |
-| `dynamicRangeData` | ΔF/F per 100mV step. Look for voltage-clamp step responses. |
-| `sensitivityData` | ΔF/F per single action potential. Look for current-clamp recordings. |
-| `brightnessData` | EC×QY, comparison to EGFP, relative fluorescence intensity. See curator Step B2. |
-| `photostabilityData` | Photobleaching curves, time constants, % remaining after illumination. |
-| `subthresholdData` | %/mV slope in the -90 to -50mV range. Look for voltage ramp data. |
+| `kinetics` | τ_on, τ_off, activation/deactivation time constants. Check supplementary tables. Note the exact figure or table label (e.g., `"Table S2"`, `"Fig. 3B"`). |
+| `dynamicRangeData` | ΔF/F per 100mV step. Look for voltage-clamp step responses. Note the figure label. |
+| `sensitivityData` | ΔF/F per single action potential. Look for current-clamp recordings. Note the figure label. |
+| `brightnessData` | EC×QY, comparison to EGFP, relative fluorescence intensity. See curator Step B2. Note the figure or table label. |
+| `photostabilityData` | Photobleaching curves, time constants, % remaining after illumination. Note the figure label. |
+| `subthresholdData` | %/mV slope in the -90 to -50mV range. Look for voltage ramp data. Note the figure label. |
+
+For **every** value you extract, record the exact figure or table label as `sourceFigure` (e.g., `"Fig. 2E"`, `"Table S1.4"`, `"Fig. S3B"`). This is displayed in the UI so users can verify data against the original paper. Do not leave `sourceFigure` blank for any entry you add or update.
 
 ### Cross-GEVI data extraction
 
@@ -317,7 +319,8 @@ After completing all checks, write all fixes to the JSON file:
 - [ ] `spectrum.type` and `voltage.type` consistent with category
 - [ ] `voltage.polarity` consistent with `dynamicRangeData.sign`
 - [ ] No score fields in JSON
-- [ ] `brightnessData` entries each have `ratio`, `reference`, and `source`
+- [ ] `brightnessData` entries each have `ratio`, `reference`, `source`, and `sourceFigure`
+- [ ] `kinetics`, `dynamicRangeData`, `sensitivityData`, `photostabilityData` entries each have `sourceFigure`
 - [ ] `photostabilityData.illumination` contains a parseable mW/mm² value; `duration` contains a parseable time
 - [ ] `voltage.source` is present and is a `doi:...` string
 - [ ] `voltage.sourceImage` points to an existing file in `public/fv-sources/`
@@ -350,6 +353,7 @@ All rules from the curator agent apply here. In particular:
 - `reference` must be an exact GEVI `id` from `src/gevis/*.json`, or `"EGFP"`
 - If only EC×QY available: `ratio = (sensor_EC × sensor_QY) / 20040`
 - Record every comparison found, even indirect ones
+- `sourceFigure` is mandatory — use the figure or table label where the brightness value appears (e.g., `"Fig. 1C"`, `"Table 1"`). The reverse entry (added at runtime to the other GEVI) inherits the same `sourceFigure`, so set it correctly here.
 
 ### Research papers (`researchPapers`)
 - Must have actually used this GEVI experimentally (not just cited/reviewed it)

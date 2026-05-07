@@ -482,32 +482,37 @@
       "on": 29.2,
       "off": 15.6,
       "temperature": "33-35°C",
-      "source": "doi:10.1021/acschemneuro.6b00234"
+      "source": "doi:10.1021/acschemneuro.6b00234",
+      "sourceFigure": "Fig. S2"
     }
   ],
   "dynamicRangeData": [
     {
       "deltaF": 29,
       "sign": "positive",
-      "source": "doi:10.1038/s41592-023-01913-z"
+      "source": "doi:10.1038/s41592-023-01913-z",
+      "sourceFigure": "Fig. 1b"
     },
     {
       "deltaF": 29,
       "sign": "positive",
-      "source": "doi:10.1021/acschemneuro.6b00234"
+      "source": "doi:10.1021/acschemneuro.6b00234",
+      "sourceFigure": "Fig. 2F"
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 1.4,
-      "source": "doi:10.1021/acschemneuro.6b00234"
+      "source": "doi:10.1021/acschemneuro.6b00234",
+      "sourceFigure": "Fig. 5"
     }
   ],
   "brightnessData": [
     {
       "ratio": 0.677,
       "reference": "arclight",
-      "source": "doi:10.1021/acschemneuro.6b00234"
+      "source": "doi:10.1021/acschemneuro.6b00234",
+      "sourceFigure": "main text"
     }
   ],
   "photostabilityData": [
@@ -515,7 +520,8 @@
       "brightnessRemaining": 75,
       "illumination": "18 mW/mm²",
       "duration": "1 min",
-      "source": "doi:10.1021/acschemneuro.6b00234"
+      "source": "doi:10.1021/acschemneuro.6b00234",
+      "sourceFigure": "Fig. 3C"
     }
   ],
   "addgene": {

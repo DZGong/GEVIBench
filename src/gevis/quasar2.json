@@ -14,17 +14,20 @@
       "ratio": 3.4,
       "reference": "arch",
       "source": "doi:10.1038/nmeth.3000",
+      "sourceFigure": "Table S2",
       "note": "At 0.7 W/cm² and 800 W/cm² (comparable at both intensities)"
     },
     {
       "ratio": 10,
       "reference": "arch",
-      "source": "doi:10.1021/acschemneuro.0c00046"
+      "source": "doi:10.1021/acschemneuro.0c00046",
+      "sourceFigure": "Table 1"
     },
     {
       "ratio": 0.417,
       "reference": "archon1",
-      "source": "doi:10.1038/s41589-018-0004-9"
+      "source": "doi:10.1038/s41589-018-0004-9",
+      "sourceFigure": "Fig. 2b"
     }
   ],
   "description": "Higher-sensitivity QuasAr variant spike counting and subthreshold event detection.",
@@ -34,6 +37,7 @@
       "off": 1,
       "temperature": "23°C",
       "source": "doi:10.1038/nmeth.3000",
+      "sourceFigure": "Table S2",
       "note": "Bi-exponential fast components (68% on, 80% off); slow τ_on=11.8 ms, slow τ_off=15.9 ms. n=6 cells"
     },
     {
@@ -41,36 +45,42 @@
       "off": 0.3,
       "temperature": "34°C",
       "source": "doi:10.1038/nmeth.3000",
+      "sourceFigure": "Table S2",
       "note": "Bi-exponential fast components (62% on, 73% off); slow τ_on=3.2 ms, slow τ_off=4.0 ms. n=7 cells"
     },
     {
       "on": 0.9,
       "off": 1.6,
       "temperature": "33-34°C",
-      "source": "doi:10.1016/j.cell.2019.11.004"
+      "source": "doi:10.1016/j.cell.2019.11.004",
+      "sourceFigure": "Table 1"
     }
   ],
   "dynamicRangeData": [
     {
       "deltaF": 90,
       "sign": "positive",
-      "source": "doi:10.1038/nmeth.3000"
+      "source": "doi:10.1038/nmeth.3000",
+      "sourceFigure": "Fig. 1c"
     },
     {
       "deltaF": 46,
       "sign": "positive",
-      "source": "doi:10.1038/s41589-018-0004-9"
+      "source": "doi:10.1038/s41589-018-0004-9",
+      "sourceFigure": "Fig. 1g"
     },
     {
       "deltaF": 46,
       "sign": "positive",
-      "source": "doi:10.1016/j.cell.2019.11.004"
+      "source": "doi:10.1016/j.cell.2019.11.004",
+      "sourceFigure": "Table 1"
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 48,
-      "source": "doi:10.1038/nmeth.3000"
+      "source": "doi:10.1038/nmeth.3000",
+      "sourceFigure": "Fig. 1g"
     }
   ],
   "photostabilityData": [
@@ -78,7 +88,8 @@
       "brightnessRemaining": 94,
       "illumination": "3000 mW/mm²",
       "duration": "1 min",
-      "source": "doi:10.1038/nmeth.3000"
+      "source": "doi:10.1038/nmeth.3000",
+      "sourceFigure": "Fig. S5"
     }
   ],
   "addgene": {

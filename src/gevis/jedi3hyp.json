@@ -577,7 +577,7 @@
     "polarity": "negative",
     "name": "JEDI-3hyp",
     "source": "doi:10.1038/s41592-026-03043-8",
-    "sourceFigure": "Fig. 1h (main panel) and Supplementary Fig. 3B (33°C)",
+    "sourceFigure": "Fig. 1h (main panel) and Fig. S3B (33°C)",
     "custom": {
       "voltage": [
         -120,
@@ -610,7 +610,8 @@
       "on": 0.48,
       "off": 2.11,
       "temperature": "33°C",
-      "source": "doi:10.1038/s41592-026-03043-8"
+      "source": "doi:10.1038/s41592-026-03043-8",
+      "sourceFigure": "Table 1"
     }
   ],
   "dynamicRangeData": [
@@ -618,25 +619,29 @@
       "deltaF": -51.5,
       "sign": "negative",
       "source": "doi:10.1038/s41592-026-03043-8",
+      "sourceFigure": "Fig. 1h",
       "note": "Response to a 100-mV depolarizing step from -70 mV in HEK293A cells (main text). F-V shifted toward hyperpolarized potentials: ΔF/F reaches ~+100% at -120 mV."
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 36.4,
-      "source": "doi:10.1038/s41592-026-03043-8"
+      "source": "doi:10.1038/s41592-026-03043-8",
+      "sourceFigure": "Fig. 1j"
     }
   ],
   "brightnessData": [
     {
       "ratio": 0.86,
       "reference": "jedi2p",
-      "source": "doi:10.1038/s41592-026-03043-8"
+      "source": "doi:10.1038/s41592-026-03043-8",
+      "sourceFigure": "Fig. 1d"
     },
     {
       "ratio": 1.25,
       "reference": "asap5",
-      "source": "doi:10.1038/s41592-026-03043-8"
+      "source": "doi:10.1038/s41592-026-03043-8",
+      "sourceFigure": "Extended Data Fig. 1c"
     }
   ],
   "photostabilityData": [
@@ -645,6 +650,7 @@
       "illumination": "37 mW/mm²",
       "duration": "6 min",
       "source": "doi:10.1038/s41592-026-03043-8",
+      "sourceFigure": "Fig. 1e",
       "note": "~52% fluorescence remaining after 6 min under 2P resonant scanning (940 nm, 37 mW at sample plane, 440 Hz) at 23°C in HEK293-Kir2.1 cells (Fig. 1e, n = 4). Comparable to JEDI-2P (~48-50%) and JEDI3sub (~50%) in the same experiment (Fig. 1f, similar across 29-100 mW range)."
     }
   ],

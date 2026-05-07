@@ -474,41 +474,47 @@
       "on": 2.24,
       "off": 1.33,
       "temperature": "25°C",
-      "source": "doi:10.1126/sciadv.ads1807"
+      "source": "doi:10.1126/sciadv.ads1807",
+      "sourceFigure": "Fig. 2D"
     }
   ],
   "dynamicRangeData": [
     {
       "deltaF": 55,
       "sign": "positive",
-      "source": "doi:10.1126/sciadv.ads1807"
+      "source": "doi:10.1126/sciadv.ads1807",
+      "sourceFigure": "Fig. 2E"
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 22.3,
-      "source": "doi:10.1126/sciadv.ads1807"
+      "source": "doi:10.1126/sciadv.ads1807",
+      "sourceFigure": "Fig. 2C"
     }
   ],
   "subthresholdData": [
     {
       "slope": 0.22,
-      "source": "doi:10.1126/sciadv.ads1807"
+      "source": "doi:10.1126/sciadv.ads1807",
+      "sourceFigure": "Fig. 2G"
     }
   ],
   "brightnessData": [
     {
       "ratio": 0.45,
       "reference": "hvi",
-      "source": "doi:10.1126/sciadv.ads1807"
+      "source": "doi:10.1126/sciadv.ads1807",
+      "sourceFigure": "Fig. S5C"
     }
   ],
   "photostabilityData": [
     {
       "brightnessRemaining": 50,
-      "illumination": "500 mW/mm²",
+      "illumination": "50 mW/mm²",
       "duration": "12.3 min",
-      "source": "doi:10.1126/sciadv.ads1807"
+      "source": "doi:10.1126/sciadv.ads1807",
+      "sourceFigure": "Fig. S7"
     }
   ],
   "researchPapers": [

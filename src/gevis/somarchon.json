@@ -51,33 +51,39 @@
       "on": 0.6,
       "off": 1.1,
       "temperature": "32°C",
-      "source": "doi:10.1038/s41467-022-35314-1"
+      "source": "doi:10.1038/s41467-022-35314-1",
+      "sourceFigure": "Main text"
     }
   ],
   "dynamicRangeData": [
     {
       "deltaF": 30,
       "sign": "positive",
-      "source": "doi:10.1038/s41586-019-1641-1"
+      "source": "doi:10.1038/s41586-019-1641-1",
+      "sourceFigure": "Fig. 1g"
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 45,
-      "source": "doi:10.1038/s41586-019-1641-1"
+      "source": "doi:10.1038/s41586-019-1641-1",
+      "sourceFigure": "Fig. 1d"
     },
     {
       "deltaF": 42,
-      "source": "doi:10.1038/s41586-019-1641-1"
+      "source": "doi:10.1038/s41586-019-1641-1",
+      "sourceFigure": "Fig. 1d"
     },
     {
       "deltaF": 35,
-      "source": "doi:10.1038/s41586-019-1641-1"
+      "source": "doi:10.1038/s41586-019-1641-1",
+      "sourceFigure": "Fig. 1d"
     },
     {
       "deltaF": 53.4,
       "source": "doi:10.1038/s41586-019-1641-1",
-      "note": "Mean ΔF/F per AP in mouse cortex L2/3 brain slices, 1.5 W/mm², n=14 cells. From Extended Data Fig. 5c source data"
+      "note": "Mean ΔF/F per AP in mouse cortex L2/3 brain slices, 1.5 W/mm², n=14 cells. From Extended Data Fig. 5c source data",
+      "sourceFigure": "Extended Data Fig. 5c"
     }
   ],
   "photostabilityData": [
@@ -85,33 +91,32 @@
       "brightnessRemaining": 50,
       "illumination": "1500 mW/mm²",
       "duration": "10 min",
-      "source": "doi:10.1038/s41586-019-1641-1"
+      "source": "doi:10.1038/s41586-019-1641-1",
+      "sourceFigure": "Extended Data Fig. 5e"
     },
     {
       "brightnessRemaining": 94,
       "illumination": "1500 mW/mm²",
       "duration": "1 min",
       "source": "doi:10.1038/s41586-019-1641-1",
-      "note": "From Extended Data Fig. 5e source data, n=17 cells"
+      "note": "From Extended Data Fig. 5e source data, n=17 cells",
+      "sourceFigure": "Extended Data Fig. 5e"
     },
     {
       "brightnessRemaining": 98,
       "illumination": "44 mW/mm²",
       "duration": "1 min",
       "source": "doi:10.1021/acschemneuro.0c00046",
-      "note": "From Supplementary Figure 2, n=8 cells, 617 nm LED excitation"
+      "note": "From Supplementary Figure 2, n=8 cells, 617 nm LED excitation",
+      "sourceFigure": "Fig. S2"
     }
   ],
   "brightnessData": [
     {
-      "ratio": 1,
-      "reference": "archon1",
-      "source": "doi:10.1038/s41586-019-1641-1"
-    },
-    {
       "ratio": 28,
       "reference": "arch",
-      "source": "doi:10.1021/acschemneuro.0c00046"
+      "source": "doi:10.1021/acschemneuro.0c00046",
+      "sourceFigure": "Fig. S2"
     }
   ],
   "addgene": {

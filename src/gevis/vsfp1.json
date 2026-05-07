@@ -524,20 +524,23 @@
       "on": 0.74,
       "off": 0.74,
       "temperature": "25-28°C",
-      "source": "doi:10.1046/j.0953-816x.2001.01617.x"
+      "source": "doi:10.1046/j.0953-816x.2001.01617.x",
+      "sourceFigure": "Fig. 3E"
     }
   ],
   "dynamicRangeData": [
     {
       "deltaF": 1.8,
       "sign": "positive",
-      "source": "doi:10.1046/j.0953-816x.2001.01617.x"
+      "source": "doi:10.1046/j.0953-816x.2001.01617.x",
+      "sourceFigure": "Fig. 3B"
     }
   ],
   "subthresholdData": [
     {
       "slope": 0.018,
-      "source": "doi:10.1046/j.0953-816x.2001.01617.x"
+      "source": "doi:10.1046/j.0953-816x.2001.01617.x",
+      "sourceFigure": "Fig. 3B"
     }
   ],
   "researchPapers": [

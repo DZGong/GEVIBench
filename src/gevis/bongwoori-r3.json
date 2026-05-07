@@ -85,27 +85,31 @@
       "on": 11,
       "off": 10,
       "temperature": "34°C",
-      "source": "doi:10.1038/s41598-017-08731-2"
+      "source": "doi:10.1038/s41598-017-08731-2",
+      "sourceFigure": "Table 2"
     }
   ],
   "dynamicRangeData": [
     {
       "deltaF": -20,
       "sign": "negative",
-      "source": "doi:10.1038/s41598-017-08731-2"
+      "source": "doi:10.1038/s41598-017-08731-2",
+      "sourceFigure": "Fig. 4B"
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 5.9,
-      "source": "doi:10.1038/s41598-017-08731-2"
+      "source": "doi:10.1038/s41598-017-08731-2",
+      "sourceFigure": "Table 3"
     }
   ],
   "brightnessData": [
     {
       "ratio": 1.89,
       "reference": "bongwoori",
-      "source": "doi:10.1038/s41598-017-08731-2"
+      "source": "doi:10.1038/s41598-017-08731-2",
+      "sourceFigure": "Table 3"
     }
   ],
   "photostabilityData": [
@@ -113,7 +117,8 @@
       "brightnessRemaining": 89,
       "illumination": "1 mW/mm²",
       "duration": "1 min",
-      "source": "doi:10.1038/s41598-017-08731-2"
+      "source": "doi:10.1038/s41598-017-08731-2",
+      "sourceFigure": "Fig. S1"
     }
   ],
   "researchPapers": [

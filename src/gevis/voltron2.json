@@ -733,37 +733,43 @@
       "on": 0.67,
       "off": 0.89,
       "temperature": "34°C",
-      "source": "doi:10.1016/j.neuron.2023.03.009"
+      "source": "doi:10.1016/j.neuron.2023.03.009",
+      "sourceFigure": "Fig. 2E"
     }
   ],
   "dynamicRangeData": [
     {
       "deltaF": -38,
       "sign": "negative",
-      "source": "doi:10.1016/j.neuron.2023.03.009"
+      "source": "doi:10.1016/j.neuron.2023.03.009",
+      "sourceFigure": "Fig. 2B"
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 10.09,
-      "source": "doi:10.1016/j.neuron.2023.03.009"
+      "source": "doi:10.1016/j.neuron.2023.03.009",
+      "sourceFigure": "Fig. 2G"
     }
   ],
   "subthresholdData": [
     {
       "slope": 0.54,
-      "source": "doi:10.1016/j.neuron.2023.03.009"
+      "source": "doi:10.1016/j.neuron.2023.03.009",
+      "sourceFigure": "Fig. 3D"
     },
     {
       "slope": 0.48,
-      "source": "doi:10.1016/j.neuron.2024.08.019"
+      "source": "doi:10.1016/j.neuron.2024.08.019",
+      "sourceFigure": "Fig. 5C"
     }
   ],
   "brightnessData": [
     {
       "ratio": 0.65,
       "reference": "voltron",
-      "source": "doi:10.1016/j.neuron.2023.03.009"
+      "source": "doi:10.1016/j.neuron.2023.03.009",
+      "sourceFigure": "Fig. 2H"
     }
   ],
   "photostabilityData": [
@@ -771,13 +777,15 @@
       "brightnessRemaining": 59,
       "illumination": "80 mW/mm²",
       "duration": "10 min",
-      "source": "doi:10.1016/j.neuron.2023.03.009"
+      "source": "doi:10.1016/j.neuron.2023.03.009",
+      "sourceFigure": "Fig. 2I"
     },
     {
       "brightnessRemaining": 50,
       "illumination": "500 mW/mm²",
       "duration": "3.0 min",
-      "source": "doi:10.1126/sciadv.ads1807"
+      "source": "doi:10.1126/sciadv.ads1807",
+      "sourceFigure": "Fig. S5"
     }
   ],
   "twoPhoton": [

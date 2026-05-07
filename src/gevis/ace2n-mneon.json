@@ -553,61 +553,71 @@
       "on": 0.36,
       "off": 0.42,
       "temperature": "22°C",
-      "source": "doi:10.1126/science.aab0810"
+      "source": "doi:10.1126/science.aab0810",
+      "sourceFigure": "Table S2"
     },
     {
       "on": 2.2,
       "off": 3.8,
       "temperature": "33-34°C",
-      "source": "doi:10.1016/j.cell.2019.11.004"
+      "source": "doi:10.1016/j.cell.2019.11.004",
+      "sourceFigure": "Table 1"
     },
     {
       "on": 0.81,
       "off": 0.77,
       "source": "doi:10.1038/s41592-018-0188-7",
       "note": "Bi-exponential fast component at 22°C in spiking HEK cells (60%* on, 60%* off); slow τ_on=4.6 ms, slow τ_off=5.2 ms",
-      "temperature": "22°C"
+      "temperature": "22°C",
+      "sourceFigure": "Supplementary Table"
     }
   ],
   "dynamicRangeData": [
     {
       "deltaF": -17.9,
       "sign": "negative",
-      "source": "doi:10.1126/science.aab0810"
+      "source": "doi:10.1126/science.aab0810",
+      "sourceFigure": "Fig. S6C"
     },
     {
       "deltaF": -9,
       "sign": "negative",
-      "source": "doi:10.1016/j.cell.2019.11.004"
+      "source": "doi:10.1016/j.cell.2019.11.004",
+      "sourceFigure": "Table 1"
     },
     {
       "deltaF": -11.6,
       "sign": "negative",
       "source": "doi:10.1038/s41592-018-0188-7",
-      "note": "Per 100 mV step in spiking HEK cells at 22°C"
+      "note": "Per 100 mV step in spiking HEK cells at 22°C",
+      "sourceFigure": "Fig. 2b"
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 5,
-      "source": "doi:10.1016/j.cell.2019.11.004"
+      "source": "doi:10.1016/j.cell.2019.11.004",
+      "sourceFigure": "Table 1"
     },
     {
       "deltaF": 4.9,
-      "source": "doi:10.1038/s41557-021-00641-1"
+      "source": "doi:10.1038/s41557-021-00641-1",
+      "sourceFigure": "Table S3"
     }
   ],
   "subthresholdData": [
     {
       "slope": 0.091,
-      "source": "doi:10.1016/j.neuron.2023.03.009"
+      "source": "doi:10.1016/j.neuron.2023.03.009",
+      "sourceFigure": "Fig. S5D"
     }
   ],
   "brightnessData": [
     {
       "ratio": 4.51,
       "reference": "EGFP",
-      "source": "doi:10.1038/nmeth.2415"
+      "source": "doi:10.1038/nmeth.2413",
+      "sourceFigure": "Table 1"
     }
   ],
   "photostabilityData": [
@@ -615,13 +625,15 @@
       "brightnessRemaining": 79,
       "illumination": "15 mW/mm²",
       "duration": "0.5 min",
-      "source": "doi:10.1126/science.aab0810"
+      "source": "doi:10.1126/science.aab0810",
+      "sourceFigure": "Table S2"
     },
     {
       "brightnessRemaining": 50,
       "illumination": "31 mW/mm²",
       "duration": "1.5 min",
-      "source": "doi:10.1038/s41557-021-00641-1"
+      "source": "doi:10.1038/s41557-021-00641-1",
+      "sourceFigure": "Table S6"
     }
   ],
   "twoPhoton": [

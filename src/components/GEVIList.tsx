@@ -244,7 +244,7 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
               return (
                 <tbody key={gevi.id} data-gevi-id={gevi.id} onClick={() => onSelect(gevi)} className={groupCls(gevi)}>
                   <tr>
-                    <td className={`pl-2 pr-2 pt-3 pb-0 text-center w-12 tabular-nums ${dimBase}`} rowSpan={2} style={{ fontSize: '16px', verticalAlign: 'middle', ...(idx < 3 && gevi[sortConfig.field] != null ? { color: '#D4AF37', fontWeight: 700 } : {}) }}>{sortConfig.field === 'year' || gevi[sortConfig.field] != null ? idx + 1 : '-'}</td>
+                    <td className={`pl-2 pr-2 pt-3 pb-0 text-center w-12 tabular-nums ${dimBase}`} rowSpan={2} style={{ fontSize: '16px', verticalAlign: 'middle' }}>{sortConfig.field === 'year' || gevi[sortConfig.field] != null ? idx + 1 : '-'}</td>
                     <td className="pl-1 pr-0 pt-3 pb-0" style={{ width: '1%', whiteSpace: 'nowrap' }}>
                       <span className="font-semibold text-ink">{gevi.name}</span>
                       <a
@@ -306,7 +306,7 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
               return (
                 <tbody key={gevi.id} data-gevi-id={gevi.id} onClick={() => onSelect(gevi)} className={groupCls(gevi)}>
                   <tr>
-                    <td className={`pl-2 pr-4 pt-3 pb-0 text-center w-16 tabular-nums ${dimBase}`} rowSpan={2} style={{ fontSize: '16px', verticalAlign: 'middle', ...(idx < 3 && gevi[sortConfig.field] != null ? { color: '#D4AF37', fontWeight: 700 } : {}) }}>{sortConfig.field === 'year' || gevi[sortConfig.field] != null ? idx + 1 : '-'}</td>
+                    <td className={`pl-2 pr-4 pt-3 pb-0 text-center w-16 tabular-nums ${dimBase}`} rowSpan={2} style={{ fontSize: '16px', verticalAlign: 'middle' }}>{sortConfig.field === 'year' || gevi[sortConfig.field] != null ? idx + 1 : '-'}</td>
                     <td className="px-1 pt-3 pb-0">
                       <span className="font-semibold whitespace-nowrap text-ink">{gevi.name}</span>
                       <a

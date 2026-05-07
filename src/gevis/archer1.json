@@ -71,6 +71,7 @@
       "on": 0.5,
       "off": 0.5,
       "source": "doi:10.1038/ncomms5894",
+      "sourceFigure": "Fig. 1e",
       "note": "No quantitative tau values published; paper states kinetics 'very similar' to Arch WT. Placeholder pending better data."
     }
   ],
@@ -79,31 +80,36 @@
       "deltaF": 85,
       "sign": "positive",
       "source": "doi:10.1038/ncomms5894",
+      "sourceFigure": "Fig. 1d",
       "note": "85% delta F/F per 100 mV step (Fig. 1d, Supplementary Fig. 4)"
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 33,
-      "source": "doi:10.1038/ncomms5894"
+      "source": "doi:10.1038/ncomms5894",
+      "sourceFigure": "Fig. 3e"
     }
   ],
   "brightnessData": [
     {
       "ratio": 10,
       "reference": "arch",
-      "source": "doi:10.1021/acschemneuro.0c00046"
+      "source": "doi:10.1021/acschemneuro.0c00046",
+      "sourceFigure": "Table 1"
     },
     {
       "ratio": 5,
       "reference": "arch",
       "source": "doi:10.1038/ncomms5894",
+      "sourceFigure": "Fig. 1a",
       "note": "5x increased fluorescence over Arch WT (Fig. 1a)"
     },
     {
       "ratio": 0.00615,
       "reference": "EGFP",
       "source": "doi:10.1021/cbe.5c00069",
+      "sourceFigure": "Table 2",
       "note": "Computed from molar brightness = EC640 x FQY = 41100 x 0.003 = 123.3; EGFP reference brightness = 20040"
     }
   ],
@@ -113,6 +119,7 @@
       "illumination": "880 mW/mm²",
       "duration": "5 min",
       "source": "doi:10.1038/ncomms5894",
+      "sourceFigure": "Fig. S4",
       "note": "Approximate from Supplementary Fig. 4: sensitivity measurements 56.3% -> 53.1% -> 52.7% delta F/F, retained stability over 5+5 min exposure. Used as proxy for baseline brightness."
     }
   ],

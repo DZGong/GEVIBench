@@ -15,26 +15,31 @@ export interface GEVI {
     off: number;
     temperature?: string;
     source: string;
+    sourceFigure?: string;
   }[];
   dynamicRangeData?: {
     deltaF: number;
     sign: 'positive' | 'negative';
     source: string;
+    sourceFigure?: string;
   }[];
   sensitivityData?: {
     deltaF: number;  // ΔF/F % per action potential
     source: string;
+    sourceFigure?: string;
   }[];
   brightnessData?: {
     ratio: number;
     reference: string;
     source: string;
+    sourceFigure?: string;
   }[];
   photostabilityData?: {
     brightnessRemaining: number;
     illumination: string;
     duration: string;
     source: string;
+    sourceFigure?: string;
   }[] | 'bioluminescent';
   twoPhoton?: {
     compatible: boolean;

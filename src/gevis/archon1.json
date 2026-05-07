@@ -620,77 +620,90 @@
       "on": 0.61,
       "off": 1.1,
       "temperature": "32°C",
-      "source": "doi:10.1038/s41589-018-0004-9"
+      "source": "doi:10.1038/s41589-018-0004-9",
+      "sourceFigure": "Fig. 2c"
     },
     {
       "on": 0.61,
       "off": 1.1,
       "temperature": "33-34°C",
-      "source": "doi:10.1016/j.cell.2019.11.004"
+      "source": "doi:10.1016/j.cell.2019.11.004",
+      "sourceFigure": "Table 1"
     },
     {
       "on": 2.2,
       "off": 1.6,
       "source": "doi:10.1038/s41592-022-01743-5",
       "note": "Bi-exponential fast component in HEK293T cells at 30°C, n=6 cells",
-      "temperature": "30°C"
+      "temperature": "30°C",
+      "sourceFigure": "Extended Data Fig. 4e"
     }
   ],
   "dynamicRangeData": [
     {
       "deltaF": 43,
       "sign": "positive",
-      "source": "doi:10.1038/s41589-018-0004-9"
+      "source": "doi:10.1038/s41589-018-0004-9",
+      "sourceFigure": "Fig. 2e"
     },
     {
       "deltaF": 48.6,
       "sign": "positive",
-      "source": "doi:10.1523/ENEURO.0060-20.2020"
+      "source": "doi:10.1523/ENEURO.0060-20.2020",
+      "sourceFigure": "Fig. 2D"
     },
     {
       "deltaF": 81,
       "sign": "positive",
-      "source": "doi:10.1016/j.cell.2019.11.004"
+      "source": "doi:10.1016/j.cell.2019.11.004",
+      "sourceFigure": "Table 1"
     },
     {
       "deltaF": 70,
       "sign": "positive",
       "source": "doi:10.1038/s41592-022-01743-5",
-      "note": "Per 100 mV step in HEK293T cells, n=4 cells"
+      "note": "Per 100 mV step in HEK293T cells, n=4 cells",
+      "sourceFigure": "Extended Data Fig. 4c"
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 30,
-      "source": "doi:10.1038/s41589-018-0004-9"
+      "source": "doi:10.1038/s41589-018-0004-9",
+      "sourceFigure": "Fig. 2h"
     },
     {
       "deltaF": 30,
-      "source": "doi:10.1016/j.cell.2019.11.004"
+      "source": "doi:10.1016/j.cell.2019.11.004",
+      "sourceFigure": "Table 1"
     }
   ],
   "brightnessData": [
     {
       "ratio": 80,
       "reference": "arch",
-      "source": "doi:10.1021/acschemneuro.0c00046"
+      "source": "doi:10.1021/acschemneuro.0c00046",
+      "sourceFigure": "Table 1"
     },
     {
       "ratio": 2.78,
       "reference": "quasar2",
-      "source": "doi:10.1038/s41589-018-0004-9"
+      "source": "doi:10.1038/s41589-018-0004-9",
+      "sourceFigure": "Fig. 2b"
     },
     {
       "ratio": 0.588,
       "reference": "quasar6",
       "source": "doi:10.1038/s41592-022-01743-5",
-      "note": "Reciprocal of QuasAr6a 1.7x brighter than Archon1"
+      "note": "Reciprocal of QuasAr6a 1.7x brighter than Archon1",
+      "sourceFigure": "Extended Data Fig. 4b"
     },
     {
       "ratio": 0.5,
       "reference": "quasar6b",
       "source": "doi:10.1038/s41592-022-01743-5",
-      "note": "Reciprocal of QuasAr6b 2.0x brighter than Archon1"
+      "note": "Reciprocal of QuasAr6b 2.0x brighter than Archon1",
+      "sourceFigure": "Extended Data Fig. 4b"
     }
   ],
   "photostabilityData": [
@@ -698,13 +711,15 @@
       "brightnessRemaining": 95,
       "illumination": "800 mW/mm²",
       "duration": "15 min",
-      "source": "doi:10.1038/s41589-018-0004-9"
+      "source": "doi:10.1038/s41589-018-0004-9",
+      "sourceFigure": "Fig. 2i"
     },
     {
       "brightnessRemaining": 62,
       "illumination": "4200 mW/mm²",
       "duration": "10 min",
-      "source": "doi:10.1038/s41592-022-01743-5"
+      "source": "doi:10.1038/s41592-022-01743-5",
+      "sourceFigure": "Extended Data Fig. 4f"
     }
   ],
   "twoPhoton": [

@@ -511,66 +511,77 @@
       "on": 0.88,
       "off": 0.8,
       "temperature": "34°C",
-      "source": "doi:10.1038/s41592-018-0188-7"
+      "source": "doi:10.1038/s41592-018-0188-7",
+      "sourceFigure": "Supplementary Table"
     },
     {
       "on": 0.88,
       "off": 0.8,
       "source": "doi:10.1038/s41592-018-0188-7",
       "note": "Bi-exponential fast component at 22°C in spiking HEK cells (60%* on, 60%* off); slow τ_on=5.2 ms, slow τ_off=4.7 ms",
-      "temperature": "22°C"
+      "temperature": "22°C",
+      "sourceFigure": "Supplementary Table"
     }
   ],
   "dynamicRangeData": [
     {
       "deltaF": -10.8,
       "sign": "negative",
-      "source": "doi:10.1038/s41557-021-00641-1"
+      "source": "doi:10.1038/s41557-021-00641-1",
+      "sourceFigure": "Fig. 2c"
     },
     {
       "deltaF": -11.8,
       "sign": "negative",
       "source": "doi:10.1038/s41592-018-0188-7",
-      "note": "Per 100 mV step in spiking HEK cells at 22°C"
+      "note": "Per 100 mV step in spiking HEK cells at 22°C",
+      "sourceFigure": "Fig. 2b"
     },
     {
       "deltaF": -17.9,
       "sign": "negative",
       "source": "doi:10.1126/sciadv.adi4208",
-      "note": "Per 100 mV step (-70 to +30 mV) in HEK293T cells"
+      "note": "Per 100 mV step (-70 to +30 mV) in HEK293T cells",
+      "sourceFigure": "Fig. 1B"
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 4.8,
-      "source": "doi:10.1038/s41592-018-0188-7"
+      "source": "doi:10.1038/s41592-018-0188-7",
+      "sourceFigure": "Fig. 3b"
     },
     {
       "deltaF": 5.3,
-      "source": "doi:10.1038/s41557-021-00641-1"
+      "source": "doi:10.1038/s41557-021-00641-1",
+      "sourceFigure": "Fig. 3a"
     },
     {
       "deltaF": 9.0,
       "source": "doi:10.1126/sciadv.adi4208",
-      "note": "Cultured rat hippocampal neurons"
+      "note": "Cultured rat hippocampal neurons",
+      "sourceFigure": "Fig. 1C"
     }
   ],
   "brightnessData": [
     {
       "ratio": 2286,
       "reference": "arch",
-      "source": "doi:10.1021/acschemneuro.0c00046"
+      "source": "doi:10.1021/acschemneuro.0c00046",
+      "sourceFigure": "Table 1"
     },
     {
       "ratio": 1,
       "reference": "ace2n-mneon",
-      "source": "doi:10.1038/s41592-018-0188-7"
+      "source": "doi:10.1038/s41592-018-0188-7",
+      "sourceFigure": "Fig. 1j"
     },
     {
       "ratio": 0.6,
       "reference": "cephid",
       "source": "doi:10.1126/sciadv.adi4208",
-      "note": "VARNAM ~580 a.u. vs Cepheid1b ~960 a.u. per cell (Fig. S5)"
+      "note": "VARNAM ~580 a.u. vs Cepheid1b ~960 a.u. per cell (Fig. S5)",
+      "sourceFigure": "Fig. S5"
     }
   ],
   "photostabilityData": [
@@ -578,26 +589,30 @@
       "brightnessRemaining": 79,
       "illumination": "15 mW/mm²",
       "duration": "1 min",
-      "source": "doi:10.1038/s41592-018-0188-7"
+      "source": "doi:10.1038/s41592-018-0188-7",
+      "sourceFigure": "Fig. S7"
     },
     {
       "brightnessRemaining": 50,
       "illumination": "48 mW/mm²",
       "duration": "2.6 min",
-      "source": "doi:10.1038/s41557-021-00641-1"
+      "source": "doi:10.1038/s41557-021-00641-1",
+      "sourceFigure": "Extended Data Fig. 4"
     },
     {
       "brightnessRemaining": 63,
       "illumination": "25 mW/mm²",
       "duration": "10 min",
       "source": "doi:10.1126/science.abm8797",
-      "note": "Fig. S11B photobleaching curve; HEK cells under continuous 565 nm LED"
+      "note": "Fig. S11B photobleaching curve; HEK cells under continuous 565 nm LED",
+      "sourceFigure": "Fig. S11B"
     }
   ],
   "subthresholdData": [
     {
       "slope": 0.104,
-      "source": "doi:10.1016/j.neuron.2023.03.009"
+      "source": "doi:10.1016/j.neuron.2023.03.009",
+      "sourceFigure": "Fig. S5E"
     }
   ],
   "addgene": {

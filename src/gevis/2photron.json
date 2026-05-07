@@ -755,27 +755,31 @@
       "on": 0.75,
       "off": 0.91,
       "temperature": "room temperature",
-      "source": "doi:10.1101/2024.11.15.623698"
+      "source": "doi:10.1101/2024.11.15.623698",
+      "sourceFigure": "Fig. S6"
     }
   ],
   "dynamicRangeData": [
     {
       "deltaF": -24,
       "sign": "negative",
-      "source": "doi:10.1101/2024.11.15.623698"
+      "source": "doi:10.1101/2024.11.15.623698",
+      "sourceFigure": "Fig. 2b"
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 5.72,
-      "source": "doi:10.1101/2024.11.15.623698"
+      "source": "doi:10.1101/2024.11.15.623698",
+      "sourceFigure": "Fig. 3b"
     }
   ],
   "brightnessData": [
     {
       "ratio": 4.12,
       "reference": "jedi2p",
-      "source": "doi:10.1101/2024.11.15.623698"
+      "source": "doi:10.1101/2024.11.15.623698",
+      "sourceFigure": "Fig. 3f"
     }
   ],
   "photostabilityData": [
@@ -784,7 +788,8 @@
       "illumination": "25.7 mW (objective output), 1035 nm 2P ULoVE",
       "duration": "10 min",
       "note": "Qualitative durability only — paper reports routine 10+ min in vivo recordings from V1 L2/3 neurons under 2P ULoVE; no % remaining or bleaching curve published.",
-      "source": "doi:10.1101/2024.11.15.623698"
+      "source": "doi:10.1101/2024.11.15.623698",
+      "sourceFigure": "Fig. 3b"
     }
   ],
   "twoPhoton": [

@@ -699,75 +699,87 @@
       "on": 0.54,
       "off": 1.21,
       "temperature": "32-35\u00b0C",
-      "source": "doi:10.1016/j.cell.2022.07.013"
+      "source": "doi:10.1016/j.cell.2022.07.013",
+      "sourceFigure": "Table S2"
     },
     {
       "on": 1.21,
       "off": 2.54,
       "temperature": "21-23\u00b0C",
-      "source": "doi:10.1016/j.cell.2022.07.013"
+      "source": "doi:10.1016/j.cell.2022.07.013",
+      "sourceFigure": "Table S2"
     },
     {
       "on": 0.49,
       "off": 1.5,
       "temperature": "33\u00b0C",
-      "source": "doi:10.64898/2026.04.07.717088"
+      "source": "doi:10.64898/2026.04.07.717088",
+      "sourceFigure": "Table S1.4"
     }
   ],
   "dynamicRangeData": [
     {
       "deltaF": -43,
       "sign": "negative",
-      "source": "doi:10.1016/j.cell.2022.07.013"
+      "source": "doi:10.1016/j.cell.2022.07.013",
+      "sourceFigure": "Fig. 2C"
     },
     {
       "deltaF": -41.8,
       "sign": "negative",
       "source": "doi:10.1038/s41592-026-03043-8",
-      "note": "Response to a 100-mV depolarizing step from -70 mV at 33°C in HEK293A cells under 2P illumination (main text and Supplementary Fig. 3/Table 2)."
+      "note": "Response to a 100-mV depolarizing step from -70 mV at 33°C in HEK293A cells under 2P illumination (main text and Supplementary Fig. 3/Table 2).",
+      "sourceFigure": "Fig. S3"
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 18.2,
-      "source": "doi:10.1016/j.cell.2022.07.013"
+      "source": "doi:10.1016/j.cell.2022.07.013",
+      "sourceFigure": "Fig. 2E"
     },
     {
       "deltaF": 23.3,
       "source": "doi:10.1038/s41592-026-03043-8",
-      "note": "Peak -ΔF/F₀ per single action potential in cultured rat E18 hippocampal neurons at 33°C under 1P widefield illumination (Fig. 1j, n = 10)."
+      "note": "Peak -ΔF/F₀ per single action potential in cultured rat E18 hippocampal neurons at 33°C under 1P widefield illumination (Fig. 1j, n = 10).",
+      "sourceFigure": "Fig. 1j"
     }
   ],
   "brightnessData": [
     {
       "ratio": 1.67,
       "reference": "asap3",
-      "source": "doi:10.1016/j.cell.2022.07.013"
+      "source": "doi:10.1016/j.cell.2022.07.013",
+      "sourceFigure": "Fig. S4I"
     },
     {
       "ratio": 1.5,
       "reference": "asap2s",
-      "source": "doi:10.1016/j.cell.2022.07.013"
+      "source": "doi:10.1016/j.cell.2022.07.013",
+      "sourceFigure": "Fig. S4I"
     },
     {
       "ratio": 1.45,
       "reference": "asap5",
       "source": "doi:10.1038/s41592-026-03043-8",
-      "note": "mBeRFP-normalized brightness at ~-70 mV in HEK293-Kir2.1 cells under 2P excitation at 940 nm, normalized to ASAP5 median (Extended Data Fig. 1c, n ≥ 3,500 cells per indicator)."
+      "note": "mBeRFP-normalized brightness at ~-70 mV in HEK293-Kir2.1 cells under 2P excitation at 940 nm, normalized to ASAP5 median (Extended Data Fig. 1c, n ≥ 3,500 cells per indicator).",
+      "sourceFigure": "Extended Data Fig. 1c"
     }
   ],
   "photostabilityData": [
     {
       "brightnessRemaining": 55,
-      "illumination": "16 mW/mm\u00b2",
+      "illumination": "15 mW/mm\u00b2",
       "duration": "2 min",
-      "source": "doi:10.1016/j.cell.2022.07.013"
+      "source": "doi:10.1016/j.cell.2022.07.013",
+      "sourceFigure": "Fig. S4G"
     }
   ],
   "subthresholdData": [
     {
       "slope": 0.7,
-      "source": "doi:10.1016/j.neuron.2024.08.019"
+      "source": "doi:10.1016/j.neuron.2024.08.019",
+      "sourceFigure": "Fig. 1D"
     }
   ],
   "twoPhoton": [

@@ -423,21 +423,24 @@
       "off": 0.69,
       "temperature": "34°C",
       "source": "doi:10.1038/s41586-019-1166-7",
-      "note": "Bi-exponential with blue light on; fast tau_on=0.8+/-0.04 ms (54+/-2%), tau_off=0.69+/-0.04 ms (69+/-2%); slow tau_on=19.3 ms, tau_off=15.8 ms. n=9 cells"
+      "note": "Bi-exponential with blue light on; fast tau_on=0.8+/-0.04 ms (54+/-2%), tau_off=0.69+/-0.04 ms (69+/-2%); slow tau_on=19.3 ms, tau_off=15.8 ms. n=9 cells",
+      "sourceFigure": "Extended Data Fig. 3"
     },
     {
       "on": 0.9,
       "off": 0.9,
       "temperature": "34°C",
       "source": "doi:10.1038/s41586-019-1166-7",
-      "note": "Bi-exponential without blue light; fast tau_on=0.9+/-0.1 ms (57+/-3%), tau_off=0.9+/-0.1 ms (79+/-4%); slow tau_on=14.6 ms, tau_off=15.0 ms. n=9 cells"
+      "note": "Bi-exponential without blue light; fast tau_on=0.9+/-0.1 ms (57+/-3%), tau_off=0.9+/-0.1 ms (79+/-4%); slow tau_on=14.6 ms, tau_off=15.0 ms. n=9 cells",
+      "sourceFigure": "Extended Data Fig. 3"
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 23.5,
       "source": "doi:10.1038/s41586-019-1641-1",
-      "note": "ΔF/F per AP in mouse cortex L2/3 brain slices, 1.5 W/mm², n=13 cells. From Piatkevich et al. 2019 Extended Data Fig. 5c"
+      "note": "ΔF/F per AP in mouse cortex L2/3 brain slices, 1.5 W/mm², n=13 cells. From Piatkevich et al. 2019 Extended Data Fig. 5c",
+      "sourceFigure": "Extended Data Fig. 5c"
     }
   ],
   "dynamicRangeData": [
@@ -445,7 +448,8 @@
       "deltaF": 40,
       "sign": "positive",
       "source": "doi:10.1038/s41586-019-1166-7",
-      "note": "ΔF/F = 40 +/- 1.7% per 100 mV from PSP measurements; same for QuasAr3 and paQuasAr3 with or without blue light (P=0.91)"
+      "note": "ΔF/F = 40 +/- 1.7% per 100 mV from PSP measurements; same for QuasAr3 and paQuasAr3 with or without blue light (P=0.91)",
+      "sourceFigure": "Fig. 1g"
     }
   ],
   "photostabilityData": [
@@ -454,14 +458,16 @@
       "illumination": "12000 mW/mm²",
       "duration": "10 min",
       "source": "doi:10.1038/s41586-019-1166-7",
-      "note": "Reporter expression recovered within 1 week"
+      "note": "Reporter expression recovered within 1 week",
+      "sourceFigure": "Extended Data Fig. 5"
     }
   ],
   "subthresholdData": [
     {
       "slope": 0.4,
       "source": "doi:10.1038/s41586-019-1166-7",
-      "note": "0.4%/mV derived from 40 +/- 1.7% per 100 mV voltage sensitivity measured in acute brain slices (Fig. 1g). SNR = 0.93 +/- 0.07 per mV in 1 kHz bandwidth."
+      "note": "0.4%/mV derived from 40 +/- 1.7% per 100 mV voltage sensitivity measured in acute brain slices (Fig. 1g). SNR = 0.93 +/- 0.07 per mV in 1 kHz bandwidth.",
+      "sourceFigure": "Fig. 1g"
     }
   ],
   "brightnessData": [
@@ -469,7 +475,8 @@
       "ratio": 2,
       "reference": "quasar2",
       "source": "doi:10.1038/s41586-019-1166-7",
-      "note": "paQuasAr3 with blue light ~2x brighter than QuasAr3 (in E. coli); QuasAr3 = QuasAr2(K171R) with improved trafficking"
+      "note": "paQuasAr3 with blue light ~2x brighter than QuasAr3 (in E. coli); QuasAr3 = QuasAr2(K171R) with improved trafficking",
+      "sourceFigure": "Extended Data Fig. 3"
     }
   ],
   "addgene": {

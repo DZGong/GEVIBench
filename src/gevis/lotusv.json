@@ -280,28 +280,32 @@
       "on": 3.09,
       "off": 6.12,
       "temperature": "30°C",
-      "source": "doi:10.1038/srep42398"
+      "source": "doi:10.1038/srep42398",
+      "sourceFigure": "Fig. 2c"
     }
   ],
   "dynamicRangeData": [
     {
       "deltaF": 21,
       "sign": "positive",
-      "source": "doi:10.1038/srep42398"
+      "source": "doi:10.1038/srep42398",
+      "sourceFigure": "Fig. 2b"
     }
   ],
   "brightnessData": [
     {
       "ratio": 0.586,
       "reference": "arclight",
-      "source": "doi:10.1038/srep42398"
+      "source": "doi:10.1038/srep42398",
+      "sourceFigure": "Fig. S5a"
     }
   ],
   "photostabilityData": "bioluminescent",
   "sensitivityData": [
     {
       "deltaF": 2.8,
-      "source": "doi:10.1038/s41598-019-43897-x"
+      "source": "doi:10.1038/s41598-019-43897-x",
+      "sourceFigure": "Fig. 1D"
     }
   ],
   "addgene": {

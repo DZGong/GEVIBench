@@ -615,32 +615,37 @@
       "on": 0.06,
       "off": 0.17,
       "temperature": "32°C",
-      "source": "doi:10.1038/s41589-018-0004-9"
+      "source": "doi:10.1038/s41589-018-0004-9",
+      "sourceFigure": "Table S1"
     }
   ],
   "dynamicRangeData": [
     {
       "deltaF": 20,
       "sign": "positive",
-      "source": "doi:10.1038/s41589-018-0004-9"
+      "source": "doi:10.1038/s41589-018-0004-9",
+      "sourceFigure": "Fig. 1g"
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 18,
-      "source": "doi:10.1038/s41589-018-0004-9"
+      "source": "doi:10.1038/s41589-018-0004-9",
+      "sourceFigure": "Table S1"
     }
   ],
   "brightnessData": [
     {
       "ratio": 28,
       "reference": "arch",
-      "source": "doi:10.1021/acschemneuro.0c00046"
+      "source": "doi:10.1021/acschemneuro.0c00046",
+      "sourceFigure": "Table 1"
     },
     {
       "ratio": 8.01,
       "reference": "quasar2",
-      "source": "doi:10.1038/s41589-018-0004-9"
+      "source": "doi:10.1038/s41589-018-0004-9",
+      "sourceFigure": "Fig. 2b"
     }
   ],
   "photostabilityData": [
@@ -648,7 +653,8 @@
       "brightnessRemaining": 98,
       "illumination": "800 mW/mm²",
       "duration": "1 min",
-      "source": "doi:10.1038/s41589-018-0004-9"
+      "source": "doi:10.1038/s41589-018-0004-9",
+      "sourceFigure": "Fig. 2i"
     }
   ],
   "addgene": {

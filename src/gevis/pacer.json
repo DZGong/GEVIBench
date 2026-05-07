@@ -513,7 +513,8 @@
       "off": 1.9,
       "temperature": "22°C",
       "source": "doi:10.1126/science.abm8797",
-      "note": "Bi-exponential fast components at 22°C in HEK cells (Table S1: fast amp 54% on / 58% off; slow τ_on=5.4 ms, slow τ_off=7.2 ms)"
+      "note": "Bi-exponential fast components at 22°C in HEK cells (Table S1: fast amp 54% on / 58% off; slow τ_on=5.4 ms, slow τ_off=7.2 ms)",
+      "sourceFigure": "Table S1"
     }
   ],
   "dynamicRangeData": [
@@ -521,14 +522,16 @@
       "deltaF": 27.8,
       "sign": "positive",
       "source": "doi:10.1126/science.abm8797",
-      "note": "ΔF/F per 100 mV step, HEK cells, Table S1; corresponds to 33.4 ± 0.8% per 120 mV step (Fig. 1D, text)"
+      "note": "ΔF/F per 100 mV step, HEK cells, Table S1; corresponds to 33.4 ± 0.8% per 120 mV step (Fig. 1D, text)",
+      "sourceFigure": "Table S1"
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 3.2,
       "source": "doi:10.1126/science.abm8797",
-      "note": "ΔF/F per single AP in VIP+ interneurons in V1 of awake mice (Fig. 1I; n=48 spikes)"
+      "note": "ΔF/F per single AP in VIP+ interneurons in V1 of awake mice (Fig. 1I; n=48 spikes)",
+      "sourceFigure": "Fig. 1I"
     }
   ],
   "brightnessData": [
@@ -536,7 +539,8 @@
       "ratio": 0.7,
       "reference": "varnam2",
       "source": "doi:10.1126/science.abm8797",
-      "note": "Resting fluorescence in HEK cells normalized to VARNAM mean (Fig. S11A): pAceR ~0.70, VARNAM2 ~1.00, VARNAM ~1.00. Expected for positive-polarity variants which have lower resting fluorescence."
+      "note": "Resting fluorescence in HEK cells normalized to VARNAM mean (Fig. S11A): pAceR ~0.70, VARNAM2 ~1.00, VARNAM ~1.00. Expected for positive-polarity variants which have lower resting fluorescence.",
+      "sourceFigure": "Fig. S11A"
     }
   ],
   "photostabilityData": [
@@ -545,7 +549,8 @@
       "illumination": "25 mW/mm²",
       "duration": "10 min",
       "source": "doi:10.1126/science.abm8797",
-      "note": "Fig. S11B photobleaching curve for pAceR in HEK cells under continuous 565 nm LED illumination at 25 mW/mm²; ~0.52/0.80 retained at 10 min"
+      "note": "Fig. S11B photobleaching curve for pAceR in HEK cells under continuous 565 nm LED illumination at 25 mW/mm²; ~0.52/0.80 retained at 10 min",
+      "sourceFigure": "Fig. S11B"
     }
   ],
   "researchPapers": [

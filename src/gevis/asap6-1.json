@@ -705,25 +705,29 @@
       "on": 3.99,
       "off": 4.89,
       "temperature": "25°C",
-      "source": "doi:10.1101/2024.06.21.599617"
+      "source": "doi:10.1101/2024.06.21.599617",
+      "sourceFigure": "Table 1"
     }
   ],
   "dynamicRangeData": [
     {
       "deltaF": 204,
       "sign": "positive",
-      "source": "doi:10.1101/2024.06.21.599617"
+      "source": "doi:10.1101/2024.06.21.599617",
+      "sourceFigure": "Fig. 1b"
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 50,
       "source": "doi:10.1101/2024.06.21.599617",
+      "sourceFigure": "Fig. 1c",
       "notes": "2ms FWHM AP waveform, room temperature, HEK293A cells"
     },
     {
       "deltaF": 63,
       "source": "doi:10.1101/2024.06.21.599617",
+      "sourceFigure": "Table S1",
       "notes": "3.5ms FWHM AP waveform, room temperature, HEK293A cells. Supplementary Table 1"
     }
   ],
@@ -731,12 +735,14 @@
     {
       "ratio": 1.412,
       "reference": "asap4e",
-      "source": "doi:10.1101/2024.06.21.599617"
+      "source": "doi:10.1101/2024.06.21.599617",
+      "sourceFigure": "Table S1"
     },
     {
       "ratio": 0.706,
       "reference": "asap6b",
-      "source": "doi:10.1101/2024.06.21.599617"
+      "source": "doi:10.1101/2024.06.21.599617",
+      "sourceFigure": "Table S1"
     }
   ],
   "twoPhoton": [

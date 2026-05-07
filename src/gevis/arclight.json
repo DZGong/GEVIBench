@@ -468,59 +468,70 @@
       "on": 9,
       "off": 17,
       "temperature": "25°C",
-      "source": "doi:10.1016/j.neuron.2012.06.040"
+      "source": "doi:10.1016/j.neuron.2012.06.040",
+      "sourceFigure": "Fig. 1D"
     },
     {
       "on": 28,
       "off": 104,
       "temperature": "22-23°C",
-      "source": "doi:10.1016/j.cell.2019.11.004"
+      "source": "doi:10.1016/j.cell.2019.11.004",
+      "sourceFigure": "Table 1"
     },
     {
       "on": 15,
       "off": 45,
       "temperature": "33-34°C",
-      "source": "doi:10.1038/nn.3709"
+      "source": "doi:10.1038/nn.3709",
+      "sourceFigure": "Fig. 1e"
     }
   ],
   "dynamicRangeData": [
     {
       "deltaF": -35,
       "sign": "negative",
-      "source": "doi:10.1016/j.neuron.2012.06.040"
+      "source": "doi:10.1016/j.neuron.2012.06.040",
+      "sourceFigure": "Fig. 2C"
     },
     {
       "deltaF": -29.6,
       "sign": "negative",
-      "source": "doi:10.1523/ENEURO.0060-20.2020"
+      "source": "doi:10.1523/ENEURO.0060-20.2020",
+      "sourceFigure": "Fig. 2D"
     },
     {
       "deltaF": -32,
       "sign": "negative",
       "source": "doi:10.1038/nmeth.3000",
+      "sourceFigure": "Fig. S6",
       "note": "ArcLight A242 in HEK293T cells at 23°C, n=7 cells"
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 3.2,
-      "source": "doi:10.1016/j.neuron.2012.06.040"
+      "source": "doi:10.1016/j.neuron.2012.06.040",
+      "sourceFigure": "Fig. 3"
     },
     {
       "deltaF": 3.2,
-      "source": "doi:10.1016/j.cell.2019.11.004"
+      "source": "doi:10.1016/j.cell.2019.11.004",
+      "sourceFigure": "Table 1"
     },
     {
       "deltaF": 2.2,
-      "source": "doi:10.1038/nn.3709"
+      "source": "doi:10.1038/nn.3709",
+      "sourceFigure": "Fig. 1g"
     },
     {
       "deltaF": 2.6,
-      "source": "doi:10.1021/acschemneuro.6b00234"
+      "source": "doi:10.1021/acschemneuro.6b00234",
+      "sourceFigure": "Main text"
     },
     {
       "deltaF": 2.7,
-      "source": "doi:10.1038/s41598-017-08731-2"
+      "source": "doi:10.1038/s41598-017-08731-2",
+      "sourceFigure": "Table 3"
     }
   ],
   "photostabilityData": [
@@ -528,20 +539,23 @@
       "brightnessRemaining": 82,
       "illumination": "100 mW/mm²",
       "duration": "1 min",
-      "source": "doi:10.1523/JNEUROSCI.3590-15.2016"
+      "source": "doi:10.1523/JNEUROSCI.3590-15.2016",
+      "sourceFigure": "Fig. 3I"
     },
     {
       "brightnessRemaining": 77,
       "illumination": "11 mW/mm²",
       "duration": "1 min",
-      "source": "doi:10.7554/eLife.25690"
+      "source": "doi:10.7554/eLife.25690",
+      "sourceFigure": "Fig. S3"
     }
   ],
   "brightnessData": [
     {
       "ratio": 1.097,
       "reference": "EGFP",
-      "source": "doi:10.1016/j.cell.2019.11.004"
+      "source": "doi:10.1016/j.cell.2019.11.004",
+      "sourceFigure": "Table 1"
     }
   ],
   "addgene": {

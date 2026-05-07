@@ -705,32 +705,37 @@
       "on": 3.74,
       "off": 6.16,
       "temperature": "25°C",
-      "source": "doi:10.1101/2024.06.21.599617"
+      "source": "doi:10.1101/2024.06.21.599617",
+      "sourceFigure": "Table 1"
     }
   ],
   "dynamicRangeData": [
     {
       "deltaF": 161,
       "sign": "positive",
-      "source": "doi:10.1101/2024.06.21.599617"
+      "source": "doi:10.1101/2024.06.21.599617",
+      "sourceFigure": "Fig. 1b"
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 33,
-      "source": "doi:10.1101/2024.06.21.599617"
+      "source": "doi:10.1101/2024.06.21.599617",
+      "sourceFigure": "Fig. 1c"
     }
   ],
   "brightnessData": [
     {
       "ratio": 2,
       "reference": "asap4e",
-      "source": "doi:10.1101/2024.06.21.599617"
+      "source": "doi:10.1101/2024.06.21.599617",
+      "sourceFigure": "Table S1"
     },
     {
       "ratio": 1.417,
       "reference": "asap6-1",
-      "source": "doi:10.1101/2024.06.21.599617"
+      "source": "doi:10.1101/2024.06.21.599617",
+      "sourceFigure": "Table S1"
     }
   ],
   "twoPhoton": [

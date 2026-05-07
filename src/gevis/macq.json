@@ -406,25 +406,29 @@
       "on": 2.8,
       "off": 5.4,
       "temperature": "22°C",
-      "source": "doi:10.1038/ncomms4674"
+      "source": "doi:10.1038/ncomms4674",
+      "sourceFigure": "Table S1"
     }
   ],
   "dynamicRangeData": [
     {
       "deltaF": -20,
       "sign": "negative",
-      "source": "doi:10.1038/ncomms4674"
+      "source": "doi:10.1038/ncomms4674",
+      "sourceFigure": "Fig. 3b"
     },
     {
       "deltaF": -19.49,
       "sign": "negative",
-      "source": "doi:10.1073/pnas.1902443116"
+      "source": "doi:10.1073/pnas.1902443116",
+      "sourceFigure": "Fig. 4C"
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 4.8,
-      "source": "doi:10.1038/ncomms4674"
+      "source": "doi:10.1038/ncomms4674",
+      "sourceFigure": "Fig. 5d"
     }
   ],
   "photostabilityData": [
@@ -432,14 +436,16 @@
       "brightnessRemaining": 61,
       "illumination": "15 mW/mm²",
       "duration": "0.5 min",
-      "source": "doi:10.1038/ncomms4674"
+      "source": "doi:10.1038/ncomms4674",
+      "sourceFigure": "Table S1"
     }
   ],
   "brightnessData": [
     {
       "ratio": 3,
       "reference": "arclight",
-      "source": "doi:10.1038/ncomms4674"
+      "source": "doi:10.1038/ncomms4674",
+      "sourceFigure": "Fig. S4"
     }
   ],
   "twoPhoton": [

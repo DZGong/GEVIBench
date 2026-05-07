@@ -512,7 +512,8 @@
       "off": 0.48,
       "temperature": "22°C",
       "source": "doi:10.1126/science.abm8797",
-      "note": "Bi-exponential fast components in spiking HEK cells (68% on, 72% off); slow τ_on=1.9 ms, slow τ_off=3.1 ms (Table S1)"
+      "note": "Bi-exponential fast components in spiking HEK cells (68% on, 72% off); slow τ_on=1.9 ms, slow τ_off=3.1 ms (Table S1)",
+      "sourceFigure": "Table S1"
     }
   ],
   "dynamicRangeData": [
@@ -520,14 +521,16 @@
       "deltaF": -19.1,
       "sign": "negative",
       "source": "doi:10.1126/science.abm8797",
-      "note": "ΔF/F per 100 mV step in spiking HEK cells at 22°C (Table S1). Also reported as -22.9 ± 0.7% per 120 mV step in Fig. 1C (n=13 cells)."
+      "note": "ΔF/F per 100 mV step in spiking HEK cells at 22°C (Table S1). Also reported as -22.9 ± 0.7% per 120 mV step in Fig. 1C (n=13 cells).",
+      "sourceFigure": "Table S1"
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 7.3,
       "source": "doi:10.1126/science.abm8797",
-      "note": "ΔF/F per single AP in V1 VIP+ interneurons in awake mice (mean ± SEM = 7.3 ± 1.2%, n=49 spikes)"
+      "note": "ΔF/F per single AP in V1 VIP+ interneurons in awake mice (mean ± SEM = 7.3 ± 1.2%, n=49 spikes)",
+      "sourceFigure": "Fig. 1I"
     }
   ],
   "brightnessData": [
@@ -535,7 +538,8 @@
       "ratio": 1.0,
       "reference": "varnam",
       "source": "doi:10.1126/science.abm8797",
-      "note": "Normalized resting fluorescence in HEK cells (Fig. S11A right panel): VARNAM2 = 1.00 ± SEM relative to VARNAM (n=7 wells/condition)"
+      "note": "Normalized resting fluorescence in HEK cells (Fig. S11A right panel): VARNAM2 = 1.00 ± SEM relative to VARNAM (n=7 wells/condition)",
+      "sourceFigure": "Fig. S11A"
     }
   ],
   "photostabilityData": [
@@ -544,7 +548,8 @@
       "illumination": "25 mW/mm²",
       "duration": "10 min",
       "source": "doi:10.1126/science.abm8797",
-      "note": "Read from photobleaching curve in Fig. S11B (right panel, 565 nm LED illumination at 25 mW/mm², HEK cells)"
+      "note": "Read from photobleaching curve in Fig. S11B (right panel, 565 nm LED illumination at 25 mW/mm², HEK cells)",
+      "sourceFigure": "Fig. S11B"
     }
   ],
   "researchPapers": [

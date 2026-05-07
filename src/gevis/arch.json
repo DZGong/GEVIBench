@@ -67,6 +67,7 @@
       "off": 0.5,
       "temperature": "24°C",
       "source": "doi:10.1038/nmeth.1782",
+      "sourceFigure": "Fig. 1d",
       "note": "Sub-millisecond single time constant; on/off not separately resolved at this resolution. Paper reports <1 ms response."
     }
   ],
@@ -74,12 +75,14 @@
     {
       "deltaF": 45,
       "sign": "positive",
-      "source": "doi:10.1038/nmeth.1782"
+      "source": "doi:10.1038/nmeth.1782",
+      "sourceFigure": "Fig. 1c"
     },
     {
       "deltaF": 40,
       "sign": "positive",
-      "source": "doi:10.1038/nmeth.3000"
+      "source": "doi:10.1038/nmeth.3000",
+      "sourceFigure": "Table S2"
     }
   ],
   "brightnessData": [
@@ -95,7 +98,8 @@
       "brightnessRemaining": 83,
       "illumination": "5400 mW/mm²",
       "duration": "10 min",
-      "source": "doi:10.1038/nmeth.1782"
+      "source": "doi:10.1038/nmeth.1782",
+      "sourceFigure": "Main text"
     }
   ],
   "researchPapers": [

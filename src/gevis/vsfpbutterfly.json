@@ -409,35 +409,30 @@
       "on": 7.7,
       "off": 89.9,
       "temperature": "32-34°C",
-      "source": "doi:10.1152/jn.00452.2012"
+      "source": "doi:10.1152/jn.00452.2012",
+      "sourceFigure": "Fig. 2E"
     }
   ],
   "dynamicRangeData": [
     {
       "deltaF": -15,
       "sign": "negative",
-      "source": "doi:10.3389/fnmol.2014.00078"
+      "source": "doi:10.3389/fnmol.2014.00078",
+      "sourceFigure": "Table 1"
     },
     {
       "deltaF": -3.2,
       "sign": "negative",
       "source": "doi:10.1152/jn.00452.2012",
+      "sourceFigure": "Fig. 3C",
       "note": "Brain slices, layer 2/3 pyramidal neurons, 12 cells"
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 0.3,
-      "source": "doi:10.1152/jn.00452.2012"
-    }
-  ],
-  "photostabilityData": [
-    {
-      "brightnessRemaining": 81,
-      "illumination": "35 mW/mm²",
-      "duration": "1 min",
-      "source": "doi:10.1039/C8IB00063H",
-      "note": "Approximated from mCitrine donor FP in vitro t1/2=3.3min at 35 mW/mm² white light"
+      "source": "doi:10.1152/jn.00452.2012",
+      "sourceFigure": "Fig. 3D"
     }
   ],
   "brightnessData": [
@@ -450,7 +445,8 @@
   "subthresholdData": [
     {
       "slope": 0.042,
-      "source": "doi:10.1152/jn.00452.2012"
+      "source": "doi:10.1152/jn.00452.2012",
+      "sourceFigure": "Fig. 3C"
     }
   ],
   "addgene": {

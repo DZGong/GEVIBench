@@ -109,7 +109,8 @@
       "on": 2.8,
       "off": 2.4,
       "temperature": "33°C",
-      "source": "doi:10.64898/2026.04.07.717088"
+      "source": "doi:10.64898/2026.04.07.717088",
+      "sourceFigure": "Table S1.4"
     }
   ],
 
@@ -117,21 +118,24 @@
     {
       "deltaF": 227,
       "sign": "positive",
-      "source": "doi:10.64898/2026.04.07.717088"
+      "source": "doi:10.64898/2026.04.07.717088",
+      "sourceFigure": "Fig. 1E"
     }
   ],
 
   "sensitivityData": [
     {
       "deltaF": 92.7,
-      "source": "doi:10.64898/2026.04.07.717088"
+      "source": "doi:10.64898/2026.04.07.717088",
+      "sourceFigure": "Fig. 3A-B"
     }
   ],
 
   "subthresholdData": [
     {
       "slope": 1.2,
-      "source": "doi:10.64898/2026.04.07.717088"
+      "source": "doi:10.64898/2026.04.07.717088",
+      "sourceFigure": "Fig. 2F"
     }
   ],
 
@@ -139,7 +143,8 @@
     {
       "ratio": 0.39,
       "reference": "jedi2p",
-      "source": "doi:10.64898/2026.04.07.717088"
+      "source": "doi:10.64898/2026.04.07.717088",
+      "sourceFigure": "Fig. 1C"
     }
   ],
 
@@ -148,7 +153,8 @@
       "brightnessRemaining": 87,
       "illumination": "100 mW (2P, 940 nm, at sample plane)",
       "duration": "6 min",
-      "source": "doi:10.64898/2026.04.07.717088"
+      "source": "doi:10.64898/2026.04.07.717088",
+      "sourceFigure": "Fig. S1.2B"
     }
   ],
 

@@ -480,7 +480,7 @@
     },
     "source": "doi:10.1101/2025.05.30.657123",
     "sourceImage": "/fv-sources/electraoff.jpg",
-    "sourceFigure": "Supp. Fig. 3B"
+    "sourceFigure": "Fig. S3B"
   },
   "kinetics": [
     {
@@ -489,7 +489,7 @@
       "source": "doi:10.1101/2025.05.30.657123",
       "note": "Fast τ components from 100-mV steps (-70→+30 mV depolarization, +30→-70 mV repolarization) in HEK293T cells at 23-25°C",
       "temperature": "23-25°C",
-      "sourceFigure": "Supp. Fig. 3D"
+      "sourceFigure": "Fig. S3D"
     }
   ],
   "dynamicRangeData": [
@@ -498,7 +498,7 @@
       "sign": "negative",
       "source": "doi:10.1101/2025.05.30.657123",
       "note": "Steady-state ΔF/F at +60 mV relative to -70 mV hold in HEK293T cells under 20 mW/mm² illumination",
-      "sourceFigure": "Supp. Fig. 3B"
+      "sourceFigure": "Fig. S3B"
     }
   ],
   "sensitivityData": [
@@ -525,7 +525,7 @@
       "duration": "30 min",
       "source": "doi:10.1101/2025.05.30.657123",
       "note": "Normalized baseline fluorescence after 30-min continuous illumination in cultured primary hippocampal neurons",
-      "sourceFigure": "Supp. Fig. 4H"
+      "sourceFigure": "Fig. S4H"
     },
     {
       "brightnessRemaining": 88,

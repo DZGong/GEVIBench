@@ -47,7 +47,7 @@ function NoteTip({ note }: { note?: string }) {
   );
 }
 
-function SourceLink({ source }: { source?: string }) {
+function SourceLink({ source, sourceFigure }: { source?: string; sourceFigure?: string }) {
   if (!source) return null;
   const url = sourceToUrl(source);
   let label = 'Source';
@@ -56,11 +56,14 @@ function SourceLink({ source }: { source?: string }) {
     const citationMap = getDoiCitationMap();
     label = citationMap[doi] || source;
   }
-  if (!url) return <span className="text-[10px] text-ink">{source}</span>;
+  if (!url) return <span className="text-[10px] text-ink">{sourceFigure && `${sourceFigure} · `}{source}</span>;
   return (
-    <a href={url} target="_blank" rel="noopener noreferrer" className="text-[10px] whitespace-nowrap text-klein hover:underline">
-      {label} <ExternalLink className="w-2.5 h-2.5 inline" />
-    </a>
+    <span className="text-[10px] whitespace-nowrap">
+      {sourceFigure && <span className="text-ink/50">{sourceFigure} · </span>}
+      <a href={url} target="_blank" rel="noopener noreferrer" className="text-klein hover:underline">
+        {label} <ExternalLink className="w-2.5 h-2.5 inline" />
+      </a>
+    </span>
   );
 }
 
@@ -142,7 +145,7 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
                       <span className="text-ink"><span className="font-semibold">{k.on} ms</span>{k.temperature ? ` (${k.temperature})` : ''}</span>
                       <span className="flex items-center gap-1.5">
                         <NoteTip note={k.note} />
-                        <SourceLink source={k.source} />
+                        <SourceLink source={k.source} sourceFigure={k.sourceFigure} />
                       </span>
                     </div>
                   </div>
@@ -158,7 +161,7 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
                       <span className="text-ink"><span className="font-semibold">{k.off} ms</span>{k.temperature ? ` (${k.temperature})` : ''}</span>
                       <span className="flex items-center gap-1.5">
                         <NoteTip note={k.note} />
-                        <SourceLink source={k.source} />
+                        <SourceLink source={k.source} sourceFigure={k.sourceFigure} />
                       </span>
                     </div>
                   </div>
@@ -174,7 +177,7 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
                       <span className="text-ink">ΔF/F<sub>AP</sub>: <span className="font-semibold">{s.deltaF}%</span></span>
                       <span className="flex items-center gap-1.5">
                         <NoteTip note={s.note} />
-                        <SourceLink source={s.source} />
+                        <SourceLink source={s.source} sourceFigure={s.sourceFigure} />
                       </span>
                     </div>
                   </div>
@@ -194,7 +197,7 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
                       </span>
                       <span className="flex items-center gap-1.5">
                         <NoteTip note={d.note} />
-                        <SourceLink source={d.source} />
+                        <SourceLink source={d.source} sourceFigure={d.sourceFigure} />
                       </span>
                     </div>
                   </div>
@@ -217,7 +220,7 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
                       <span className="text-ink">F<sub>remain</sub>: <span className="font-semibold">{p.brightnessRemaining}%</span> @ {p.illumination}, {p.duration}</span>
                       <span className="flex items-center gap-1.5">
                         <NoteTip note={p.note} />
-                        <SourceLink source={p.source} />
+                        <SourceLink source={p.source} sourceFigure={p.sourceFigure} />
                       </span>
                     </div>
                   </div>
@@ -243,7 +246,7 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
                       <span className="text-ink"><span className="font-semibold">{formatRatio(b.ratio)}×</span> vs {b.reference}</span>
                       <span className="flex items-center gap-1.5">
                         <NoteTip note={b.note} />
-                        <SourceLink source={b.source} />
+                        <SourceLink source={b.source} sourceFigure={b.sourceFigure} />
                       </span>
                     </div>
                   </div>

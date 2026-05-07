@@ -19,12 +19,14 @@
     {
       "ratio": 1.11,
       "reference": "asap3",
-      "source": "doi:10.1016/j.cell.2022.07.013"
+      "source": "doi:10.1016/j.cell.2022.07.013",
+      "sourceFigure": "Fig. 2I"
     },
     {
       "ratio": 1,
       "reference": "asap1",
-      "source": "doi:10.7554/eLife.25690"
+      "source": "doi:10.7554/eLife.25690",
+      "sourceFigure": "Fig. 1—figure supplement 2"
     }
   ],
   "kinetics": [
@@ -32,51 +34,60 @@
       "on": 5.2,
       "off": 24,
       "temperature": "22°C",
-      "source": "doi:10.7554/eLife.25690"
+      "source": "doi:10.7554/eLife.25690",
+      "sourceFigure": "Table 1"
     },
     {
       "on": 1.5,
       "off": 3.4,
       "temperature": "33-34°C",
-      "source": "doi:10.1016/j.cell.2019.11.004"
+      "source": "doi:10.1016/j.cell.2019.11.004",
+      "sourceFigure": "Table 1"
     },
     {
       "on": 3.78,
       "off": 7.59,
       "temperature": "32-35°C",
-      "source": "doi:10.1016/j.cell.2022.07.013"
+      "source": "doi:10.1016/j.cell.2022.07.013",
+      "sourceFigure": "Table S2"
     },
     {
       "on": 6.39,
       "off": 12.7,
       "temperature": "21-23°C",
-      "source": "doi:10.1016/j.cell.2022.07.013"
+      "source": "doi:10.1016/j.cell.2022.07.013",
+      "sourceFigure": "Table S2"
     }
   ],
   "dynamicRangeData": [
     {
       "deltaF": -38.7,
       "sign": "negative",
-      "source": "doi:10.7554/eLife.25690"
+      "source": "doi:10.7554/eLife.25690",
+      "sourceFigure": "Fig. 1C"
     },
     {
       "deltaF": -36,
       "sign": "negative",
-      "source": "doi:10.1016/j.cell.2019.11.004"
+      "source": "doi:10.1016/j.cell.2019.11.004",
+      "sourceFigure": "Table 1"
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 12.2,
-      "source": "doi:10.7554/eLife.25690"
+      "source": "doi:10.7554/eLife.25690",
+      "sourceFigure": "Fig. 2I"
     },
     {
       "deltaF": 15,
-      "source": "doi:10.7554/eLife.25690"
+      "source": "doi:10.7554/eLife.25690",
+      "sourceFigure": "Fig. 4E"
     },
     {
       "deltaF": 7,
-      "source": "doi:10.1016/j.cell.2019.11.004"
+      "source": "doi:10.1016/j.cell.2019.11.004",
+      "sourceFigure": "Table 1"
     }
   ],
   "photostabilityData": [
@@ -84,7 +95,8 @@
       "brightnessRemaining": 71,
       "illumination": "11 mW/mm²",
       "duration": "1 min",
-      "source": "doi:10.7554/eLife.25690"
+      "source": "doi:10.7554/eLife.25690",
+      "sourceFigure": "Fig. 1—figure supplement 3"
     }
   ],
   "twoPhoton": [

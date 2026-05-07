@@ -735,20 +735,23 @@
       "off": 0.64,
       "temperature": "25°C",
       "source": "doi:10.1038/s41467-020-17322-1",
-      "note": "Bi-exponential fast component in voltage-clamped rat neurons (85% on, 90% off); slow τ_on=19 ms, slow τ_off=37 ms. Imaged at 3.2 kHz."
+      "note": "Bi-exponential fast component in voltage-clamped rat neurons (85% on, 90% off); slow τ_on=19 ms, slow τ_off=37 ms. Imaged at 3.2 kHz.",
+      "sourceFigure": "Table S1"
     }
   ],
   "dynamicRangeData": [
     {
       "deltaF": 23,
       "sign": "positive",
-      "source": "doi:10.1038/s41467-020-17322-1"
+      "source": "doi:10.1038/s41467-020-17322-1",
+      "sourceFigure": "Fig. 2a"
     },
     {
       "deltaF": 20,
       "sign": "positive",
       "source": "doi:10.1038/s41467-020-17322-1",
-      "note": "Per 100 mV step in spiking HEK cells at 22°C"
+      "note": "Per 100 mV step in spiking HEK cells at 22°C",
+      "sourceFigure": "Fig. S4"
     }
   ],
   "photostabilityData": [
@@ -756,26 +759,30 @@
       "brightnessRemaining": 60,
       "illumination": "18 mW/mm²",
       "duration": "5 min",
-      "source": "doi:10.1038/s41467-020-17322-1"
+      "source": "doi:10.1038/s41467-020-17322-1",
+      "sourceFigure": "Fig. 2c"
     },
     {
       "brightnessRemaining": 50,
       "illumination": "500 mW/mm²",
       "duration": "3.45 min",
-      "source": "doi:10.1126/sciadv.ads1807"
+      "source": "doi:10.1126/sciadv.ads1807",
+      "sourceFigure": "Fig. S7"
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 5.9,
-      "source": "doi:10.1126/sciadv.ads1807"
+      "source": "doi:10.1126/sciadv.ads1807",
+      "sourceFigure": "Fig. S5B"
     }
   ],
   "brightnessData": [
     {
       "ratio": 0.59,
       "reference": "voltron",
-      "source": "doi:10.1038/s41467-020-17322-1"
+      "source": "doi:10.1038/s41467-020-17322-1",
+      "sourceFigure": "Fig. 2b"
     }
   ],
   "addgene": {

@@ -430,7 +430,8 @@
       "on": 1.8,
       "off": 1.3,
       "temperature": "30°C",
-      "source": "doi:10.1038/s41592-022-01743-5"
+      "source": "doi:10.1038/s41592-022-01743-5",
+      "sourceFigure": "Extended Data Fig. 4d"
     }
   ],
   "dynamicRangeData": [
@@ -438,6 +439,7 @@
       "deltaF": 73,
       "sign": "positive",
       "source": "doi:10.1038/s41592-022-01743-5",
+      "sourceFigure": "Extended Data Fig. 4c",
       "note": "In HEK293T cells, voltage clamp, per 100 mV step, n=5 cells"
     }
   ],
@@ -445,13 +447,15 @@
     {
       "ratio": 1.7,
       "reference": "archon1",
-      "source": "doi:10.1038/s41592-022-01743-5"
+      "source": "doi:10.1038/s41592-022-01743-5",
+      "sourceFigure": "Extended Data Fig. 4b"
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 26,
       "source": "doi:10.1038/s41592-022-01743-5",
+      "sourceFigure": "Extended Data Fig. 5c",
       "note": "Per-spike ΔF/F from high-throughput Optopatch assay in cultured rat hippocampal neurons at room temperature, highest virus titer, n=843 cells. From Extended Data Fig. 5c"
     }
   ],
@@ -460,7 +464,8 @@
       "brightnessRemaining": 62,
       "illumination": "4200 mW/mm²",
       "duration": "10 min",
-      "source": "doi:10.1038/s41592-022-01743-5"
+      "source": "doi:10.1038/s41592-022-01743-5",
+      "sourceFigure": "Extended Data Fig. 6f"
     }
   ],
   "addgene": {

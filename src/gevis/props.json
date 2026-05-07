@@ -90,6 +90,7 @@
       "off": 4.7,
       "temperature": "25°C",
       "source": "doi:10.1126/science.1204763",
+      "sourceFigure": "Fig. 1D",
       "note": "Single time constant of ~4.7 ms for voltage step response (blink duration FWHM); on/off not separately resolved. Paper states 'response time ~5 ms'."
     }
   ],
@@ -98,6 +99,7 @@
       "deltaF": 150,
       "sign": "positive",
       "source": "doi:10.1126/science.1204763",
+      "sourceFigure": "Fig. 1C",
       "note": "ΔF/F = 150% per 100 mV, measured via induced transmembrane voltage in E. coli"
     }
   ],

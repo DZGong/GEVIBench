@@ -18,6 +18,7 @@
       "off": 1.75,
       "temperature": "25°C",
       "source": "doi:10.1101/2024.02.02.578569",
+      "sourceFigure": "Fig. 1B",
       "note": "Paper reports only a single response half-time τ_1/2 = 1.75 ± 0.11 ms for depolarizing step; separate τ_on and τ_off not resolved"
     }
   ],
@@ -25,13 +26,15 @@
     {
       "deltaF": -61,
       "sign": "negative",
-      "source": "doi:10.1101/2024.02.02.578569"
+      "source": "doi:10.1101/2024.02.02.578569",
+      "sourceFigure": "Fig. 1B"
     }
   ],
   "sensitivityData": [
     {
       "deltaF": -28.1,
-      "source": "doi:10.1101/2024.02.02.578569"
+      "source": "doi:10.1101/2024.02.02.578569",
+      "sourceFigure": "Fig. 2B"
     }
   ],
   "spectrum": {

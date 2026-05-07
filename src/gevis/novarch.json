@@ -55,7 +55,8 @@
       "on": 1.2,
       "off": 2.7,
       "source": "doi:10.1126/sciadv.abe3216",
-      "note": "Bi-exponential kinetics of the voltage response under red-only illumination: upstroke fast tau=1.2 ms (76%) and slow tau=10 ms (24%); downstroke fast tau=2.7 ms (76%) and slow tau=15 ms (24%). Fig. 3F"
+      "note": "Bi-exponential kinetics of the voltage response under red-only illumination: upstroke fast tau=1.2 ms (76%) and slow tau=10 ms (24%); downstroke fast tau=2.7 ms (76%) and slow tau=15 ms (24%). Fig. 3F",
+      "sourceFigure": "Fig. 3F"
     }
   ],
   "dynamicRangeData": [
@@ -63,21 +64,24 @@
       "deltaF": 41,
       "sign": "positive",
       "source": "doi:10.1126/sciadv.abe3216",
-      "note": "ΔF_R^V/F_R = 41 +/- 7% from -70 to +30 mV, n = 4 cells under red-only illumination (Fig. 3E)"
+      "note": "ΔF_R^V/F_R = 41 +/- 7% from -70 to +30 mV, n = 4 cells under red-only illumination (Fig. 3E)",
+      "sourceFigure": "Fig. 3E"
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 28,
       "source": "doi:10.1126/sciadv.abe3216",
-      "note": "ΔF^V/F_R = 28 +/- 5% per action potential in cultured rat hippocampal neurons under wide-field red illumination (110 W/cm^2), n = 6 neurons (Fig. 4B). With 2P sensitization: 79 +/- 11%."
+      "note": "ΔF^V/F_R = 28 +/- 5% per action potential in cultured rat hippocampal neurons under wide-field red illumination (110 W/cm^2), n = 6 neurons (Fig. 4B). With 2P sensitization: 79 +/- 11%.",
+      "sourceFigure": "Fig. 4B"
     }
   ],
   "subthresholdData": [
     {
       "slope": 0.41,
       "source": "doi:10.1126/sciadv.abe3216",
-      "note": "Derived from 41% per 100 mV voltage sensitivity under red-only illumination (Fig. 3E)"
+      "note": "Derived from 41% per 100 mV voltage sensitivity under red-only illumination (Fig. 3E)",
+      "sourceFigure": "Fig. 3E"
     }
   ],
   "brightnessData": [
@@ -85,7 +89,8 @@
       "ratio": 3,
       "reference": "archon1",
       "source": "doi:10.1126/sciadv.abe3216",
-      "note": "Under red + blue light sensitization (the intended imaging modality), NovArch is ~3-fold brighter than Archon1 (Citrine-normalized: NovArch 0.88 ± 0.24 vs Archon1 0.30 ± 0.25). Under red-only illumination (no sensitization), NovArch is only ~0.7× Archon1 (Citrine ratio 0.2 ± 0.06). Raw counts: 1000 ± 510 (NovArch red+blue) vs 450 ± 440 (Archon1) at I_blue = 26 W/cm²."
+      "note": "Under red + blue light sensitization (the intended imaging modality), NovArch is ~3-fold brighter than Archon1 (Citrine-normalized: NovArch 0.88 ± 0.24 vs Archon1 0.30 ± 0.25). Under red-only illumination (no sensitization), NovArch is only ~0.7× Archon1 (Citrine ratio 0.2 ± 0.06). Raw counts: 1000 ± 510 (NovArch red+blue) vs 450 ± 440 (Archon1) at I_blue = 26 W/cm².",
+      "sourceFigure": "Fig. S1C"
     }
   ],
   "photostabilityData": [
@@ -94,7 +99,8 @@
       "illumination": "1400 mW/mm² red + 220 mW/mm² blue",
       "duration": "10.8 min",
       "source": "doi:10.1126/sciadv.abe3216",
-      "note": "NovArch photobleached to 50% of initial intensity in 650 s under continuous high-intensity illumination (I_red = 140 W/cm^2 plus I_blue = 22 W/cm^2 photoactivation), fig. S4C"
+      "note": "NovArch photobleached to 50% of initial intensity in 650 s under continuous high-intensity illumination (I_red = 140 W/cm^2 plus I_blue = 22 W/cm^2 photoactivation), fig. S4C",
+      "sourceFigure": "Fig. S4C"
     }
   ],
   "addgene": {

@@ -36,19 +36,22 @@
     {
       "deltaF": 60,
       "sign": "positive",
-      "source": "doi:10.1038/ncomms5894"
+      "source": "doi:10.1038/ncomms5894",
+      "sourceFigure": "Fig. 1d"
     }
   ],
   "brightnessData": [
     {
       "ratio": 3,
       "reference": "arch",
-      "source": "doi:10.1038/ncomms5894"
+      "source": "doi:10.1038/ncomms5894",
+      "sourceFigure": "Fig. 1a"
     },
     {
       "ratio": 0.027,
       "reference": "EGFP",
-      "source": "doi:10.1021/cbe.5c00069"
+      "source": "doi:10.1021/cbe.5c00069",
+      "sourceFigure": "Table 2"
     }
   ],
   "researchPapers": [

@@ -43,20 +43,23 @@
       "on": 0.92,
       "off": 10.3,
       "temperature": "33°C",
-      "source": "doi:10.1113/jphysiol.2013.257048"
+      "source": "doi:10.1113/jphysiol.2013.257048",
+      "sourceFigure": "Fig. 4C"
     }
   ],
   "dynamicRangeData": [
     {
       "deltaF": 48.5,
       "sign": "positive",
-      "source": "doi:10.1113/jphysiol.2013.257048"
+      "source": "doi:10.1113/jphysiol.2013.257048",
+      "sourceFigure": "Fig. 4B"
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 2.57,
-      "source": "doi:10.1113/jphysiol.2013.257048"
+      "source": "doi:10.1113/jphysiol.2013.257048",
+      "sourceFigure": "Fig. 6B"
     }
   ],
   "researchPapers": [

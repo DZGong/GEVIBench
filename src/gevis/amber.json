@@ -519,14 +519,16 @@
       "on": 40,
       "off": 30,
       "temperature": "25°C",
-      "source": "doi:10.1002/adbi.202100842"
+      "source": "doi:10.1002/adbi.202100842",
+      "sourceFigure": "Fig. 3B"
     }
   ],
   "dynamicRangeData": [
     {
       "deltaF": 200,
       "sign": "positive",
-      "source": "doi:10.1002/adbi.202100842"
+      "source": "doi:10.1002/adbi.202100842",
+      "sourceFigure": "Fig. 2B"
     }
   ],
   "photostabilityData": "bioluminescent",

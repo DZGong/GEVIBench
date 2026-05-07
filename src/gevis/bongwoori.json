@@ -461,37 +461,43 @@
       "on": 8,
       "off": 7,
       "temperature": "33°C",
-      "source": "doi:10.1523/JNEUROSCI.3008-14.2015"
+      "source": "doi:10.1523/JNEUROSCI.3008-14.2015",
+      "sourceFigure": "Fig. 6"
     },
     {
       "on": 9,
       "off": 8,
       "temperature": "34°C",
-      "source": "doi:10.1038/s41598-017-08731-2"
+      "source": "doi:10.1038/s41598-017-08731-2",
+      "sourceFigure": "Table 2"
     }
   ],
   "dynamicRangeData": [
     {
       "deltaF": -10,
       "sign": "negative",
-      "source": "doi:10.1523/JNEUROSCI.3008-14.2015"
+      "source": "doi:10.1523/JNEUROSCI.3008-14.2015",
+      "sourceFigure": "Fig. 6A"
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 3.7,
-      "source": "doi:10.1038/s41598-017-08731-2"
+      "source": "doi:10.1038/s41598-017-08731-2",
+      "sourceFigure": "Table 3"
     },
     {
       "deltaF": 2.5,
-      "source": "doi:10.1523/JNEUROSCI.3008-14.2015"
+      "source": "doi:10.1523/JNEUROSCI.3008-14.2015",
+      "sourceFigure": "Fig. 7"
     }
   ],
   "brightnessData": [
     {
       "ratio": 0.29,
       "reference": "arclight",
-      "source": "doi:10.1038/s41598-017-08731-2"
+      "source": "doi:10.1038/s41598-017-08731-2",
+      "sourceFigure": "Table 3"
     }
   ],
   "photostabilityData": [
@@ -499,7 +505,8 @@
       "brightnessRemaining": 88,
       "illumination": "1 mW/mm²",
       "duration": "1 min",
-      "source": "doi:10.1038/s41598-017-08731-2"
+      "source": "doi:10.1038/s41598-017-08731-2",
+      "sourceFigure": "Fig. S1"
     }
   ],
   "addgene": {

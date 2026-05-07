@@ -508,27 +508,31 @@
       "on": 1.7,
       "off": 2.5,
       "temperature": "25°C",
-      "source": "doi:10.1038/s41557-021-00641-1"
+      "source": "doi:10.1038/s41557-021-00641-1",
+      "sourceFigure": "Table S3"
     }
   ],
   "dynamicRangeData": [
     {
       "deltaF": -39,
       "sign": "negative",
-      "source": "doi:10.1038/s41557-021-00641-1"
+      "source": "doi:10.1038/s41557-021-00641-1",
+      "sourceFigure": "Table S3"
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 25.3,
-      "source": "doi:10.1038/s41557-021-00641-1"
+      "source": "doi:10.1038/s41557-021-00641-1",
+      "sourceFigure": "Table S3"
     }
   ],
   "brightnessData": [
     {
       "ratio": 0.19,
       "reference": "voltron",
-      "source": "doi:10.1038/s41557-021-00641-1"
+      "source": "doi:10.1038/s41557-021-00641-1",
+      "sourceFigure": "Table S4"
     }
   ],
   "photostabilityData": [
@@ -536,7 +540,8 @@
       "brightnessRemaining": 50,
       "illumination": "49 mW/mm²",
       "duration": "7.2 min",
-      "source": "doi:10.1038/s41557-021-00641-1"
+      "source": "doi:10.1038/s41557-021-00641-1",
+      "sourceFigure": "Table S6"
     }
   ],
   "researchPapers": [

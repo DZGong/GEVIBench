@@ -20,49 +20,57 @@
       "on": 0.54,
       "off": 1.2,
       "temperature": "32-35°C",
-      "source": "doi:10.1038/s41467-023-41975-3"
+      "source": "doi:10.1038/s41467-023-41975-3",
+      "sourceFigure": "Table 1"
     },
     {
       "on": 1.74,
       "off": 2.91,
       "temperature": "21-23°C",
-      "source": "doi:10.1038/s41467-023-41975-3"
+      "source": "doi:10.1038/s41467-023-41975-3",
+      "sourceFigure": "Table 1"
     }
   ],
   "dynamicRangeData": [
     {
       "deltaF": -56,
       "sign": "negative",
-      "source": "doi:10.1038/s41467-023-41975-3"
+      "source": "doi:10.1038/s41467-023-41975-3",
+      "sourceFigure": "Fig. 2c"
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 31.2,
-      "source": "doi:10.1038/s41467-023-41975-3"
+      "source": "doi:10.1038/s41467-023-41975-3",
+      "sourceFigure": "Fig. 2e"
     }
   ],
   "subthresholdData": [
     {
       "slope": 0.9,
-      "source": "doi:10.1016/j.neuron.2024.08.019"
+      "source": "doi:10.1016/j.neuron.2024.08.019",
+      "sourceFigure": "Fig. 1D"
     }
   ],
   "brightnessData": [
     {
       "ratio": 2.44,
       "reference": "asap3",
-      "source": "doi:10.1038/s41467-023-41975-3"
+      "source": "doi:10.1038/s41467-023-41975-3",
+      "sourceFigure": "Fig. 2h"
     },
     {
       "ratio": 2.2,
       "reference": "asap2s",
-      "source": "doi:10.1038/s41467-023-41975-3"
+      "source": "doi:10.1038/s41467-023-41975-3",
+      "sourceFigure": "Fig. 2h"
     },
     {
       "ratio": 1.71,
       "reference": "asap3",
-      "source": "doi:10.1021/acschemneuro.5c00670"
+      "source": "doi:10.1021/acschemneuro.5c00670",
+      "sourceFigure": "Fig. 2C"
     }
   ],
   "photostabilityData": [
@@ -70,7 +78,8 @@
       "brightnessRemaining": 64,
       "illumination": "16 mW/mm²",
       "duration": "2 min",
-      "source": "doi:10.1038/s41467-023-41975-3"
+      "source": "doi:10.1038/s41467-023-41975-3",
+      "sourceFigure": "Fig. S4"
     }
   ],
   "spectrum": {

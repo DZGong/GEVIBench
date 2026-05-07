@@ -25,14 +25,16 @@
       "on": 2.24,
       "off": 2.09,
       "temperature": "35-37°C",
-      "source": "doi:10.1371/journal.pone.0043454"
+      "source": "doi:10.1371/journal.pone.0043454",
+      "sourceFigure": "Fig. 5B"
     }
   ],
   "dynamicRangeData": [
     {
       "deltaF": -1.2,
       "sign": "negative",
-      "source": "doi:10.1371/journal.pone.0043454"
+      "source": "doi:10.1371/journal.pone.0043454",
+      "sourceFigure": "Fig. 4A"
     }
   ],
   "brightnessData": [
@@ -45,7 +47,8 @@
   "sensitivityData": [
     {
       "deltaF": 0.7,
-      "source": "doi:10.1371/journal.pone.0043454"
+      "source": "doi:10.1371/journal.pone.0043454",
+      "sourceFigure": "Fig. 7C"
     }
   ],
   "spectrum": {

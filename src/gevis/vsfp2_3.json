@@ -494,19 +494,22 @@
       "on": 46.7,
       "off": 49.3,
       "temperature": "35°C",
-      "source": "doi:10.1007/s00249-010-0620-0"
+      "source": "doi:10.1007/s00249-010-0620-0",
+      "sourceFigure": "Table 1"
     },
     {
       "on": 72,
       "off": 70.6,
       "temperature": "30°C",
-      "source": "doi:10.1007/s00249-010-0620-0"
+      "source": "doi:10.1007/s00249-010-0620-0",
+      "sourceFigure": "Table 1"
     },
     {
       "on": 85.8,
       "off": 137,
       "temperature": "25°C",
-      "source": "doi:10.1007/s00249-010-0620-0"
+      "source": "doi:10.1007/s00249-010-0620-0",
+      "sourceFigure": "Table 1"
     }
   ],
   "dynamicRangeData": [
@@ -514,22 +517,15 @@
       "deltaF": -8.3,
       "sign": "negative",
       "source": "doi:10.1371/journal.pone.0004555",
+      "sourceFigure": "Table 1",
       "note": "Donor (Cerulean) channel ΔF/F for +130mV step (-70 to +60 mV) at 35°C, n=5 cells"
     },
     {
       "deltaF": 15.2,
       "sign": "positive",
       "source": "doi:10.3389/fnmol.2014.00078",
+      "sourceFigure": "Table 1",
       "note": "Ratiometric ΔR/R (acceptor/donor) for full voltage range -140 to +120 mV from holding -70 mV"
-    }
-  ],
-  "photostabilityData": [
-    {
-      "brightnessRemaining": 91,
-      "illumination": "2 mW/mm²",
-      "duration": "1 min",
-      "source": "doi:10.1371/journal.pone.0049149",
-      "note": "Approximated from Cerulean donor FP in vitro τ_irrev=610s at 2 mW/mm²"
     }
   ],
   "brightnessData": [
@@ -543,6 +539,7 @@
     {
       "deltaF": 0.2,
       "source": "doi:10.1016/j.bpj.2009.02.046",
+      "sourceFigure": "Main text",
       "note": "Computational prediction (0.1-0.25% ΔF/F per AP), Akemann et al. 2009 Biophys J simulation"
     }
   ],

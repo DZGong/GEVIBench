@@ -697,6 +697,7 @@
       "off": 8.4,
       "temperature": "22°C",
       "source": "doi:10.1038/s41592-023-01913-z",
+      "sourceFigure": "Table S1",
       "note": "Bi-exponential fast component. Supplementary Table 1 columns for ASAP4b and ASAP4e appear swapped — values here are corrected (ASAP4b is the bright-optimized variant, expected to be slower than speed-optimized ASAP4e)"
     },
     {
@@ -704,6 +705,7 @@
       "off": 3.66,
       "temperature": "37°C",
       "source": "doi:10.1038/s41592-023-01913-z",
+      "sourceFigure": "Table S1",
       "note": "Bi-exponential fast component. Supplementary Table 1 columns for ASAP4b and ASAP4e appear swapped — values here are corrected"
     }
   ],
@@ -711,18 +713,21 @@
     {
       "deltaF": 180,
       "sign": "positive",
-      "source": "doi:10.1038/s41592-023-01913-z"
+      "source": "doi:10.1038/s41592-023-01913-z",
+      "sourceFigure": "Table 1"
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 35,
       "source": "doi:10.1038/s41592-023-01913-z",
+      "sourceFigure": "Table 1",
       "notes": "3.5ms FWHM, 100mV AP waveform, room temperature"
     },
     {
       "deltaF": 30,
       "source": "doi:10.1038/s41592-023-01913-z",
+      "sourceFigure": "Extended Data Fig. 5c",
       "notes": "Naturalistic hippocampal AP waveform, 37°C"
     }
   ],
@@ -730,7 +735,8 @@
     {
       "ratio": 0.4468,
       "reference": "asap3",
-      "source": "doi:10.1038/s41592-023-01913-z"
+      "source": "doi:10.1038/s41592-023-01913-z",
+      "sourceFigure": "Extended Data Fig. 3d"
     }
   ],
   "photostabilityData": [
@@ -738,7 +744,8 @@
       "brightnessRemaining": 68,
       "illumination": "100 mW/mm²",
       "duration": "1 min",
-      "source": "doi:10.1038/s41592-023-01913-z"
+      "source": "doi:10.1038/s41592-023-01913-z",
+      "sourceFigure": "Fig. 2b"
     }
   ],
   "twoPhoton": [

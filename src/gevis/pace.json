@@ -120,7 +120,8 @@
       "off": 0.61,
       "temperature": "22°C",
       "source": "doi:10.1126/science.abm8797",
-      "note": "Bi-exponential fast components at 22°C in spiking HEK cells (82% on, 78% off); slow τ_on=1.5 ms, slow τ_off=3.2 ms (Table S1)"
+      "note": "Bi-exponential fast components at 22°C in spiking HEK cells (82% on, 78% off); slow τ_on=1.5 ms, slow τ_off=3.2 ms (Table S1)",
+      "sourceFigure": "Table S1"
     }
   ],
   "dynamicRangeData": [
@@ -128,14 +129,16 @@
       "deltaF": 30.5,
       "sign": "positive",
       "source": "doi:10.1126/science.abm8797",
-      "note": "ΔF/F per 100 mV step in spiking HEK cells at 22°C (Table S1); main text reports 36.6 ± 0.7% ΔF/F per 120 mV step (n=11 cells)"
+      "note": "ΔF/F per 100 mV step in spiking HEK cells at 22°C (Table S1); main text reports 36.6 ± 0.7% ΔF/F per 120 mV step (n=11 cells)",
+      "sourceFigure": "Table S1"
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 10.7,
       "source": "doi:10.1126/science.abm8797",
-      "note": "ΔF/F per single action potential in PPL1-γ2α'1 dopaminergic neurons in Drosophila (n=87 spikes)"
+      "note": "ΔF/F per single action potential in PPL1-γ2α'1 dopaminergic neurons in Drosophila (n=87 spikes)",
+      "sourceFigure": "Fig. 1I"
     }
   ],
   "brightnessData": [
@@ -143,7 +146,8 @@
       "ratio": 0.7,
       "reference": "ace2n-mneon",
       "source": "doi:10.1126/science.abm8797",
-      "note": "Resting fluorescence normalized to Ace-mNeon in HEK cells (Fig. S11A)"
+      "note": "Resting fluorescence normalized to Ace-mNeon in HEK cells (Fig. S11A)",
+      "sourceFigure": "Fig. S11A"
     }
   ],
   "photostabilityData": [
@@ -152,7 +156,8 @@
       "illumination": "25 mW/mm²",
       "duration": "10 min",
       "source": "doi:10.1126/science.abm8797",
-      "note": "From photobleaching curve in HEK cells under continuous illumination (Fig. S11B); pAce supported extended 30-min continuous imaging at ~5 mW/mm² with stable d' (Fig. S14)"
+      "note": "From photobleaching curve in HEK cells under continuous illumination (Fig. S11B); pAce supported extended 30-min continuous imaging at ~5 mW/mm² with stable d' (Fig. S14)",
+      "sourceFigure": "Fig. S11B"
     }
   ],
   "addgene": {

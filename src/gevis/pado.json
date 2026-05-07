@@ -462,14 +462,16 @@
       "on": 30,
       "off": 10,
       "temperature": "35°C",
-      "source": "doi:10.1038/srep23865"
+      "source": "doi:10.1038/srep23865",
+      "sourceFigure": "Fig. 5b"
     }
   ],
   "dynamicRangeData": [
     {
       "deltaF": -5,
       "sign": "negative",
-      "source": "doi:10.1038/srep23865"
+      "source": "doi:10.1038/srep23865",
+      "sourceFigure": "Fig. 2a"
     }
   ],
   "researchPapers": [

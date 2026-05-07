@@ -638,21 +638,24 @@
     {
       "on": 2.74,
       "off": 1.88,
-      "temperature": "room temperature",
-      "source": "doi:10.1016/j.neuron.2025.12.014"
+      "temperature": "25°C",
+      "source": "doi:10.1016/j.neuron.2025.12.014",
+      "sourceFigure": "Fig. 1D"
     }
   ],
   "dynamicRangeData": [
     {
       "deltaF": 29,
       "sign": "positive",
-      "source": "doi:10.1016/j.neuron.2025.12.014"
+      "source": "doi:10.1016/j.neuron.2025.12.014",
+      "sourceFigure": "Fig. 1E"
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 25,
-      "source": "doi:10.1016/j.neuron.2025.12.014"
+      "source": "doi:10.1016/j.neuron.2025.12.014",
+      "sourceFigure": "Fig. 1G(ii)"
     }
   ],
   "brightnessData": [
@@ -660,7 +663,8 @@
       "ratio": 0.42,
       "reference": "pace",
       "note": "Derived from 1P SNR and ΔF/F₀ in ND7/23 cells (Fig. 1C: Jarvis SNR 265±132, ΔF/F₀ 0.29; pAce SNR 575±193, ΔF/F₀ 0.41), using F₀ ∝ (SNR / (ΔF/F₀))². Under 2P illumination (Fig. 3C(i)), Jarvis and pAce show comparable F₀.",
-      "source": "doi:10.1016/j.neuron.2025.12.014"
+      "source": "doi:10.1016/j.neuron.2025.12.014",
+      "sourceFigure": "Fig. 1C"
     }
   ],
   "photostabilityData": [
@@ -668,7 +672,8 @@
       "brightnessRemaining": 99,
       "illumination": "10 mW/mm\u00b2",
       "duration": "1 min",
-      "source": "doi:10.1016/j.neuron.2025.12.014"
+      "source": "doi:10.1016/j.neuron.2025.12.014",
+      "sourceFigure": "Fig. 1F"
     }
   ],
   "twoPhoton": [

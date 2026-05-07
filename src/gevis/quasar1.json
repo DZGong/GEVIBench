@@ -425,6 +425,7 @@
       "off": 0.07,
       "temperature": "23°C",
       "source": "doi:10.1038/nmeth.3000",
+      "sourceFigure": "Table S2",
       "note": "Bi-exponential fast components (94% on, 88% off); slow τ_on=3.2 ms, slow τ_off=1.9 ms. n=6 cells"
     }
   ],
@@ -432,13 +433,15 @@
     {
       "deltaF": 32,
       "sign": "positive",
-      "source": "doi:10.1038/nmeth.3000"
+      "source": "doi:10.1038/nmeth.3000",
+      "sourceFigure": "Fig. 1c"
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 21,
-      "source": "doi:10.1038/nmeth.3000"
+      "source": "doi:10.1038/nmeth.3000",
+      "sourceFigure": "Fig. 1e"
     }
   ],
   "brightnessData": [
@@ -446,12 +449,14 @@
       "ratio": 15.2,
       "reference": "arch",
       "source": "doi:10.1038/nmeth.3000",
+      "sourceFigure": "Table S2",
       "note": "At 0.7 W/cm² (500 mW/cm²); 10.3× at high intensity (800 W/cm²)"
     },
     {
       "ratio": 20,
       "reference": "arch",
-      "source": "doi:10.1021/acschemneuro.0c00046"
+      "source": "doi:10.1021/acschemneuro.0c00046",
+      "sourceFigure": "Table 1"
     }
   ],
   "photostabilityData": [
@@ -459,7 +464,8 @@
       "brightnessRemaining": 87,
       "illumination": "3000 mW/mm²",
       "duration": "1 min",
-      "source": "doi:10.1038/nmeth.3000"
+      "source": "doi:10.1038/nmeth.3000",
+      "sourceFigure": "Main text"
     }
   ],
   "addgene": {

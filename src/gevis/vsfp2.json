@@ -524,14 +524,16 @@
       "on": 15,
       "off": 75,
       "temperature": "35°C",
-      "source": "doi:10.1371/journal.pone.0000440"
+      "source": "doi:10.1371/journal.pone.0000440",
+      "sourceFigure": "Table 1"
     }
   ],
   "dynamicRangeData": [
     {
       "deltaF": 8.6,
       "sign": "positive",
-      "source": "doi:10.1371/journal.pone.0000440"
+      "source": "doi:10.1371/journal.pone.0000440",
+      "sourceFigure": "Table 1"
     }
   ],
   "researchPapers": [

@@ -24,61 +24,72 @@
       "on": 2.1,
       "off": 2,
       "temperature": "22°C",
-      "source": "doi:10.1038/nn.3709"
+      "source": "doi:10.1038/nn.3709",
+      "sourceFigure": "Fig. 1e"
     },
     {
       "on": 2.9,
       "off": 2.4,
       "temperature": "22°C",
-      "source": "doi:10.7554/eLife.25690"
+      "source": "doi:10.7554/eLife.25690",
+      "sourceFigure": "Table 1"
     }
   ],
   "dynamicRangeData": [
     {
       "deltaF": -17.5,
       "sign": "negative",
-      "source": "doi:10.1038/nn.3709"
+      "source": "doi:10.1038/nn.3709",
+      "sourceFigure": "Fig. 1d"
     },
     {
       "deltaF": -23.3,
       "sign": "negative",
-      "source": "doi:10.7554/eLife.25690"
+      "source": "doi:10.7554/eLife.25690",
+      "sourceFigure": "Fig. 1C"
     },
     {
       "deltaF": -25.7,
       "sign": "negative",
-      "source": "doi:10.1523/ENEURO.0060-20.2020"
+      "source": "doi:10.1523/ENEURO.0060-20.2020",
+      "sourceFigure": "Fig. 2D"
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 6.3,
-      "source": "doi:10.1038/nn.3709"
+      "source": "doi:10.1038/nn.3709",
+      "sourceFigure": "Fig. 4a"
     },
     {
       "deltaF": 8.6,
-      "source": "doi:10.7554/eLife.25690"
+      "source": "doi:10.7554/eLife.25690",
+      "sourceFigure": "Fig. 2I"
     },
     {
       "deltaF": 2.8,
-      "source": "doi:10.1038/s41598-017-08731-2"
+      "source": "doi:10.1038/s41598-017-08731-2",
+      "sourceFigure": "Table 3"
     }
   ],
   "brightnessData": [
     {
       "ratio": 1,
       "reference": "asap2s",
-      "source": "doi:10.7554/eLife.25690"
+      "source": "doi:10.7554/eLife.25690",
+      "sourceFigure": "Fig. S2"
     },
     {
       "ratio": 0.61,
       "reference": "arclight",
-      "source": "doi:10.1523/ENEURO.0060-20.2020"
+      "source": "doi:10.1523/ENEURO.0060-20.2020",
+      "sourceFigure": "Fig. 2F"
     },
     {
       "ratio": 0.94,
       "reference": "asap3",
-      "source": "doi:10.1021/acschemneuro.5c00670"
+      "source": "doi:10.1021/acschemneuro.5c00670",
+      "sourceFigure": "Fig. 2C"
     }
   ],
   "photostabilityData": [
@@ -86,25 +97,29 @@
       "brightnessRemaining": 74,
       "illumination": "0.12 mW/mm²",
       "duration": "15 min",
-      "source": "doi:10.1038/nn.3709"
+      "source": "doi:10.1038/nn.3709",
+      "sourceFigure": "Fig. S9"
     },
     {
       "brightnessRemaining": 91,
       "illumination": "15 mW/mm²",
       "duration": "0.5 min",
-      "source": "doi:10.1126/science.aab0810"
+      "source": "doi:10.1126/science.aab0810",
+      "sourceFigure": "Table S2"
     },
     {
       "brightnessRemaining": 28,
       "illumination": "100 mW/mm²",
       "duration": "1 min",
-      "source": "doi:10.1523/JNEUROSCI.3484-15.2016"
+      "source": "doi:10.1523/JNEUROSCI.3484-15.2016",
+      "sourceFigure": "Fig. 3I"
     },
     {
       "brightnessRemaining": 72,
       "illumination": "11 mW/mm²",
       "duration": "1 min",
-      "source": "doi:10.7554/eLife.25690"
+      "source": "doi:10.7554/eLife.25690",
+      "sourceFigure": "Fig. S3"
     }
   ],
   "twoPhoton": [

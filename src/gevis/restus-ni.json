@@ -480,19 +480,22 @@
     {
       "deltaF": -70,
       "sign": "negative",
-      "source": "doi:10.1021/acschemneuro.5c00670"
+      "source": "doi:10.1021/acschemneuro.5c00670",
+      "sourceFigure": "Fig. 1F"
     }
   ],
   "brightnessData": [
     {
       "ratio": 1.045,
       "reference": "restus",
-      "source": "doi:10.1021/acschemneuro.5c00670"
+      "source": "doi:10.1021/acschemneuro.5c00670",
+      "sourceFigure": "Fig. 2C"
     },
     {
       "ratio": 1.788,
       "reference": "asap3",
-      "source": "doi:10.1021/acschemneuro.5c00670"
+      "source": "doi:10.1021/acschemneuro.5c00670",
+      "sourceFigure": "Fig. 2C"
     }
   ],
   "photostabilityData": [
@@ -501,6 +504,7 @@
       "illumination": "20 uW at 480 nm",
       "duration": "2.2 min",
       "source": "doi:10.1021/acschemneuro.5c00670",
+      "sourceFigure": "Fig. 2D",
       "note": "Confocal FLIM, 5.5% loss over 132 s at -60 mV; power in focal plane, not mW/mm²"
     }
   ],

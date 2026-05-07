@@ -44,7 +44,8 @@
       "off": 1.1,
       "temperature": "25°C",
       "source": "doi:10.1038/s41589-021-00775-w",
-      "note": "Fast component of double-exponential fit (96% fast activation, 50% fast deactivation); slow τ_on=5.2 ms, slow τ_off=3.7 ms. Measured at 1 kHz during whole-cell voltage clamp from -70 to +30 mV in rat hippocampal neurons at room temperature (Supplementary Table 6)."
+      "note": "Fast component of double-exponential fit (96% fast activation, 50% fast deactivation); slow τ_on=5.2 ms, slow τ_off=3.7 ms. Measured at 1 kHz during whole-cell voltage clamp from -70 to +30 mV in rat hippocampal neurons at room temperature (Supplementary Table 6).",
+      "sourceFigure": "Table S6"
     }
   ],
   "dynamicRangeData": [
@@ -52,7 +53,8 @@
       "deltaF": 9.3,
       "sign": "positive",
       "source": "doi:10.1038/s41589-021-00775-w",
-      "note": "ΔF/F for -70 mV to +30 mV (100 mV) step in rat hippocampal neurons labeled with JF635-HaloTag ligand"
+      "note": "ΔF/F for -70 mV to +30 mV (100 mV) step in rat hippocampal neurons labeled with JF635-HaloTag ligand",
+      "sourceFigure": "Fig. 4e"
     }
   ],
   "brightnessData": [
@@ -60,7 +62,8 @@
       "ratio": 3.03,
       "reference": "EGFP",
       "source": "doi:10.1038/s41589-021-00775-w",
-      "note": "Estimated from JF635-HaloTag conjugate EC=81000 M^-1cm^-1 and QY=0.75 (Supplementary Table 4), giving EC*QY=60750; vs EGFP EC*QY=20040. Assumes full protein binding."
+      "note": "Estimated from JF635-HaloTag conjugate EC=81000 M^-1cm^-1 and QY=0.75 (Supplementary Table 4), giving EC*QY=60750; vs EGFP EC*QY=20040. Assumes full protein binding.",
+      "sourceFigure": "Table S4"
     }
   ],
   "addgene": {

@@ -155,7 +155,7 @@ export function getAllGEVIs(): GEVI[] {
   // Augment brightnessData with reverse comparisons from other GEVIs.
   // If GEVI B has { ratio, reference: A }, then A should also show { ratio: 1/ratio, reference: B }.
   // This ensures both sides of a comparison are visible on each GEVI's detail page.
-  const reverseEntries = new Map<string, { ratio: number; reference: string; source: string }[]>();
+  const reverseEntries = new Map<string, { ratio: number; reference: string; source: string; sourceFigure?: string }[]>();
   for (const gevi of rawGevis) {
     if (!gevi.brightnessData) continue;
     for (const entry of gevi.brightnessData) {
@@ -165,6 +165,7 @@ export function getAllGEVIs(): GEVI[] {
         ratio: 1 / entry.ratio,
         reference: gevi.id,
         source: entry.source,
+        ...(entry.sourceFigure && { sourceFigure: entry.sourceFigure }),
       });
     }
   }
@@ -294,12 +295,17 @@ export function getAxisDistributions(): AxisDistribution[] {
   return axisDistributionCache;
 }
 
+// Manual citations for reference papers (fluorophores, tools) not in any GEVI's researchPapers
+const MANUAL_CITATIONS: Record<string, string> = {
+  '10.1038/nmeth.2413': 'Shaner 2013',
+};
+
 // Build DOI -> "LastName Year" citation map from all researchPapers
 let citationCache: Record<string, string> | null = null;
 export function getDoiCitationMap(): Record<string, string> {
   if (citationCache) return citationCache;
   const gevis = getAllGEVIs();
-  const map: Record<string, string> = {};
+  const map: Record<string, string> = { ...MANUAL_CITATIONS };
   for (const gevi of gevis) {
     for (const rp of gevi.researchPapers ?? []) {
       if (!rp.url) continue;

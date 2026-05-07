@@ -557,7 +557,8 @@
       "off": 0.81,
       "source": "doi:10.1126/science.abm8797",
       "note": "Bi-exponential fast components at 22°C in spiking HEK cells (67% on, 65% off); slow τ_on=3.1 ms, slow τ_off=2.8 ms",
-      "temperature": "22°C"
+      "temperature": "22°C",
+      "sourceFigure": "Table S1"
     }
   ],
   "dynamicRangeData": [
@@ -565,20 +566,23 @@
       "deltaF": -26.1,
       "sign": "negative",
       "source": "doi:10.1126/science.abm8797",
-      "note": "ΔF/F per 100 mV step in spiking HEK cells at 22°C"
+      "note": "ΔF/F per 100 mV step in spiking HEK cells at 22°C",
+      "sourceFigure": "Table S1"
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 16.5,
-      "source": "doi:10.1126/science.abm8797"
+      "source": "doi:10.1126/science.abm8797",
+      "sourceFigure": "Fig. 1I"
     }
   ],
   "brightnessData": [
     {
       "ratio": 1.1,
       "reference": "ace2n-mneon",
-      "source": "doi:10.1126/science.abm8797"
+      "source": "doi:10.1126/science.abm8797",
+      "sourceFigure": "Fig. S11A"
     }
   ],
   "photostabilityData": [
@@ -586,7 +590,8 @@
       "brightnessRemaining": 30,
       "illumination": "25 mW/mm²",
       "duration": "10 min",
-      "source": "doi:10.1126/science.abm8797"
+      "source": "doi:10.1126/science.abm8797",
+      "sourceFigure": "Fig. S11B"
     }
   ],
   "addgene": {
