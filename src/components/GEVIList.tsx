@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { ExternalLink, ChevronLeft, ChevronRight } from 'lucide-react';
-import { getGEVIColor } from '../utils';
+import { getGEVIColor, wavelengthToColor } from '../utils';
 import type { SortConfig, SortField } from '../types';
 
 interface GEVIListProps {
@@ -105,6 +105,31 @@ function extractYear(paper: string): string {
   return match ? match[0] : '';
 }
 
+// Cell content for the λ ex/em column. Chemogenetic GEVIs depend on a dye/HaloTag
+// partner whose spectrum doesn't characterize the sensor itself, so they show
+// "Chemogenetic" instead of the raw peaks (the detail-page spectrum panel still
+// renders the underlying FP/opsin peaks).
+function WavelengthCellContent({ gevi }: { gevi: any }) {
+  if (gevi.voltage?.type === 'chemi') {
+    return <span className="text-ink/60 italic whitespace-nowrap">Chemogenetic</span>;
+  }
+  const peakEx = gevi.spectrum?.peakEx;
+  const peakEm = gevi.spectrum?.peakEm;
+  if (peakEx == null || peakEm == null) return <>—</>;
+  return (
+    <span className="inline-flex items-center justify-center gap-1 whitespace-nowrap">
+      <span className="inline-block w-2 h-2 rounded-full" style={{ backgroundColor: wavelengthToColor(peakEx) }} aria-hidden="true" />
+      {peakEx}/{peakEm}
+      <span className="inline-block w-2 h-2 rounded-full" style={{ backgroundColor: wavelengthToColor(peakEm) }} aria-hidden="true" />
+    </span>
+  );
+}
+
+function hasWavelengthValue(gevi: any): boolean {
+  if (gevi.voltage?.type === 'chemi') return true; // shown as "Chemogenetic"
+  return gevi.spectrum?.peakEx != null && gevi.spectrum?.peakEm != null;
+}
+
 function SortHeader({ symbol, desc, field, sortConfig, onSort, className = '' }: {
   symbol: React.ReactNode;
   desc: string;
@@ -148,9 +173,10 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
   const isNarrow = useIsNarrow();
   const [narrowIdx, setNarrowIdx] = useState(0);
   const NARROW_OPTIONS = useMemo(() => {
-    const metricOptions = METRICS.map(m => ({ key: m.key, sortField: m.sortField, shortLabel: m.shortLabel }));
-    const first = { key: 'year' as const, sortField: 'year' as SortField, shortLabel: 'Year' };
-    return [first, ...metricOptions];
+    const metricOptions = METRICS.map(m => ({ key: m.key as string, sortField: m.sortField, shortLabel: m.shortLabel }));
+    const yearOpt = { key: 'year', sortField: 'year' as SortField, shortLabel: 'Year' };
+    const wavelengthOpt = { key: 'wavelength', sortField: 'peakEx' as SortField, shortLabel: 'λ ex/em' };
+    return [yearOpt, wavelengthOpt, ...metricOptions];
   }, []);
   const currentNarrow = NARROW_OPTIONS[narrowIdx];
 
@@ -212,7 +238,13 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
                         sortConfig.field === currentNarrow.sortField ? 'text-klein font-medium' : 'text-ink font-medium'
                       }`}
                     >
-                      <span style={{ fontSize: '14px' }}>{currentNarrow.key === 'year' ? 'Year' : METRICS.find(m => m.key === currentNarrow.key)?.symbol ?? currentNarrow.shortLabel}</span>
+                      <span style={{ fontSize: '14px' }}>
+                        {currentNarrow.key === 'year'
+                          ? 'Year'
+                          : currentNarrow.key === 'wavelength'
+                          ? <>λ<sub>ex</sub>/λ<sub>em</sub> (nm)</>
+                          : METRICS.find(m => m.key === currentNarrow.key)?.symbol ?? currentNarrow.shortLabel}
+                      </span>
                       {sortConfig.field === currentNarrow.sortField && (
                         <span style={{ fontSize: '12px' }} className="ml-0.5">
                           {sortConfig.order === 'desc' ? '▼' : '▲'}
@@ -240,7 +272,8 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
             {gevis.map((gevi: any, idx: number) => {
               const geviColor = getGEVIColor(gevi);
               const isYear = currentNarrow.key === 'year';
-              const hasVal = isYear || hasMetricValue(gevi, currentNarrow.key as MetricKey);
+              const isWavelength = currentNarrow.key === 'wavelength';
+              const hasVal = isYear || (isWavelength ? hasWavelengthValue(gevi) : hasMetricValue(gevi, currentNarrow.key as MetricKey));
               return (
                 <tbody key={gevi.id} data-gevi-id={gevi.id} onClick={() => onSelect(gevi)} className={groupCls(gevi)}>
                   <tr>
@@ -263,6 +296,10 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
                     {isYear ? (
                       <td className={`px-1 pt-3 pb-0 text-center tabular-nums ${dimBase}`} style={{ fontSize: '16px' }}>
                         {gevi.year}
+                      </td>
+                    ) : isWavelength ? (
+                      <td className={`px-1 pt-3 pb-0 text-center tabular-nums ${hasVal ? cellBase : dimBase}`} style={{ fontSize: '14px' }}>
+                        <WavelengthCellContent gevi={gevi} />
                       </td>
                     ) : (() => {
                       const isTop3 = top3PerMetric[currentNarrow.key]?.has(gevi.id);
@@ -293,6 +330,8 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
               <tr className="border-b border-surface">
                 <th className={`pl-2 pr-4 py-2 text-center ${thBase} w-16`} style={{ fontSize: '14px' }}>#</th>
                 <th className={`px-1 py-2 text-left ${thBase}`} style={{ fontSize: '14px' }}>Sensor ({gevis.length})</th>
+                <SortHeader symbol={<>λ<sub>ex</sub>/λ<sub>em</sub> (nm)</>} desc="peak excitation / emission wavelengths" field="peakEx" sortConfig={sortConfig} onSort={onSortChange} />
+                <th className="w-6"></th>
                 {METRICS.map(m => (
                   <SortHeader key={m.key} symbol={m.symbol} desc={m.desc} field={m.sortField} sortConfig={sortConfig} onSort={onSortChange} />
                 ))}
@@ -322,6 +361,10 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
                         <span><span className="italic">{abbreviatePaper(gevi.paper).replace(/\s*\d{4}$/, '')}</span> {extractYear(gevi.paper)}</span>
                       </a>
                     </td>
+                    <td className={`px-1 pt-3 pb-0 text-center tabular-nums ${hasWavelengthValue(gevi) ? cellBase : dimBase}`} style={{ fontSize: '14px' }}>
+                      <WavelengthCellContent gevi={gevi} />
+                    </td>
+                    <td className="w-6"></td>
                     {METRICS.map(m => {
                       const isTop3 = top3PerMetric[m.key]?.has(gevi.id);
                       return (
@@ -357,7 +400,7 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
                     </td>
                   </tr>
                   <tr>
-                    <td colSpan={7} className="px-1 pt-0.5 pb-3 text-ink font-sans" style={{ fontSize: '12px', lineHeight: '1.3' }}>
+                    <td colSpan={9} className="px-1 pt-0.5 pb-3 text-ink font-sans" style={{ fontSize: '12px', lineHeight: '1.3' }}>
                       {gevi.description}
                     </td>
                     <td className="w-4"></td>

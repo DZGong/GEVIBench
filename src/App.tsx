@@ -154,6 +154,24 @@ function GEVIBenchApp() {
         return (a.year - b.year) * multiplier;
       }
 
+      // peakEx (λ ex/em) sort: chemogenetic GEVIs are clustered together at one
+      // end of the list (bottom for ascending, top for descending) because their
+      // spectrum reflects the dye partner, not the sensor itself, so it isn't
+      // meaningful to interleave them with FP/opsin-based sensors.
+      if (field === 'peakEx') {
+        const aChemi = a.voltage?.type === 'chemi';
+        const bChemi = b.voltage?.type === 'chemi';
+        if (aChemi && bChemi) return b.year - a.year; // among chemi, fall back to year desc
+        if (aChemi) return multiplier;   // asc → push to bottom, desc → push to top
+        if (bChemi) return -multiplier;
+        const aPx = a.spectrum?.peakEx ?? null;
+        const bPx = b.spectrum?.peakEx ?? null;
+        if (aPx == null && bPx == null) return b.year - a.year;
+        if (aPx == null) return 1;
+        if (bPx == null) return -1;
+        return (aPx - bPx) * multiplier;
+      }
+
       const aVal = a[field] ?? null;
       const bVal = b[field] ?? null;
       const aNull = aVal === null || aVal === undefined;

@@ -118,6 +118,7 @@ export type SortField =
   | 'year'
   | 'paperCount'
   | 'bRel'
+  | 'peakEx'
   | 'displayTauOn'
   | 'displayTauOff'
   | 'displayTauSum'
