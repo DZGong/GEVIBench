@@ -388,14 +388,6 @@ function GEVIBenchApp() {
           setShowAPSimulator(false);
           window.history.pushState(null, '', '/scatter-plot');
         }}
-        onShowAPSimulator={() => {
-          setActiveTab('database');
-          setShowAPSimulator(true);
-          setShowFamilyTree(false);
-          setShowBrightnessNetwork(false);
-          setShowScatterPlot(false);
-          window.history.pushState(null, '', '/ap-simulator');
-        }}
         onShowCompare={() => {
           setActiveTab('database');
           setShowFamilyTree(false);

@@ -1,4 +1,4 @@
-import { Menu, X, ChevronDown, TreeDeciduous, GitCompare, Github, Share2, ScatterChart, Activity } from 'lucide-react';
+import { Menu, X, ChevronDown, TreeDeciduous, GitCompare, Github, Share2, ScatterChart } from 'lucide-react';
 import { useState, useRef, useEffect } from 'react';
 import type { ViewTab } from '../types';
 
@@ -12,7 +12,11 @@ interface HeaderProps {
   onShowCompare: () => void;
   onShowBrightnessNetwork: () => void;
   onShowScatterPlot: () => void;
-  onShowAPSimulator: () => void;
+  // NOTE: The AP Simulator is intentionally not surfaced in the Tools menu —
+  // the panel still ships and the /ap-simulator route remains functional, so
+  // it can be reached by visiting that URL directly while the feature is in
+  // development. Restore the dropdown entry below (and the onShowAPSimulator
+  // prop / App.tsx handler) when the simulator is ready for public release.
 }
 
 // Logo from external SVG file
@@ -20,7 +24,7 @@ const Logo = () => (
   <img src="/imgs/logo.svg" alt="GEVIBench logo" style={{ height: '32.4px' }} className="w-auto flex-shrink-0" />
 );
 
-export function Header({ activeTab, setActiveTab, mobileMenuOpen, setMobileMenuOpen, onLogoClick, onShowFamilyTree, onShowCompare, onShowBrightnessNetwork, onShowScatterPlot, onShowAPSimulator }: HeaderProps) {
+export function Header({ activeTab, setActiveTab, mobileMenuOpen, setMobileMenuOpen, onLogoClick, onShowFamilyTree, onShowCompare, onShowBrightnessNetwork, onShowScatterPlot }: HeaderProps) {
   const [toolsMenuOpen, setToolsMenuOpen] = useState(false);
   const toolsMenuRef = useRef<HTMLDivElement>(null);
 
@@ -42,12 +46,11 @@ export function Header({ activeTab, setActiveTab, mobileMenuOpen, setMobileMenuO
     setToolsMenuOpen(!toolsMenuOpen);
   };
 
-  const handleToolSelect = (tool: 'family-tree' | 'compare' | 'brightness-network' | 'scatter-plot' | 'ap-simulator') => {
+  const handleToolSelect = (tool: 'family-tree' | 'compare' | 'brightness-network' | 'scatter-plot') => {
     if (tool === 'family-tree') onShowFamilyTree();
     else if (tool === 'compare') onShowCompare();
     else if (tool === 'brightness-network') onShowBrightnessNetwork();
     else if (tool === 'scatter-plot') onShowScatterPlot();
-    else if (tool === 'ap-simulator') onShowAPSimulator();
     setToolsMenuOpen(false);
     setMobileMenuOpen(false);
   };
@@ -123,13 +126,8 @@ export function Header({ activeTab, setActiveTab, mobileMenuOpen, setMobileMenuO
                       <ScatterChart className="w-4 h-4" />
                       Performance Scatter
                     </button>
-                    <button
-                      onClick={() => handleToolSelect('ap-simulator')}
-                      className="w-full text-left px-4 py-2 text-sm flex items-center gap-2 text-ink/70 hover:bg-surface-low"
-                    >
-                      <Activity className="w-4 h-4" />
-                      AP Simulator
-                    </button>
+                    {/* AP Simulator menu entry hidden while the feature is in development.
+                        It is still reachable by visiting /ap-simulator directly. */}
                   </div>
                 )}
               </div>
@@ -189,13 +187,8 @@ export function Header({ activeTab, setActiveTab, mobileMenuOpen, setMobileMenuO
                 <ScatterChart className="w-4 h-4" />
                 Performance Scatter
               </button>
-              <button
-                onClick={() => { onShowAPSimulator(); setMobileMenuOpen(false); }}
-                className={`label px-3 py-2 text-left flex items-center gap-2 border-b-2 ${activeTab === 'tools' ? 'text-klein border-gold' : 'text-ink border-transparent'}`}
-              >
-                <Activity className="w-4 h-4" />
-                AP Simulator
-              </button>
+              {/* AP Simulator mobile entry hidden while the feature is in development.
+                  It is still reachable by visiting /ap-simulator directly. */}
               <button
                 onClick={() => { setActiveTab('contact'); setMobileMenuOpen(false); }}
                 className={`label px-3 py-2 text-left border-b-2 ${activeTab === 'contact' ? 'text-klein border-gold' : 'text-ink border-transparent'}`}
