@@ -360,11 +360,20 @@ function GEVIBenchApp() {
     </main>
   );
 
+  // Tool panels (Family Tree, Brightness Network, Performance Scatter, AP Simulator)
+  // render *inside* the Database tab, so the underlying `activeTab` stays 'database'
+  // when any tool is open. For the header's highlight, surface 'tools' instead so the
+  // Tools menu shows as active while a tool panel is visible.
+  const headerActiveTab: ViewTab =
+    showFamilyTree || showBrightnessNetwork || showScatterPlot || showAPSimulator
+      ? 'tools'
+      : activeTab;
+
   return (
     <div className="min-h-screen flex flex-col">
       <div className="spike-trace-layer" style={{ backgroundImage: getSpikeTextureDataURI() }} aria-hidden="true" />
       <Header
-        activeTab={activeTab}
+        activeTab={headerActiveTab}
         setActiveTab={(tab) => {
           setActiveTab(tab);
           if (tab === 'database') {
