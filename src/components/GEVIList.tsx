@@ -105,13 +105,13 @@ function extractYear(paper: string): string {
   return match ? match[0] : '';
 }
 
-// Cell content for the λ ex/em column. Chemogenetic GEVIs depend on a dye/HaloTag
+// Cell content for the λ ex/em column. Chemigenetic GEVIs depend on a dye/HaloTag
 // partner whose spectrum doesn't characterize the sensor itself, so they show
-// "Chemogenetic" instead of the raw peaks (the detail-page spectrum panel still
+// "Chemigenetic" instead of the raw peaks (the detail-page spectrum panel still
 // renders the underlying FP/opsin peaks).
 function WavelengthCellContent({ gevi }: { gevi: any }) {
   if (gevi.voltage?.type === 'chemi') {
-    return <span className="text-ink/60 italic whitespace-nowrap">Chemogenetic</span>;
+    return <span className="text-ink/60 italic whitespace-nowrap">Chemigenetic</span>;
   }
   const peakEx = gevi.spectrum?.peakEx;
   const peakEm = gevi.spectrum?.peakEm;
@@ -126,7 +126,7 @@ function WavelengthCellContent({ gevi }: { gevi: any }) {
 }
 
 function hasWavelengthValue(gevi: any): boolean {
-  if (gevi.voltage?.type === 'chemi') return true; // shown as "Chemogenetic"
+  if (gevi.voltage?.type === 'chemi') return true; // shown as "Chemigenetic"
   return gevi.spectrum?.peakEx != null && gevi.spectrum?.peakEm != null;
 }
 

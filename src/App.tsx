@@ -154,7 +154,7 @@ function GEVIBenchApp() {
         return (a.year - b.year) * multiplier;
       }
 
-      // peakEx (λ ex/em) sort: chemogenetic GEVIs are clustered together at one
+      // peakEx (λ ex/em) sort: chemigenetic GEVIs are clustered together at one
       // end of the list (bottom for ascending, top for descending) because their
       // spectrum reflects the dye partner, not the sensor itself, so it isn't
       // meaningful to interleave them with FP/opsin-based sensors.
