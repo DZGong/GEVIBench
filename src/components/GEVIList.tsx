@@ -209,14 +209,16 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
     }`;
 
   return (
-    <div className="rounded-lg overflow-hidden bg-surface-lowest shadow-ambient">
-      <div className="overflow-x-auto">
-        {gevis.length === 0 ? (
-          <div className="p-8 text-center text-ink/40">
-            <div className="text-2xl mb-2">🔍</div>
-            <div className="text-sm font-medium">No sensors match</div>
-          </div>
-        ) : (compact || isNarrow) ? (
+    // overflow-clip (vs overflow-hidden) clips for rounded corners but does NOT
+    // establish a scroll container — letting the sticky <thead> below find the
+    // real scrolling ancestor (the parent panel with overflow-y-auto).
+    <div className="rounded-lg overflow-clip bg-surface-lowest shadow-ambient">
+      {gevis.length === 0 ? (
+        <div className="p-8 text-center text-ink/40">
+          <div className="text-2xl mb-2">🔍</div>
+          <div className="text-sm font-medium">No sensors match</div>
+        </div>
+      ) : (compact || isNarrow) ? (
           /* Narrow / mobile view — single swipeable metric column */
           <table className="w-full border-collapse" style={{ fontSize: '14px' }}>
             <thead className="sticky top-0 z-10 bg-surface">
@@ -410,7 +412,6 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
             })}
           </table>
         )}
-      </div>
     </div>
   );
 }
