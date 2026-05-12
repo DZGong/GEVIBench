@@ -504,7 +504,8 @@ export function BrightnessNetworkPanel({ onSelectGEVI }: Props) {
               </marker>
             </defs>
 
-            {/* Edges — directed: a measured itself as ratio× of b, arrow points a→b */}
+            {/* Edges — directed: a measured itself as ratio× of b; arrow points b→a
+                (from the reference toward the GEVI being characterized). */}
             {edges.map((edge, i) => {
               const a = nodeById.get(edge.a), b = nodeById.get(edge.b);
               if (!a || !b) return null;
@@ -512,8 +513,10 @@ export function BrightnessNetworkPanel({ onSelectGEVI }: Props) {
               const d = Math.max(1, Math.sqrt(dx * dx + dy * dy));
               const nx = dx / d, ny = dy / d;
               const pad = 16;
-              const x1 = a.x + nx * pad, y1 = a.y + ny * pad;
-              const x2 = b.x - nx * pad, y2 = b.y - ny * pad;
+              // Line goes from b's edge (facing a) to a's edge (facing b); markerEnd
+              // puts the arrowhead at the a side.
+              const x1 = b.x - nx * pad, y1 = b.y - ny * pad;
+              const x2 = a.x + nx * pad, y2 = a.y + ny * pad;
               const mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
               const isRel = hoveredId === edge.a || hoveredId === edge.b;
               const fade = hoveredId && !isRel;
