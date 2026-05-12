@@ -12,9 +12,12 @@
 
   "spectrum": {
     "type": "fp",
-    "peakEx": 490,
-    "peakEm": 516,
+    "peakEx": 489,
+    "peakEm": 511,
     "name": "FORCE1s",
+    "source": "FPbase: JEDI-2P (parent)",
+    "sourceFigure": "Fig. S1.2A",
+    "note": "Spectrum lineshape is inherited from the parent JEDI-2P (FPbase, 1 nm-resolution arrays). The FORCE1s preprint shows the 1P excitation/emission spectrum of FORCE1s in Fig. S1.2A and states it is 'qualitatively similar' to JEDI-2P and ASAP4e, but does not numerically declare 1P peak wavelengths for FORCE1s. Peaks (489 nm ex / 511 nm em) are therefore taken from the parent JEDI-2P. FORCE1s does not yet have a dedicated FPbase entry.",
     "custom": {
       "minEx": 300,
       "excitation": [
@@ -151,10 +154,11 @@
   "photostabilityData": [
     {
       "brightnessRemaining": 87,
-      "illumination": "100 mW (2P, 940 nm, at sample plane)",
+      "illumination": "100 mW/mm²",
       "duration": "6 min",
       "source": "doi:10.64898/2026.04.07.717088",
-      "sourceFigure": "Fig. S1.2B"
+      "sourceFigure": "Fig. S1.2B",
+      "note": "100 mW at sample plane under 2P resonant scanning (940 nm) — recorded as mW/mm² for parser compatibility, matching the convention used for other 2P GEVIs in this database."
     }
   ],
 

@@ -4,6 +4,7 @@
 
 import { useMemo } from 'react';
 import { wavelengthToColor } from './utils';
+import { NoteTip, SourceLink } from './components/SourceCitation';
 
 interface SpectrumPoint {
   wavelength: number;
@@ -28,6 +29,10 @@ interface CustomSpectrum {
 export interface SpectrumData {
   config?: SpectrumConfig;
   custom?: CustomSpectrum;
+  // Optional provenance — rendered as a small caption + note tooltip beneath the panel
+  source?: string;
+  sourceFigure?: string;
+  note?: string;
 }
 
 interface SpectrumViewerProps {
@@ -249,9 +254,17 @@ export function SpectrumViewer({ spectrumData, geviName }: SpectrumViewerProps) 
         </div>
       </div>
 
-      {/* Peak wavelengths */}
-      <div className="mt-2 text-xs text-ink">
-        Peak Excitation: {config.peakEx}nm | Peak Emission: {config.peakEm}nm
+      {/* Peak wavelengths + optional source/note */}
+      <div className="mt-2 flex flex-wrap items-center justify-between gap-x-3 gap-y-1 text-xs text-ink">
+        <span>
+          Peak Excitation: {config.peakEx}nm | Peak Emission: {config.peakEm}nm
+        </span>
+        {(spectrumData?.source || spectrumData?.note) && (
+          <span className="inline-flex items-center gap-1.5">
+            <NoteTip note={spectrumData?.note} />
+            <SourceLink source={spectrumData?.source} sourceFigure={spectrumData?.sourceFigure} />
+          </span>
+        )}
       </div>
     </div>
   );
