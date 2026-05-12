@@ -209,10 +209,12 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
     }`;
 
   return (
-    // overflow-clip (vs overflow-hidden) clips for rounded corners but does NOT
-    // establish a scroll container — letting the sticky <thead> below find the
-    // real scrolling ancestor (the parent panel with overflow-y-auto).
-    <div className="rounded-lg overflow-clip bg-surface-lowest shadow-ambient">
+    // The visual treatment (rounded corners, background, shadow) and scroll
+    // container live on the *parent* panel in App.tsx — both so the sticky
+    // <thead> can find a real scroll ancestor without an intermediate scroll
+    // context getting in the way, and so horizontal-overflow scroll bars
+    // attach to the panel (the scroll area), not to a clipping wrapper here.
+    <div>
       {gevis.length === 0 ? (
         <div className="p-8 text-center text-ink/40">
           <div className="text-2xl mb-2">🔍</div>

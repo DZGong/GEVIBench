@@ -308,11 +308,22 @@ function GEVIBenchApp() {
         <>
           {/* Main Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-            {/* GEVI List — scrolls internally so the title + search bar stay put.
-                · Compact (detail open): hidden on narrow screens; sticky inside the grid with its own y-scroll.
+            {/* GEVI List panel — also the scroll container for the table.
+                · Compact (detail open): hidden on narrow screens; sticky inside the grid with its own scroll.
                 · Otherwise: full width with capped height; the table scrolls inside while the rest of the page doesn't.
-                17rem accounts for header (~80px) + title (~98px) + search (~44px) + paddings ≈ 248px. */}
-            <div ref={sideListRef} className={`${selectedGEVI && filteredGEVIs.length > 0 ? 'hidden md:block col-span-1 sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto' : 'col-span-3 max-h-[calc(100vh-17rem)] overflow-y-auto'}`}>
+                  17rem accounts for header (~80px) + title (~98px) + search (~44px) + paddings ≈ 248px.
+                `overflow-auto` (both axes) lets the table scroll horizontally on viewports too narrow
+                to fit all columns, while the sticky <thead> still pins vertically.
+                The rounded/bg/shadow visual treatment lives here (not inside GEVIList) so it stays
+                aligned with the scroll area instead of clipping horizontal overflow. */}
+            <div
+              ref={sideListRef}
+              className={`rounded-lg bg-surface-lowest shadow-ambient ${
+                selectedGEVI && filteredGEVIs.length > 0
+                  ? 'hidden md:block col-span-1 sticky top-20 max-h-[calc(100vh-6rem)] overflow-auto'
+                  : 'col-span-3 max-h-[calc(100vh-17rem)] overflow-auto'
+              }`}
+            >
               <GEVIList
                 gevis={filteredGEVIs}
                 selectedGEVI={selectedGEVI}
