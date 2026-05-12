@@ -471,7 +471,7 @@ export function BrightnessNetworkPanel({ onSelectGEVI }: Props) {
         <div>
           <h3 className="text-lg font-bold text-klein">Brightness Network</h3>
           <p className="text-xs text-ink mt-0.5">
-            Graph of relative brightness measurements across GEVIs, anchored to EGFP via BFS traversal.
+            Graph of relative brightness measurements across GEVIs, anchored to EGFP.
           </p>
         </div>
         <div className="ml-auto text-xs text-ink/40">
