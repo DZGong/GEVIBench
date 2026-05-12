@@ -310,8 +310,10 @@ function GEVIBenchApp() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
             {/* GEVI List panel — also the scroll container for the table.
                 · Compact (detail open): hidden on narrow screens; sticky inside the grid with its own scroll.
-                · Otherwise: full width, capped at 730px so the panel typically extends past the
-                  viewport on smaller screens, giving the outer page some scroll room outside it.
+                · Otherwise: full width, capped at 1.2× the viewport-fit value (120vh - 20.4rem
+                  ≡ 1.2 × (100vh - 17rem)) so the panel scales with the window — fills the viewport
+                  on any height and extends past it by ~0.2× to give the outer page some scroll room.
+                  17rem ≈ header (~80px) + title (~98px) + search (~44px) + paddings ≈ 248px.
                 `overflow-auto` (both axes) lets the table scroll horizontally on viewports too narrow
                 to fit all columns, while the sticky <thead> still pins vertically.
                 The rounded/bg/shadow visual treatment lives here (not inside GEVIList) so it stays
@@ -321,7 +323,7 @@ function GEVIBenchApp() {
               className={`rounded-lg bg-surface-lowest shadow-ambient ${
                 selectedGEVI && filteredGEVIs.length > 0
                   ? 'hidden md:block col-span-1 sticky top-20 max-h-[calc(100vh-6rem)] overflow-auto'
-                  : 'col-span-3 max-h-[730px] overflow-auto'
+                  : 'col-span-3 max-h-[calc(120vh-20.4rem)] overflow-auto'
               }`}
             >
               <GEVIList
