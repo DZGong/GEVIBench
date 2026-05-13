@@ -26,3 +26,9 @@ dist-ssr
 # Tool directories
 .playwright-cli/
 .superpowers/
+
+# Local-only working files (kept on disk, not pushed)
+local/
+docs/superpowers/
+fv-curve-issues.md
+.claude/agent-memory/
