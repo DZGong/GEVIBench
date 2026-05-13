@@ -1,29 +1,62 @@
 {
-  "id": "macq",
-  "name": "MacQ",
+  "id": "caesr",
+  "name": "CAESR",
   "year": 2014,
   "category": "eFRET GEVI",
   "tags": [
-    "Opsin",
-    "FRET"
+    "Yellow",
+    "Citrine",
+    "Archaerhodopsin",
+    "QuasAr2"
   ],
   "paper": "Nature Communications 2014",
-  "paperUrl": "https://doi.org/10.1038/ncomms4674",
-  "description": "Early opsin-fluorescent protein FRET voltage indicator, fusing the Mac rhodopsin to mCitrine.",
+  "paperUrl": "https://doi.org/10.1038/ncomms5625",
+  "description": "Pioneering opsin-FRET voltage indicator fusing Citrine to the QuasAr2 archaerhodopsin quencher; the prototype of the QuasAr-based eFRET sensor lineage.",
   "familyTreePath": [
     "GEVI",
     "Opsin",
     "Opsin-FRET",
-    "macq"
+    "caesr"
   ],
+  "crossBranchParentId": "arch",
   "spectrum": {
     "type": "rhodopsin",
-    "peakEx": 515,
+    "peakEx": 516,
     "peakEm": 529,
-    "name": "MacQ",
+    "name": "CAESR",
     "custom": {
-      "minEx": 380,
+      "minEx": 350,
       "excitation": [
+        0.022,
+        0.0189,
+        0.0218,
+        0.0234,
+        0.0235,
+        0.0202,
+        0.0188,
+        0.0206,
+        0.0209,
+        0.019,
+        0.0216,
+        0.0199,
+        0.0195,
+        0.0195,
+        0.0194,
+        0.0194,
+        0.0174,
+        0.0164,
+        0.017,
+        0.0163,
+        0.0152,
+        0.0159,
+        0.015,
+        0.014,
+        0.0143,
+        0.0144,
+        0.0141,
+        0.0152,
+        0.0143,
+        0.015,
         0.0136,
         0.0142,
         0.0141,
@@ -159,7 +192,7 @@
         0.9372,
         0.969,
         0.9901,
-        1,
+        1.0,
         0.9959,
         0.9768,
         0.944,
@@ -194,7 +227,57 @@
         0.0092,
         0.0081,
         0.0073,
-        0.0063
+        0.0063,
+        0.0048,
+        0.0046,
+        0.0032,
+        0.0029,
+        0.0019,
+        0.0016,
+        0.0013,
+        0.0011,
+        0.0014,
+        0.002,
+        0.0018,
+        0.0012,
+        0.0017,
+        0.0013,
+        0.0022,
+        0.002,
+        0.0012,
+        0.0006,
+        0.0009,
+        0.0013,
+        0.0012,
+        0.0009,
+        0.001,
+        0.0007,
+        0.0014,
+        0.0017,
+        0.0017,
+        0.0013,
+        0.0018,
+        0.0018,
+        0.0015,
+        0.0015,
+        0.001,
+        0.001,
+        0.0014,
+        0.0011,
+        0.0016,
+        0.0023,
+        0.0015,
+        0.0016,
+        0.0017,
+        0.0017,
+        0.0018,
+        0.0019,
+        0.0019,
+        0.0011,
+        0.0006,
+        0.001,
+        0.0011,
+        0.0017
       ],
       "minEm": 484,
       "emission": [
@@ -243,8 +326,8 @@
         0.9661,
         0.9874,
         0.999,
-        1,
-        1,
+        1.0,
+        1.0,
         0.9832,
         0.9622,
         0.9413,
@@ -364,140 +447,137 @@
         0.0185,
         0.0179,
         0.0172,
-        0.0162
+        0.0162,
+        0.0166,
+        0.0166,
+        0.0158,
+        0.015,
+        0.0146,
+        0.0146,
+        0.0138,
+        0.0134,
+        0.0133,
+        0.0131,
+        0.0123,
+        0.0118,
+        0.0121,
+        0.0114,
+        0.0113,
+        0.0112,
+        0.0114,
+        0.0107,
+        0.0108,
+        0.0106,
+        0.0101,
+        0.0095,
+        0.0094,
+        0.0097,
+        0.0096,
+        0.0095,
+        0.0089,
+        0.0088,
+        0.0093,
+        0.0092,
+        0.0096,
+        0.0083,
+        0.0081,
+        0.0085,
+        0.0084,
+        0.0086,
+        0.0082,
+        0.0076,
+        0.0081,
+        0.0077,
+        0.0074,
+        0.0082,
+        0.0079,
+        0.0075,
+        0.0072,
+        0.0069,
+        0.0074,
+        0.007,
+        0.0071,
+        0.007
       ]
     }
   },
   "voltage": {
     "type": "opsin",
-    "slope": 20,
+    "slope": 13,
     "polarity": "negative",
-    "name": "MacQ",
+    "name": "CAESR",
+    "source": "doi:10.1038/ncomms5625",
+    "sourceImage": "/fv-sources/caesr.jpg",
+    "sourceFigure": "Fig. 4b",
     "custom": {
       "voltage": [
         -100,
-        -80,
         -70,
-        -60,
-        -40,
-        -20,
+        -50,
         0,
-        20,
-        40
+        50,
+        100
       ],
       "deltaF": [
-        8,
-        3,
+        4,
         0,
-        -2,
-        -5,
+        -3,
         -8,
-        -10,
         -12,
-        -14
+        -15
       ]
-    },
-    "source": "doi:10.1038/ncomms4674",
-    "sourceImage": "/fv-sources/macq.jpg",
-    "sourceFigure": "Fig. 3b"
+    }
   },
   "kinetics": [
     {
-      "on": 2.8,
-      "off": 5.4,
-      "temperature": "22°C",
-      "source": "doi:10.1038/ncomms4674",
-      "sourceFigure": "Table S1"
+      "on": 4.3,
+      "off": 4.3,
+      "temperature": "23\u00b0C",
+      "source": "doi:10.1038/ncomms5625",
+      "sourceFigure": "Table 1",
+      "note": "Bi-exponential fast components (45% fast on depolarizing; hyperpolarizing 4.3 ms 45% fast, slow 31 ms; depolarizing slow 27 ms 45% fast); \u03c4_1/2 = 7.5 ms both directions"
     }
   ],
   "dynamicRangeData": [
     {
-      "deltaF": -20,
+      "deltaF": -13.1,
       "sign": "negative",
-      "source": "doi:10.1038/ncomms4674",
-      "sourceFigure": "Fig. 3b"
-    },
-    {
-      "deltaF": -19.49,
-      "sign": "negative",
-      "source": "doi:10.1073/pnas.1902443116",
-      "sourceFigure": "Fig. 4C"
+      "source": "doi:10.1038/ncomms5625",
+      "sourceFigure": "Table 1"
     }
   ],
   "sensitivityData": [
     {
-      "deltaF": 4.8,
-      "source": "doi:10.1038/ncomms4674",
-      "sourceFigure": "Fig. 5d"
-    }
-  ],
-  "photostabilityData": [
-    {
-      "brightnessRemaining": 61,
-      "illumination": "15 mW/mm²",
-      "duration": "0.5 min",
-      "source": "doi:10.1038/ncomms4674",
-      "sourceFigure": "Table S1"
+      "deltaF": 9.7,
+      "source": "doi:10.1038/ncomms5625",
+      "sourceFigure": "Table 1"
     }
   ],
   "brightnessData": [
     {
-      "ratio": 3,
-      "reference": "arclight",
-      "source": "doi:10.1038/ncomms4674",
-      "sourceFigure": "Fig. S4"
+      "ratio": 2.39,
+      "reference": "EGFP",
+      "source": "doi:10.1038/ncomms5625",
+      "sourceFigure": "Table S1",
+      "note": "Estimated from Citrine EC=77000 M-1cm-1, QY=0.76 (Suppl. Table 1), reduced by measured eFRET efficiency E_FRET=0.18 (Suppl. Fig. 2); EGFP reference EC\u00d7QY = 33,400 \u00d7 0.60"
     }
   ],
-  "twoPhoton": [
-    {
-      "compatible": false,
-      "source": "doi:10.7554/eLife.25690"
-    }
-  ],
-  "addgene": {
-    "id": "48762",
-    "url": "https://www.addgene.org/48762/"
-  },
   "researchPapers": [
     {
-      "title": "Imaging neural spiking in brain tissue using FRET-opsin protein voltage sensors",
-      "authors": "Gong Y, Wagner MJ, Zhong Li J, Schnitzer MJ",
+      "title": "Bright and fast multicoloured voltage reporters via electrochromic FRET",
+      "authors": "Zou P, Zhao Y, Douglass AD, Hochbaum DR, Brinks D, Werley CA, Harrison DJ, Campbell RE, Cohen AE",
       "journal": "Nature Communications",
       "year": 2014,
-      "sample": "HEK293 cells, cultured neurons, mouse brain slices and in vivo (Purkinje neurons)",
-      "url": "https://doi.org/10.1038/ncomms4674"
+      "sample": "HEK293 cells, in vitro; cultured rat hippocampal neurons, in vitro",
+      "url": "https://doi.org/10.1038/ncomms5625"
     },
     {
-      "title": "High-speed recording of neural spikes in awake mice and flies with a fluorescent voltage sensor",
-      "authors": "Gong Y, et al.",
-      "journal": "Science",
+      "title": "Two-photon lifetime imaging of voltage indicating proteins as a probe of absolute membrane voltage",
+      "authors": "Brinks D, Klein AJ, Cohen AE",
+      "journal": "Biophysical Journal",
       "year": 2015,
-      "sample": "HEK293 cells, cultured neurons, in vitro",
-      "url": "https://doi.org/10.1126/science.aab0810"
-    },
-    {
-      "title": "Cell-Type-Specific Optical Recording of Membrane Voltage Dynamics in Freely Moving Mice",
-      "authors": "Marshall JD, Li JZ, Zhang Y, Gong Y, St-Pierre F, Lin MZ, Schnitzer MJ",
-      "journal": "Cell",
-      "year": 2016,
-      "sample": "Mouse somatosensory cortex, striatum (D1/D2 MSNs), PV interneurons, in vivo freely moving",
-      "url": "https://doi.org/10.1016/j.cell.2016.11.021"
-    },
-    {
-      "title": "Fast two-photon imaging of subcellular voltage dynamics in neuronal tissue with genetically encoded indicators",
-      "authors": "Chamberland S, et al.",
-      "journal": "eLife",
-      "year": 2017,
-      "sample": "Drosophila visual neurons (L2), in vivo; rat hippocampal organotypic slices, in vitro",
-      "url": "https://doi.org/10.7554/eLife.25690"
-    },
-    {
-      "title": "Rhodopsin-based voltage imaging tools for use in muscles and neurons of Caenorhabditis elegans",
-      "authors": "Azimi Hashemi N, et al.",
-      "journal": "PNAS",
-      "year": 2019,
-      "sample": "C. elegans, pharyngeal and body wall muscles, in vivo",
-      "url": "https://doi.org/10.1073/pnas.1902443116"
+      "sample": "HEK293T cells, in vitro",
+      "url": "https://doi.org/10.1016/j.bpj.2015.07.038"
     }
   ]
 }

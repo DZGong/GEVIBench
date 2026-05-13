@@ -49,6 +49,23 @@ Also check for **legacy hardcoded score fields** that should NOT be in the JSON:
 - `speed`, `dynamicRange`, `sensitivity`, `brightness`, `photostability`, `overall`, `paperCount`
 - If any of these exist, flag them for removal.
 
+### `sourceFigure` formatting — strict
+
+When you add or fix a `sourceFigure` value, follow these formats exactly. Flag any existing entry that uses a non-conforming format and rewrite it.
+
+| Source location | Required format | Wrong examples to flag and fix |
+|-----------------|------------------|----------------|
+| Main figure | `"Fig. 1"`, `"Fig. 2A"`, `"Fig. 3B"`, `"Fig. 4e"` | `"Figure 1"`, `"figure 2A"` |
+| **Supplementary figure** | `"Fig. S1"`, `"Fig. S2a"`, `"Fig. S3B"` | `"Supplementary Figure 1"`, `"Suppl. Fig. 1"`, `"SI Fig 1"` |
+| Main table | `"Table 1"`, `"Table 2"`, `"Table 3"` | — |
+| **Supplementary table** | `"Table S1"`, `"Table S2"`, `"Table S2.4"` | `"Supplementary Table 1"`, `"Suppl. Table 1"` |
+| Extended Data (Nature journals) | `"Extended Data Fig. 4e"`, `"Extended Data Table 1"` | — |
+| Stated only in the running paragraph (no figure or table) | `"Main text"` | `"text"`, `"paragraph"` |
+| Stated in the abstract | `"Abstract"` | — |
+| Stated in Methods | `"Methods"` | `"methods section"` |
+
+Never leave `sourceFigure` blank or use vague labels like `"figure"` or `"table"`. If a value can't be attributed to a specific location, remove the entry rather than leave the attribution unclear.
+
 Record all findings in a checklist before proceeding.
 
 ### 1b. Validate kinetics values
@@ -209,6 +226,18 @@ Follow the curator agent's **Step D** (Build the ΔF/F–V curve):
 5. Record only the actual data points — **no fitting, extrapolation, or interpolation**
 
 If no F-V figure exists in any available paper, remove `voltage.custom` entirely and note it in the report.
+
+#### Optional: image-based data extraction tool
+
+When the GEVI already has a cropped F-V figure stored at `public/fv-sources/{id}.jpg` (i.e. `voltage.sourceImage` exists), the project ships a digitization helper at `scripts/extract_curve.py` (with a calibration GUI at `scripts/pick_calibration.py`). It color-filters the figure, peak-detects clusters, and outputs `voltage`/`deltaF` arrays after a 2-point pixel calibration. Multi-curve plots are supported via `--multi-curve` and split-ROI runs.
+
+**Mandatory rule when the source image is available:** before re-digitizing the F-V curve manually, **ask the user whether to use the extraction tool**. Phrase it as a short yes/no question, e.g.:
+
+> "I'm about to re-digitize the F-V curve for {GEVI} from `{voltage.sourceImage}` ({voltage.sourceFigure}). Do you want me to use `scripts/extract_curve.py`, or read the values manually?"
+
+The same tool can also digitize photobleach curves (F vs time). If you're fixing `photostabilityData` and the paper has a bleach curve figure, ask the same question before reading endpoints by eye.
+
+The script is most accurate on figures with clean, well-separated data points (≤3 curves, discrete markers). It is less reliable for violin plots or heavily overlapping curves; the user often knows in advance which path is better for the specific figure.
 
 ---
 

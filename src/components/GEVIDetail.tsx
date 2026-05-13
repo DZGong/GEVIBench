@@ -1,23 +1,32 @@
 import { useState, useRef } from 'react';
 import { BonusBadges } from './BonusBadges';
-import { BookOpen, ExternalLink, Plus, X, Sun, Zap, Activity, TrendingUp, Shield, Dna, ChevronDown, ChevronUp } from 'lucide-react';
+import { BookOpen, ExternalLink, Plus, X, Sun, Zap, Activity, TrendingUp, Shield, Dna, ChevronDown, ChevronUp, Users } from 'lucide-react';
 import { SpectrumViewer, SpectrumData } from '../SpectrumViewer';
 import { VoltageCurveViewer } from '../VoltageCurveViewer';
 import { GEVILineage } from './GEVILineage';
 import { DistributionRadar } from './DistributionRadar';
 import { NoteTip, SourceLink } from './SourceCitation';
+import { computeSampleSummary, SAMPLE_CATEGORY_ORDER } from '../utils';
 
 function formatRatio(ratio: number): string {
   return parseFloat(ratio.toPrecision(2)).toString();
 }
 
+// Detail-page metric tiles. τ_on and τ_off are shown in a single "kinetics"
+// tile (matching the radar's combined axis); the per-entry table still
+// surfaces on and off as separate columns so the underlying numbers are
+// preserved. N_used is the 6th tile and mirrors the radar's 6th axis.
+//
+// `desc` mirrors the column-header tooltip text in the GEVI list so the
+// two surfaces stay aligned. If you edit a description here, also update
+// the corresponding entry in `src/components/GEVIList.tsx`.
 const metrics = [
-  { key: 'brightness', name: <>B/B<sub>EGFP</sub></>, icon: Sun },
-  { key: 'tauOn', name: <>τ<sub>on</sub> (ms)</>, icon: Zap },
-  { key: 'tauOff', name: <>τ<sub>off</sub> (ms)</>, icon: Zap },
-  { key: 'dynamicRange', name: <>ΔF/F per 100mV</>, icon: TrendingUp },
-  { key: 'sensitivity', name: <>ΔF/F per AP</>, icon: Activity },
-  { key: 'photostability', name: <>F<sub>remain</sub>%</>, icon: Shield },
+  { key: 'brightness',     name: <>B/B<sub>EGFP</sub></>,                      icon: Sun,        desc: 'Relative molecular brightness vs EGFP' },
+  { key: 'kinetics',       name: <>τ<sub>on</sub>/τ<sub>off</sub> (ms)</>,     icon: Zap,        desc: 'Activation and decay time constants' },
+  { key: 'dynamicRange',   name: <>ΔF/F per 100mV</>,                          icon: TrendingUp, desc: 'Steady-state fluorescence change per 100 mV' },
+  { key: 'sensitivity',    name: <>ΔF/F per AP</>,                             icon: Activity,   desc: 'Fluorescence change per single action potential' },
+  { key: 'photostability', name: <>F<sub>remain</sub>%</>,                     icon: Shield,     desc: 'Fraction of fluorescence remaining after continuous illumination' },
+  { key: 'nUsed',          name: <>N<sub>used</sub></>,                        icon: Users,      desc: 'Number of independent published studies that have applied this sensor' },
 ];
 
 interface GEVIDetailProps {
@@ -92,35 +101,29 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
       {/* Metrics Grid */}
       <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-3">
         {metrics.map((metric) => (
-          <div key={metric.key} className="rounded-lg p-2 md:p-3 bg-surface-low">
-            <div className="flex items-center gap-1.5 mb-1.5">
+          <div key={metric.key} className="border rounded-lg p-2 md:p-3 bg-surface-low border-ink/10">
+            <div className="flex items-center gap-1.5">
               <metric.icon className="w-3 h-3" />
               <span className="text-xs md:text-sm font-medium text-ink">{metric.name}</span>
             </div>
-            {/* τ_on */}
-            {metric.key === 'tauOn' && gevi.kinetics?.length > 0 && (
-              <div className="mt-2 text-[10px] space-y-1">
-                {gevi.kinetics.map((k: any, i: number) => (
-                  <div key={i} className={`py-1 ${i < gevi.kinetics.length - 1 ? 'border-b border-ink/10' : ''}`}>
-                    <div className="flex items-center justify-between gap-2">
-                      <span className="text-ink"><span className="font-semibold">{k.on} ms</span>{k.temperature ? ` (${k.temperature})` : ''}</span>
-                      <span className="flex items-center gap-1.5">
-                        <NoteTip note={k.note} />
-                        <SourceLink source={k.source} sourceFigure={k.sourceFigure} />
-                      </span>
-                    </div>
-                  </div>
-                ))}
+            {metric.desc && (
+              <div className="text-[10px] text-ink/50 leading-snug mt-0.5 mb-1.5">
+                {metric.desc}
               </div>
             )}
-            {/* τ_off */}
-            {metric.key === 'tauOff' && gevi.kinetics?.length > 0 && (
+            {/* Combined τ_on / τ_off — bare numbers per kinetics entry (the
+                tile header already says "τ_on/τ_off (ms)", so labels and units
+                inside the row would be redundant). */}
+            {metric.key === 'kinetics' && gevi.kinetics?.length > 0 && (
               <div className="mt-2 text-[10px] space-y-1">
                 {gevi.kinetics.map((k: any, i: number) => (
                   <div key={i} className={`py-1 ${i < gevi.kinetics.length - 1 ? 'border-b border-ink/10' : ''}`}>
                     <div className="flex items-center justify-between gap-2">
-                      <span className="text-ink"><span className="font-semibold">{k.off} ms</span>{k.temperature ? ` (${k.temperature})` : ''}</span>
-                      <span className="flex items-center gap-1.5">
+                      <span className="text-ink">
+                        <span className="font-semibold">{k.on} / {k.off}</span>
+                        {k.temperature ? <span className="text-ink/60"> ({k.temperature})</span> : null}
+                      </span>
+                      <span className="flex items-center gap-1.5 min-w-0">
                         <NoteTip note={k.note} />
                         <SourceLink source={k.source} sourceFigure={k.sourceFigure} />
                       </span>
@@ -135,8 +138,10 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
                 {gevi.sensitivityData.map((s: any, i: number) => (
                   <div key={i} className={`py-1 ${i < gevi.sensitivityData.length - 1 ? 'border-b border-ink/10' : ''}`}>
                     <div className="flex items-center justify-between gap-2">
-                      <span className="text-ink">ΔF/F<sub>AP</sub>: <span className="font-semibold">{s.deltaF}%</span></span>
-                      <span className="flex items-center gap-1.5">
+                      <span>
+                        <span className="font-semibold">{s.deltaF}%</span> <span className="text-ink">per AP</span>
+                      </span>
+                      <span className="flex items-center gap-1.5 min-w-0">
                         <NoteTip note={s.note} />
                         <SourceLink source={s.source} sourceFigure={s.sourceFigure} />
                       </span>
@@ -152,11 +157,11 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
                   <div key={i} className={`py-1 ${i < gevi.dynamicRangeData.length - 1 ? 'border-b border-ink/10' : ''}`}>
                     <div className="flex items-center justify-between gap-2">
                       <span>
-                        <span className={`font-semibold ${d.sign === 'negative' ? 'text-red-600' : 'text-green-600'}`}>
+                        <span className="font-semibold">
                           {d.sign === 'negative' ? '-' : '+'}{Math.abs(d.deltaF)}%
                         </span> <span className="text-ink">per 100mV</span>
                       </span>
-                      <span className="flex items-center gap-1.5">
+                      <span className="flex items-center gap-1.5 min-w-0">
                         <NoteTip note={d.note} />
                         <SourceLink source={d.source} sourceFigure={d.sourceFigure} />
                       </span>
@@ -179,7 +184,7 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
                   <div key={i} className={`py-1 ${i < gevi.photostabilityData.length - 1 ? 'border-b border-ink/10' : ''}`}>
                     <div className="flex items-center justify-between gap-2">
                       <span className="text-ink">F<sub>remain</sub>: <span className="font-semibold">{p.brightnessRemaining}%</span> @ {p.illumination}, {p.duration}</span>
-                      <span className="flex items-center gap-1.5">
+                      <span className="flex items-center gap-1.5 min-w-0">
                         <NoteTip note={p.note} />
                         <SourceLink source={p.source} sourceFigure={p.sourceFigure} />
                       </span>
@@ -205,7 +210,7 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
                   <div key={i} className={`py-1 ${i < gevi.brightnessData.length - 1 ? 'border-b border-ink/10' : ''}`}>
                     <div className="flex items-center justify-between gap-2">
                       <span className="text-ink"><span className="font-semibold">{formatRatio(b.ratio)}×</span> vs {b.reference}</span>
-                      <span className="flex items-center gap-1.5">
+                      <span className="flex items-center gap-1.5 min-w-0">
                         <NoteTip note={b.note} />
                         <SourceLink source={b.source} sourceFigure={b.sourceFigure} />
                       </span>
@@ -214,6 +219,53 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
                 ))}
               </div>
             )}
+            {/* N_used — paper count plus per-organism breakdown derived from each
+                paper's `sample` string. Categories with zero matches are hidden.
+                A "View papers" jump expands the research-papers section below
+                and scrolls it into view. */}
+            {metric.key === 'nUsed' && (() => {
+              const total = gevi.researchPapers?.length ?? 0;
+              const summary = computeSampleSummary(gevi.researchPapers);
+              const breakdown = SAMPLE_CATEGORY_ORDER
+                .filter(cat => (summary[cat] ?? 0) > 0)
+                .map(cat => ({ category: cat, count: summary[cat] }));
+              const jumpToPapers = () => {
+                setPapersExpanded(true);
+                // setTimeout so the expanded content has a chance to render
+                // before we measure scroll position.
+                setTimeout(() => {
+                  papersRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 0);
+              };
+              return (
+                <div className="mt-2 text-[10px]">
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-ink">N<sub>used</sub>:</span>
+                    <span className="text-ink font-semibold">{total}</span>
+                    <span className="text-ink/50">{total === 1 ? 'paper' : 'papers'}</span>
+                  </div>
+                  {total > 0 && (
+                    <button
+                      onClick={(e) => { e.stopPropagation(); jumpToPapers(); }}
+                      className="mt-1 inline-flex items-center gap-1 text-klein hover:underline"
+                    >
+                      <BookOpen className="w-3 h-3" />
+                      View papers
+                    </button>
+                  )}
+                  {breakdown.length > 0 && (
+                    <div className="mt-1.5 pt-1.5 space-y-0.5 border-t border-ink/15">
+                      {breakdown.map((e, i) => (
+                        <div key={e.category} className={`flex items-center justify-between py-0.5 ${i < breakdown.length - 1 ? 'border-b border-ink/10' : ''}`}>
+                          <span className="text-ink">{e.category}</span>
+                          <span className="text-ink font-semibold">{e.count}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            })()}
           </div>
         ))}
       </div>

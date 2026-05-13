@@ -1,7 +1,8 @@
-import { Trash2, GitCompare, X } from 'lucide-react';
+import { Trash2, GitCompare, X, ExternalLink } from 'lucide-react';
 import React, { useState, useRef, useCallback } from 'react';
 import { generateVoltageCurve } from '../VoltageCurveViewer';
 import { DistributionRadar } from './DistributionRadar';
+import { WavelengthCellContent, extractYear, abbreviatePaper } from './GEVIList';
 
 const COLORS = ['#002FA7', '#ef4444', '#22c55e', '#f59e0b', '#8b5cf6'];
 
@@ -83,34 +84,73 @@ export function ComparisonPanel({ compareGEVIs, onRemove, showEmpty = false, onC
         ))}
       </div>
 
-      {/* Raw values comparison */}
+      {/* Raw values comparison — column layout mirrors the GEVI list */}
       <div className="mb-4 border rounded-lg p-3 overflow-x-auto bg-surface-low border-ink/10">
         <h4 className="text-sm font-semibold mb-2 text-ink/70">Raw Values</h4>
         <table className="w-full text-xs" style={{ borderCollapse: 'collapse' }}>
           <thead>
             <tr className="text-ink/60">
               <th className="text-left px-2 py-1.5 font-medium">GEVI</th>
+              <th className="text-center px-2 py-1.5 font-medium whitespace-nowrap">
+                <>λ<sub>ex</sub>/λ<sub>em</sub> (nm)</>
+              </th>
               {RAW_METRICS.map(m => (
                 <th key={m.key} className="text-center px-2 py-1.5 font-medium whitespace-nowrap">
                   {m.symbol}
                 </th>
               ))}
+              <th
+                className="text-center px-2 py-1.5 font-medium whitespace-nowrap"
+                title="Number of independent published studies that have applied this sensor to record voltage signals (a usage / adoption count, not citation count)"
+              >
+                <>N<sub>used</sub></>
+              </th>
+              <th className="text-center px-2 py-1.5 font-medium whitespace-nowrap">Year</th>
             </tr>
           </thead>
           <tbody>
             {compareGEVIs.map((gevi, idx) => (
               <tr key={gevi.id} className="border-t border-ink/5">
-                <td
-                  className="px-2 py-1.5 font-medium whitespace-nowrap"
-                  style={{ color: COLORS[idx % COLORS.length] }}
-                >
-                  {gevi.name}
+                <td className="px-2 py-1.5 whitespace-nowrap align-middle">
+                  <span
+                    className="font-medium"
+                    style={{ color: COLORS[idx % COLORS.length] }}
+                  >
+                    {gevi.name}
+                  </span>
+                  {gevi.paperUrl && (
+                    <a
+                      href={gevi.paperUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="inline-flex items-center gap-1 whitespace-nowrap text-klein hover:underline ml-2"
+                      title={gevi.paper}
+                    >
+                      <ExternalLink className="w-3 h-3" />
+                      <span>
+                        <span className="italic">
+                          {abbreviatePaper(gevi.paper).replace(/\s*\d{4}$/, '')}
+                        </span>{' '}
+                        {extractYear(gevi.paper)}
+                      </span>
+                    </a>
+                  )}
+                </td>
+                <td className="px-2 py-1.5 text-center tabular-nums text-ink align-middle">
+                  <WavelengthCellContent gevi={gevi} />
                 </td>
                 {RAW_METRICS.map(m => (
-                  <td key={m.key} className="px-2 py-1.5 text-center tabular-nums text-ink">
+                  <td key={m.key} className="px-2 py-1.5 text-center tabular-nums text-ink align-middle">
                     {m.fmt(gevi)}
                   </td>
                 ))}
+                <td className="px-2 py-1.5 text-center tabular-nums text-ink align-middle">
+                  {gevi.paperCount ?? 0}
+                </td>
+                <td className="px-2 py-1.5 text-center tabular-nums text-ink align-middle">
+                  {gevi.year}
+                </td>
               </tr>
             ))}
           </tbody>

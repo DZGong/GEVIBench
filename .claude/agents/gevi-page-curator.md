@@ -57,17 +57,36 @@ When using `familyTreePath`, the last element must equal `id`. Check `src/gevis/
 
 **Do NOT set any score fields (`speed`, `dynamicRange`, `sensitivity`, `brightness`, `photostability`, `overall`) in the JSON.** All scores are computed automatically by the website from the raw data fields below.
 
-Every raw data entry must include a `source` field (DOI string, e.g. `"doi:10.1038/s41592-023-01820-3"`). All raw data fields are **arrays** — multiple entries from different papers are averaged into a single score.
+Every raw data entry must include a `source` field (DOI string, e.g. `"doi:10.1038/s41592-023-01820-3"`) **and** a `sourceFigure` field identifying exactly where in the paper the value came from. All raw data fields are **arrays** — multiple entries from different papers are averaged into a single score.
+
+#### B0. `sourceFigure` formatting — strict
+
+The `sourceFigure` string is rendered in the UI as a citation so users can verify each value against the original paper. Use these exact formats:
+
+| Source location | Required format | Wrong examples |
+|-----------------|------------------|----------------|
+| Main figure | `"Fig. 1"`, `"Fig. 2A"`, `"Fig. 3B"`, `"Fig. 4e"` | `"Figure 1"`, `"figure 2A"` |
+| **Supplementary figure** | `"Fig. S1"`, `"Fig. S2a"`, `"Fig. S3B"` | `"Supplementary Figure 1"`, `"Suppl. Fig. 1"`, `"SI Fig 1"` |
+| Main table | `"Table 1"`, `"Table 2"`, `"Table 3"` | — |
+| **Supplementary table** | `"Table S1"`, `"Table S2"`, `"Table S2.4"` | `"Supplementary Table 1"`, `"Suppl. Table 1"` |
+| Extended Data (Nature journals) | `"Extended Data Fig. 4e"`, `"Extended Data Table 1"` | — |
+| Stated only in the running paragraph (no figure or table) | `"Main text"` | `"text"`, `"paragraph"` |
+| Stated in the abstract | `"Abstract"` | — |
+| Stated in Methods | `"Methods"` | `"methods section"` |
+
+Never leave `sourceFigure` blank or use a vague label like `"figure"` or `"table"`. If a value can't be attributed to a specific location, do not record it.
+
+#### B-fields
 
 | Raw data field | What to extract from the paper |
 |----------------|-------------------------------|
-| `kinetics` | Array of `{ on, off, temperature, source }`. τ_on and τ_off in ms. **Temperature rule:** Always include a `"temperature"` field recording the measurement temperature (e.g. `"22°C"`, `"33-34°C"`, `"37°C"`, `"room temperature"`). Omit `temperature` only if the paper does not state what temperature the kinetics were measured at. If kinetics are reported at multiple temperatures, prefer the measurement closest to 37°C (physiological). Always check supplementary tables — main text kinetics values are sometimes at room temperature or even have names swapped between variants. |
-| `dynamicRangeData` | Array of `{ deltaF, sign, source }`. ΔF/F% per 100 mV step, signed. `sign`: `"positive"` or `"negative"`. |
-| `sensitivityData` | Array of `{ deltaF, source }`. ΔF/F% per single action potential (always positive). |
-| `subthresholdData` | Array of `{ slope, source }`. Subthreshold sensitivity in %/mV, always positive. Look for it in voltage-clamp ramps or step responses in the subthreshold range (typically −90 to −50 mV). |
-| `brightnessData` | Array of `{ ratio, reference, source }` — see step B2. |
-| `photostabilityData` | Array of `{ brightnessRemaining, illumination, duration, source }`. If the paper reports multiple measurements, include **one entry per paper**: select the measurement with duration closest to 1 min, breaking ties by intensity closest to 10 mW/mm². **Bioluminescent GEVIs:** If the GEVI is bioluminescent (no excitation light, e.g. uses NanoLuc/luciferase), set `"photostabilityData": "bioluminescent"` instead of an array — the scoring system will assign a score of 100 automatically. |
-| `researchPapers` | Exhaustive list of independent papers that used this GEVI for voltage imaging — see step C. The popularity subscore is computed automatically from `researchPapers.length`. **Do NOT set `paperCount`** — it is derived from `researchPapers` at runtime. |
+| `kinetics` | Array of `{ on, off, temperature, source, sourceFigure }`. τ_on and τ_off in ms. **Temperature rule:** Always include a `"temperature"` field (e.g. `"22°C"`, `"33-34°C"`, `"37°C"`). Omit `temperature` only if the paper does not state it. If kinetics are reported at multiple temperatures, prefer the measurement closest to 37°C. Always check supplementary tables — main text kinetics values are sometimes at room temperature. |
+| `dynamicRangeData` | Array of `{ deltaF, sign, source, sourceFigure }`. ΔF/F% per 100 mV step, signed. `sign`: `"positive"` or `"negative"`. |
+| `sensitivityData` | Array of `{ deltaF, source, sourceFigure }`. ΔF/F% per single action potential (always positive). |
+| `subthresholdData` | Array of `{ slope, source, sourceFigure }`. Subthreshold sensitivity in %/mV. Look in the −90 to −50 mV range. |
+| `brightnessData` | Array of `{ ratio, reference, source, sourceFigure }` — see step B2. |
+| `photostabilityData` | Array of `{ brightnessRemaining, illumination, duration, source, sourceFigure }`. If the paper reports multiple measurements, include **one entry per paper**: select the measurement with duration closest to 1 min, breaking ties by intensity closest to 10 mW/mm². **When the paper has a photobleach curve figure**, ask the user whether to digitize it with `scripts/extract_curve.py` (same tool can read F vs time curves) before manually reading off endpoints. **Bioluminescent GEVIs:** set `"photostabilityData": "bioluminescent"` (string, not array). |
+| `researchPapers` | Exhaustive list of independent papers that used this GEVI for voltage imaging — see step C. **Do NOT set `paperCount`** — derived at runtime. |
 
 Omit a raw data field entirely if the paper does not report that measurement — do not include an empty array.
 
@@ -322,6 +341,16 @@ For non-chemigenetic GEVIs (no multiple dyes), omit `additionalCurves`:
 
 In the output summary, note the source: `voltage.custom: read from Fig. 1E (9 data points per curve, 4 dye curves)`.
 
+#### Optional: image-based data extraction tool
+
+When the paper has a clear F-V or photobleach figure available (and especially when there are many points to digitize), the project ships two helper scripts at `scripts/extract_curve.py` and `scripts/pick_calibration.py`. Together they let you click two calibration points on the figure with a crosshair GUI, then color-filter and detect data points programmatically. See `scripts/extract_curve.py --help` for full options. Multi-curve plots are supported via `--multi-curve` and split-ROI runs.
+
+**Mandatory rule when the raw figure is available:** before manually digitizing points, **ask the user whether to use the extraction tool**. Phrase it as a short yes/no question, e.g.:
+
+> "I have a clear F-V curve image for {GEVI} from {source figure}. Do you want me to use `scripts/extract_curve.py` to digitize it, or read the values manually?"
+
+Only proceed with manual digitization (or with the script) after the user answers. The script tends to be more accurate for figures with clean, well-separated data points and less reliable for violin plots or heavily overlapping curves; the user often knows in advance which path is better for the specific figure.
+
 ---
 
 ### E. Build the excitation/emission spectrum (spectrum.custom)
@@ -481,8 +510,9 @@ File: `src/gevis/{id}.json`
       "on": 1.2,           // τ_on in ms — field name is exactly "on", NOT "tauOn"
       "off": 2.5,          // τ_off in ms — field name is exactly "off", NOT "tauOff"
       "temperature": "33-34°C",  // measurement temperature — omit only if paper doesn't state it
-      "source": "doi:10.1038/s41592-023-01820-3"
-      // Do NOT add extra fields beyond on, off, temperature, source
+      "source": "doi:10.1038/s41592-023-01820-3",
+      "sourceFigure": "Table S2"   // strict format — see B0
+      // Do NOT add extra fields beyond on, off, temperature, source, sourceFigure
     }
   ],
 
@@ -490,8 +520,9 @@ File: `src/gevis/{id}.json`
     // One entry per paper. Omit field entirely if no data found.
     {
       "deltaF": -35,           // ΔF/F% per 100 mV step, signed; field name is exactly "deltaF"
-      "sign": "negative|positive",
-      "source": "doi:10.1038/s41592-023-01820-3"
+      "sign": "negative",
+      "source": "doi:10.1038/s41592-023-01820-3",
+      "sourceFigure": "Fig. 1D"
       // Do NOT add extra fields
     }
   ],
@@ -500,7 +531,8 @@ File: `src/gevis/{id}.json`
     // One entry per paper. Omit field entirely if no data found.
     {
       "deltaF": 8.5,           // ΔF/F% per single action potential, always positive
-      "source": "doi:10.1038/s41592-023-01820-3"
+      "source": "doi:10.1038/s41592-023-01820-3",
+      "sourceFigure": "Fig. 2c"
       // Do NOT add extra fields
     }
   ],
@@ -509,7 +541,8 @@ File: `src/gevis/{id}.json`
     // One entry per paper. Omit field entirely if no data found.
     {
       "slope": 0.54,           // subthreshold sensitivity in %/mV, always positive
-      "source": "doi:10.1038/s41592-023-01820-3"
+      "source": "doi:10.1038/s41592-023-01820-3",
+      "sourceFigure": "Fig. S3a"
       // Do NOT add extra fields
     }
   ],
@@ -519,7 +552,8 @@ File: `src/gevis/{id}.json`
     {
       "ratio": 0.75,           // sensor/reference — e.g. 0.75 means 75% as bright as EGFP
       "reference": "EGFP",     // exact GEVI id from src/gevis/*.json, or "EGFP"
-      "source": "doi:10.1016/j.cell.2019.11.004"
+      "source": "doi:10.1016/j.cell.2019.11.004",
+      "sourceFigure": "Table 1"
     }
   ],
 
@@ -529,7 +563,8 @@ File: `src/gevis/{id}.json`
       "brightnessRemaining": 80,  // numeric %, e.g. 90 means 90% remaining
       "illumination": "16 mW/mm²",
       "duration": "1 min",
-      "source": "doi:10.1038/s41592-023-01820-3"
+      "source": "doi:10.1038/s41592-023-01820-3",
+      "sourceFigure": "Fig. 2i"
       // Do NOT add extra fields
     }
   ],

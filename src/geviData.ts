@@ -196,7 +196,7 @@ export function getAllGEVIs(): GEVI[] {
 // array of all raw entries for the current GEVI's "stars".
 // ============================================================================
 
-export type DistributionAxisKey = 'tauOn' | 'tauOff' | 'dynamicRange' | 'sensitivity' | 'brightness' | 'photostability';
+export type DistributionAxisKey = 'tauOn' | 'tauOff' | 'dynamicRange' | 'sensitivity' | 'brightness' | 'photostability' | 'kinetics' | 'nUsed';
 
 export interface DistributionAxisSpec {
   key: DistributionAxisKey;
@@ -262,6 +262,18 @@ export function getRawEntriesForGEVI(gevi: GEVI, key: DistributionAxisKey): numb
       if (gevi.photostabilityData === 'bioluminescent') return [100];
       if (!Array.isArray(gevi.photostabilityData)) return [];
       return gevi.photostabilityData.map(normalizePhotostability).filter(v => v > 0);
+    }
+    // Combined τ_on + τ_off per kinetics entry — the radar's "speed" axis on
+    // main collapses on/off into a single dimension so the polygon doesn't
+    // double-count kinetics. Display tiles still show on / off separately.
+    case 'kinetics':
+      return (gevi.kinetics ?? []).map(k => k.on + k.off).filter(v => v > 0);
+    // Independent papers that used the sensor. Single scalar per GEVI (no
+    // distribution); the radar renders it as a point at the count's radius
+    // on the log axis.
+    case 'nUsed': {
+      const n = gevi.researchPapers?.length ?? 0;
+      return n > 0 ? [n] : [];
     }
   }
 }

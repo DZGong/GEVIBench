@@ -57,7 +57,7 @@ export function Header({ activeTab, setActiveTab, mobileMenuOpen, setMobileMenuO
 
   return (
     <header className="sticky top-0 z-50 bg-surface backdrop-blur-[12px]">
-      <div className="max-w-7xl mx-auto px-4 py-3">
+      <div className="max-w-screen-2xl mx-auto px-4 py-3">
         <div className="flex items-center justify-between relative">
           <div className="flex items-center gap-3">
             <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="lg:hidden p-2">

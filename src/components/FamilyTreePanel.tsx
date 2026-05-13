@@ -84,7 +84,8 @@ const MANUAL_SUBTREE_SHIFTS: Record<string, { dx: number; dy: number }> = {
   'Opsin-FRET': { dx: -80, dy: 0 },
   Chemigenetic: { dx: -60, dy: 88 },
   'ace2n-mneon': { dx: 0, dy: 44 },
-  macq: { dx: 66, dy: 0 },
+  caesr: { dx: 25, dy: 33 },
+  macq: { dx: 44, dy: 33 },
   arch: { dx: 0, dy: -44 },
   varnam: { dx: 0, dy: 22 },
   cephid: { dx: 0, dy: 0 },
@@ -96,6 +97,15 @@ const MANUAL_SUBTREE_SHIFTS: Record<string, { dx: number; dy: number }> = {
   '2photron': { dx: 0, dy: 44 },
   solaris: { dx: 0, dy: 44 },
 };
+
+// Shifts that move ONLY the root node of a subtree (and its incoming/outgoing
+// link endpoints anchored at that node), without displacing any descendants.
+// Use this when you want to nudge a single node without breaking the layout of
+// the subtree rooted there.
+const NODE_ONLY_SHIFTS: Record<string, { dx: number; dy: number }> = {
+  'ace2n-mneon': { dx: 57, dy: 0 },
+};
+
 const TOP_PADDING = 31;
 const NODE_RADIUS_LEAF = 8;
 const NODE_RADIUS_BRANCH = 5;
@@ -237,14 +247,33 @@ function layoutTree(node: TreeNode, x: number, y: number, depth = 0): LayoutResu
     const manual = MANUAL_SUBTREE_SHIFTS[key];
     const extraDx = manual?.dx ?? 0;
     const extraDy = manual?.dy ?? 0;
+    const nodeOnly = NODE_ONLY_SHIFTS[key];
+    const nodeDx = nodeOnly?.dx ?? 0;
+    const nodeDy = nodeOnly?.dy ?? 0;
 
-    for (const cn of result.nodes) {
-      nodes.push({ ...cn, x: cn.x + offsetX + extraDx, y: cn.y + extraDy });
+    // Capture the subtree root's pre-shift coordinates so we can identify
+    // any links that originate from it (those need the node-only shift too).
+    const rootOrigX = result.nodes[0].x;
+    const rootOrigY = result.nodes[0].y;
+
+    for (let j = 0; j < result.nodes.length; j++) {
+      const cn = result.nodes[j];
+      const isSubtreeRoot = j === 0;
+      nodes.push({
+        ...cn,
+        x: cn.x + offsetX + extraDx + (isSubtreeRoot ? nodeDx : 0),
+        y: cn.y + extraDy + (isSubtreeRoot ? nodeDy : 0),
+      });
     }
     for (const cl of result.links) {
+      // A link's "from" endpoint sits at the subtree root iff its x matches
+      // the root's x exactly (the root is the only node that emits outgoing
+      // links from that x within its own subtree). Apply node-only shift to
+      // those endpoints so links stay anchored to the moved node.
+      const linkFromRoot = Math.abs(cl.fromX - rootOrigX) < 0.5 && cl.fromY >= rootOrigY - 0.5 && cl.fromY <= rootOrigY + NODE_RADIUS_LEAF + 4;
       links.push({
-        fromX: cl.fromX + offsetX + extraDx,
-        fromY: cl.fromY + extraDy,
+        fromX: cl.fromX + offsetX + extraDx + (linkFromRoot ? nodeDx : 0),
+        fromY: cl.fromY + extraDy + (linkFromRoot ? nodeDy : 0),
         toX: cl.toX + offsetX + extraDx,
         toY: cl.toY + extraDy,
       });
@@ -257,8 +286,8 @@ function layoutTree(node: TreeNode, x: number, y: number, depth = 0): LayoutResu
     links.push({
       fromX: x,
       fromY: y + fromOffset,
-      toX: childRootNode.x + offsetX + extraDx,
-      toY: childRootNode.y + extraDy - toOffset,
+      toX: childRootNode.x + offsetX + extraDx + nodeDx,
+      toY: childRootNode.y + extraDy + nodeDy - toOffset,
     });
 
     maxY = Math.max(maxY, result.maxY + extraDy);
@@ -381,7 +410,7 @@ function buildTreeFromPaths(gevis: GEVI[]): TreeNode {
     ['VSD-FRET', ['lotusv', 'vsfp1', 'mermaid']],
     ['arclight', ['marina', 'bongwoori', 'harclight1']],
     ['varnam', ['varnam2', 'cephid']],
-    ['Opsin-FRET', ['ace2n-mneon', 'macq', 'Chemigenetic']],
+    ['Opsin-FRET', ['caesr', 'macq', 'ace2n-mneon', 'Chemigenetic']],
     ['archon1', ['_fork_quasar6_quasar6b', 'somarchon']],
     ['Opsin-Fluorescent', ['arch', 'props']],
   ];

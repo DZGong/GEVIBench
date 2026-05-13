@@ -12,6 +12,15 @@ export function sourceToUrl(source: string): string | null {
   return null;
 }
 
+// Compact display form for figure citations — "Extended Data Fig./Figure"
+// abbreviates to "Ext. Data Fig.", "Extended Fig./Figure" to "Ext. Fig.".
+// Applied at render time so the underlying JSON stays human-readable.
+export function abbreviateFigure(s: string): string {
+  return s
+    .replace(/\bExtended Data Fig(?:ure|\.)/g, 'Ext. Data Fig.')
+    .replace(/\bExtended Fig(?:ure|\.)/g, 'Ext. Fig.');
+}
+
 export function NoteTip({ note }: { note?: string }) {
   if (!note) return null;
   return (
@@ -33,11 +42,29 @@ export function SourceLink({ source, sourceFigure }: { source?: string; sourceFi
     const citationMap = getDoiCitationMap();
     label = citationMap[doi] || source;
   }
-  if (!url) return <span className="text-[10px] text-ink">{sourceFigure && `${sourceFigure} · `}{source}</span>;
+  const figureLabel = sourceFigure ? abbreviateFigure(sourceFigure) : undefined;
+  // Wrapping policy: each segment (figure label, citation link) stays together
+  // on its own line via inline whitespace-nowrap. The " · " separator is kept
+  // OUTSIDE both nowrap spans (as a regular text node with surrounding spaces)
+  // so the browser can wrap at the separator when the container is too narrow.
+  // JSX collapses inter-element whitespace, so the literal `{' · '}` is required
+  // — leaving a bare newline between the two elements would yield no wrap point.
+  // Result: "Fig. 1d · Land 2026" can wrap as
+  //   "Fig. 1d"
+  //   "Land 2026"
+  // on tight viewports.
+  if (!url) return (
+    <span className="text-[10px] text-ink leading-snug">
+      {figureLabel && <span className="whitespace-nowrap">{figureLabel}</span>}
+      {figureLabel && ' · '}
+      <span className="whitespace-nowrap">{source}</span>
+    </span>
+  );
   return (
-    <span className="text-[10px] whitespace-nowrap">
-      {sourceFigure && <span className="text-ink/50">{sourceFigure} · </span>}
-      <a href={url} target="_blank" rel="noopener noreferrer" className="text-klein hover:underline">
+    <span className="text-[10px] leading-snug">
+      {figureLabel && <span className="text-ink/50 whitespace-nowrap">{figureLabel}</span>}
+      {figureLabel && <span className="text-ink/50">{' · '}</span>}
+      <a href={url} target="_blank" rel="noopener noreferrer" className="text-klein hover:underline whitespace-nowrap">
         {label} <ExternalLink className="w-2.5 h-2.5 inline" />
       </a>
     </span>

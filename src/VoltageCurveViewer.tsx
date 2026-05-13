@@ -5,6 +5,7 @@
 
 import { useState, useRef, useCallback, useMemo } from 'react';
 import { getDoiCitationMap } from './geviData';
+import { abbreviateFigure } from './components/SourceCitation';
 
 interface VoltagePoint {
   voltage: number;  // mV
@@ -160,13 +161,37 @@ export function VoltageCurveViewer({ voltageData, geviName }: VoltageCurveViewer
   const height = 280;
   const padding = { top: 25, right: 25, bottom: 40, left: 55 };
 
-  const minV = dataMinV;
-  const maxV = dataMaxV;
+  // Pick a "nice" tick step (1, 2, or 5 × power of 10) for a given range and target tick count
+  const niceStep = (range: number, target: number): number => {
+    if (range <= 0) return 1;
+    const raw = range / target;
+    const exp = Math.floor(Math.log10(raw));
+    const mag = Math.pow(10, exp);
+    const norm = raw / mag;
+    const nice = norm < 1.5 ? 1 : norm < 3 ? 2 : norm < 7 ? 5 : 10;
+    return nice * mag;
+  };
+
   const rawMinDeltaF = allPoints.length ? Math.min(...allPoints.map(d => d.deltaF)) : -50;
   const rawMaxDeltaF = allPoints.length ? Math.max(...allPoints.map(d => d.deltaF)) : 30;
-  const deltaFPad = Math.max(5, (rawMaxDeltaF - rawMinDeltaF) * 0.1);
-  const minDeltaF = Math.floor(rawMinDeltaF - deltaFPad);
-  const maxDeltaF = Math.ceil(rawMaxDeltaF + deltaFPad);
+
+  // Snap chart bounds to round multiples of the chosen step so ticks fall on data-aligned values
+  const xStep = niceStep(dataMaxV - dataMinV, 7);
+  const yStep = niceStep((rawMaxDeltaF - rawMinDeltaF) || 10, 6);
+  const minV = Math.floor(dataMinV / xStep) * xStep;
+  const maxV = Math.ceil(dataMaxV / xStep) * xStep;
+  const minDeltaF = Math.floor(rawMinDeltaF / yStep) * yStep;
+  const maxDeltaF = Math.ceil(rawMaxDeltaF / yStep) * yStep;
+
+  // Generate tick arrays at the chosen step
+  const buildTicks = (lo: number, hi: number, step: number): number[] => {
+    const ticks: number[] = [];
+    for (let v = lo; v <= hi + step * 1e-6; v += step) ticks.push(Math.round(v / step) * step);
+    return ticks;
+  };
+  const xTicks = buildTicks(minV, maxV, xStep);
+  const yTicks = buildTicks(minDeltaF, maxDeltaF, yStep);
+
   const chartWidth = width - padding.left - padding.right;
   const chartHeight = height - padding.top - padding.bottom;
 
@@ -224,8 +249,8 @@ export function VoltageCurveViewer({ voltageData, geviName }: VoltageCurveViewer
         className="relative cursor-crosshair bg-surface-low rounded"
       >
         <svg className="w-full block" viewBox={`0 0 ${width} ${height}`}>
-          {/* Grid lines - dynamic Y ticks */}
-          {Array.from({ length: 6 }, (_, i) => Math.round(minDeltaF + (i / 5) * (maxDeltaF - minDeltaF))).map(v => (
+          {/* Grid lines - aligned to data-step Y ticks */}
+          {yTicks.map(v => (
             <line
               key={`grid-${v}`}
               x1={padding.left}
@@ -236,8 +261,8 @@ export function VoltageCurveViewer({ voltageData, geviName }: VoltageCurveViewer
               strokeWidth="1"
             />
           ))}
-          {/* X-axis labels - dynamic based on voltage range */}
-          {Array.from({ length: 7 }, (_, i) => Math.round(minV + (i / 6) * (maxV - minV))).map(v => (
+          {/* X-axis labels - aligned to data step */}
+          {xTicks.map(v => (
             <text
               key={`x-${v}`}
               x={xScale(v)}
@@ -249,8 +274,8 @@ export function VoltageCurveViewer({ voltageData, geviName }: VoltageCurveViewer
               {v}
             </text>
           ))}
-          {/* Y-axis labels - dynamic */}
-          {Array.from({ length: 6 }, (_, i) => Math.round(minDeltaF + (i / 5) * (maxDeltaF - minDeltaF))).map(v => (
+          {/* Y-axis labels - aligned to data step */}
+          {yTicks.map(v => (
             <text
               key={`y-${v}`}
               x={padding.left - 8}
@@ -406,7 +431,7 @@ export function VoltageCurveViewer({ voltageData, geviName }: VoltageCurveViewer
               ? <a href={url} target="_blank" rel="noopener noreferrer" className="hover:underline text-klein">{label}</a>
               : <span>{label}</span>
             }
-            {voltageData.sourceFigure && <span> — {voltageData.sourceFigure}</span>}
+            {voltageData.sourceFigure && <span> — {abbreviateFigure(voltageData.sourceFigure)}</span>}
           </div>
         );
       })()}
@@ -424,7 +449,7 @@ export function VoltageCurveViewer({ voltageData, geviName }: VoltageCurveViewer
               className="rounded-lg shadow-xl max-h-[80vh]"
             />
             <div className="absolute bottom-0 left-0 right-0 bg-black/70 text-white text-xs px-3 py-1.5 rounded-b-lg">
-              {voltageData.sourceFigure || 'Source figure'}
+              {voltageData.sourceFigure ? abbreviateFigure(voltageData.sourceFigure) : 'Source figure'}
               {voltageData.source && (() => {
                 const doi = voltageData.source!.startsWith('doi:') ? voltageData.source!.slice(4) : null;
                 return doi ? (

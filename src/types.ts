@@ -115,6 +115,7 @@ export interface GEVIColor {
 }
 
 export type SortField =
+  | 'name'
   | 'year'
   | 'paperCount'
   | 'bRel'

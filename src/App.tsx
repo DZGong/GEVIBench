@@ -150,6 +150,12 @@ function GEVIBenchApp() {
       const { field, order } = sortConfig;
       const multiplier = order === 'asc' ? 1 : -1;
 
+      if (field === 'name') {
+        // Alphabetical sort by sensor name (case-insensitive, locale-aware,
+        // numeric segments compared as numbers so ASAP2 < ASAP3 < ASAP10).
+        return a.name.localeCompare(b.name, undefined, { sensitivity: 'base', numeric: true }) * multiplier;
+      }
+
       if (field === 'year') {
         return (a.year - b.year) * multiplier;
       }
@@ -234,22 +240,37 @@ function GEVIBenchApp() {
   }, []);
 
   const handleSortChange = useCallback((field: SortField) => {
-    setSortConfig(prev => ({
-      field,
-      order: prev.field === field && prev.order === 'desc' ? 'asc' : 'desc',
-    }));
+    setSortConfig(prev => {
+      // First-click default order: text fields (name) start A→Z (asc);
+      // numeric fields start high→low (desc). Clicking the active field flips.
+      const defaultOrder = field === 'name' ? 'asc' : 'desc';
+      const flippedOrder = defaultOrder === 'desc' ? 'asc' : 'desc';
+      const sameField = prev.field === field;
+      return {
+        field,
+        order: sameField && prev.order === defaultOrder ? flippedOrder : defaultOrder,
+      };
+    });
   }, []);
 
   // Render Database Tab
   const renderDatabaseTab = () => (
-    <main className="w-full max-w-7xl mx-auto px-4 py-3">
-      {/* Title Panel with Video Background */}
+    <main className="w-full max-w-[1350px] mx-auto px-4 py-3">
+      {/* Title Panel with Video Background.
+          Video must be H.264 (avc1) in MP4 with the `moov` atom at the front
+          (`+faststart`); MPEG-4 Visual (`mp4v`) plays in Safari but Chrome
+          dropped support for it years ago, so a non-H.264 file shows a blank
+          grey panel in Chrome. `preload="auto"` lets the browser fetch enough
+          to start playback right away, and `disableRemotePlayback` hides the
+          AirPlay/Cast affordance on Safari for a clean background loop. */}
       <div className="relative rounded-xl overflow-hidden mb-3 -mt-1">
         <video
           autoPlay
           loop
           muted
           playsInline
+          preload="auto"
+          disableRemotePlayback
           className="absolute inset-0 w-full h-full object-cover"
         >
           <source src="/imgs/spike_mov.mp4" type="video/mp4" />
@@ -444,7 +465,7 @@ function GEVIBenchApp() {
 
       {/* Footer */}
       <footer className="mt-auto py-2 bg-surface-low">
-        <div className="max-w-7xl mx-auto px-4 flex items-center justify-center gap-3">
+        <div className="max-w-[1320px] mx-auto px-4 flex items-center justify-center gap-3">
           <span className="flex items-center gap-1 text-xs font-sans text-ink/40">
             © 2026 GEVIBench. Data sourced from published studies.
           </span>

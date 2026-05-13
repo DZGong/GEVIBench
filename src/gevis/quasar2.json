@@ -15,7 +15,7 @@
       "reference": "arch",
       "source": "doi:10.1038/nmeth.3000",
       "sourceFigure": "Table S2",
-      "note": "At 0.7 W/cm² and 800 W/cm² (comparable at both intensities)"
+      "note": "At 0.7 W/cm\u00b2 and 800 W/cm\u00b2 (comparable at both intensities)"
     },
     {
       "ratio": 10,
@@ -35,23 +35,23 @@
     {
       "on": 1.2,
       "off": 1,
-      "temperature": "23°C",
+      "temperature": "23\u00b0C",
       "source": "doi:10.1038/nmeth.3000",
       "sourceFigure": "Table S2",
-      "note": "Bi-exponential fast components (68% on, 80% off); slow τ_on=11.8 ms, slow τ_off=15.9 ms. n=6 cells"
+      "note": "Bi-exponential fast components (68% on, 80% off); slow \u03c4_on=11.8 ms, slow \u03c4_off=15.9 ms. n=6 cells"
     },
     {
       "on": 0.3,
       "off": 0.3,
-      "temperature": "34°C",
+      "temperature": "34\u00b0C",
       "source": "doi:10.1038/nmeth.3000",
       "sourceFigure": "Table S2",
-      "note": "Bi-exponential fast components (62% on, 73% off); slow τ_on=3.2 ms, slow τ_off=4.0 ms. n=7 cells"
+      "note": "Bi-exponential fast components (62% on, 73% off); slow \u03c4_on=3.2 ms, slow \u03c4_off=4.0 ms. n=7 cells"
     },
     {
       "on": 0.9,
       "off": 1.6,
-      "temperature": "33-34°C",
+      "temperature": "33-34\u00b0C",
       "source": "doi:10.1016/j.cell.2019.11.004",
       "sourceFigure": "Table 1"
     }
@@ -81,12 +81,17 @@
       "deltaF": 48,
       "source": "doi:10.1038/nmeth.3000",
       "sourceFigure": "Fig. 1g"
+    },
+    {
+      "deltaF": 48,
+      "source": "doi:10.1038/ncomms5625",
+      "sourceFigure": "Table 1"
     }
   ],
   "photostabilityData": [
     {
       "brightnessRemaining": 94,
-      "illumination": "3000 mW/mm²",
+      "illumination": "3000 mW/mm\u00b2",
       "duration": "1 min",
       "source": "doi:10.1038/nmeth.3000",
       "sourceFigure": "Fig. S5"

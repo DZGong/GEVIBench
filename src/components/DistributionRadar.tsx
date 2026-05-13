@@ -36,12 +36,15 @@ interface AxisSpec {
 }
 
 const AXES: AxisSpec[] = [
-  { key: 'brightness',     label: [{ text: 'B/B' }, { text: 'EGFP', sub: true }],                   ticks: [0.1, 1,   10] },
-  { key: 'tauOn',          label: [{ text: 'τ' }, { text: 'on', sub: true }, { text: ' (ms)' }],    ticks: [10,  1,   0.1] },
-  { key: 'tauOff',         label: [{ text: 'τ' }, { text: 'off', sub: true }, { text: ' (ms)' }],   ticks: [100, 10,  1] },
-  { key: 'dynamicRange',   label: [{ text: 'ΔF/F per 100mV' }],                                     ticks: [1,   10,  100] },
-  { key: 'sensitivity',    label: [{ text: 'ΔF/F per AP' }],                                        ticks: [1,   10,  100] },
-  { key: 'photostability', label: [{ text: 'F' }, { text: 'remain', sub: true }, { text: '%' }],    ticks: [1,   10,  100] },
+  { key: 'brightness',     label: [{ text: 'B/B' }, { text: 'EGFP', sub: true }],                                                       ticks: [0.1, 1,   10] },
+  // Kinetics axis collapses on/off into the per-entry sum (τ_on + τ_off).
+  // Inverted: faster (smaller sum) sits on the outer ring.
+  { key: 'kinetics',       label: [{ text: 'τ' }, { text: 'on', sub: true }, { text: '+τ' }, { text: 'off', sub: true }, { text: ' (ms)' }], ticks: [100, 10,  1] },
+  { key: 'dynamicRange',   label: [{ text: 'ΔF/F% per 100mV' }],                                                                        ticks: [1,   10,  100] },
+  { key: 'sensitivity',    label: [{ text: 'ΔF/F% per AP' }],                                                                           ticks: [1,   10,  100] },
+  { key: 'photostability', label: [{ text: 'F' }, { text: 'remain', sub: true }, { text: '%' }],                                        ticks: [1,   10,  100] },
+  // Independent research papers using this sensor — proxy for adoption.
+  { key: 'nUsed',          label: [{ text: 'N' }, { text: 'used', sub: true }],                                                         ticks: [1,   10,  100] },
 ];
 
 function labelToPlainText(parts: LabelPart[]): string {
@@ -79,8 +82,9 @@ function axisRadialPosition(value: number, ticks: [number, number, number]): num
 
 function formatValue(v: number, key: DistributionAxisKey): string {
   if (key === 'brightness') return `${v.toPrecision(2)}× EGFP`;
-  if (key === 'tauOn' || key === 'tauOff') return `${v.toPrecision(2)} ms`;
+  if (key === 'tauOn' || key === 'tauOff' || key === 'kinetics') return `${v.toPrecision(2)} ms`;
   if (key === 'photostability') return `${v.toFixed(0)}%/min`;
+  if (key === 'nUsed') return `${v.toFixed(0)} ${v === 1 ? 'paper' : 'papers'}`;
   return `${v.toPrecision(2)}%`;
 }
 
