@@ -227,7 +227,7 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
       ) : (compact || isNarrow) ? (
           /* Narrow / mobile view — single swipeable metric column */
           <table className="w-full border-collapse" style={{ fontSize: '14px' }}>
-            <thead className="sticky top-0 z-10 bg-surface [&_th]:bg-surface">
+            <thead className="sticky top-0 z-10 isolate bg-surface [&_th]:bg-surface [&_th]:relative [&_th]:[transform:translateZ(0)] [&_th]:[will-change:transform]">
               <tr className="border-b border-surface">
                 <th className={`pl-2 pr-2 py-2 text-center ${thBase} w-12`} style={{ fontSize: '14px' }}>#</th>
                 <th className={`pl-1 pr-0 py-2 text-left ${thBase}`} style={{ fontSize: '14px', width: '1%', whiteSpace: 'nowrap' }}>Sensor ({gevis.length})</th>
@@ -366,7 +366,7 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
         ) : (
           /* Full tabular view — wide screens */
           <table className="w-full border-collapse" style={{ fontSize: '14px' }}>
-            <thead className="sticky top-0 z-10 bg-surface [&_th]:bg-surface">
+            <thead className="sticky top-0 z-10 isolate bg-surface [&_th]:bg-surface [&_th]:relative [&_th]:[transform:translateZ(0)] [&_th]:[will-change:transform]">
               <tr className="border-b border-surface">
                 <th className={`pl-2 pr-4 py-2 text-center ${thBase} w-16`} style={{ fontSize: '14px' }}>#</th>
                 <th
