@@ -329,34 +329,51 @@ function GEVIBenchApp() {
         <>
           {/* Main Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-            {/* GEVI List panel — also the scroll container for the table.
+            {/* GEVI List panel.
                 · Compact (detail open): hidden on narrow screens; sticky inside the grid with its own scroll.
                 · Otherwise: full width, capped at 1.2× the viewport-fit value (120vh - 20.4rem
                   ≡ 1.2 × (100vh - 17rem)) so the panel scales with the window — fills the viewport
                   on any height and extends past it by ~0.2× to give the outer page some scroll room.
                   17rem ≈ header (~80px) + title (~98px) + search (~44px) + paddings ≈ 248px.
-                `overflow-auto` (both axes) lets the table scroll horizontally on viewports too narrow
-                to fit all columns, while the sticky <thead> still pins vertically.
-                The rounded/bg/shadow visual treatment lives here (not inside GEVIList) so it stays
-                aligned with the scroll area instead of clipping horizontal overflow. */}
+
+                Two-div structure: the OUTER div owns the rounded corners +
+                background + shadow + sizing + sticky/grid placement, and uses
+                overflow:hidden purely to enforce the rounded clip. The INNER
+                div is the actual scroll container (overflow:auto on both
+                axes — horizontal lets the wide table scroll on narrow
+                viewports, vertical drives the sticky <thead>). Splitting
+                them prevents a long-standing Safari WebKit bug where
+                position:sticky children of an overflow:auto + border-radius
+                element render past the rounded corners during scroll
+                (visible as row text bleeding above the sticky header).
+                See https://bugs.webkit.org/show_bug.cgi?id=98643 and
+                related issues. */}
             <div
-              ref={sideListRef}
-              className={`rounded-lg bg-surface-lowest shadow-ambient ${
+              className={`rounded-lg overflow-hidden bg-surface-lowest shadow-ambient ${
                 selectedGEVI && filteredGEVIs.length > 0
-                  ? 'hidden md:block col-span-1 sticky top-20 max-h-[calc(100vh-6rem)] overflow-auto'
-                  : 'col-span-3 max-h-[calc(120vh-20.4rem)] overflow-auto'
+                  ? 'hidden md:block col-span-1 sticky top-20 max-h-[calc(100vh-6rem)]'
+                  : 'col-span-3 max-h-[calc(120vh-20.4rem)]'
               }`}
             >
-              <GEVIList
-                gevis={filteredGEVIs}
-                selectedGEVI={selectedGEVI}
-                onSelect={handleSelectGEVI}
-                onAddToCompare={addToCompare}
-                compareGEVIs={compareGEVIs}
-                compact={!!selectedGEVI && filteredGEVIs.length > 0}
-                sortConfig={sortConfig}
-                onSortChange={handleSortChange}
-              />
+              <div
+                ref={sideListRef}
+                className={`overflow-auto ${
+                  selectedGEVI && filteredGEVIs.length > 0
+                    ? 'max-h-[calc(100vh-6rem)]'
+                    : 'max-h-[calc(120vh-20.4rem)]'
+                }`}
+              >
+                <GEVIList
+                  gevis={filteredGEVIs}
+                  selectedGEVI={selectedGEVI}
+                  onSelect={handleSelectGEVI}
+                  onAddToCompare={addToCompare}
+                  compareGEVIs={compareGEVIs}
+                  compact={!!selectedGEVI && filteredGEVIs.length > 0}
+                  sortConfig={sortConfig}
+                  onSortChange={handleSortChange}
+                />
+              </div>
             </div>
 
             {/* Detail Panel */}
