@@ -205,8 +205,12 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
     return result;
   }, [gevis]);
 
+  // Row dividers: with border-collapse:separate (used so position:sticky thead
+  // paints correctly in Safari), <tbody> borders no longer render. Draw the
+  // divider as a top border on the first <tr>'s cells of every tbody except
+  // the first one, which visually places the line between adjacent gevi rows.
   const groupCls = (gevi: any) =>
-    `cursor-pointer transition-colors group border-b border-surface ${
+    `cursor-pointer transition-colors group [&:not(:first-of-type)>tr:first-child>td]:border-t [&:not(:first-of-type)>tr:first-child>td]:border-surface ${
       selectedGEVI?.id === gevi.id
         ? 'bg-surface-low'
         : '[&:hover]:bg-surface-low'
@@ -226,9 +230,9 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
         </div>
       ) : (compact || isNarrow) ? (
           /* Narrow / mobile view — single swipeable metric column */
-          <table className="w-full border-collapse" style={{ fontSize: '14px' }}>
-            <thead className="sticky top-0 z-10 isolate bg-surface [&_th]:bg-surface [&_th]:relative [&_th]:[transform:translateZ(0)] [&_th]:[will-change:transform]">
-              <tr className="border-b border-surface">
+          <table className="w-full border-separate [border-spacing:0]" style={{ fontSize: '14px' }}>
+            <thead className="sticky top-0 z-10 bg-surface [&_th]:bg-surface [&_th]:border-b [&_th]:border-surface">
+              <tr>
                 <th className={`pl-2 pr-2 py-2 text-center ${thBase} w-12`} style={{ fontSize: '14px' }}>#</th>
                 <th className={`pl-1 pr-0 py-2 text-left ${thBase}`} style={{ fontSize: '14px', width: '1%', whiteSpace: 'nowrap' }}>Sensor ({gevis.length})</th>
                 <th className="px-1 py-2" style={{ minWidth: '150px' }}>
@@ -365,9 +369,9 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
           </table>
         ) : (
           /* Full tabular view — wide screens */
-          <table className="w-full border-collapse" style={{ fontSize: '14px' }}>
-            <thead className="sticky top-0 z-10 isolate bg-surface [&_th]:bg-surface [&_th]:relative [&_th]:[transform:translateZ(0)] [&_th]:[will-change:transform]">
-              <tr className="border-b border-surface">
+          <table className="w-full border-separate [border-spacing:0]" style={{ fontSize: '14px' }}>
+            <thead className="sticky top-0 z-10 bg-surface [&_th]:bg-surface [&_th]:border-b [&_th]:border-surface">
+              <tr>
                 <th className={`pl-2 pr-4 py-2 text-center ${thBase} w-16`} style={{ fontSize: '14px' }}>#</th>
                 <th
                   className={`px-1 py-2 text-left ${thBase} cursor-pointer select-none hover:text-klein transition-colors whitespace-nowrap ${
