@@ -31,4 +31,4 @@ dist-ssr
 local/
 docs/superpowers/
 fv-curve-issues.md
-.claude/agent-memory/
+.claude/
