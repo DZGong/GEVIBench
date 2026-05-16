@@ -11,6 +11,8 @@ node_modules
 dist
 dist-ssr
 *.local
+package-lock.json
+.npmrc
 
 # Editor directories and files
 .vscode/*
@@ -33,3 +35,4 @@ docs/superpowers/
 fv-curve-issues.md
 .claude/
 CLAUDE.md
+public/imgs/*_original.*
