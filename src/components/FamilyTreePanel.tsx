@@ -413,6 +413,7 @@ function buildTreeFromPaths(gevis: GEVI[]): TreeNode {
     ['Opsin-FRET', ['caesr', 'macq', 'ace2n-mneon', 'Chemigenetic']],
     ['archon1', ['_fork_quasar6_quasar6b', 'somarchon']],
     ['Opsin-Fluorescent', ['arch', 'props']],
+    ['pace', ['jarvis', 'electraon', 'positron2']],
   ];
   function findNode(n: TreeNode, key: string): TreeNode | null {
     if (!n.children) return null;
