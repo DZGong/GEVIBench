@@ -79,7 +79,7 @@ export function Header({ activeTab, setActiveTab, mobileMenuOpen, setMobileMenuO
             </button>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 lg:mr-6">
             <nav className="hidden lg:flex items-center gap-2">
               <button onClick={() => setActiveTab('database')} className={tabButtonClass('database')}>
                 Database

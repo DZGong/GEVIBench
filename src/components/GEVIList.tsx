@@ -113,7 +113,22 @@ export { abbreviatePaper };
 // renders the underlying FP/opsin peaks).
 export function WavelengthCellContent({ gevi }: { gevi: any }) {
   if (gevi.voltage?.type === 'chemi') {
-    return <span className="text-ink/60 italic whitespace-nowrap">Chemigenetic</span>;
+    // Each letter is tinted across the visible spectrum (blue → red, redshifted
+    // so the warm colors aren't bunched at the end) to hint that chemigenetic
+    // sensors pair with a whole palette of synthetic dyes.
+    const label = 'Chemigenetic';
+    const last = label.length - 1;
+    return (
+      <span
+        className="italic whitespace-nowrap font-medium"
+        aria-label="Chemigenetic"
+        title="Chemigenetic — compatible with a palette of synthetic dyes"
+      >
+        {label.split('').map((ch, i) => (
+          <span key={i} style={{ color: `hsl(${Math.max(0, Math.round(255 - (270 * i) / last))}, 85%, 48%)` }}>{ch}</span>
+        ))}
+      </span>
+    );
   }
   const peakEx = gevi.spectrum?.peakEx;
   const peakEm = gevi.spectrum?.peakEm;
