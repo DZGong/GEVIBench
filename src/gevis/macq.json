@@ -366,7 +366,8 @@
         0.0172,
         0.0162
       ]
-    }
+    },
+    "proofread": false
   },
   "voltage": {
     "type": "opsin",
@@ -399,7 +400,8 @@
     },
     "source": "doi:10.1038/ncomms4674",
     "sourceImage": "/fv-sources/macq.jpg",
-    "sourceFigure": "Fig. 3b"
+    "sourceFigure": "Fig. 3b",
+    "proofread": false
   },
   "kinetics": [
     {
@@ -407,7 +409,8 @@
       "off": 5.4,
       "temperature": "22°C",
       "source": "doi:10.1038/ncomms4674",
-      "sourceFigure": "Table S1"
+      "sourceFigure": "Table S1",
+      "proofread": false
     }
   ],
   "dynamicRangeData": [
@@ -415,20 +418,23 @@
       "deltaF": -20,
       "sign": "negative",
       "source": "doi:10.1038/ncomms4674",
-      "sourceFigure": "Fig. 3b"
+      "sourceFigure": "Fig. 3b",
+      "proofread": false
     },
     {
       "deltaF": -19.49,
       "sign": "negative",
       "source": "doi:10.1073/pnas.1902443116",
-      "sourceFigure": "Fig. 4C"
+      "sourceFigure": "Fig. 4C",
+      "proofread": false
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 4.8,
       "source": "doi:10.1038/ncomms4674",
-      "sourceFigure": "Fig. 5d"
+      "sourceFigure": "Fig. 5d",
+      "proofread": false
     }
   ],
   "photostabilityData": [
@@ -437,7 +443,8 @@
       "illumination": "15 mW/mm²",
       "duration": "0.5 min",
       "source": "doi:10.1038/ncomms4674",
-      "sourceFigure": "Table S1"
+      "sourceFigure": "Table S1",
+      "proofread": false
     }
   ],
   "brightnessData": [
@@ -445,18 +452,21 @@
       "ratio": 3,
       "reference": "arclight",
       "source": "doi:10.1038/ncomms4674",
-      "sourceFigure": "Fig. S4"
+      "sourceFigure": "Fig. S4",
+      "proofread": false
     }
   ],
   "twoPhoton": [
     {
       "compatible": false,
-      "source": "doi:10.7554/eLife.25690"
+      "source": "doi:10.7554/eLife.25690",
+      "proofread": false
     }
   ],
   "addgene": {
     "id": "48762",
-    "url": "https://www.addgene.org/48762/"
+    "url": "https://www.addgene.org/48762/",
+    "proofread": false
   },
   "researchPapers": [
     {
@@ -465,7 +475,8 @@
       "journal": "Nature Communications",
       "year": 2014,
       "sample": "HEK293 cells, cultured neurons, mouse brain slices and in vivo (Purkinje neurons)",
-      "url": "https://doi.org/10.1038/ncomms4674"
+      "url": "https://doi.org/10.1038/ncomms4674",
+      "proofread": false
     },
     {
       "title": "High-speed recording of neural spikes in awake mice and flies with a fluorescent voltage sensor",
@@ -473,7 +484,8 @@
       "journal": "Science",
       "year": 2015,
       "sample": "HEK293 cells, cultured neurons, in vitro",
-      "url": "https://doi.org/10.1126/science.aab0810"
+      "url": "https://doi.org/10.1126/science.aab0810",
+      "proofread": false
     },
     {
       "title": "Cell-Type-Specific Optical Recording of Membrane Voltage Dynamics in Freely Moving Mice",
@@ -481,7 +493,8 @@
       "journal": "Cell",
       "year": 2016,
       "sample": "Mouse somatosensory cortex, striatum (D1/D2 MSNs), PV interneurons, in vivo freely moving",
-      "url": "https://doi.org/10.1016/j.cell.2016.11.021"
+      "url": "https://doi.org/10.1016/j.cell.2016.11.021",
+      "proofread": false
     },
     {
       "title": "Fast two-photon imaging of subcellular voltage dynamics in neuronal tissue with genetically encoded indicators",
@@ -489,7 +502,8 @@
       "journal": "eLife",
       "year": 2017,
       "sample": "Drosophila visual neurons (L2), in vivo; rat hippocampal organotypic slices, in vitro",
-      "url": "https://doi.org/10.7554/eLife.25690"
+      "url": "https://doi.org/10.7554/eLife.25690",
+      "proofread": false
     },
     {
       "title": "Rhodopsin-based voltage imaging tools for use in muscles and neurons of Caenorhabditis elegans",
@@ -497,7 +511,8 @@
       "journal": "PNAS",
       "year": 2019,
       "sample": "C. elegans, pharyngeal and body wall muscles, in vivo",
-      "url": "https://doi.org/10.1073/pnas.1902443116"
+      "url": "https://doi.org/10.1073/pnas.1902443116",
+      "proofread": false
     }
   ]
 }

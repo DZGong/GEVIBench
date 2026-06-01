@@ -1,4 +1,4 @@
-import { Menu, X, ChevronDown, TreeDeciduous, GitCompare, Github, Share2, ScatterChart } from 'lucide-react';
+import { Menu, X, ChevronDown, TreeDeciduous, GitCompare, Share2, ScatterChart } from 'lucide-react';
 import { useState, useRef, useEffect } from 'react';
 import type { ViewTab } from '../types';
 
@@ -136,16 +136,6 @@ export function Header({ activeTab, setActiveTab, mobileMenuOpen, setMobileMenuO
                 Contact
               </button>
             </nav>
-
-            <a
-              href="https://github.com/DZGong/GEVIBench"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 rounded-md text-ink/60 hover:bg-surface-low"
-              title="GitHub"
-            >
-              <Github className="w-5 h-5" />
-            </a>
           </div>
         </div>
 

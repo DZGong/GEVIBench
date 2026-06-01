@@ -663,7 +663,8 @@
         0.0064,
         0.0064
       ]
-    }
+    },
+    "proofread": false
   },
   "voltage": {
     "type": "fp",
@@ -698,7 +699,8 @@
     },
     "source": "doi:10.1101/2024.06.21.599617",
     "sourceImage": "/fv-sources/asap6b.jpg",
-    "sourceFigure": "Fig. 1b"
+    "sourceFigure": "Fig. 1b",
+    "proofread": false
   },
   "kinetics": [
     {
@@ -706,7 +708,8 @@
       "off": 6.16,
       "temperature": "25°C",
       "source": "doi:10.1101/2024.06.21.599617",
-      "sourceFigure": "Table 1"
+      "sourceFigure": "Table 1",
+      "proofread": false
     }
   ],
   "dynamicRangeData": [
@@ -714,14 +717,16 @@
       "deltaF": 161,
       "sign": "positive",
       "source": "doi:10.1101/2024.06.21.599617",
-      "sourceFigure": "Fig. 1b"
+      "sourceFigure": "Fig. 1b",
+      "proofread": false
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 33,
       "source": "doi:10.1101/2024.06.21.599617",
-      "sourceFigure": "Fig. 1c"
+      "sourceFigure": "Fig. 1c",
+      "proofread": false
     }
   ],
   "brightnessData": [
@@ -729,19 +734,22 @@
       "ratio": 2,
       "reference": "asap4e",
       "source": "doi:10.1101/2024.06.21.599617",
-      "sourceFigure": "Table S1"
+      "sourceFigure": "Table S1",
+      "proofread": false
     },
     {
       "ratio": 1.417,
       "reference": "asap6-1",
       "source": "doi:10.1101/2024.06.21.599617",
-      "sourceFigure": "Table S1"
+      "sourceFigure": "Table S1",
+      "proofread": false
     }
   ],
   "twoPhoton": [
     {
       "compatible": true,
-      "source": "doi:10.1101/2024.06.21.599617"
+      "source": "doi:10.1101/2024.06.21.599617",
+      "proofread": false
     }
   ],
   "researchPapers": [
@@ -751,7 +759,8 @@
       "journal": "bioRxiv",
       "year": 2024,
       "url": "https://doi.org/10.1101/2024.06.21.599617",
-      "sample": "HEK293A cells, rat hippocampal neurons in vitro, mouse retina ex vivo, mouse motor cortex in vivo (1P), mouse barrel cortex in vivo (2P)"
+      "sample": "HEK293A cells, rat hippocampal neurons in vitro, mouse retina ex vivo, mouse motor cortex in vivo (1P), mouse barrel cortex in vivo (2P)",
+      "proofread": false
     }
   ]
 }

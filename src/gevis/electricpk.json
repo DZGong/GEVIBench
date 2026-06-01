@@ -18,7 +18,8 @@
   ],
   "addgene": {
     "id": "40314",
-    "url": "https://www.addgene.org/40314/"
+    "url": "https://www.addgene.org/40314/",
+    "proofread": false
   },
   "kinetics": [
     {
@@ -26,7 +27,8 @@
       "off": 2.09,
       "temperature": "35-37°C",
       "source": "doi:10.1371/journal.pone.0043454",
-      "sourceFigure": "Fig. 5B"
+      "sourceFigure": "Fig. 5B",
+      "proofread": false
     }
   ],
   "dynamicRangeData": [
@@ -34,21 +36,24 @@
       "deltaF": -1.2,
       "sign": "negative",
       "source": "doi:10.1371/journal.pone.0043454",
-      "sourceFigure": "Fig. 4A"
+      "sourceFigure": "Fig. 4A",
+      "proofread": false
     }
   ],
   "brightnessData": [
     {
       "ratio": 0.536,
       "reference": "EGFP",
-      "source": "estimated from cpEGFP (GCaMP3) EC×QY vs EGFP"
+      "source": "estimated from cpEGFP (GCaMP3) EC×QY vs EGFP",
+      "proofread": false
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 0.7,
       "source": "doi:10.1371/journal.pone.0043454",
-      "sourceFigure": "Fig. 7C"
+      "sourceFigure": "Fig. 7C",
+      "proofread": false
     }
   ],
   "spectrum": {
@@ -668,7 +673,8 @@
         0.0073,
         0.007
       ]
-    }
+    },
+    "proofread": false
   },
   "voltage": {
     "type": "fp",
@@ -697,14 +703,16 @@
     },
     "source": "doi:10.1371/journal.pone.0043454",
     "sourceImage": "/fv-sources/electricpk.jpg",
-    "sourceFigure": "Fig. 6B"
+    "sourceFigure": "Fig. 6B",
+    "proofread": false
   },
   "photostabilityData": [
     {
       "brightnessRemaining": 80,
       "illumination": "100 mW/mm²",
       "duration": "1 min",
-      "source": "estimated from EGFP photostability (cpEGFP shares same chromophore)"
+      "source": "estimated from EGFP photostability (cpEGFP shares same chromophore)",
+      "proofread": false
     }
   ],
   "researchPapers": [
@@ -714,7 +722,8 @@
       "journal": "PLoS ONE",
       "year": 2012,
       "sample": "HEK293 cells, mouse hippocampal neurons, in vitro",
-      "url": "https://doi.org/10.1371/journal.pone.0043454"
+      "url": "https://doi.org/10.1371/journal.pone.0043454",
+      "proofread": false
     }
   ]
 }

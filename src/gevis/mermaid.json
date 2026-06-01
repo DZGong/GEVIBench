@@ -345,7 +345,8 @@
         0.0116,
         0.0098
       ]
-    }
+    },
+    "proofread": false
   },
   "voltage": {
     "type": "fret",
@@ -380,7 +381,8 @@
     },
     "source": "doi:10.1038/nmeth.1235",
     "sourceImage": "/fv-sources/mermaid.jpg",
-    "sourceFigure": "Fig. 1e"
+    "sourceFigure": "Fig. 1e",
+    "proofread": false
   },
   "kinetics": [
     {
@@ -388,14 +390,16 @@
       "off": 15,
       "temperature": "33°C",
       "source": "doi:10.1038/nmeth.1235",
-      "sourceFigure": "Fig. 1F"
+      "sourceFigure": "Fig. 1F",
+      "proofread": false
     },
     {
       "on": 12,
       "off": 23,
       "temperature": "35-37°C",
       "source": "doi:10.1371/journal.pone.0043454",
-      "sourceFigure": "Fig. 5B"
+      "sourceFigure": "Fig. 5B",
+      "proofread": false
     }
   ],
   "dynamicRangeData": [
@@ -403,7 +407,8 @@
       "deltaF": 40,
       "sign": "positive",
       "source": "doi:10.1038/nmeth.1235",
-      "sourceFigure": "Fig. 1E"
+      "sourceFigure": "Fig. 1E",
+      "proofread": false
     }
   ],
   "brightnessData": [
@@ -411,14 +416,16 @@
       "ratio": 1.286,
       "reference": "EGFP",
       "source": "doi:10.1038/nmeth.1235",
-      "sourceFigure": "Main text"
+      "sourceFigure": "Main text",
+      "proofread": false
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 1.6,
       "source": "doi:10.1038/nmeth.1235",
-      "sourceFigure": "Table S1"
+      "sourceFigure": "Table S1",
+      "proofread": false
     }
   ],
   "photostabilityData": [
@@ -427,7 +434,8 @@
       "illumination": "4.08 mW/mm²",
       "duration": "2.5 min",
       "source": "doi:10.1038/nmeth.1235",
-      "sourceFigure": "Fig. S2"
+      "sourceFigure": "Fig. S2",
+      "proofread": false
     }
   ],
   "researchPapers": [
@@ -437,7 +445,8 @@
       "journal": "Nature Methods",
       "year": 2008,
       "sample": "HEK293 cells, Neuro2A cells, rat cortical neurons, Xenopus oocytes, in vitro",
-      "url": "https://doi.org/10.1038/nmeth.1235"
+      "url": "https://doi.org/10.1038/nmeth.1235",
+      "proofread": false
     },
     {
       "title": "Visualizing voltage dynamics in zebrafish heart",
@@ -445,7 +454,8 @@
       "journal": "The Journal of Physiology",
       "year": 2010,
       "sample": "Zebrafish, heart, in vivo",
-      "url": "https://doi.org/10.1113/jphysiol.2010.189126"
+      "url": "https://doi.org/10.1113/jphysiol.2010.189126",
+      "proofread": false
     },
     {
       "title": "Optical action potential screening on adult ventricular myocytes as an alternative QT-screen",
@@ -453,7 +463,8 @@
       "journal": "Cellular Physiology and Biochemistry",
       "year": 2011,
       "sample": "Rat, ventricular myocytes, in vitro",
-      "url": "https://doi.org/10.1159/000327954"
+      "url": "https://doi.org/10.1159/000327954",
+      "proofread": false
     },
     {
       "title": "Neural coding in a single sensory neuron controlling opposite seeking behaviours in Caenorhabditis elegans",
@@ -461,7 +472,8 @@
       "journal": "Nature Communications",
       "year": 2011,
       "sample": "C. elegans, in vivo",
-      "url": "https://doi.org/10.1038/ncomms1352"
+      "url": "https://doi.org/10.1038/ncomms1352",
+      "proofread": false
     },
     {
       "title": "Rapid evaluation of a protein-based voltage probe using a field-induced membrane potential change",
@@ -469,7 +481,8 @@
       "journal": "Biochimica et Biophysica Acta",
       "year": 2014,
       "sample": "HEK293 cells, in vitro",
-      "url": "https://doi.org/10.1016/j.bbamem.2014.03.002"
+      "url": "https://doi.org/10.1016/j.bbamem.2014.03.002",
+      "proofread": false
     },
     {
       "title": "INaP selective inhibition reverts precocious inter- and motorneurons hyperexcitability in the Sod1-G93R zebrafish ALS model",
@@ -477,7 +490,8 @@
       "journal": "Scientific Reports",
       "year": 2016,
       "sample": "Zebrafish, spinal motor neurons, in vivo",
-      "url": "https://doi.org/10.1038/srep24515"
+      "url": "https://doi.org/10.1038/srep24515",
+      "proofread": false
     },
     {
       "title": "Biosensing Motor Neuron Membrane Potential in Live Zebrafish Embryos",
@@ -485,7 +499,8 @@
       "journal": "Journal of Visualized Experiments",
       "year": 2017,
       "sample": "Zebrafish, motor neurons, in vivo",
-      "url": "https://doi.org/10.3791/55297"
+      "url": "https://doi.org/10.3791/55297",
+      "proofread": false
     },
     {
       "title": "Tracking the sarcoplasmic reticulum membrane voltage in muscle with a FRET biosensor",
@@ -493,7 +508,8 @@
       "journal": "The Journal of General Physiology",
       "year": 2018,
       "sample": "Mouse, skeletal muscle fibers, in vitro",
-      "url": "https://doi.org/10.1085/jgp.201812035"
+      "url": "https://doi.org/10.1085/jgp.201812035",
+      "proofread": false
     },
     {
       "title": "Use of FRET-Sensor 'Mermaid' to Detect Subtle Changes in Membrane Potential of Primary Mouse PASMCs",
@@ -501,7 +517,8 @@
       "journal": "Cells",
       "year": 2024,
       "sample": "Mouse, pulmonary arterial smooth muscle cells, in vitro",
-      "url": "https://doi.org/10.3390/cells13121070"
+      "url": "https://doi.org/10.3390/cells13121070",
+      "proofread": false
     }
   ]
 }

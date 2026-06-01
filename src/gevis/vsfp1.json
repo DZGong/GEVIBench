@@ -484,7 +484,8 @@
         0.0071,
         0.007
       ]
-    }
+    },
+    "proofread": false
   },
   "voltage": {
     "type": "fret",
@@ -517,7 +518,8 @@
     },
     "source": "doi:10.1046/j.0953-816x.2001.01617.x",
     "sourceImage": "/fv-sources/vsfp1.jpg",
-    "sourceFigure": "Fig. 3B"
+    "sourceFigure": "Fig. 3B",
+    "proofread": false
   },
   "kinetics": [
     {
@@ -525,7 +527,8 @@
       "off": 0.74,
       "temperature": "25-28°C",
       "source": "doi:10.1046/j.0953-816x.2001.01617.x",
-      "sourceFigure": "Fig. 3E"
+      "sourceFigure": "Fig. 3E",
+      "proofread": false
     }
   ],
   "dynamicRangeData": [
@@ -533,14 +536,16 @@
       "deltaF": 1.8,
       "sign": "positive",
       "source": "doi:10.1046/j.0953-816x.2001.01617.x",
-      "sourceFigure": "Fig. 3B"
+      "sourceFigure": "Fig. 3B",
+      "proofread": false
     }
   ],
   "subthresholdData": [
     {
       "slope": 0.018,
       "source": "doi:10.1046/j.0953-816x.2001.01617.x",
-      "sourceFigure": "Fig. 3B"
+      "sourceFigure": "Fig. 3B",
+      "proofread": false
     }
   ],
   "researchPapers": [
@@ -550,7 +555,8 @@
       "journal": "European Journal of Neuroscience",
       "year": 2001,
       "sample": "HEK 293 cells, in vitro",
-      "url": "https://doi.org/10.1046/j.0953-816x.2001.01617.x"
+      "url": "https://doi.org/10.1046/j.0953-816x.2001.01617.x",
+      "proofread": false
     }
   ]
 }

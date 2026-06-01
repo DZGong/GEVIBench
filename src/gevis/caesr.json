@@ -499,7 +499,8 @@
         0.0071,
         0.007
       ]
-    }
+    },
+    "proofread": false
   },
   "voltage": {
     "type": "opsin",
@@ -526,7 +527,8 @@
         -12,
         -15
       ]
-    }
+    },
+    "proofread": false
   },
   "kinetics": [
     {
@@ -535,7 +537,8 @@
       "temperature": "23\u00b0C",
       "source": "doi:10.1038/ncomms5625",
       "sourceFigure": "Table 1",
-      "note": "Bi-exponential fast components (45% fast on depolarizing; hyperpolarizing 4.3 ms 45% fast, slow 31 ms; depolarizing slow 27 ms 45% fast); \u03c4_1/2 = 7.5 ms both directions"
+      "note": "Bi-exponential fast components (45% fast on depolarizing; hyperpolarizing 4.3 ms 45% fast, slow 31 ms; depolarizing slow 27 ms 45% fast); \u03c4_1/2 = 7.5 ms both directions",
+      "proofread": false
     }
   ],
   "dynamicRangeData": [
@@ -543,14 +546,16 @@
       "deltaF": -13.1,
       "sign": "negative",
       "source": "doi:10.1038/ncomms5625",
-      "sourceFigure": "Table 1"
+      "sourceFigure": "Table 1",
+      "proofread": false
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 9.7,
       "source": "doi:10.1038/ncomms5625",
-      "sourceFigure": "Table 1"
+      "sourceFigure": "Table 1",
+      "proofread": false
     }
   ],
   "brightnessData": [
@@ -559,7 +564,8 @@
       "reference": "EGFP",
       "source": "doi:10.1038/ncomms5625",
       "sourceFigure": "Table S1",
-      "note": "Estimated from Citrine EC=77000 M-1cm-1, QY=0.76 (Suppl. Table 1), reduced by measured eFRET efficiency E_FRET=0.18 (Suppl. Fig. 2); EGFP reference EC\u00d7QY = 33,400 \u00d7 0.60"
+      "note": "Estimated from Citrine EC=77000 M-1cm-1, QY=0.76 (Suppl. Table 1), reduced by measured eFRET efficiency E_FRET=0.18 (Suppl. Fig. 2); EGFP reference EC\u00d7QY = 33,400 \u00d7 0.60",
+      "proofread": false
     }
   ],
   "researchPapers": [
@@ -569,7 +575,8 @@
       "journal": "Nature Communications",
       "year": 2014,
       "sample": "HEK293 cells, in vitro; cultured rat hippocampal neurons, in vitro",
-      "url": "https://doi.org/10.1038/ncomms5625"
+      "url": "https://doi.org/10.1038/ncomms5625",
+      "proofread": false
     },
     {
       "title": "Two-photon lifetime imaging of voltage indicating proteins as a probe of absolute membrane voltage",
@@ -577,7 +584,8 @@
       "journal": "Biophysical Journal",
       "year": 2015,
       "sample": "HEK293T cells, in vitro",
-      "url": "https://doi.org/10.1016/j.bpj.2015.07.038"
+      "url": "https://doi.org/10.1016/j.bpj.2015.07.038",
+      "proofread": false
     }
   ]
 }

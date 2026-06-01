@@ -577,7 +577,8 @@
         0.032,
         0.03
       ]
-    }
+    },
+    "proofread": false
   },
   "voltage": {
     "type": "opsin",
@@ -608,7 +609,8 @@
     },
     "source": "doi:10.1038/s41589-018-0004-9",
     "sourceImage": "/fv-sources/archon2.jpg",
-    "sourceFigure": "Fig. 2e"
+    "sourceFigure": "Fig. 2e",
+    "proofread": false
   },
   "kinetics": [
     {
@@ -616,7 +618,8 @@
       "off": 0.17,
       "temperature": "32°C",
       "source": "doi:10.1038/s41589-018-0004-9",
-      "sourceFigure": "Table S1"
+      "sourceFigure": "Table S1",
+      "proofread": false
     }
   ],
   "dynamicRangeData": [
@@ -624,14 +627,16 @@
       "deltaF": 20,
       "sign": "positive",
       "source": "doi:10.1038/s41589-018-0004-9",
-      "sourceFigure": "Fig. 1g"
+      "sourceFigure": "Fig. 1g",
+      "proofread": false
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 18,
       "source": "doi:10.1038/s41589-018-0004-9",
-      "sourceFigure": "Table S1"
+      "sourceFigure": "Table S1",
+      "proofread": false
     }
   ],
   "brightnessData": [
@@ -639,13 +644,15 @@
       "ratio": 28,
       "reference": "arch",
       "source": "doi:10.1021/acschemneuro.0c00046",
-      "sourceFigure": "Table 1"
+      "sourceFigure": "Table 1",
+      "proofread": false
     },
     {
       "ratio": 8.01,
       "reference": "quasar2",
       "source": "doi:10.1038/s41589-018-0004-9",
-      "sourceFigure": "Fig. 2b"
+      "sourceFigure": "Fig. 2b",
+      "proofread": false
     }
   ],
   "photostabilityData": [
@@ -654,12 +661,14 @@
       "illumination": "800 mW/mm²",
       "duration": "1 min",
       "source": "doi:10.1038/s41589-018-0004-9",
-      "sourceFigure": "Fig. 2i"
+      "sourceFigure": "Fig. 2i",
+      "proofread": false
     }
   ],
   "addgene": {
     "id": "108421",
-    "url": "https://www.addgene.org/108421/"
+    "url": "https://www.addgene.org/108421/",
+    "proofread": false
   },
   "researchPapers": [
     {
@@ -668,7 +677,8 @@
       "journal": "Nature Chemical Biology",
       "year": 2018,
       "sample": "HEK293T cells, in vitro; Mouse cortex, acute brain slices; Cultured neurons, in vitro",
-      "url": "https://doi.org/10.1038/s41589-018-0004-9"
+      "url": "https://doi.org/10.1038/s41589-018-0004-9",
+      "proofread": false
     },
     {
       "title": "Screening and Cellular Characterization of Genetically Encoded Voltage Indicators Based on Near-Infrared Fluorescent Proteins",
@@ -676,7 +686,8 @@
       "journal": "ACS Chemical Neuroscience",
       "year": 2020,
       "sample": "HEK293T cells, in vitro; Cultured hippocampal neurons, in vitro",
-      "url": "https://doi.org/10.1021/acschemneuro.0c00046"
+      "url": "https://doi.org/10.1021/acschemneuro.0c00046",
+      "proofread": false
     },
     {
       "title": "Absorption and Emission Spectroscopic Investigation of the Thermal Dynamics of the Archaerhodopsin 3 Based Fluorescent Voltage Sensor Archon2",
@@ -684,7 +695,8 @@
       "journal": "International Journal of Molecular Sciences",
       "year": 2020,
       "sample": "Purified protein in Tris buffer, in vitro spectroscopy",
-      "url": "https://doi.org/10.3390/ijms21186576"
+      "url": "https://doi.org/10.3390/ijms21186576",
+      "proofread": false
     },
     {
       "title": "Photocycle dynamics of the Archaerhodopsin 3 based fluorescent voltage sensor Archon2",
@@ -692,7 +704,8 @@
       "journal": "Journal of Photochemistry and Photobiology B: Biology",
       "year": 2021,
       "sample": "Purified protein in Tris buffer, in vitro spectroscopy",
-      "url": "https://doi.org/10.1016/j.jphotobiol.2021.112331"
+      "url": "https://doi.org/10.1016/j.jphotobiol.2021.112331",
+      "proofread": false
     }
   ]
 }

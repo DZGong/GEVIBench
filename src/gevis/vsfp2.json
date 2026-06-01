@@ -480,7 +480,8 @@
         0.0071,
         0.007
       ]
-    }
+    },
+    "proofread": false
   },
   "voltage": {
     "type": "fret",
@@ -517,7 +518,8 @@
     },
     "source": "doi:10.1371/journal.pone.0000440",
     "sourceImage": "/fv-sources/vsfp2.jpg",
-    "sourceFigure": "Fig. 3B"
+    "sourceFigure": "Fig. 3B",
+    "proofread": false
   },
   "kinetics": [
     {
@@ -525,7 +527,8 @@
       "off": 75,
       "temperature": "35°C",
       "source": "doi:10.1371/journal.pone.0000440",
-      "sourceFigure": "Table 1"
+      "sourceFigure": "Table 1",
+      "proofread": false
     }
   ],
   "dynamicRangeData": [
@@ -533,7 +536,8 @@
       "deltaF": 8.6,
       "sign": "positive",
       "source": "doi:10.1371/journal.pone.0000440",
-      "sourceFigure": "Table 1"
+      "sourceFigure": "Table 1",
+      "proofread": false
     }
   ],
   "researchPapers": [
@@ -543,7 +547,8 @@
       "journal": "PLoS ONE",
       "year": 2007,
       "sample": "PC12 cells (neuroendocrine), in vitro",
-      "url": "https://doi.org/10.1371/journal.pone.0000440"
+      "url": "https://doi.org/10.1371/journal.pone.0000440",
+      "proofread": false
     },
     {
       "title": "Second and third generation voltage-sensitive fluorescent proteins for monitoring membrane potential",
@@ -551,7 +556,8 @@
       "journal": "Frontiers in Molecular Neuroscience",
       "year": 2009,
       "sample": "PC12 cells (neuroendocrine), primary hippocampal neurons, in vitro",
-      "url": "https://doi.org/10.3389/neuro.02.005.2009"
+      "url": "https://doi.org/10.3389/neuro.02.005.2009",
+      "proofread": false
     }
   ]
 }

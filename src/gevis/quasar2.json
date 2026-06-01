@@ -15,19 +15,22 @@
       "reference": "arch",
       "source": "doi:10.1038/nmeth.3000",
       "sourceFigure": "Table S2",
-      "note": "At 0.7 W/cm\u00b2 and 800 W/cm\u00b2 (comparable at both intensities)"
+      "note": "At 0.7 W/cm\u00b2 and 800 W/cm\u00b2 (comparable at both intensities)",
+      "proofread": false
     },
     {
       "ratio": 10,
       "reference": "arch",
       "source": "doi:10.1021/acschemneuro.0c00046",
-      "sourceFigure": "Table 1"
+      "sourceFigure": "Table 1",
+      "proofread": false
     },
     {
       "ratio": 0.417,
       "reference": "archon1",
       "source": "doi:10.1038/s41589-018-0004-9",
-      "sourceFigure": "Fig. 2b"
+      "sourceFigure": "Fig. 2b",
+      "proofread": false
     }
   ],
   "description": "Higher-sensitivity QuasAr variant spike counting and subthreshold event detection.",
@@ -38,7 +41,8 @@
       "temperature": "23\u00b0C",
       "source": "doi:10.1038/nmeth.3000",
       "sourceFigure": "Table S2",
-      "note": "Bi-exponential fast components (68% on, 80% off); slow \u03c4_on=11.8 ms, slow \u03c4_off=15.9 ms. n=6 cells"
+      "note": "Bi-exponential fast components (68% on, 80% off); slow \u03c4_on=11.8 ms, slow \u03c4_off=15.9 ms. n=6 cells",
+      "proofread": false
     },
     {
       "on": 0.3,
@@ -46,14 +50,16 @@
       "temperature": "34\u00b0C",
       "source": "doi:10.1038/nmeth.3000",
       "sourceFigure": "Table S2",
-      "note": "Bi-exponential fast components (62% on, 73% off); slow \u03c4_on=3.2 ms, slow \u03c4_off=4.0 ms. n=7 cells"
+      "note": "Bi-exponential fast components (62% on, 73% off); slow \u03c4_on=3.2 ms, slow \u03c4_off=4.0 ms. n=7 cells",
+      "proofread": false
     },
     {
       "on": 0.9,
       "off": 1.6,
       "temperature": "33-34\u00b0C",
       "source": "doi:10.1016/j.cell.2019.11.004",
-      "sourceFigure": "Table 1"
+      "sourceFigure": "Table 1",
+      "proofread": false
     }
   ],
   "dynamicRangeData": [
@@ -61,31 +67,36 @@
       "deltaF": 90,
       "sign": "positive",
       "source": "doi:10.1038/nmeth.3000",
-      "sourceFigure": "Fig. 1c"
+      "sourceFigure": "Fig. 1c",
+      "proofread": false
     },
     {
       "deltaF": 46,
       "sign": "positive",
       "source": "doi:10.1038/s41589-018-0004-9",
-      "sourceFigure": "Fig. 1g"
+      "sourceFigure": "Fig. 1g",
+      "proofread": false
     },
     {
       "deltaF": 46,
       "sign": "positive",
       "source": "doi:10.1016/j.cell.2019.11.004",
-      "sourceFigure": "Table 1"
+      "sourceFigure": "Table 1",
+      "proofread": false
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 48,
       "source": "doi:10.1038/nmeth.3000",
-      "sourceFigure": "Fig. 1g"
+      "sourceFigure": "Fig. 1g",
+      "proofread": false
     },
     {
       "deltaF": 48,
       "source": "doi:10.1038/ncomms5625",
-      "sourceFigure": "Table 1"
+      "sourceFigure": "Table 1",
+      "proofread": false
     }
   ],
   "photostabilityData": [
@@ -94,17 +105,20 @@
       "illumination": "3000 mW/mm\u00b2",
       "duration": "1 min",
       "source": "doi:10.1038/nmeth.3000",
-      "sourceFigure": "Fig. S5"
+      "sourceFigure": "Fig. S5",
+      "proofread": false
     }
   ],
   "addgene": {
     "id": "51692",
-    "url": "https://www.addgene.org/51692/"
+    "url": "https://www.addgene.org/51692/",
+    "proofread": false
   },
   "twoPhoton": [
     {
       "compatible": false,
-      "source": "doi:10.1016/j.cell.2019.11.004"
+      "source": "doi:10.1016/j.cell.2019.11.004",
+      "proofread": false
     }
   ],
   "parentId": "arch",
@@ -483,7 +497,8 @@
         0.0055,
         0.005
       ]
-    }
+    },
+    "proofread": false
   },
   "voltage": {
     "type": "opsin",
@@ -514,7 +529,8 @@
     },
     "source": "doi:10.1038/nmeth.3000",
     "sourceImage": "/fv-sources/quasar2.jpg",
-    "sourceFigure": "Fig. 1c"
+    "sourceFigure": "Fig. 1c",
+    "proofread": false
   },
   "researchPapers": [
     {
@@ -523,7 +539,8 @@
       "journal": "Nature Methods",
       "year": 2014,
       "sample": "HEK293 cells, cultured rat hippocampal neurons, mouse brain slices, Drosophila in vivo",
-      "url": "https://doi.org/10.1038/nmeth.3000"
+      "url": "https://doi.org/10.1038/nmeth.3000",
+      "proofread": false
     },
     {
       "title": "Two-photon lifetime imaging of voltage indicating proteins as a probe of absolute membrane voltage",
@@ -531,7 +548,8 @@
       "journal": "Biophysical Journal",
       "year": 2015,
       "sample": "HEK293T cells and cultured rat hippocampal neurons, in vitro",
-      "url": "https://doi.org/10.1016/j.bpj.2015.07.038"
+      "url": "https://doi.org/10.1016/j.bpj.2015.07.038",
+      "proofread": false
     },
     {
       "title": "Genetically targeted all-optical electrophysiology with a transgenic Cre-dependent Optopatch mouse",
@@ -539,7 +557,8 @@
       "journal": "Journal of Neuroscience",
       "year": 2016,
       "sample": "Mouse, DRG neurons and brain slices, in vitro/in vivo",
-      "url": "https://doi.org/10.1523/JNEUROSCI.1582-16.2016"
+      "url": "https://doi.org/10.1523/JNEUROSCI.1582-16.2016",
+      "proofread": false
     },
     {
       "title": "Optical electrophysiology for probing function and pharmacology of voltage-gated ion channels",
@@ -547,7 +566,8 @@
       "journal": "eLife",
       "year": 2016,
       "sample": "HEK293 cells stably expressing NaV channels, in vitro",
-      "url": "https://doi.org/10.7554/eLife.15202"
+      "url": "https://doi.org/10.7554/eLife.15202",
+      "proofread": false
     },
     {
       "title": "Cardiotoxicity screening with simultaneous optogenetic pacing, voltage imaging and calcium imaging",
@@ -555,7 +575,8 @@
       "journal": "Journal of Pharmacological and Toxicological Methods",
       "year": 2016,
       "sample": "Human iPSC-derived cardiomyocytes, in vitro",
-      "url": "https://doi.org/10.1016/j.vascn.2016.05.003"
+      "url": "https://doi.org/10.1016/j.vascn.2016.05.003",
+      "proofread": false
     },
     {
       "title": "All-optical electrophysiology for disease modeling and pharmacological characterization of neurons",
@@ -563,7 +584,8 @@
       "journal": "Current Protocols in Pharmacology",
       "year": 2017,
       "sample": "Rat hippocampal neurons and human iPSC-derived neurons, in vitro",
-      "url": "https://doi.org/10.1002/cpph.25"
+      "url": "https://doi.org/10.1002/cpph.25",
+      "proofread": false
     },
     {
       "title": "Ultrawidefield microscope for high-speed fluorescence imaging and targeted optogenetic stimulation",
@@ -571,7 +593,8 @@
       "journal": "Biomedical Optics Express",
       "year": 2017,
       "sample": "Cultured neurons expressing Optopatch2, in vitro",
-      "url": "https://doi.org/10.1364/BOE.8.005794"
+      "url": "https://doi.org/10.1364/BOE.8.005794",
+      "proofread": false
     },
     {
       "title": "Geometry-dependent functional changes in iPSC-derived cardiomyocytes probed by functional imaging and RNA sequencing",
@@ -579,7 +602,8 @@
       "journal": "PLOS ONE",
       "year": 2017,
       "sample": "Human iPSC-derived cardiomyocytes, in vitro",
-      "url": "https://doi.org/10.1371/journal.pone.0172671"
+      "url": "https://doi.org/10.1371/journal.pone.0172671",
+      "proofread": false
     },
     {
       "title": "Evaluation of optogenetic electrophysiology tools in human stem cell-derived cardiomyocytes",
@@ -587,7 +611,8 @@
       "journal": "Frontiers in Physiology",
       "year": 2017,
       "sample": "Human iPSC-derived cardiomyocytes, in vitro",
-      "url": "https://doi.org/10.3389/fphys.2017.00884"
+      "url": "https://doi.org/10.3389/fphys.2017.00884",
+      "proofread": false
     },
     {
       "title": "A dimeric fluorescent protein yields a bright, red-shifted GEVI capable of population signals in brain slice",
@@ -595,7 +620,8 @@
       "journal": "Scientific Reports",
       "year": 2018,
       "sample": "Mouse hippocampal brain slices, ex vivo",
-      "url": "https://doi.org/10.1038/s41598-018-33297-y"
+      "url": "https://doi.org/10.1038/s41598-018-33297-y",
+      "proofread": false
     },
     {
       "title": "All-optical electrophysiology for high-throughput functional characterization of a human iPSC-derived motor neuron model of ALS",
@@ -603,7 +629,8 @@
       "journal": "Stem Cell Reports",
       "year": 2018,
       "sample": "Human iPSC-derived motor neurons (ALS model), in vitro",
-      "url": "https://doi.org/10.1016/j.stemcr.2018.04.020"
+      "url": "https://doi.org/10.1016/j.stemcr.2018.04.020",
+      "proofread": false
     },
     {
       "title": "Optical interrogation of neuronal circuitry in zebrafish using genetically encoded voltage indicators",
@@ -611,7 +638,8 @@
       "journal": "Scientific Reports",
       "year": 2018,
       "sample": "Zebrafish, larval brain, in vivo",
-      "url": "https://doi.org/10.1038/s41598-018-23906-1"
+      "url": "https://doi.org/10.1038/s41598-018-23906-1",
+      "proofread": false
     },
     {
       "title": "Comparative evaluation of genetically encoded voltage indicators",
@@ -619,7 +647,8 @@
       "journal": "Cell Reports",
       "year": 2019,
       "sample": "Mouse, cultured hippocampal neurons and visual cortex in vivo",
-      "url": "https://doi.org/10.1016/j.celrep.2018.12.088"
+      "url": "https://doi.org/10.1016/j.celrep.2018.12.088",
+      "proofread": false
     },
     {
       "title": "Electrophysiological characterization of drug response in hSC-derived cardiomyocytes using voltage-sensitive optical platforms",
@@ -627,7 +656,8 @@
       "journal": "Journal of Pharmacological and Toxicological Methods",
       "year": 2019,
       "sample": "Human stem cell-derived cardiomyocytes, in vitro",
-      "url": "https://doi.org/10.1016/j.vascn.2019.106612"
+      "url": "https://doi.org/10.1016/j.vascn.2019.106612",
+      "proofread": false
     },
     {
       "title": "Simultaneous voltage and calcium imaging and optogenetic stimulation with high sensitivity and a wide field of view",
@@ -635,7 +665,8 @@
       "journal": "Biomedical Optics Express",
       "year": 2019,
       "sample": "Human iPSC-derived cardiomyocytes, in vitro",
-      "url": "https://doi.org/10.1364/BOE.10.000789"
+      "url": "https://doi.org/10.1364/BOE.10.000789",
+      "proofread": false
     },
     {
       "title": "Rhodopsin-based voltage imaging tools for use in muscles and neurons of Caenorhabditis elegans",
@@ -643,7 +674,8 @@
       "journal": "Proceedings of the National Academy of Sciences",
       "year": 2019,
       "sample": "C. elegans, body wall muscles and neurons, in vivo",
-      "url": "https://doi.org/10.1073/pnas.1902443116"
+      "url": "https://doi.org/10.1073/pnas.1902443116",
+      "proofread": false
     },
     {
       "title": "Highly parallelized, multicolor optogenetic recordings of cellular activity for therapeutic discovery applications in ion channels and disease-associated excitable cells",
@@ -651,7 +683,8 @@
       "journal": "Frontiers in Molecular Neuroscience",
       "year": 2022,
       "sample": "HEK293 cells expressing NaV channels, in vitro",
-      "url": "https://doi.org/10.3389/fnmol.2022.896320"
+      "url": "https://doi.org/10.3389/fnmol.2022.896320",
+      "proofread": false
     },
     {
       "title": "Human cancer cells generate spontaneous calcium transients and intercellular waves that modulate tumor growth",
@@ -659,7 +692,8 @@
       "journal": "Biomaterials",
       "year": 2022,
       "sample": "Human colon and prostate cancer cells, in vitro/in vivo",
-      "url": "https://doi.org/10.1016/j.biomaterials.2022.121823"
+      "url": "https://doi.org/10.1016/j.biomaterials.2022.121823",
+      "proofread": false
     },
     {
       "title": "All-optical closed-loop voltage clamp for precise control of muscles and neurons in live animals",
@@ -667,7 +701,8 @@
       "journal": "Nature Communications",
       "year": 2023,
       "sample": "C. elegans, muscles and neurons; rat hippocampal neurons, in vitro/in vivo",
-      "url": "https://doi.org/10.1038/s41467-023-37622-6"
+      "url": "https://doi.org/10.1038/s41467-023-37622-6",
+      "proofread": false
     },
     {
       "title": "A phenotypic screening platform for chronic pain therapeutics using all-optical electrophysiology",
@@ -675,7 +710,8 @@
       "journal": "PAIN",
       "year": 2024,
       "sample": "Mouse DRG sensory neurons, in vitro",
-      "url": "https://doi.org/10.1097/j.pain.0000000000003090"
+      "url": "https://doi.org/10.1097/j.pain.0000000000003090",
+      "proofread": false
     },
     {
       "title": "A robotic multidimensional directed evolution approach applied to fluorescent voltage reporters",
@@ -683,7 +719,8 @@
       "journal": "Nature Chemical Biology",
       "year": 2018,
       "sample": "HEK293T cells and cultured mouse hippocampal neurons, in vitro",
-      "url": "https://doi.org/10.1038/s41589-018-0004-9"
+      "url": "https://doi.org/10.1038/s41589-018-0004-9",
+      "proofread": false
     },
     {
       "title": "Ultrafast two-photon imaging of a high-gain voltage indicator in awake behaving mice",
@@ -691,7 +728,8 @@
       "journal": "Cell",
       "year": 2019,
       "sample": "HEK293 cells, cultured neurons, and mouse brain in vivo",
-      "url": "https://doi.org/10.1016/j.cell.2019.11.004"
+      "url": "https://doi.org/10.1016/j.cell.2019.11.004",
+      "proofread": false
     },
     {
       "title": "Screening and cellular characterization of genetically encoded voltage indicators based on near-infrared fluorescent proteins",
@@ -699,7 +737,8 @@
       "journal": "ACS Chemical Neuroscience",
       "year": 2020,
       "sample": "HEK293T cells and cultured mouse hippocampal neurons, in vitro",
-      "url": "https://doi.org/10.1021/acschemneuro.0c00046"
+      "url": "https://doi.org/10.1021/acschemneuro.0c00046",
+      "proofread": false
     }
   ]
 }

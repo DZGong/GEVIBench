@@ -3,6 +3,7 @@ import { BookOpen, ExternalLink } from 'lucide-react';
 import { getAllGEVIs } from '../geviData';
 import { getTreeNodeColor } from '../utils';
 import type { GEVI } from '../types';
+import { DistributionRadar } from './DistributionRadar';
 
 // Journal name abbreviations for tooltip display
 const JOURNAL_ABBREV: Record<string, string> = {
@@ -27,8 +28,8 @@ function abbreviatePaper(paper: string): string {
   return paper;
 }
 
-const TOOLTIP_W = 170;
-const TOOLTIP_H = 130;
+const TOOLTIP_W = 260;
+const TOOLTIP_H = 430;
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -673,6 +674,16 @@ export function BrightnessNetworkPanel({ onSelectGEVI }: Props) {
                 <ExternalLink className="w-3 h-3 flex-shrink-0" />
               </a>
             )}
+
+            {g.description && (
+              <p className="text-[11px] leading-snug text-ink/70 mb-1.5">
+                {g.description}
+              </p>
+            )}
+
+            <div className="w-full h-64">
+              <DistributionRadar gevi={g} expandHex />
+            </div>
 
           </div>
         );

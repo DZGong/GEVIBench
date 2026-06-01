@@ -8,6 +8,7 @@
     "build": "pnpm install --prefer-offline && rm -rf node_modules/.vite-temp && vite build && node scripts/prerender.mjs",
     "build:prod": "pnpm install --prefer-offline && rm -rf node_modules/.vite-temp && tsc -b && BUILD_MODE=prod vite build",
     "lint": "pnpm install --prefer-offline && eslint .",
+    "test:photostability": "node scripts/test-photostability.mjs",
     "preview": "pnpm install --prefer-offline && vite preview",
     "install-deps": "pnpm install --prefer-offline",
     "clean": "rm -rf node_modules .pnpm-store pnpm-lock.yaml && pnpm store prune"

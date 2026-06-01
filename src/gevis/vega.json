@@ -1,0 +1,132 @@
+{
+  "id": "vega",
+  "name": "Vega",
+  "year": 2025,
+  "category": "eFRET GEVI",
+  "tags": [
+    "Ace opsin",
+    "mBaoJin",
+    "Green",
+    "FRET",
+    "Somatic targeting"
+  ],
+  "paper": "bioRxiv 2025",
+  "paperUrl": "https://doi.org/10.1101/2025.05.29.656768",
+  "description": "Photostable green eFRET GEVI built by inserting mBaoJin(3M) into the first extracellular loop of Ace2 rhodopsin, with Kv2.1 and ER2 targeting motifs for long-duration one-photon voltage imaging.",
+  "parentId": "cephid",
+  "spectrum": {
+    "type": "rhodopsin",
+    "peakEx": 500,
+    "peakEm": 508,
+    "name": "Vega",
+    "proofread": false
+  },
+  "voltage": {
+    "type": "opsin",
+    "slope": 33.1,
+    "polarity": "negative",
+    "name": "Vega",
+    "custom": {
+      "voltage": [
+        -100,
+        -73,
+        -59,
+        -40,
+        -20,
+        0,
+        20,
+        40,
+        60,
+        79,
+        100
+      ],
+      "deltaF": [
+        12,
+        -1,
+        -6,
+        -13,
+        -23,
+        -27,
+        -33,
+        -35,
+        -37,
+        -39,
+        -41
+      ]
+    },
+    "source": "doi:10.1101/2025.05.29.656768",
+    "sourceImage": "/fv-sources/vega.jpg",
+    "sourceFigure": "Fig. 1C",
+    "proofread": false
+  },
+  "kinetics": [
+    {
+      "on": 1.34,
+      "off": 3.74,
+      "temperature": "21-23°C",
+      "source": "doi:10.1101/2025.05.29.656768",
+      "sourceFigure": "Fig. S2",
+      "note": "Double-exponential fit to +100 mV command steps (-70 mV to +30 mV) in HEK293T cells",
+      "proofread": false
+    }
+  ],
+  "dynamicRangeData": [
+    {
+      "deltaF": -33.1,
+      "sign": "negative",
+      "source": "doi:10.1101/2025.05.29.656768",
+      "sourceFigure": "Table S2",
+      "note": "ΔF/F0 per 100 mV in HEK293T cells at 1058 Hz under 488 nm illumination at 3 W/cm²",
+      "proofread": false
+    }
+  ],
+  "sensitivityData": [
+    {
+      "deltaF": 17.1,
+      "source": "doi:10.1101/2025.05.29.656768",
+      "sourceFigure": "Table S2",
+      "note": "Absolute ΔF/F0 per AP in cultured rat hippocampal neurons at 484 Hz under 488 nm illumination at 3 W/cm²",
+      "proofread": false
+    }
+  ],
+  "brightnessData": [
+    {
+      "ratio": 2,
+      "reference": "ace2n-mneon2",
+      "source": "doi:10.1101/2025.05.29.656768",
+      "sourceFigure": "Fig. 1B",
+      "note": "Whole-cell fluorescence in HEK293T cells under 488 nm illumination at 3 W/cm²",
+      "proofread": false
+    },
+    {
+      "ratio": 8,
+      "reference": "jedi1p",
+      "source": "doi:10.1101/2025.05.29.656768",
+      "sourceFigure": "Fig. 1B",
+      "note": "Whole-cell fluorescence in HEK293T cells under 488 nm illumination at 3 W/cm²",
+      "proofread": false
+    }
+  ],
+  "photostabilityData": [
+    {
+      "brightnessRemaining": 75,
+      "illumination": "3 W/cm²",
+      "duration": "769 s",
+      "source": "doi:10.1101/2025.05.29.656768",
+      "sourceFigure": "Table S1",
+      "note": "Photobleaching quarter-life t0.75 in live HEK293T cells under 488 nm illumination",
+      "proofread": false
+    }
+  ],
+  "researchPapers": [
+    {
+      "title": "A photostable genetically encoded voltage indicator for imaging neural activities in tissue and live animals",
+      "authors": "Cao C, Zhu R, Zhou S, Zhao Z, Lin C, Liu S, Peng L, Subach FV, Piatkevich KD, Zou P",
+      "journal": "bioRxiv",
+      "year": 2025,
+      "sample": "HEK293T cells; Rat, hippocampal neurons, in vitro; Mouse, thalamic acute brain slices, ex vivo; Mouse, pancreatic islets, ex vivo; Mouse, visual cortex, in vivo",
+      "url": "https://doi.org/10.1101/2025.05.29.656768",
+      "proofread": false
+    }
+  ]
+}

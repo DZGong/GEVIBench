@@ -386,7 +386,8 @@
         0.0055,
         0.005
       ]
-    }
+    },
+    "proofread": false
   },
   "voltage": {
     "type": "opsin",
@@ -417,7 +418,8 @@
     },
     "source": "doi:10.1038/nmeth.3000",
     "sourceImage": "/fv-sources/quasar1.jpg",
-    "sourceFigure": "Fig. 1c"
+    "sourceFigure": "Fig. 1c",
+    "proofread": false
   },
   "kinetics": [
     {
@@ -426,7 +428,8 @@
       "temperature": "23°C",
       "source": "doi:10.1038/nmeth.3000",
       "sourceFigure": "Table S2",
-      "note": "Bi-exponential fast components (94% on, 88% off); slow τ_on=3.2 ms, slow τ_off=1.9 ms. n=6 cells"
+      "note": "Bi-exponential fast components (94% on, 88% off); slow τ_on=3.2 ms, slow τ_off=1.9 ms. n=6 cells",
+      "proofread": false
     }
   ],
   "dynamicRangeData": [
@@ -434,14 +437,16 @@
       "deltaF": 32,
       "sign": "positive",
       "source": "doi:10.1038/nmeth.3000",
-      "sourceFigure": "Fig. 1c"
+      "sourceFigure": "Fig. 1c",
+      "proofread": false
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 21,
       "source": "doi:10.1038/nmeth.3000",
-      "sourceFigure": "Fig. 1e"
+      "sourceFigure": "Fig. 1e",
+      "proofread": false
     }
   ],
   "brightnessData": [
@@ -450,13 +455,15 @@
       "reference": "arch",
       "source": "doi:10.1038/nmeth.3000",
       "sourceFigure": "Table S2",
-      "note": "At 0.7 W/cm² (500 mW/cm²); 10.3× at high intensity (800 W/cm²)"
+      "note": "At 0.7 W/cm² (500 mW/cm²); 10.3× at high intensity (800 W/cm²)",
+      "proofread": false
     },
     {
       "ratio": 20,
       "reference": "arch",
       "source": "doi:10.1021/acschemneuro.0c00046",
-      "sourceFigure": "Table 1"
+      "sourceFigure": "Table 1",
+      "proofread": false
     }
   ],
   "photostabilityData": [
@@ -465,12 +472,14 @@
       "illumination": "3000 mW/mm²",
       "duration": "1 min",
       "source": "doi:10.1038/nmeth.3000",
-      "sourceFigure": "Main text"
+      "sourceFigure": "Main text",
+      "proofread": false
     }
   ],
   "addgene": {
     "id": "51629",
-    "url": "https://www.addgene.org/51629/"
+    "url": "https://www.addgene.org/51629/",
+    "proofread": false
   },
   "researchPapers": [
     {
@@ -479,7 +488,8 @@
       "journal": "Nature Methods",
       "year": 2014,
       "sample": "HEK293 cells, cultured rat hippocampal neurons, in vitro",
-      "url": "https://doi.org/10.1038/nmeth.3000"
+      "url": "https://doi.org/10.1038/nmeth.3000",
+      "proofread": false
     }
   ]
 }

@@ -90,7 +90,8 @@
         0.0071, 0.0069, 0.0066, 0.0068, 0.0061, 0.0069, 0.0061, 0.0065, 0.006, 0.0068,
         0.0067, 0.0063, 0.0063, 0.0064, 0.0067, 0.0068, 0.0064, 0.0064
       ]
-    }
+    },
+    "proofread": false
   },
 
   "voltage": {
@@ -104,7 +105,8 @@
     "custom": {
       "voltage": [-120, -100, -70, -40, -20, 0, 30],
       "deltaF":  [-10, -7, 0, 87, 165, 227, 260]
-    }
+    },
+    "proofread": false
   },
 
   "kinetics": [
@@ -113,7 +115,8 @@
       "off": 2.4,
       "temperature": "33°C",
       "source": "doi:10.64898/2026.04.07.717088",
-      "sourceFigure": "Table S1.4"
+      "sourceFigure": "Table S1.4",
+      "proofread": false
     }
   ],
 
@@ -122,7 +125,8 @@
       "deltaF": 227,
       "sign": "positive",
       "source": "doi:10.64898/2026.04.07.717088",
-      "sourceFigure": "Fig. 1E"
+      "sourceFigure": "Fig. 1E",
+      "proofread": false
     }
   ],
 
@@ -130,7 +134,8 @@
     {
       "deltaF": 92.7,
       "source": "doi:10.64898/2026.04.07.717088",
-      "sourceFigure": "Fig. 3A-B"
+      "sourceFigure": "Fig. 3A-B",
+      "proofread": false
     }
   ],
 
@@ -138,7 +143,8 @@
     {
       "slope": 1.2,
       "source": "doi:10.64898/2026.04.07.717088",
-      "sourceFigure": "Fig. 2F"
+      "sourceFigure": "Fig. 2F",
+      "proofread": false
     }
   ],
 
@@ -147,7 +153,8 @@
       "ratio": 0.39,
       "reference": "jedi2p",
       "source": "doi:10.64898/2026.04.07.717088",
-      "sourceFigure": "Fig. 1C"
+      "sourceFigure": "Fig. 1C",
+      "proofread": false
     }
   ],
 
@@ -158,7 +165,8 @@
       "duration": "6 min",
       "source": "doi:10.64898/2026.04.07.717088",
       "sourceFigure": "Fig. S1.2B",
-      "note": "100 mW at sample plane under 2P resonant scanning (940 nm) — recorded as mW/mm² for parser compatibility, matching the convention used for other 2P GEVIs in this database."
+      "note": "100 mW at sample plane under 2P resonant scanning (940 nm) — recorded as mW/mm² for parser compatibility, matching the convention used for other 2P GEVIs in this database.",
+      "proofread": false
     }
   ],
 
@@ -169,7 +177,8 @@
       "journal": "bioRxiv",
       "year": 2026,
       "sample": "Mouse, visual cortex L2/3, in vivo; Mouse, visual cortex, freely moving, in vivo; HEK293 cells, in vitro; Rat, hippocampal neurons, in vitro",
-      "url": "https://doi.org/10.64898/2026.04.07.717088"
+      "url": "https://doi.org/10.64898/2026.04.07.717088",
+      "proofread": false
     }
   ]
 }

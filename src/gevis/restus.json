@@ -437,7 +437,8 @@
         0.0073,
         0.007
       ]
-    }
+    },
+    "proofread": false
   },
   "voltage": {
     "type": "fp",
@@ -472,7 +473,8 @@
     },
     "source": "doi:10.1002/advs.202307938",
     "sourceImage": "/fv-sources/restus.jpg",
-    "sourceFigure": "Fig. 1C"
+    "sourceFigure": "Fig. 1C",
+    "proofread": false
   },
   "kinetics": [
     {
@@ -480,7 +482,8 @@
       "off": 20,
       "temperature": "23°C",
       "source": "doi:10.1002/advs.202307938",
-      "sourceFigure": "Fig. S9"
+      "sourceFigure": "Fig. S9",
+      "proofread": false
     }
   ],
   "dynamicRangeData": [
@@ -488,14 +491,16 @@
       "deltaF": -66,
       "sign": "negative",
       "source": "doi:10.1002/advs.202307938",
-      "sourceFigure": "Fig. 1G"
+      "sourceFigure": "Fig. 1G",
+      "proofread": false
     }
   ],
   "subthresholdData": [
     {
       "slope": 0.5,
       "source": "doi:10.1002/advs.202307938",
-      "sourceFigure": "Fig. 1H"
+      "sourceFigure": "Fig. 1H",
+      "proofread": false
     }
   ],
   "brightnessData": [
@@ -503,24 +508,28 @@
       "ratio": 0.775,
       "reference": "EGFP",
       "source": "doi:10.1002/advs.202307938",
-      "sourceFigure": "Fig. 1G"
+      "sourceFigure": "Fig. 1G",
+      "proofread": false
     },
     {
       "ratio": 2.07,
       "reference": "asap3",
       "source": "doi:10.1002/advs.202307938",
-      "sourceFigure": "Fig. 1G"
+      "sourceFigure": "Fig. 1G",
+      "proofread": false
     },
     {
       "ratio": 1.712,
       "reference": "asap3",
       "source": "doi:10.1021/acschemneuro.5c00670",
-      "sourceFigure": "Fig. 2C"
+      "sourceFigure": "Fig. 2C",
+      "proofread": false
     }
   ],
   "addgene": {
     "id": "209767",
-    "url": "https://www.addgene.org/209767/"
+    "url": "https://www.addgene.org/209767/",
+    "proofread": false
   },
   "researchPapers": [
     {
@@ -529,7 +538,8 @@
       "journal": "Advanced Science",
       "year": 2024,
       "sample": "HEK293T cells; A375 melanoma cells; MCF-7 breast cancer cells, in vitro",
-      "url": "https://doi.org/10.1002/advs.202307938"
+      "url": "https://doi.org/10.1002/advs.202307938",
+      "proofread": false
     },
     {
       "title": "Absolute Membrane Potential Recording with ASAP-Type Genetically Encoded Voltage Indicators Using Fluorescence Lifetime Imaging",
@@ -537,7 +547,8 @@
       "journal": "ACS Chemical Neuroscience",
       "year": 2025,
       "sample": "HEK293T cells; A375 melanoma cells; MCF-7 breast cancer cells, in vitro",
-      "url": "https://doi.org/10.1021/acschemneuro.5c00670"
+      "url": "https://doi.org/10.1021/acschemneuro.5c00670",
+      "proofread": false
     },
     {
       "title": "Crosstalk of KCNH1 and KCNH5 gain-of-function mutations leading to epilepsy and neurodevelopmental disorders",
@@ -545,7 +556,8 @@
       "journal": "Molecular Brain",
       "year": 2026,
       "sample": "HEK293T cells, in vitro",
-      "url": "https://doi.org/10.1186/s13041-026-01279-1"
+      "url": "https://doi.org/10.1186/s13041-026-01279-1",
+      "proofread": false
     },
     {
       "title": "Generation and characterization of a human induced pluripotent stem cell line (hiPSC) expressing the rEstus voltage sensor under doxycycline induction",
@@ -553,7 +565,8 @@
       "journal": "Stem Cell Research",
       "year": 2026,
       "sample": "Human iPSC, in vitro",
-      "url": "https://doi.org/10.1016/j.scr.2026.103972"
+      "url": "https://doi.org/10.1016/j.scr.2026.103972",
+      "proofread": false
     }
   ]
 }

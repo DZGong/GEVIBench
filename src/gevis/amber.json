@@ -483,7 +483,8 @@
         0.0071,
         0.007
       ]
-    }
+    },
+    "proofread": false
   },
   "voltage": {
     "type": "fret",
@@ -512,7 +513,8 @@
     },
     "source": "doi:10.1002/adbi.202100842",
     "sourceImage": "/fv-sources/amber.jpg",
-    "sourceFigure": "Fig. 2B"
+    "sourceFigure": "Fig. 2B",
+    "proofread": false
   },
   "kinetics": [
     {
@@ -520,7 +522,8 @@
       "off": 30,
       "temperature": "25°C",
       "source": "doi:10.1002/adbi.202100842",
-      "sourceFigure": "Fig. 3B"
+      "sourceFigure": "Fig. 3B",
+      "proofread": false
     }
   ],
   "dynamicRangeData": [
@@ -528,7 +531,8 @@
       "deltaF": 200,
       "sign": "positive",
       "source": "doi:10.1002/adbi.202100842",
-      "sourceFigure": "Fig. 2B"
+      "sourceFigure": "Fig. 2B",
+      "proofread": false
     }
   ],
   "photostabilityData": "bioluminescent",
@@ -539,7 +543,8 @@
       "journal": "Advanced Biology",
       "year": 2021,
       "sample": "C. elegans, pharyngeal muscle and mechanosensory neurons, in vivo",
-      "url": "https://doi.org/10.1002/adbi.202100842"
+      "url": "https://doi.org/10.1002/adbi.202100842",
+      "proofread": false
     }
   ]
 }

@@ -517,7 +517,8 @@
         0.011,
         0.01
       ]
-    }
+    },
+    "proofread": false
   },
   "voltage": {
     "type": "opsin",
@@ -575,9 +576,11 @@
           -25,
           -30,
           -34
-        ]
+        ],
+        "proofread": false
       }
-    ]
+    ],
+    "proofread": false
   },
   "kinetics": [
     {
@@ -586,7 +589,8 @@
       "temperature": "room temperature",
       "source": "doi:10.1126/sciadv.adi4208",
       "sourceFigure": "Fig. S7",
-      "note": "Cepheid1b responding time for depolarization (-70 to +30 mV) and repolarization (+30 to -70 mV) in HEK293T cells"
+      "note": "Cepheid1b responding time for depolarization (-70 to +30 mV) and repolarization (+30 to -70 mV) in HEK293T cells",
+      "proofread": false
     }
   ],
   "dynamicRangeData": [
@@ -595,7 +599,8 @@
       "sign": "negative",
       "source": "doi:10.1126/sciadv.adi4208",
       "sourceFigure": "Fig. 1B",
-      "note": "Cepheid1b per 100 mV step (-70 to +30 mV) in HEK293T cells"
+      "note": "Cepheid1b per 100 mV step (-70 to +30 mV) in HEK293T cells",
+      "proofread": false
     }
   ],
   "sensitivityData": [
@@ -603,7 +608,8 @@
       "deltaF": 12.1,
       "source": "doi:10.1126/sciadv.adi4208",
       "sourceFigure": "Fig. 1C",
-      "note": "Cepheid1b in cultured rat hippocampal neurons"
+      "note": "Cepheid1b in cultured rat hippocampal neurons",
+      "proofread": false
     }
   ],
   "brightnessData": [
@@ -612,7 +618,8 @@
       "reference": "varnam",
       "source": "doi:10.1126/sciadv.adi4208",
       "sourceFigure": "Fig. S5",
-      "note": "Cepheid1b average photon count ~960 a.u. vs VARNAM ~580 a.u. per cell (Fig. S5)"
+      "note": "Cepheid1b average photon count ~960 a.u. vs VARNAM ~580 a.u. per cell (Fig. S5)",
+      "proofread": false
     }
   ],
   "photostabilityData": [
@@ -622,7 +629,8 @@
       "duration": "13 min",
       "source": "doi:10.1126/sciadv.adi4208",
       "sourceFigure": "Fig. S6A",
-      "note": "Cepheid1b normalized intensity at 13 min under 1.59 W/cm² 561 nm illumination (Fig. S6A)"
+      "note": "Cepheid1b normalized intensity at 13 min under 1.59 W/cm² 561 nm illumination (Fig. S6A)",
+      "proofread": false
     }
   ],
   "researchPapers": [
@@ -632,7 +640,8 @@
       "journal": "Science Advances",
       "year": 2023,
       "sample": "HEK293T cells, in vitro; rat hippocampal neurons, in vitro; mouse cortex, hippocampus, cerebellum, thalamus, habenula, acute brain slices; mouse pancreatic islets, ex vivo",
-      "url": "https://doi.org/10.1126/sciadv.adi4208"
+      "url": "https://doi.org/10.1126/sciadv.adi4208",
+      "proofread": false
     },
     {
       "title": "Positive-going hybrid indicators for voltage imaging in excitable cells and tissues",
@@ -640,7 +649,8 @@
       "journal": "Science Advances",
       "year": 2025,
       "sample": "Cultured neurons, cardiomyocytes, pancreatic islet cells",
-      "url": "https://doi.org/10.1126/sciadv.ads1807"
+      "url": "https://doi.org/10.1126/sciadv.ads1807",
+      "proofread": false
     }
   ]
 }

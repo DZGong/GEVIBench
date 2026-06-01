@@ -65,7 +65,8 @@
         0.0125, 0.0125, 0.012, 0.0118, 0.0119, 0.0113, 0.0111, 0.0109, 0.0108, 0.0104,
         0.0102, 0.0102
       ]
-    }
+    },
+    "proofread": false
   },
   "voltage": {
     "type": "fp",
@@ -78,7 +79,8 @@
     "custom": {
       "voltage": [-170, -120, -70, -20, 30, 80, 130],
       "deltaF": [-2, -1, 0, -19, -25, -26, -27]
-    }
+    },
+    "proofread": false
   },
   "kinetics": [
     {
@@ -86,7 +88,8 @@
       "off": 10,
       "temperature": "34°C",
       "source": "doi:10.1038/s41598-017-08731-2",
-      "sourceFigure": "Table 2"
+      "sourceFigure": "Table 2",
+      "proofread": false
     }
   ],
   "dynamicRangeData": [
@@ -94,14 +97,16 @@
       "deltaF": -20,
       "sign": "negative",
       "source": "doi:10.1038/s41598-017-08731-2",
-      "sourceFigure": "Fig. 4B"
+      "sourceFigure": "Fig. 4B",
+      "proofread": false
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 5.9,
       "source": "doi:10.1038/s41598-017-08731-2",
-      "sourceFigure": "Table 3"
+      "sourceFigure": "Table 3",
+      "proofread": false
     }
   ],
   "brightnessData": [
@@ -109,7 +114,8 @@
       "ratio": 1.89,
       "reference": "bongwoori",
       "source": "doi:10.1038/s41598-017-08731-2",
-      "sourceFigure": "Table 3"
+      "sourceFigure": "Table 3",
+      "proofread": false
     }
   ],
   "photostabilityData": [
@@ -118,7 +124,8 @@
       "illumination": "1 mW/mm²",
       "duration": "1 min",
       "source": "doi:10.1038/s41598-017-08731-2",
-      "sourceFigure": "Fig. S1"
+      "sourceFigure": "Fig. S1",
+      "proofread": false
     }
   ],
   "researchPapers": [
@@ -128,7 +135,8 @@
       "journal": "Scientific Reports",
       "year": 2017,
       "sample": "HEK293 cells; cultured mouse hippocampal neurons, in vitro",
-      "url": "https://doi.org/10.1038/s41598-017-08731-2"
+      "url": "https://doi.org/10.1038/s41598-017-08731-2",
+      "proofread": false
     },
     {
       "title": "Engineering photoactivatability in genetically encoded voltage and pH indicators",
@@ -136,7 +144,8 @@
       "journal": "Frontiers in Cellular Neuroscience",
       "year": 2019,
       "sample": "HEK293 cells, in vitro",
-      "url": "https://doi.org/10.3389/fncel.2019.00482"
+      "url": "https://doi.org/10.3389/fncel.2019.00482",
+      "proofread": false
     },
     {
       "title": "Visualizing oscillations in brain slices with genetically encoded voltage indicators",
@@ -144,7 +153,8 @@
       "journal": "Frontiers in Neuroanatomy",
       "year": 2021,
       "sample": "Mouse motor cortex brain slices, ex vivo",
-      "url": "https://doi.org/10.3389/fnana.2021.741711"
+      "url": "https://doi.org/10.3389/fnana.2021.741711",
+      "proofread": false
     },
     {
       "title": "Imaging electrical activity of retinal ganglion cells with fluorescent voltage and calcium indicator proteins in retinal degenerative rd1 blind mice",
@@ -152,7 +162,8 @@
       "journal": "ACS Chemical Neuroscience",
       "year": 2025,
       "sample": "Mouse rd1 retinal ganglion cells, ex vivo",
-      "url": "https://doi.org/10.1021/acschemneuro.5c00740"
+      "url": "https://doi.org/10.1021/acschemneuro.5c00740",
+      "proofread": false
     }
   ]
 }

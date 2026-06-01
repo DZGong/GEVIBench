@@ -15,7 +15,8 @@
     "type": "rhodopsin",
     "peakEx": 585,
     "peakEm": 710,
-    "name": "SomArchon"
+    "name": "SomArchon",
+    "proofread": false
   },
   "voltage": {
     "type": "opsin",
@@ -44,7 +45,8 @@
     },
     "source": "doi:10.1038/s41586-019-1641-1",
     "sourceImage": "/fv-sources/somarchon.jpg",
-    "sourceFigure": "Fig. 1g"
+    "sourceFigure": "Fig. 1g",
+    "proofread": false
   },
   "kinetics": [
     {
@@ -52,7 +54,8 @@
       "off": 1.1,
       "temperature": "32°C",
       "source": "doi:10.1038/s41467-022-35314-1",
-      "sourceFigure": "Main text"
+      "sourceFigure": "Main text",
+      "proofread": false
     }
   ],
   "dynamicRangeData": [
@@ -60,30 +63,35 @@
       "deltaF": 30,
       "sign": "positive",
       "source": "doi:10.1038/s41586-019-1641-1",
-      "sourceFigure": "Fig. 1g"
+      "sourceFigure": "Fig. 1g",
+      "proofread": false
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 45,
       "source": "doi:10.1038/s41586-019-1641-1",
-      "sourceFigure": "Fig. 1d"
+      "sourceFigure": "Fig. 1d",
+      "proofread": false
     },
     {
       "deltaF": 42,
       "source": "doi:10.1038/s41586-019-1641-1",
-      "sourceFigure": "Fig. 1d"
+      "sourceFigure": "Fig. 1d",
+      "proofread": false
     },
     {
       "deltaF": 35,
       "source": "doi:10.1038/s41586-019-1641-1",
-      "sourceFigure": "Fig. 1d"
+      "sourceFigure": "Fig. 1d",
+      "proofread": false
     },
     {
       "deltaF": 53.4,
       "source": "doi:10.1038/s41586-019-1641-1",
       "note": "Mean ΔF/F per AP in mouse cortex L2/3 brain slices, 1.5 W/mm², n=14 cells. From Extended Data Fig. 5c source data",
-      "sourceFigure": "Extended Data Fig. 5c"
+      "sourceFigure": "Extended Data Fig. 5c",
+      "proofread": false
     }
   ],
   "photostabilityData": [
@@ -92,7 +100,8 @@
       "illumination": "1500 mW/mm²",
       "duration": "10 min",
       "source": "doi:10.1038/s41586-019-1641-1",
-      "sourceFigure": "Extended Data Fig. 5e"
+      "sourceFigure": "Extended Data Fig. 5e",
+      "proofread": false
     },
     {
       "brightnessRemaining": 94,
@@ -100,7 +109,8 @@
       "duration": "1 min",
       "source": "doi:10.1038/s41586-019-1641-1",
       "note": "From Extended Data Fig. 5e source data, n=17 cells",
-      "sourceFigure": "Extended Data Fig. 5e"
+      "sourceFigure": "Extended Data Fig. 5e",
+      "proofread": false
     },
     {
       "brightnessRemaining": 98,
@@ -108,7 +118,8 @@
       "duration": "1 min",
       "source": "doi:10.1021/acschemneuro.0c00046",
       "note": "From Supplementary Figure 2, n=8 cells, 617 nm LED excitation",
-      "sourceFigure": "Fig. S2"
+      "sourceFigure": "Fig. S2",
+      "proofread": false
     }
   ],
   "brightnessData": [
@@ -116,12 +127,14 @@
       "ratio": 28,
       "reference": "arch",
       "source": "doi:10.1021/acschemneuro.0c00046",
-      "sourceFigure": "Fig. S2"
+      "sourceFigure": "Fig. S2",
+      "proofread": false
     }
   ],
   "addgene": {
     "id": "126941",
-    "url": "https://www.addgene.org/126941/"
+    "url": "https://www.addgene.org/126941/",
+    "proofread": false
   },
   "researchPapers": [
     {
@@ -130,7 +143,8 @@
       "journal": "Nature",
       "year": 2019,
       "sample": "Mouse, cortex, hippocampus CA1, and striatum, in vivo awake head-fixed",
-      "url": "https://doi.org/10.1038/s41586-019-1641-1"
+      "url": "https://doi.org/10.1038/s41586-019-1641-1",
+      "proofread": false
     },
     {
       "title": "All-optical electrophysiology reveals the role of lateral inhibition in sensory processing in cortical layer 1",
@@ -138,7 +152,8 @@
       "journal": "Cell",
       "year": 2020,
       "sample": "Mouse, barrel cortex layer 1 interneurons, in vivo awake",
-      "url": "https://doi.org/10.1016/j.cell.2020.01.001"
+      "url": "https://doi.org/10.1016/j.cell.2020.01.001",
+      "proofread": false
     },
     {
       "title": "Craniotomy Procedure for Visualizing Neuronal Activities in Hippocampus of Behaving Mice",
@@ -146,7 +161,8 @@
       "journal": "Journal of Visualized Experiments",
       "year": 2021,
       "sample": "Mouse, hippocampus CA1, in vivo awake head-fixed",
-      "url": "https://doi.org/10.3791/62266"
+      "url": "https://doi.org/10.3791/62266",
+      "proofread": false
     },
     {
       "title": "Large-scale voltage imaging in behaving mice using targeted illumination",
@@ -154,7 +170,8 @@
       "journal": "iScience",
       "year": 2021,
       "sample": "Mouse, visual cortex and hippocampal CA1, in vivo awake; rat cortical neurons, in vitro",
-      "url": "https://doi.org/10.1016/j.isci.2021.103263"
+      "url": "https://doi.org/10.1016/j.isci.2021.103263",
+      "proofread": false
     },
     {
       "title": "Region-specific effects of ultrasound on individual neurons in the awake mammalian brain",
@@ -162,7 +179,8 @@
       "journal": "iScience",
       "year": 2021,
       "sample": "Mouse, hippocampus and motor cortex, in vivo awake",
-      "url": "https://doi.org/10.1016/j.isci.2021.102955"
+      "url": "https://doi.org/10.1016/j.isci.2021.102955",
+      "proofread": false
     },
     {
       "title": "Visualizing Oscillations in Brain Slices With Genetically Encoded Voltage Indicators",
@@ -170,7 +188,8 @@
       "journal": "Frontiers in Neuroanatomy",
       "year": 2021,
       "sample": "Mouse, motor cortex brain slices, in vitro",
-      "url": "https://doi.org/10.3389/fnana.2021.741711"
+      "url": "https://doi.org/10.3389/fnana.2021.741711",
+      "proofread": false
     },
     {
       "title": "Deep brain stimulation creates informational lesion through membrane depolarization in mouse hippocampus",
@@ -178,7 +197,8 @@
       "journal": "Nature Communications",
       "year": 2022,
       "sample": "Mouse, hippocampal CA1, in vivo awake",
-      "url": "https://doi.org/10.1038/s41467-022-35314-1"
+      "url": "https://doi.org/10.1038/s41467-022-35314-1",
+      "proofread": false
     },
     {
       "title": "Membrane Voltage Dynamics of Parvalbumin Interneurons Orchestrate Hippocampal Theta Rhythmicity",
@@ -186,7 +206,8 @@
       "journal": "bioRxiv",
       "year": 2022,
       "sample": "Mouse, hippocampal CA1 parvalbumin interneurons and pyramidal cells, in vivo awake",
-      "url": "https://doi.org/10.1101/2022.11.14.516448"
+      "url": "https://doi.org/10.1101/2022.11.14.516448",
+      "proofread": false
     },
     {
       "title": "Theta and gamma rhythmic coding through two spike output modes in the hippocampus during spatial navigation",
@@ -194,7 +215,8 @@
       "journal": "Cell Reports",
       "year": 2023,
       "sample": "Mouse, hippocampal CA1, in vivo awake head-fixed",
-      "url": "https://doi.org/10.1016/j.celrep.2023.112906"
+      "url": "https://doi.org/10.1016/j.celrep.2023.112906",
+      "proofread": false
     },
     {
       "title": "Striatal cholinergic interneuron membrane voltage tracks locomotor rhythms in mice",
@@ -202,7 +224,8 @@
       "journal": "Nature Communications",
       "year": 2023,
       "sample": "Mouse, striatum cholinergic interneurons and spiny projection neurons, in vivo awake",
-      "url": "https://doi.org/10.1038/s41467-023-39497-z"
+      "url": "https://doi.org/10.1038/s41467-023-39497-z",
+      "proofread": false
     },
     {
       "title": "Photothrombosis induced cortical stroke produces electrographic epileptic biomarkers in mice",
@@ -210,7 +233,8 @@
       "journal": "bioRxiv",
       "year": 2024,
       "sample": "Mouse, motor cortex, in vivo awake",
-      "url": "https://doi.org/10.1101/2024.03.01.582958"
+      "url": "https://doi.org/10.1101/2024.03.01.582958",
+      "proofread": false
     },
     {
       "title": "Slow and fast cortical cholinergic arousal is reduced in a mouse model of focal seizures with impaired consciousness",
@@ -218,7 +242,8 @@
       "journal": "Cell Reports",
       "year": 2024,
       "sample": "Mouse, cortex, in vivo awake",
-      "url": "https://doi.org/10.1016/j.celrep.2024.115012"
+      "url": "https://doi.org/10.1016/j.celrep.2024.115012",
+      "proofread": false
     },
     {
       "title": "Large-scale deep tissue voltage imaging with targeted-illumination confocal microscopy",
@@ -226,7 +251,8 @@
       "journal": "Nature Methods",
       "year": 2024,
       "sample": "Mouse, visual cortex, motor cortex, and hippocampal CA1, in vivo awake",
-      "url": "https://doi.org/10.1038/s41592-024-02275-w"
+      "url": "https://doi.org/10.1038/s41592-024-02275-w",
+      "proofread": false
     },
     {
       "title": "Relative phase of membrane potential theta oscillations between individual hippocampal neurons code space",
@@ -234,7 +260,8 @@
       "journal": "bioRxiv",
       "year": 2025,
       "sample": "Mouse, hippocampal CA1, in vivo awake head-fixed",
-      "url": "https://doi.org/10.1101/2025.11.14.688496"
+      "url": "https://doi.org/10.1101/2025.11.14.688496",
+      "proofread": false
     },
     {
       "title": "Imaging high-frequency voltage dynamics in multiple neuron classes of behaving mammals",
@@ -242,7 +269,8 @@
       "journal": "Cell",
       "year": 2025,
       "sample": "Mouse and rat, cortex, hippocampus, striatum, in vivo awake; fiber photometry with TEMPO",
-      "url": "https://doi.org/10.1016/j.cell.2025.06.028"
+      "url": "https://doi.org/10.1016/j.cell.2025.06.028",
+      "proofread": false
     },
     {
       "title": "Transcranial ultrasound stimulation modulates neuronal membrane potentials across broad timescales in the awake mammalian brain",
@@ -250,7 +278,8 @@
       "journal": "Brain Stimulation",
       "year": 2025,
       "sample": "Mouse, cortex, in vivo awake",
-      "url": "https://doi.org/10.1016/j.brs.2025.09.004"
+      "url": "https://doi.org/10.1016/j.brs.2025.09.004",
+      "proofread": false
     }
   ]
 }

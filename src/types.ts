@@ -16,23 +16,33 @@ export interface GEVI {
     temperature?: string;
     source: string;
     sourceFigure?: string;
+    proofread?: boolean;
   }[];
   dynamicRangeData?: {
     deltaF: number;
     sign: 'positive' | 'negative';
     source: string;
     sourceFigure?: string;
+    proofread?: boolean;
   }[];
   sensitivityData?: {
     deltaF: number;  // ΔF/F % per action potential
     source: string;
     sourceFigure?: string;
+    proofread?: boolean;
+  }[];
+  subthresholdData?: {
+    slope: number;  // %/mV
+    source: string;
+    sourceFigure?: string;
+    proofread?: boolean;
   }[];
   brightnessData?: {
     ratio: number;
     reference: string;
     source: string;
     sourceFigure?: string;
+    proofread?: boolean;
   }[];
   photostabilityData?: {
     brightnessRemaining: number;
@@ -40,10 +50,13 @@ export interface GEVI {
     duration: string;
     source: string;
     sourceFigure?: string;
+    proofread?: boolean;
   }[] | 'bioluminescent';
   twoPhoton?: {
     compatible: boolean;
     source: string;
+    sourceFigure?: string;
+    proofread?: boolean;
   }[];
 
   // Raw derived values — computed at runtime for tabular display + sorting
@@ -64,6 +77,10 @@ export interface GEVI {
     peakEx: number;
     peakEm: number;
     name: string;
+    source?: string;
+    sourceFigure?: string;
+    note?: string;
+    proofread?: boolean;
     custom?: {
       minEx?: number;
       excitation?: number[];
@@ -76,6 +93,7 @@ export interface GEVI {
     slope: number;
     polarity: 'positive' | 'negative';
     name: string;
+    proofread?: boolean;
     custom?: {
       voltage: number[];
       deltaF: number[];
@@ -84,6 +102,7 @@ export interface GEVI {
       name: string;
       voltage: number[];
       deltaF: number[];
+      proofread?: boolean;
     }[];
     source?: string;
     sourceImage?: string;
@@ -94,6 +113,7 @@ export interface GEVI {
   addgene?: {
     id: string;
     url: string;
+    proofread?: boolean;
   };
   paperCount?: number;    // computed at runtime from researchPapers.length
 }
@@ -107,6 +127,7 @@ export interface ResearchPaper {
   dye?: string;
   url: string;
   applications?: string[];
+  proofread?: boolean;
 }
 
 export interface GEVIColor {

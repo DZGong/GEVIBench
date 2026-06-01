@@ -17,7 +17,8 @@
     "type": "rhodopsin",
     "peakEx": 550,
     "peakEm": 687,
-    "name": "Archer1"
+    "name": "Archer1",
+    "proofread": false
   },
   "voltage": {
     "type": "opsin",
@@ -64,7 +65,8 @@
     },
     "source": "doi:10.1038/ncomms5894",
     "sourceImage": "/fv-sources/archer1.jpg",
-    "sourceFigure": "Fig. 1d"
+    "sourceFigure": "Fig. 1d",
+    "proofread": false
   },
   "kinetics": [
     {
@@ -72,7 +74,8 @@
       "off": 0.5,
       "source": "doi:10.1038/ncomms5894",
       "sourceFigure": "Fig. 1e",
-      "note": "No quantitative tau values published; paper states kinetics 'very similar' to Arch WT. Placeholder pending better data."
+      "note": "No quantitative tau values published; paper states kinetics 'very similar' to Arch WT. Placeholder pending better data.",
+      "proofread": false
     }
   ],
   "dynamicRangeData": [
@@ -81,14 +84,16 @@
       "sign": "positive",
       "source": "doi:10.1038/ncomms5894",
       "sourceFigure": "Fig. 1d",
-      "note": "85% delta F/F per 100 mV step (Fig. 1d, Supplementary Fig. 4)"
+      "note": "85% delta F/F per 100 mV step (Fig. 1d, Supplementary Fig. 4)",
+      "proofread": false
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 33,
       "source": "doi:10.1038/ncomms5894",
-      "sourceFigure": "Fig. 3e"
+      "sourceFigure": "Fig. 3e",
+      "proofread": false
     }
   ],
   "brightnessData": [
@@ -96,21 +101,24 @@
       "ratio": 10,
       "reference": "arch",
       "source": "doi:10.1021/acschemneuro.0c00046",
-      "sourceFigure": "Table 1"
+      "sourceFigure": "Table 1",
+      "proofread": false
     },
     {
       "ratio": 5,
       "reference": "arch",
       "source": "doi:10.1038/ncomms5894",
       "sourceFigure": "Fig. 1a",
-      "note": "5x increased fluorescence over Arch WT (Fig. 1a)"
+      "note": "5x increased fluorescence over Arch WT (Fig. 1a)",
+      "proofread": false
     },
     {
       "ratio": 0.00615,
       "reference": "EGFP",
       "source": "doi:10.1021/cbe.5c00069",
       "sourceFigure": "Table 2",
-      "note": "Computed from molar brightness = EC640 x FQY = 41100 x 0.003 = 123.3; EGFP reference brightness = 20040"
+      "note": "Computed from molar brightness = EC640 x FQY = 41100 x 0.003 = 123.3; EGFP reference brightness = 20040",
+      "proofread": false
     }
   ],
   "photostabilityData": [
@@ -120,12 +128,14 @@
       "duration": "5 min",
       "source": "doi:10.1038/ncomms5894",
       "sourceFigure": "Fig. S4",
-      "note": "Approximate from Supplementary Fig. 4: sensitivity measurements 56.3% -> 53.1% -> 52.7% delta F/F, retained stability over 5+5 min exposure. Used as proxy for baseline brightness."
+      "note": "Approximate from Supplementary Fig. 4: sensitivity measurements 56.3% -> 53.1% -> 52.7% delta F/F, retained stability over 5+5 min exposure. Used as proxy for baseline brightness.",
+      "proofread": false
     }
   ],
   "addgene": {
     "id": "60423",
-    "url": "https://www.addgene.org/60423/"
+    "url": "https://www.addgene.org/60423/",
+    "proofread": false
   },
   "researchPapers": [
     {
@@ -134,7 +144,8 @@
       "journal": "Nature Communications",
       "year": 2014,
       "sample": "Cultured rat hippocampal neurons, in vitro; C. elegans AWC-ON neurons, in vivo",
-      "url": "https://doi.org/10.1038/ncomms5894"
+      "url": "https://doi.org/10.1038/ncomms5894",
+      "proofread": false
     },
     {
       "title": "A robotic multidimensional directed evolution approach applied to fluorescent voltage reporters",
@@ -142,7 +153,8 @@
       "journal": "Nature Chemical Biology",
       "year": 2018,
       "sample": "HEK293T cells and cultured rat hippocampal neurons, in vitro",
-      "url": "https://doi.org/10.1038/s41589-018-0004-9"
+      "url": "https://doi.org/10.1038/s41589-018-0004-9",
+      "proofread": false
     },
     {
       "title": "Comparative Evaluation of Genetically Encoded Voltage Indicators",
@@ -150,7 +162,8 @@
       "journal": "Cell Reports",
       "year": 2019,
       "sample": "Mouse cortical neurons, in vitro (excluded from in vivo due to low brightness under LED/2P excitation)",
-      "url": "https://doi.org/10.1016/j.celrep.2018.12.088"
+      "url": "https://doi.org/10.1016/j.celrep.2018.12.088",
+      "proofread": false
     },
     {
       "title": "Screening and Cellular Characterization of Genetically Encoded Voltage Indicators Based on Near-Infrared Fluorescent Proteins",
@@ -158,7 +171,8 @@
       "journal": "ACS Chemical Neuroscience",
       "year": 2020,
       "sample": "HEK293T cells and cultured rat hippocampal neurons, in vitro",
-      "url": "https://doi.org/10.1021/acschemneuro.0c00046"
+      "url": "https://doi.org/10.1021/acschemneuro.0c00046",
+      "proofread": false
     },
     {
       "title": "Rational Design of Far-Red Archaerhodopsin-3-Based Fluorescent Genetically Encoded Voltage Indicators: from Elucidation of the Fluorescence Mechanism in Archers to Novel Red-Shifted Variants",
@@ -166,7 +180,8 @@
       "journal": "ACS Physical Chemistry Au",
       "year": 2024,
       "sample": "Computational modeling and HEK293T cells, in vitro",
-      "url": "https://doi.org/10.1021/acsphyschemau.3c00073"
+      "url": "https://doi.org/10.1021/acsphyschemau.3c00073",
+      "proofread": false
     },
     {
       "title": "Semirational Protein Engineering Yields Archaerhodopsin-3-Based Fluorescent Genetically Encoded Voltage Indicators with Enhanced Brightness and Red Shifted Absorption Bands",
@@ -174,7 +189,8 @@
       "journal": "Chem & Bio Engineering",
       "year": 2025,
       "sample": "E. coli and HEK293T cells, in vitro",
-      "url": "https://doi.org/10.1021/cbe.5c00069"
+      "url": "https://doi.org/10.1021/cbe.5c00069",
+      "proofread": false
     }
   ]
 }

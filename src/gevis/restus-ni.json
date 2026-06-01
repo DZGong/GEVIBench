@@ -437,7 +437,8 @@
         0.0073,
         0.007
       ]
-    }
+    },
+    "proofread": false
   },
   "voltage": {
     "type": "fp",
@@ -474,14 +475,16 @@
     },
     "source": "doi:10.1021/acschemneuro.5c00670",
     "sourceImage": "/fv-sources/restus-ni.jpg",
-    "sourceFigure": "Fig. 1F"
+    "sourceFigure": "Fig. 1F",
+    "proofread": false
   },
   "dynamicRangeData": [
     {
       "deltaF": -70,
       "sign": "negative",
       "source": "doi:10.1021/acschemneuro.5c00670",
-      "sourceFigure": "Fig. 1F"
+      "sourceFigure": "Fig. 1F",
+      "proofread": false
     }
   ],
   "brightnessData": [
@@ -489,13 +492,15 @@
       "ratio": 1.045,
       "reference": "restus",
       "source": "doi:10.1021/acschemneuro.5c00670",
-      "sourceFigure": "Fig. 2C"
+      "sourceFigure": "Fig. 2C",
+      "proofread": false
     },
     {
       "ratio": 1.788,
       "reference": "asap3",
       "source": "doi:10.1021/acschemneuro.5c00670",
-      "sourceFigure": "Fig. 2C"
+      "sourceFigure": "Fig. 2C",
+      "proofread": false
     }
   ],
   "photostabilityData": [
@@ -505,7 +510,8 @@
       "duration": "2.2 min",
       "source": "doi:10.1021/acschemneuro.5c00670",
       "sourceFigure": "Fig. 2D",
-      "note": "Confocal FLIM, 5.5% loss over 132 s at -60 mV; power in focal plane, not mW/mm²"
+      "note": "Confocal FLIM, 5.5% loss over 132 s at -60 mV; power in focal plane, not mW/mm²",
+      "proofread": false
     }
   ],
   "researchPapers": [
@@ -515,7 +521,8 @@
       "journal": "ACS Chemical Neuroscience",
       "year": 2025,
       "sample": "HEK293T cells; A375 melanoma cells; MCF-7 breast cancer cells, in vitro",
-      "url": "https://doi.org/10.1021/acschemneuro.5c00670"
+      "url": "https://doi.org/10.1021/acschemneuro.5c00670",
+      "proofread": false
     }
   ]
 }

@@ -517,7 +517,8 @@
         0.0002,
         0.0002
       ]
-    }
+    },
+    "proofread": false
   },
   "voltage": {
     "type": "opsin",
@@ -546,7 +547,8 @@
     },
     "source": "doi:10.1126/science.aab0810",
     "sourceImage": "/fv-sources/ace2n-mneon.jpg",
-    "sourceFigure": "Fig. 1D"
+    "sourceFigure": "Fig. 1D",
+    "proofread": false
   },
   "kinetics": [
     {
@@ -554,14 +556,16 @@
       "off": 0.42,
       "temperature": "22°C",
       "source": "doi:10.1126/science.aab0810",
-      "sourceFigure": "Table S2"
+      "sourceFigure": "Table S2",
+      "proofread": false
     },
     {
       "on": 2.2,
       "off": 3.8,
       "temperature": "33-34°C",
       "source": "doi:10.1016/j.cell.2019.11.004",
-      "sourceFigure": "Table 1"
+      "sourceFigure": "Table 1",
+      "proofread": false
     },
     {
       "on": 0.81,
@@ -569,7 +573,8 @@
       "source": "doi:10.1038/s41592-018-0188-7",
       "note": "Bi-exponential fast component at 22°C in spiking HEK cells (60%* on, 60%* off); slow τ_on=4.6 ms, slow τ_off=5.2 ms",
       "temperature": "22°C",
-      "sourceFigure": "Supplementary Table"
+      "sourceFigure": "Supplementary Table",
+      "proofread": false
     }
   ],
   "dynamicRangeData": [
@@ -577,39 +582,45 @@
       "deltaF": -17.9,
       "sign": "negative",
       "source": "doi:10.1126/science.aab0810",
-      "sourceFigure": "Fig. S6C"
+      "sourceFigure": "Fig. S6C",
+      "proofread": false
     },
     {
       "deltaF": -9,
       "sign": "negative",
       "source": "doi:10.1016/j.cell.2019.11.004",
-      "sourceFigure": "Table 1"
+      "sourceFigure": "Table 1",
+      "proofread": false
     },
     {
       "deltaF": -11.6,
       "sign": "negative",
       "source": "doi:10.1038/s41592-018-0188-7",
       "note": "Per 100 mV step in spiking HEK cells at 22°C",
-      "sourceFigure": "Fig. 2b"
+      "sourceFigure": "Fig. 2b",
+      "proofread": false
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 5,
       "source": "doi:10.1016/j.cell.2019.11.004",
-      "sourceFigure": "Table 1"
+      "sourceFigure": "Table 1",
+      "proofread": false
     },
     {
       "deltaF": 4.9,
       "source": "doi:10.1038/s41557-021-00641-1",
-      "sourceFigure": "Table S3"
+      "sourceFigure": "Table S3",
+      "proofread": false
     }
   ],
   "subthresholdData": [
     {
       "slope": 0.091,
       "source": "doi:10.1016/j.neuron.2023.03.009",
-      "sourceFigure": "Fig. S5D"
+      "sourceFigure": "Fig. S5D",
+      "proofread": false
     }
   ],
   "brightnessData": [
@@ -617,7 +628,8 @@
       "ratio": 4.51,
       "reference": "EGFP",
       "source": "doi:10.1038/nmeth.2413",
-      "sourceFigure": "Table 1"
+      "sourceFigure": "Table 1",
+      "proofread": false
     }
   ],
   "photostabilityData": [
@@ -626,20 +638,23 @@
       "illumination": "15 mW/mm²",
       "duration": "0.5 min",
       "source": "doi:10.1126/science.aab0810",
-      "sourceFigure": "Table S2"
+      "sourceFigure": "Table S2",
+      "proofread": false
     },
     {
       "brightnessRemaining": 50,
       "illumination": "31 mW/mm²",
       "duration": "1.5 min",
       "source": "doi:10.1038/s41557-021-00641-1",
-      "sourceFigure": "Table S6"
+      "sourceFigure": "Table S6",
+      "proofread": false
     }
   ],
   "twoPhoton": [
     {
       "compatible": false,
-      "source": "doi:10.1016/j.cell.2019.11.004"
+      "source": "doi:10.1016/j.cell.2019.11.004",
+      "proofread": false
     }
   ],
   "researchPapers": [
@@ -649,7 +664,8 @@
       "journal": "Science",
       "year": 2015,
       "sample": "Rat hippocampal neurons, in vitro; mouse V1 cortex, in vivo; Drosophila olfactory neurons, in vivo",
-      "url": "https://doi.org/10.1126/science.aab0810"
+      "url": "https://doi.org/10.1126/science.aab0810",
+      "proofread": false
     },
     {
       "title": "Long-term optical brain imaging in live adult fruit flies",
@@ -657,7 +673,8 @@
       "journal": "Nature Communications",
       "year": 2018,
       "sample": "Drosophila, dopamine neurons, in vivo",
-      "url": "https://doi.org/10.1038/s41467-018-02873-1"
+      "url": "https://doi.org/10.1038/s41467-018-02873-1",
+      "proofread": false
     },
     {
       "title": "Comparative Evaluation of Genetically Encoded Voltage Indicators",
@@ -665,7 +682,8 @@
       "journal": "Cell Reports",
       "year": 2019,
       "sample": "Mouse hippocampal neurons, in vitro; mouse visual cortex, in vivo",
-      "url": "https://doi.org/10.1016/j.celrep.2018.12.088"
+      "url": "https://doi.org/10.1016/j.celrep.2018.12.088",
+      "proofread": false
     },
     {
       "title": "Fast two-photon imaging of subcellular voltage dynamics in neuronal tissue with genetically encoded indicators",
@@ -673,7 +691,8 @@
       "journal": "eLife",
       "year": 2017,
       "sample": "Drosophila visual neurons (L2), in vivo; rat hippocampal organotypic slices, in vitro",
-      "url": "https://doi.org/10.7554/eLife.25690"
+      "url": "https://doi.org/10.7554/eLife.25690",
+      "proofread": false
     },
     {
       "title": "Exploring Bioelectricity with Ace2N-mNeon during Zebrafish Embryogenesis",
@@ -681,7 +700,8 @@
       "journal": "bioRxiv",
       "year": 2024,
       "sample": "Zebrafish embryos, neurons and cardiomyocytes, in vivo",
-      "url": "https://doi.org/10.1101/2024.12.12.628143"
+      "url": "https://doi.org/10.1101/2024.12.12.628143",
+      "proofread": false
     },
     {
       "title": "Imaging high-frequency voltage dynamics in multiple neuron classes of behaving mammals",
@@ -689,7 +709,8 @@
       "journal": "Cell",
       "year": 2025,
       "sample": "Mouse, cortex, in vivo",
-      "url": "https://doi.org/10.1016/j.cell.2025.06.028"
+      "url": "https://doi.org/10.1016/j.cell.2025.06.028",
+      "proofread": false
     }
   ]
 }

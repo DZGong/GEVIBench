@@ -9,7 +9,7 @@ import { join, basename } from 'path';
 
 const DIST = join(process.cwd(), 'dist');
 const GEVIS_DIR = join(process.cwd(), 'src', 'gevis');
-const BASE_URL = 'https://gevi-bench.vercel.app';
+const BASE_URL = 'https://gevibench.vercel.app';
 
 // Read the built index.html as template
 const template = readFileSync(join(DIST, 'index.html'), 'utf-8');

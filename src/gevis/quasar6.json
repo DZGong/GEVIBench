@@ -386,7 +386,8 @@
         0.0055,
         0.005
       ]
-    }
+    },
+    "proofread": false
   },
   "voltage": {
     "type": "opsin",
@@ -423,7 +424,8 @@
     },
     "source": "doi:10.1038/s41592-022-01743-5",
     "sourceImage": "/fv-sources/quasar6.jpg",
-    "sourceFigure": "Fig. 3c"
+    "sourceFigure": "Fig. 3c",
+    "proofread": false
   },
   "kinetics": [
     {
@@ -431,7 +433,8 @@
       "off": 1.3,
       "temperature": "30°C",
       "source": "doi:10.1038/s41592-022-01743-5",
-      "sourceFigure": "Extended Data Fig. 4d"
+      "sourceFigure": "Extended Data Fig. 4d",
+      "proofread": false
     }
   ],
   "dynamicRangeData": [
@@ -440,7 +443,8 @@
       "sign": "positive",
       "source": "doi:10.1038/s41592-022-01743-5",
       "sourceFigure": "Extended Data Fig. 4c",
-      "note": "In HEK293T cells, voltage clamp, per 100 mV step, n=5 cells"
+      "note": "In HEK293T cells, voltage clamp, per 100 mV step, n=5 cells",
+      "proofread": false
     }
   ],
   "brightnessData": [
@@ -448,7 +452,8 @@
       "ratio": 1.7,
       "reference": "archon1",
       "source": "doi:10.1038/s41592-022-01743-5",
-      "sourceFigure": "Extended Data Fig. 4b"
+      "sourceFigure": "Extended Data Fig. 4b",
+      "proofread": false
     }
   ],
   "sensitivityData": [
@@ -456,7 +461,8 @@
       "deltaF": 26,
       "source": "doi:10.1038/s41592-022-01743-5",
       "sourceFigure": "Extended Data Fig. 5c",
-      "note": "Per-spike ΔF/F from high-throughput Optopatch assay in cultured rat hippocampal neurons at room temperature, highest virus titer, n=843 cells. From Extended Data Fig. 5c"
+      "note": "Per-spike ΔF/F from high-throughput Optopatch assay in cultured rat hippocampal neurons at room temperature, highest virus titer, n=843 cells. From Extended Data Fig. 5c",
+      "proofread": false
     }
   ],
   "photostabilityData": [
@@ -465,12 +471,14 @@
       "illumination": "4200 mW/mm²",
       "duration": "10 min",
       "source": "doi:10.1038/s41592-022-01743-5",
-      "sourceFigure": "Extended Data Fig. 6f"
+      "sourceFigure": "Extended Data Fig. 6f",
+      "proofread": false
     }
   ],
   "addgene": {
     "id": "178822",
-    "url": "https://www.addgene.org/178822/"
+    "url": "https://www.addgene.org/178822/",
+    "proofread": false
   },
   "researchPapers": [
     {
@@ -479,7 +487,8 @@
       "journal": "Nature Methods",
       "year": 2023,
       "sample": "HEK293T cells, in vitro; Cultured rat hippocampal neurons, in vitro; Mouse cortex NDNF interneurons, in vivo; Mouse hippocampus PV interneurons, in vivo",
-      "url": "https://doi.org/10.1038/s41592-022-01743-5"
+      "url": "https://doi.org/10.1038/s41592-022-01743-5",
+      "proofread": false
     },
     {
       "title": "Diminishing neuronal acidification by channelrhodopsins with low proton conduction",
@@ -487,7 +496,8 @@
       "journal": "eLife",
       "year": 2023,
       "sample": "Rat, cultured hippocampal neurons, in vitro; HEK293T cells, in vitro",
-      "url": "https://doi.org/10.7554/eLife.86833"
+      "url": "https://doi.org/10.7554/eLife.86833",
+      "proofread": false
     },
     {
       "title": "Retrograde endocannabinoid signaling at inhibitory synapses in vivo",
@@ -495,7 +505,8 @@
       "journal": "Science",
       "year": 2024,
       "sample": "Mouse, hippocampus CA1, in vivo",
-      "url": "https://doi.org/10.1126/science.adk3863"
+      "url": "https://doi.org/10.1126/science.adk3863",
+      "proofread": false
     },
     {
       "title": "Plasmonic Enhancement of Protein Function",
@@ -503,7 +514,8 @@
       "journal": "bioRxiv",
       "year": 2024,
       "sample": "HEK293T cells, in vitro",
-      "url": "https://doi.org/10.1101/2024.02.07.579195"
+      "url": "https://doi.org/10.1101/2024.02.07.579195",
+      "proofread": false
     }
   ]
 }

@@ -386,7 +386,8 @@
         0.0055,
         0.005
       ]
-    }
+    },
+    "proofread": false
   },
   "voltage": {
     "type": "opsin",
@@ -415,7 +416,8 @@
     },
     "source": "doi:10.1038/s41586-019-1166-7",
     "sourceImage": "/fv-sources/quasar3.jpg",
-    "sourceFigure": "Ext. Data Fig. 3c"
+    "sourceFigure": "Ext. Data Fig. 3c",
+    "proofread": false
   },
   "kinetics": [
     {
@@ -424,7 +426,8 @@
       "temperature": "34°C",
       "source": "doi:10.1038/s41586-019-1166-7",
       "note": "Bi-exponential with blue light on; fast tau_on=0.8+/-0.04 ms (54+/-2%), tau_off=0.69+/-0.04 ms (69+/-2%); slow tau_on=19.3 ms, tau_off=15.8 ms. n=9 cells",
-      "sourceFigure": "Extended Data Fig. 3"
+      "sourceFigure": "Extended Data Fig. 3",
+      "proofread": false
     },
     {
       "on": 0.9,
@@ -432,7 +435,8 @@
       "temperature": "34°C",
       "source": "doi:10.1038/s41586-019-1166-7",
       "note": "Bi-exponential without blue light; fast tau_on=0.9+/-0.1 ms (57+/-3%), tau_off=0.9+/-0.1 ms (79+/-4%); slow tau_on=14.6 ms, tau_off=15.0 ms. n=9 cells",
-      "sourceFigure": "Extended Data Fig. 3"
+      "sourceFigure": "Extended Data Fig. 3",
+      "proofread": false
     }
   ],
   "sensitivityData": [
@@ -440,7 +444,8 @@
       "deltaF": 23.5,
       "source": "doi:10.1038/s41586-019-1641-1",
       "note": "ΔF/F per AP in mouse cortex L2/3 brain slices, 1.5 W/mm², n=13 cells. From Piatkevich et al. 2019 Extended Data Fig. 5c",
-      "sourceFigure": "Extended Data Fig. 5c"
+      "sourceFigure": "Extended Data Fig. 5c",
+      "proofread": false
     }
   ],
   "dynamicRangeData": [
@@ -449,7 +454,8 @@
       "sign": "positive",
       "source": "doi:10.1038/s41586-019-1166-7",
       "note": "ΔF/F = 40 +/- 1.7% per 100 mV from PSP measurements; same for QuasAr3 and paQuasAr3 with or without blue light (P=0.91)",
-      "sourceFigure": "Fig. 1g"
+      "sourceFigure": "Fig. 1g",
+      "proofread": false
     }
   ],
   "photostabilityData": [
@@ -459,7 +465,8 @@
       "duration": "10 min",
       "source": "doi:10.1038/s41586-019-1166-7",
       "note": "Reporter expression recovered within 1 week",
-      "sourceFigure": "Extended Data Fig. 5"
+      "sourceFigure": "Extended Data Fig. 5",
+      "proofread": false
     }
   ],
   "subthresholdData": [
@@ -467,7 +474,8 @@
       "slope": 0.4,
       "source": "doi:10.1038/s41586-019-1166-7",
       "note": "0.4%/mV derived from 40 +/- 1.7% per 100 mV voltage sensitivity measured in acute brain slices (Fig. 1g). SNR = 0.93 +/- 0.07 per mV in 1 kHz bandwidth.",
-      "sourceFigure": "Fig. 1g"
+      "sourceFigure": "Fig. 1g",
+      "proofread": false
     }
   ],
   "brightnessData": [
@@ -476,12 +484,14 @@
       "reference": "quasar2",
       "source": "doi:10.1038/s41586-019-1166-7",
       "note": "paQuasAr3 with blue light ~2x brighter than QuasAr3 (in E. coli); QuasAr3 = QuasAr2(K171R) with improved trafficking",
-      "sourceFigure": "Extended Data Fig. 3"
+      "sourceFigure": "Extended Data Fig. 3",
+      "proofread": false
     }
   ],
   "addgene": {
     "id": "107703",
-    "url": "https://www.addgene.org/107703/"
+    "url": "https://www.addgene.org/107703/",
+    "proofread": false
   },
   "researchPapers": [
     {
@@ -490,7 +500,8 @@
       "journal": "Nature",
       "year": 2019,
       "sample": "Mouse, hippocampus CA1 and olfactory bulb, in vivo (awake behaving); HEK293T cells and acute brain slices",
-      "url": "https://doi.org/10.1038/s41586-019-1166-7"
+      "url": "https://doi.org/10.1038/s41586-019-1166-7",
+      "proofread": false
     },
     {
       "title": "All-optical electrophysiology reveals the role of lateral inhibition in sensory processing in cortical layer 1",
@@ -498,7 +509,8 @@
       "journal": "Cell",
       "year": 2020,
       "sample": "Mouse, barrel cortex L1 interneurons, in vivo (awake behaving)",
-      "url": "https://doi.org/10.1016/j.cell.2019.12.025"
+      "url": "https://doi.org/10.1016/j.cell.2019.12.025",
+      "proofread": false
     },
     {
       "title": "Scalable measurements of intrinsic excitability in human iPS cell-derived excitatory neurons using all-optical electrophysiology",
@@ -506,7 +518,8 @@
       "journal": "Neurochemical Research",
       "year": 2019,
       "sample": "Human iPSC-derived excitatory cortical neurons, in vitro",
-      "url": "https://doi.org/10.1007/s11064-018-2694-5"
+      "url": "https://doi.org/10.1007/s11064-018-2694-5",
+      "proofread": false
     },
     {
       "title": "Photoactivated voltage imaging in tissue with an archaerhodopsin-derived reporter",
@@ -514,7 +527,8 @@
       "journal": "Science Advances",
       "year": 2021,
       "sample": "Mouse, hippocampus acute slices and CA1 in vivo",
-      "url": "https://doi.org/10.1126/sciadv.abe3216"
+      "url": "https://doi.org/10.1126/sciadv.abe3216",
+      "proofread": false
     },
     {
       "title": "High-fidelity estimates of spikes and subthreshold waveforms from 1-photon voltage imaging in vivo",
@@ -522,7 +536,8 @@
       "journal": "Cell Reports",
       "year": 2021,
       "sample": "Mouse, hippocampus CA1, in vivo; zebrafish spinal cord",
-      "url": "https://doi.org/10.1016/j.celrep.2021.108954"
+      "url": "https://doi.org/10.1016/j.celrep.2021.108954",
+      "proofread": false
     },
     {
       "title": "Linearly polarized excitation enhances signals from fluorescent voltage indicators",
@@ -530,7 +545,8 @@
       "journal": "Biophysical Journal",
       "year": 2021,
       "sample": "HEK293 cells and cultured rat hippocampal neurons",
-      "url": "https://doi.org/10.1016/j.bpj.2021.10.028"
+      "url": "https://doi.org/10.1016/j.bpj.2021.10.028",
+      "proofread": false
     },
     {
       "title": "Video-based pooled screening yields improved far-red genetically encoded voltage indicators",
@@ -538,7 +554,8 @@
       "journal": "Nature Methods",
       "year": 2023,
       "sample": "HEK293 cells, cultured neurons, mouse cortex and hippocampus in vivo",
-      "url": "https://doi.org/10.1038/s41592-022-01743-5"
+      "url": "https://doi.org/10.1038/s41592-022-01743-5",
+      "proofread": false
     },
     {
       "title": "Statistically unbiased prediction enables accurate denoising of voltage imaging data",
@@ -546,7 +563,8 @@
       "journal": "Nature Methods",
       "year": 2023,
       "sample": "Mouse, brain tissue (denoising benchmark on paQuasAr3-s datasets)",
-      "url": "https://doi.org/10.1038/s41592-023-02005-8"
+      "url": "https://doi.org/10.1038/s41592-023-02005-8",
+      "proofread": false
     },
     {
       "title": "Mechanism of sensory perception unveiled by simultaneous measurement of membrane voltage and intracellular calcium",
@@ -554,7 +572,8 @@
       "journal": "Communications Biology",
       "year": 2024,
       "sample": "C. elegans, AWA olfactory neurons (simultaneous voltage + calcium imaging)",
-      "url": "https://doi.org/10.1038/s42003-024-06778-2"
+      "url": "https://doi.org/10.1038/s42003-024-06778-2",
+      "proofread": false
     },
     {
       "title": "Optical constraints on two-photon voltage imaging",
@@ -562,7 +581,8 @@
       "journal": "Neurophotonics",
       "year": 2024,
       "sample": "Cultured neurons and mouse brain (1P/2P GEVI characterization)",
-      "url": "https://doi.org/10.1117/1.NPh.11.3.035007"
+      "url": "https://doi.org/10.1117/1.NPh.11.3.035007",
+      "proofread": false
     },
     {
       "title": "Robust self-supervised denoising of voltage imaging data using CellMincer",
@@ -570,7 +590,8 @@
       "journal": "npj Imaging",
       "year": 2024,
       "sample": "Primary neurons and iPSC-derived neurons, in vitro",
-      "url": "https://doi.org/10.1038/s44303-024-00055-x"
+      "url": "https://doi.org/10.1038/s44303-024-00055-x",
+      "proofread": false
     }
   ]
 }

@@ -88,7 +88,7 @@ export const methodologyContent = {
 
     photostabilityScoring: {
       title: "Photostability",
-      description: "Normalized to standard condition (100 mW/mm², 1 min) via first-order bleaching model. Entry closest to 1 min and 10 mW/mm² selected. Bioluminescent GEVIs score 100.",
+      description: "Normalized to standard condition (100 mW/mm², 1 min) via first-order bleaching model. Entries reported in convertible irradiance units such as W/cm² are converted to mW/mm². When a representative entry is needed, the entry closest to 1 min and 100 mW/mm² is selected. Bioluminescent GEVIs score 100.",
       formula: "Score = F_remain ^ (100 / (t × P))",
       formulaNote: "F_remain: fractional brightness (0–1), t: duration (min), P: power (mW/mm²).",
       details: [

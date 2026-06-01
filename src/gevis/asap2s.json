@@ -13,20 +13,23 @@
   "parentId": "asap1",
   "addgene": {
     "id": "101274",
-    "url": "https://www.addgene.org/101274/"
+    "url": "https://www.addgene.org/101274/",
+    "proofread": false
   },
   "brightnessData": [
     {
       "ratio": 1.11,
       "reference": "asap3",
       "source": "doi:10.1016/j.cell.2022.07.013",
-      "sourceFigure": "Fig. 2I"
+      "sourceFigure": "Fig. 2I",
+      "proofread": false
     },
     {
       "ratio": 1,
       "reference": "asap1",
       "source": "doi:10.7554/eLife.25690",
-      "sourceFigure": "Fig. 1—figure supplement 2"
+      "sourceFigure": "Fig. 1—figure supplement 2",
+      "proofread": false
     }
   ],
   "kinetics": [
@@ -35,28 +38,32 @@
       "off": 24,
       "temperature": "22°C",
       "source": "doi:10.7554/eLife.25690",
-      "sourceFigure": "Table 1"
+      "sourceFigure": "Table 1",
+      "proofread": false
     },
     {
       "on": 1.5,
       "off": 3.4,
       "temperature": "33-34°C",
       "source": "doi:10.1016/j.cell.2019.11.004",
-      "sourceFigure": "Table 1"
+      "sourceFigure": "Table 1",
+      "proofread": false
     },
     {
       "on": 3.78,
       "off": 7.59,
       "temperature": "32-35°C",
       "source": "doi:10.1016/j.cell.2022.07.013",
-      "sourceFigure": "Table S2"
+      "sourceFigure": "Table S2",
+      "proofread": false
     },
     {
       "on": 6.39,
       "off": 12.7,
       "temperature": "21-23°C",
       "source": "doi:10.1016/j.cell.2022.07.013",
-      "sourceFigure": "Table S2"
+      "sourceFigure": "Table S2",
+      "proofread": false
     }
   ],
   "dynamicRangeData": [
@@ -64,30 +71,35 @@
       "deltaF": -38.7,
       "sign": "negative",
       "source": "doi:10.7554/eLife.25690",
-      "sourceFigure": "Fig. 1C"
+      "sourceFigure": "Fig. 1C",
+      "proofread": false
     },
     {
       "deltaF": -36,
       "sign": "negative",
       "source": "doi:10.1016/j.cell.2019.11.004",
-      "sourceFigure": "Table 1"
+      "sourceFigure": "Table 1",
+      "proofread": false
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 12.2,
       "source": "doi:10.7554/eLife.25690",
-      "sourceFigure": "Fig. 2I"
+      "sourceFigure": "Fig. 2I",
+      "proofread": false
     },
     {
       "deltaF": 15,
       "source": "doi:10.7554/eLife.25690",
-      "sourceFigure": "Fig. 4E"
+      "sourceFigure": "Fig. 4E",
+      "proofread": false
     },
     {
       "deltaF": 7,
       "source": "doi:10.1016/j.cell.2019.11.004",
-      "sourceFigure": "Table 1"
+      "sourceFigure": "Table 1",
+      "proofread": false
     }
   ],
   "photostabilityData": [
@@ -96,17 +108,20 @@
       "illumination": "11 mW/mm²",
       "duration": "1 min",
       "source": "doi:10.7554/eLife.25690",
-      "sourceFigure": "Fig. 1—figure supplement 3"
+      "sourceFigure": "Fig. 1—figure supplement 3",
+      "proofread": false
     }
   ],
   "twoPhoton": [
     {
       "compatible": true,
-      "source": "doi:10.7554/eLife.25690"
+      "source": "doi:10.7554/eLife.25690",
+      "proofread": false
     },
     {
       "compatible": true,
-      "source": "doi:10.1016/j.cell.2019.11.004"
+      "source": "doi:10.1016/j.cell.2019.11.004",
+      "proofread": false
     }
   ],
   "researchPapers": [
@@ -116,7 +131,8 @@
       "journal": "eLife",
       "year": 2017,
       "sample": "HEK293A cells; rat hippocampal neurons; Drosophila L2 neurons; mouse hippocampal slice cultures, in vitro/in vivo",
-      "url": "https://doi.org/10.7554/eLife.25690"
+      "url": "https://doi.org/10.7554/eLife.25690",
+      "proofread": false
     },
     {
       "title": "In Vitro Testing of Voltage Indicators: Archon1, ArcLightD, ASAP1, ASAP2s, ASAP3b, Bongwoori-Pos6, BeRST1, FlicR1, and Chi-VSFP-Butterfly",
@@ -124,7 +140,8 @@
       "journal": "eNeuro",
       "year": 2020,
       "sample": "Mouse, cortex; HEK293 cells, in vitro",
-      "url": "https://doi.org/10.1523/ENEURO.0060-20.2020"
+      "url": "https://doi.org/10.1523/ENEURO.0060-20.2020",
+      "proofread": false
     },
     {
       "title": "Ultrafast two-photon imaging of a high-gain voltage indicator in awake behaving mice",
@@ -132,7 +149,8 @@
       "journal": "Cell",
       "year": 2019,
       "sample": "Rat, hippocampal neurons; HEK293A cells; mouse, cerebellar slices, in vitro",
-      "url": "https://doi.org/10.1016/j.cell.2019.11.004"
+      "url": "https://doi.org/10.1016/j.cell.2019.11.004",
+      "proofread": false
     },
     {
       "title": "Imaging of Evoked Cortical Depolarizations Using Either ASAP2s, or chi-VSFP, or Di-4-Anepps, or Autofluorescence Optical Signals",
@@ -140,7 +158,8 @@
       "journal": "Journal of Integrative Neuroscience",
       "year": 2023,
       "sample": "Mouse, cortex; ASAP2s-transgenic brain slices, ex vivo",
-      "url": "https://doi.org/10.31083/j.jin2206160"
+      "url": "https://doi.org/10.31083/j.jin2206160",
+      "proofread": false
     },
     {
       "title": "CaMKII Measures the Passage of Time to Coordinate Behavior and Motivational State",
@@ -148,7 +167,8 @@
       "journal": "Neuron",
       "year": 2019,
       "sample": "Drosophila, abdominal ganglion neurons, ex vivo",
-      "url": "https://doi.org/10.1016/j.neuron.2019.10.018"
+      "url": "https://doi.org/10.1016/j.neuron.2019.10.018",
+      "proofread": false
     },
     {
       "title": "Biochemical evidence accumulates across neurons to drive a network-level eruption",
@@ -156,7 +176,8 @@
       "journal": "Molecular Cell",
       "year": 2021,
       "sample": "Drosophila, Corazonin neurons, ex vivo",
-      "url": "https://doi.org/10.1016/j.molcel.2020.12.029"
+      "url": "https://doi.org/10.1016/j.molcel.2020.12.029",
+      "proofread": false
     },
     {
       "title": "Drosophila TRPγ is required in neuroendocrine cells for post-ingestive food selection",
@@ -164,7 +185,8 @@
       "journal": "eLife",
       "year": 2022,
       "sample": "Drosophila, DH44 neuroendocrine cells, in vivo",
-      "url": "https://doi.org/10.7554/eLife.56726"
+      "url": "https://doi.org/10.7554/eLife.56726",
+      "proofread": false
     },
     {
       "title": "Triclosan disrupts immune cell function by depressing Ca2+ influx following acidification of the cytoplasm",
@@ -172,7 +194,8 @@
       "journal": "Toxicology and Applied Pharmacology",
       "year": 2020,
       "sample": "RBL mast cells, in vitro",
-      "url": "https://doi.org/10.1016/j.taap.2020.115205"
+      "url": "https://doi.org/10.1016/j.taap.2020.115205",
+      "proofread": false
     },
     {
       "title": "Real-time detection of changes in yeast plasma membrane potential using genetically encoded voltage indicator proteins",
@@ -180,7 +203,8 @@
       "journal": "FEMS Yeast Research",
       "year": 2020,
       "sample": "Saccharomyces cerevisiae, in vitro",
-      "url": "https://doi.org/10.1093/femsyr/foaa041"
+      "url": "https://doi.org/10.1093/femsyr/foaa041",
+      "proofread": false
     },
     {
       "title": "A dark quencher genetically encodable voltage indicator (dqGEVI) exhibits high fidelity and speed",
@@ -188,7 +212,8 @@
       "journal": "Proceedings of the National Academy of Sciences",
       "year": 2021,
       "sample": "HEK293T cells; rat hippocampal neurons, in vitro",
-      "url": "https://doi.org/10.1073/pnas.2020235118"
+      "url": "https://doi.org/10.1073/pnas.2020235118",
+      "proofread": false
     },
     {
       "title": "Sustained deep-tissue voltage recording using a fast indicator evolved for two-photon microscopy",
@@ -196,7 +221,8 @@
       "journal": "Cell",
       "year": 2022,
       "sample": "HEK293A cells; mouse hippocampal neurons, in vitro",
-      "url": "https://doi.org/10.1016/j.cell.2022.07.013"
+      "url": "https://doi.org/10.1016/j.cell.2022.07.013",
+      "proofread": false
     },
     {
       "title": "Physiological features of parvalbumin-expressing GABAergic interneurons contributing to high-frequency oscillations in the cerebral cortex",
@@ -204,7 +230,8 @@
       "journal": "Current Research in Neurobiology",
       "year": 2023,
       "sample": "Mouse, cortex; PV-ASAP2s transgenic brain slices, ex vivo",
-      "url": "https://doi.org/10.1016/j.crneur.2023.100121"
+      "url": "https://doi.org/10.1016/j.crneur.2023.100121",
+      "proofread": false
     }
   ],
   "spectrum": {
@@ -759,7 +786,8 @@
         0.0064,
         0.0064
       ]
-    }
+    },
+    "proofread": false
   },
   "voltage": {
     "type": "fp",
@@ -790,6 +818,7 @@
     },
     "source": "doi:10.7554/eLife.25690",
     "sourceImage": "/fv-sources/asap2s.jpg",
-    "sourceFigure": "Fig. 1C"
+    "sourceFigure": "Fig. 1C",
+    "proofread": false
   }
 }

@@ -21,7 +21,8 @@
     "type": "rhodopsin",
     "peakEx": 525,
     "peakEm": 710,
-    "name": "PROPS"
+    "name": "PROPS",
+    "proofread": false
   },
   "voltage": {
     "type": "opsin",
@@ -82,7 +83,8 @@
         126.2,
         133.1
       ]
-    }
+    },
+    "proofread": false
   },
   "kinetics": [
     {
@@ -91,7 +93,8 @@
       "temperature": "25°C",
       "source": "doi:10.1126/science.1204763",
       "sourceFigure": "Fig. 1D",
-      "note": "Single time constant of ~4.7 ms for voltage step response (blink duration FWHM); on/off not separately resolved. Paper states 'response time ~5 ms'."
+      "note": "Single time constant of ~4.7 ms for voltage step response (blink duration FWHM); on/off not separately resolved. Paper states 'response time ~5 ms'.",
+      "proofread": false
     }
   ],
   "dynamicRangeData": [
@@ -100,12 +103,14 @@
       "sign": "positive",
       "source": "doi:10.1126/science.1204763",
       "sourceFigure": "Fig. 1C",
-      "note": "ΔF/F = 150% per 100 mV, measured via induced transmembrane voltage in E. coli"
+      "note": "ΔF/F = 150% per 100 mV, measured via induced transmembrane voltage in E. coli",
+      "proofread": false
     }
   ],
   "addgene": {
     "id": "33780",
-    "url": "https://www.addgene.org/33780/"
+    "url": "https://www.addgene.org/33780/",
+    "proofread": false
   },
   "researchPapers": [
     {
@@ -114,7 +119,8 @@
       "journal": "Science",
       "year": 2011,
       "sample": "E. coli (BW25113 and other strains), in vitro",
-      "url": "https://doi.org/10.1126/science.1204763"
+      "url": "https://doi.org/10.1126/science.1204763",
+      "proofread": false
     },
     {
       "title": "Initial photophysical characterization of the proteorhodopsin optical proton sensor (PROPS)",
@@ -122,7 +128,8 @@
       "journal": "Frontiers in Neuroscience",
       "year": 2015,
       "sample": "E. coli, in vitro",
-      "url": "https://doi.org/10.3389/fnins.2015.00315"
+      "url": "https://doi.org/10.3389/fnins.2015.00315",
+      "proofread": false
     },
     {
       "title": "Voltage-gated calcium flux mediates Escherichia coli mechanosensation",
@@ -130,7 +137,8 @@
       "journal": "Proceedings of the National Academy of Sciences",
       "year": 2017,
       "sample": "E. coli, in vitro",
-      "url": "https://doi.org/10.1073/pnas.1703084114"
+      "url": "https://doi.org/10.1073/pnas.1703084114",
+      "proofread": false
     },
     {
       "title": "Membrane voltage dysregulation driven by metabolic dysfunction underlies bactericidal activity of aminoglycosides",
@@ -138,7 +146,8 @@
       "journal": "eLife",
       "year": 2020,
       "sample": "E. coli, in vitro",
-      "url": "https://doi.org/10.7554/eLife.58706"
+      "url": "https://doi.org/10.7554/eLife.58706",
+      "proofread": false
     }
   ]
 }

@@ -2,6 +2,13 @@ import { useMemo, useState, useRef, useCallback, useEffect } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { getAllGEVIs } from '../geviData';
 import { getTreeNodeColor } from '../utils';
+import {
+  normalizePhotostability,
+  parseDurationMinutes,
+  parseIlluminationMwPerMm2,
+  STANDARD_PHOTOSTABILITY_DURATION_MINUTES,
+  STANDARD_PHOTOSTABILITY_POWER_MW_PER_MM2,
+} from '../photostability';
 import type { GEVI } from '../types';
 
 // ── Types ─────────────────────────────────────────────────────────────────────
@@ -124,18 +131,6 @@ function LabelDropdown<T extends string>({
 
 // ── Raw value extraction ──────────────────────────────────────────────────────
 
-function normalizePhotostability(br: number, illumination: string, duration: string): number {
-  const f = br / 100;
-  const pwrM = illumination.match(/([\d.]+)\s*mW\/mm[²2]/);
-  const power = pwrM ? parseFloat(pwrM[1]) : 100;
-  let mins = 1;
-  const minM = duration.match(/([\d.]+)\s*min/);
-  const secM = duration.match(/([\d.]+)\s*s\b/i);
-  if (minM) mins = parseFloat(minM[1]);
-  else if (secM) mins = parseFloat(secM[1]) / 60;
-  return Math.min(100, Math.pow(f, 100 / (mins * power)) * 100);
-}
-
 function getRawValue(gevi: GEVI, axis: AxisKey): number | null {
   switch (axis) {
     case 'brightness':
@@ -156,18 +151,19 @@ function getRawValue(gevi: GEVI, axis: AxisKey): number | null {
       if (gevi.photostabilityData === 'bioluminescent') return 100;
       if (!Array.isArray(gevi.photostabilityData) || !gevi.photostabilityData.length) return null;
       const parsed = gevi.photostabilityData.map(e => {
-        const pwrM = e.illumination.match(/([\d.]+)\s*mW\/mm[²2]/);
-        const power = pwrM ? parseFloat(pwrM[1]) : 100;
-        let mins = 1;
-        const minM = e.duration.match(/([\d.]+)\s*min/);
-        const secM = e.duration.match(/([\d.]+)\s*s\b/i);
-        if (minM) mins = parseFloat(minM[1]);
-        else if (secM) mins = parseFloat(secM[1]) / 60;
-        return { e, mins, power };
-      });
-      parsed.sort((a, b) => Math.abs(a.mins - 1) - Math.abs(b.mins - 1) || Math.abs(a.power - 10) - Math.abs(b.power - 10));
-      const { e } = parsed[0];
-      return normalizePhotostability(e.brightnessRemaining, e.illumination, e.duration);
+        const minutes = parseDurationMinutes(e.duration);
+        const power = parseIlluminationMwPerMm2(e.illumination);
+        const value = normalizePhotostability(e);
+        return { value, minutes, power };
+      }).filter((p): p is { value: number; minutes: number; power: number } =>
+        p.value !== null && p.minutes !== null && p.power !== null
+      );
+      if (!parsed.length) return null;
+      parsed.sort((a, b) =>
+        Math.abs(a.minutes - STANDARD_PHOTOSTABILITY_DURATION_MINUTES) - Math.abs(b.minutes - STANDARD_PHOTOSTABILITY_DURATION_MINUTES) ||
+        Math.abs(a.power - STANDARD_PHOTOSTABILITY_POWER_MW_PER_MM2) - Math.abs(b.power - STANDARD_PHOTOSTABILITY_POWER_MW_PER_MM2)
+      );
+      return parsed[0].value;
     }
     case 'year':
       return gevi.year != null ? gevi.year : null;

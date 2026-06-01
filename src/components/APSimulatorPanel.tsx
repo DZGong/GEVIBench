@@ -5,6 +5,7 @@
 
 import { useState, useMemo, useCallback } from 'react';
 import { getAllGEVIs } from '../geviData';
+import { estimateBleachTauAt1MwPerMm2Ms } from '../photostability';
 import type { GEVI } from '../types';
 
 // Number input that allows clearing the field while typing, clamping on blur.
@@ -253,13 +254,11 @@ function extractSimParams(gevi: GEVI): SimParams | null {
   // Scale linearly with power: τ_at_1mW = τ_at_P * P
   let tauBleach: number | null = null;
   if (Array.isArray(gevi.photostabilityData) && gevi.photostabilityData.length) {
-    const pd = gevi.photostabilityData[0];
-    const remaining = pd.brightnessRemaining;
-    if (remaining > 0 && remaining < 100) {
-      const durMs = parseFloat(pd.duration) * 60 * 1000; // "X min" → ms
-      const power = parseFloat(pd.illumination);          // "X mW/mm²"
-      const tauAtP = -durMs / Math.log(remaining / 100);
-      tauBleach = tauAtP * power; // normalize to 1 mW/mm²
+    for (const entry of gevi.photostabilityData) {
+      tauBleach = estimateBleachTauAt1MwPerMm2Ms(entry);
+      if (tauBleach !== null) {
+        break;
+      }
     }
   }
 

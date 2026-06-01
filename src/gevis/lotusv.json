@@ -246,7 +246,8 @@
         0.0071,
         0.007
       ]
-    }
+    },
+    "proofread": false
   },
   "voltage": {
     "type": "fret",
@@ -273,7 +274,8 @@
     },
     "source": "doi:10.1038/srep42398",
     "sourceImage": "/fv-sources/lotusv.jpg",
-    "sourceFigure": "Fig. 2b"
+    "sourceFigure": "Fig. 2b",
+    "proofread": false
   },
   "kinetics": [
     {
@@ -281,7 +283,8 @@
       "off": 6.12,
       "temperature": "30°C",
       "source": "doi:10.1038/srep42398",
-      "sourceFigure": "Fig. 2c"
+      "sourceFigure": "Fig. 2c",
+      "proofread": false
     }
   ],
   "dynamicRangeData": [
@@ -289,7 +292,8 @@
       "deltaF": 21,
       "sign": "positive",
       "source": "doi:10.1038/srep42398",
-      "sourceFigure": "Fig. 2b"
+      "sourceFigure": "Fig. 2b",
+      "proofread": false
     }
   ],
   "brightnessData": [
@@ -297,7 +301,8 @@
       "ratio": 0.586,
       "reference": "arclight",
       "source": "doi:10.1038/srep42398",
-      "sourceFigure": "Fig. S5a"
+      "sourceFigure": "Fig. S5a",
+      "proofread": false
     }
   ],
   "photostabilityData": "bioluminescent",
@@ -305,12 +310,14 @@
     {
       "deltaF": 2.8,
       "source": "doi:10.1038/s41598-019-43897-x",
-      "sourceFigure": "Fig. 1D"
+      "sourceFigure": "Fig. 1D",
+      "proofread": false
     }
   ],
   "addgene": {
     "id": "87127",
-    "url": "https://www.addgene.org/87127/"
+    "url": "https://www.addgene.org/87127/",
+    "proofread": false
   },
   "researchPapers": [
     {
@@ -319,7 +326,8 @@
       "journal": "Scientific Reports",
       "year": 2017,
       "sample": "Rat, GH3 cells, in vitro; HEK293T cells; Xenopus oocytes; rat, PC12 cells; human, hiPSC-CMs, in vitro",
-      "url": "https://doi.org/10.1038/srep42398"
+      "url": "https://doi.org/10.1038/srep42398",
+      "proofread": false
     },
     {
       "title": "Imaging local brain activity of multiple freely moving mice sharing the same environment",
@@ -327,7 +335,8 @@
       "journal": "Scientific Reports",
       "year": 2019,
       "sample": "Mouse, visual cortex, in vivo; rat, hippocampal neurons, in vitro",
-      "url": "https://doi.org/10.1038/s41598-019-43897-x"
+      "url": "https://doi.org/10.1038/s41598-019-43897-x",
+      "proofread": false
     }
   ]
 }

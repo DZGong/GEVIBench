@@ -426,7 +426,8 @@
         0.0413,
         0.04
       ]
-    }
+    },
+    "proofread": false
   },
   "voltage": {
     "type": "fret",
@@ -461,7 +462,8 @@
     },
     "source": "doi:10.1021/acschemneuro.0c00046",
     "sourceImage": "/fv-sources/nirbutterfly.jpg",
-    "sourceFigure": "Fig. 3b"
+    "sourceFigure": "Fig. 3b",
+    "proofread": false
   },
   "kinetics": [
     {
@@ -469,7 +471,8 @@
       "off": 2.13,
       "temperature": "32-34°C",
       "source": "doi:10.1021/acschemneuro.0c00046",
-      "sourceFigure": "Fig. 1g"
+      "sourceFigure": "Fig. 1g",
+      "proofread": false
     }
   ],
   "dynamicRangeData": [
@@ -477,19 +480,22 @@
       "deltaF": -16,
       "sign": "negative",
       "source": "doi:10.1021/acschemneuro.0c00046",
-      "sourceFigure": "Table 1"
+      "sourceFigure": "Table 1",
+      "proofread": false
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 6,
       "source": "doi:10.1021/acschemneuro.0c00046",
-      "sourceFigure": "Fig. 4b"
+      "sourceFigure": "Fig. 4b",
+      "proofread": false
     },
     {
       "deltaF": 0.34,
       "source": "doi:10.1117/1.NPh.11.2.024201",
-      "sourceFigure": "Fig. 3c"
+      "sourceFigure": "Fig. 3c",
+      "proofread": false
     }
   ],
   "brightnessData": [
@@ -497,19 +503,22 @@
       "ratio": 486,
       "reference": "arch",
       "source": "doi:10.1021/acschemneuro.0c00046",
-      "sourceFigure": "Table 1"
+      "sourceFigure": "Table 1",
+      "proofread": false
     },
     {
       "ratio": 7,
       "reference": "archon1",
       "source": "doi:10.1117/1.NPh.11.2.024201",
-      "sourceFigure": "Fig. 2b"
+      "sourceFigure": "Fig. 2b",
+      "proofread": false
     },
     {
       "ratio": 3.17,
       "reference": "somarchon",
       "source": "doi:10.1021/acschemneuro.0c00046",
-      "sourceFigure": "Fig. S2"
+      "sourceFigure": "Fig. S2",
+      "proofread": false
     }
   ],
   "photostabilityData": [
@@ -518,12 +527,14 @@
       "illumination": "44 mW/mm²",
       "duration": "1 min",
       "source": "doi:10.1021/acschemneuro.0c00046",
-      "sourceFigure": "Fig. S2"
+      "sourceFigure": "Fig. S2",
+      "proofread": false
     }
   ],
   "addgene": {
     "id": "136590",
-    "url": "https://www.addgene.org/136590/"
+    "url": "https://www.addgene.org/136590/",
+    "proofread": false
   },
   "researchPapers": [
     {
@@ -532,7 +543,8 @@
       "journal": "ACS Chemical Neuroscience",
       "year": 2020,
       "sample": "HEK293 cells and mouse cortical/hippocampal neurons, in vitro",
-      "url": "https://doi.org/10.1021/acschemneuro.0c00046"
+      "url": "https://doi.org/10.1021/acschemneuro.0c00046",
+      "proofread": false
     },
     {
       "title": "Characterization of two near-infrared genetically encoded voltage indicators",
@@ -540,7 +552,8 @@
       "journal": "Neurophotonics",
       "year": 2024,
       "sample": "Mouse, hippocampal CA3 slices, in vitro",
-      "url": "https://doi.org/10.1117/1.NPh.11.2.024201"
+      "url": "https://doi.org/10.1117/1.NPh.11.2.024201",
+      "proofread": false
     }
   ]
 }

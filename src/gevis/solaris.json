@@ -19,7 +19,8 @@
       "temperature": "25°C",
       "source": "doi:10.1101/2024.02.02.578569",
       "sourceFigure": "Fig. 1B",
-      "note": "Paper reports only a single response half-time τ_1/2 = 1.75 ± 0.11 ms for depolarizing step; separate τ_on and τ_off not resolved"
+      "note": "Paper reports only a single response half-time τ_1/2 = 1.75 ± 0.11 ms for depolarizing step; separate τ_on and τ_off not resolved",
+      "proofread": false
     }
   ],
   "dynamicRangeData": [
@@ -27,14 +28,16 @@
       "deltaF": -61,
       "sign": "negative",
       "source": "doi:10.1101/2024.02.02.578569",
-      "sourceFigure": "Fig. 1B"
+      "sourceFigure": "Fig. 1B",
+      "proofread": false
     }
   ],
   "sensitivityData": [
     {
       "deltaF": -28.1,
       "source": "doi:10.1101/2024.02.02.578569",
-      "sourceFigure": "Fig. 2B"
+      "sourceFigure": "Fig. 2B",
+      "proofread": false
     }
   ],
   "spectrum": {
@@ -739,7 +742,8 @@
         0.0003,
         0.0003
       ]
-    }
+    },
+    "proofread": false
   },
   "voltage": {
     "type": "chemi",
@@ -794,7 +798,8 @@
           -33,
           -41,
           -48
-        ]
+        ],
+        "proofread": false
       },
       {
         "name": "Solaris (JF549)",
@@ -819,7 +824,8 @@
           -23,
           -29,
           -34
-        ]
+        ],
+        "proofread": false
       },
       {
         "name": "Solaris (JF525)",
@@ -844,7 +850,8 @@
           -13,
           -17,
           -21
-        ]
+        ],
+        "proofread": false
       },
       {
         "name": "Solaris (JF635)",
@@ -869,12 +876,14 @@
           -17,
           -21,
           -24
-        ]
+        ],
+        "proofread": false
       }
     ],
     "source": "doi:10.1101/2024.02.02.578569",
     "sourceImage": "/fv-sources/solaris.jpg",
-    "sourceFigure": "Fig. 1C"
+    "sourceFigure": "Fig. 1C",
+    "proofread": false
   },
   "researchPapers": [
     {
@@ -883,7 +892,8 @@
       "journal": "bioRxiv",
       "year": 2024,
       "sample": "HEK293T cells; rat hippocampal neurons, in vitro",
-      "url": "https://doi.org/10.1101/2024.02.02.578569"
+      "url": "https://doi.org/10.1101/2024.02.02.578569",
+      "proofread": false
     }
   ]
 }

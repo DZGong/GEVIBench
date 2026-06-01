@@ -700,7 +700,8 @@
         0.0002,
         0.0001
       ]
-    }
+    },
+    "proofread": false
   },
   "voltage": {
     "type": "chemi",
@@ -755,7 +756,8 @@
           -13,
           -20,
           -24
-        ]
+        ],
+        "proofread": false
       },
       {
         "name": "Voltron (JF585)",
@@ -780,7 +782,8 @@
           -8,
           -13,
           -16
-        ]
+        ],
+        "proofread": false
       },
       {
         "name": "Voltron (JF635)",
@@ -805,12 +808,14 @@
           -5,
           -8,
           -10
-        ]
+        ],
+        "proofread": false
       }
     ],
     "source": "doi:10.1126/science.aav6416",
     "sourceImage": "/fv-sources/voltron.jpg",
-    "sourceFigure": "Fig. 1E"
+    "sourceFigure": "Fig. 1E",
+    "proofread": false
   },
   "kinetics": [
     {
@@ -818,7 +823,8 @@
       "off": 1.13,
       "temperature": "34°C",
       "source": "doi:10.1016/j.neuron.2023.03.009",
-      "sourceFigure": "Fig. 2E"
+      "sourceFigure": "Fig. 2E",
+      "proofread": false
     },
     {
       "on": 0.64,
@@ -826,7 +832,8 @@
       "source": "doi:10.1038/s41467-020-17322-1",
       "note": "Bi-exponential fast component at 22°C in spiking HEK cells (61% on, 55% off); slow τ_on=4.1 ms, slow τ_off=3.9 ms",
       "temperature": "22°C",
-      "sourceFigure": "Table S1"
+      "sourceFigure": "Table S1",
+      "proofread": false
     }
   ],
   "dynamicRangeData": [
@@ -834,14 +841,16 @@
       "deltaF": -23,
       "sign": "negative",
       "source": "doi:10.1126/science.aav6416",
-      "sourceFigure": "Fig. 1E"
+      "sourceFigure": "Fig. 1E",
+      "proofread": false
     },
     {
       "deltaF": -20,
       "sign": "negative",
       "source": "doi:10.1038/s41467-020-17322-1",
       "note": "Per 100 mV step in spiking HEK cells at 22°C",
-      "sourceFigure": "Fig. 2a"
+      "sourceFigure": "Fig. 2a",
+      "proofread": false
     }
   ],
   "brightnessData": [
@@ -849,27 +858,31 @@
       "ratio": 4,
       "reference": "ace2n-mneon",
       "source": "doi:10.1126/science.aav6416",
-      "sourceFigure": "Fig. 1F"
+      "sourceFigure": "Fig. 1F",
+      "proofread": false
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 6.16,
       "source": "doi:10.1016/j.neuron.2023.03.009",
-      "sourceFigure": "Fig. 2G"
+      "sourceFigure": "Fig. 2G",
+      "proofread": false
     },
     {
       "deltaF": 6.5,
       "source": "doi:10.1038/s41586-019-1641-1",
       "note": "Voltron-ST (JF525) in mouse cortex L2/3 brain slices, 1.5 W/mm², n=14 cells. From Piatkevich et al. 2019 Extended Data Fig. 5c",
-      "sourceFigure": "Extended Data Fig. 5c"
+      "sourceFigure": "Extended Data Fig. 5c",
+      "proofread": false
     }
   ],
   "subthresholdData": [
     {
       "slope": 0.21,
       "source": "doi:10.1016/j.neuron.2023.03.009",
-      "sourceFigure": "Fig. 2B"
+      "sourceFigure": "Fig. 2B",
+      "proofread": false
     }
   ],
   "photostabilityData": [
@@ -878,7 +891,8 @@
       "illumination": "23 mW/mm²",
       "duration": "15 min",
       "source": "doi:10.1126/science.aav6416",
-      "sourceFigure": "Fig. 1H"
+      "sourceFigure": "Fig. 1H",
+      "proofread": false
     },
     {
       "brightnessRemaining": 64,
@@ -886,12 +900,14 @@
       "duration": "1 min",
       "source": "doi:10.1038/s41586-019-1641-1",
       "note": "Voltron-ST (JF525) in mouse cortex L2/3 brain slices, n=8 cells. From Piatkevich et al. 2019 Extended Data Fig. 5e",
-      "sourceFigure": "Extended Data Fig. 5e"
+      "sourceFigure": "Extended Data Fig. 5e",
+      "proofread": false
     }
   ],
   "addgene": {
     "id": "119033",
-    "url": "https://www.addgene.org/119033/"
+    "url": "https://www.addgene.org/119033/",
+    "proofread": false
   },
   "researchPapers": [
     {
@@ -900,7 +916,8 @@
       "journal": "Science",
       "year": 2019,
       "sample": "Mouse cortex L1, larval zebrafish, Drosophila, in vivo; HEK cells",
-      "url": "https://doi.org/10.1126/science.aav6416"
+      "url": "https://doi.org/10.1126/science.aav6416",
+      "proofread": false
     },
     {
       "title": "High-fidelity estimates of spikes and subthreshold waveforms from 1-photon voltage imaging in vivo",
@@ -908,7 +925,8 @@
       "journal": "Cell Reports",
       "year": 2021,
       "sample": "Mouse, somatosensory cortex layer 1, in vivo",
-      "url": "https://doi.org/10.1016/j.celrep.2021.108954"
+      "url": "https://doi.org/10.1016/j.celrep.2021.108954",
+      "proofread": false
     },
     {
       "title": "VolPy: Automated and scalable analysis pipelines for voltage imaging datasets",
@@ -916,7 +934,8 @@
       "journal": "PLOS Computational Biology",
       "year": 2021,
       "sample": "Mouse cortex L1 and larval zebrafish tegmentum, in vivo",
-      "url": "https://doi.org/10.1371/journal.pcbi.1008806"
+      "url": "https://doi.org/10.1371/journal.pcbi.1008806",
+      "proofread": false
     },
     {
       "title": "Single Photon Kilohertz Frame Rate Imaging of Neural Activity",
@@ -924,7 +943,8 @@
       "journal": "Advanced Science",
       "year": 2022,
       "sample": "Rat, hippocampal CA1, acute brain slices, Voltron-JF525",
-      "url": "https://doi.org/10.1002/advs.202203018"
+      "url": "https://doi.org/10.1002/advs.202203018",
+      "proofread": false
     },
     {
       "title": "Voltage-Seq: all-optical postsynaptic connectome-guided single-cell transcriptomics",
@@ -932,7 +952,8 @@
       "journal": "Nature Methods",
       "year": 2023,
       "sample": "Mouse, periaqueductal gray (PAG), acute brain slices, Voltron-ST + JF585",
-      "url": "https://doi.org/10.1038/s41592-023-01965-1"
+      "url": "https://doi.org/10.1038/s41592-023-01965-1",
+      "proofread": false
     },
     {
       "title": "All-optical voltage imaging-guided postsynaptic single-cell transcriptome profiling with Voltage-Seq",
@@ -940,7 +961,8 @@
       "journal": "Nature Protocols",
       "year": 2024,
       "sample": "Mouse, acute brain slices, Voltron-ST",
-      "url": "https://doi.org/10.1038/s41596-024-01005-y"
+      "url": "https://doi.org/10.1038/s41596-024-01005-y",
+      "proofread": false
     },
     {
       "title": "Dynamic assemblies of parvalbumin interneurons in brain oscillations",
@@ -948,7 +970,8 @@
       "journal": "Neuron",
       "year": 2024,
       "sample": "Mouse, hippocampal CA1, PV interneurons, in vivo",
-      "url": "https://doi.org/10.1016/j.neuron.2024.05.015"
+      "url": "https://doi.org/10.1016/j.neuron.2024.05.015",
+      "proofread": false
     },
     {
       "title": "Optical Recordings of Unitary Synaptic Connections Reveal High and Random Local Connectivity between CA3 Pyramidal Cells",
@@ -956,7 +979,8 @@
       "journal": "Journal of Neuroscience",
       "year": 2025,
       "sample": "Rat, hippocampal CA3 pyramidal cells, acute brain slices, Voltron-ST + JF549",
-      "url": "https://doi.org/10.1523/JNEUROSCI.0102-25.2025"
+      "url": "https://doi.org/10.1523/JNEUROSCI.0102-25.2025",
+      "proofread": false
     },
     {
       "title": "Voltage imaging reveals circuit computations in the raphe underlying serotonin-mediated motor vigor learning",
@@ -964,7 +988,8 @@
       "journal": "Neuron",
       "year": 2025,
       "sample": "Larval zebrafish, serotonergic raphe (DRN), in vivo",
-      "url": "https://doi.org/10.1016/j.neuron.2025.05.017"
+      "url": "https://doi.org/10.1016/j.neuron.2025.05.017",
+      "proofread": false
     }
   ]
 }

@@ -3,6 +3,7 @@
 
 import type { GEVI } from './types';
 import geviGitDates from 'virtual:gevi-git-dates';
+import { normalizePhotostability } from './photostability';
 
 // Cache for loaded GEVIs
 let geviCache: GEVI[] | null = null;
@@ -116,7 +117,7 @@ function computeDisplayValues(gevi: GEVI, bRelMap: Map<string, number>) {
   if (gevi.photostabilityData === 'bioluminescent') {
     displayPhotostab = 100;
   } else if (Array.isArray(gevi.photostabilityData) && gevi.photostabilityData.length > 0) {
-    const normalized = gevi.photostabilityData.map(normalizePhotostability).filter(v => v > 0);
+    const normalized = gevi.photostabilityData.map(normalizePhotostability).filter((v): v is number => v !== null && v > 0);
     displayPhotostab = median(normalized);
   } else {
     displayPhotostab = null;
@@ -228,21 +229,6 @@ function median(values: number[]): number | null {
   return sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
 }
 
-// Normalize a photostability entry to 1 min @ 100 mW/mm² as a % of initial brightness.
-// Uses first-order bleaching: F_std = F_remaining ^ (100 / (t · P))
-function normalizePhotostability(entry: { brightnessRemaining: number; illumination: string; duration: string }): number {
-  const fRemaining = entry.brightnessRemaining / 100;
-  const powerMatch = entry.illumination.match(/([\d.]+)\s*mW\/mm[²2]/);
-  const power = powerMatch ? parseFloat(powerMatch[1]) : 100;
-  let minutes = 1;
-  const minMatch = entry.duration.match(/([\d.]+)\s*min/);
-  const secMatch = entry.duration.match(/([\d.]+)\s*s\b/i);
-  if (minMatch) minutes = parseFloat(minMatch[1]);
-  else if (secMatch) minutes = parseFloat(secMatch[1]) / 60;
-  const exponent = 100 / (minutes * power);
-  return Math.min(100, Math.pow(fRemaining, exponent) * 100);
-}
-
 // All raw entries for a single GEVI on a single axis (used for "stars" of the current GEVI).
 export function getRawEntriesForGEVI(gevi: GEVI, key: DistributionAxisKey): number[] {
   switch (key) {
@@ -261,7 +247,7 @@ export function getRawEntriesForGEVI(gevi: GEVI, key: DistributionAxisKey): numb
     case 'photostability': {
       if (gevi.photostabilityData === 'bioluminescent') return [100];
       if (!Array.isArray(gevi.photostabilityData)) return [];
-      return gevi.photostabilityData.map(normalizePhotostability).filter(v => v > 0);
+      return gevi.photostabilityData.map(normalizePhotostability).filter((v): v is number => v !== null && v > 0);
     }
     // Combined τ_on + τ_off per kinetics entry — the radar's "speed" axis on
     // main collapses on/off into a single dimension so the polygon doesn't

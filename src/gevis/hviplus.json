@@ -428,7 +428,8 @@
         0.0161,
         0.0161
       ]
-    }
+    },
+    "proofread": false
   },
   "voltage": {
     "type": "chemi",
@@ -467,7 +468,8 @@
     },
     "source": "doi:10.1126/sciadv.ads1807",
     "sourceImage": "/fv-sources/hviplus.jpg",
-    "sourceFigure": "Fig. 2E"
+    "sourceFigure": "Fig. 2E",
+    "proofread": false
   },
   "kinetics": [
     {
@@ -475,7 +477,8 @@
       "off": 1.33,
       "temperature": "25°C",
       "source": "doi:10.1126/sciadv.ads1807",
-      "sourceFigure": "Fig. 2D"
+      "sourceFigure": "Fig. 2D",
+      "proofread": false
     }
   ],
   "dynamicRangeData": [
@@ -483,21 +486,24 @@
       "deltaF": 55,
       "sign": "positive",
       "source": "doi:10.1126/sciadv.ads1807",
-      "sourceFigure": "Fig. 2E"
+      "sourceFigure": "Fig. 2E",
+      "proofread": false
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 22.3,
       "source": "doi:10.1126/sciadv.ads1807",
-      "sourceFigure": "Fig. 2C"
+      "sourceFigure": "Fig. 2C",
+      "proofread": false
     }
   ],
   "subthresholdData": [
     {
       "slope": 0.22,
       "source": "doi:10.1126/sciadv.ads1807",
-      "sourceFigure": "Fig. 2G"
+      "sourceFigure": "Fig. 2G",
+      "proofread": false
     }
   ],
   "brightnessData": [
@@ -505,7 +511,8 @@
       "ratio": 0.45,
       "reference": "hvi",
       "source": "doi:10.1126/sciadv.ads1807",
-      "sourceFigure": "Fig. S5C"
+      "sourceFigure": "Fig. S5C",
+      "proofread": false
     }
   ],
   "photostabilityData": [
@@ -514,7 +521,8 @@
       "illumination": "50 mW/mm²",
       "duration": "12.3 min",
       "source": "doi:10.1126/sciadv.ads1807",
-      "sourceFigure": "Fig. S7"
+      "sourceFigure": "Fig. S7",
+      "proofread": false
     }
   ],
   "researchPapers": [
@@ -524,7 +532,8 @@
       "journal": "Science Advances",
       "year": 2025,
       "sample": "Rat, hippocampal neurons, in vitro; rat, cardiomyocytes, in vitro; mouse, pancreatic islets, ex vivo",
-      "url": "https://doi.org/10.1126/sciadv.ads1807"
+      "url": "https://doi.org/10.1126/sciadv.ads1807",
+      "proofread": false
     }
   ]
 }

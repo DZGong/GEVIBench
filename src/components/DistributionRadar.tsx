@@ -7,6 +7,11 @@ interface DistributionRadarProps {
   // Compare mode: one polygon per GEVI, colored via `colors`. When provided, `gevi` is ignored.
   gevis?: GEVI[];
   colors?: string[];
+  compact?: boolean;
+  // Enlarges the hexagon and pushes top/bottom labels further vertically
+  // (top labels up, bottom labels down) without moving them horizontally,
+  // so the polygon takes more of the available area.
+  expandHex?: boolean;
 }
 
 // ViewBox sized with extra margin around the plot so axis + tick labels never
@@ -15,9 +20,17 @@ const VB_W = 600;
 const VB_H = 500;
 const CX = VB_W / 2;
 const CY = VB_H / 2;
-const R_OUTER = 175;
+const R_OUTER_DEFAULT = 175;
+// `expandHex` mode grows the hexagon, but the side labels keep their default
+// x position so they don't drift horizontally. 195 is the practical max — at
+// this radius, side vertices sit just inside the side labels' starting x so
+// the polygon edge doesn't clip into the text.
+const R_OUTER_EXPANDED = 195;
 const R_INNER = 38;
-const R_MID = (R_INNER + R_OUTER) / 2;
+// Extra vertical shift (in viewBox units) applied to labels in expanded
+// mode — top three labels lifted UP, bottom three pushed DOWN. Keeps them
+// clear of the enlarged hexagon without moving horizontally.
+const EXPANDED_LABEL_YLIFT = 24;
 
 // Fixed absolute-value ticks per axis, ordered [inner, middle, outer] of the
 // radar. The three radii (R_INNER, R_MID, R_OUTER) correspond exactly to these
@@ -26,7 +39,7 @@ const R_MID = (R_INNER + R_OUTER) / 2;
 // For speed axes (τ), inner = slow/large-τ, outer = fast/small-τ. For every
 // other axis, inner = weak, outer = strong. This is intentional: outward is
 // always "better" so the polygon's overall size reads as relative quality.
-type LabelPart = { text: string; sub?: boolean };
+type LabelPart = { text: string; sub?: boolean; newline?: boolean };
 
 interface AxisSpec {
   key: DistributionAxisKey;
@@ -40,15 +53,15 @@ const AXES: AxisSpec[] = [
   // Kinetics axis collapses on/off into the per-entry sum (τ_on + τ_off).
   // Inverted: faster (smaller sum) sits on the outer ring.
   { key: 'kinetics',       label: [{ text: 'τ' }, { text: 'on', sub: true }, { text: '+τ' }, { text: 'off', sub: true }, { text: ' (ms)' }], ticks: [100, 10,  1] },
-  { key: 'dynamicRange',   label: [{ text: 'ΔF/F% per 100mV' }],                                                                        ticks: [1,   10,  100] },
-  { key: 'sensitivity',    label: [{ text: 'ΔF/F% per AP' }],                                                                           ticks: [1,   10,  100] },
+  { key: 'dynamicRange',   label: [{ text: 'ΔF/F%' }, { text: 'per 100mV', newline: true }],                                           ticks: [1,   10,  100] },
+  { key: 'sensitivity',    label: [{ text: 'ΔF/F%' }, { text: 'per AP', newline: true }],                                              ticks: [1,   10,  100] },
   { key: 'photostability', label: [{ text: 'F' }, { text: 'remain', sub: true }, { text: '%' }],                                        ticks: [1,   10,  100] },
   // Independent research papers using this sensor — proxy for adoption.
   { key: 'nUsed',          label: [{ text: 'N' }, { text: 'used', sub: true }],                                                         ticks: [1,   10,  100] },
 ];
 
 function labelToPlainText(parts: LabelPart[]): string {
-  return parts.map(p => (p.sub ? `_${p.text}` : p.text)).join('');
+  return parts.map(p => (p.sub ? `_${p.text}` : p.text)).join(' ');
 }
 
 function axisAngle(idx: number, n: number): number {
@@ -69,15 +82,18 @@ function polar(angle: number, r: number): [number, number] {
 // visibly outside the "100" ring instead of collapsing onto it.
 const T_OVERSHOOT = 1.15;
 
-function axisRadialPosition(value: number, ticks: [number, number, number]): number {
-  if (!(value > 0)) return R_INNER;
-  const logInner = Math.log10(ticks[0]);
-  const logOuter = Math.log10(ticks[2]);
-  const span = logOuter - logInner;
-  if (span === 0) return R_MID;
-  const t = (Math.log10(value) - logInner) / span;
-  const clamped = Math.max(0, Math.min(T_OVERSHOOT, t));
-  return R_INNER + clamped * (R_OUTER - R_INNER);
+function makeAxisRadialPosition(rOuter: number) {
+  const rMid = (R_INNER + rOuter) / 2;
+  return function axisRadialPosition(value: number, ticks: [number, number, number]): number {
+    if (!(value > 0)) return R_INNER;
+    const logInner = Math.log10(ticks[0]);
+    const logOuter = Math.log10(ticks[2]);
+    const span = logOuter - logInner;
+    if (span === 0) return rMid;
+    const t = (Math.log10(value) - logInner) / span;
+    const clamped = Math.max(0, Math.min(T_OVERSHOOT, t));
+    return R_INNER + clamped * (rOuter - R_INNER);
+  };
 }
 
 function formatValue(v: number, key: DistributionAxisKey): string {
@@ -94,7 +110,13 @@ function formatTickLabel(v: number): string {
   return v.toString();
 }
 
-export function DistributionRadar({ gevi, gevis, colors }: DistributionRadarProps) {
+export function DistributionRadar({ gevi, gevis, colors, compact = false, expandHex = false }: DistributionRadarProps) {
+  const FONT_AXIS = compact ? 21 : 26;
+  const FONT_SUB = compact ? 14 : 18;
+  const FONT_TICK = compact ? 14 : 18;
+  const R_OUTER = expandHex ? R_OUTER_EXPANDED : R_OUTER_DEFAULT;
+  const R_MID = (R_INNER + R_OUTER) / 2;
+  const axisRadialPosition = useMemo(() => makeAxisRadialPosition(R_OUTER), [R_OUTER]);
   const [hover, setHover] = useState<{ axisIdx: number; key: DistributionAxisKey; value: number; label: string; name?: string; color?: string } | null>(null);
 
   const n = AXES.length;
@@ -158,7 +180,7 @@ export function DistributionRadar({ gevi, gevis, colors }: DistributionRadarProp
 
   return (
     <div className="relative w-full h-full">
-      <svg viewBox={`0 0 ${VB_W} ${VB_H}`} width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
+      <svg viewBox={`0 0 ${VB_W} ${VB_H}`} width="100%" height="100%" preserveAspectRatio="xMidYMid meet" overflow="visible">
         {/* Hexagonal grid rings — aligned with the three ticks on each spoke */}
         {gridRadii.map(r => {
           const pts = AXES.map((_, i) => polar(axisAngle(i, n), r).join(',')).join(' ');
@@ -181,8 +203,24 @@ export function DistributionRadar({ gevi, gevis, colors }: DistributionRadarProp
           const [x2, y2] = polar(angle, R_OUTER);
           // Push straight-down axis labels farther out so they clear the outer
           // tick value that sits just above them along the same vertical line.
-          const labelRadius = R_OUTER + (Math.sin(angle) > 0.7 ? 52 : 32);
-          const [lx, ly] = polar(angle, labelRadius);
+          // In expanded mode the polygon is already larger, and the bottom
+          // axis carries a multi-line label that would overflow the viewBox
+          // at +42, so use the standard +24 there.
+          const radialOffset = Math.sin(angle) > 0.7 && !expandHex ? 42 : 24;
+          // Decouple label x from y in expanded mode: x is computed against the
+          // DEFAULT outer radius so labels don't drift horizontally when the
+          // hexagon enlarges; y uses the (larger) actual radius plus a vertical
+          // lift so top/bottom *side* labels step out of the hexagon's way.
+          // Vertical axes (|sin| > 0.7) get no extra lift — they're already at
+          // the vertical extreme and any extra shift clips against the
+          // viewBox (visible when the container's aspect matches viewBox
+          // exactly, as in the GEVI detail panel).
+          const lx = CX + Math.cos(angle) * (R_OUTER_DEFAULT + radialOffset);
+          const sinA = Math.sin(angle);
+          const yLift = expandHex && Math.abs(sinA) <= 0.7
+            ? (sinA < 0 ? -EXPANDED_LABEL_YLIFT : EXPANDED_LABEL_YLIFT)
+            : 0;
+          const ly = CY + sinA * (R_OUTER + radialOffset) + yLift;
           const anchor = Math.abs(Math.cos(angle)) < 0.3 ? 'middle' : Math.cos(angle) > 0 ? 'start' : 'end';
           return (
             <g key={axis.key}>
@@ -192,17 +230,23 @@ export function DistributionRadar({ gevi, gevis, colors }: DistributionRadarProp
                 y={ly}
                 textAnchor={anchor}
                 dominantBaseline="middle"
-                fontSize={18}
+                fontSize={FONT_AXIS}
                 fontWeight={500}
                 fill="currentColor"
                 fillOpacity={0.75}
               >
                 {axis.label.map((p, pi) => {
                   const prev = axis.label[pi - 1];
-                  // dy is cumulative in SVG; shift down entering a sub, up when leaving one.
-                  const dy = p.sub && !prev?.sub ? 4 : !p.sub && prev?.sub ? -4 : 0;
+                  if (p.newline) {
+                    return (
+                      <tspan key={pi} x={lx} dy={FONT_AXIS * 1.15} fontSize={p.sub ? FONT_SUB : FONT_AXIS}>
+                        {p.text}
+                      </tspan>
+                    );
+                  }
+                  const dy = p.sub && !prev?.sub ? 6 : !p.sub && prev?.sub ? -6 : 0;
                   return (
-                    <tspan key={pi} dy={dy} fontSize={p.sub ? 13 : 18}>
+                    <tspan key={pi} dy={dy} fontSize={p.sub ? FONT_SUB : FONT_AXIS}>
                       {p.text}
                     </tspan>
                   );
@@ -221,7 +265,7 @@ export function DistributionRadar({ gevi, gevis, colors }: DistributionRadarProp
               {axis.ticks.map((value, tIdx) => {
                 const r = gridRadii[tIdx];
                 const [tx, ty] = polar(angle, r);
-                const labelOffset = 12;
+                const labelOffset = 11;
                 const [lx, ly] = [tx + Math.cos(perp) * labelOffset, ty + Math.sin(perp) * labelOffset];
                 return (
                   <text
@@ -230,7 +274,7 @@ export function DistributionRadar({ gevi, gevis, colors }: DistributionRadarProp
                     y={ly}
                     textAnchor="middle"
                     dominantBaseline="middle"
-                    fontSize={13}
+                    fontSize={FONT_TICK}
                     fill="currentColor"
                     fillOpacity={0.6}
                   >

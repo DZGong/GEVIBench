@@ -582,7 +582,8 @@
         0.0412,
         0.0412
       ]
-    }
+    },
+    "proofread": false
   },
   "voltage": {
     "type": "fp",
@@ -613,7 +614,8 @@
     },
     "source": "doi:10.1523/JNEUROSCI.3590-15.2016",
     "sourceImage": "/fv-sources/flicr1.jpg",
-    "sourceFigure": "Fig. 3D"
+    "sourceFigure": "Fig. 3D",
+    "proofread": false
   },
   "kinetics": [
     {
@@ -621,14 +623,16 @@
       "off": 2.8,
       "temperature": "22°C",
       "source": "doi:10.1523/JNEUROSCI.3590-15.2016",
-      "sourceFigure": "Table 1"
+      "sourceFigure": "Table 1",
+      "proofread": false
     },
     {
       "on": 0.74,
       "off": 0.93,
       "temperature": "34°C",
       "source": "doi:10.1523/JNEUROSCI.3590-15.2016",
-      "sourceFigure": "Table 1"
+      "sourceFigure": "Table 1",
+      "proofread": false
     }
   ],
   "dynamicRangeData": [
@@ -636,25 +640,29 @@
       "deltaF": 6.6,
       "sign": "positive",
       "source": "doi:10.1523/JNEUROSCI.3590-15.2016",
-      "sourceFigure": "Fig. 3D"
+      "sourceFigure": "Fig. 3D",
+      "proofread": false
     },
     {
       "deltaF": 2.54,
       "sign": "positive",
       "source": "doi:10.1523/ENEURO.0060-20.2020",
-      "sourceFigure": "Fig. 2D"
+      "sourceFigure": "Fig. 2D",
+      "proofread": false
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 2.6,
       "source": "doi:10.1523/JNEUROSCI.3590-15.2016",
-      "sourceFigure": "Fig. 5D"
+      "sourceFigure": "Fig. 5D",
+      "proofread": false
     },
     {
       "deltaF": 1.4,
       "source": "doi:10.1038/s41598-019-52370-8",
-      "sourceFigure": "Fig. 3d"
+      "sourceFigure": "Fig. 3d",
+      "proofread": false
     }
   ],
   "brightnessData": [
@@ -662,13 +670,15 @@
       "ratio": 1458,
       "reference": "arch",
       "source": "doi:10.1021/acschemneuro.0c00046",
-      "sourceFigure": "Table 1"
+      "sourceFigure": "Table 1",
+      "proofread": false
     },
     {
       "ratio": 0.15,
       "reference": "ace2n-mneon",
       "source": "doi:10.1038/s41592-018-0188-7",
-      "sourceFigure": "Fig. 1j"
+      "sourceFigure": "Fig. 1j",
+      "proofread": false
     }
   ],
   "photostabilityData": [
@@ -677,12 +687,14 @@
       "illumination": "10 mW/mm²",
       "duration": "1 min",
       "source": "doi:10.1523/JNEUROSCI.3590-15.2016",
-      "sourceFigure": "Fig. 3I"
+      "sourceFigure": "Fig. 3I",
+      "proofread": false
     }
   ],
   "addgene": {
     "id": "74142",
-    "url": "https://www.addgene.org/74142/"
+    "url": "https://www.addgene.org/74142/",
+    "proofread": false
   },
   "researchPapers": [
     {
@@ -691,7 +703,8 @@
       "journal": "Journal of Neuroscience",
       "year": 2016,
       "sample": "HEK293 cells; rat hippocampal neurons, in vitro; rat organotypic brain slices",
-      "url": "https://doi.org/10.1523/JNEUROSCI.3590-15.2016"
+      "url": "https://doi.org/10.1523/JNEUROSCI.3590-15.2016",
+      "proofread": false
     },
     {
       "title": "Fast, in vivo voltage imaging using a red fluorescent indicator",
@@ -699,7 +712,8 @@
       "journal": "Nature Methods",
       "year": 2018,
       "sample": "Mouse hippocampus and cortex, in vivo; Drosophila, in vivo",
-      "url": "https://doi.org/10.1038/s41592-018-0188-7"
+      "url": "https://doi.org/10.1038/s41592-018-0188-7",
+      "proofread": false
     },
     {
       "title": "A high-speed, bright, red fluorescent voltage sensor to detect neural activity",
@@ -707,7 +721,8 @@
       "journal": "Scientific Reports",
       "year": 2019,
       "sample": "HEK293T cells; cultured rat hippocampal neurons, in vitro",
-      "url": "https://doi.org/10.1038/s41598-019-52370-8"
+      "url": "https://doi.org/10.1038/s41598-019-52370-8",
+      "proofread": false
     },
     {
       "title": "In vitro testing of voltage indicators: Archon1, ArcLightD, ASAP1, ASAP2s, ASAP3b, Bongwoori-Pos6, BeRST1, FlicR1, and Chi-VSFP-Butterfly",
@@ -715,7 +730,8 @@
       "journal": "eNeuro",
       "year": 2020,
       "sample": "HEK293 cells, in vitro",
-      "url": "https://doi.org/10.1523/ENEURO.0060-20.2020"
+      "url": "https://doi.org/10.1523/ENEURO.0060-20.2020",
+      "proofread": false
     },
     {
       "title": "Screening and cellular characterization of genetically encoded voltage indicators based on near-infrared fluorescent proteins",
@@ -723,7 +739,8 @@
       "journal": "ACS Chemical Neuroscience",
       "year": 2020,
       "sample": "HEK293T cells; cultured neurons, in vitro",
-      "url": "https://doi.org/10.1021/acschemneuro.0c00046"
+      "url": "https://doi.org/10.1021/acschemneuro.0c00046",
+      "proofread": false
     }
   ]
 }

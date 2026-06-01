@@ -17,7 +17,8 @@
   ],
   "addgene": {
     "id": "52519",
-    "url": "https://www.addgene.org/52519/"
+    "url": "https://www.addgene.org/52519/",
+    "proofread": false
   },
   "kinetics": [
     {
@@ -25,14 +26,16 @@
       "off": 2,
       "temperature": "22\u00b0C",
       "source": "doi:10.1038/nn.3709",
-      "sourceFigure": "Fig. 1e"
+      "sourceFigure": "Fig. 1e",
+      "proofread": false
     },
     {
       "on": 2.9,
       "off": 2.4,
       "temperature": "22\u00b0C",
       "source": "doi:10.7554/eLife.25690",
-      "sourceFigure": "Table 1"
+      "sourceFigure": "Table 1",
+      "proofread": false
     },
     {
       "on": 2.3,
@@ -40,7 +43,8 @@
       "temperature": "23\u00b0C",
       "source": "doi:10.1038/ncomms5625",
       "sourceFigure": "Table 1",
-      "note": "Fast components from bi-exponential fit; depolarizing \u03c4_fast=2.3 ms (88% fast, slow 39 ms), hyperpolarizing \u03c4_fast=3.0 ms (67% fast, slow 29 ms)"
+      "note": "Fast components from bi-exponential fit; depolarizing \u03c4_fast=2.3 ms (88% fast, slow 39 ms), hyperpolarizing \u03c4_fast=3.0 ms (67% fast, slow 29 ms)",
+      "proofread": false
     }
   ],
   "dynamicRangeData": [
@@ -48,47 +52,55 @@
       "deltaF": -17.5,
       "sign": "negative",
       "source": "doi:10.1038/nn.3709",
-      "sourceFigure": "Fig. 1d"
+      "sourceFigure": "Fig. 1d",
+      "proofread": false
     },
     {
       "deltaF": -23.3,
       "sign": "negative",
       "source": "doi:10.7554/eLife.25690",
-      "sourceFigure": "Fig. 1C"
+      "sourceFigure": "Fig. 1C",
+      "proofread": false
     },
     {
       "deltaF": -25.7,
       "sign": "negative",
       "source": "doi:10.1523/ENEURO.0060-20.2020",
-      "sourceFigure": "Fig. 2D"
+      "sourceFigure": "Fig. 2D",
+      "proofread": false
     },
     {
       "deltaF": -28.8,
       "sign": "negative",
       "source": "doi:10.1038/ncomms5625",
-      "sourceFigure": "Table 1"
+      "sourceFigure": "Table 1",
+      "proofread": false
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 6.3,
       "source": "doi:10.1038/nn.3709",
-      "sourceFigure": "Fig. 4a"
+      "sourceFigure": "Fig. 4a",
+      "proofread": false
     },
     {
       "deltaF": 8.6,
       "source": "doi:10.7554/eLife.25690",
-      "sourceFigure": "Fig. 2I"
+      "sourceFigure": "Fig. 2I",
+      "proofread": false
     },
     {
       "deltaF": 2.8,
       "source": "doi:10.1038/s41598-017-08731-2",
-      "sourceFigure": "Table 3"
+      "sourceFigure": "Table 3",
+      "proofread": false
     },
     {
       "deltaF": 17.8,
       "source": "doi:10.1038/ncomms5625",
-      "sourceFigure": "Table 1"
+      "sourceFigure": "Table 1",
+      "proofread": false
     }
   ],
   "brightnessData": [
@@ -96,19 +108,22 @@
       "ratio": 1,
       "reference": "asap2s",
       "source": "doi:10.7554/eLife.25690",
-      "sourceFigure": "Fig. S2"
+      "sourceFigure": "Fig. S2",
+      "proofread": false
     },
     {
       "ratio": 0.61,
       "reference": "arclight",
       "source": "doi:10.1523/ENEURO.0060-20.2020",
-      "sourceFigure": "Fig. 2F"
+      "sourceFigure": "Fig. 2F",
+      "proofread": false
     },
     {
       "ratio": 0.94,
       "reference": "asap3",
       "source": "doi:10.1021/acschemneuro.5c00670",
-      "sourceFigure": "Fig. 2C"
+      "sourceFigure": "Fig. 2C",
+      "proofread": false
     }
   ],
   "photostabilityData": [
@@ -117,34 +132,39 @@
       "illumination": "0.12 mW/mm\u00b2",
       "duration": "15 min",
       "source": "doi:10.1038/nn.3709",
-      "sourceFigure": "Fig. S9"
+      "sourceFigure": "Fig. S9",
+      "proofread": false
     },
     {
       "brightnessRemaining": 91,
       "illumination": "15 mW/mm\u00b2",
       "duration": "0.5 min",
       "source": "doi:10.1126/science.aab0810",
-      "sourceFigure": "Table S2"
+      "sourceFigure": "Table S2",
+      "proofread": false
     },
     {
       "brightnessRemaining": 28,
       "illumination": "100 mW/mm\u00b2",
       "duration": "1 min",
       "source": "doi:10.1523/JNEUROSCI.3484-15.2016",
-      "sourceFigure": "Fig. 3I"
+      "sourceFigure": "Fig. 3I",
+      "proofread": false
     },
     {
       "brightnessRemaining": 72,
       "illumination": "11 mW/mm\u00b2",
       "duration": "1 min",
       "source": "doi:10.7554/eLife.25690",
-      "sourceFigure": "Fig. S3"
+      "sourceFigure": "Fig. S3",
+      "proofread": false
     }
   ],
   "twoPhoton": [
     {
       "compatible": true,
-      "source": "doi:10.7554/eLife.25690"
+      "source": "doi:10.7554/eLife.25690",
+      "proofread": false
     }
   ],
   "researchPapers": [
@@ -154,7 +174,8 @@
       "journal": "Nature Neuroscience",
       "year": 2014,
       "sample": "HEK293A cells; rat hippocampal neurons, in vitro",
-      "url": "https://doi.org/10.1038/nn.3709"
+      "url": "https://doi.org/10.1038/nn.3709",
+      "proofread": false
     },
     {
       "title": "A Bright and Fast Red Fluorescent Protein Voltage Indicator That Reports Neuronal Activity in Organotypic Brain Slices",
@@ -162,7 +183,8 @@
       "journal": "Journal of Neuroscience",
       "year": 2016,
       "sample": "HEK293 cells; rat hippocampal neurons, in vitro",
-      "url": "https://doi.org/10.1523/JNEUROSCI.3484-15.2016"
+      "url": "https://doi.org/10.1523/JNEUROSCI.3484-15.2016",
+      "proofread": false
     },
     {
       "title": "Biophysical Characterization of Genetically Encoded Voltage Sensor ASAP1: Dynamic Range Improvement",
@@ -170,7 +192,8 @@
       "journal": "Biophysical Journal",
       "year": 2017,
       "sample": "Xenopus laevis oocytes; rat dorsal root ganglion neurons, in vitro",
-      "url": "https://doi.org/10.1016/j.bpj.2017.10.018"
+      "url": "https://doi.org/10.1016/j.bpj.2017.10.018",
+      "proofread": false
     },
     {
       "title": "Fast two-photon imaging of subcellular voltage dynamics in neuronal tissue with genetically encoded indicators",
@@ -178,7 +201,8 @@
       "journal": "eLife",
       "year": 2017,
       "sample": "HEK293A cells; mouse hippocampal neurons, in vitro",
-      "url": "https://doi.org/10.7554/eLife.25690"
+      "url": "https://doi.org/10.7554/eLife.25690",
+      "proofread": false
     },
     {
       "title": "In Vitro Testing of Voltage Indicators: Archon1, ArcLightD, ASAP1, ASAP2s, ASAP3b, Bongwoori-Pos6, BeRST1, FlicR1, and Chi-VSFP-Butterfly",
@@ -186,7 +210,8 @@
       "journal": "eNeuro",
       "year": 2020,
       "sample": "HEK293 cells; mouse brain slices, in vitro",
-      "url": "https://doi.org/10.1523/ENEURO.0060-20.2020"
+      "url": "https://doi.org/10.1523/ENEURO.0060-20.2020",
+      "proofread": false
     },
     {
       "title": "Comparative Evaluation of Genetically Encoded Voltage Indicators",
@@ -194,7 +219,8 @@
       "journal": "Cell Reports",
       "year": 2019,
       "sample": "Mouse hippocampal neurons, in vitro",
-      "url": "https://doi.org/10.1016/j.celrep.2018.12.088"
+      "url": "https://doi.org/10.1016/j.celrep.2018.12.088",
+      "proofread": false
     },
     {
       "title": "Optical interrogation of neuronal circuitry in zebrafish using genetically encoded voltage indicators",
@@ -202,7 +228,8 @@
       "journal": "Scientific Reports",
       "year": 2018,
       "sample": "Zebrafish, cerebellum; spinal cord, in vivo",
-      "url": "https://doi.org/10.1038/s41598-018-23906-1"
+      "url": "https://doi.org/10.1038/s41598-018-23906-1",
+      "proofread": false
     },
     {
       "title": "Visualization of Cellular Electrical Activity in Zebrafish Early Embryos and Tumors",
@@ -210,7 +237,8 @@
       "journal": "Journal of Visualized Experiments",
       "year": 2018,
       "sample": "Zebrafish embryos; zebrafish tumors, in vivo",
-      "url": "https://doi.org/10.3791/57330"
+      "url": "https://doi.org/10.3791/57330",
+      "proofread": false
     },
     {
       "title": "Real-time detection of yeast membrane potential using ASAP1 voltage indicator",
@@ -218,7 +246,8 @@
       "journal": "FEMS Yeast Research",
       "year": 2020,
       "sample": "Saccharomyces cerevisiae, in vitro",
-      "url": "https://doi.org/10.1093/femsyr/foaa041"
+      "url": "https://doi.org/10.1093/femsyr/foaa041",
+      "proofread": false
     },
     {
       "title": "In vivo wide-field voltage imaging in zebrafish with voltage-sensitive dye and genetically encoded voltage indicator",
@@ -226,7 +255,8 @@
       "journal": "Development, Growth & Differentiation",
       "year": 2021,
       "sample": "Zebrafish larvae, cerebellum; spinal cord, in vivo",
-      "url": "https://doi.org/10.1111/dgd.12744"
+      "url": "https://doi.org/10.1111/dgd.12744",
+      "proofread": false
     },
     {
       "title": "Enabling comprehensive optogenetic studies of mouse hearts by simultaneous opto-electrical panoramic mapping and stimulation",
@@ -234,7 +264,8 @@
       "journal": "Nature Communications",
       "year": 2021,
       "sample": "Mouse heart, ex vivo",
-      "url": "https://doi.org/10.1038/s41467-021-26039-8"
+      "url": "https://doi.org/10.1038/s41467-021-26039-8",
+      "proofread": false
     },
     {
       "title": "In Vitro Matured Human Pluripotent Stem Cell-Derived Cardiomyocytes Form Grafts With Enhanced Structure and Function in Injured Hearts",
@@ -242,7 +273,8 @@
       "journal": "Circulation",
       "year": 2022,
       "sample": "Human PSC-derived cardiomyocytes; rat heart, ex vivo",
-      "url": "https://doi.org/10.1161/CIRCULATIONAHA.121.053563"
+      "url": "https://doi.org/10.1161/CIRCULATIONAHA.121.053563",
+      "proofread": false
     },
     {
       "title": "Zebrafish Embryos Display Characteristic Bioelectric Signals during Early Development",
@@ -250,7 +282,8 @@
       "journal": "Cells",
       "year": 2022,
       "sample": "Zebrafish embryos, in vivo",
-      "url": "https://doi.org/10.3390/cells11223586"
+      "url": "https://doi.org/10.3390/cells11223586",
+      "proofread": false
     },
     {
       "title": "Optogenetic Reporters Delivered as mRNA Facilitate Repeatable Action Potential and Calcium Handling Assessment in Human iPSC-Derived Cardiomyocytes",
@@ -258,7 +291,8 @@
       "journal": "Stem Cells",
       "year": 2022,
       "sample": "Human iPSC-derived cardiomyocytes, in vitro",
-      "url": "https://doi.org/10.1093/stmcls/sxac029"
+      "url": "https://doi.org/10.1093/stmcls/sxac029",
+      "proofread": false
     },
     {
       "title": "A fully-automated low-cost cardiac monolayer optical mapping robot",
@@ -266,7 +300,8 @@
       "journal": "Frontiers in Cardiovascular Medicine",
       "year": 2023,
       "sample": "Human PSC-derived cardiomyocyte monolayers, in vitro",
-      "url": "https://doi.org/10.3389/fcvm.2023.1096884"
+      "url": "https://doi.org/10.3389/fcvm.2023.1096884",
+      "proofread": false
     },
     {
       "title": "Protocol for dual-optical mapping of voltage and calcium sensors in human pluripotent stem cell-derived cardiomyocytes",
@@ -274,7 +309,8 @@
       "journal": "STAR Protocols",
       "year": 2025,
       "sample": "Human PSC-derived cardiomyocytes, in vitro",
-      "url": "https://doi.org/10.1016/j.xpro.2025.104044"
+      "url": "https://doi.org/10.1016/j.xpro.2025.104044",
+      "proofread": false
     },
     {
       "title": "Absolute Membrane Potential Recording with ASAP-Type Genetically Encoded Voltage Indicators Using Fluorescence Lifetime Imaging",
@@ -282,7 +318,8 @@
       "journal": "ACS Chemical Neuroscience",
       "year": 2025,
       "sample": "HEK293T cells, in vitro",
-      "url": "https://doi.org/10.1021/acschemneuro.5c00670"
+      "url": "https://doi.org/10.1021/acschemneuro.5c00670",
+      "proofread": false
     }
   ],
   "spectrum": {
@@ -902,7 +939,8 @@
         0.0073,
         0.007
       ]
-    }
+    },
+    "proofread": false
   },
   "voltage": {
     "type": "fp",
@@ -931,6 +969,7 @@
     },
     "source": "doi:10.1038/nn.3709",
     "sourceImage": "/fv-sources/asap1.jpg",
-    "sourceFigure": "Fig. 1d"
+    "sourceFigure": "Fig. 1d",
+    "proofread": false
   }
 }

@@ -591,7 +591,8 @@
         0.0004,
         0.0003
       ]
-    }
+    },
+    "proofread": false
   },
   "voltage": {
     "type": "opsin",
@@ -632,7 +633,8 @@
         26,
         29
       ]
-    }
+    },
+    "proofread": false
   },
   "kinetics": [
     {
@@ -640,7 +642,8 @@
       "off": 1.88,
       "temperature": "25°C",
       "source": "doi:10.1016/j.neuron.2025.12.014",
-      "sourceFigure": "Fig. 1D"
+      "sourceFigure": "Fig. 1D",
+      "proofread": false
     }
   ],
   "dynamicRangeData": [
@@ -648,14 +651,16 @@
       "deltaF": 29,
       "sign": "positive",
       "source": "doi:10.1016/j.neuron.2025.12.014",
-      "sourceFigure": "Fig. 1E"
+      "sourceFigure": "Fig. 1E",
+      "proofread": false
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 25,
       "source": "doi:10.1016/j.neuron.2025.12.014",
-      "sourceFigure": "Fig. 1G(ii)"
+      "sourceFigure": "Fig. 1G(ii)",
+      "proofread": false
     }
   ],
   "brightnessData": [
@@ -664,7 +669,8 @@
       "reference": "pace",
       "note": "Derived from 1P SNR and ΔF/F₀ in ND7/23 cells (Fig. 1C: Jarvis SNR 265±132, ΔF/F₀ 0.29; pAce SNR 575±193, ΔF/F₀ 0.41), using F₀ ∝ (SNR / (ΔF/F₀))². Under 2P illumination (Fig. 3C(i)), Jarvis and pAce show comparable F₀.",
       "source": "doi:10.1016/j.neuron.2025.12.014",
-      "sourceFigure": "Fig. 1C"
+      "sourceFigure": "Fig. 1C",
+      "proofread": false
     }
   ],
   "photostabilityData": [
@@ -673,13 +679,15 @@
       "illumination": "10 mW/mm\u00b2",
       "duration": "1 min",
       "source": "doi:10.1016/j.neuron.2025.12.014",
-      "sourceFigure": "Fig. 1F"
+      "sourceFigure": "Fig. 1F",
+      "proofread": false
     }
   ],
   "twoPhoton": [
     {
       "compatible": true,
-      "source": "doi:10.1016/j.neuron.2025.12.014"
+      "source": "doi:10.1016/j.neuron.2025.12.014",
+      "proofread": false
     }
   ],
   "researchPapers": [
@@ -689,7 +697,8 @@
       "journal": "Neuron",
       "year": 2026,
       "sample": "ND7/23 cells, in vitro; CHO cells, in vitro; Mouse, organotypic hippocampal slices, in vitro; Zebrafish larvae, olfactory epithelium, in vivo",
-      "url": "https://doi.org/10.1016/j.neuron.2025.12.014"
+      "url": "https://doi.org/10.1016/j.neuron.2025.12.014",
+      "proofread": false
     }
   ]
 }

@@ -13,7 +13,8 @@
   "siblingId": "jedi2p",
   "addgene": {
     "id": "202613",
-    "url": "https://www.addgene.org/202613/"
+    "url": "https://www.addgene.org/202613/",
+    "proofread": false
   },
   "kinetics": [
     {
@@ -21,14 +22,16 @@
       "off": 1.2,
       "temperature": "32-35°C",
       "source": "doi:10.1038/s41467-023-41975-3",
-      "sourceFigure": "Table 1"
+      "sourceFigure": "Table 1",
+      "proofread": false
     },
     {
       "on": 1.74,
       "off": 2.91,
       "temperature": "21-23°C",
       "source": "doi:10.1038/s41467-023-41975-3",
-      "sourceFigure": "Table 1"
+      "sourceFigure": "Table 1",
+      "proofread": false
     }
   ],
   "dynamicRangeData": [
@@ -36,21 +39,32 @@
       "deltaF": -56,
       "sign": "negative",
       "source": "doi:10.1038/s41467-023-41975-3",
-      "sourceFigure": "Fig. 2c"
+      "sourceFigure": "Fig. 2c",
+      "proofread": false
+    },
+    {
+      "deltaF": -66.3,
+      "sign": "negative",
+      "source": "doi:10.1101/2025.05.29.656768",
+      "note": "F-V comparison in HEK293T cells under matched wide-field imaging conditions",
+      "sourceFigure": "Fig. 1C",
+      "proofread": false
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 31.2,
       "source": "doi:10.1038/s41467-023-41975-3",
-      "sourceFigure": "Fig. 2e"
+      "sourceFigure": "Fig. 2e",
+      "proofread": false
     }
   ],
   "subthresholdData": [
     {
       "slope": 0.9,
       "source": "doi:10.1016/j.neuron.2024.08.019",
-      "sourceFigure": "Fig. 1D"
+      "sourceFigure": "Fig. 1D",
+      "proofread": false
     }
   ],
   "brightnessData": [
@@ -58,19 +72,30 @@
       "ratio": 2.44,
       "reference": "asap3",
       "source": "doi:10.1038/s41467-023-41975-3",
-      "sourceFigure": "Fig. 2h"
+      "sourceFigure": "Fig. 2h",
+      "proofread": false
     },
     {
       "ratio": 2.2,
       "reference": "asap2s",
       "source": "doi:10.1038/s41467-023-41975-3",
-      "sourceFigure": "Fig. 2h"
+      "sourceFigure": "Fig. 2h",
+      "proofread": false
     },
     {
       "ratio": 1.71,
       "reference": "asap3",
       "source": "doi:10.1021/acschemneuro.5c00670",
-      "sourceFigure": "Fig. 2C"
+      "sourceFigure": "Fig. 2C",
+      "proofread": false
+    },
+    {
+      "ratio": 0.125,
+      "reference": "vega",
+      "source": "doi:10.1101/2025.05.29.656768",
+      "note": "Whole-cell fluorescence in HEK293T cells; Vega was ~8-fold brighter under matched 488 nm illumination",
+      "sourceFigure": "Fig. 1B",
+      "proofread": false
     }
   ],
   "photostabilityData": [
@@ -79,7 +104,17 @@
       "illumination": "16 mW/mm²",
       "duration": "2 min",
       "source": "doi:10.1038/s41467-023-41975-3",
-      "sourceFigure": "Fig. S4"
+      "sourceFigure": "Fig. S4",
+      "proofread": false
+    },
+    {
+      "brightnessRemaining": 75,
+      "illumination": "3 W/cm²",
+      "duration": "102 s",
+      "source": "doi:10.1101/2025.05.29.656768",
+      "note": "Photobleaching quarter-life t0.75 in live HEK293T cells under 488 nm illumination",
+      "sourceFigure": "Table S1",
+      "proofread": false
     }
   ],
   "spectrum": {
@@ -470,7 +505,8 @@
         0.035,
         0.0396
       ]
-    }
+    },
+    "proofread": false
   },
   "voltage": {
     "type": "fp",
@@ -497,7 +533,8 @@
     },
     "source": "doi:10.1038/s41467-023-41975-3",
     "sourceImage": "/fv-sources/jedi1p.jpg",
-    "sourceFigure": "Fig. 2b"
+    "sourceFigure": "Fig. 2b",
+    "proofread": false
   },
   "researchPapers": [
     {
@@ -506,7 +543,8 @@
       "journal": "Nature Communications",
       "year": 2023,
       "sample": "Mouse, cortex, in vivo; HEK293T cells, in vitro; dissociated hippocampal neurons",
-      "url": "https://doi.org/10.1038/s41467-023-41975-3"
+      "url": "https://doi.org/10.1038/s41467-023-41975-3",
+      "proofread": false
     },
     {
       "title": "Cortex-wide voltage imaging in a sensory cued reaching task reveals fast subnetwork dynamics",
@@ -514,7 +552,8 @@
       "journal": "bioRxiv",
       "year": 2025,
       "sample": "Mouse, cortex, in vivo",
-      "url": "https://doi.org/10.1101/2025.04.24.650533"
+      "url": "https://doi.org/10.1101/2025.04.24.650533",
+      "proofread": false
     },
     {
       "title": "A fast and responsive voltage indicator with enhanced sensitivity for unitary synaptic events",
@@ -522,7 +561,8 @@
       "journal": "Neuron",
       "year": 2024,
       "sample": "Mouse, motor cortex, in vivo",
-      "url": "https://doi.org/10.1016/j.neuron.2024.08.019"
+      "url": "https://doi.org/10.1016/j.neuron.2024.08.019",
+      "proofread": false
     },
     {
       "title": "Absolute Membrane Potential Recording with ASAP-Type Genetically Encoded Voltage Indicators Using Fluorescence Lifetime Imaging",
@@ -530,7 +570,8 @@
       "journal": "ACS Chemical Neuroscience",
       "year": 2025,
       "sample": "HEK293T cells, in vitro",
-      "url": "https://doi.org/10.1021/acschemneuro.5c00670"
+      "url": "https://doi.org/10.1021/acschemneuro.5c00670",
+      "proofread": false
     },
     {
       "title": "An integrated platform for simultaneous wide-field voltage/calcium imaging and fMRI reveals neuronal infraslow dynamics underlying functional connectivity",
@@ -538,7 +579,17 @@
       "journal": "bioRxiv",
       "year": 2026,
       "sample": "Mouse, cortex, in vivo",
-      "url": "https://doi.org/10.64898/2026.01.26.701889"
+      "url": "https://doi.org/10.64898/2026.01.26.701889",
+      "proofread": false
+    },
+    {
+      "title": "A photostable genetically encoded voltage indicator for imaging neural activities in tissue and live animals",
+      "authors": "Cao C, Zhu R, Zhou S, Zhao Z, Lin C, Liu S, Peng L, Subach FV, Piatkevich KD, Zou P",
+      "journal": "bioRxiv",
+      "year": 2025,
+      "sample": "HEK293T cells, in vitro",
+      "url": "https://doi.org/10.1101/2025.05.29.656768",
+      "proofread": false
     }
   ]
 }

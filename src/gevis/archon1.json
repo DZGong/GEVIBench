@@ -576,7 +576,8 @@
         0.032,
         0.03
       ]
-    }
+    },
+    "proofread": false
   },
   "voltage": {
     "type": "opsin",
@@ -609,7 +610,8 @@
     },
     "source": "doi:10.1038/s41589-018-0004-9",
     "sourceImage": "/fv-sources/archon1.jpg",
-    "sourceFigure": "Fig. 2d"
+    "sourceFigure": "Fig. 2d",
+    "proofread": false
   },
   "kinetics": [
     {
@@ -617,14 +619,16 @@
       "off": 1.1,
       "temperature": "32°C",
       "source": "doi:10.1038/s41589-018-0004-9",
-      "sourceFigure": "Fig. 2c"
+      "sourceFigure": "Fig. 2c",
+      "proofread": false
     },
     {
       "on": 0.61,
       "off": 1.1,
       "temperature": "33-34°C",
       "source": "doi:10.1016/j.cell.2019.11.004",
-      "sourceFigure": "Table 1"
+      "sourceFigure": "Table 1",
+      "proofread": false
     },
     {
       "on": 2.2,
@@ -632,7 +636,8 @@
       "source": "doi:10.1038/s41592-022-01743-5",
       "note": "Bi-exponential fast component in HEK293T cells at 30°C, n=6 cells",
       "temperature": "30°C",
-      "sourceFigure": "Extended Data Fig. 4e"
+      "sourceFigure": "Extended Data Fig. 4e",
+      "proofread": false
     }
   ],
   "dynamicRangeData": [
@@ -640,38 +645,44 @@
       "deltaF": 43,
       "sign": "positive",
       "source": "doi:10.1038/s41589-018-0004-9",
-      "sourceFigure": "Fig. 2e"
+      "sourceFigure": "Fig. 2e",
+      "proofread": false
     },
     {
       "deltaF": 48.6,
       "sign": "positive",
       "source": "doi:10.1523/ENEURO.0060-20.2020",
-      "sourceFigure": "Fig. 2D"
+      "sourceFigure": "Fig. 2D",
+      "proofread": false
     },
     {
       "deltaF": 81,
       "sign": "positive",
       "source": "doi:10.1016/j.cell.2019.11.004",
-      "sourceFigure": "Table 1"
+      "sourceFigure": "Table 1",
+      "proofread": false
     },
     {
       "deltaF": 70,
       "sign": "positive",
       "source": "doi:10.1038/s41592-022-01743-5",
       "note": "Per 100 mV step in HEK293T cells, n=4 cells",
-      "sourceFigure": "Extended Data Fig. 4c"
+      "sourceFigure": "Extended Data Fig. 4c",
+      "proofread": false
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 30,
       "source": "doi:10.1038/s41589-018-0004-9",
-      "sourceFigure": "Fig. 2h"
+      "sourceFigure": "Fig. 2h",
+      "proofread": false
     },
     {
       "deltaF": 30,
       "source": "doi:10.1016/j.cell.2019.11.004",
-      "sourceFigure": "Table 1"
+      "sourceFigure": "Table 1",
+      "proofread": false
     }
   ],
   "brightnessData": [
@@ -679,27 +690,31 @@
       "ratio": 80,
       "reference": "arch",
       "source": "doi:10.1021/acschemneuro.0c00046",
-      "sourceFigure": "Table 1"
+      "sourceFigure": "Table 1",
+      "proofread": false
     },
     {
       "ratio": 2.78,
       "reference": "quasar2",
       "source": "doi:10.1038/s41589-018-0004-9",
-      "sourceFigure": "Fig. 2b"
+      "sourceFigure": "Fig. 2b",
+      "proofread": false
     },
     {
       "ratio": 0.588,
       "reference": "quasar6",
       "source": "doi:10.1038/s41592-022-01743-5",
       "note": "Reciprocal of QuasAr6a 1.7x brighter than Archon1",
-      "sourceFigure": "Extended Data Fig. 4b"
+      "sourceFigure": "Extended Data Fig. 4b",
+      "proofread": false
     },
     {
       "ratio": 0.5,
       "reference": "quasar6b",
       "source": "doi:10.1038/s41592-022-01743-5",
       "note": "Reciprocal of QuasAr6b 2.0x brighter than Archon1",
-      "sourceFigure": "Extended Data Fig. 4b"
+      "sourceFigure": "Extended Data Fig. 4b",
+      "proofread": false
     }
   ],
   "photostabilityData": [
@@ -708,25 +723,29 @@
       "illumination": "800 mW/mm²",
       "duration": "15 min",
       "source": "doi:10.1038/s41589-018-0004-9",
-      "sourceFigure": "Fig. 2i"
+      "sourceFigure": "Fig. 2i",
+      "proofread": false
     },
     {
       "brightnessRemaining": 62,
       "illumination": "4200 mW/mm²",
       "duration": "10 min",
       "source": "doi:10.1038/s41592-022-01743-5",
-      "sourceFigure": "Extended Data Fig. 4f"
+      "sourceFigure": "Extended Data Fig. 4f",
+      "proofread": false
     }
   ],
   "twoPhoton": [
     {
       "compatible": false,
-      "source": "doi:10.1016/j.cell.2019.11.004"
+      "source": "doi:10.1016/j.cell.2019.11.004",
+      "proofread": false
     }
   ],
   "addgene": {
     "id": "108423",
-    "url": "https://www.addgene.org/108423/"
+    "url": "https://www.addgene.org/108423/",
+    "proofread": false
   },
   "researchPapers": [
     {
@@ -735,7 +754,8 @@
       "journal": "Nature Chemical Biology",
       "year": 2018,
       "sample": "HEK293T cells, cultured mouse hippocampal neurons, mouse cortex brain slices, zebrafish larvae, C. elegans, in vitro/in vivo",
-      "url": "https://doi.org/10.1038/s41589-018-0004-9"
+      "url": "https://doi.org/10.1038/s41589-018-0004-9",
+      "proofread": false
     },
     {
       "title": "Rhodopsin-based voltage imaging tools for use in muscles and neurons of Caenorhabditis elegans",
@@ -743,7 +763,8 @@
       "journal": "Proceedings of the National Academy of Sciences",
       "year": 2019,
       "sample": "C. elegans, body wall muscle, pharyngeal muscle, neurons, in vivo",
-      "url": "https://doi.org/10.1073/pnas.1902443116"
+      "url": "https://doi.org/10.1073/pnas.1902443116",
+      "proofread": false
     },
     {
       "title": "In Vitro Testing of Voltage Indicators: Archon1, ArcLightD, ASAP1, ASAP2s, ASAP3b, Bongwoori-Pos6, BeRST1, FlicR1, and Chi-VSFP-Butterfly",
@@ -751,7 +772,8 @@
       "journal": "eNeuro",
       "year": 2020,
       "sample": "HEK293 cells, in vitro; Mouse cortical neurons, in vitro",
-      "url": "https://doi.org/10.1523/ENEURO.0060-20.2020"
+      "url": "https://doi.org/10.1523/ENEURO.0060-20.2020",
+      "proofread": false
     },
     {
       "title": "Voltage Imaging of Cardiac Cells and Tissue Using the Genetically Encoded Voltage Sensor Archon1",
@@ -759,7 +781,8 @@
       "journal": "iScience",
       "year": 2020,
       "sample": "hiPSC-derived cardiomyocytes, in vitro; 3D engineered cardiac tissue, in vitro",
-      "url": "https://doi.org/10.1016/j.isci.2020.100974"
+      "url": "https://doi.org/10.1016/j.isci.2020.100974",
+      "proofread": false
     },
     {
       "title": "High-fidelity estimates of spikes and subthreshold waveforms from 1-photon voltage imaging in vivo",
@@ -767,7 +790,8 @@
       "journal": "Cell Reports",
       "year": 2021,
       "sample": "Mouse hippocampus CA1 pyramidal neurons, in vivo; Mouse cortex layer 1 interneurons, in vivo",
-      "url": "https://doi.org/10.1016/j.celrep.2021.108954"
+      "url": "https://doi.org/10.1016/j.celrep.2021.108954",
+      "proofread": false
     },
     {
       "title": "Plakophilin-2 truncating variants impair cardiac contractility by disrupting sarcomere stability and organization",
@@ -775,7 +799,8 @@
       "journal": "Science Advances",
       "year": 2021,
       "sample": "hiPSC-derived cardiomyocytes, in vitro",
-      "url": "https://doi.org/10.1126/sciadv.abh3995"
+      "url": "https://doi.org/10.1126/sciadv.abh3995",
+      "proofread": false
     },
     {
       "title": "Studying Synaptically Evoked Cortical Responses ex vivo With Combination of a Single Neuron Recording (Whole-Cell) and Population Voltage Imaging (Genetically Encoded Voltage Indicator)",
@@ -783,7 +808,8 @@
       "journal": "Frontiers in Neuroscience",
       "year": 2021,
       "sample": "Mouse cortex layer 2/3 pyramidal neurons, acute brain slices, in vitro",
-      "url": "https://doi.org/10.3389/fnins.2021.773883"
+      "url": "https://doi.org/10.3389/fnins.2021.773883",
+      "proofread": false
     },
     {
       "title": "Neuronal activity drives pathway-specific depolarization of peripheral astrocyte processes",
@@ -791,7 +817,8 @@
       "journal": "Nature Neuroscience",
       "year": 2022,
       "sample": "Mouse cortex astrocytes, acute brain slices, in vitro",
-      "url": "https://doi.org/10.1038/s41593-022-01049-x"
+      "url": "https://doi.org/10.1038/s41593-022-01049-x",
+      "proofread": false
     },
     {
       "title": "Voltage imaging identifies spinal circuits that modulate locomotor adaptation in zebrafish",
@@ -799,7 +826,8 @@
       "journal": "Neuron",
       "year": 2022,
       "sample": "Zebrafish larvae, spinal cord glutamatergic neurons, in vivo",
-      "url": "https://doi.org/10.1016/j.neuron.2022.01.001"
+      "url": "https://doi.org/10.1016/j.neuron.2022.01.001",
+      "proofread": false
     },
     {
       "title": "Video-based pooled screening yields improved far-red genetically encoded voltage indicators",
@@ -807,7 +835,8 @@
       "journal": "Nature Methods",
       "year": 2023,
       "sample": "Mouse cortex NDNF neurons, in vivo; Mouse hippocampus PV neurons, in vivo; Cultured neurons, in vitro",
-      "url": "https://doi.org/10.1038/s41592-022-01743-5"
+      "url": "https://doi.org/10.1038/s41592-022-01743-5",
+      "proofread": false
     },
     {
       "title": "Characterization of two near-infrared genetically encoded voltage indicators",
@@ -815,7 +844,8 @@
       "journal": "Neurophotonics",
       "year": 2024,
       "sample": "Mouse hippocampal CA3 slices, acute brain slices, in vitro",
-      "url": "https://doi.org/10.1117/1.NPh.11.2.024201"
+      "url": "https://doi.org/10.1117/1.NPh.11.2.024201",
+      "proofread": false
     },
     {
       "title": "Subthreshold electric fields bidirectionally modulate neurotransmitter release through axon polarization",
@@ -823,7 +853,8 @@
       "journal": "Brain Stimulation",
       "year": 2025,
       "sample": "Rat hippocampal neurons, dissociated culture, in vitro",
-      "url": "https://doi.org/10.1016/j.brs.2025.103006"
+      "url": "https://doi.org/10.1016/j.brs.2025.103006",
+      "proofread": false
     },
     {
       "title": "Ultrafast two-photon imaging of a high-gain voltage indicator in awake behaving mice",
@@ -831,7 +862,8 @@
       "journal": "Cell",
       "year": 2019,
       "sample": "HEK293 cells, cultured neurons, mouse brain in vivo",
-      "url": "https://doi.org/10.1016/j.cell.2019.11.004"
+      "url": "https://doi.org/10.1016/j.cell.2019.11.004",
+      "proofread": false
     },
     {
       "title": "Screening and cellular characterization of genetically encoded voltage indicators based on near-infrared fluorescent proteins",
@@ -839,7 +871,8 @@
       "journal": "ACS Chemical Neuroscience",
       "year": 2020,
       "sample": "HEK293T cells and cultured mouse hippocampal neurons, in vitro",
-      "url": "https://doi.org/10.1021/acschemneuro.0c00046"
+      "url": "https://doi.org/10.1021/acschemneuro.0c00046",
+      "proofread": false
     },
     {
       "title": "QuasAr Odyssey: the origin of fluorescence and its voltage sensitivity in microbial rhodopsins",
@@ -847,7 +880,8 @@
       "journal": "Nature Communications",
       "year": 2022,
       "sample": "ND7/23 cells, E. coli, in vitro",
-      "url": "https://doi.org/10.1038/s41467-022-33084-4"
+      "url": "https://doi.org/10.1038/s41467-022-33084-4",
+      "proofread": false
     },
     {
       "title": "Detection of Membrane Potential-Dependent Rhodopsin Fluorescence Using Low-Intensity Light Emitting Diode for Long-Term Imaging",
@@ -855,7 +889,8 @@
       "journal": "ACS Omega",
       "year": 2023,
       "sample": "HEK293 and PC12 cells, in vitro",
-      "url": "https://doi.org/10.1021/acsomega.2c06980"
+      "url": "https://doi.org/10.1021/acsomega.2c06980",
+      "proofread": false
     }
   ]
 }

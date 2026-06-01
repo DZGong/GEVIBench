@@ -414,11 +414,11 @@ function GEVIBenchApp() {
         activeTab={headerActiveTab}
         setActiveTab={(tab) => {
           setActiveTab(tab);
+          setShowFamilyTree(false);
+          setShowBrightnessNetwork(false);
+          setShowScatterPlot(false);
+          setShowAPSimulator(false);
           if (tab === 'database') {
-            setShowFamilyTree(false);
-            setShowBrightnessNetwork(false);
-            setShowScatterPlot(false);
-            setShowAPSimulator(false);
             window.history.pushState(null, '', '/');
           } else {
             window.history.pushState(null, '', `/${tab}`);

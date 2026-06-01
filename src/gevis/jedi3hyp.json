@@ -569,7 +569,8 @@
         0.0064,
         0.0064
       ]
-    }
+    },
+    "proofread": false
   },
   "voltage": {
     "type": "fp",
@@ -603,7 +604,8 @@
         -52,
         -55
       ]
-    }
+    },
+    "proofread": false
   },
   "kinetics": [
     {
@@ -611,7 +613,8 @@
       "off": 2.11,
       "temperature": "33°C",
       "source": "doi:10.1038/s41592-026-03043-8",
-      "sourceFigure": "Table 1"
+      "sourceFigure": "Table 1",
+      "proofread": false
     }
   ],
   "dynamicRangeData": [
@@ -620,14 +623,16 @@
       "sign": "negative",
       "source": "doi:10.1038/s41592-026-03043-8",
       "sourceFigure": "Fig. 1h",
-      "note": "Response to a 100-mV depolarizing step from -70 mV in HEK293A cells (main text). F-V shifted toward hyperpolarized potentials: ΔF/F reaches ~+100% at -120 mV."
+      "note": "Response to a 100-mV depolarizing step from -70 mV in HEK293A cells (main text). F-V shifted toward hyperpolarized potentials: ΔF/F reaches ~+100% at -120 mV.",
+      "proofread": false
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 36.4,
       "source": "doi:10.1038/s41592-026-03043-8",
-      "sourceFigure": "Fig. 1j"
+      "sourceFigure": "Fig. 1j",
+      "proofread": false
     }
   ],
   "brightnessData": [
@@ -635,13 +640,15 @@
       "ratio": 0.86,
       "reference": "jedi2p",
       "source": "doi:10.1038/s41592-026-03043-8",
-      "sourceFigure": "Fig. 1d"
+      "sourceFigure": "Fig. 1d",
+      "proofread": false
     },
     {
       "ratio": 1.25,
       "reference": "asap5",
       "source": "doi:10.1038/s41592-026-03043-8",
-      "sourceFigure": "Extended Data Fig. 1c"
+      "sourceFigure": "Extended Data Fig. 1c",
+      "proofread": false
     }
   ],
   "photostabilityData": [
@@ -651,18 +658,21 @@
       "duration": "6 min",
       "source": "doi:10.1038/s41592-026-03043-8",
       "sourceFigure": "Fig. 1e",
-      "note": "~52% fluorescence remaining after 6 min under 2P resonant scanning (940 nm, 37 mW at sample plane, 440 Hz) at 23°C in HEK293-Kir2.1 cells (Fig. 1e, n = 4). Comparable to JEDI-2P (~48-50%) and JEDI3sub (~50%) in the same experiment (Fig. 1f, similar across 29-100 mW range)."
+      "note": "~52% fluorescence remaining after 6 min under 2P resonant scanning (940 nm, 37 mW at sample plane, 440 Hz) at 23°C in HEK293-Kir2.1 cells (Fig. 1e, n = 4). Comparable to JEDI-2P (~48-50%) and JEDI3sub (~50%) in the same experiment (Fig. 1f, similar across 29-100 mW range).",
+      "proofread": false
     }
   ],
   "twoPhoton": [
     {
       "compatible": true,
-      "source": "doi:10.1038/s41592-026-03043-8"
+      "source": "doi:10.1038/s41592-026-03043-8",
+      "proofread": false
     }
   ],
   "addgene": {
     "id": "246631",
-    "url": "https://www.addgene.org/246631/"
+    "url": "https://www.addgene.org/246631/",
+    "proofread": false
   },
   "researchPapers": [
     {
@@ -671,7 +681,8 @@
       "journal": "Nature Methods",
       "year": 2026,
       "sample": "HEK293 cells, in vitro; Rat, cultured hippocampal neurons, in vitro; Mouse, visual cortex L2/3, in vivo; Mouse, hippocampus CA1 PV+ interneurons, in vivo; Mouse, cortex VIP+/SOM+ interneurons, in vivo",
-      "url": "https://doi.org/10.1038/s41592-026-03043-8"
+      "url": "https://doi.org/10.1038/s41592-026-03043-8",
+      "proofread": false
     }
   ]
 }

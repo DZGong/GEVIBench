@@ -425,7 +425,8 @@
         0.0102,
         0.0102
       ]
-    }
+    },
+    "proofread": false
   },
   "voltage": {
     "type": "fp",
@@ -454,7 +455,8 @@
     },
     "source": "doi:10.1523/JNEUROSCI.3008-14.2015",
     "sourceImage": "/fv-sources/bongwoori.jpg",
-    "sourceFigure": "Fig. 6B"
+    "sourceFigure": "Fig. 6B",
+    "proofread": false
   },
   "kinetics": [
     {
@@ -462,14 +464,16 @@
       "off": 7,
       "temperature": "33°C",
       "source": "doi:10.1523/JNEUROSCI.3008-14.2015",
-      "sourceFigure": "Fig. 6"
+      "sourceFigure": "Fig. 6",
+      "proofread": false
     },
     {
       "on": 9,
       "off": 8,
       "temperature": "34°C",
       "source": "doi:10.1038/s41598-017-08731-2",
-      "sourceFigure": "Table 2"
+      "sourceFigure": "Table 2",
+      "proofread": false
     }
   ],
   "dynamicRangeData": [
@@ -477,19 +481,22 @@
       "deltaF": -10,
       "sign": "negative",
       "source": "doi:10.1523/JNEUROSCI.3008-14.2015",
-      "sourceFigure": "Fig. 6A"
+      "sourceFigure": "Fig. 6A",
+      "proofread": false
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 3.7,
       "source": "doi:10.1038/s41598-017-08731-2",
-      "sourceFigure": "Table 3"
+      "sourceFigure": "Table 3",
+      "proofread": false
     },
     {
       "deltaF": 2.5,
       "source": "doi:10.1523/JNEUROSCI.3008-14.2015",
-      "sourceFigure": "Fig. 7"
+      "sourceFigure": "Fig. 7",
+      "proofread": false
     }
   ],
   "brightnessData": [
@@ -497,7 +504,8 @@
       "ratio": 0.29,
       "reference": "arclight",
       "source": "doi:10.1038/s41598-017-08731-2",
-      "sourceFigure": "Table 3"
+      "sourceFigure": "Table 3",
+      "proofread": false
     }
   ],
   "photostabilityData": [
@@ -506,12 +514,14 @@
       "illumination": "1 mW/mm²",
       "duration": "1 min",
       "source": "doi:10.1038/s41598-017-08731-2",
-      "sourceFigure": "Fig. S1"
+      "sourceFigure": "Fig. S1",
+      "proofread": false
     }
   ],
   "addgene": {
     "id": "63720",
-    "url": "https://www.addgene.org/63720/"
+    "url": "https://www.addgene.org/63720/",
+    "proofread": false
   },
   "researchPapers": [
     {
@@ -520,7 +530,8 @@
       "journal": "Journal of Neuroscience",
       "year": 2015,
       "sample": "HEK293 cells; cultured mouse hippocampal neurons, in vitro",
-      "url": "https://doi.org/10.1523/JNEUROSCI.3008-14.2015"
+      "url": "https://doi.org/10.1523/JNEUROSCI.3008-14.2015",
+      "proofread": false
     },
     {
       "title": "Improving a genetically encoded voltage indicator by modifying the cytoplasmic charge composition",
@@ -528,7 +539,8 @@
       "journal": "Scientific Reports",
       "year": 2017,
       "sample": "HEK293 cells; cultured mouse hippocampal neurons, in vitro",
-      "url": "https://doi.org/10.1038/s41598-017-08731-2"
+      "url": "https://doi.org/10.1038/s41598-017-08731-2",
+      "proofread": false
     },
     {
       "title": "Optical consequences of a genetically-encoded voltage indicator with a pH sensitive fluorescent protein",
@@ -536,7 +548,8 @@
       "journal": "Neuroscience Research",
       "year": 2019,
       "sample": "HEK293 cells; cultured hippocampal neurons, in vitro",
-      "url": "https://doi.org/10.1016/j.neures.2018.10.006"
+      "url": "https://doi.org/10.1016/j.neures.2018.10.006",
+      "proofread": false
     },
     {
       "title": "Engineering photoactivatability in genetically encoded voltage and pH indicators",
@@ -544,7 +557,8 @@
       "journal": "Frontiers in Cellular Neuroscience",
       "year": 2019,
       "sample": "HEK293 cells, in vitro",
-      "url": "https://doi.org/10.3389/fncel.2019.00482"
+      "url": "https://doi.org/10.3389/fncel.2019.00482",
+      "proofread": false
     },
     {
       "title": "In vitro testing of voltage indicators: Archon1, ArcLightD, ASAP1, ASAP2s, ASAP3b, Bongwoori-Pos6, BeRST1, FlicR1, and Chi-VSFP-Butterfly",
@@ -552,7 +566,8 @@
       "journal": "eNeuro",
       "year": 2020,
       "sample": "Cultured hippocampal neurons; mouse brain slices, in vitro/ex vivo",
-      "url": "https://doi.org/10.1523/ENEURO.0060-20.2020"
+      "url": "https://doi.org/10.1523/ENEURO.0060-20.2020",
+      "proofread": false
     },
     {
       "title": "Mechanism of ArcLight derived GEVIs involves electrostatic interactions that can affect proton wires",
@@ -560,7 +575,8 @@
       "journal": "Biophysical Journal",
       "year": 2021,
       "sample": "HEK293 cells, in vitro",
-      "url": "https://doi.org/10.1016/j.bpj.2021.03.009"
+      "url": "https://doi.org/10.1016/j.bpj.2021.03.009",
+      "proofread": false
     },
     {
       "title": "Visualizing oscillations in brain slices with genetically encoded voltage indicators",
@@ -568,7 +584,8 @@
       "journal": "Frontiers in Neuroanatomy",
       "year": 2021,
       "sample": "Mouse motor cortex brain slices, ex vivo",
-      "url": "https://doi.org/10.3389/fnana.2021.741711"
+      "url": "https://doi.org/10.3389/fnana.2021.741711",
+      "proofread": false
     },
     {
       "title": "A trafficking motif alters GEVI activity implicating persistent protein interactions at the membrane",
@@ -576,7 +593,8 @@
       "journal": "Biophysical Reports",
       "year": 2022,
       "sample": "HEK293 cells, in vitro",
-      "url": "https://doi.org/10.1016/j.bpr.2022.100047"
+      "url": "https://doi.org/10.1016/j.bpr.2022.100047",
+      "proofread": false
     },
     {
       "title": "Imaging electrical activity of retinal ganglion cells with fluorescent voltage and calcium indicator proteins in retinal degenerative rd1 blind mice",
@@ -584,7 +602,8 @@
       "journal": "ACS Chemical Neuroscience",
       "year": 2025,
       "sample": "Mouse rd1 retinal ganglion cells, ex vivo",
-      "url": "https://doi.org/10.1021/acschemneuro.5c00740"
+      "url": "https://doi.org/10.1021/acschemneuro.5c00740",
+      "proofread": false
     }
   ]
 }

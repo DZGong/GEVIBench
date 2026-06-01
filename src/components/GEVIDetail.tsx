@@ -276,8 +276,8 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
         <div className="flex flex-col gap-4 flex-1 min-w-0">
           <div className="border rounded-lg p-4 md:p-6 bg-surface-low border-ink/10">
             <h4 className="text-sm font-semibold mb-3 md:mb-4 text-ink">Performance Profile</h4>
-            <div className="w-full aspect-[6/5]">
-              <DistributionRadar gevi={gevi} />
+            <div className="w-full max-w-sm aspect-[6/5]">
+              <DistributionRadar gevi={gevi} compact expandHex />
             </div>
           </div>
 

@@ -694,7 +694,8 @@
         0.0002,
         0.0001
       ]
-    }
+    },
+    "proofread": false
   },
   "voltage": {
     "type": "chemi",
@@ -727,7 +728,8 @@
     },
     "source": "doi:10.1038/s41467-020-17322-1",
     "sourceImage": "/fv-sources/positron.jpg",
-    "sourceFigure": "Fig. 2a"
+    "sourceFigure": "Fig. 2a",
+    "proofread": false
   },
   "kinetics": [
     {
@@ -736,7 +738,8 @@
       "temperature": "25°C",
       "source": "doi:10.1038/s41467-020-17322-1",
       "note": "Bi-exponential fast component in voltage-clamped rat neurons (85% on, 90% off); slow τ_on=19 ms, slow τ_off=37 ms. Imaged at 3.2 kHz.",
-      "sourceFigure": "Table S1"
+      "sourceFigure": "Table S1",
+      "proofread": false
     }
   ],
   "dynamicRangeData": [
@@ -744,14 +747,16 @@
       "deltaF": 23,
       "sign": "positive",
       "source": "doi:10.1038/s41467-020-17322-1",
-      "sourceFigure": "Fig. 2a"
+      "sourceFigure": "Fig. 2a",
+      "proofread": false
     },
     {
       "deltaF": 20,
       "sign": "positive",
       "source": "doi:10.1038/s41467-020-17322-1",
       "note": "Per 100 mV step in spiking HEK cells at 22°C",
-      "sourceFigure": "Fig. S4"
+      "sourceFigure": "Fig. S4",
+      "proofread": false
     }
   ],
   "photostabilityData": [
@@ -760,21 +765,24 @@
       "illumination": "18 mW/mm²",
       "duration": "5 min",
       "source": "doi:10.1038/s41467-020-17322-1",
-      "sourceFigure": "Fig. 2c"
+      "sourceFigure": "Fig. 2c",
+      "proofread": false
     },
     {
       "brightnessRemaining": 50,
       "illumination": "500 mW/mm²",
       "duration": "3.45 min",
       "source": "doi:10.1126/sciadv.ads1807",
-      "sourceFigure": "Fig. S7"
+      "sourceFigure": "Fig. S7",
+      "proofread": false
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 5.9,
       "source": "doi:10.1126/sciadv.ads1807",
-      "sourceFigure": "Fig. S5B"
+      "sourceFigure": "Fig. S5B",
+      "proofread": false
     }
   ],
   "brightnessData": [
@@ -782,12 +790,14 @@
       "ratio": 0.59,
       "reference": "voltron",
       "source": "doi:10.1038/s41467-020-17322-1",
-      "sourceFigure": "Fig. 2b"
+      "sourceFigure": "Fig. 2b",
+      "proofread": false
     }
   ],
   "addgene": {
     "id": "129253",
-    "url": "https://www.addgene.org/129253/"
+    "url": "https://www.addgene.org/129253/",
+    "proofread": false
   },
   "researchPapers": [
     {
@@ -796,7 +806,8 @@
       "journal": "Nature Communications",
       "year": 2020,
       "sample": "Rat, hippocampal neurons, in vitro; Zebrafish, forebrain, in vivo",
-      "url": "https://doi.org/10.1038/s41467-020-17322-1"
+      "url": "https://doi.org/10.1038/s41467-020-17322-1",
+      "proofread": false
     },
     {
       "title": "Positive-going hybrid indicators for voltage imaging in excitable cells and tissues",
@@ -804,7 +815,8 @@
       "journal": "Science Advances",
       "year": 2025,
       "sample": "Rat, hippocampal neurons, in vitro",
-      "url": "https://doi.org/10.1126/sciadv.ads1807"
+      "url": "https://doi.org/10.1126/sciadv.ads1807",
+      "proofread": false
     }
   ]
 }

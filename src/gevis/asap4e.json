@@ -664,7 +664,8 @@
         0.0064,
         0.0064
       ]
-    }
+    },
+    "proofread": false
   },
   "voltage": {
     "type": "fp",
@@ -699,7 +700,8 @@
     },
     "source": "doi:10.1038/s41592-023-01913-z",
     "sourceImage": "/fv-sources/asap4e.jpg",
-    "sourceFigure": "Fig. 1B"
+    "sourceFigure": "Fig. 1B",
+    "proofread": false
   },
   "kinetics": [
     {
@@ -708,7 +710,8 @@
       "temperature": "22\u00b0C",
       "source": "doi:10.1038/s41592-023-01913-z",
       "sourceFigure": "Table S1",
-      "note": "Bi-exponential fast component. Supplementary Table 1 columns for ASAP4b and ASAP4e appear swapped \u2014 values here are corrected (ASAP4e is the speed-optimized variant, expected to be faster than bright-optimized ASAP4b)"
+      "note": "Bi-exponential fast component. Supplementary Table 1 columns for ASAP4b and ASAP4e appear swapped \u2014 values here are corrected (ASAP4e is the speed-optimized variant, expected to be faster than bright-optimized ASAP4b)",
+      "proofread": false
     },
     {
       "on": 1.53,
@@ -716,14 +719,16 @@
       "temperature": "37\u00b0C",
       "source": "doi:10.1038/s41592-023-01913-z",
       "sourceFigure": "Table S1",
-      "note": "Bi-exponential fast component. Supplementary Table 1 columns for ASAP4b and ASAP4e appear swapped \u2014 values here are corrected"
+      "note": "Bi-exponential fast component. Supplementary Table 1 columns for ASAP4b and ASAP4e appear swapped \u2014 values here are corrected",
+      "proofread": false
     },
     {
       "on": 2.6,
       "off": 6.7,
       "temperature": "33\u00b0C",
       "source": "doi:10.64898/2026.04.07.717088",
-      "sourceFigure": "Table S1.4"
+      "sourceFigure": "Table S1.4",
+      "proofread": false
     }
   ],
   "dynamicRangeData": [
@@ -731,26 +736,30 @@
       "deltaF": 210,
       "sign": "positive",
       "source": "doi:10.1038/s41592-023-01913-z",
-      "sourceFigure": "Table 1"
+      "sourceFigure": "Table 1",
+      "proofread": false
     },
     {
       "deltaF": 148,
       "sign": "positive",
       "source": "doi:10.64898/2026.04.07.717088",
-      "sourceFigure": "Fig. 1E"
+      "sourceFigure": "Fig. 1E",
+      "proofread": false
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 23,
       "source": "doi:10.1038/s41592-023-01913-z",
-      "sourceFigure": "Extended Data Fig. 5a"
+      "sourceFigure": "Extended Data Fig. 5a",
+      "proofread": false
     },
     {
       "deltaF": 41,
       "source": "doi:10.1038/s41592-023-01913-z",
       "sourceFigure": "Extended Data Fig. 5c",
-      "notes": "1ms FWHM AP waveform at 37\u00b0C"
+      "notes": "1ms FWHM AP waveform at 37\u00b0C",
+      "proofread": false
     }
   ],
   "brightnessData": [
@@ -758,13 +767,15 @@
       "ratio": 0.362,
       "reference": "asap3",
       "source": "doi:10.1038/s41592-023-01913-z",
-      "sourceFigure": "Extended Data Fig. 3d"
+      "sourceFigure": "Extended Data Fig. 3d",
+      "proofread": false
     },
     {
       "ratio": 0.5,
       "reference": "forces1",
       "source": "doi:10.64898/2026.04.07.717088",
-      "sourceFigure": "Fig. 1C"
+      "sourceFigure": "Fig. 1C",
+      "proofread": false
     }
   ],
   "photostabilityData": [
@@ -773,18 +784,21 @@
       "illumination": "100 mW/mm\u00b2",
       "duration": "1 min",
       "source": "doi:10.1038/s41592-023-01913-z",
-      "sourceFigure": "Fig. 2b"
+      "sourceFigure": "Fig. 2b",
+      "proofread": false
     }
   ],
   "twoPhoton": [
     {
       "compatible": true,
-      "source": "doi:10.1038/s41592-023-01913-z"
+      "source": "doi:10.1038/s41592-023-01913-z",
+      "proofread": false
     }
   ],
   "addgene": {
     "id": "201031",
-    "url": "https://www.addgene.org/201031/"
+    "url": "https://www.addgene.org/201031/",
+    "proofread": false
   },
   "researchPapers": [
     {
@@ -793,7 +807,8 @@
       "journal": "Nature Neuroscience",
       "year": 2025,
       "url": "https://doi.org/10.1038/s41593-025-02016-y",
-      "sample": "Mouse, hippocampus CA1, PV and SST interneurons, in vivo"
+      "sample": "Mouse, hippocampus CA1, PV and SST interneurons, in vivo",
+      "proofread": false
     },
     {
       "title": "Imaging sensory transmission and neuronal plasticity in primary sensory neurons with a positively tuned voltage indicator",
@@ -801,7 +816,8 @@
       "journal": "Nature Communications",
       "year": 2025,
       "url": "https://doi.org/10.1038/s41467-025-61774-2",
-      "sample": "Mouse, dorsal root ganglia neurons, in vivo"
+      "sample": "Mouse, dorsal root ganglia neurons, in vivo",
+      "proofread": false
     },
     {
       "title": "Retroreflective beam multiplexing enables high-throughput two-photon voltage imaging in vivo",
@@ -809,7 +825,8 @@
       "journal": "bioRxiv",
       "year": 2025,
       "url": "https://doi.org/10.64898/2025.12.09.693349",
-      "sample": "Mouse, visual cortex and hippocampus, in vivo two-photon"
+      "sample": "Mouse, visual cortex and hippocampus, in vivo two-photon",
+      "proofread": false
     }
   ]
 }

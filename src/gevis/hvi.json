@@ -437,7 +437,8 @@
         0.0005,
         0
       ]
-    }
+    },
+    "proofread": false
   },
   "voltage": {
     "type": "chemi",
@@ -496,12 +497,14 @@
           -14,
           -21,
           -25
-        ]
+        ],
+        "proofread": false
       }
     ],
     "source": "doi:10.1038/s41557-021-00641-1",
     "sourceImage": "/fv-sources/hvi.jpg",
-    "sourceFigure": "Fig. 2b"
+    "sourceFigure": "Fig. 2b",
+    "proofread": false
   },
   "kinetics": [
     {
@@ -509,7 +512,8 @@
       "off": 2.5,
       "temperature": "25°C",
       "source": "doi:10.1038/s41557-021-00641-1",
-      "sourceFigure": "Table S3"
+      "sourceFigure": "Table S3",
+      "proofread": false
     }
   ],
   "dynamicRangeData": [
@@ -517,14 +521,16 @@
       "deltaF": -39,
       "sign": "negative",
       "source": "doi:10.1038/s41557-021-00641-1",
-      "sourceFigure": "Table S3"
+      "sourceFigure": "Table S3",
+      "proofread": false
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 25.3,
       "source": "doi:10.1038/s41557-021-00641-1",
-      "sourceFigure": "Table S3"
+      "sourceFigure": "Table S3",
+      "proofread": false
     }
   ],
   "brightnessData": [
@@ -532,7 +538,8 @@
       "ratio": 0.19,
       "reference": "voltron",
       "source": "doi:10.1038/s41557-021-00641-1",
-      "sourceFigure": "Table S4"
+      "sourceFigure": "Table S4",
+      "proofread": false
     }
   ],
   "photostabilityData": [
@@ -541,7 +548,8 @@
       "illumination": "49 mW/mm²",
       "duration": "7.2 min",
       "source": "doi:10.1038/s41557-021-00641-1",
-      "sourceFigure": "Table S6"
+      "sourceFigure": "Table S6",
+      "proofread": false
     }
   ],
   "researchPapers": [
@@ -551,7 +559,8 @@
       "journal": "Nature Chemistry",
       "year": 2021,
       "sample": "Human, HEK293T cells, in vitro; rat, hippocampal neurons, in vitro",
-      "url": "https://doi.org/10.1038/s41557-021-00641-1"
+      "url": "https://doi.org/10.1038/s41557-021-00641-1",
+      "proofread": false
     },
     {
       "title": "Orange/far-red hybrid voltage indicators with reduced phototoxicity enable reliable long-term imaging in neurons and cardiomyocytes",
@@ -559,7 +568,8 @@
       "journal": "Proceedings of the National Academy of Sciences",
       "year": 2023,
       "sample": "Rat, hippocampal neurons, in vitro; rat, cardiomyocytes, in vitro",
-      "url": "https://doi.org/10.1073/pnas.2306950120"
+      "url": "https://doi.org/10.1073/pnas.2306950120",
+      "proofread": false
     },
     {
       "title": "Positive-going hybrid indicators for voltage imaging in excitable cells and tissues",
@@ -567,7 +577,8 @@
       "journal": "Science Advances",
       "year": 2025,
       "sample": "Rat, hippocampal neurons, in vitro; mouse, pancreatic islets",
-      "url": "https://doi.org/10.1126/sciadv.ads1807"
+      "url": "https://doi.org/10.1126/sciadv.ads1807",
+      "proofread": false
     }
   ]
 }

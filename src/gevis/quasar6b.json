@@ -386,7 +386,8 @@
         0.0055,
         0.005
       ]
-    }
+    },
+    "proofread": false
   },
   "voltage": {
     "type": "opsin",
@@ -423,7 +424,8 @@
     },
     "source": "doi:10.1038/s41592-022-01743-5",
     "sourceImage": "/fv-sources/quasar6b.jpg",
-    "sourceFigure": "Fig. 3c"
+    "sourceFigure": "Fig. 3c",
+    "proofread": false
   },
   "kinetics": [
     {
@@ -431,7 +433,8 @@
       "off": 0.8,
       "temperature": "30°C",
       "source": "doi:10.1038/s41592-022-01743-5",
-      "sourceFigure": "Extended Data Fig. 4d"
+      "sourceFigure": "Extended Data Fig. 4d",
+      "proofread": false
     }
   ],
   "dynamicRangeData": [
@@ -440,7 +443,8 @@
       "sign": "positive",
       "source": "doi:10.1038/s41592-022-01743-5",
       "sourceFigure": "Extended Data Fig. 4c",
-      "note": "In HEK293T cells, voltage clamp, per 100 mV step, n=4 cells"
+      "note": "In HEK293T cells, voltage clamp, per 100 mV step, n=4 cells",
+      "proofread": false
     }
   ],
   "brightnessData": [
@@ -448,7 +452,8 @@
       "ratio": 2,
       "reference": "archon1",
       "source": "doi:10.1038/s41592-022-01743-5",
-      "sourceFigure": "Extended Data Fig. 4b"
+      "sourceFigure": "Extended Data Fig. 4b",
+      "proofread": false
     }
   ],
   "sensitivityData": [
@@ -456,7 +461,8 @@
       "deltaF": 27,
       "source": "doi:10.1038/s41592-022-01743-5",
       "sourceFigure": "Fig. 3c",
-      "note": "Fractional voltage sensitivity from -70 to +20 mV in cultured rat hippocampal neurons, mean ± S.D. = 27 ± 3%, from Fig. 3c"
+      "note": "Fractional voltage sensitivity from -70 to +20 mV in cultured rat hippocampal neurons, mean ± S.D. = 27 ± 3%, from Fig. 3c",
+      "proofread": false
     }
   ],
   "photostabilityData": [
@@ -465,12 +471,14 @@
       "illumination": "4200 mW/mm²",
       "duration": "10 min",
       "source": "doi:10.1038/s41592-022-01743-5",
-      "sourceFigure": "Extended Data Fig. 6f"
+      "sourceFigure": "Extended Data Fig. 6f",
+      "proofread": false
     }
   ],
   "addgene": {
     "id": "178823",
-    "url": "https://www.addgene.org/178823/"
+    "url": "https://www.addgene.org/178823/",
+    "proofread": false
   },
   "researchPapers": [
     {
@@ -479,7 +487,8 @@
       "journal": "Nature Methods",
       "year": 2023,
       "sample": "HEK293T cells, in vitro; Cultured rat hippocampal neurons, in vitro; Mouse cortex NDNF interneurons, in vivo; Mouse hippocampus PV interneurons, in vivo",
-      "url": "https://doi.org/10.1038/s41592-022-01743-5"
+      "url": "https://doi.org/10.1038/s41592-022-01743-5",
+      "proofread": false
     },
     {
       "title": "All-optical electrophysiology reveals behavior-dependent dynamics of excitation and inhibition in the hippocampus",
@@ -487,7 +496,8 @@
       "journal": "Neuron",
       "year": 2026,
       "sample": "Mouse, hippocampus CA1 PV interneurons, in vivo",
-      "url": "https://doi.org/10.1016/j.neuron.2025.12.040"
+      "url": "https://doi.org/10.1016/j.neuron.2025.12.040",
+      "proofread": false
     }
   ]
 }

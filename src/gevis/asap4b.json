@@ -664,7 +664,8 @@
         0.0064,
         0.0064
       ]
-    }
+    },
+    "proofread": false
   },
   "voltage": {
     "type": "fp",
@@ -689,7 +690,8 @@
     },
     "source": "doi:10.1038/s41592-023-01913-z",
     "sourceImage": "/fv-sources/asap4b.jpg",
-    "sourceFigure": "Fig. 1B"
+    "sourceFigure": "Fig. 1B",
+    "proofread": false
   },
   "kinetics": [
     {
@@ -698,7 +700,8 @@
       "temperature": "22°C",
       "source": "doi:10.1038/s41592-023-01913-z",
       "sourceFigure": "Table S1",
-      "note": "Bi-exponential fast component. Supplementary Table 1 columns for ASAP4b and ASAP4e appear swapped — values here are corrected (ASAP4b is the bright-optimized variant, expected to be slower than speed-optimized ASAP4e)"
+      "note": "Bi-exponential fast component. Supplementary Table 1 columns for ASAP4b and ASAP4e appear swapped — values here are corrected (ASAP4b is the bright-optimized variant, expected to be slower than speed-optimized ASAP4e)",
+      "proofread": false
     },
     {
       "on": 1.49,
@@ -706,7 +709,8 @@
       "temperature": "37°C",
       "source": "doi:10.1038/s41592-023-01913-z",
       "sourceFigure": "Table S1",
-      "note": "Bi-exponential fast component. Supplementary Table 1 columns for ASAP4b and ASAP4e appear swapped — values here are corrected"
+      "note": "Bi-exponential fast component. Supplementary Table 1 columns for ASAP4b and ASAP4e appear swapped — values here are corrected",
+      "proofread": false
     }
   ],
   "dynamicRangeData": [
@@ -714,7 +718,8 @@
       "deltaF": 180,
       "sign": "positive",
       "source": "doi:10.1038/s41592-023-01913-z",
-      "sourceFigure": "Table 1"
+      "sourceFigure": "Table 1",
+      "proofread": false
     }
   ],
   "sensitivityData": [
@@ -722,13 +727,15 @@
       "deltaF": 35,
       "source": "doi:10.1038/s41592-023-01913-z",
       "sourceFigure": "Table 1",
-      "notes": "3.5ms FWHM, 100mV AP waveform, room temperature"
+      "notes": "3.5ms FWHM, 100mV AP waveform, room temperature",
+      "proofread": false
     },
     {
       "deltaF": 30,
       "source": "doi:10.1038/s41592-023-01913-z",
       "sourceFigure": "Extended Data Fig. 5c",
-      "notes": "Naturalistic hippocampal AP waveform, 37°C"
+      "notes": "Naturalistic hippocampal AP waveform, 37°C",
+      "proofread": false
     }
   ],
   "brightnessData": [
@@ -736,7 +743,8 @@
       "ratio": 0.4468,
       "reference": "asap3",
       "source": "doi:10.1038/s41592-023-01913-z",
-      "sourceFigure": "Extended Data Fig. 3d"
+      "sourceFigure": "Extended Data Fig. 3d",
+      "proofread": false
     }
   ],
   "photostabilityData": [
@@ -745,18 +753,21 @@
       "illumination": "100 mW/mm²",
       "duration": "1 min",
       "source": "doi:10.1038/s41592-023-01913-z",
-      "sourceFigure": "Fig. 2b"
+      "sourceFigure": "Fig. 2b",
+      "proofread": false
     }
   ],
   "twoPhoton": [
     {
       "compatible": true,
-      "source": "doi:10.1038/s41592-023-01913-z"
+      "source": "doi:10.1038/s41592-023-01913-z",
+      "proofread": false
     }
   ],
   "addgene": {
     "id": "201030",
-    "url": "https://www.addgene.org/201030/"
+    "url": "https://www.addgene.org/201030/",
+    "proofread": false
   },
   "researchPapers": [
     {
@@ -765,7 +776,8 @@
       "journal": "Nature Neuroscience",
       "year": 2025,
       "url": "https://doi.org/10.1038/s41593-025-02016-y",
-      "sample": "Mouse, CA1 hippocampus, PV and SST interneurons, in vivo"
+      "sample": "Mouse, CA1 hippocampus, PV and SST interneurons, in vivo",
+      "proofread": false
     },
     {
       "title": "Imaging sensory transmission and neuronal plasticity in primary sensory neurons with a positively tuned voltage indicator",
@@ -773,7 +785,8 @@
       "journal": "Nature Communications",
       "year": 2025,
       "url": "https://doi.org/10.1038/s41467-025-61774-2",
-      "sample": "Mouse, dorsal root ganglia neurons, in vivo"
+      "sample": "Mouse, dorsal root ganglia neurons, in vivo",
+      "proofread": false
     }
   ]
 }

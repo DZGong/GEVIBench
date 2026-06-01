@@ -363,7 +363,8 @@
         0.0172,
         0.0162
       ]
-    }
+    },
+    "proofread": false
   },
   "voltage": {
     "type": "fret",
@@ -402,7 +403,8 @@
     },
     "source": "doi:10.1152/jn.00452.2012",
     "sourceImage": "/fv-sources/vsfpbutterfly.jpg",
-    "sourceFigure": "Fig. 2C"
+    "sourceFigure": "Fig. 2C",
+    "proofread": false
   },
   "kinetics": [
     {
@@ -410,7 +412,8 @@
       "off": 89.9,
       "temperature": "32-34°C",
       "source": "doi:10.1152/jn.00452.2012",
-      "sourceFigure": "Fig. 2E"
+      "sourceFigure": "Fig. 2E",
+      "proofread": false
     }
   ],
   "dynamicRangeData": [
@@ -418,40 +421,46 @@
       "deltaF": -15,
       "sign": "negative",
       "source": "doi:10.3389/fnmol.2014.00078",
-      "sourceFigure": "Table 1"
+      "sourceFigure": "Table 1",
+      "proofread": false
     },
     {
       "deltaF": -3.2,
       "sign": "negative",
       "source": "doi:10.1152/jn.00452.2012",
       "sourceFigure": "Fig. 3C",
-      "note": "Brain slices, layer 2/3 pyramidal neurons, 12 cells"
+      "note": "Brain slices, layer 2/3 pyramidal neurons, 12 cells",
+      "proofread": false
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 0.3,
       "source": "doi:10.1152/jn.00452.2012",
-      "sourceFigure": "Fig. 3D"
+      "sourceFigure": "Fig. 3D",
+      "proofread": false
     }
   ],
   "brightnessData": [
     {
       "ratio": 1.74,
       "reference": "EGFP",
-      "source": "EC×QY: mCitrine EC=77000, QY=0.76 vs EGFP EC=56000, QY=0.60"
+      "source": "EC×QY: mCitrine EC=77000, QY=0.76 vs EGFP EC=56000, QY=0.60",
+      "proofread": false
     }
   ],
   "subthresholdData": [
     {
       "slope": 0.042,
       "source": "doi:10.1152/jn.00452.2012",
-      "sourceFigure": "Fig. 3C"
+      "sourceFigure": "Fig. 3C",
+      "proofread": false
     }
   ],
   "addgene": {
     "id": "47978",
-    "url": "https://www.addgene.org/47978/"
+    "url": "https://www.addgene.org/47978/",
+    "proofread": false
   },
   "researchPapers": [
     {
@@ -460,7 +469,8 @@
       "journal": "Journal of Neurophysiology",
       "year": 2012,
       "sample": "Mouse, somatosensory cortex layer 2/3, in vivo; hippocampus CA3, brain slices; PC12 cells, in vitro",
-      "url": "https://doi.org/10.1152/jn.00452.2012"
+      "url": "https://doi.org/10.1152/jn.00452.2012",
+      "proofread": false
     },
     {
       "title": "Exploration of genetically encoded voltage indicators based on a chimeric voltage sensing domain",
@@ -468,7 +478,8 @@
       "journal": "Frontiers in Molecular Neuroscience",
       "year": 2014,
       "sample": "Mouse, somatosensory cortex, in vivo; PC12 and HEK293T cells, in vitro",
-      "url": "https://doi.org/10.3389/fnmol.2014.00078"
+      "url": "https://doi.org/10.3389/fnmol.2014.00078",
+      "proofread": false
     },
     {
       "title": "Two-photon voltage imaging using a genetically encoded voltage indicator",
@@ -476,7 +487,8 @@
       "journal": "Scientific Reports",
       "year": 2013,
       "sample": "Mouse, cortex layer 2/3, brain slices; mouse, somatosensory cortex, in vivo",
-      "url": "https://doi.org/10.1038/srep02231"
+      "url": "https://doi.org/10.1038/srep02231",
+      "proofread": false
     },
     {
       "title": "Voltage imaging of waking mouse cortex reveals emergence of critical neuronal dynamics",
@@ -484,7 +496,8 @@
       "journal": "Journal of Neuroscience",
       "year": 2014,
       "sample": "Mouse, cortex, in vivo",
-      "url": "https://doi.org/10.1523/JNEUROSCI.3474-14.2014"
+      "url": "https://doi.org/10.1523/JNEUROSCI.3474-14.2014",
+      "proofread": false
     },
     {
       "title": "Imaging the awake visual cortex with a genetically encoded voltage indicator",
@@ -492,7 +505,8 @@
       "journal": "Journal of Neuroscience",
       "year": 2015,
       "sample": "Mouse, visual cortex, in vivo, awake",
-      "url": "https://doi.org/10.1523/JNEUROSCI.0594-14.2015"
+      "url": "https://doi.org/10.1523/JNEUROSCI.0594-14.2015",
+      "proofread": false
     },
     {
       "title": "Validation of optical voltage reporting by the genetically encoded voltage indicator VSFP-Butterfly from cortical layer 2/3 pyramidal neurons in mouse brain slices",
@@ -500,7 +514,8 @@
       "journal": "Physiological Reports",
       "year": 2015,
       "sample": "Mouse, cortex layer 2/3, brain slices",
-      "url": "https://doi.org/10.14814/phy2.12468"
+      "url": "https://doi.org/10.14814/phy2.12468",
+      "proofread": false
     },
     {
       "title": "Cortical entropy, mutual information and scale-free dynamics in waking mice",
@@ -508,7 +523,8 @@
       "journal": "Cerebral Cortex",
       "year": 2016,
       "sample": "Mouse, cortex, in vivo",
-      "url": "https://doi.org/10.1093/cercor/bhw200"
+      "url": "https://doi.org/10.1093/cercor/bhw200",
+      "proofread": false
     },
     {
       "title": "Transgenic mice for intersectional targeting of neural sensors and effectors with high specificity and performance",
@@ -516,7 +532,8 @@
       "journal": "Neuron",
       "year": 2015,
       "sample": "Mouse, cortex, transgenic Ai78(TITL-VSFPB) line, in vivo",
-      "url": "https://doi.org/10.1016/j.neuron.2015.02.022"
+      "url": "https://doi.org/10.1016/j.neuron.2015.02.022",
+      "proofread": false
     },
     {
       "title": "Transgenic strategies for sparse but strong expression of genetically encoded voltage and calcium indicators",
@@ -524,7 +541,8 @@
       "journal": "International Journal of Molecular Sciences",
       "year": 2017,
       "sample": "Mouse, cortex layer 2/3, transgenic",
-      "url": "https://doi.org/10.3390/ijms18071461"
+      "url": "https://doi.org/10.3390/ijms18071461",
+      "proofread": false
     },
     {
       "title": "Imaging of brain slices with a genetically encoded voltage indicator",
@@ -532,7 +550,8 @@
       "journal": "Methods in Molecular Biology",
       "year": 2017,
       "sample": "Mouse, cortex layer 2/3, brain slices",
-      "url": "https://doi.org/10.1007/978-1-4939-6810-7_5"
+      "url": "https://doi.org/10.1007/978-1-4939-6810-7_5",
+      "proofread": false
     },
     {
       "title": "Cortical signatures of wakeful somatosensory processing",
@@ -540,7 +559,8 @@
       "journal": "Scientific Reports",
       "year": 2018,
       "sample": "Mouse, somatosensory cortex, in vivo, awake",
-      "url": "https://doi.org/10.1038/s41598-018-30422-9"
+      "url": "https://doi.org/10.1038/s41598-018-30422-9",
+      "proofread": false
     },
     {
       "title": "Effects of arousal on mouse sensory cortex depend on modality",
@@ -548,7 +568,8 @@
       "journal": "Cell Reports",
       "year": 2018,
       "sample": "Mouse, visual cortex; barrel cortex; auditory cortex, in vivo, awake",
-      "url": "https://doi.org/10.1016/j.celrep.2018.02.092"
+      "url": "https://doi.org/10.1016/j.celrep.2018.02.092",
+      "proofread": false
     },
     {
       "title": "Optogenetic sensors in the zebrafish heart: a novel in vivo electrophysiological tool to study cardiac arrhythmogenesis",
@@ -556,7 +577,8 @@
       "journal": "Theranostics",
       "year": 2018,
       "sample": "Zebrafish, heart, in vivo",
-      "url": "https://doi.org/10.7150/thno.26108"
+      "url": "https://doi.org/10.7150/thno.26108",
+      "proofread": false
     },
     {
       "title": "Slow moving neural source in the epileptic hippocampus can mimic progression of human seizures",
@@ -564,7 +586,8 @@
       "journal": "Scientific Reports",
       "year": 2018,
       "sample": "Mouse, hippocampal slices, in vitro",
-      "url": "https://doi.org/10.1038/s41598-018-19925-7"
+      "url": "https://doi.org/10.1038/s41598-018-19925-7",
+      "proofread": false
     },
     {
       "title": "Single-neuron level one-photon voltage imaging with sparsely targeted genetically encoded voltage indicators",
@@ -572,7 +595,8 @@
       "journal": "Frontiers in Cellular Neuroscience",
       "year": 2019,
       "sample": "Mouse, cortex layer 2/3, brain slices",
-      "url": "https://doi.org/10.3389/fncel.2019.00039"
+      "url": "https://doi.org/10.3389/fncel.2019.00039",
+      "proofread": false
     },
     {
       "title": "In vitro testing of voltage indicators: Archon1, ArcLightD, ASAP1, ASAP2s, ASAP3b, Bongwoori-Pos6, BeRST1, FlicR1, and Chi-VSFP-Butterfly",
@@ -580,7 +604,8 @@
       "journal": "eNeuro",
       "year": 2020,
       "sample": "Mouse, cortex, brain slices; HEK293 cells, in vitro",
-      "url": "https://doi.org/10.1523/ENEURO.0060-20.2020"
+      "url": "https://doi.org/10.1523/ENEURO.0060-20.2020",
+      "proofread": false
     },
     {
       "title": "Subcellular resolution three-dimensional light-field imaging with genetically encoded voltage indicators",
@@ -588,7 +613,8 @@
       "journal": "Neurophotonics",
       "year": 2020,
       "sample": "Mouse, brain slices, in vitro",
-      "url": "https://doi.org/10.1117/1.NPh.7.3.035006"
+      "url": "https://doi.org/10.1117/1.NPh.7.3.035006",
+      "proofread": false
     },
     {
       "title": "Population imaging discrepancies between a genetically-encoded calcium indicator (GECI) versus a genetically-encoded voltage indicator (GEVI)",
@@ -596,7 +622,8 @@
       "journal": "Scientific Reports",
       "year": 2021,
       "sample": "Mouse, somatosensory cortex, brain slices",
-      "url": "https://doi.org/10.1038/s41598-021-84651-6"
+      "url": "https://doi.org/10.1038/s41598-021-84651-6",
+      "proofread": false
     },
     {
       "title": "Studying synaptically evoked cortical responses ex vivo with combination of a single neuron recording (whole-cell) and population voltage imaging (genetically encoded voltage indicator)",
@@ -604,7 +631,8 @@
       "journal": "Frontiers in Neuroscience",
       "year": 2021,
       "sample": "Mouse, cortex, brain slices",
-      "url": "https://doi.org/10.3389/fnins.2021.773883"
+      "url": "https://doi.org/10.3389/fnins.2021.773883",
+      "proofread": false
     },
     {
       "title": "Cortex-wide dynamics of intrinsic electrical activities: propagating waves and their interactions",
@@ -612,7 +640,8 @@
       "journal": "Journal of Neuroscience",
       "year": 2021,
       "sample": "Mouse, cortex, in vivo, anesthetized, CaMK2A-tTA;chi-VSFP transgenic",
-      "url": "https://doi.org/10.1523/JNEUROSCI.0623-20.2021"
+      "url": "https://doi.org/10.1523/JNEUROSCI.0623-20.2021",
+      "proofread": false
     },
     {
       "title": "Combining cortical voltage imaging and hippocampal electrophysiology for investigating global, multi-timescale activity interactions in the brain",
@@ -620,7 +649,8 @@
       "journal": "International Journal of Molecular Sciences",
       "year": 2022,
       "sample": "Mouse, cortex; hippocampus, in vivo, awake",
-      "url": "https://doi.org/10.3390/ijms23126814"
+      "url": "https://doi.org/10.3390/ijms23126814",
+      "proofread": false
     },
     {
       "title": "Evoked cortical depolarizations before and after the amyloid plaque accumulation: voltage imaging study",
@@ -628,7 +658,8 @@
       "journal": "Journal of Alzheimer's Disease",
       "year": 2022,
       "sample": "Mouse, cortex, brain slices, Alzheimer's disease model (APPswe/PS1dE9), chi-VSFP transgenic",
-      "url": "https://doi.org/10.3233/JAD-220249"
+      "url": "https://doi.org/10.3233/JAD-220249",
+      "proofread": false
     },
     {
       "title": "Cortical correlates of psychedelic-induced shaking behavior revealed by voltage imaging",
@@ -636,7 +667,8 @@
       "journal": "International Journal of Molecular Sciences",
       "year": 2023,
       "sample": "Mouse, cortex layer 2/3, in vivo, awake",
-      "url": "https://doi.org/10.3390/ijms24119463"
+      "url": "https://doi.org/10.3390/ijms24119463",
+      "proofread": false
     },
     {
       "title": "Complexity of cortical wave patterns of the wake mouse cortex",
@@ -644,7 +676,8 @@
       "journal": "Nature Communications",
       "year": 2023,
       "sample": "Mouse, cortex, in vivo, awake, CaMK2A-tTA;chi-VSFP transgenic",
-      "url": "https://doi.org/10.1038/s41467-023-37088-6"
+      "url": "https://doi.org/10.1038/s41467-023-37088-6",
+      "proofread": false
     },
     {
       "title": "Imaging of evoked cortical depolarizations using either ASAP2s, or chi-VSFP, or Di-4-Anepps, or autofluorescence optical signals",
@@ -652,7 +685,8 @@
       "journal": "Journal of Integrative Neuroscience",
       "year": 2023,
       "sample": "Mouse, cortex, brain slices",
-      "url": "https://doi.org/10.31083/j.jin2206160"
+      "url": "https://doi.org/10.31083/j.jin2206160",
+      "proofread": false
     },
     {
       "title": "Cortical networks relating to arousal are differentially coupled to neural activity and hemodynamics",
@@ -660,7 +694,8 @@
       "journal": "Journal of Neuroscience",
       "year": 2024,
       "sample": "Mouse, cortex, in vivo, awake",
-      "url": "https://doi.org/10.1523/JNEUROSCI.0298-23.2024"
+      "url": "https://doi.org/10.1523/JNEUROSCI.0298-23.2024",
+      "proofread": false
     },
     {
       "title": "Ex vivo propagation of synaptically-evoked cortical depolarizations in a mouse model of Alzheimer's disease at 20 Hz, 40 Hz, or 83 Hz",
@@ -668,7 +703,8 @@
       "journal": "Scientific Reports",
       "year": 2024,
       "sample": "Mouse, cortex, brain slices, Alzheimer's disease model (5xFAD), chi-VSFP transgenic",
-      "url": "https://doi.org/10.1038/s41598-024-74262-2"
+      "url": "https://doi.org/10.1038/s41598-024-74262-2",
+      "proofread": false
     },
     {
       "title": "Psychedelic 5-HT2A agonist increases spontaneous and evoked 5-Hz oscillations in visual and retrosplenial cortex",
@@ -676,7 +712,8 @@
       "journal": "Communications Biology",
       "year": 2026,
       "sample": "Mouse, visual cortex; retrosplenial cortex, in vivo, awake",
-      "url": "https://doi.org/10.1038/s42003-025-09492-9"
+      "url": "https://doi.org/10.1038/s42003-025-09492-9",
+      "proofread": false
     }
   ]
 }

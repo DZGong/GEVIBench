@@ -663,7 +663,8 @@
         0.0064,
         0.0064
       ]
-    }
+    },
+    "proofread": false
   },
   "voltage": {
     "type": "fp",
@@ -692,7 +693,8 @@
     },
     "source": "doi:10.1016/j.cell.2022.07.013",
     "sourceImage": "/fv-sources/jedi2p.jpg",
-    "sourceFigure": "Fig. 2B"
+    "sourceFigure": "Fig. 2B",
+    "proofread": false
   },
   "kinetics": [
     {
@@ -700,21 +702,24 @@
       "off": 1.21,
       "temperature": "32-35\u00b0C",
       "source": "doi:10.1016/j.cell.2022.07.013",
-      "sourceFigure": "Table S2"
+      "sourceFigure": "Table S2",
+      "proofread": false
     },
     {
       "on": 1.21,
       "off": 2.54,
       "temperature": "21-23\u00b0C",
       "source": "doi:10.1016/j.cell.2022.07.013",
-      "sourceFigure": "Table S2"
+      "sourceFigure": "Table S2",
+      "proofread": false
     },
     {
       "on": 0.49,
       "off": 1.5,
       "temperature": "33\u00b0C",
       "source": "doi:10.64898/2026.04.07.717088",
-      "sourceFigure": "Table S1.4"
+      "sourceFigure": "Table S1.4",
+      "proofread": false
     }
   ],
   "dynamicRangeData": [
@@ -722,27 +727,31 @@
       "deltaF": -43,
       "sign": "negative",
       "source": "doi:10.1016/j.cell.2022.07.013",
-      "sourceFigure": "Fig. 2C"
+      "sourceFigure": "Fig. 2C",
+      "proofread": false
     },
     {
       "deltaF": -41.8,
       "sign": "negative",
       "source": "doi:10.1038/s41592-026-03043-8",
       "note": "Response to a 100-mV depolarizing step from -70 mV at 33°C in HEK293A cells under 2P illumination (main text and Supplementary Fig. 3/Table 2).",
-      "sourceFigure": "Fig. S3"
+      "sourceFigure": "Fig. S3",
+      "proofread": false
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 18.2,
       "source": "doi:10.1016/j.cell.2022.07.013",
-      "sourceFigure": "Fig. 2E"
+      "sourceFigure": "Fig. 2E",
+      "proofread": false
     },
     {
       "deltaF": 23.3,
       "source": "doi:10.1038/s41592-026-03043-8",
       "note": "Peak -ΔF/F₀ per single action potential in cultured rat E18 hippocampal neurons at 33°C under 1P widefield illumination (Fig. 1j, n = 10).",
-      "sourceFigure": "Fig. 1j"
+      "sourceFigure": "Fig. 1j",
+      "proofread": false
     }
   ],
   "brightnessData": [
@@ -750,20 +759,23 @@
       "ratio": 1.67,
       "reference": "asap3",
       "source": "doi:10.1016/j.cell.2022.07.013",
-      "sourceFigure": "Fig. S4I"
+      "sourceFigure": "Fig. S4I",
+      "proofread": false
     },
     {
       "ratio": 1.5,
       "reference": "asap2s",
       "source": "doi:10.1016/j.cell.2022.07.013",
-      "sourceFigure": "Fig. S4I"
+      "sourceFigure": "Fig. S4I",
+      "proofread": false
     },
     {
       "ratio": 1.45,
       "reference": "asap5",
       "source": "doi:10.1038/s41592-026-03043-8",
       "note": "mBeRFP-normalized brightness at ~-70 mV in HEK293-Kir2.1 cells under 2P excitation at 940 nm, normalized to ASAP5 median (Extended Data Fig. 1c, n ≥ 3,500 cells per indicator).",
-      "sourceFigure": "Extended Data Fig. 1c"
+      "sourceFigure": "Extended Data Fig. 1c",
+      "proofread": false
     }
   ],
   "photostabilityData": [
@@ -772,25 +784,29 @@
       "illumination": "15 mW/mm\u00b2",
       "duration": "2 min",
       "source": "doi:10.1016/j.cell.2022.07.013",
-      "sourceFigure": "Fig. S4G"
+      "sourceFigure": "Fig. S4G",
+      "proofread": false
     }
   ],
   "subthresholdData": [
     {
       "slope": 0.7,
       "source": "doi:10.1016/j.neuron.2024.08.019",
-      "sourceFigure": "Fig. 1D"
+      "sourceFigure": "Fig. 1D",
+      "proofread": false
     }
   ],
   "twoPhoton": [
     {
       "compatible": true,
-      "source": "doi:10.1016/j.cell.2022.07.013"
+      "source": "doi:10.1016/j.cell.2022.07.013",
+      "proofread": false
     }
   ],
   "addgene": {
     "id": "179463",
-    "url": "https://www.addgene.org/179463/"
+    "url": "https://www.addgene.org/179463/",
+    "proofread": false
   },
   "researchPapers": [
     {
@@ -799,7 +815,8 @@
       "journal": "Cell",
       "year": 2022,
       "sample": "HEK293 cells, in vitro; Mouse, visual cortex L2/3, in vivo; Drosophila, interneurons, ex vivo; Mouse, retina, ex vivo",
-      "url": "https://doi.org/10.1016/j.cell.2022.07.013"
+      "url": "https://doi.org/10.1016/j.cell.2022.07.013",
+      "proofread": false
     },
     {
       "title": "Scanless two-photon voltage imaging",
@@ -807,7 +824,8 @@
       "journal": "Nature Communications",
       "year": 2024,
       "sample": "Mouse, hippocampal slices, in vitro; Mouse, barrel cortex, in vivo",
-      "url": "https://doi.org/10.1038/s41467-024-49192-2"
+      "url": "https://doi.org/10.1038/s41467-024-49192-2",
+      "proofread": false
     },
     {
       "title": "A fast and responsive voltage indicator with enhanced sensitivity for unitary synaptic events",
@@ -815,7 +833,8 @@
       "journal": "Neuron",
       "year": 2024,
       "sample": "Rat, cultured neurons, in vitro; Mouse, cortex, in vivo",
-      "url": "https://doi.org/10.1016/j.neuron.2024.08.019"
+      "url": "https://doi.org/10.1016/j.neuron.2024.08.019",
+      "proofread": false
     },
     {
       "title": "A novel rhodopsin-based voltage indicator for simultaneous two-photon optical recording with GCaMP in vivo",
@@ -823,7 +842,8 @@
       "journal": "bioRxiv",
       "year": 2024,
       "sample": "Mouse, visual cortex, in vivo",
-      "url": "https://doi.org/10.1101/2024.11.15.623698"
+      "url": "https://doi.org/10.1101/2024.11.15.623698",
+      "proofread": false
     },
     {
       "title": "Two-photon voltage imaging with rhodopsin-based sensors",
@@ -831,7 +851,8 @@
       "journal": "Neuron",
       "year": 2026,
       "sample": "HEK293 cells, in vitro; Mouse, cortex and cerebellum, in vivo",
-      "url": "https://doi.org/10.1016/j.neuron.2025.12.014"
+      "url": "https://doi.org/10.1016/j.neuron.2025.12.014",
+      "proofread": false
     },
     {
       "title": "All-optical voltage interrogation for probing synaptic plasticity in vivo",
@@ -839,7 +860,8 @@
       "journal": "Nature Communications",
       "year": 2025,
       "sample": "Mouse, cerebellum, Purkinje cell dendrites, in vivo",
-      "url": "https://doi.org/10.1038/s41467-025-63867-4"
+      "url": "https://doi.org/10.1038/s41467-025-63867-4",
+      "proofread": false
     },
     {
       "title": "FACED 2.0 enables large-scale voltage and calcium imaging in vivo",
@@ -847,7 +869,8 @@
       "journal": "Nature Methods",
       "year": 2025,
       "sample": "Mouse, visual cortex L2/3, in vivo; Zebrafish larvae, in vivo",
-      "url": "https://doi.org/10.1038/s41592-025-02925-7"
+      "url": "https://doi.org/10.1038/s41592-025-02925-7",
+      "proofread": false
     },
     {
       "title": "Retroreflective beam multiplexing enables high-throughput two-photon voltage imaging in vivo",
@@ -855,7 +878,8 @@
       "journal": "bioRxiv",
       "year": 2025,
       "sample": "Mouse, visual cortex V1, in vivo; Mouse, hippocampus CA1, in vivo",
-      "url": "https://doi.org/10.64898/2025.12.09.693349"
+      "url": "https://doi.org/10.64898/2025.12.09.693349",
+      "proofread": false
     },
     {
       "title": "Movement-stabilized three-dimensional optical recordings of membrane potential changes and calcium dynamics in hippocampal CA1 dendrites",
@@ -863,7 +887,8 @@
       "journal": "Neuron",
       "year": 2026,
       "sample": "Mouse, hippocampus CA1, dendrites and soma, in vivo",
-      "url": "https://doi.org/10.1016/j.neuron.2026.01.004"
+      "url": "https://doi.org/10.1016/j.neuron.2026.01.004",
+      "proofread": false
     },
     {
       "title": "Kilohertz-rate two-photon voltage imaging of population dynamics in vivo",
@@ -871,7 +896,8 @@
       "journal": "bioRxiv",
       "year": 2026,
       "sample": "Mouse, cortex, in vivo",
-      "url": "https://doi.org/10.64898/2025.12.29.696942"
+      "url": "https://doi.org/10.64898/2025.12.29.696942",
+      "proofread": false
     },
     {
       "title": "Designer indicators for two-photon recording of subthreshold voltage dynamics",
@@ -879,7 +905,8 @@
       "journal": "Nature Methods",
       "year": 2026,
       "sample": "HEK293 cells, in vitro; Rat, cultured hippocampal neurons, in vitro; Mouse, visual cortex L2/3, in vivo",
-      "url": "https://doi.org/10.1038/s41592-026-03043-8"
+      "url": "https://doi.org/10.1038/s41592-026-03043-8",
+      "proofread": false
     },
     {
       "title": "Optical constraints on two-photon voltage imaging",
@@ -887,7 +914,8 @@
       "journal": "Neurophotonics",
       "year": 2024,
       "sample": "HEK293 cells, in vitro; Mouse, cortex, in vivo",
-      "url": "https://doi.org/10.1117/1.NPh.11.3.035007"
+      "url": "https://doi.org/10.1117/1.NPh.11.3.035007",
+      "proofread": false
     },
     {
       "title": "Linking functional activity and connectivity of neuronal circuits via fast cross-layer all-optical physiology",
@@ -895,7 +923,8 @@
       "journal": "Cell Reports",
       "year": 2025,
       "sample": "Mouse, visual cortex V1 and somatosensory cortex S1, in vivo",
-      "url": "https://doi.org/10.1016/j.celrep.2025.116646"
+      "url": "https://doi.org/10.1016/j.celrep.2025.116646",
+      "proofread": false
     }
   ]
 }

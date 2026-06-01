@@ -7,6 +7,7 @@ import { BookOpen, ExternalLink } from 'lucide-react';
 import { getAllGEVIs } from '../geviData';
 import type { GEVI, TreeNode } from '../types';
 import { getTreeNodeColor } from '../utils';
+import { DistributionRadar } from './DistributionRadar';
 
 // Journal name abbreviations for tooltip display
 const JOURNAL_ABBREV: Record<string, string> = {
@@ -78,6 +79,11 @@ const MANUAL_SUBTREE_SHIFTS: Record<string, { dx: number; dy: number }> = {
   vsfp1: { dx: 0, dy: 44 },
   'VSD-FRET': { dx: 30, dy: 0 },
   arclight: { dx: 0, dy: 33 },
+  // ASAP3 children kept on shared rows (4b/4e/5/rEstus; 6b/6.1/7y/rEstus-NI),
+  // nudged down together for a little more gap below ASAP3.
+  _fork_asap4b_asap4e: { dx: 0, dy: -34 },
+  asap5: { dx: 0, dy: 18 },
+  restus: { dx: 0, dy: 18 },
   _fork_quasar1_quasar2: { dx: -57, dy: 44 },
   _fork_archon1_archon2: { dx: -57, dy: -44 },
   _fork_quasar6_quasar6b: { dx: 0, dy: 44 },
@@ -109,8 +115,8 @@ const NODE_ONLY_SHIFTS: Record<string, { dx: number; dy: number }> = {
 const TOP_PADDING = 31;
 const NODE_RADIUS_LEAF = 8;
 const NODE_RADIUS_BRANCH = 5;
-const TOOLTIP_W = 170;
-const TOOLTIP_H = 130;
+const TOOLTIP_W = 260;
+const TOOLTIP_H = 430;
 
 interface LayoutNode {
   id: string;
@@ -764,6 +770,16 @@ export function FamilyTreePanel({
               <ExternalLink className="w-3 h-3 flex-shrink-0" />
             </a>
           )}
+
+          {hoverInfo.gevi.description && (
+            <p className="text-[11px] leading-snug text-ink/70 mb-1.5">
+              {hoverInfo.gevi.description}
+            </p>
+          )}
+
+          <div className="w-full h-64">
+            <DistributionRadar gevi={hoverInfo.gevi} expandHex />
+          </div>
 
         </div>
       )}
