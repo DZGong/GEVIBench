@@ -4,6 +4,9 @@ export interface GEVI {
   id: string;
   name: string;
   year: number;
+  /** Exact publication date (ISO YYYY-MM-DD), used as the primary sort key.
+   *  `year` remains the displayed/citation year; `date` drives ordering. */
+  date?: string;
   category: string;
   tags: string[];
   paper: string;

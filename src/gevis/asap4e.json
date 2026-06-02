@@ -2,6 +2,7 @@
   "id": "asap4e",
   "name": "ASAP4e",
   "year": 2023,
+  "date": "2023-07-06",
   "category": "VSD-cpGFP GEVI",
   "tags": [
     "cpGFP",
@@ -745,6 +746,13 @@
       "source": "doi:10.64898/2026.04.07.717088",
       "sourceFigure": "Fig. 1E",
       "proofread": false
+    },
+    {
+      "deltaF": 212,
+      "sign": "positive",
+      "source": "doi:10.1101/2024.06.21.599617",
+      "sourceFigure": "Table S1",
+      "proofread": false
     }
   ],
   "sensitivityData": [
@@ -759,6 +767,13 @@
       "source": "doi:10.1038/s41592-023-01913-z",
       "sourceFigure": "Extended Data Fig. 5c",
       "notes": "1ms FWHM AP waveform at 37\u00b0C",
+      "proofread": false
+    },
+    {
+      "deltaF": 33,
+      "source": "doi:10.1101/2024.06.21.599617",
+      "sourceFigure": "Table S1",
+      "notes": "3.5ms FWHM AP waveform, 100mV, room temperature, HEK293A cells",
       "proofread": false
     }
   ],

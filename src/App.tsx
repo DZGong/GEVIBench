@@ -157,7 +157,13 @@ function GEVIBenchApp() {
       }
 
       if (field === 'year') {
-        return (a.year - b.year) * multiplier;
+        // Sort by exact publication date (ISO YYYY-MM-DD) as the primary key so
+        // same-year sensors order by when they were actually published. Fall back
+        // to Jan 1 of the calendar year if a sensor has no recorded date.
+        const aKey = a.date ?? `${a.year}-01-01`;
+        const bKey = b.date ?? `${b.year}-01-01`;
+        if (aKey === bKey) return 0;
+        return (aKey < bKey ? -1 : 1) * multiplier;
       }
 
       // peakEx (λ ex/em) sort: chemigenetic GEVIs are clustered together at one

@@ -2,6 +2,7 @@
   "id": "forces1",
   "name": "FORCE1s",
   "year": 2026,
+  "date": "2026-04-10",
   "category": "VSD-cpGFP GEVI",
   "tags": ["cpGFP", "Green", "Positive-going", "Two-photon"],
   "paper": "bioRxiv 2026",
