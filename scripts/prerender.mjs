@@ -168,7 +168,32 @@ linkLines.push('</ul></div></noscript>');
 mainHtml = mainHtml.replace('</body>', linkLines.join('\n') + '\n</body>');
 writeFileSync(join(DIST, 'index.html'), mainHtml);
 
+// --- Generate sitemap.xml (auto-generated each build — do NOT hand-edit) ---
+// Static routes mirror the app's navigable views; GEVI detail pages are derived
+// from the JSON files so the sitemap can never drift out of sync with the data.
+const SITEMAP_STATIC_ROUTES = [
+  '/', '/methodology', '/contact',
+  '/family-tree', '/brightness-network', '/scatter-plot', '/ap-simulator',
+];
+const lastmod = new Date().toISOString().slice(0, 10);
+const sitemapPaths = [
+  ...SITEMAP_STATIC_ROUTES,
+  ...gevis
+    .map(g => g.id || basename(g._file, '.json'))
+    .sort((a, b) => a.localeCompare(b))
+    .map(id => `/gevi/${id}`),
+];
+const sitemapXml =
+  '<?xml version="1.0" encoding="UTF-8"?>\n' +
+  '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
+  sitemapPaths
+    .map(p => `  <url>\n    <loc>${BASE_URL}${p}</loc>\n    <lastmod>${lastmod}</lastmod>\n  </url>`)
+    .join('\n') +
+  '\n</urlset>\n';
+writeFileSync(join(DIST, 'sitemap.xml'), sitemapXml);
+
 // --- Summary ---
 const geviCount = gevis.length;
 const totalPages = geviCount + staticPages.length;
 console.log(`✓ Prerendered ${totalPages} pages (${geviCount} GEVIs + ${staticPages.length} static + homepage links)`);
+console.log(`✓ Generated sitemap.xml with ${sitemapPaths.length} URLs`);
