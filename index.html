@@ -30,6 +30,32 @@
   <meta name="twitter:description" content="Compare 47+ genetically encoded voltage indicators by speed, brightness, sensitivity, and more." />
   <meta name="twitter:image" content="https://gevibench.org/imgs/logo.svg" />
 
+  <!-- Structured data (JSON-LD) — helps Google recognize the GEVIBench brand -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://gevibench.org/#organization",
+        "name": "GEVIBench",
+        "url": "https://gevibench.org/",
+        "logo": "https://gevibench.org/imgs/logo.svg"
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://gevibench.org/#website",
+        "name": "GEVIBench",
+        "alternateName": "Genetically Encoded Voltage Indicator Benchmark",
+        "url": "https://gevibench.org/",
+        "description": "An open benchmark and interactive database for genetically encoded voltage indicators (GEVIs), comparing sensors by speed, brightness, sensitivity, dynamic range, and photostability.",
+        "inLanguage": "en",
+        "publisher": { "@id": "https://gevibench.org/#organization" }
+      }
+    ]
+  }
+  </script>
+
   <!-- Favicon -->
   <link rel="icon" href="/imgs/favicon.svg" type="image/svg+xml" />
 
