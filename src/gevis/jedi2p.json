@@ -753,6 +753,13 @@
       "note": "Peak -ΔF/F₀ per single action potential in cultured rat E18 hippocampal neurons at 33°C under 1P widefield illumination (Fig. 1j, n = 10).",
       "sourceFigure": "Fig. 1j",
       "proofread": false
+    },
+    {
+      "deltaF": 28.6,
+      "source": "doi:10.64898/2026.06.01.726307",
+      "note": "Mean single-spike response amplitude of JEDI-2P-Kv in Layer 2/3 cortical neurons of awake, head-fixed mice under ULoVE 2P microscopy (-28.6 ± 4.1% ΔF/F, mean ± SD; bright-to-dim, magnitude reported).",
+      "sourceFigure": "Fig. 3B",
+      "proofread": false
     }
   ],
   "brightnessData": [
