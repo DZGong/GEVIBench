@@ -152,7 +152,7 @@ let mainHtml = readFileSync(join(DIST, 'index.html'), 'utf-8');
 const linkLines = [
   '<noscript><div style="max-width:800px;margin:0 auto;padding:20px;font-family:sans-serif">',
   '<h1>GEVIBench — Genetically Encoded Voltage Indicator Benchmark</h1>',
-  '<p>Compare 47+ voltage indicators by speed, brightness, sensitivity, dynamic range, photostability, and popularity.</p>',
+  '<p>Compare 70 voltage indicators by speed, brightness, sensitivity, dynamic range, photostability, and popularity.</p>',
   '<h2>All Sensors</h2><ul>',
 ];
 for (const gevi of gevis) {
