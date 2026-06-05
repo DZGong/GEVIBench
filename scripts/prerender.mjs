@@ -141,6 +141,30 @@ const staticPages = [
     description: 'Request new GEVIs, report missing sensors, or share relevant papers and resources with the GEVIBench team.',
     noscriptHtml: '<h1>Contact & Contribute</h1><p>Request a new GEVI to be added, report missing sensors, or share relevant papers and resources.</p>',
   },
+  {
+    path: '/family-tree',
+    title: 'Family Tree — GEVIBench',
+    description: 'Interactive lineage tree of genetically encoded voltage indicators (GEVIs), showing how the ASAP, JEDI, ArcLight, Voltron, Arch, and other families are derived from one another.',
+    noscriptHtml: '<h1>GEVI Family Tree</h1><p>An interactive lineage tree showing the genetic ancestry of genetically encoded voltage indicators (GEVIs) — how each sensor was derived from its parent across the VSD-single, VSD-FRET, opsin, and chemigenetic branches.</p>',
+  },
+  {
+    path: '/brightness-network',
+    title: 'Brightness Network — GEVIBench',
+    description: 'Force-directed network comparing the molecular brightness of genetically encoded voltage indicators (GEVIs) relative to EGFP and to one another.',
+    noscriptHtml: '<h1>Brightness Network</h1><p>A force-directed graph comparing the molecular brightness of genetically encoded voltage indicators (GEVIs), anchored to EGFP and resolved through pairwise brightness measurements.</p>',
+  },
+  {
+    path: '/scatter-plot',
+    title: 'Performance Scatter Plot — GEVIBench',
+    description: 'Interactive scatter plot comparing genetically encoded voltage indicators (GEVIs) across performance metrics such as speed, sensitivity, dynamic range, brightness, and photostability.',
+    noscriptHtml: '<h1>Performance Scatter Plot</h1><p>An interactive scatter plot for comparing genetically encoded voltage indicators (GEVIs) across performance axes including kinetics, sensitivity, dynamic range, brightness, and photostability.</p>',
+  },
+  {
+    path: '/ap-simulator',
+    title: 'Action Potential Simulator — GEVIBench',
+    description: 'Simulate how different genetically encoded voltage indicators (GEVIs) report action potentials, comparing their kinetics and sensitivity side by side.',
+    noscriptHtml: '<h1>Action Potential Simulator</h1><p>Simulate and compare how genetically encoded voltage indicators (GEVIs) report neuronal action potentials, based on each sensor\'s measured kinetics and voltage sensitivity.</p>',
+  },
 ];
 
 for (const page of staticPages) {
