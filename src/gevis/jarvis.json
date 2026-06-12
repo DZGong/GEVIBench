@@ -643,6 +643,7 @@
       "off": 1.88,
       "temperature": "25°C",
       "source": "doi:10.1016/j.neuron.2025.12.014",
+      "note": "Time constants τ = t½/ln2 from monoexponential half-rise times (Fig. 1D: on 1.9 ± 0.1 ms, off 1.3 ± 0.2 ms) for a 100-mV step in ND7/23 cells under 1P wide-field illumination, voltage-clamp at room temperature (ΔF/F₀ at 1 kHz): τ_on = 2.74 ms, τ_off = 1.88 ms.",
       "sourceFigure": "Fig. 1D",
       "proofread": false
     }
@@ -651,15 +652,19 @@
     {
       "deltaF": 29,
       "sign": "positive",
+      "modality": "1P",
       "source": "doi:10.1016/j.neuron.2025.12.014",
-      "sourceFigure": "Fig. 1E",
+      "note": "ΔF/F₀ = 0.29 ± 0.08 for a 100-mV step (−70 to +30 mV, 100 ms) in ND7/23 cells under 1P wide-field illumination (470 nm LED, 10 mW/mm², 50 Hz), whole-cell voltage clamp. Same endpoint visible at +30 mV on the Fig. 1E sensitivity curve.",
+      "sourceFigure": "Fig. 1C(i)",
       "proofread": false
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 25,
+      "modality": "1P",
       "source": "doi:10.1016/j.neuron.2025.12.014",
+      "note": "ΔF/F₀ per AP = 0.25 ± 0.02 at 1 kHz acquisition in organotypic hippocampal slices under 1P wide-field illumination (470 nm LED, 16 mW/mm²). Rises with frame rate: 0.20 (0.5 kHz), 0.25 (1 kHz), 0.28 (2 kHz).",
       "sourceFigure": "Fig. 1G(ii)",
       "proofread": false
     }
@@ -679,7 +684,9 @@
       "brightnessRemaining": 99,
       "illumination": "10 mW/mm\u00b2",
       "duration": "1 min",
+      "modality": "1P",
       "source": "doi:10.1016/j.neuron.2025.12.014",
+      "note": "Read from the topmost (Jarvis, 10 mW/mm\u00b2) bleach curve in CHO cells under 1P wide-field illumination (470 nm LED), F/F\u2080 measured over 240 s; at 1 min Jarvis retains ~99% (far more photostable than pAce and JEDI-2P).",
       "sourceFigure": "Fig. 1F",
       "proofread": false
     }

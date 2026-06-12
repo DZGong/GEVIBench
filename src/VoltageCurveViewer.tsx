@@ -88,6 +88,45 @@ export function generateVoltageCurve(type: 'opsin' | 'fp' | 'fret' | 'red' | 'ch
   return data;
 }
 
+// Estimate sensitivity (|ΔF/F| over a 100-mV step) directly from a measured curve.
+// Used for the caption whenever real custom data exists, so it no longer relies on the
+// hand-maintained `slope` field. Reports the steepest 100-mV window across the curve;
+// if the curve spans less than 100 mV, falls back to the full ΔF/F range.
+export function sensitivityFromCurve(points: VoltagePoint[]): number {
+  if (!points.length) return 0;
+  const sorted = [...points].sort((a, b) => a.voltage - b.voltage);
+  const minV = sorted[0].voltage;
+  const maxV = sorted[sorted.length - 1].voltage;
+
+  // Linear interpolation of ΔF/F at an arbitrary voltage, clamped to the data range.
+  const interp = (v: number): number => {
+    if (v <= minV) return sorted[0].deltaF;
+    if (v >= maxV) return sorted[sorted.length - 1].deltaF;
+    for (let i = 1; i < sorted.length; i++) {
+      if (v <= sorted[i].voltage) {
+        const a = sorted[i - 1];
+        const b = sorted[i];
+        const t = (v - a.voltage) / (b.voltage - a.voltage);
+        return a.deltaF + t * (b.deltaF - a.deltaF);
+      }
+    }
+    return sorted[sorted.length - 1].deltaF;
+  };
+
+  // Span < 100 mV: best available estimate is the full ΔF/F range.
+  if (maxV - minV < 100) {
+    const ys = sorted.map(p => p.deltaF);
+    return Math.round(Math.abs(Math.max(...ys) - Math.min(...ys)));
+  }
+
+  // Otherwise report the steepest 100-mV window.
+  let maxStep = 0;
+  for (let v = minV; v <= maxV - 100 + 1e-6; v += 1) {
+    maxStep = Math.max(maxStep, Math.abs(interp(v + 100) - interp(v)));
+  }
+  return Math.round(maxStep);
+}
+
 export function VoltageCurveViewer({ voltageData, geviName }: VoltageCurveViewerProps) {
   const [hoverVoltage, setHoverVoltage] = useState<number | null>(null);
   const [insetExpanded, setInsetExpanded] = useState(false);
@@ -227,8 +266,14 @@ export function VoltageCurveViewer({ voltageData, geviName }: VoltageCurveViewer
     return '#6b7280'; // gray for zero
   };
 
-  // Calculate sensitivity (% deltaF per 100mV)
-  const sensitivity = config ? Math.abs(config.slope) : 15;
+  // Sensitivity (% |ΔF/F| per 100 mV). Prefer the measured curve; fall back to the
+  // legacy `slope` field only when a GEVI has no custom data.
+  const sensitivity = useMemo(() => {
+    if (voltageCustom?.voltage?.length && computedVoltage?.length) {
+      return sensitivityFromCurve(computedVoltage);
+    }
+    return config ? Math.abs(config.slope) : 15;
+  }, [voltageCustom, computedVoltage, config]);
 
   if (!config || !computedVoltage) {
     return (

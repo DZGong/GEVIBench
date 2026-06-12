@@ -119,11 +119,11 @@
   },
   "kinetics": [
     {
-      "on": 0.51,
-      "off": 0.61,
+      "on": 0.69,
+      "off": 1.18,
       "temperature": "22°C",
       "source": "doi:10.1126/science.abm8797",
-      "note": "Bi-exponential fast components at 22°C in spiking HEK cells (82% on, 78% off); slow τ_on=1.5 ms, slow τ_off=3.2 ms (Table S1)",
+      "note": "Amplitude-weighted mean of the bi-exponential fit at 22°C in spiking HEK cells: τ_on = 0.82×0.51 + 0.18×1.5 = 0.69 ms; τ_off = 0.78×0.61 + 0.22×3.2 = 1.18 ms (fast/slow components and amplitudes from Table S1).",
       "sourceFigure": "Table S1",
       "proofread": false
     }
@@ -131,19 +131,63 @@
   "dynamicRangeData": [
     {
       "deltaF": 30.5,
+      "modality": "1P",
       "sign": "positive",
       "source": "doi:10.1126/science.abm8797",
       "note": "ΔF/F per 100 mV step in spiking HEK cells at 22°C (Table S1); main text reports 36.6 ± 0.7% ΔF/F per 120 mV step (n=11 cells)",
       "sourceFigure": "Table S1",
+      "proofread": false
+    },
+    {
+      "deltaF": 41,
+      "sign": "positive",
+      "modality": "1P",
+      "source": "doi:10.1016/j.neuron.2025.12.014",
+      "note": "ΔF/F₀ = 0.41 ± 0.14 for a 100-mV step (−70 to +30 mV, 100 ms) in ND7/23 cells under 1P wide-field illumination (470 nm LED, 10 mW/mm², 50 Hz), whole-cell voltage clamp. Measured alongside Jarvis (0.29) and JEDI-2P (−0.46).",
+      "sourceFigure": "Fig. 1C(i)",
+      "proofread": false
+    },
+    {
+      "deltaF": 43.5,
+      "sign": "positive",
+      "modality": "1P",
+      "source": "doi:10.25378/janelia.21534411",
+      "note": "ΔF/F read from the pAce (green) F-V trace between -70 mV (baseline 0) and +30 mV in the Janelia patch-assay F-V curve figure (1P widefield, -20 mV steps, n=7); full sweep -110 to +50 mV spans ~-13% to +50%.",
+      "sourceFigure": "Fig. 1",
       "proofread": false
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 10.7,
+      "modality": "1P",
       "source": "doi:10.1126/science.abm8797",
       "note": "ΔF/F per single action potential in PPL1-γ2α'1 dopaminergic neurons in Drosophila (n=87 spikes)",
       "sourceFigure": "Fig. 1I",
+      "proofread": false
+    },
+    {
+      "deltaF": 43,
+      "modality": "1P",
+      "source": "doi:10.1016/j.neuron.2025.12.014",
+      "note": "ΔF/F₀ per AP = 0.43 ± 0.04 at 1 kHz acquisition in organotypic hippocampal slices under 1P wide-field illumination (470 nm LED, 16 mW/mm²). Rises with frame rate: 0.33 (0.5 kHz), 0.43 (1 kHz), 0.51 (2 kHz). Measured alongside Jarvis.",
+      "sourceFigure": "Fig. 1G(ii)",
+      "proofread": false
+    },
+    {
+      "deltaF": 19.9,
+      "modality": "1P",
+      "source": "doi:10.1126/sciadv.ads1807",
+      "note": "pAce: 19.9 ± 1.8% ΔF/F0 per AP in cultured rat hippocampal neurons, 1P epifluorescence, measured in the HVI+ paper as the spectrally similar green positive-going reference.",
+      "sourceFigure": "Fig. 2E",
+      "proofread": false
+    },
+    {
+      "deltaF": 19.5,
+      "modality": "1P",
+      "source": "doi:10.25378/janelia.21534411",
+      "note": "Median single-AP ΔF/F0 read from the pAce (green) boxplot in the Janelia patch-assay spike-detection figure (1P widefield, PatcherBot cultured neurons, n=7); box spans ~17-22%.",
+      "sourceFigure": "Fig. 2",
       "proofread": false
     }
   ],
@@ -165,6 +209,24 @@
       "source": "doi:10.1126/science.abm8797",
       "note": "From photobleaching curve in HEK cells under continuous illumination (Fig. S11B); pAce supported extended 30-min continuous imaging at ~5 mW/mm² with stable d' (Fig. S14)",
       "sourceFigure": "Fig. S11B",
+      "proofread": false
+    },
+    {
+      "brightnessRemaining": 20,
+      "illumination": "10 mW/mm²",
+      "duration": "~42 min",
+      "modality": "1P",
+      "source": "doi:10.1101/2025.05.30.657123",
+      "note": "pAce lost 80% of initial fluorescence (retained ~20%) under continuous 10 mW/mm² wide-field illumination in HeLa cells; measured as a reference alongside ElectraON/ElectraOFF in the mBaoJin GEVI paper",
+      "sourceFigure": "Fig. 1h",
+      "proofread": false
+    }
+  ],
+  "twoPhoton": [
+    {
+      "compatible": true,
+      "source": "doi:10.1016/j.neuron.2025.12.014",
+      "note": "Demonstrated 2P-compatible: scanless holographic 2P voltage imaging detected APs in organotypic slices and high-contrast AP detection in awake mouse cortex; FRET-opsin sensors showed improved performance with low-irradiance scanless illumination.",
       "proofread": false
     }
   ],
@@ -217,15 +279,6 @@
       "year": 2025,
       "sample": "Mouse, cerebellar cortex, in vivo",
       "url": "https://doi.org/10.1016/j.celrep.2025.116148",
-      "proofread": false
-    },
-    {
-      "title": "Prefrontal gamma oscillations engage dynamic cell type-specific configurations to support flexible behavior",
-      "authors": "Phensy AJ, Hagopian LL, Costello CM, Haziza S, Ghenand O, Zhang Y, Schnitzer MJ, Sohal V",
-      "journal": "bioRxiv",
-      "year": 2025,
-      "sample": "Mouse, medial prefrontal cortex, in vivo",
-      "url": "https://doi.org/10.1101/2024.03.08.584173",
       "proofread": false
     },
     {

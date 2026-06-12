@@ -629,10 +629,20 @@
   ],
   "dynamicRangeData": [
     {
-      "deltaF": 192,
+      "deltaF": 42,
       "sign": "positive",
+      "modality": "1P",
       "source": "doi:10.64898/2026.06.01.726307",
-      "note": "Steady-state ΔF/F from -120 to +90 mV (210-mV span) under whole-cell voltage clamp with 2P illumination at 1050 nm (mean ± 95% CI 192 ± 25%). Suprathreshold window (-40 to +30 mV) gives 130 ± 20%.",
+      "note": "1P steady-state ΔF/F from -70 to +30 mV (100-mV step), measured by whole-cell voltage clamp combined with 1P widefield imaging at ~22°C (median ~42%, range ~22-58%, n = 5-11 HEK293A cells).",
+      "sourceFigure": "Fig. 1H",
+      "proofread": false
+    },
+    {
+      "deltaF": 130,
+      "sign": "positive",
+      "modality": "2P",
+      "source": "doi:10.64898/2026.06.01.726307",
+      "note": "2P steady-state ΔF/F at +30 mV relative to -70 mV baseline (100-mV step), read from the F-V curve in Fig. 2D under whole-cell voltage clamp with 2P illumination at 1050 nm; matches the 1P measurement window for direct comparison and equals the paper's stated suprathreshold dynamic range (130 ± 20% ΔF/F, mean ± 95% CI). The full -120 to +90 mV range (210-mV span) gives 192 ± 25%.",
       "sourceFigure": "Fig. 2D",
       "proofread": false
     }
@@ -640,9 +650,18 @@
   "sensitivityData": [
     {
       "deltaF": 40,
+      "modality": "2P",
       "source": "doi:10.64898/2026.06.01.726307",
-      "note": "Peak ΔF/F response to an isolated single-action-potential waveform replayed under voltage clamp, imaged by 2P resonant scanning at 440 Hz (n = 10 cells).",
+      "note": "Peak ΔF/F response to an isolated single-action-potential waveform replayed under voltage clamp, imaged by 2P resonant scanning at 440 Hz in vitro (n = 10 cells).",
       "sourceFigure": "Fig. 2G",
+      "proofread": false
+    },
+    {
+      "deltaF": 68.9,
+      "modality": "2P",
+      "source": "doi:10.64898/2026.06.01.726307",
+      "note": "Mean in vivo single-spike response amplitude of VADER1-tKv in Layer 2/3 cortical neurons of awake, head-fixed mice under ULoVE 2P microscopy at 1045 nm (68.9 ± 16.5% ΔF/F, mean ± SD, n = 20 cells); ~2.5-fold larger than JEDI-2P-Kv.",
+      "sourceFigure": "Fig. 3B",
       "proofread": false
     }
   ],
@@ -653,6 +672,27 @@
       "source": "doi:10.64898/2026.06.01.726307",
       "note": "2P basal brightness at -70 mV, corrected for relative 2P excitation efficiency at 1050 nm. Relative brightness normalized to VADER1 = 1.0; FlicR2 = 1.18 (n = 24 wells, >100 HEK-Kir2.1 cells each), so VADER1/FlicR2 = 0.85.",
       "sourceFigure": "Fig. 2C",
+      "proofread": false
+    }
+  ],
+  "photostabilityData": [
+    {
+      "brightnessRemaining": 60,
+      "illumination": "22.5 mW at 1045 nm (ULoVE 2P)",
+      "duration": "10 min",
+      "modality": "2P",
+      "source": "doi:10.64898/2026.06.01.726307",
+      "note": "In vivo 2P ULoVE photobleaching: baseline fluorescence remained at ~60% of its initial level after 10 min of continuous illumination at 22.5 mW measured at the brain surface (1045 nm). Bleaching was biexponential with a fast component comparable to JEDI-2P; slow-phase power-law slope -0.135 (vs JEDI-2P -0.056). NOTE: power-only (not an mW/mm² irradiance) and 2P, so not directly comparable to the 1-min/100-mW-per-mm² 1P standard.",
+      "sourceFigure": "Fig. 3F",
+      "proofread": false
+    }
+  ],
+  "twoPhoton": [
+    {
+      "compatible": true,
+      "source": "doi:10.64898/2026.06.01.726307",
+      "note": "First fully genetically encoded red GEVI demonstrating robust 2P voltage imaging in vivo. Reliable single-spike detection under both ULoVE (~1045 nm) and resonant-scanning 2P microscopy in mouse cortex L2/3 and L5; 1040-1130 nm excitation exceeds 80% of maximal brightness, with peaks at 1055 and 1120 nm.",
+      "sourceFigure": "Fig. 2B",
       "proofread": false
     }
   ],

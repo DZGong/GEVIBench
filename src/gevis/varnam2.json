@@ -511,11 +511,11 @@
   },
   "kinetics": [
     {
-      "on": 0.5,
-      "off": 0.48,
+      "on": 0.95,
+      "off": 1.21,
       "temperature": "22°C",
       "source": "doi:10.1126/science.abm8797",
-      "note": "Bi-exponential fast components in spiking HEK cells (68% on, 72% off); slow τ_on=1.9 ms, slow τ_off=3.1 ms (Table S1)",
+      "note": "Amplitude-weighted mean of the bi-exponential fit at 22°C in spiking HEK cells (Table S1): τ_on = 0.68×0.5 + 0.32×1.9 = 0.95 ms; τ_off = 0.72×0.48 + 0.28×3.1 = 1.21 ms (fast amp 68% on / 72% off; slow τ_on=1.9 ms, slow τ_off=3.1 ms). Previously stored only the fast component (0.50/0.48).",
       "sourceFigure": "Table S1",
       "proofread": false
     }
@@ -523,6 +523,7 @@
   "dynamicRangeData": [
     {
       "deltaF": -19.1,
+      "modality": "1P",
       "sign": "negative",
       "source": "doi:10.1126/science.abm8797",
       "note": "ΔF/F per 100 mV step in spiking HEK cells at 22°C (Table S1). Also reported as -22.9 ± 0.7% per 120 mV step in Fig. 1C (n=13 cells).",
@@ -533,8 +534,9 @@
   "sensitivityData": [
     {
       "deltaF": 7.3,
+      "modality": "1P",
       "source": "doi:10.1126/science.abm8797",
-      "note": "ΔF/F per single AP in V1 VIP+ interneurons in awake mice (mean ± SEM = 7.3 ± 1.2%, n=49 spikes)",
+      "note": "Negative-going ΔF/F per single AP (magnitude stored): −7.3 ± 1.2% (mean ± SEM, n=49 spikes) recorded in PPL1-γ2α'1 dopaminergic neurons in Drosophila (main text; the per-spike values were obtained from the fly recordings, not the V1 VIP+ mouse traces shown in Fig. 1I).",
       "sourceFigure": "Fig. 1I",
       "proofread": false
     }
@@ -560,6 +562,11 @@
       "proofread": false
     }
   ],
+  "addgene": {
+    "id": "195520",
+    "url": "https://www.addgene.org/195520/",
+    "proofread": false
+  },
   "researchPapers": [
     {
       "title": "Dual-polarity voltage imaging of the concurrent dynamics of multiple neuron types",
@@ -568,6 +575,24 @@
       "year": 2022,
       "sample": "HEK cells, in vitro; Drosophila PPL1-α'2α2 dopaminergic neurons, in vivo; mouse hippocampus CA1 EC-projecting pyramidal neurons, in vivo",
       "url": "https://doi.org/10.1126/science.abm8797",
+      "proofread": false
+    },
+    {
+      "title": "Imaging high-frequency voltage dynamics in multiple neuron classes of behaving mammals",
+      "authors": "Haziza S, Chrapkiewicz R, Zhang Y, Kruzhilin V, Li J, Delamare G, Swanson R, Buzsáki G, Kannan M, Vasan G, Lin MZ, Zeng H, Daigle T, Schnitzer MJ",
+      "journal": "Cell",
+      "year": 2025,
+      "sample": "Mouse, visual cortex (pyramidal neurons) and hippocampus, in vivo; dual-cell-type TEMPO imaging with VARNAM2 in pyramidal cells and ASAP3 in PV cells",
+      "url": "https://doi.org/10.1016/j.cell.2025.06.028",
+      "proofread": false
+    },
+    {
+      "title": "Prefrontal gamma oscillations engage dynamic cell type-specific configurations to support flexible behavior",
+      "authors": "Phensy AJ, Hagopian LL, Costello CM, Haziza S, Ghenand O, Zhang Y, Schnitzer MJ, Sohal V",
+      "journal": "bioRxiv",
+      "year": 2025,
+      "sample": "Mouse, medial prefrontal cortex, in vivo; VARNAM2 expressed in PFC→MD projection neurons (dual-color with Ace-mNeon2 in PV interneurons)",
+      "url": "https://doi.org/10.1101/2024.03.08.584173",
       "proofread": false
     }
   ]

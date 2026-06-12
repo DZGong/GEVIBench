@@ -24,12 +24,17 @@ export interface GEVI {
   dynamicRangeData?: {
     deltaF: number;
     sign: 'positive' | 'negative';
+    responseType?: 'peak' | 'steady-state';  // 'peak' renders a gold badge; steady-state is the default (unlabeled)
+    modality?: '1P' | '2P';  // excitation modality; 1P is the primary list/sort value
+    dye?: string;  // chemigenetic GEVIs only: the dye this measurement used (e.g. "Cy3b", "JF525")
     source: string;
     sourceFigure?: string;
     proofread?: boolean;
   }[];
   sensitivityData?: {
     deltaF: number;  // ΔF/F % per action potential
+    modality?: '1P' | '2P';  // excitation modality; 1P is the primary list/sort value
+    dye?: string;  // chemigenetic GEVIs only: the dye this measurement used (e.g. "Cy3b", "JF525")
     source: string;
     sourceFigure?: string;
     proofread?: boolean;
@@ -51,6 +56,7 @@ export interface GEVI {
     brightnessRemaining: number;
     illumination: string;
     duration: string;
+    modality?: '1P' | '2P';  // excitation modality; display-only label (no primary-value logic)
     source: string;
     sourceFigure?: string;
     proofread?: boolean;

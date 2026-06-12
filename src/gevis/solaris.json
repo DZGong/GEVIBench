@@ -7,7 +7,7 @@
   "tags": [
     "Ace opsin",
     "cpHaloTag",
-    "Far-red"
+    "Red"
   ],
   "paper": "bioRxiv 2024",
   "paperUrl": "https://doi.org/10.1101/2024.02.02.578569",
@@ -15,29 +15,35 @@
   "parentId": "voltron",
   "kinetics": [
     {
-      "on": 1.75,
-      "off": 1.75,
+      "on": 2.53,
+      "off": 2.53,
       "temperature": "25°C",
       "source": "doi:10.1101/2024.02.02.578569",
-      "sourceFigure": "Fig. 1B",
-      "note": "Paper reports only a single response half-time τ_1/2 = 1.75 ± 0.11 ms for depolarizing step; separate τ_on and τ_off not resolved",
+      "sourceFigure": "Main text",
+      "note": "Paper reports only a single monoexponential response half-time τ1/2 = 1.75 ± 0.11 ms for the depolarizing step (room temperature, 1058 Hz frame rate); converted to a time constant via τ = t½/ln2 = 1.75/0.693 = 2.53 ms. Separate activation/deactivation time constants were not resolved, so on and off use the same symmetric value.",
       "proofread": false
     }
   ],
   "dynamicRangeData": [
     {
-      "deltaF": -61,
+      "deltaF": -53,
       "sign": "negative",
+      "modality": "1P",
+      "dye": "JF585",
       "source": "doi:10.1101/2024.02.02.578569",
-      "sourceFigure": "Fig. 1B",
+      "sourceFigure": "Fig. 1C",
+      "note": "ΔF/F0 per 100 mV step (-70 to +30 mV), read off the Solaris585 F-V curve in Fig. 1C; the conclusions state Solaris585 has -53% ΔF/F0 per 100 mV. The headline -60.6 ± 1.6% value (n = 5 cells, 594 nm laser at 1.72 W/cm²) cited in the main text/Fig. 1B is for the wider -80 to +20 mV step, not the 100-mV DB convention. HEK293T whole-cell voltage clamp, one-photon widefield.",
       "proofread": false
     }
   ],
   "sensitivityData": [
     {
       "deltaF": -28.1,
+      "modality": "1P",
+      "dye": "JF585",
       "source": "doi:10.1101/2024.02.02.578569",
       "sourceFigure": "Fig. 2B",
+      "note": "ΔF/F0 = -28.1 ± 1.3% per single AP (n = 7 cells), Solaris585 in cultured rat hippocampal neurons, current-clamp evoked spikes imaged at 484 Hz under one-photon 594 nm illumination. More than 2-fold higher than Voltron2585 (-12.3 ± 0.7%) under matched conditions.",
       "proofread": false
     }
   ],
@@ -764,15 +770,15 @@
         40
       ],
       "deltaF": [
-        17,
+        33,
         7,
         0,
-        -8,
-        -20,
-        -31,
-        -42,
+        -13,
+        -27,
+        -38,
+        -45,
         -51,
-        -57
+        -55
       ]
     },
     "additionalCurves": [
@@ -790,15 +796,15 @@
           40
         ],
         "deltaF": [
-          12,
-          5,
+          32,
+          6,
           0,
-          -6,
-          -15,
-          -24,
-          -33,
-          -41,
-          -48
+          -13,
+          -27,
+          -38,
+          -45,
+          -50,
+          -54
         ],
         "proofread": false
       },
@@ -816,15 +822,15 @@
           40
         ],
         "deltaF": [
-          8,
-          3,
+          31,
+          6,
           0,
-          -4,
-          -10,
-          -16,
-          -23,
-          -29,
-          -34
+          -13,
+          -27,
+          -38,
+          -45,
+          -50,
+          -54
         ],
         "proofread": false
       },
@@ -842,15 +848,15 @@
           40
         ],
         "deltaF": [
-          5,
-          2,
+          34,
+          6,
           0,
-          -2,
-          -5,
-          -9,
           -13,
-          -17,
-          -21
+          -26,
+          -37,
+          -44,
+          -49,
+          -53
         ],
         "proofread": false
       },
@@ -868,13 +874,13 @@
           40
         ],
         "deltaF": [
-          6,
-          2,
+          9,
+          4,
           0,
-          -3,
-          -7,
-          -12,
-          -17,
+          -8,
+          -13,
+          -18,
+          -20,
           -21,
           -24
         ],

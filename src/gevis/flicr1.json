@@ -19,6 +19,9 @@
     "peakEx": 570,
     "peakEm": 597,
     "name": "FlicR1",
+    "source": "FPbase: mApple",
+    "sourceFigure": "FPbase",
+    "note": "FlicR1 is not in FPbase; the displayed curve is the parent fluorophore mApple (the FlicR reporter cpmApple is a circular permutation of mApple). The stored excitation/emission arrays are the FPbase mApple spectrum verbatim (ex 568 nm / em 592 nm). FlicR1's own reported peaks (ex 570 nm / em 597 nm; Abdelfattah et al. 2016, measured on a Safire2 plate reader / DU-800 spectrophotometer) are slightly red-shifted from the mApple proxy curve.",
     "custom": {
       "minEx": 300,
       "excitation": [
@@ -620,17 +623,19 @@
   },
   "kinetics": [
     {
-      "on": 3,
-      "off": 2.8,
+      "on": 6.8,
+      "off": 7.4,
       "temperature": "22°C",
+      "note": "Biexponential response to a -70→+30 mV step in HEK293 cells (Table 1). Amplitude-weighted means: activation τon = 0.90×3.0 + 0.10×41 = 6.8 ms (τfast 3.0 ms 90%, τslow 41 ms 10%); deactivation τoff = 0.70×2.8 + 0.30×18 = 7.36 ms (τfast 2.8 ms 70%, τslow 18 ms 30%). Previously stored the fast components only (3.0 / 2.8 ms), which understated the response.",
       "source": "doi:10.1523/JNEUROSCI.3590-15.2016",
       "sourceFigure": "Table 1",
       "proofread": false
     },
     {
-      "on": 0.74,
-      "off": 0.93,
+      "on": 3.4,
+      "off": 3.7,
       "temperature": "34°C",
+      "note": "Biexponential response to a -70→+30 mV step in HEK293 cells (Table 1). Amplitude-weighted means: activation τon = 0.90×0.74 + 0.10×27 = 3.37 ms (τfast 0.74 ms 90%, τslow 27 ms 10%); deactivation τoff = 0.79×0.93 + 0.21×14 = 3.67 ms (τfast 0.93 ms 79%, τslow 14 ms 21%). Previously stored the fast components only (0.74 / 0.93 ms).",
       "source": "doi:10.1523/JNEUROSCI.3590-15.2016",
       "sourceFigure": "Table 1",
       "proofread": false
@@ -640,6 +645,7 @@
     {
       "deltaF": 6.6,
       "sign": "positive",
+      "modality": "1P",
       "source": "doi:10.1523/JNEUROSCI.3590-15.2016",
       "sourceFigure": "Fig. 3D",
       "proofread": false
@@ -647,6 +653,7 @@
     {
       "deltaF": 2.54,
       "sign": "positive",
+      "modality": "1P",
       "source": "doi:10.1523/ENEURO.0060-20.2020",
       "sourceFigure": "Fig. 2D",
       "proofread": false
@@ -655,12 +662,14 @@
   "sensitivityData": [
     {
       "deltaF": 2.6,
+      "modality": "1P",
       "source": "doi:10.1523/JNEUROSCI.3590-15.2016",
       "sourceFigure": "Fig. 5D",
       "proofread": false
     },
     {
       "deltaF": 1.4,
+      "modality": "1P",
       "source": "doi:10.1038/s41598-019-52370-8",
       "sourceFigure": "Fig. 3d",
       "proofread": false
@@ -685,8 +694,10 @@
   "photostabilityData": [
     {
       "brightnessRemaining": 67,
-      "illumination": "10 mW/mm²",
+      "illumination": "100 mW/mm²",
       "duration": "1 min",
+      "modality": "1P",
+      "note": "Photobleaching time constant τ = 150 ± 10 s (single-exponential fit, Fig. 3J) under continuous 561 nm illumination at 10 W/cm² = 100 mW/mm²; fraction remaining after 1 min = exp(-60/150) = 67%. Corrected illumination from a prior '10 mW/mm²' (a 10× unit error: 1 W/cm² = 10 mW/mm², so 10 W/cm² = 100 mW/mm²). 100 mW/mm² / 1 min matches the reference normalization standard, so no rescaling is applied.",
       "source": "doi:10.1523/JNEUROSCI.3590-15.2016",
       "sourceFigure": "Fig. 3I",
       "proofread": false

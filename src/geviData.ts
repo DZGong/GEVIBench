@@ -98,6 +98,16 @@ function selectBestKinetics(gevi: GEVI): { on: number; off: number } | null {
   return { on: avgOn, off: avgOff };
 }
 
+// For metrics that can be measured under one-photon or two-photon excitation
+// (ΔF/F per AP, ΔF/F per 100 mV), the 1P value is the primary number used in
+// the list and for sorting. Prefer entries explicitly tagged modality:"1P";
+// if none are tagged 1P, fall back to all entries — so legacy data with no
+// modality tag behaves exactly as before.
+function preferOnePhoton<T extends { modality?: string }>(entries: T[]): T[] {
+  const oneP = entries.filter(e => e.modality === '1P');
+  return oneP.length > 0 ? oneP : entries;
+}
+
 // Compute raw derived values used for display + sorting in the scoreless UI.
 // No 0-100 score mapping — these are measured quantities.
 function computeDisplayValues(gevi: GEVI, bRelMap: Map<string, number>) {
@@ -107,10 +117,10 @@ function computeDisplayValues(gevi: GEVI, bRelMap: Map<string, number>) {
   const displayTauOff = bestKinetics?.off ?? null;
   const displayTauSum = bestKinetics ? bestKinetics.on + bestKinetics.off : null;
 
-  const drEntries = (gevi.dynamicRangeData ?? []).map(d => Math.abs(d.deltaF)).filter(v => v > 0);
+  const drEntries = preferOnePhoton(gevi.dynamicRangeData ?? []).map(d => Math.abs(d.deltaF)).filter(v => v > 0);
   const displayDynamicRange = median(drEntries);
 
-  const sensEntries = (gevi.sensitivityData ?? []).map(d => Math.abs(d.deltaF)).filter(v => v > 0);
+  const sensEntries = preferOnePhoton(gevi.sensitivityData ?? []).map(d => Math.abs(d.deltaF)).filter(v => v > 0);
   const displaySensitivity = median(sensEntries);
 
   let displayPhotostab: number | null;
@@ -272,6 +282,15 @@ function getRepresentativeValue(gevi: GEVI, key: DistributionAxisKey): number | 
     if (!best) return null;
     const v = key === 'tauOn' ? best.on : best.off;
     return v > 0 ? v : null;
+  }
+  // ΔF/F per AP and per 100 mV: 1P is the primary value (matches the list), so
+  // the population backdrop uses the 1P-preferred median too. The per-GEVI
+  // "stars" still show every raw entry via getRawEntriesForGEVI.
+  if (key === 'dynamicRange') {
+    return median(preferOnePhoton(gevi.dynamicRangeData ?? []).map(d => Math.abs(d.deltaF)).filter(v => v > 0));
+  }
+  if (key === 'sensitivity') {
+    return median(preferOnePhoton(gevi.sensitivityData ?? []).map(d => Math.abs(d.deltaF)).filter(v => v > 0));
   }
   return median(getRawEntriesForGEVI(gevi, key));
 }

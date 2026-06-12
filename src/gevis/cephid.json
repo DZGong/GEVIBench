@@ -519,6 +519,9 @@
         0.01
       ]
     },
+    "source": "doi:10.1126/sciadv.adi4208",
+    "sourceFigure": "Fig. S2",
+    "note": "Cepheid1b uses the RFP donor mScarlet-I1.4 (an engineered brighter variant of mScarlet-I) inserted into ECL1 of AceD81C rhodopsin. Excitation max 570 nm, emission max 600 nm per the paper's mScarlet-I1.4 spectra (Fig. S2; Table S5). Custom excitation/emission curves are the mScarlet-I/mScarlet-I1.4 donor profile (asymmetric emission with a long red tail and a vibronic excitation shoulder).",
     "proofread": false
   },
   "voltage": {
@@ -585,31 +588,42 @@
   },
   "kinetics": [
     {
-      "on": 1.88,
-      "off": 2.89,
-      "temperature": "room temperature",
+      "on": 2.71,
+      "off": 4.17,
+      "temperature": "25°C",
       "source": "doi:10.1126/sciadv.adi4208",
       "sourceFigure": "Fig. S7",
-      "note": "Cepheid1b responding time for depolarization (-70 to +30 mV) and repolarization (+30 to -70 mV) in HEK293T cells",
+      "note": "Cepheid1b in HEK293T cells (room temperature, 1058 Hz frame rate). Fig. S7B reports response half-times ('responding time') of t½ = 1.88 ms for depolarization (-70 to +30 mV) and t½ = 2.89 ms for repolarization (+30 to -70 mV); the Solaris paper (same lab) confirms Cepheid1b depolarizing τ1/2 = 1.9 ± 0.1 ms. Converted to time constants via τ = t½/ln2 = 1.443·t½ → on 2.71 ms, off 4.17 ms.",
+      "proofread": false
+    },
+    {
+      "on": 2.74,
+      "off": 2.74,
+      "temperature": "25°C",
+      "note": "Cepheid1b: single response half-time τ1/2 = 1.9 ± 0.1 ms in the depolarizing step (room temperature, HEK293T), converted to τ = t½/ln2 = 2.74 ms; separate on/off not resolved. Measured in the Solaris paper as a comparator to Solaris585.",
+      "source": "doi:10.1101/2024.02.02.578569",
+      "sourceFigure": "Main text",
       "proofread": false
     }
   ],
   "dynamicRangeData": [
     {
-      "deltaF": -32.9,
+      "deltaF": -31,
       "sign": "negative",
+      "modality": "1P",
       "source": "doi:10.1126/sciadv.adi4208",
-      "sourceFigure": "Fig. 1B",
-      "note": "Cepheid1b per 100 mV step (-70 to +30 mV) in HEK293T cells",
+      "sourceFigure": "Fig. S7A",
+      "note": "Cepheid1b sensitivity per 100 mV step (-70 to +30 mV) in HEK293T cells under whole-cell voltage clamp (widefield 1P, 1058 Hz); Fig. S7A bar mean ≈31%. The main text/Fig. 1B value of -32.9 ± 1.0% (n = 6 cells) is the wider -70 to +40 mV (110 mV) step and is overstated for a 100 mV window.",
       "proofread": false
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 12.1,
+      "modality": "1P",
       "source": "doi:10.1126/sciadv.adi4208",
       "sourceFigure": "Fig. 1C",
-      "note": "Cepheid1b in cultured rat hippocampal neurons",
+      "note": "Cepheid1b -12.1 ± 0.8% per AP in cultured rat hippocampal neurons (current clamp, widefield 1P imaging at 484 Hz)",
       "proofread": false
     }
   ],
@@ -625,12 +639,13 @@
   ],
   "photostabilityData": [
     {
-      "brightnessRemaining": 75,
+      "brightnessRemaining": 38,
       "illumination": "15.9 mW/mm²",
       "duration": "13 min",
+      "modality": "1P",
       "source": "doi:10.1126/sciadv.adi4208",
       "sourceFigure": "Fig. S6A",
-      "note": "Cepheid1b normalized intensity at 13 min under 1.59 W/cm² 561 nm illumination (Fig. S6A)",
+      "note": "Cepheid1b (mScarlet-I1.4 donor) normalized intensity ≈38% at 13 min under 1.59 W/cm² (= 15.9 mW/mm²) 561 nm widefield illumination (Fig. S6A). Cepheid1b is the brighter but less photostable variant; the ~78% remaining (top curve in Fig. S6A) belongs to Cepheid1s (mRuby4), which the main text describes as having a half-photobleach time >13 min.",
       "proofread": false
     }
   ],
@@ -645,12 +660,12 @@
       "proofread": false
     },
     {
-      "title": "Positive-going hybrid indicators for voltage imaging in excitable cells and tissues",
-      "authors": "Liu S, Ling J, Xie B, Zhang Y, Peng L, Yang L, Yu Y, Lin J, Tang C, Chen Z, Zou P",
-      "journal": "Science Advances",
-      "year": 2025,
-      "sample": "Cultured neurons, cardiomyocytes, pancreatic islet cells",
-      "url": "https://doi.org/10.1126/sciadv.ads1807",
+      "title": "Solaris: a panel of bright and sensitive hybrid voltage indicators for imaging membrane potential in cultured neurons",
+      "authors": "Yang J, Zhu S, Yang L, Peng L, Han Y, Hayward RF, Park P, Hu D, Cohen AE, Zou P",
+      "journal": "bioRxiv",
+      "year": 2024,
+      "sample": "HEK293T cells, in vitro (Cepheid1b measured as a comparator: voltage-clamp response half-time τ1/2 = 1.9 ± 0.1 ms at 1058 Hz)",
+      "url": "https://doi.org/10.1101/2024.02.02.578569",
       "proofread": false
     }
   ]

@@ -457,19 +457,19 @@
         0,
         20,
         40,
-        50
+        60
       ],
       "deltaF": [
-        4,
-        1,
+        17,
+        6,
         0,
-        -2,
-        -4,
-        -9,
-        -18,
-        -32,
-        -49,
-        -56
+        -6,
+        -16,
+        -25,
+        -33,
+        -40,
+        -45,
+        -50
       ]
     },
     "additionalCurves": [
@@ -484,20 +484,18 @@
           -20,
           0,
           20,
-          40,
-          50
+          40
         ],
         "deltaF": [
-          2,
-          1,
+          9,
+          3,
           0,
-          -1,
-          -2,
-          -4,
-          -8,
-          -14,
-          -21,
-          -25
+          -3,
+          -10,
+          -15,
+          -20,
+          -24,
+          -27
         ],
         "proofread": false
       }
@@ -512,25 +510,59 @@
       "on": 1.7,
       "off": 2.5,
       "temperature": "25°C",
+      "note": "HVI-Cy3, fast component of a bi-exponential fit in HEK293T cells (whole-cell voltage clamp). Activation (depolarizing step): τfast 1.70 ± 0.07 ms, 97.1% fast amplitude; deactivation (hyperpolarizing step): τfast 2.50 ± 0.10 ms, 93.4% fast (Supplementary Table 3). The slow component τ is not reported, so an amplitude-weighted mean cannot be computed; the fast component dominates (>93%) and is used as a close proxy. Main text labels τfast the half-life τ1/2.",
       "source": "doi:10.1038/s41557-021-00641-1",
       "sourceFigure": "Table S3",
+      "proofread": false
+    },
+    {
+      "on": 2.27,
+      "off": 4.35,
+      "temperature": "25°C",
+      "note": "HVI-Cy3b, amplitude-weighted mean τ from the bi-exponential fit in Table S2 of the HVI+ paper (HEK293T whole-cell voltage clamp, room temperature). Activation (depolarizing step): τfast 2.03 ms (95.6%) + τslow 7.40 ms (4.4%) → τ̄ = 2.27 ms. Deactivation (hyperpolarizing step): τfast 3.00 ms (92.1%) + τslow 20.09 ms (7.9%) → τ̄ = 4.35 ms.",
+      "source": "doi:10.1126/sciadv.ads1807",
+      "sourceFigure": "Table S2",
       "proofread": false
     }
   ],
   "dynamicRangeData": [
     {
-      "deltaF": -39,
+      "deltaF": -39.1,
       "sign": "negative",
+      "modality": "1P",
+      "dye": "Cy3",
+      "note": "HVI-Cy3: −39.1 ± 0.8% ΔF/F0 per 100 mV (n = 9) in HEK293T cells under whole-cell voltage clamp, 1P (532 nm), from Supplementary Table 3; also stated in the main text and abstract.",
       "source": "doi:10.1038/s41557-021-00641-1",
       "sourceFigure": "Table S3",
+      "proofread": false
+    },
+    {
+      "deltaF": -61.3,
+      "sign": "negative",
+      "modality": "1P",
+      "dye": "Cy3b",
+      "note": "HVI-Cy3b: −61.3 ± 1.5% ΔF/F0 per 100 mV in HEK293T cells under whole-cell voltage clamp, 1P epifluorescence (532 nm), reported in the HVI+ paper as the highest-sensitivity negative-going orange HVI variant.",
+      "source": "doi:10.1126/sciadv.ads1807",
+      "sourceFigure": "Table S2",
       "proofread": false
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 25.3,
+      "modality": "1P",
+      "dye": "Cy3",
       "source": "doi:10.1038/s41557-021-00641-1",
       "sourceFigure": "Table S3",
+      "proofread": false
+    },
+    {
+      "deltaF": -39.6,
+      "modality": "1P",
+      "dye": "Cy3b",
+      "note": "HVI-Cy3b: −39.6 ± 0.8% ΔF/F0 per AP (n = 9) in cultured rat hippocampal neurons at 484 Hz, 1P epifluorescence (532 nm), from Table S2 of the HVI+ paper. Magnitude rises at higher frame rates (less AP undersampling).",
+      "source": "doi:10.1126/sciadv.ads1807",
+      "sourceFigure": "Table S2",
       "proofread": false
     }
   ],
@@ -548,8 +580,29 @@
       "brightnessRemaining": 50,
       "illumination": "49 mW/mm²",
       "duration": "7.2 min",
+      "modality": "1P",
+      "note": "HVI-Cy3 photobleaching half-life τ1/2 = 430 ± 64 s (= 7.2 min) in HEK293T cells under continuous 532 nm illumination at 4.9 W/cm² (= 49 mW/mm²); 50% remaining at 7.2 min.",
       "source": "doi:10.1038/s41557-021-00641-1",
       "sourceFigure": "Table S6",
+      "proofread": false
+    },
+    {
+      "brightnessRemaining": 50,
+      "illumination": "50 mW/mm²",
+      "duration": "7.2 min",
+      "modality": "1P",
+      "note": "HVI-Cy3b photobleaching half-life of 432 ± 111 s in HEK293T cells under continuous 532 nm illumination at 5.0 W/cm² (= 50 mW/mm²); 50% remaining at 7.2 min.",
+      "source": "doi:10.1126/sciadv.ads1807",
+      "sourceFigure": "Table S5",
+      "proofread": false
+    }
+  ],
+  "subthresholdData": [
+    {
+      "slope": 0.28,
+      "note": "HVI-Cy3: ΔF/F0 responses of −4.7 ± 0.1% and −2.2 ± 0.1% to depolarizing subthreshold steps of +16.9 and +7.8 mV, and +2.2 ± 0.1% and +4.8 ± 0.1% to hyperpolarizing steps of −7.4 and −17.2 mV, at a resting potential of ~−68 mV in cultured rat hippocampal neurons (484 Hz, 532 nm). |ΔF/F0|/|ΔV| ≈ 0.28 %/mV across all four steps.",
+      "source": "doi:10.1038/s41557-021-00641-1",
+      "sourceFigure": "Table S5",
       "proofread": false
     }
   ],

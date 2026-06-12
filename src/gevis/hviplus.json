@@ -474,11 +474,12 @@
   },
   "kinetics": [
     {
-      "on": 2.24,
-      "off": 1.33,
+      "on": 6.77,
+      "off": 5.48,
       "temperature": "25°C",
+      "note": "Amplitude-weighted mean τ from the bi-exponential fit in Table S2 (HVI+-Cy3b, HEK293T whole-cell voltage clamp, room temperature). Activation (depolarizing step): τfast 2.24 ± 0.38 ms (58.6%) + τslow 13.17 ± 1.58 ms (41.4%) → τ̄ = 6.77 ms. Deactivation (hyperpolarizing step): τfast 1.33 ± 0.18 ms (64.7%) + τslow 13.09 ± 1.07 ms (35.3%) → τ̄ = 5.48 ms.",
       "source": "doi:10.1126/sciadv.ads1807",
-      "sourceFigure": "Fig. 2D",
+      "sourceFigure": "Table S2",
       "proofread": false
     }
   ],
@@ -486,6 +487,9 @@
     {
       "deltaF": 55,
       "sign": "positive",
+      "modality": "1P",
+      "dye": "Cy3b",
+      "note": "55.0 ± 2.1% ΔF/F0 per 100 mV (−70 to +30 mV) for HVI+-Cy3b in HEK293T cells under whole-cell voltage clamp, 1P epifluorescence (532 nm).",
       "source": "doi:10.1126/sciadv.ads1807",
       "sourceFigure": "Fig. 2E",
       "proofread": false
@@ -494,6 +498,9 @@
   "sensitivityData": [
     {
       "deltaF": 22.3,
+      "modality": "1P",
+      "dye": "Cy3b",
+      "note": "22.3 ± 0.8% ΔF/F0 per AP for HVI+-Cy3b in cultured rat hippocampal neurons, 1P epifluorescence (532 nm), 484 Hz frame rate.",
       "source": "doi:10.1126/sciadv.ads1807",
       "sourceFigure": "Fig. 2C",
       "proofread": false
@@ -509,8 +516,9 @@
   ],
   "brightnessData": [
     {
-      "ratio": 0.45,
+      "ratio": 0.53,
       "reference": "hvi",
+      "note": "Resting fluorescence of HVI+-Cy3b normalized to HVI-Cy3b (=1.0) in neurons, with a HaloTag-JF646 reference channel (Fig. S5C); main text states HVI+-Cy3b is approximately half the resting brightness of HVI-Cy3b.",
       "source": "doi:10.1126/sciadv.ads1807",
       "sourceFigure": "Fig. S5C",
       "proofread": false
@@ -521,6 +529,8 @@
       "brightnessRemaining": 50,
       "illumination": "50 mW/mm²",
       "duration": "12.3 min",
+      "modality": "1P",
+      "note": "Photobleaching half-life of 736 ± 113 s (Table S5) for HVI+-Cy3b in HEK293T cells under continuous 532 nm illumination at 5.0 W/cm² (= 50 mW/mm²); 50% remaining at 12.3 min.",
       "source": "doi:10.1126/sciadv.ads1807",
       "sourceFigure": "Fig. S7",
       "proofread": false

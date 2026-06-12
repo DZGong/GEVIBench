@@ -504,13 +504,14 @@
       ],
       "deltaF": [
         0,
-        21,
-        93,
-        150,
-        186,
-        193,
-        200
-      ]
+        14,
+        68,
+        88,
+        97,
+        100,
+        99
+      ],
+      "note": "Read directly from Fig. 2B (normalized bioluminescence vs membrane potential, single-cell voltage clamp), expressed on a 0-100 scale (max = 1.0 at +40 mV). The figure's lowest measured potential is -60 mV (luminescence floor ~0), so that point sets the 0 baseline; no -70 mV point exists in the figure and none was extrapolated. Boltzmann fit V1/2 = -25.5 +/- 1 mV."
     },
     "source": "doi:10.1002/adbi.202100842",
     "sourceImage": "/fv-sources/amber.jpg",
@@ -524,6 +525,7 @@
       "temperature": "25°C",
       "source": "doi:10.1002/adbi.202100842",
       "sourceFigure": "Fig. 3B",
+      "note": "Switching kinetics from the gating-current fast component (Fig. 3B, voltage-clamp steps -60 to +60 mV). Paper reports tau_on ~26-330 ms (closer to 26-63 ms near/above V1/2) and tau_off ~15-45 ms; representative mid-range values stored. A slow envelope component of ~200-300 ms (substrate recycling, not gating) is an upper bound and is not used here. All recordings at room temperature (SI 1.4).",
       "proofread": false
     }
   ],
@@ -532,7 +534,8 @@
       "deltaF": 200,
       "sign": "positive",
       "source": "doi:10.1002/adbi.202100842",
-      "sourceFigure": "Fig. 2B",
+      "sourceFigure": "Fig. 2A",
+      "note": "Bioluminescent dynamic range (delta-L/L on depolarization), not a fluorescence delta-F/F per 100 mV. AMBER shows ~3-fold (i.e. ~200% delta-L/L) average increase in bioluminescence upon KCl-induced depolarization (Fig. 2A / Section 2.1). Population stats (Fig. 1C caption): 28-fold maximal increase, 72% average increase across cells. On-off ratio reported greater than LOTUS-V. No 1P/2P modality applies (bioluminescent, no excitation light).",
       "proofread": false
     }
   ],

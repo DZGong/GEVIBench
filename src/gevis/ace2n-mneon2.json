@@ -514,7 +514,10 @@
         0.0002
       ]
     },
-    "proofread": false
+    "note": "Ace2N-mNeon2's fluorescent reporter is mNeonGreen (the Ace2 opsin is the dark FRET acceptor). The stored excitation/emission arrays are the FPbase mNeonGreen curve verbatim (corr 1.0, max diff 0.0 vs FPbase; peaks ex 504 / em 517). No separately measured curve is published; source attribution was previously missing.",
+    "proofread": false,
+    "source": "FPbase: mNeonGreen",
+    "sourceFigure": "FPbase"
   },
   "voltage": {
     "type": "opsin",
@@ -556,10 +559,10 @@
   },
   "kinetics": [
     {
-      "on": 0.77,
-      "off": 0.81,
+      "on": 1.54,
+      "off": 1.51,
       "source": "doi:10.1126/science.abm8797",
-      "note": "Bi-exponential fast components at 22°C in spiking HEK cells (67% on, 65% off); slow τ_on=3.1 ms, slow τ_off=2.8 ms",
+      "note": "Amplitude-weighted mean of the bi-exponential fit at 22°C in spiking HEK cells (Table S1): τ_on = 0.67×0.77 + 0.33×3.1 = 1.54 ms; τ_off = 0.65×0.81 + 0.35×2.8 = 1.51 ms (fast amp 67% on / 65% off; slow τ_on=3.1 ms, slow τ_off=2.8 ms). Previously stored only the fast component (0.77/0.81).",
       "temperature": "22°C",
       "sourceFigure": "Table S1",
       "proofread": false
@@ -568,6 +571,7 @@
   "dynamicRangeData": [
     {
       "deltaF": -26.1,
+      "modality": "1P",
       "sign": "negative",
       "source": "doi:10.1126/science.abm8797",
       "note": "ΔF/F per 100 mV step in spiking HEK cells at 22°C",
@@ -576,24 +580,45 @@
     },
     {
       "deltaF": -26.7,
+      "modality": "1P",
       "sign": "negative",
       "source": "doi:10.1101/2025.05.29.656768",
-      "note": "ΔF/F0 per 100 mV in HEK293T cells at 1058 Hz under 488 nm illumination at 3 W/cm²",
+      "note": "ΔF/F0 = -26.7 ± 3.2% per 100 mV in HEK293T cells (n = 8) at 1058 Hz under 488 nm 1P wide-field illumination at 3 W/cm² (Vega paper); main text Fig. 1C value",
       "sourceFigure": "Table S2",
+      "proofread": false
+    },
+    {
+      "deltaF": -29.5,
+      "sign": "negative",
+      "modality": "1P",
+      "source": "doi:10.25378/janelia.21534411",
+      "note": "ΔF/F read from the Ace mNeon2 (orange) F-V trace between -70 mV (baseline 0) and +30 mV in the Janelia patch-assay F-V curve figure (1P widefield, -20 mV steps, n=6); full sweep -110 to +50 mV spans ~+11.5% to -31%.",
+      "sourceFigure": "Fig. 1",
       "proofread": false
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 16.5,
+      "modality": "1P",
       "source": "doi:10.1126/science.abm8797",
+      "note": "Negative-going ΔF/F per single AP (magnitude stored): −16.5 ± 1.9% (mean ± SEM, n=127 spikes) recorded in PPL1-γ2α'1 dopaminergic neurons in Drosophila (main text; per-spike values were obtained from the fly recordings, not the V1 VIP+ mouse traces shown in Fig. 1I).",
       "sourceFigure": "Fig. 1I",
       "proofread": false
     },
     {
+      "deltaF": 11,
+      "modality": "1P",
+      "source": "doi:10.25378/janelia.21534411",
+      "note": "Median single-AP |ΔF/F0| read from the Ace mNeon2 (orange) boxplot in the Janelia patch-assay spike-detection figure (1P widefield, PatcherBot cultured neurons, n≈9); negative-going, median ≈ -11% (magnitude stored).",
+      "sourceFigure": "Fig. 2",
+      "proofread": false
+    },
+    {
       "deltaF": 13.2,
+      "modality": "1P",
       "source": "doi:10.1101/2025.05.29.656768",
-      "note": "Absolute ΔF/F0 per AP in cultured rat hippocampal neurons at 484 Hz under 488 nm illumination at 3 W/cm²",
+      "note": "Absolute ΔF/F0 = -13.2 ± 1.4% per AP (per spike) in cultured rat hippocampal neurons (n = 4) at 484 Hz under 488 nm 1P wide-field illumination at 3 W/cm² (Vega paper, Fig. 1E)",
       "sourceFigure": "Table S2",
       "proofread": false
     }
@@ -631,6 +656,16 @@
       "source": "doi:10.1101/2025.05.29.656768",
       "note": "Photobleaching quarter-life t0.75 in live HEK293T cells under 488 nm illumination",
       "sourceFigure": "Table S1",
+      "proofread": false
+    },
+    {
+      "brightnessRemaining": 17,
+      "illumination": "10 mW/mm²",
+      "duration": "~42 min",
+      "modality": "1P",
+      "source": "doi:10.1101/2025.05.30.657123",
+      "note": "Ace-mNeon2 lost 83% of initial fluorescence (retained ~17%) under continuous 10 mW/mm² wide-field illumination in HeLa cells; measured as a reference alongside ElectraON/ElectraOFF in the mBaoJin GEVI paper",
+      "sourceFigure": "Fig. 1h",
       "proofread": false
     }
   ],

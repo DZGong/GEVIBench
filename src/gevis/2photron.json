@@ -13,7 +13,13 @@
   "paper": "bioRxiv 2024",
   "paperUrl": "https://doi.org/10.1101/2024.11.15.623698",
   "description": "Chemigenetic voltage indicator built from Klebsormidium nitens rhodopsin and HaloTag, engineered for two-photon voltage imaging.",
-  "parentId": "voltron",
+  "familyTreePath": [
+    "GEVI",
+    "Opsin",
+    "Opsin-FRET",
+    "Chemigenetic",
+    "2photron"
+  ],
   "spectrum": {
     "type": "rhodopsin",
     "peakEx": 560,
@@ -755,9 +761,10 @@
   },
   "kinetics": [
     {
-      "on": 0.75,
-      "off": 0.91,
-      "temperature": "room temperature",
+      "on": 1.64,
+      "off": 2.21,
+      "temperature": "25°C",
+      "note": "Double-exponential fit (ΔF/F(t) = A1·e^(-t/τfast) + A2·e^(-t/τslow)) of the response to a 150 mV voltage step in cultured rat neurons under 1P illumination (3.2 kHz acquisition, n=6). Activation (-70→80 mV): τfast 0.75 ± 0.15 ms (67 ± 1.9 % fast), τslow 3.45 ± 0.74 ms; amplitude-weighted mean on τ = 1.64 ms. Deactivation (80→-70 mV): τfast 0.91 ± 0.15 ms (59.3 ± 4.9 % fast), τslow 4.11 ± 0.89 ms; amplitude-weighted mean off τ = 2.21 ms.",
       "source": "doi:10.1101/2024.11.15.623698",
       "sourceFigure": "Fig. S6",
       "proofread": false
@@ -767,16 +774,32 @@
     {
       "deltaF": -24,
       "sign": "negative",
+      "modality": "1P",
+      "dye": "JF552",
+      "note": "ΔF/F0 for a -70 → +30 mV step (100 mV) in voltage-clamped cultured rat neurons; -24 ± 2.3 % under 1P (orange) and -24.5 ± 2.5 % under 2P (purple) — nearly identical.",
       "source": "doi:10.1101/2024.11.15.623698",
-      "sourceFigure": "Fig. 2b",
+      "sourceFigure": "Fig. 2B",
+      "proofread": false
+    },
+    {
+      "deltaF": -24.5,
+      "sign": "negative",
+      "modality": "2P",
+      "dye": "JF552",
+      "note": "ΔF/F0 for a -70 → +30 mV step (100 mV) under two-photon excitation in voltage-clamped cultured rat neurons; -24.5 ± 2.5 %, nearly identical to the 1P value (-24 ± 2.3 %).",
+      "source": "doi:10.1101/2024.11.15.623698",
+      "sourceFigure": "Fig. 2B",
       "proofread": false
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 5.72,
+      "modality": "2P",
+      "dye": "JF552",
+      "note": "Mean |ΔF/F| per spike = 5.72 ± 1.39 % from layer II/III V1 neurons of awake mice, recorded in vivo with 2P ULoVE excitation at 1045 nm (>3.5 kHz), soma-targeted 2Photron-ST552. (Golgi cells gave 7.88 ± 1.31 %, Fig. S9.)",
       "source": "doi:10.1101/2024.11.15.623698",
-      "sourceFigure": "Fig. 3b",
+      "sourceFigure": "Fig. 3B",
       "proofread": false
     }
   ],
@@ -784,19 +807,9 @@
     {
       "ratio": 4.12,
       "reference": "jedi2p",
+      "note": "In vivo 2P photon flux: 2Photron-ST552 15.5 ± 4.9 MHz vs JEDI-2P-Kv 3.76 ± 1.42 MHz (~4x higher), layer II/III V1 neurons, 1045 nm ULoVE excitation.",
       "source": "doi:10.1101/2024.11.15.623698",
-      "sourceFigure": "Fig. 3f",
-      "proofread": false
-    }
-  ],
-  "photostabilityData": [
-    {
-      "brightnessRemaining": null,
-      "illumination": "25.7 mW (objective output), 1035 nm 2P ULoVE",
-      "duration": "10 min",
-      "note": "Qualitative durability only — paper reports routine 10+ min in vivo recordings from V1 L2/3 neurons under 2P ULoVE; no % remaining or bleaching curve published.",
-      "source": "doi:10.1101/2024.11.15.623698",
-      "sourceFigure": "Fig. 3b",
+      "sourceFigure": "Fig. 3F",
       "proofread": false
     }
   ],
@@ -815,15 +828,6 @@
       "year": 2024,
       "sample": "Mouse, visual cortex, in vivo, two-photon; mouse, cerebellum Golgi cells, in vivo, two-photon; rat, hippocampal neurons, in vitro",
       "url": "https://doi.org/10.1101/2024.11.15.623698",
-      "proofread": false
-    },
-    {
-      "title": "Two-photon voltage imaging with rhodopsin-based sensors",
-      "authors": "Grimm C, et al.",
-      "journal": "Neuron",
-      "year": 2026,
-      "sample": "Mouse, hippocampal slices, in vitro; zebrafish larvae, in vivo; mouse, cortex, in vivo, two-photon",
-      "url": "https://doi.org/10.1016/j.neuron.2025.12.014",
       "proofread": false
     }
   ]

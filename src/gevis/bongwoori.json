@@ -15,8 +15,12 @@
   "spectrum": {
     "type": "fp",
     "peakEx": 490,
-    "peakEm": 510,
+    "peakEm": 511,
     "name": "Bongwoori",
+    "source": "FPbase: EGFP",
+    "sourceFigure": "FPbase",
+    "note": "Fluorophore is Super Ecliptic pHluorin (A227D), the GFP-derived reporter shared across the ArcLight/Bongwoori family. Super ecliptic pHluorin carries the S65T (EGFP) mutation, so it is spectrally near-identical to EGFP and no separate measured curve is published; the displayed curve is the FPbase EGFP excitation + emission verbatim (peaks 490/511). Previously the emission was the EGFP curve red-shifted +4 nm (a fabricated shift that placed the peak at 515 nm); the shift has been removed (minEm 476→472). Same fix as the Marina spectrum.",
+    "proofread": false,
     "custom": {
       "minEx": 300,
       "excitation": [
@@ -251,7 +255,7 @@
         0.0122,
         0.0109
       ],
-      "minEm": 476,
+      "minEm": 472,
       "emission": [
         0.0101,
         0.0122,
@@ -426,8 +430,7 @@
         0.0102,
         0.0102
       ]
-    },
-    "proofread": false
+    }
   },
   "voltage": {
     "type": "fp",
@@ -436,7 +439,6 @@
     "name": "Bongwoori",
     "custom": {
       "voltage": [
-        -170,
         -120,
         -70,
         -20,
@@ -445,33 +447,35 @@
         130
       ],
       "deltaF": [
-        3,
         1,
         0,
         -4,
-        -9,
-        -16,
-        -21
+        -10,
+        -13,
+        -13
       ]
     },
     "source": "doi:10.1523/JNEUROSCI.3008-14.2015",
     "sourceImage": "/fv-sources/bongwoori.jpg",
     "sourceFigure": "Fig. 6B",
-    "proofread": false
+    "proofread": false,
+    "note": "Fig. 6B plots the NORMALIZED ΔF/F (0→1 Boltzmann fit, V1/2 ≈ -3 mV), not signed ΔF/F. Digitized the blue Bongwoori curve (normalized: -120→0.015, -70→0.066, -20→0.34, +30→0.78, +80→0.96, +130→1.0) and rescaled to signed ΔF/F with -70 mV = 0 and the -70→+30 mV step anchored to the -10% per-100-mV dynamic range (Fig. 6A). The curve saturates near -13% by +80 mV. Replaces a prior curve that did not saturate (-16% at +80, -21% at +130) and included an off-figure -170 mV point (Fig. 6B starts at -120 mV)."
   },
   "kinetics": [
     {
-      "on": 8,
+      "on": 10,
       "off": 7,
       "temperature": "33°C",
+      "note": "Weighted (amplitude-weighted) τ from the bi-exponential fit, Piao 2015 Table 2: τon = 10 ± 1 ms, τoff = 7 ± 1 ms (for a 100-mV depolarization, HEK293). The on-response fast component alone is 8 ± 1 ms (91% amplitude); previously τon was stored as that fast component (8) rather than the weighted mean (10).",
       "source": "doi:10.1523/JNEUROSCI.3008-14.2015",
-      "sourceFigure": "Fig. 6",
+      "sourceFigure": "Table 2",
       "proofread": false
     },
     {
-      "on": 9,
-      "off": 8,
+      "on": 17,
+      "off": 14,
       "temperature": "34°C",
+      "note": "Weighted τ from the bi-exponential fit, Lee 2017 Table 2: τon = 17 ± 1 ms (fast 9 ms 76%, slow 40 ms), τoff = 14 ± 1 ms (fast 8 ms 86%, slow 52 ms). Previously τon/τoff were stored as the fast components (9 / 8) rather than the weighted means (17 / 14).",
       "source": "doi:10.1038/s41598-017-08731-2",
       "sourceFigure": "Table 2",
       "proofread": false
@@ -481,6 +485,7 @@
     {
       "deltaF": -10,
       "sign": "negative",
+      "modality": "1P",
       "source": "doi:10.1523/JNEUROSCI.3008-14.2015",
       "sourceFigure": "Fig. 6A",
       "proofread": false
@@ -489,12 +494,14 @@
   "sensitivityData": [
     {
       "deltaF": 3.7,
+      "modality": "1P",
       "source": "doi:10.1038/s41598-017-08731-2",
       "sourceFigure": "Table 3",
       "proofread": false
     },
     {
       "deltaF": 2.5,
+      "modality": "1P",
       "source": "doi:10.1523/JNEUROSCI.3008-14.2015",
       "sourceFigure": "Fig. 7",
       "proofread": false

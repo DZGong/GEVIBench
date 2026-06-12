@@ -420,15 +420,15 @@
         30
       ],
       "deltaF": [
-        19,
+        57,
+        42,
         13,
-        6,
         0,
-        -17,
-        -33,
-        -46,
-        -51,
-        -54,
+        -20,
+        -35,
+        -47,
+        -52,
+        -55,
         -57
       ]
     },
@@ -439,36 +439,41 @@
   },
   "kinetics": [
     {
-      "on": 0.78,
-      "off": 1.12,
+      "on": 2.97,
+      "off": 2.62,
       "temperature": "37°C",
       "source": "doi:10.1016/j.neuron.2024.08.019",
       "sourceFigure": "Table S2",
+      "note": "Bi-exponential fits at 37°C (Table S2). Activation: τ-fast 0.8 ms (95%), τ-slow 44.2 ms (5%) → amplitude-weighted mean 2.97 ms. Deactivation: τ-fast 1.1 ms (63%), τ-slow 5.2 ms (37%) → amplitude-weighted mean 2.62 ms. The paper headlines the fast components (0.78/1.12 ms).",
       "proofread": false
     },
     {
-      "on": 2.61,
-      "off": 4.3,
-      "temperature": "22°C",
+      "on": 6.02,
+      "off": 16.4,
+      "temperature": "23°C",
       "source": "doi:10.1016/j.neuron.2024.08.019",
       "sourceFigure": "Table S2",
+      "note": "Bi-exponential fits at 23°C (Table S2). Activation: τ-fast 2.6 ms (92%), τ-slow 45.3 ms (8%) → amplitude-weighted mean 6.02 ms. Deactivation: τ-fast 4.3 ms (75%), τ-slow 55.9 ms (23%) → amplitude-weighted mean 16.4 ms. The paper headlines the fast components (2.61/4.30 ms).",
       "proofread": false
     }
   ],
   "dynamicRangeData": [
     {
-      "deltaF": -59,
+      "deltaF": -57,
       "sign": "negative",
+      "modality": "1P",
       "source": "doi:10.1016/j.neuron.2024.08.019",
       "sourceFigure": "Fig. 1D",
+      "note": "Steady-state -ΔF/F for a -70 to +30 mV (100-mV) depolarizing step in HEK293A cells under one-photon widefield voltage clamp; -57 ± 2% at 23°C and -57 ± 3% at 37°C (Table S2). The F-V curve continues to a ~-60% plateau by +80 mV over the wider -70 to +80 mV sweep.",
       "proofread": false
     },
     {
       "deltaF": -35.2,
       "sign": "negative",
+      "modality": "2P",
       "source": "doi:10.1038/s41592-026-03043-8",
-      "sourceFigure": "Extended Data Fig. 1b",
-      "note": "Response to a 100-mV depolarizing step from -70 mV at 33°C in HEK293A cells under 2P illumination (Extended Data Fig. 1b, n = 7 cells). Reduced response relative to JEDI-2P (41.8%) under 2P.",
+      "sourceFigure": "Ext. Fig. 1b",
+      "note": "Response to a 100-mV depolarizing step from -70 mV at 33°C in HEK293A cells under 2P resonant scanning at 940 nm (Ext. Fig. 1b, n = 7 cells). Reduced response relative to JEDI-2P (41.8%) under 2P.",
       "proofread": false
     }
   ],
@@ -482,13 +487,16 @@
   ],
   "sensitivityData": [
     {
-      "deltaF": 28,
+      "deltaF": 34,
+      "modality": "1P",
       "source": "doi:10.1016/j.neuron.2024.08.019",
       "sourceFigure": "Fig. 1F",
+      "note": "Mean peak -ΔF/F per current-evoked action potential in cultured rat hippocampal neurons at room temperature, recorded by camera at 800 fps under one-photon widefield illumination (Fig. 1F, n = 10 cells). ~2-fold larger than ASAP3 (~17%).",
       "proofread": false
     },
     {
       "deltaF": 13,
+      "modality": "2P",
       "source": "doi:10.64898/2026.05.27.728040",
       "sourceFigure": "Fig. 2k",
       "note": "Peak -ΔF/F per action potential in Drosophila TPN-II neurons in vivo under 940-nm two-photon excitation; ASAP7y responded 81% more strongly in the same prep",
@@ -527,6 +535,24 @@
     "proofread": false
   },
   "researchPapers": [
+    {
+      "title": "A fast and responsive voltage indicator with enhanced sensitivity for unitary synaptic events",
+      "authors": "Hao YA, Lee S, Roth RH, Natale S, Gomez L, Taxidis J, et al.",
+      "journal": "Neuron",
+      "year": 2024,
+      "url": "https://doi.org/10.1016/j.neuron.2024.08.019",
+      "sample": "HEK293A cells; cultured rat/human neurons; mouse motor/barrel cortex and hippocampus; Drosophila Mi1 and TPN-II; zebrafish tectum; in vitro and in vivo",
+      "proofread": false
+    },
+    {
+      "title": "Ultrasensitive voltage imaging reveals distinct electrical microdomains in neurons",
+      "authors": "Hao YA, Jayne LL, Lee S, Dittrich MN, Zhang M, et al.",
+      "journal": "bioRxiv",
+      "year": 2026,
+      "url": "https://doi.org/10.64898/2026.05.27.728040",
+      "sample": "Drosophila Mi1 and TPN-II neurons, in vivo; cultured cortical neurons; ASAP5 characterized alongside ASAP7y",
+      "proofread": false
+    },
     {
       "title": "Deep two-photon voltage imaging with adaptive excitation",
       "authors": "Zhao S, Hebert E, Gruzdeva A, Mahishi D, Takahashi H, Lee S, Hao YA, Lin MZ, Yapici N, Xu C",

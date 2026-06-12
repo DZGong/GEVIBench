@@ -27,21 +27,27 @@
     "custom": {
       "voltage": [
         -100,
+        -80,
         -70,
         -60,
+        -40,
         -20,
         0,
         20,
+        40,
         60
       ],
       "deltaF": [
         -9,
+        -3,
         0,
-        3,
-        15,
-        21,
-        29,
-        40
+        4,
+        11,
+        17,
+        22,
+        26,
+        30,
+        32
       ]
     },
     "source": "doi:10.1038/s41586-019-1641-1",
@@ -53,8 +59,9 @@
     {
       "on": 0.6,
       "off": 1.1,
-      "temperature": "32°C",
+      "temperature": "37°C",
       "source": "doi:10.1038/s41467-022-35314-1",
+      "note": "Monoexponential rising time constant 0.6 ms and decay time constant 1.1 ms, stated in the main text. Measured in vivo in awake head-fixed mouse hippocampal CA1 (physiological brain temperature ~37°C). The original SomArchon paper (Piatkevich 2019) reported only that kinetics were comparable to Archon1 (Fig. 1e FWHM_AP), without explicit time constants. (Temperature was previously listed as 32°C, carried over from Archon1's in vitro value; corrected to physiological since this is an in vivo awake-mouse measurement.)",
       "sourceFigure": "Main text",
       "proofread": false
     }
@@ -63,7 +70,9 @@
     {
       "deltaF": 30,
       "sign": "positive",
+      "modality": "1P",
       "source": "doi:10.1038/s41586-019-1641-1",
+      "note": "Highest relative ΔF/F during 100-mV voltage steps (cortex, 1P widefield voltage-clamp, λex=637 nm, n=12 neurons from 2 mice). Read from the ΔF/F-vs-V plot in Fig. 1g (normalized to −70 mV).",
       "sourceFigure": "Fig. 1g",
       "proofread": false
     }
@@ -71,52 +80,63 @@
   "sensitivityData": [
     {
       "deltaF": 45,
+      "modality": "1P",
       "source": "doi:10.1038/s41586-019-1641-1",
+      "note": "ΔF/F per AP, cortex layer 2/3 brain slice, 1P widefield, λex=637 nm. From Fig. 1d (per-region values for cortex/hippocampus/striatum are 45/42/35%).",
       "sourceFigure": "Fig. 1d",
       "proofread": false
     },
     {
       "deltaF": 42,
+      "modality": "1P",
       "source": "doi:10.1038/s41586-019-1641-1",
+      "note": "ΔF/F per AP, hippocampus brain slice, 1P widefield, λex=637 nm.",
       "sourceFigure": "Fig. 1d",
       "proofread": false
     },
     {
       "deltaF": 35,
+      "modality": "1P",
       "source": "doi:10.1038/s41586-019-1641-1",
+      "note": "ΔF/F per AP, striatum brain slice, 1P widefield, λex=637 nm.",
       "sourceFigure": "Fig. 1d",
       "proofread": false
     },
     {
       "deltaF": 53.4,
+      "modality": "1P",
       "source": "doi:10.1038/s41586-019-1641-1",
-      "note": "Mean ΔF/F per AP in mouse cortex L2/3 brain slices, 1.5 W/mm², n=14 cells. From Extended Data Fig. 5c source data",
-      "sourceFigure": "Extended Data Fig. 5c",
+      "note": "Mean ΔF/F per AP in mouse cortex L2/3 brain slices, 1P widefield, 1.5 W/mm², n=14 cells. Verified against Ext. Fig. 5c source data (mean of 14 cells = 53.45%).",
+      "sourceFigure": "Ext. Fig. 5c",
       "proofread": false
     }
   ],
   "photostabilityData": [
     {
-      "brightnessRemaining": 50,
+      "brightnessRemaining": 42,
       "illumination": "1500 mW/mm²",
-      "duration": "10 min",
+      "duration": "9.5 min",
+      "modality": "1P",
       "source": "doi:10.1038/s41586-019-1641-1",
-      "sourceFigure": "Extended Data Fig. 5e",
+      "note": "Endpoint of the Ext. Fig. 5e photobleach curve (SomArchon, n=17 cells, 1P widefield): 42.0% remaining at 571 s (9.5 min). 50% remaining is reached at ~7.4 min. (Previously stored as 50% at 10 min; corrected to the actual source-data endpoint — the curve does not extend to 600 s.)",
+      "sourceFigure": "Ext. Fig. 5e",
       "proofread": false
     },
     {
       "brightnessRemaining": 94,
       "illumination": "1500 mW/mm²",
       "duration": "1 min",
+      "modality": "1P",
       "source": "doi:10.1038/s41586-019-1641-1",
-      "note": "From Extended Data Fig. 5e source data, n=17 cells",
-      "sourceFigure": "Extended Data Fig. 5e",
+      "note": "From Ext. Fig. 5e source data, n=17 cells (93.9% remaining at ~61 s).",
+      "sourceFigure": "Ext. Fig. 5e",
       "proofread": false
     },
     {
       "brightnessRemaining": 98,
       "illumination": "44 mW/mm²",
       "duration": "1 min",
+      "modality": "1P",
       "source": "doi:10.1021/acschemneuro.0c00046",
       "note": "From Supplementary Figure 2, n=8 cells, 617 nm LED excitation",
       "sourceFigure": "Fig. S2",

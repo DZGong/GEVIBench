@@ -16,9 +16,12 @@
   "siblingId": "asap4b",
   "spectrum": {
     "type": "fp",
-    "peakEx": 490,
-    "peakEm": 513,
+    "peakEx": 489,
+    "peakEm": 511,
     "name": "ASAP4e",
+    "source": "doi:10.1038/s41592-023-01913-z",
+    "sourceFigure": "Ext. Fig. 3e",
+    "note": "One-photon excitation/emission spectra of ASAP3, ASAP4b and ASAP4e were measured in HEK293-Kir2.1 cells (Ext. Fig. 3e). ASAP4e and ASAP4b share an identical GFP chromophore environment, so the cpGFP excitation (~489 nm) and emission lineshapes are essentially identical; the digitized 1-nm-resolution custom curve (shared with ASAP4b) peaks at 489 nm (ex) and 511 nm (em). ASAP4 variants show slightly redder emission than ASAP3. The follow-up FORCE1s preprint (doi:10.64898/2026.04.07.717088, Fig. S1.2A) reports a measured ASAP4e 1P emission peak of 518 ± 4 nm in HEK293A cells (vs 511 nm for EGFP); peakEm here is set to the digitized custom-curve peak (511 nm) for consistency with the displayed curve and with sibling ASAP4b.",
     "custom": {
       "minEx": 300,
       "excitation": [
@@ -679,56 +682,62 @@
         -100,
         -80,
         -70,
-        -50,
-        -30,
-        -10,
+        -60,
+        -40,
+        -20,
         0,
-        10,
-        30
+        30,
+        50,
+        70,
+        90
       ],
       "deltaF": [
-        -40,
-        -28,
-        -12,
+        -13,
+        -9,
+        -3,
         0,
-        35,
-        80,
-        140,
-        165,
-        188,
-        210
+        6,
+        22,
+        55,
+        98,
+        210,
+        300,
+        375,
+        435
       ]
     },
     "source": "doi:10.1038/s41592-023-01913-z",
     "sourceImage": "/fv-sources/asap4e.jpg",
     "sourceFigure": "Fig. 1B",
+    "note": "Re-digitized from the F-V plot in Fig. 1B (ASAP4e = lavender, ASAP4.2 F413M) at the measured command-voltage steps, normalized to ΔF/F=0 at -70 mV with +30 mV anchored to the Table 1 100-mV value (+210%). Spans the full plotted range (-120 to +90 mV, reaching ~+435%); ASAP4e diverges above ASAP4b past ~+15 mV and keeps rising steeply. The prior curve's negative/mid-range points were over-steep.",
     "proofread": false
   },
   "kinetics": [
     {
-      "on": 2.62,
-      "off": 5.69,
+      "on": 18.29,
+      "off": 15.6,
       "temperature": "22\u00b0C",
       "source": "doi:10.1038/s41592-023-01913-z",
       "sourceFigure": "Table S1",
-      "note": "Bi-exponential fast component. Supplementary Table 1 columns for ASAP4b and ASAP4e appear swapped \u2014 values here are corrected (ASAP4e is the speed-optimized variant, expected to be faster than bright-optimized ASAP4b)",
+      "note": "Amplitude-weighted mean of bi-exponential fit (Supplementary Table 1, ASAP4e at 22 \u00b0C, HEK293A voltage clamp). On (depolarization \u221270\u2192+30 mV): \u03c4fast 3.93 ms (14.0%), \u03c4slow 20.64 ms \u2192 weighted mean 18.29 ms. Off (repolarization +30\u2192\u221270 mV): \u03c4fast 8.40 ms (20.6%), \u03c4slow 17.47 ms \u2192 weighted mean 15.60 ms. Note: Table S1 is not column-swapped \u2014 it explicitly labels ASAP4b (\u03c4fast 2.62 ms) and ASAP4e (\u03c4fast 3.93 ms) at 22 \u00b0C; the main text instead pairs the 2.6-ms fast component with the larger 19% amplitude (= ASAP4b) and 3.9 ms with 14% (= ASAP4e). The amplitude\u2192variant mapping is consistent between text and table, so the table values are used here.",
       "proofread": false
     },
     {
-      "on": 1.53,
-      "off": 1.54,
+      "on": 4.55,
+      "off": 4.71,
       "temperature": "37\u00b0C",
       "source": "doi:10.1038/s41592-023-01913-z",
       "sourceFigure": "Table S1",
-      "note": "Bi-exponential fast component. Supplementary Table 1 columns for ASAP4b and ASAP4e appear swapped \u2014 values here are corrected",
+      "note": "Amplitude-weighted mean of bi-exponential fit (Supplementary Table 1, ASAP4e at 37 \u00b0C). On (depolarization): \u03c4fast 1.49 ms (14.5%), \u03c4slow 5.07 ms \u2192 weighted mean 4.55 ms. Off (repolarization): \u03c4fast 3.66 ms (68.6%), \u03c4slow 7.01 ms \u2192 weighted mean 4.71 ms. As expected, speed-optimized ASAP4e is faster than brightness-optimized ASAP4b (5.56/7.00 ms at 37 \u00b0C).",
       "proofread": false
     },
     {
-      "on": 2.6,
+      "on": 8.14,
       "off": 6.7,
       "temperature": "33\u00b0C",
       "source": "doi:10.64898/2026.04.07.717088",
       "sourceFigure": "Table S1.4",
+      "note": "ASAP4e measured under 1P widefield voltage clamp at 33 \u00b0C in the FORCE1s preprint (Table S1.4). On (\u221270\u2192+30 mV) is the amplitude-weighted mean of a bi-exponential fit: \u03c4fast 2.6 ms (34%), \u03c4slow 11 ms (66%) \u2192 8.14 ms. Off (+30\u2192\u221270 mV) was best fit by a monoexponential, \u03c4 6.7 ms.",
       "proofread": false
     }
   ],
@@ -736,20 +745,25 @@
     {
       "deltaF": 210,
       "sign": "positive",
+      "modality": "1P",
       "source": "doi:10.1038/s41592-023-01913-z",
       "sourceFigure": "Table 1",
+      "note": "ΔF100/F0 across the −70 → +30 mV (100-mV) step, voltage clamp in HEK293A cells, 1P. The full F-V sweep reaches 468% over all voltages (main text, Fig. 1b).",
       "proofread": false
     },
     {
-      "deltaF": 148,
+      "deltaF": 330,
       "sign": "positive",
+      "modality": "2P",
       "source": "doi:10.64898/2026.04.07.717088",
       "sourceFigure": "Fig. 1E",
+      "note": "ΔF/F at +30 mV relative to −70 mV (100-mV step) read from the gray ASAP4e steady-state F-V curve in Fig. 1E, measured under 2P excitation at 33 °C in HEK293A cells (the curve reaches ≈3.0–3.3 ΔF/F0 at +30 mV). Larger than the 1P value (210%), consistent with the origin paper's finding that 2P ΔF/F is ≥35% higher than 1P for these sensors due to background suppression. The paper's quantified panel F reports the −70 → 0 mV (70-mV) response as 148 ± 29% (not a full 100-mV step), so 148% is NOT used as the dynamic range here.",
       "proofread": false
     },
     {
       "deltaF": 212,
       "sign": "positive",
+      "modality": "1P",
       "source": "doi:10.1101/2024.06.21.599617",
       "sourceFigure": "Table S1",
       "proofread": false
@@ -757,23 +771,35 @@
   ],
   "sensitivityData": [
     {
-      "deltaF": 23,
+      "deltaF": 38,
+      "modality": "1P",
       "source": "doi:10.1038/s41592-023-01913-z",
-      "sourceFigure": "Extended Data Fig. 5a",
+      "sourceFigure": "Table 1",
+      "note": "\u0394FAP/F0 to a 3.5-ms FWHM, 100-mV AP waveform by voltage patch-clamp in HEK293A cells, room temperature, 1P (Table 1 reference value).",
+      "proofread": false
+    },
+    {
+      "deltaF": 23,
+      "modality": "1P",
+      "source": "doi:10.1038/s41592-023-01913-z",
+      "sourceFigure": "Ext. Fig. 5a",
+      "note": "\u0394FAP/F\u221270 to a 2-ms FWHM AP, HEK293A voltage clamp, 1P (order ASAP4b 19% < ASAP3 22% < ASAP4e 23%).",
       "proofread": false
     },
     {
       "deltaF": 41,
+      "modality": "1P",
       "source": "doi:10.1038/s41592-023-01913-z",
-      "sourceFigure": "Extended Data Fig. 5c",
-      "notes": "1ms FWHM AP waveform at 37\u00b0C",
+      "sourceFigure": "Ext. Fig. 5c",
+      "note": "Naturalistic mouse-hippocampal single-AP waveform (1-ms FWHM) at 37\u00b0C, HEK293A voltage clamp, 1P.",
       "proofread": false
     },
     {
       "deltaF": 33,
+      "modality": "1P",
       "source": "doi:10.1101/2024.06.21.599617",
       "sourceFigure": "Table S1",
-      "notes": "3.5ms FWHM AP waveform, 100mV, room temperature, HEK293A cells",
+      "note": "3.5-ms FWHM AP waveform, 100 mV, room temperature, HEK293A cells, 1P.",
       "proofread": false
     }
   ],
@@ -782,7 +808,7 @@
       "ratio": 0.362,
       "reference": "asap3",
       "source": "doi:10.1038/s41592-023-01913-z",
-      "sourceFigure": "Extended Data Fig. 3d",
+      "sourceFigure": "Ext. Fig. 3d",
       "proofread": false
     },
     {
@@ -798,8 +824,10 @@
       "brightnessRemaining": 100,
       "illumination": "100 mW/mm\u00b2",
       "duration": "1 min",
+      "modality": "1P",
       "source": "doi:10.1038/s41592-023-01913-z",
       "sourceFigure": "Fig. 2b",
+      "note": "ASAP4e-Kv showed 0 \u00b1 10% fluorescence loss (\u2192 \u2248100% remaining) after 60 s of continuous 100-mW/mm\u00b2 one-photon illumination in hippocampal SST+ interneurons in vivo (Fig. 2b). The near-zero net bleaching is genuine: some ASAP4e-Kv cells exhibit photoactivation that offsets photobleaching. Powers used were 100\u2013250 mW/mm\u00b2, normalized to 100 mW/mm\u00b2 assuming linearity.",
       "proofread": false
     }
   ],
@@ -816,6 +844,33 @@
     "proofread": false
   },
   "researchPapers": [
+    {
+      "title": "A positively tuned voltage indicator for extended electrical recordings in the brain",
+      "authors": "Evans SW, Shi DQ, Chavarha M, et al.",
+      "journal": "Nature Methods",
+      "year": 2023,
+      "url": "https://doi.org/10.1038/s41592-023-01913-z",
+      "sample": "HEK293A cells (voltage clamp), mouse hippocampus and cortex, in vivo (origin paper introducing ASAP4e)",
+      "proofread": false
+    },
+    {
+      "title": "Improving positively tuned voltage indicators for faster kinetics and higher contrast",
+      "authors": "Lee S, Zhang G, Hao YA, et al.",
+      "journal": "bioRxiv",
+      "year": 2024,
+      "url": "https://doi.org/10.1101/2024.06.21.599617",
+      "sample": "HEK293A cells, voltage clamp and AP-waveform characterization of ASAP4e",
+      "proofread": false
+    },
+    {
+      "title": "A versatile, positive-going voltage indicator that enables accessible two-photon recordings in vivo",
+      "authors": "McDonald AJ, Land MA, Yang S, et al.",
+      "journal": "bioRxiv",
+      "year": 2026,
+      "url": "https://doi.org/10.64898/2026.04.07.717088",
+      "sample": "HEK293A cells, ASAP4e benchmarked under 2P excitation against FORCE1s (kinetics, F-V, brightness, spike waveforms)",
+      "proofread": false
+    },
     {
       "title": "Voltage imaging reveals hippocampal inhibitory dynamics shaping pyramidal memory-encoding sequences",
       "authors": "Taxidis J, et al.",

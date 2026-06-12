@@ -425,16 +425,17 @@
     },
     "source": "doi:10.1038/s41592-022-01743-5",
     "sourceImage": "/fv-sources/quasar6b.jpg",
-    "sourceFigure": "Fig. 3c",
+    "sourceFigure": "Ext. Fig. 4c",
     "proofread": false
   },
   "kinetics": [
     {
-      "on": 0.8,
-      "off": 0.8,
+      "on": 1.6,
+      "off": 1.5,
       "temperature": "30°C",
       "source": "doi:10.1038/s41592-022-01743-5",
-      "sourceFigure": "Extended Data Fig. 4d",
+      "sourceFigure": "Ext. Fig. 4e",
+      "note": "Amplitude-weighted mean from biexponential fit at 30°C. Activation: 87% fast tau 0.8 ms, 13% slow tau 6.6 ms. Deactivation: 87% fast tau 0.8 ms, 13% slow tau 6.0 ms.",
       "proofread": false
     }
   ],
@@ -442,9 +443,10 @@
     {
       "deltaF": 24,
       "sign": "positive",
+      "modality": "1P",
       "source": "doi:10.1038/s41592-022-01743-5",
-      "sourceFigure": "Extended Data Fig. 4c",
-      "note": "In HEK293T cells, voltage clamp, per 100 mV step, n=4 cells",
+      "sourceFigure": "Ext. Fig. 4c",
+      "note": "In HEK293T cells, voltage clamp with 635 nm one-photon excitation, per 100 mV step, n=4 cells",
       "proofread": false
     }
   ],
@@ -453,16 +455,17 @@
       "ratio": 2,
       "reference": "archon1",
       "source": "doi:10.1038/s41592-022-01743-5",
-      "sourceFigure": "Extended Data Fig. 4b",
+      "sourceFigure": "Ext. Fig. 4b",
       "proofread": false
     }
   ],
   "sensitivityData": [
     {
-      "deltaF": 27,
+      "deltaF": 14,
+      "modality": "1P",
       "source": "doi:10.1038/s41592-022-01743-5",
-      "sourceFigure": "Fig. 3c",
-      "note": "Fractional voltage sensitivity from -70 to +20 mV in cultured rat hippocampal neurons, mean ± S.D. = 27 ± 3%, from Fig. 3c",
+      "sourceFigure": "Fig. 3i",
+      "note": "Per-spike ΔF/F from high-throughput Optopatch assay in cultured rat hippocampal neurons at room temperature, 635 nm one-photon excitation, highest virus titer, n=596 cells; visually estimated from Fig. 3i, with titer series in Ext. Fig. 5c. The 27 ± 3% value in Fig. 3c is a -70 to +20 mV voltage-clamp measurement, not AP sensitivity.",
       "proofread": false
     }
   ],
@@ -472,7 +475,8 @@
       "illumination": "4200 mW/mm²",
       "duration": "10 min",
       "source": "doi:10.1038/s41592-022-01743-5",
-      "sourceFigure": "Extended Data Fig. 6f",
+      "sourceFigure": "Ext. Fig. 4f",
+      "note": "Photobleaching by 635 nm laser at 420 W/cm² (= 4200 mW/mm²) over 10 min in HEK293T cells, n=2 cells. Caption states all constructs showed <40% photobleaching over 10 min; QuasAr6b trace ends at ~62-65% remaining. (Main text mis-cites this as Ext. Fig. 6f, but the photobleach panel is Ext. Fig. 4f.)",
       "proofread": false
     }
   ],

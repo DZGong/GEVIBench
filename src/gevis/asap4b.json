@@ -16,9 +16,12 @@
   "siblingId": "asap4e",
   "spectrum": {
     "type": "fp",
-    "peakEx": 490,
-    "peakEm": 509,
+    "peakEx": 489,
+    "peakEm": 511,
     "name": "ASAP4b",
+    "source": "doi:10.1038/s41592-023-01913-z",
+    "sourceFigure": "Ext. Fig. 3e",
+    "note": "One-photon excitation/emission spectra of ASAP3, ASAP4b and ASAP4e were measured in HEK293-Kir2.1 cells (Ext. Fig. 3e). ASAP4b and ASAP4e share an identical GFP chromophore environment, so the cpGFP excitation (~489 nm) and emission lineshapes are essentially identical; the digitized 1-nm-resolution custom curve peaks at 489 nm (ex) and 511 nm (em). ASAP4 variants show slightly redder emission than ASAP3. The follow-up FORCE1s preprint (doi:10.64898/2026.04.07.717088, Fig. S1.2A) reports a measured ASAP4e 1P emission peak of 518 nm in HEK293A cells; peakEm here is set to the digitized custom-curve peak (511 nm), shared with ASAP4e.",
     "custom": {
       "minEx": 300,
       "excitation": [
@@ -675,42 +678,57 @@
     "name": "ASAP4b",
     "custom": {
       "voltage": [
+        -120,
         -100,
+        -80,
         -70,
+        -60,
         -40,
+        -20,
         0,
-        30
+        30,
+        50,
+        70,
+        90
       ],
       "deltaF": [
-        -63,
+        -25,
+        -18,
+        -6,
         0,
-        67,
-        144,
-        178
+        6,
+        24,
+        53,
+        96,
+        180,
+        208,
+        230,
+        245
       ]
     },
     "source": "doi:10.1038/s41592-023-01913-z",
     "sourceImage": "/fv-sources/asap4b.jpg",
     "sourceFigure": "Fig. 1B",
+    "note": "Re-digitized from the F-V plot in Fig. 1B (ASAP4b = blue, ASAP4.2 F413G) at the measured command-voltage steps, normalized to ΔF/F=0 at -70 mV with +30 mV anchored to the Table 1 100-mV value (+180%). Spans the full plotted range (-120 to +90 mV, reaching ~+245%); the response continues to rise and plateau past +30 mV. The prior curve was a sparse 5-point fit with an over-steep negative/mid-range arm.",
     "proofread": false
   },
   "kinetics": [
     {
-      "on": 3.93,
-      "off": 8.4,
+      "on": 17.66,
+      "off": 22.85,
       "temperature": "22°C",
       "source": "doi:10.1038/s41592-023-01913-z",
       "sourceFigure": "Table S1",
-      "note": "Bi-exponential fast component. Supplementary Table 1 columns for ASAP4b and ASAP4e appear swapped — values here are corrected (ASAP4b is the bright-optimized variant, expected to be slower than speed-optimized ASAP4e)",
+      "note": "Amplitude-weighted mean of bi-exponential fit (Supplementary Table 1, ASAP4b at 22 °C, HEK293A voltage clamp). On (depolarization −70→+30 mV): τfast 2.62 ms (19.1%), τslow 21.21 ms → weighted mean 17.66 ms. Off (repolarization +30→−70 mV): τfast 5.69 ms (8.8%), τslow 24.50 ms → weighted mean 22.85 ms. The main text rounds the depolarization fast component to 2.6 ms (19% amplitude) for ASAP4b vs 3.9 ms (14%) for ASAP4e; Table S1 is the source for the full multi-exponential fit used here.",
       "proofread": false
     },
     {
-      "on": 1.49,
-      "off": 3.66,
+      "on": 5.56,
+      "off": 7.0,
       "temperature": "37°C",
       "source": "doi:10.1038/s41592-023-01913-z",
       "sourceFigure": "Table S1",
-      "note": "Bi-exponential fast component. Supplementary Table 1 columns for ASAP4b and ASAP4e appear swapped — values here are corrected",
+      "note": "Amplitude-weighted mean of bi-exponential fit (Supplementary Table 1, ASAP4b at 37 °C). On (depolarization): τfast 1.53 ms (12.5%), τslow 6.13 ms → weighted mean 5.56 ms. Off (repolarization): τfast 1.54 ms (6.5%), τslow 7.38 ms → weighted mean 7.00 ms. As expected, brightness-optimized ASAP4b is slower than speed-optimized ASAP4e (4.55/4.71 ms at 37 °C).",
       "proofread": false
     }
   ],
@@ -718,13 +736,16 @@
     {
       "deltaF": 180,
       "sign": "positive",
+      "modality": "1P",
       "source": "doi:10.1038/s41592-023-01913-z",
       "sourceFigure": "Table 1",
+      "note": "ΔF100/F0 across the −70 → +30 mV (100-mV) step, voltage clamp in HEK293A cells under 1P widefield excitation.",
       "proofread": false
     },
     {
       "deltaF": 168,
       "sign": "positive",
+      "modality": "1P",
       "source": "doi:10.1101/2024.06.21.599617",
       "sourceFigure": "Table S1",
       "proofread": false
@@ -733,23 +754,34 @@
   "sensitivityData": [
     {
       "deltaF": 35,
+      "modality": "1P",
       "source": "doi:10.1038/s41592-023-01913-z",
       "sourceFigure": "Table 1",
-      "notes": "3.5ms FWHM, 100mV AP waveform, room temperature",
+      "note": "ΔFAP/F0 to a 3.5-ms FWHM, 100-mV AP waveform by voltage patch-clamp in HEK293A cells, room temperature, 1P.",
       "proofread": false
     },
     {
       "deltaF": 30,
+      "modality": "1P",
       "source": "doi:10.1038/s41592-023-01913-z",
-      "sourceFigure": "Extended Data Fig. 5c",
-      "notes": "Naturalistic hippocampal AP waveform, 37°C",
+      "sourceFigure": "Ext. Fig. 5c",
+      "note": "Naturalistic hippocampal AP-burst waveform (1-ms FWHM spikes), single-AP response, 37°C, 1P.",
       "proofread": false
     },
     {
       "deltaF": 31,
+      "modality": "1P",
       "source": "doi:10.1101/2024.06.21.599617",
       "sourceFigure": "Table S1",
-      "notes": "3.5ms FWHM AP waveform, 100mV, room temperature, HEK293A cells",
+      "note": "3.5-ms FWHM AP waveform, 100 mV, room temperature, HEK293A cells, 1P.",
+      "proofread": false
+    },
+    {
+      "deltaF": 13,
+      "modality": "1P",
+      "source": "doi:10.1126/sciadv.ads1807",
+      "note": "ASAP4b: 13.0 ± 1.3% ΔF/F0 per AP (n = 4) in cultured rat hippocampal neurons at 484 Hz, 1P epifluorescence (488 nm), measured in the HVI+ paper as a green positive-going reference. Lower than the origin-paper AP-waveform values (30–35%) because the 484 Hz frame rate undersamples the fast AP peak.",
+      "sourceFigure": "Table S2",
       "proofread": false
     }
   ],
@@ -758,7 +790,7 @@
       "ratio": 0.4468,
       "reference": "asap3",
       "source": "doi:10.1038/s41592-023-01913-z",
-      "sourceFigure": "Extended Data Fig. 3d",
+      "sourceFigure": "Ext. Fig. 3d",
       "proofread": false
     }
   ],
@@ -767,8 +799,10 @@
       "brightnessRemaining": 68,
       "illumination": "100 mW/mm²",
       "duration": "1 min",
+      "modality": "1P",
       "source": "doi:10.1038/s41592-023-01913-z",
       "sourceFigure": "Fig. 2b",
+      "note": "ASAP4b-Kv showed 32 ± 8% fluorescence loss (→ 68% remaining) after 60 s of continuous 100-mW/mm² one-photon illumination in hippocampal SST+ interneurons in vivo (powers 100–250 mW/mm² normalized to 100 mW/mm² assuming linearity).",
       "proofread": false
     }
   ],
@@ -785,6 +819,33 @@
     "proofread": false
   },
   "researchPapers": [
+    {
+      "title": "A positively tuned voltage indicator for extended electrical recordings in the brain",
+      "authors": "Evans SW, Shi DQ, Chavarha M, et al.",
+      "journal": "Nature Methods",
+      "year": 2023,
+      "url": "https://doi.org/10.1038/s41592-023-01913-z",
+      "sample": "HEK293A cells (voltage clamp), mouse hippocampus and striatum, in vivo (origin paper introducing ASAP4b)",
+      "proofread": false
+    },
+    {
+      "title": "Improving positively tuned voltage indicators for faster kinetics and higher contrast",
+      "authors": "Lee S, Zhang G, Hao YA, et al.",
+      "journal": "bioRxiv",
+      "year": 2024,
+      "url": "https://doi.org/10.1101/2024.06.21.599617",
+      "sample": "HEK293A cells, voltage clamp and AP-waveform characterization of ASAP4b",
+      "proofread": false
+    },
+    {
+      "title": "Positive-going hybrid indicators for voltage imaging in excitable cells and tissues",
+      "authors": "Liu S, et al.",
+      "journal": "Science Advances",
+      "year": 2025,
+      "url": "https://doi.org/10.1126/sciadv.ads1807",
+      "sample": "Cultured rat hippocampal neurons, ASAP4b used as a green positive-going reference (484 Hz, 1P)",
+      "proofread": false
+    },
     {
       "title": "Voltage imaging reveals hippocampal inhibitory dynamics shaping pyramidal memory-encoding sequences",
       "authors": "Taxidis J, et al.",

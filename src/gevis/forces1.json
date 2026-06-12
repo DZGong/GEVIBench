@@ -14,11 +14,11 @@
   "spectrum": {
     "type": "fp",
     "peakEx": 489,
-    "peakEm": 511,
+    "peakEm": 516,
     "name": "FORCE1s",
     "source": "FPbase: JEDI-2P (parent)",
     "sourceFigure": "Fig. S1.2A",
-    "note": "Spectrum lineshape is inherited from the parent JEDI-2P (FPbase, 1 nm-resolution arrays). The FORCE1s preprint shows the 1P excitation/emission spectrum of FORCE1s in Fig. S1.2A and states it is 'qualitatively similar' to JEDI-2P and ASAP4e, but does not numerically declare 1P peak wavelengths for FORCE1s. Peaks (489 nm ex / 511 nm em) are therefore taken from the parent JEDI-2P. FORCE1s does not yet have a dedicated FPbase entry.",
+    "note": "Spectrum lineshape is inherited from the parent JEDI-2P (FPbase, 1 nm-resolution arrays). The FORCE1s preprint shows the 1P excitation/emission spectrum of FORCE1s in Fig. S1.2A and states it is 'qualitatively similar' to JEDI-2P and ASAP4e. Fig. S1.2A reports a measured FORCE1s 1P emission peak of 516 ± 1 nm (vs 519 nm for JEDI-2P, 518 nm for ASAP4e, 511 nm for EGFP; HEK293A cells excited at 430/10 nm), so peakEm is set to 516. No 1P excitation peak is numerically declared for FORCE1s, so peakEx (489 nm) and the custom curve lineshape are taken from the parent JEDI-2P. FORCE1s does not yet have a dedicated FPbase entry.",
     "custom": {
       "minEx": 300,
       "excitation": [
@@ -104,8 +104,8 @@
     "sourceImage": "/fv-sources/forces1.jpg",
     "sourceFigure": "Fig. 1E",
     "custom": {
-      "voltage": [-120, -100, -70, -40, -20, 0, 30],
-      "deltaF":  [-10, -7, 0, 87, 165, 227, 260]
+      "voltage": [-120, -100, -80, -70, -60, -40, -20, 0, 20, 30, 50],
+      "deltaF":  [-37, -31, -7, 0, 19, 78, 186, 234, 255, 273, 286]
     },
     "proofread": false
   },
@@ -123,10 +123,12 @@
 
   "dynamicRangeData": [
     {
-      "deltaF": 227,
+      "deltaF": 270,
       "sign": "positive",
+      "modality": "2P",
       "source": "doi:10.64898/2026.04.07.717088",
       "sourceFigure": "Fig. 1E",
+      "note": "ΔF/F0 for a true 100-mV step (-70 → +30 mV), read off the steady-state voltage-response curve (Fig. 1E; FORCE1s green point at +30 mV ≈ 270%). Whole-cell voltage clamp with 2P imaging at 33°C in HEK293A cells (n = 7). The paper's headline number, 227 ± 34%, is the -70 → 0 mV (70-mV) step, not a 100-mV step; the -70 → -40 mV (30-mV) step was 87.4 ± 13.9% (Fig. 1F, Fig. S1.2C).",
       "proofread": false
     }
   ],
@@ -134,8 +136,10 @@
   "sensitivityData": [
     {
       "deltaF": 92.7,
+      "modality": "2P",
       "source": "doi:10.64898/2026.04.07.717088",
-      "sourceFigure": "Fig. 3A-B",
+      "sourceFigure": "Fig. 3B",
+      "note": "Mean single-spike (isolated AP) response amplitude of FORCE1s-Kv in Layer 2/3 V1 neurons of awake, head-fixed mice under ULoVE 2P microscopy (92.7 ± 24.9% ΔF/F, mean ± SD; 3.4-fold larger than JEDI-2P-Kv's 27.6 ± 4.1%).",
       "proofread": false
     }
   ],
@@ -162,11 +166,22 @@
   "photostabilityData": [
     {
       "brightnessRemaining": 87,
-      "illumination": "100 mW/mm²",
+      "illumination": "100 mW",
       "duration": "6 min",
+      "modality": "2P",
       "source": "doi:10.64898/2026.04.07.717088",
       "sourceFigure": "Fig. S1.2B",
-      "note": "100 mW at sample plane under 2P resonant scanning (940 nm) — recorded as mW/mm² for parser compatibility, matching the convention used for other 2P GEVIs in this database.",
+      "note": "In vitro (HEK293A). 100 mW power at the sample plane under 2P resonant scanning at 940 nm over a 40 × 635 µm FOV for 6 min (Fig. S1.2B). The paper reports a sample-plane POWER, not an irradiance, so it is stored as a power (mW) and will not normalize to the mW/mm² standard. FORCE1s showed greater photostability than JEDI-2P and comparable photostability to ASAP4e.",
+      "proofread": false
+    },
+    {
+      "brightnessRemaining": 72,
+      "illumination": "50-65 mW",
+      "duration": "40 min",
+      "modality": "2P",
+      "source": "doi:10.64898/2026.04.07.717088",
+      "sourceFigure": "Fig. 6D",
+      "note": "In vivo, freely moving mice (V1 L2/3) using a MINI2P miniature 2P microscope. FORCE1s-Kv retained 72 ± 9% of baseline fluorescence at the end of 40-min sessions (mean ± SEM, n = 5 neurons). Laser power 50-65 mW measured out of the objective (a power, not an irradiance), so this entry is display-only and does not normalize.",
       "proofread": false
     }
   ],

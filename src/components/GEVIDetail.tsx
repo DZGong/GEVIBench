@@ -140,6 +140,8 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
                     <div className="flex items-center justify-between gap-2">
                       <span>
                         <span className="font-semibold">{s.deltaF}%</span> <span className="text-ink">per AP</span>
+                        {s.dye && <span className="ml-1 align-middle text-[9px] px-1 py-0.5 rounded bg-klein/10 text-klein font-semibold">{s.dye}</span>}
+                        {s.modality && <span className="ml-1 align-middle text-[9px] px-1 py-0.5 rounded bg-ink/10 text-ink/70 font-semibold">{s.modality}</span>}
                       </span>
                       <span className="flex items-center gap-1.5 min-w-0">
                         <NoteTip note={s.note} />
@@ -159,7 +161,10 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
                       <span>
                         <span className="font-semibold">
                           {d.sign === 'negative' ? '-' : '+'}{Math.abs(d.deltaF)}%
-                        </span> <span className="text-ink">per 100mV</span>
+                        </span>
+                        {d.responseType === 'peak' && <span className="ml-1 align-middle text-[9px] px-1 py-0.5 rounded bg-gold/20 text-gold font-semibold whitespace-nowrap" title="Measured at the transient peak of the step response, not the steady-state plateau">peak state</span>}
+                        {d.dye && <span className="ml-1 align-middle text-[9px] px-1 py-0.5 rounded bg-klein/10 text-klein font-semibold">{d.dye}</span>}
+                        {d.modality && <span className="ml-1 align-middle text-[9px] px-1 py-0.5 rounded bg-ink/10 text-ink/70 font-semibold">{d.modality}</span>}
                       </span>
                       <span className="flex items-center gap-1.5 min-w-0">
                         <NoteTip note={d.note} />
@@ -183,7 +188,9 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
                 {gevi.photostabilityData.map((p: any, i: number) => (
                   <div key={i} className={`py-1 ${i < gevi.photostabilityData.length - 1 ? 'border-b border-ink/10' : ''}`}>
                     <div className="flex items-center justify-between gap-2">
-                      <span className="text-ink">F<sub>remain</sub>: <span className="font-semibold">{p.brightnessRemaining}%</span> @ {p.illumination}, {p.duration}</span>
+                      <span className="text-ink">F<sub>remain</sub>: <span className="font-semibold">{p.brightnessRemaining}%</span> @ {p.illumination}, {p.duration}
+                        {p.modality && <span className="ml-1 align-middle text-[9px] px-1 py-0.5 rounded bg-ink/10 text-ink/70 font-semibold">{p.modality}</span>}
+                      </span>
                       <span className="flex items-center gap-1.5 min-w-0">
                         <NoteTip note={p.note} />
                         <SourceLink source={p.source} sourceFigure={p.sourceFigure} />
@@ -283,7 +290,11 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
 
           {/* Spectrum Viewer */}
           <div>
-            <SpectrumViewer spectrumData={spectrumData} geviName={gevi.name} />
+            <SpectrumViewer
+              spectrumData={spectrumData}
+              geviName={gevi.name}
+              bioluminescent={gevi.category === 'Bioluminescent GEVI' || gevi.photostabilityData === 'bioluminescent'}
+            />
           </div>
         </div>
 

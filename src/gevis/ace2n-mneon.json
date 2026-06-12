@@ -9,7 +9,7 @@
   ],
   "paper": "Science 2015",
   "paperUrl": "https://doi.org/10.1126/science.aab0810",
-  "description": "First Opsin-fluorescent protein FRET voltage indicator using an Ace2 opsin,.",
+  "description": "First opsin–fluorescent protein FRET voltage indicator, using an Ace2 opsin and mNeonGreen.",
   "familyTreePath": [
     "GEVI",
     "Opsin",
@@ -519,7 +519,10 @@
         0.0002
       ]
     },
-    "proofread": false
+    "note": "Ace2N-mNeon is an eFRET sensor whose fluorescent reporter is mNeonGreen (the Ace2 opsin is the dark FRET acceptor that quenches it voltage-dependently). The stored excitation/emission arrays are the FPbase mNeonGreen curve verbatim (corr 1.0, max diff 0.0; peaks ex 504 / em 517). No separately measured Ace2N-mNeon ex/em curve is published, so mNeonGreen is the correct displayed fluorophore; source attribution was previously missing.",
+    "proofread": false,
+    "source": "FPbase: mNeonGreen",
+    "sourceFigure": "FPbase"
   },
   "voltage": {
     "type": "opsin",
@@ -528,7 +531,6 @@
     "name": "Ace2N-mNeon",
     "custom": {
       "voltage": [
-        -120,
         -100,
         -70,
         -50,
@@ -537,7 +539,6 @@
         30
       ],
       "deltaF": [
-        9,
         5.4,
         0,
         -3.6,
@@ -549,13 +550,15 @@
     "source": "doi:10.1126/science.aab0810",
     "sourceImage": "/fv-sources/ace2n-mneon.jpg",
     "sourceFigure": "Fig. 1D",
-    "proofread": false
+    "proofread": false,
+    "note": "Digitized from the dashed 'Ace2N-mNeon peak' curve in Fig. 1D (the monotonic peak/transient response), normalized to 0 at -70 mV. The solid steady-state 'Ace2N-mNeon' curve is shallower (bottoms at ~-6%) and non-monotonic (rises again above 0 mV), so the monotonic peak curve is used for the F-V. Removed a prior -120 mV point (ΔF/F +9%) that was extrapolated beyond the figure's -100 mV axis limit. The +30 mV value (-17.9%) is the peak response and matches the Gong-2015 dynamicRangeData entry; later studies report a smaller steady-state ~-9 to -11.6%."
   },
   "kinetics": [
     {
-      "on": 0.36,
-      "off": 0.42,
+      "on": 1.36,
+      "off": 2.14,
       "temperature": "22°C",
+      "note": "Table S2 is explicitly biexponential. Amplitude-weighted means: activation (depolarizing, '+') τon = 0.74×0.36 + 0.26×4.2 = 1.36 ms (τfast 0.36 ms 74%, τslow 4.2 ms); deactivation (hyperpolarizing, '−') τoff = 0.64×0.42 + 0.36×5.2 = 2.14 ms (τfast 0.42 ms 64%, τslow 5.2 ms). Previously stored the fast components only (0.36 / 0.42 ms). HEK293T voltage clamp.",
       "source": "doi:10.1126/science.aab0810",
       "sourceFigure": "Table S2",
       "proofread": false
@@ -569,12 +572,12 @@
       "proofread": false
     },
     {
-      "on": 0.81,
-      "off": 0.77,
+      "on": 2.33,
+      "off": 2.54,
       "source": "doi:10.1038/s41592-018-0188-7",
-      "note": "Bi-exponential fast component at 22°C in spiking HEK cells (60%* on, 60%* off); slow τ_on=4.6 ms, slow τ_off=5.2 ms",
+      "note": "Biexponential, 22°C, spiking HEK cells. Amplitude-weighted means using the reported (approximate) Pfast≈60%: τon = 0.60×0.81 + 0.40×4.6 = 2.33 ms (τfast 0.81 ms, τslow 4.6 ms); τoff = 0.60×0.77 + 0.40×5.2 = 2.54 ms (τfast 0.77 ms, τslow 5.2 ms). Previously stored the fast components only (0.81 / 0.77 ms); the amplitudes are marked approximate (*) in Table S1 of doi:10.1126/science.abm8797 (borrowed from Villette et al.), so the weighted mean is approximate but is preferred over the fast component alone per the multi-exponential rule.",
       "temperature": "22°C",
-      "sourceFigure": "Supplementary Table",
+      "sourceFigure": "Table S1",
       "proofread": false
     }
   ],
@@ -582,6 +585,28 @@
     {
       "deltaF": -17.9,
       "sign": "negative",
+      "responseType": "peak",
+      "modality": "1P",
+      "note": "Gong 2015 PEAK response — Fig. 1D dashed 'Ace2N-mNeon peak' curve, cultured neurons, 15 mW/mm², N=10, for a -70→+30 mV step. Ace2N-mNeon is hysteretic, so the paper plots peak and steady-state separately; this is the peak. The F-V curve (voltage.custom) is digitized from this same dashed curve.",
+      "source": "doi:10.1126/science.aab0810",
+      "sourceFigure": "Fig. 1D",
+      "proofread": false
+    },
+    {
+      "deltaF": -5,
+      "sign": "negative",
+      "modality": "1P",
+      "note": "Gong 2015 STEADY-STATE response — Fig. 1D solid 'Ace2N-mNeon' curve, cultured neurons, 15 mW/mm², N=10, read at +30 mV (the -70→+30 mV step). The steady-state is hysteretically suppressed relative to the peak and is non-monotonic (most-negative ~-6.5% near 0 mV, then rising above 0 mV).",
+      "source": "doi:10.1126/science.aab0810",
+      "sourceFigure": "Fig. 1D",
+      "proofread": false
+    },
+    {
+      "deltaF": -19.4,
+      "sign": "negative",
+      "responseType": "peak",
+      "modality": "1P",
+      "note": "Gong 2015 PEAK response from Fig. S6C — blue Ace2N-mNeon curve in the linker-variant comparison (Ace2N-mNeon / 2AA / 4AA), 50 mW/mm², for a -70→+30 mV step. Digitized values: ~0% at -70, -15.9% at 0 mV, -19.4% at +30, -19.9% at +40. Slightly larger magnitude than the Fig. 1D peak (different cells, ~3x higher illumination).",
       "source": "doi:10.1126/science.aab0810",
       "sourceFigure": "Fig. S6C",
       "proofread": false
@@ -589,6 +614,7 @@
     {
       "deltaF": -9,
       "sign": "negative",
+      "modality": "1P",
       "source": "doi:10.1016/j.cell.2019.11.004",
       "sourceFigure": "Table 1",
       "proofread": false
@@ -596,21 +622,41 @@
     {
       "deltaF": -11.6,
       "sign": "negative",
+      "modality": "1P",
       "source": "doi:10.1038/s41592-018-0188-7",
       "note": "Per 100 mV step in spiking HEK cells at 22°C",
       "sourceFigure": "Fig. 2b",
+      "proofread": false
+    },
+    {
+      "deltaF": -11.5,
+      "sign": "negative",
+      "modality": "1P",
+      "source": "doi:10.25378/janelia.21534411",
+      "note": "ΔF/F read from the Ace mNeon (light blue) F-V trace between -70 mV (baseline 0) and +30 mV in the Janelia patch-assay F-V curve figure (1P widefield, -20 mV steps, n=6); full sweep -110 to +50 mV spans ~+3.5% to -13%.",
+      "sourceFigure": "Fig. 1",
       "proofread": false
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 5,
+      "modality": "1P",
       "source": "doi:10.1016/j.cell.2019.11.004",
       "sourceFigure": "Table 1",
       "proofread": false
     },
     {
+      "deltaF": 5,
+      "modality": "1P",
+      "source": "doi:10.25378/janelia.21534411",
+      "note": "Median single-AP |ΔF/F0| read from the Ace mNeon (light blue) boxplot in the Janelia patch-assay spike-detection figure (1P widefield, PatcherBot cultured neurons, n=6); negative-going, median ≈ -5% (magnitude stored).",
+      "sourceFigure": "Fig. 2",
+      "proofread": false
+    },
+    {
       "deltaF": 4.9,
+      "modality": "1P",
       "source": "doi:10.1038/s41557-021-00641-1",
       "sourceFigure": "Table S3",
       "proofread": false
@@ -638,6 +684,7 @@
       "brightnessRemaining": 79,
       "illumination": "15 mW/mm²",
       "duration": "0.5 min",
+      "modality": "1P",
       "source": "doi:10.1126/science.aab0810",
       "sourceFigure": "Table S2",
       "proofread": false
@@ -646,8 +693,19 @@
       "brightnessRemaining": 50,
       "illumination": "31 mW/mm²",
       "duration": "1.5 min",
+      "modality": "1P",
       "source": "doi:10.1038/s41557-021-00641-1",
       "sourceFigure": "Table S6",
+      "proofread": false
+    },
+    {
+      "brightnessRemaining": 31,
+      "illumination": "25 mW/mm²",
+      "duration": "10 min",
+      "modality": "1P",
+      "source": "doi:10.1126/science.abm8797",
+      "note": "Read from the Ace-mNeon photobleaching curve in Fig. S11B (left panel, 505 nm LED at 25 mW/mm², HEK cells under continuous illumination); ~0.31 of initial fluorescence retained at 10 min. Measured as the green negative-going reference in the Kannan et al. dual-polarity paper.",
+      "sourceFigure": "Fig. S11B",
       "proofread": false
     }
   ],

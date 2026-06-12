@@ -433,7 +433,7 @@
   "voltage": {
     "type": "fret",
     "slope": 16,
-    "polarity": "negative",
+    "polarity": "positive",
     "name": "nirButterfly",
     "custom": {
       "voltage": [
@@ -449,21 +449,21 @@
         60
       ],
       "deltaF": [
-        5,
-        3,
+        -3,
+        -1,
         0,
-        -2,
-        -4,
-        -7,
-        -8,
-        -10,
-        -11,
-        -12
+        1,
+        4,
+        6,
+        8,
+        10,
+        11,
+        12
       ]
     },
     "source": "doi:10.1021/acschemneuro.0c00046",
     "sourceImage": "/fv-sources/nirbutterfly.jpg",
-    "sourceFigure": "Fig. 3b",
+    "sourceFigure": "Fig. 3b (NIR GEVIb)",
     "proofread": false
   },
   "kinetics": [
@@ -478,22 +478,25 @@
   ],
   "dynamicRangeData": [
     {
-      "deltaF": -16,
-      "sign": "negative",
+      "deltaF": 10.2,
+      "sign": "positive",
+      "modality": "1P",
       "source": "doi:10.1021/acschemneuro.0c00046",
-      "sourceFigure": "Table 1",
+      "sourceFigure": "Main text (Results)",
       "proofread": false
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 6,
+      "modality": "1P",
       "source": "doi:10.1021/acschemneuro.0c00046",
       "sourceFigure": "Fig. 4b",
       "proofread": false
     },
     {
       "deltaF": 0.34,
+      "modality": "1P",
       "source": "doi:10.1117/1.NPh.11.2.024201",
       "sourceFigure": "Fig. 3c",
       "proofread": false

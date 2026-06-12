@@ -11,8 +11,8 @@
   ],
   "paper": "bioRxiv 2026",
   "paperUrl": "https://doi.org/10.1101/2024.06.21.599617",
-  "description": "Contrast-optimized sibling of ASAP6b with the largest per-spike fluorescence increase and signal-to-noise of the ASAP lineage for one- and two-photon spike detection in vivo.",
-  "parentId": "asap6b",
+  "description": "Contrast-optimized descendant of ASAP4b with the largest per-spike fluorescence increase and signal-to-noise of the ASAP lineage for one- and two-photon spike detection in vivo.",
+  "parentId": "asap4b",
   "spectrum": {
     "type": "fp",
     "peakEx": 490,
@@ -721,24 +721,28 @@
     {
       "deltaF": 222,
       "sign": "positive",
+      "modality": "1P",
       "source": "doi:10.1101/2024.06.21.599617",
       "sourceFigure": "Table S2",
+      "note": "ΔF/F0 upon a 100-mV step from -70 to +30 mV in whole-cell voltage clamp, HEK293A cells, room temperature",
       "proofread": false
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 70,
+      "modality": "1P",
       "source": "doi:10.1101/2024.06.21.599617",
       "sourceFigure": "Table S2",
-      "notes": "2.0ms FWHM AP waveform, 100mV, room temperature, HEK293A cells",
+      "note": "2.0ms FWHM AP waveform, 100mV, room temperature, HEK293A cells (whole-cell voltage clamp)",
       "proofread": false
     },
     {
       "deltaF": 98,
+      "modality": "1P",
       "source": "doi:10.1101/2024.06.21.599617",
       "sourceFigure": "Table S4",
-      "notes": "Single AP in cultured rat hippocampal neurons (ASAP6c-Kv)",
+      "note": "Single AP in cultured rat hippocampal neurons (ASAP6c-Kv), one-photon widefield imaging at 800 fps, physiological temperature",
       "proofread": false
     }
   ],
@@ -748,7 +752,7 @@
       "reference": "asap4e",
       "source": "doi:10.1101/2024.06.21.599617",
       "sourceFigure": "Table S4",
-      "notes": "Per-neuron relative brightness, ASAP6c-Kv vs ASAP4e-Kv",
+      "note": "Per-neuron relative brightness, ASAP6c-Kv vs ASAP4e-Kv (both normalized to ASAP4e-Kv = 1.0)",
       "proofread": false
     }
   ],

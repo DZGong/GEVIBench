@@ -579,6 +579,7 @@
     "polarity": "negative",
     "name": "JEDI-3sub",
     "source": "doi:10.1038/s41592-026-03043-8",
+    "sourceImage": "/fv-sources/jedi3sub.jpg",
     "sourceFigure": "Fig. 1h (main panel) and Fig. S3C (33°C)",
     "custom": {
       "voltage": [
@@ -622,17 +623,20 @@
     {
       "deltaF": -63.5,
       "sign": "negative",
+      "modality": "2P",
       "source": "doi:10.1038/s41592-026-03043-8",
       "sourceFigure": "Fig. 1h",
-      "note": "Response to a 100-mV depolarizing step from -70 mV in HEK293A cells (main text). Fig. 1h shows ΔF/F ≈ -62% at +30 mV (saturating).",
+      "note": "Response to a 100-mV depolarizing step (-70 mV to +30 mV) at 23°C in HEK293A cells under 2P excitation at 940 nm (Fig. 1h; value reported in main text and Supplementary Fig. 3/Table 2 as 63.5%). Fig. 1h shows ΔF/F saturating near -62% at +30 mV.",
       "proofread": false
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 42.8,
+      "modality": "2P",
       "source": "doi:10.1038/s41592-026-03043-8",
       "sourceFigure": "Fig. 1j",
+      "note": "Peak -%ΔF/Fo response to a 2-ms FWHM single-spike waveform at 23°C under 2P excitation at 940 nm in HEK293A cells (Fig. 1j, n = 8). Compare JEDI-2P 23.3% and JEDI3hyp 36.4% in the same experiment.",
       "proofread": false
     }
   ],
@@ -648,18 +652,19 @@
       "ratio": 1.39,
       "reference": "asap5",
       "source": "doi:10.1038/s41592-026-03043-8",
-      "sourceFigure": "Extended Data Fig. 1c",
+      "sourceFigure": "Ext. Fig. 1c",
       "proofread": false
     }
   ],
   "photostabilityData": [
     {
       "brightnessRemaining": 50,
-      "illumination": "37 mW/mm²",
+      "illumination": "37 mW",
       "duration": "6 min",
+      "modality": "2P",
       "source": "doi:10.1038/s41592-026-03043-8",
       "sourceFigure": "Fig. 1e",
-      "note": "~50% fluorescence remaining after 6 min under 2P resonant scanning (940 nm, 37 mW at sample plane, 440 Hz) at 23°C in HEK293-Kir2.1 cells (Fig. 1e, n = 4). Comparable to JEDI-2P (~48-50%) and JEDI3hyp (~52%) in the same experiment (Fig. 1f, similar across 29-100 mW range).",
+      "note": "~50% fluorescence remaining after 6 min under 2P resonant scanning (940 nm, 37 mW at the sample plane, 440 Hz) at 23°C in HEK293-Kir2.1 cells (Fig. 1e, n = 4). Power reported as 37 mW at the sample plane (not an irradiance), so not directly comparable to the 100 mW/mm² 1P standard. Comparable to JEDI-2P (~48-50%) and JEDI3hyp (~52%) in the same experiment (Fig. 1f, similar across 29-100 mW range).",
       "proofread": false
     }
   ],

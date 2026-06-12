@@ -705,26 +705,26 @@
     "name": "Positron (JF525)",
     "custom": {
       "voltage": [
-        -100,
+        -110,
+        -90,
         -70,
         -50,
         -30,
         -10,
-        0,
         10,
         30,
         50
       ],
       "deltaF": [
         -8,
+        -5,
         0,
-        7,
+        5,
+        9,
         12,
         16,
-        18,
         20,
-        23,
-        25
+        24
       ]
     },
     "source": "doi:10.1038/s41467-020-17322-1",
@@ -734,12 +734,21 @@
   },
   "kinetics": [
     {
-      "on": 0.63,
-      "off": 0.64,
+      "on": 3.39,
+      "off": 4.28,
       "temperature": "25°C",
       "source": "doi:10.1038/s41467-020-17322-1",
-      "note": "Bi-exponential fast component in voltage-clamped rat neurons (85% on, 90% off); slow τ_on=19 ms, slow τ_off=37 ms. Imaged at 3.2 kHz.",
+      "note": "Amplitude-weighted mean τ from the bi-exponential fit in voltage-clamped rat neurons (imaged at 3.2 kHz). Activation: τfast 0.63 ms (85%) + τslow 19 ms (15%) → τ̄ = 3.39 ms. Deactivation: τfast 0.64 ms (90%) + τslow 37 ms (10%) → τ̄ = 4.28 ms. (Previously stored as the fast component 0.63/0.64.)",
       "sourceFigure": "Table S1",
+      "proofread": false
+    },
+    {
+      "on": 11.27,
+      "off": 10.76,
+      "temperature": "25°C",
+      "note": "Positron525, amplitude-weighted mean τ from the bi-exponential fit in Table S2 of the HVI+ paper (HEK293T whole-cell voltage clamp, room temperature). Activation: τfast 1.31 ms (86.4%) + τslow 74.54 ms (13.6%) → τ̄ = 11.27 ms. Deactivation: τfast 1.42 ms (86.3%) + τslow 69.56 ms (13.7%) → τ̄ = 10.76 ms. The pronounced ~70 ms slow component makes this cross-measurement much slower than the original Positron-paper fit.",
+      "source": "doi:10.1126/sciadv.ads1807",
+      "sourceFigure": "Table S2",
       "proofread": false
     }
   ],
@@ -747,6 +756,9 @@
     {
       "deltaF": 23,
       "sign": "positive",
+      "modality": "1P",
+      "dye": "JF525",
+      "note": "ΔF/F at +30 mV relative to −70 mV baseline read from the Positron (red) F-V curve (Fig. 2a) in voltage-clamped rat hippocampal neurons, 1P widefield. Positron is not two-photon compatible (paper states rhodopsin eFRET GEVIs are 1P-only).",
       "source": "doi:10.1038/s41467-020-17322-1",
       "sourceFigure": "Fig. 2a",
       "proofread": false
@@ -754,9 +766,31 @@
     {
       "deltaF": 20,
       "sign": "positive",
+      "modality": "1P",
+      "dye": "JF525",
+      "note": "Per 100 mV step in spiking HEK cells, 1P widefield.",
       "source": "doi:10.1038/s41467-020-17322-1",
-      "note": "Per 100 mV step in spiking HEK cells at 22°C",
       "sourceFigure": "Fig. S4",
+      "proofread": false
+    },
+    {
+      "deltaF": 14.7,
+      "sign": "positive",
+      "modality": "1P",
+      "dye": "JF525",
+      "source": "doi:10.1126/sciadv.ads1807",
+      "note": "Positron525: 14.7 ± 0.7% ΔF/F0 per 100 mV (−70 to +30 mV, n = 5) in HEK293T cells under whole-cell voltage clamp at 1058 Hz, 532 nm laser (1P), from Table S2 of the HVI+ paper.",
+      "sourceFigure": "Table S2",
+      "proofread": false
+    },
+    {
+      "deltaF": 12,
+      "sign": "positive",
+      "modality": "1P",
+      "dye": "JF525",
+      "source": "doi:10.25378/janelia.21534411",
+      "note": "ΔF/F read from the Positron (red) F-V trace between -70 mV (baseline 0) and +30 mV in the Janelia patch-assay F-V curve figure (1P widefield, -20 mV steps, n=6); full sweep -110 to +50 mV spans ~-6% to +14%.",
+      "sourceFigure": "Fig. 1",
       "proofread": false
     }
   ],
@@ -765,24 +799,40 @@
       "brightnessRemaining": 60,
       "illumination": "18 mW/mm²",
       "duration": "5 min",
+      "modality": "1P",
+      "note": "Soma-localized Positron-ST labeled with JF525, continuous 18 mW/mm² LED illumination for 5 min in neuron cultures (1P widefield); ~60% remaining at 5 min, bleaching at about half the rate of Voltron.",
       "source": "doi:10.1038/s41467-020-17322-1",
       "sourceFigure": "Fig. 2c",
       "proofread": false
     },
     {
       "brightnessRemaining": 50,
-      "illumination": "500 mW/mm²",
+      "illumination": "50 mW/mm²",
       "duration": "3.45 min",
+      "modality": "1P",
+      "note": "Positron525 photobleaching half-life of 207 ± 47 s in HEK293T cells under continuous 532 nm illumination at 5.0 W/cm² (= 50 mW/mm²); 50% remaining at 3.45 min. Half-life value from Table S5; representative bleach curve in Fig. S7.",
       "source": "doi:10.1126/sciadv.ads1807",
-      "sourceFigure": "Fig. S7",
+      "sourceFigure": "Table S5",
       "proofread": false
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 5.9,
+      "modality": "1P",
+      "dye": "JF525",
+      "note": "Positron525: 5.9 ± 0.8% ΔF/F0 per AP in cultured rat hippocampal neurons, 1P epifluorescence (JF525, 532 nm), measured in the HVI+ paper as a spectrally similar positive-going reference.",
       "source": "doi:10.1126/sciadv.ads1807",
       "sourceFigure": "Fig. S5B",
+      "proofread": false
+    },
+    {
+      "deltaF": 6.5,
+      "modality": "1P",
+      "dye": "JF525",
+      "source": "doi:10.25378/janelia.21534411",
+      "note": "Median single-AP ΔF/F0 read from the Positron (red) boxplot in the Janelia patch-assay spike-detection figure (1P widefield, PatcherBot cultured neurons, n=6).",
+      "sourceFigure": "Fig. 2",
       "proofread": false
     }
   ],

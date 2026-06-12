@@ -18,6 +18,9 @@
     "peakEx": 567,
     "peakEm": 592,
     "name": "FlicR2",
+    "source": "FPbase: mApple",
+    "sourceFigure": "FPbase",
+    "note": "FlicR2 is not in FPbase; the displayed curve is the parent fluorophore mApple (the FlicR reporter cpmApple is a circular permutation of mApple). The stored excitation/emission arrays are the FPbase mApple spectrum verbatim (ex 568 nm / em 592 nm), which match FlicR2's reported red cpmApple peaks. The VARNAM paper (Kannan et al. 2018) that introduced FlicR2 does not provide a standalone FlicR2 spectrum.",
     "proofread": false,
     "custom": {
       "minEx": 300,
@@ -623,21 +626,34 @@
       ]
     }
   },
+  "kinetics": [
+    {
+      "on": 16.2,
+      "off": 15.8,
+      "temperature": "22-25°C",
+      "source": "doi:10.1038/s41592-018-0188-7",
+      "note": "Amplitude-weighted mean τ of a biexponential fit (depolarizing/repolarizing voltage steps in HEK cells, voltage clamp, room temp 22-25 °C, n = 4; 561 nm laser, 50 mW/mm²; VARNAM/Kannan 2018 Table S1, which also characterizes FlicR2). Rise: τfast 2.9 ± 0.2 ms, τslow 29.5 ± 2.1 ms → on = 16.2 ms. Decay: τfast 3.1 ± 0.6 ms, τslow 28.5 ± 4.5 ms → off = 15.8 ms. The paper reports only τfast/τslow, NOT the component amplitudes, so a 50:50 fast:slow split is assumed; FlicR2's fast component is ~2.9/3.1 ms if the fast term dominates.",
+      "sourceFigure": "Table S1",
+      "proofread": false
+    }
+  ],
   "dynamicRangeData": [
     {
-      "deltaF": 5.3,
+      "deltaF": 24,
       "sign": "positive",
+      "modality": "1P",
       "source": "doi:10.1038/s41592-018-0188-7",
-      "note": "FlicR2 gives -4.2 ± 0.5% ΔF/F for an 80-mV hyperpolarization (positive-going); equivalent to ~+5.3% per 100-mV depolarization. HEK cells, 1P, ~22°C.",
-      "sourceFigure": "Fig. 2b",
+      "note": "1P ΔF/F ≈ 24% across a -70 → +30 mV (100-mV) depolarizing step. Kannan et al. 2018 (VARNAM paper); HEK cells, widefield 1P, ~22°C.",
+      "sourceFigure": "Fig. 2c",
       "proofread": false
     },
     {
-      "deltaF": 27,
+      "deltaF": 24,
       "sign": "positive",
+      "modality": "2P",
       "source": "doi:10.64898/2026.06.01.726307",
-      "note": "2P steady-state F-V: 19 ± 11% ΔF/F across the -40 to +30 mV suprathreshold window (70-mV step), i.e. ~27% per 100 mV. Whole-cell voltage clamp with 2P imaging at 1050 nm, ~22°C, n = 5 cells.",
-      "sourceFigure": "Fig. 2E",
+      "note": "2P ΔF/F = 24% across a -70 → +30 mV (100-mV) step, read directly from the steady-state F-V curve (0% at -70 mV, +24% at +30 mV; VADER1-vs-FlicR2 comparison). Yang et al. 2026; whole-cell voltage clamp, 2P imaging at 1050 nm, ~22°C.",
+      "sourceFigure": "Fig. 2D",
       "proofread": false
     }
   ],

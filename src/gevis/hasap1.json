@@ -36,18 +36,18 @@
     "sourceImage": "/fv-sources/hasap1.jpg",
     "sourceFigure": "Fig. 4e",
     "custom": {
-      "voltage": [-110, -100, -90, -70, -50, -30, -10, 0, 30, 50],
-      "deltaF":  [-4, -3, -2, 0, 1, 3, 5, 6, 9, 12]
+      "voltage": [-110, -90, -70, -50, -30, -10, 10, 30, 50],
+      "deltaF":  [-3, -2, 0, 1, 2, 4, 6, 9, 13]
     },
     "proofread": false
   },
   "kinetics": [
     {
-      "on": 2.1,
-      "off": 1.1,
+      "on": 2.22,
+      "off": 2.4,
       "temperature": "25°C",
       "source": "doi:10.1038/s41589-021-00775-w",
-      "note": "Fast component of double-exponential fit (96% fast activation, 50% fast deactivation); slow τ_on=5.2 ms, slow τ_off=3.7 ms. Measured at 1 kHz during whole-cell voltage clamp from -70 to +30 mV in rat hippocampal neurons at room temperature (Supplementary Table 6).",
+      "note": "Amplitude-weighted mean τ from double-exponential fit. Activation: τ_fast=2.1 ms (96%), τ_slow=5.2 ms (4%) → 2.22 ms. Deactivation: τ_fast=1.1 ms (50%), τ_slow=3.7 ms (50%) → 2.40 ms. Measured at 1.2 kHz during whole-cell voltage clamp, 100 mV step (-70 to +30 mV) in rat hippocampal neurons at room temperature (Table S6).",
       "sourceFigure": "Table S6",
       "proofread": false
     }
@@ -56,8 +56,10 @@
     {
       "deltaF": 9.3,
       "sign": "positive",
+      "modality": "1P",
+      "dye": "JF635",
       "source": "doi:10.1038/s41589-021-00775-w",
-      "note": "ΔF/F for -70 mV to +30 mV (100 mV) step in rat hippocampal neurons labeled with JF635-HaloTag ligand",
+      "note": "ΔF/F = 9.3 ± 1% for -70 mV to +30 mV (100 mV) step in rat hippocampal neurons labeled with JF635-HaloTag ligand. Widefield (1P) voltage-clamp imaging at 400 Hz (645/30 nm excitation).",
       "sourceFigure": "Fig. 4e",
       "proofread": false
     }

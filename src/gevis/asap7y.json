@@ -410,7 +410,7 @@
       "off": 2.7,
       "temperature": "37°C",
       "source": "doi:10.64898/2026.05.27.728040",
-      "sourceFigure": "Fig. S1b",
+      "sourceFigure": "Ext. Fig. 1b",
       "proofread": false
     },
     {
@@ -418,7 +418,7 @@
       "off": 10.7,
       "temperature": "25°C",
       "source": "doi:10.64898/2026.05.27.728040",
-      "sourceFigure": "Fig. S1b",
+      "sourceFigure": "Ext. Fig. 1b",
       "proofread": false
     }
   ],
@@ -426,6 +426,7 @@
     {
       "deltaF": -80,
       "sign": "negative",
+      "modality": "1P",
       "source": "doi:10.64898/2026.05.27.728040",
       "sourceFigure": "Fig. 1b",
       "note": "ΔF/F0 across the physiological range from -70 mV to +30 mV (100-mV step) in voltage-clamped HEK293 cells; full dynamic range (Fmax/Fmin) = 18 vs 3.5 for ASAP5",
@@ -435,9 +436,18 @@
   "sensitivityData": [
     {
       "deltaF": 62,
+      "modality": "1P",
       "source": "doi:10.64898/2026.05.27.728040",
-      "sourceFigure": "Fig. S1c",
+      "sourceFigure": "Ext. Fig. 1c",
       "note": "Response to a commanded 100-mV action potential waveform in HEK293 cells at 37°C",
+      "proofread": false
+    },
+    {
+      "deltaF": 24,
+      "modality": "2P",
+      "source": "doi:10.64898/2026.05.27.728040",
+      "sourceFigure": "Fig. 2k",
+      "note": "Peak -ΔF/F per spontaneous action potential in Drosophila TPN-II neurons in vivo under 940-nm two-photon excitation; 81% higher than ASAP5 (13%) in the same prep",
       "proofread": false
     }
   ],
@@ -473,7 +483,7 @@
       "illumination": "10 µW/mm²",
       "duration": "60 min",
       "source": "doi:10.64898/2026.05.27.728040",
-      "sourceFigure": "Fig. S3a",
+      "sourceFigure": "Ext. Fig. 3a",
       "note": "~10% photobleaching over a 1-h recording of ASAP7y in PV interneurons in mouse cortex under CW 445-nm exposure (~10 µW/mm²), versus ~40% for ASAP3 under the same conditions",
       "proofread": false
     }

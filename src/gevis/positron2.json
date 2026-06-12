@@ -737,18 +737,22 @@
     {
       "deltaF": 38,
       "sign": "positive",
+      "modality": "1P",
+      "dye": "JF525",
       "source": "doi:10.25378/janelia.21534411",
       "sourceFigure": "Fig. 1",
-      "note": "Approximate ΔF/F read from the Positron2 trace between -70 mV and +30 mV in the local F-V characterization image.",
+      "note": "ΔF/F read from the Positron2 (blue) F-V trace between -70 mV (baseline 0) and +30 mV in the patch-assay F-V curve figure (1P widefield, -20 mV steps). Full sweep -110 to +50 mV spans -12% to +42%.",
       "proofread": false
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 16,
+      "modality": "1P",
+      "dye": "JF525",
       "source": "doi:10.25378/janelia.21534411",
       "sourceFigure": "Fig. 2",
-      "note": "Approximate median single-action-potential response read from the Positron2 boxplot in the local spike-detection characterization image.",
+      "note": "Median single-action-potential ΔF/F0 read from the Positron2 boxplot in the patch-assay spike-detection figure (1P widefield, PatcherBot cultured neurons, n=6); box spans ~11-17.5%.",
       "proofread": false
     }
   ],

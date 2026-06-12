@@ -425,16 +425,17 @@
     },
     "source": "doi:10.1038/s41592-022-01743-5",
     "sourceImage": "/fv-sources/quasar6.jpg",
-    "sourceFigure": "Fig. 3c",
+    "sourceFigure": "Ext. Fig. 4c",
     "proofread": false
   },
   "kinetics": [
     {
-      "on": 1.8,
-      "off": 1.3,
+      "on": 2.3,
+      "off": 1.6,
       "temperature": "30°C",
       "source": "doi:10.1038/s41592-022-01743-5",
-      "sourceFigure": "Extended Data Fig. 4d",
+      "sourceFigure": "Ext. Fig. 4e",
+      "note": "Amplitude-weighted mean from biexponential fit at 30°C. Activation: 90% fast tau 1.8 ms, 10% slow tau 6.3 ms. Deactivation: 88% fast tau 1.3 ms, 12% slow tau 4.1 ms.",
       "proofread": false
     }
   ],
@@ -442,9 +443,10 @@
     {
       "deltaF": 73,
       "sign": "positive",
+      "modality": "1P",
       "source": "doi:10.1038/s41592-022-01743-5",
-      "sourceFigure": "Extended Data Fig. 4c",
-      "note": "In HEK293T cells, voltage clamp, per 100 mV step, n=5 cells",
+      "sourceFigure": "Ext. Fig. 4c",
+      "note": "In HEK293T cells, voltage clamp with 635 nm one-photon excitation, per 100 mV step, n=5 cells",
       "proofread": false
     }
   ],
@@ -453,16 +455,17 @@
       "ratio": 1.7,
       "reference": "archon1",
       "source": "doi:10.1038/s41592-022-01743-5",
-      "sourceFigure": "Extended Data Fig. 4b",
+      "sourceFigure": "Ext. Fig. 4b",
       "proofread": false
     }
   ],
   "sensitivityData": [
     {
-      "deltaF": 26,
+      "deltaF": 23,
+      "modality": "1P",
       "source": "doi:10.1038/s41592-022-01743-5",
-      "sourceFigure": "Extended Data Fig. 5c",
-      "note": "Per-spike ΔF/F from high-throughput Optopatch assay in cultured rat hippocampal neurons at room temperature, highest virus titer, n=843 cells. From Extended Data Fig. 5c",
+      "sourceFigure": "Fig. 3i",
+      "note": "Per-spike ΔF/F from high-throughput Optopatch assay in cultured rat hippocampal neurons at room temperature, 635 nm one-photon excitation, highest virus titer, n=843 cells; visually estimated from Fig. 3i, with titer series in Ext. Fig. 5c.",
       "proofread": false
     }
   ],
@@ -472,7 +475,8 @@
       "illumination": "4200 mW/mm²",
       "duration": "10 min",
       "source": "doi:10.1038/s41592-022-01743-5",
-      "sourceFigure": "Extended Data Fig. 6f",
+      "sourceFigure": "Ext. Fig. 4f",
+      "note": "Photobleaching by 635 nm laser at 420 W/cm² (= 4200 mW/mm²) over 10 min in HEK293T cells, n=2 cells. Caption states all constructs showed <40% photobleaching over 10 min; QuasAr6a trace ends at ~62% remaining. (Main text mis-cites this as Ext. Fig. 6f, but the photobleach panel is Ext. Fig. 4f.)",
       "proofread": false
     }
   ],
@@ -489,6 +493,15 @@
       "year": 2023,
       "sample": "HEK293T cells, in vitro; Cultured rat hippocampal neurons, in vitro; Mouse cortex NDNF interneurons, in vivo; Mouse hippocampus PV interneurons, in vivo",
       "url": "https://doi.org/10.1038/s41592-022-01743-5",
+      "proofread": false
+    },
+    {
+      "title": "Dendritic branch structure compartmentalizes voltage-dependent calcium influx in cortical layer 2/3 pyramidal cells",
+      "authors": "Landau AT, Park P, Wong-Campos JD, Tian H, Cohen AE, Sabatini BL",
+      "journal": "eLife",
+      "year": 2022,
+      "sample": "Mouse, cortical layer 2/3 pyramidal cells, acute brain slices",
+      "url": "https://doi.org/10.7554/eLife.76993",
       "proofread": false
     },
     {
@@ -510,12 +523,12 @@
       "proofread": false
     },
     {
-      "title": "Plasmonic Enhancement of Protein Function",
-      "authors": "Locarno M, Dong Q, Meng X, Glessi C, Hettema NM, Brandsma N, Blokhuizen S, Castaneda Garcia A, Ganapathy S, Post M, Schmidt T, van Roemburg L, Xu B, Cho CT, Laan L, Chien M, Brinks D",
-      "journal": "bioRxiv",
-      "year": 2024,
+      "title": "Plasmonic Enhancement of Fluorescence and Protein Dynamics in Living Mammalian Cells",
+      "authors": "Locarno M, Dong Q, Post M, Meng X, Glessi C, Hettema NM, Brandsma N, Blokhuizen S, Castaneda Garcia A, Ganapathy S, Schmidt T, van Roemburg L, Xu B, Cho CT, Laan L, Chien M, Brinks D",
+      "journal": "Advanced Materials",
+      "year": 2026,
       "sample": "HEK293T cells, in vitro",
-      "url": "https://doi.org/10.1101/2024.02.07.579195",
+      "url": "https://doi.org/10.1002/adma.202501944",
       "proofread": false
     }
   ]

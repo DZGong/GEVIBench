@@ -19,19 +19,21 @@
   },
   "kinetics": [
     {
-      "on": 0.54,
+      "on": 1.58,
       "off": 1.2,
       "temperature": "32-35°C",
       "source": "doi:10.1038/s41467-023-41975-3",
       "sourceFigure": "Table 1",
+      "note": "Depolarization (on) is the amplitude-weighted mean of a bi-exponential fit: τfast=0.54 ms (89.3%), τslow=10.3 ms (10.7%) -> τ̄=1.58 ms. Repolarization (off) was best fit by a single exponential, τ=1.20 ms (Table 1, 1-s voltage steps -70<->+30 mV, HEK293A whole-cell clamp).",
       "proofread": false
     },
     {
-      "on": 1.74,
+      "on": 5.41,
       "off": 2.91,
       "temperature": "21-23°C",
       "source": "doi:10.1038/s41467-023-41975-3",
       "sourceFigure": "Table 1",
+      "note": "Depolarization (on) is the amplitude-weighted mean of a bi-exponential fit: τfast=1.74 ms (85.9%), τslow=27.8 ms (14.1%) -> τ̄=5.41 ms (independently cited as τon=5.41 ms by the Vega paper, doi:10.1101/2025.05.29.656768). Repolarization (off) was best fit by a single exponential, τ=2.91 ms (Table 1).",
       "proofread": false
     }
   ],
@@ -41,14 +43,23 @@
       "sign": "negative",
       "source": "doi:10.1038/s41467-023-41975-3",
       "sourceFigure": "Fig. 2c",
+      "note": "Origin paper. ΔF/F0 for a 100-mV step (-70 -> +30 mV); Fig. 2c is the dedicated quantification of the 100-mV step (JEDI-1P mean ~55-56% -%ΔF/F0). Whole-cell voltage clamp in HEK293A cells at ~1 kHz. Lower than the two later independent measurements below (-66.3% and -66%); the difference likely reflects different cell line/conditions (HEK293A widefield ~1 kHz here vs HEK293T at 3 W/cm2 in Vega and Boltzmann-fit extrapolation in the rEstus2s paper).",
       "proofread": false
     },
     {
       "deltaF": -66.3,
       "sign": "negative",
       "source": "doi:10.1101/2025.05.29.656768",
-      "note": "F-V comparison in HEK293T cells under matched wide-field imaging conditions",
+      "note": "100-mV step (-70 -> +30 mV). ΔF/F0 = -66.3 ± 2.5% from the F-V curve in HEK293T cells under 488 nm 1P widefield illumination at 3 W/cm2 (Vega paper, Fig. 1C). Higher than the -56% reported in the origin paper Fig. 2c, measured under different conditions.",
       "sourceFigure": "Fig. 1C",
+      "proofread": false
+    },
+    {
+      "deltaF": -66,
+      "sign": "negative",
+      "source": "doi:10.64898/2026.02.10.701308",
+      "sourceFigure": "Table S1",
+      "note": "100-mV step (-70 -> +30 mV), computed from the Fgreen/Fred R-V Boltzmann fit measured alongside rEstus2s (Rmax=1.68, ΔRmax=-1.23, Vhalf=-35.6, ks=21.2; Table S1; evaluates to -65.9%). One-photon widefield voltage clamp in HEK293T cells, 23°C. Agrees with the Vega paper's -66.3% and is higher than the origin paper's Fig. 2c value of -56%.",
       "proofread": false
     }
   ],
@@ -64,7 +75,8 @@
     {
       "slope": 0.9,
       "source": "doi:10.1016/j.neuron.2024.08.019",
-      "sourceFigure": "Fig. 1D",
+      "sourceFigure": "Fig. S1C",
+      "note": "Subthreshold fluorescence-per-voltage conversion ratio = 0.9% per mV for JEDI-1P (vs 1.3% for ASAP5, 0.9% for ASAP3, 0.7% for JEDI-2P), stated in the main text and quantified in Figure S1C of the ASAP5/Hao paper. The normalized F-V slope is also shown in main Fig. 1D.",
       "proofread": false
     }
   ],
@@ -507,6 +519,9 @@
         0.0396
       ]
     },
+    "source": "doi:10.1038/s41467-023-41975-3",
+    "sourceFigure": "Fig. 2j",
+    "note": "Excitation and emission spectra digitized from the origin paper Fig. 2j (HEK293-Kir2.1 cells, n=5). The paper states JEDI-1P is maximally excited at 487 nm with an emission peak at 509 nm; both digitized curves peak exactly at those wavelengths. Curves are real measured data (asymmetric, noisy), not a Gaussian fallback.",
     "proofread": false
   },
   "voltage": {
@@ -535,6 +550,7 @@
     "source": "doi:10.1038/s41467-023-41975-3",
     "sourceImage": "/fv-sources/jedi1p.jpg",
     "sourceFigure": "Fig. 2b",
+    "note": "Steady-state -%ΔF/F0 vs command voltage (Fig. 2b), read directly from the JEDI-1P (green) curve and normalized to 0 at -70 mV. The figure shows points every 10 mV (-100 to +50); the 30-mV subset stored here matches the plotted curve (e.g. -100->+9, -40->-16, -10->-32, +20->-46, +50->-56).",
     "proofread": false
   },
   "researchPapers": [
@@ -590,6 +606,15 @@
       "year": 2025,
       "sample": "HEK293T cells, in vitro",
       "url": "https://doi.org/10.1101/2025.05.29.656768",
+      "proofread": false
+    },
+    {
+      "title": "Sub-Millivolt Voltage Imaging Reveals Gap Junction-Mediated Bioelectric Contact Inhibition",
+      "authors": "Rühl P, Hussein R, Reuter S, Frahnert K, Nair AG, Mrowka R, Schönherr R, Heinemann SH",
+      "journal": "bioRxiv",
+      "year": 2026,
+      "sample": "HEK293T cells, in vitro (whole-cell voltage clamp; JEDI-1P R-V curve characterized alongside rEstus2s)",
+      "url": "https://doi.org/10.64898/2026.02.10.701308",
       "proofread": false
     }
   ]

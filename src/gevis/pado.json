@@ -20,7 +20,7 @@
   "spectrum": {
     "type": "fp",
     "peakEx": 488,
-    "peakEm": 510,
+    "peakEm": 511,
     "name": "Pado",
     "custom": {
       "minEx": 300,
@@ -432,7 +432,10 @@
         0.0102
       ]
     },
-    "proofread": false
+    "note": "Pado's fluorophore is Super Ecliptic pHluorin A227D (SE227D) — the same FP first reported in ArcLight (Methods; also used in Marina). Super ecliptic pHluorin carries the S65T (EGFP) mutation, which collapses its excitation to a single ~488 nm peak, making it spectrally near-identical to EGFP; no measured super ecliptic pHluorin ex/em curve is published, so the FPbase EGFP excitation/emission curve is used as a near-exact representation (peaks 488/511, including EGFP's ~0.17 shoulder at 400 nm). The stored arrays were already the verbatim FPbase EGFP curve (corr 1.0, max diff 0.0 vs the EGFP curve) but carried no source attribution; this change only adds the missing citation.",
+    "proofread": false,
+    "source": "FPbase: EGFP",
+    "sourceFigure": "FPbase"
   },
   "voltage": {
     "type": "fp",
@@ -442,29 +445,27 @@
     "custom": {
       "voltage": [
         -70,
-        -20,
         30,
-        80,
         130
       ],
       "deltaF": [
         0,
-        -1.5,
         -5,
-        -6,
         -10
       ]
     },
     "source": "doi:10.1038/srep23865",
     "sourceImage": "/fv-sources/pado.jpg",
     "sourceFigure": "Fig. 2a",
-    "proofread": false
+    "proofread": false,
+    "note": "Fig. 2a is a representative single-trial trace whose voltage command has only two depolarizing step levels from the -70 mV holding potential: +30 mV (a 100-mV step, <5% ΔF/F) and +130 mV (a 200-mV step, ~10% ΔF/F). ΔF/F read from those step deflections and normalized to 0 at -70 mV. Removed two fabricated/interpolated points (-20 mV at -1.5%, +80 mV at -6%) that correspond to no step in the figure. The paper reports no hyperpolarized or finer-grained F-V data; the +130 mV signal is partly confounded by a pH-dependent baseline jump from Hv channel activation."
   },
   "kinetics": [
     {
-      "on": 30,
+      "on": 93,
       "off": 10,
       "temperature": "35°C",
+      "note": "τon and τoff of the optical signal for a 200-mV depolarizing step in HEK293 cells, read from the Fig. 5b bar graph (n=7, pH 7.4 / 100 mM HEPES standard condition): τon ≈ 93 ms, τoff ≈ 10 ms — Pado is a slow sensor. Single time-constant fits (no multi-exponential reported). Raising external pH to 7.8 speeds τon to ~36 ms with little effect on τoff (~9 ms). Recorded at 35°C. Previously stored τon=30 ms, which matched the pH 7.8 condition rather than the standard pH 7.4.",
       "source": "doi:10.1038/srep23865",
       "sourceFigure": "Fig. 5b",
       "proofread": false
@@ -474,6 +475,8 @@
     {
       "deltaF": -5,
       "sign": "negative",
+      "modality": "1P",
+      "note": "<5% ΔF/F for a 100-mV depolarizing step (-70 → +30 mV) in HEK293 cells under widefield (one-photon) voltage clamp, 75 W Xenon arc lamp with GFP filter set. Single representative trial (Fig. 2a). The larger ~10% signal at +130 mV (a 200-mV step) is partly pH-confounded by Hv channel activation and is not used as the 100-mV dynamic range; an averaged value of ~8% ΔF/F for the 200-mV step is reported in Fig. 2b.",
       "source": "doi:10.1038/srep23865",
       "sourceFigure": "Fig. 2a",
       "proofread": false

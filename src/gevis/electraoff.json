@@ -447,6 +447,9 @@
         0.0026
       ]
     },
+    "source": "FPbase: mBaoJin",
+    "sourceFigure": "FPbase",
+    "note": "The Electra paper does not report excitation/emission spectra; the fluorophore is mBaoJin(3M), a StayGold-derived green FP. This is the digitized mBaoJin spectrum (peakEx 500 nm, peakEm 508 nm) from FPbase, shared with ElectraON and Vega.",
     "proofread": false
   },
   "voltage": {
@@ -487,31 +490,42 @@
   },
   "kinetics": [
     {
-      "on": 1.15,
-      "off": 0.41,
+      "on": 1.75,
+      "off": 1.14,
       "source": "doi:10.1101/2025.05.30.657123",
-      "note": "Fast τ components from 100-mV steps (-70→+30 mV depolarization, +30→-70 mV repolarization) in HEK293T cells at 23-25°C",
+      "note": "Fast time constants (τfast) reported by the paper as τon = 1.75 ± 0.32 ms and τoff = 1.14 ± 0.25 ms, measured from a 100-mV step (-70→+30 mV depolarization, +30→-70 mV repolarization) in HEK293T cells at room temperature (23-25°C), 2.5 kHz acquisition. The paper fits a single fast time constant (no slow-component amplitudes reported), so no amplitude-weighted mean applies.",
       "temperature": "23-25°C",
-      "sourceFigure": "Fig. S3D",
+      "sourceFigure": "Fig. S3d",
       "proofread": false
     }
   ],
   "dynamicRangeData": [
     {
-      "deltaF": -20.6,
+      "deltaF": -13,
       "sign": "negative",
+      "modality": "1P",
       "source": "doi:10.1101/2025.05.30.657123",
-      "note": "Steady-state ΔF/F at +60 mV relative to -70 mV hold in HEK293T cells under 20 mW/mm² illumination",
+      "note": "ΔF/F0 for a 100-mV step (-70 → +30 mV), read at +30 mV from the F-V curve (Fig. S3B; ≈-12% at +20 mV, ≈-15% at +40 mV) in HEK293T cells under 20 mW/mm² 1P wide-field illumination (1 kHz acquisition); main text reports a full-range dynamic range of -20.6 ± 2.4% ΔF/F0 over the -100 to +60 mV (160 mV) sweep",
       "sourceFigure": "Fig. S3B",
+      "proofread": false
+    },
+    {
+      "deltaF": -18,
+      "sign": "negative",
+      "modality": "2P",
+      "source": "doi:10.1101/2025.05.30.657123",
+      "note": "ΔF/F change of approximately 18% in ElectraOFF-expressing CHO cells under scanless two-photon excitation at 940 nm (0.6 mW/μm²) for a -60 → +40 mV (100 mV) voltage-clamp step",
+      "sourceFigure": "Fig. 3b",
       "proofread": false
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 14.5,
+      "modality": "1P",
       "source": "doi:10.1101/2025.05.30.657123",
-      "note": "Peak absolute ΔF/F₀ per 1-AP electrical stimulation in primary hippocampal neurons",
-      "sourceFigure": "Fig. 1K",
+      "note": "Peak absolute ΔF/F₀ per 1-AP electrical stimulation in primary hippocampal neurons under 1P wide-field illumination (n=36 cells)",
+      "sourceFigure": "Fig. 1k",
       "proofread": false
     }
   ],
@@ -521,7 +535,7 @@
       "reference": "ace2n-mneon2",
       "source": "doi:10.1101/2025.05.30.657123",
       "note": "Ace-L3-mBJ(3M) (ElectraOFF) green-to-red fluorescence ratio was 1.6-fold higher than Ace-mNeon2 in HeLa cells",
-      "sourceFigure": "Fig. 1E",
+      "sourceFigure": "Fig. 1e",
       "proofread": false
     }
   ],
@@ -532,16 +546,16 @@
       "duration": "30 min",
       "source": "doi:10.1101/2025.05.30.657123",
       "note": "Normalized baseline fluorescence after 30-min continuous illumination in cultured primary hippocampal neurons",
-      "sourceFigure": "Fig. S4H",
+      "sourceFigure": "Fig. S4h",
       "proofread": false
     },
     {
-      "brightnessRemaining": 88,
-      "illumination": "20 mW/mm²",
+      "brightnessRemaining": 85,
+      "illumination": "10 mW/mm²",
       "duration": "~42 min",
       "source": "doi:10.1101/2025.05.30.657123",
-      "note": "Retained ~88% fluorescence after 2500 s of continuous 20 mW/mm² illumination in HeLa cells; most photostable of Ace-based GEVIs tested",
-      "sourceFigure": "Fig. 1H",
+      "note": "Retained high basal fluorescence (~85%, minimal bleaching) under continuous 10 mW/mm² wide-field illumination in HeLa cells, by contrast with pAce and Ace-mNeon2 which lost 80% and 83% respectively over the same window (Fig. 1h)",
+      "sourceFigure": "Fig. 1h",
       "proofread": false
     }
   ],
@@ -562,15 +576,6 @@
       "year": 2025,
       "sample": "Mouse, hippocampus CA1 pyramidal neurons, striatal cholinergic interneurons, and visual cortex PV interneurons, in vivo",
       "url": "https://doi.org/10.1101/2025.05.29.656886",
-      "proofread": false
-    },
-    {
-      "title": "Two-photon voltage imaging with rhodopsin-based sensors",
-      "authors": "Grimm C, Sims RR, Tanese D, Lafirdeen ASM, Bendifallah I, Chan CY, Faini G, Putti E, Del Bene F, Papagiakoumou E, Emiliani V",
-      "journal": "Neuron",
-      "year": 2026,
-      "sample": "CHO cells, two-photon voltage imaging (benchmark inclusion of ElectraOFF under 2P)",
-      "url": "https://doi.org/10.1016/j.neuron.2025.12.014",
       "proofread": false
     }
   ]

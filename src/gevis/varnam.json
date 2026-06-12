@@ -19,6 +19,9 @@
     "peakEx": 558,
     "peakEm": 592,
     "name": "VARNAM",
+    "source": "FPbase: mRuby3",
+    "sourceFigure": "FPbase",
+    "note": "VARNAM is an eFRET sensor (Ace2N opsin + mRuby3); the fluorescence reporter is mRuby3. The displayed excitation/emission is the FPbase mRuby3 spectrum verbatim (ex 558 nm / em 592 nm), matching VARNAM's reported peaks.",
     "custom": {
       "minEx": 447,
       "excitation": [
@@ -511,20 +514,12 @@
   },
   "kinetics": [
     {
-      "on": 0.88,
-      "off": 0.8,
-      "temperature": "34°C",
+      "on": 3.04,
+      "off": 2.75,
+      "temperature": "22-25°C",
       "source": "doi:10.1038/s41592-018-0188-7",
-      "sourceFigure": "Supplementary Table",
-      "proofread": false
-    },
-    {
-      "on": 0.88,
-      "off": 0.8,
-      "source": "doi:10.1038/s41592-018-0188-7",
-      "note": "Bi-exponential fast component at 22°C in spiking HEK cells (60%* on, 60%* off); slow τ_on=5.2 ms, slow τ_off=4.7 ms",
-      "temperature": "22°C",
-      "sourceFigure": "Supplementary Table",
+      "note": "Amplitude-weighted mean τ of a biexponential fit (depolarizing/repolarizing voltage steps in HEK cells, voltage clamp, room temp 22-25 °C, n = 4). Rise: τfast 0.88 ± 0.13 ms, τslow 5.2 ± 0.5 ms → on = 3.04 ms. Decay: τfast 0.80 ± 0.44 ms, τslow 4.7 ± 0.3 ms → off = 2.75 ms. The paper reports only τfast/τslow (Table S1), NOT the component amplitudes, so a 50:50 fast:slow split is assumed; if the fast component actually dominates, the true mean is faster (toward the fast τ). An earlier duplicate entry labelled 34 °C was removed (no 34 °C kinetics in the paper).",
+      "sourceFigure": "Table S1",
       "proofread": false
     }
   ],
@@ -532,6 +527,7 @@
     {
       "deltaF": -10.8,
       "sign": "negative",
+      "modality": "1P",
       "source": "doi:10.1038/s41557-021-00641-1",
       "sourceFigure": "Fig. 2c",
       "proofread": false
@@ -539,6 +535,7 @@
     {
       "deltaF": -11.8,
       "sign": "negative",
+      "modality": "1P",
       "source": "doi:10.1038/s41592-018-0188-7",
       "note": "Per 100 mV step in spiking HEK cells at 22°C",
       "sourceFigure": "Fig. 2b",
@@ -547,6 +544,7 @@
     {
       "deltaF": -17.9,
       "sign": "negative",
+      "modality": "1P",
       "source": "doi:10.1126/sciadv.adi4208",
       "note": "Per 100 mV step (-70 to +30 mV) in HEK293T cells",
       "sourceFigure": "Fig. 1B",
@@ -556,18 +554,21 @@
   "sensitivityData": [
     {
       "deltaF": 4.8,
+      "modality": "1P",
       "source": "doi:10.1038/s41592-018-0188-7",
       "sourceFigure": "Fig. 3b",
       "proofread": false
     },
     {
       "deltaF": 5.3,
+      "modality": "1P",
       "source": "doi:10.1038/s41557-021-00641-1",
       "sourceFigure": "Fig. 3a",
       "proofread": false
     },
     {
       "deltaF": 9.0,
+      "modality": "1P",
       "source": "doi:10.1126/sciadv.adi4208",
       "note": "Cultured rat hippocampal neurons",
       "sourceFigure": "Fig. 1C",
@@ -612,7 +613,7 @@
       "illumination": "48 mW/mm²",
       "duration": "2.6 min",
       "source": "doi:10.1038/s41557-021-00641-1",
-      "sourceFigure": "Extended Data Fig. 4",
+      "sourceFigure": "Ext. Fig. 4",
       "proofread": false
     },
     {
