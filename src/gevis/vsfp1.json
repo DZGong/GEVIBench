@@ -486,6 +486,9 @@
         0.007
       ]
     },
+    "source": "FPbase: ECFP / EYFP",
+    "sourceFigure": "FPbase",
+    "note": "Composite FRET spectrum: excitation is the CFP donor (FPbase ECFP, verbatim — corr 1.00), emission is the YFP acceptor (FPbase EYFP, verbatim — corr 1.00). VSFP1 is excited in the CFP band (~435 nm) and read as the YFP/CFP emission ratio. Both arrays normalized to max = 1.0.",
     "proofread": false
   },
   "voltage": {
@@ -529,7 +532,8 @@
       "temperature": "25-28°C",
       "source": "doi:10.1046/j.0953-816x.2001.01617.x",
       "sourceFigure": "Fig. 3E",
-      "proofread": false
+      "proofread": false,
+      "note": "Single response time constant 0.74 ± 0.12 ms (n=19), the SAME for hyperpolarizing and depolarizing ±100 mV steps (Sakai 2001 Fig. 3E; exponential fit 0.7 ms) — so identical on=off is the paper's single reported value, not a placeholder. The paper notes it was instrument-limited (cf. the di-4-ANEPPS dye's 0.97 ms in the same setup), i.e. an upper bound; VSFP1's true FRET response may be faster. Room temperature (25–28°C, HEK293)."
     }
   ],
   "dynamicRangeData": [
@@ -538,7 +542,9 @@
       "sign": "positive",
       "source": "doi:10.1046/j.0953-816x.2001.01617.x",
       "sourceFigure": "Fig. 3B",
-      "proofread": false
+      "proofread": false,
+      "modality": "1P",
+      "note": "ΔF/F slope = 1.8 ± 0.1% per 100 mV (Sakai 2001, n=11, Fig. 3B). The voltage–fluorescence relationship is LINEAR (r=0.99) over −150→+250 mV with no saturation (Kv2.1-based VSD, very depolarized activation), so the per-100-mV ΔF/F equals the −70→+30 mV step (+1.8%) and the subthreshold slope (see subthresholdData). VSFP1's signal is the CFP/YFP FRET change reported as ΔF/F. 1P widefield, HEK293."
     }
   ],
   "subthresholdData": [
@@ -546,7 +552,8 @@
       "slope": 0.018,
       "source": "doi:10.1046/j.0953-816x.2001.01617.x",
       "sourceFigure": "Fig. 3B",
-      "proofread": false
+      "proofread": false,
+      "note": "Linear F-V slope = 1.8 ± 0.1%/100 mV = 0.018 %/mV (Sakai 2001 Fig. 3B, r=0.99, n=11). VSFP1's response is linear across the physiological range (no saturation), so its subthreshold slope equals its per-100-mV dynamic range."
     }
   ],
   "researchPapers": [

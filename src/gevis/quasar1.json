@@ -395,12 +395,12 @@
   },
   "kinetics": [
     {
-      "on": 0.05,
-      "off": 0.07,
+      "on": 0.24,
+      "off": 0.29,
       "temperature": "23°C",
       "source": "doi:10.1038/nmeth.3000",
       "sourceFigure": "Table S2",
-      "note": "Bi-exponential fast components (94% on, 88% off); slow τ_on=3.2 ms, slow τ_off=1.9 ms. n=6 cells",
+      "note": "Amplitude-weighted means of the bi-exponential fit (Table S2, HEK293, n=6): activation (τup, -70→+30 mV) τ1 0.05 ms (94%), τ2 3.2 ms → τon = 0.94×0.05 + 0.06×3.2 = 0.24 ms; deactivation (τdown) τ1 0.07 ms (88%), τ2 1.9 ms → τoff = 0.88×0.07 + 0.12×1.9 = 0.29 ms. Previously stored the fast components (0.05 / 0.07 ms) — QuasAr1's headline sub-100-µs fast component, but the 6-12% slow tail dominates the amplitude-weighted mean.",
       "proofread": false
     }
   ],
@@ -408,14 +408,17 @@
     {
       "deltaF": 32,
       "sign": "positive",
+      "modality": "1P",
       "source": "doi:10.1038/nmeth.3000",
       "sourceFigure": "Fig. 1c",
+      "note": "ΔF/F per 100 mV (-70→+30 mV); Table S2 lists 33%. 1P widefield, 640 nm excitation.",
       "proofread": false
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 21,
+      "modality": "1P",
       "source": "doi:10.1038/nmeth.3000",
       "sourceFigure": "Fig. 1e",
       "proofread": false

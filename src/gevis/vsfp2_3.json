@@ -450,6 +450,9 @@
         0.007
       ]
     },
+    "source": "FPbase: Cerulean / Citrine",
+    "sourceFigure": "FPbase",
+    "note": "Composite FRET spectrum: excitation is the donor Cerulean (FPbase Cerulean, verbatim — corr 1.0000, peak 433 nm), emission is the acceptor Citrine (FPbase Citrine, verbatim — corr 1.0000, peak 529 nm). VSFP2.3 is a Cerulean/Citrine FRET pair excited in the Cerulean band and read as the Citrine/Cerulean emission ratio. Both arrays normalized to max = 1.0.",
     "proofread": false
   },
   "voltage": {
@@ -463,34 +466,33 @@
     "custom": {
       "voltage": [
         -140,
-        -120,
-        -100,
-        -80,
+        -110,
+        -90,
         -70,
-        -60,
-        -40,
-        -20,
-        0,
-        20,
-        40,
-        60
+        -50,
+        -30,
+        -10,
+        10,
+        30,
+        50,
+        70
       ],
       "deltaF": [
-        -1,
-        -1,
-        0,
-        0,
-        0,
-        0,
-        1,
-        2,
-        2,
-        3,
-        3,
-        4
+        -3.6,
+        -3.2,
+        -2.3,
+        0.0,
+        3.8,
+        7.7,
+        10.1,
+        11.0,
+        11.4,
+        11.5,
+        11.6
       ]
     },
-    "proofread": false
+    "proofread": false,
+    "note": "Re-digitized + rescaled 2026-06-14 from Mutoh 2009 Fig. 3B (normalized acceptor ΔF-voltage curve, V½ = −49.5 mV, n=10). Fig. 3B is a NORMALIZED 0→1 curve referenced to the −70 mV holding potential (it dips slightly negative at hyperpolarization), NOT signed ΔF/F — the prior voltage.custom was that normalized shape arbitrarily scaled ×4 and mislabeled as ΔF/F%. Rescaled to the RATIOMETRIC ΔR/R (the sensor's Citrine/Cerulean readout) using the published Boltzmann shape (V½ −49.5 mV, slope a≈18 mV; reproduces the re-digitized markers at −150/−90/0 mV) anchored to the full −140→+120 mV ΔR/R = 15.2% (Mishina 2014). −70 mV = 0; positive-going. The −70→+30 mV (100-mV) step ≈ +11% (≈+10% if anchored to Mutoh 2009's 13.3% instead). The donor (Cerulean) single channel is the mirror-image negative-going curve."
   },
   "kinetics": [
     {
@@ -499,7 +501,8 @@
       "temperature": "35°C",
       "source": "doi:10.1007/s00249-010-0620-0",
       "sourceFigure": "Table 1",
-      "proofread": false
+      "proofread": false,
+      "note": "Fluorescence FRET-response time constant at 0 mV (Lundby 2010 Eur Biophys J Table 1, n cells). Single-exponential fit of the optical response — NOT the VSD sensing-current τ, which is far faster (~0.55 ms on / 1.16 ms off at 35°C). VSFP2.3's slow apparent kinetics are limited by the FRET/fluorescence response, not charge movement."
     },
     {
       "on": 72,
@@ -507,7 +510,8 @@
       "temperature": "30°C",
       "source": "doi:10.1007/s00249-010-0620-0",
       "sourceFigure": "Table 1",
-      "proofread": false
+      "proofread": false,
+      "note": "Fluorescence FRET-response τ at 0 mV (Lundby 2010 Table 1). Temperature-dependent (Arrhenius); slower than at 35°C."
     },
     {
       "on": 85.8,
@@ -515,7 +519,8 @@
       "temperature": "25°C",
       "source": "doi:10.1007/s00249-010-0620-0",
       "sourceFigure": "Table 1",
-      "proofread": false
+      "proofread": false,
+      "note": "Fluorescence FRET-response τ at 0 mV (Lundby 2010 Table 1). Slowest of the three temperatures; sensing-current τ at 25°C is ~0.84/1.65 ms (on/off) by contrast."
     }
   ],
   "dynamicRangeData": [
@@ -524,16 +529,18 @@
       "sign": "negative",
       "source": "doi:10.1371/journal.pone.0004555",
       "sourceFigure": "Table 1",
-      "note": "Donor (Cerulean) channel ΔF/F for +130mV step (-70 to +60 mV) at 35°C, n=5 cells",
-      "proofread": false
+      "note": "DONOR (Cerulean) single-channel ΔF/F maximal change = −8.3% (Mutoh 2009 Table 1, n=5, 35°C, donor at 470 nm; self-consistent with acceptor +3.9% → ΔR/R +13.3%). This is the spectral MAX change over a wide window (~−100→+40 mV), not a 100-mV step — the −70→+30 mV equivalent is ~−6.5%. Negative-going (donor quenched as FRET rises on depolarization), opposite the sensor's positive ratiometric polarity; kept as a single-channel component value. Widefield → 1P.",
+      "proofread": false,
+      "modality": "1P"
     },
     {
-      "deltaF": 15.2,
+      "deltaF": 11,
       "sign": "positive",
       "source": "doi:10.3389/fnmol.2014.00078",
       "sourceFigure": "Table 1",
-      "note": "Ratiometric ΔR/R (acceptor/donor) for full voltage range -140 to +120 mV from holding -70 mV",
-      "proofread": false
+      "note": "RATIOMETRIC ΔR/R (Citrine/Cerulean), the sensor's primary readout, positive-going. Stored value is the −70→+30 mV (100-mV) step ≈ +11%, read from the rescaled F-V curve (voltage.custom). The PUBLISHED full-range value is 15.2% over −140→+120 mV (Mishina 2014 Table 1, ~260 mV); Mutoh 2009 reports ΔR/R 13.3% over its narrower spectral window. Widefield → 1P.",
+      "proofread": false,
+      "modality": "1P"
     }
   ],
   "brightnessData": [
@@ -541,7 +548,9 @@
       "ratio": 1.74,
       "reference": "EGFP",
       "source": "Estimated from Citrine QY=0.76, EC=77000 vs EGFP QY=0.60, EC=56000",
-      "proofread": false
+      "proofread": false,
+      "sourceFigure": "FPbase",
+      "note": "Curator estimate, not a paper-measured value: brightness ratio = (Citrine acceptor EC×QY)/(EGFP EC×QY) = (77000×0.76)/(56000×0.60) = 1.74. The acceptor Citrine dominates VSFP2.3's green readout; Citrine/EGFP photophysical constants are FPbase/literature values."
     }
   ],
   "sensitivityData": [
@@ -549,8 +558,9 @@
       "deltaF": 0.2,
       "source": "doi:10.1016/j.bpj.2009.02.046",
       "sourceFigure": "Main text",
-      "note": "Computational prediction (0.1-0.25% ΔF/F per AP), Akemann et al. 2009 Biophys J simulation",
-      "proofread": false
+      "note": "COMPUTATIONAL PREDICTION (not a measurement): Akemann et al. 2009 Biophys J simulated 0.1–0.25% ΔF/F per action potential for VSFP2.3, reflecting its slow kinetics (~47 ms) relative to a spike. No directly measured single-AP ΔF/F is reported for VSFP2.3. Models 1P widefield.",
+      "proofread": false,
+      "modality": "1P"
     }
   ],
   "addgene": {

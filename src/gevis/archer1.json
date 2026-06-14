@@ -16,9 +16,10 @@
   "siblingId": "archer2",
   "spectrum": {
     "type": "rhodopsin",
-    "peakEx": 550,
-    "peakEm": 687,
+    "peakEx": 627,
+    "peakEm": 729,
     "name": "Archer1",
+    "note": "Arch(D95E/T99C) rhodopsin reporter. Peaks from Nikolaev 2025 Table 2 (doi:10.1021/cbe.5c00069): absorption max 626 nm, excitation max 627 nm, emission max 729 nm (FQY 0.33%). Previously stored ex 550 / em 687 — those were the Arch-WT values, not the red-shifted Archer1; imaging is done at 630/13 nm excitation. No measured ex/em curve is published, so the panel shows the Gaussian fallback from these peaks.",
     "proofread": false
   },
   "voltage": {
@@ -29,71 +30,47 @@
     "custom": {
       "voltage": [
         -100,
-        -90,
-        -80,
         -70,
-        -60,
         -50,
-        -40,
-        -30,
-        -20,
-        -10,
+        -25,
         0,
-        10,
-        20,
-        30,
-        40,
+        25,
         50
       ],
       "deltaF": [
-        -23,
-        -15,
-        -8,
+        -19,
         0,
-        8,
-        16,
-        25,
-        34,
-        43,
-        50,
-        57,
-        63,
-        70,
-        75,
-        80,
-        85
+        20,
+        42,
+        67,
+        84,
+        105
       ]
     },
     "source": "doi:10.1038/ncomms5894",
     "sourceImage": "/fv-sources/archer1.jpg",
     "sourceFigure": "Fig. 1d",
-    "proofread": false
+    "proofread": false,
+    "note": "Re-digitized from the red Archer1 line in Fig. 1d (a LINEAR ΔF/F-V fit over -100 to +50 mV), normalized to -70 mV = 0; gives ~85-88% ΔF/F per 100-mV step, matching the paper's stated 85%/100 mV. Replaces a fabricated curve of 16 evenly-spaced 10-mV points whose slope (~73%/100 mV) was too shallow and inconsistent with the 85% dynamic range."
   },
-  "kinetics": [
-    {
-      "on": 0.5,
-      "off": 0.5,
-      "source": "doi:10.1038/ncomms5894",
-      "sourceFigure": "Fig. 1e",
-      "note": "No quantitative tau values published; paper states kinetics 'very similar' to Arch WT. Placeholder pending better data.",
-      "proofread": false
-    }
-  ],
   "dynamicRangeData": [
     {
       "deltaF": 85,
       "sign": "positive",
+      "modality": "1P",
       "source": "doi:10.1038/ncomms5894",
       "sourceFigure": "Fig. 1d",
-      "note": "85% delta F/F per 100 mV step (Fig. 1d, Supplementary Fig. 4)",
+      "note": "85% ΔF/F per 100 mV step (stated in abstract; Fig. 1d, Supplementary Fig. 4). 1P widefield, 655 nm excitation.",
       "proofread": false
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 33,
+      "modality": "1P",
       "source": "doi:10.1038/ncomms5894",
       "sourceFigure": "Fig. 3e",
+      "note": "ΔF/F per action potential in cultured neurons; the abstract states 25-40% per AP for Archer1.",
       "proofread": false
     }
   ],
@@ -127,6 +104,7 @@
       "brightnessRemaining": 94,
       "illumination": "880 mW/mm²",
       "duration": "5 min",
+      "modality": "1P",
       "source": "doi:10.1038/ncomms5894",
       "sourceFigure": "Fig. S4",
       "note": "Approximate from Supplementary Fig. 4: sensitivity measurements 56.3% -> 53.1% -> 52.7% delta F/F, retained stability over 5+5 min exposure. Used as proxy for baseline brightness.",

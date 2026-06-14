@@ -501,7 +501,10 @@
         0.007
       ]
     },
-    "proofread": false
+    "note": "CAESR is an eFRET sensor: the fluorescent reporter is Citrine (a YFP donor) and QuasAr2 is the dark archaerhodopsin acceptor that quenches it voltage-dependently. The stored excitation/emission arrays are the FPbase Citrine curve verbatim (corr 1.0, max diff 0.0; peaks ex 515 / em 529). No separately measured CAESR ex/em curve is published; Citrine is the correct displayed fluorophore — source attribution was previously missing.",
+    "proofread": false,
+    "source": "FPbase: Citrine",
+    "sourceFigure": "FPbase"
   },
   "voltage": {
     "type": "opsin",
@@ -533,12 +536,12 @@
   },
   "kinetics": [
     {
-      "on": 4.3,
-      "off": 4.3,
+      "on": 14.8,
+      "off": 9.9,
       "temperature": "23\u00b0C",
+      "note": "Amplitude-weighted means of the bi-exponential fit, Citrine/CAESR row of Table 1 (HEK293, 23\u00b0C). Depolarizing (on): \u03c4fast 4.8 ms (38%), \u03c4slow 21 ms \u2192 \u03c4on = 0.38\u00d74.8 + 0.62\u00d721 = 14.8 ms (\u03c4\u00bd 7.5 ms). Hyperpolarizing (off): \u03c4fast 3.1 ms (62%), \u03c4slow 21 ms \u2192 \u03c4off = 0.62\u00d73.1 + 0.38\u00d721 = 9.9 ms (\u03c4\u00bd 3.8 ms). Previously stored 4.3/4.3 ms, which were the fast components borrowed from the wrong table row (EGFP/mOrange2).",
       "source": "doi:10.1038/ncomms5625",
       "sourceFigure": "Table 1",
-      "note": "Bi-exponential fast components (45% fast on depolarizing; hyperpolarizing 4.3 ms 45% fast, slow 31 ms; depolarizing slow 27 ms 45% fast); \u03c4_1/2 = 7.5 ms both directions",
       "proofread": false
     }
   ],
@@ -546,6 +549,8 @@
     {
       "deltaF": -13.1,
       "sign": "negative",
+      "modality": "1P",
+      "note": "Steady-state response to a depolarizing step, -13.1% ΔF/F per 100 mV (Citrine row of Table 1; HEK293, 1P widefield, 23°C). The Fig. 4b triangle-wave F-V sweep reads a bit shallower (~-10% at +30 mV) due to hysteresis.",
       "source": "doi:10.1038/ncomms5625",
       "sourceFigure": "Table 1",
       "proofread": false
@@ -554,6 +559,7 @@
   "sensitivityData": [
     {
       "deltaF": 9.7,
+      "modality": "1P",
       "source": "doi:10.1038/ncomms5625",
       "sourceFigure": "Table 1",
       "proofread": false

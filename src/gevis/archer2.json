@@ -16,9 +16,10 @@
   "siblingId": "archer1",
   "spectrum": {
     "type": "rhodopsin",
-    "peakEx": 633,
-    "peakEm": 687,
+    "peakEx": 640,
+    "peakEm": 731,
     "name": "Archer2",
+    "note": "Arch(D95E/T99C/A225M) rhodopsin reporter. Peaks from Nikolaev 2025 Table 2 (doi:10.1021/cbe.5c00069): absorption max 633 nm, excitation max 640 nm, emission max 731 nm (FQY 0.66%). Previously stored em 687 — that was the Arch-WT value, not the red-shifted Archer2. No measured ex/em curve is published, so the panel shows the Gaussian fallback from these peaks.",
     "proofread": false
   },
   "voltage": {
@@ -39,8 +40,10 @@
     {
       "deltaF": 60,
       "sign": "positive",
+      "modality": "1P",
       "source": "doi:10.1038/ncomms5894",
       "sourceFigure": "Fig. 1d",
+      "note": "60% ΔF/F per 100 mV step (stated in abstract; Fig. 1d). 1P widefield, 655 nm excitation.",
       "proofread": false
     }
   ],

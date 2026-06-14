@@ -21,7 +21,7 @@
   "spectrum": {
     "type": "fret",
     "peakEx": 483,
-    "peakEm": 563,
+    "peakEm": 564,
     "name": "Mermaid",
     "custom": {
       "minEx": 310,
@@ -347,6 +347,9 @@
         0.0098
       ]
     },
+    "source": "FPbase: mUkG / mKOκ",
+    "sourceFigure": "FPbase",
+    "note": "Composite FRET spectrum: excitation is the donor mUKG (FPbase mUkG, verbatim — corr 1.00, peak 483 nm), emission is the acceptor mKOκ (FPbase mKOκ, verbatim — corr 1.00, peak 564 nm). Mermaid (Tsutsui 2008) is a green/orange Kusabira FRET pair, excited in the mUKG band and read as the mKOκ/mUKG ratio. Both arrays normalized to max = 1.0.",
     "proofread": false
   },
   "voltage": {
@@ -383,6 +386,7 @@
     "source": "doi:10.1038/nmeth.1235",
     "sourceImage": "/fv-sources/mermaid.jpg",
     "sourceFigure": "Fig. 1e",
+    "note": "RATIOMETRIC F-V: y-axis is ΔR/R (mKOκ/mUKG emission ratio), not ΔF/F. Data tracks the BLUE Xenopus-oocyte (19°C) curve in Fig. 1e (the paper's canonical ~40%/100 mV oocyte curve), normalized to −70 mV = 0; the red Neuro2A 33°C curve plateaus lower (~29%). Positive-going, Vmid −35.8 mV, single-Boltzmann fit.",
     "proofread": false
   },
   "kinetics": [
@@ -391,7 +395,8 @@
       "off": 15,
       "temperature": "33°C",
       "source": "doi:10.1038/nmeth.1235",
-      "sourceFigure": "Fig. 1F",
+      "sourceFigure": "Fig. 1f",
+      "note": "Neuro2A at 33°C. τ_on stored = the FAST component of a genuinely bi-exponential 'on' response: Fig. 1f plots τ_on(fast) (~8 ms) AND τ_on(slow) (~100–256 ms) separately; the main text notes a fast (7.3–17.4 ms) followed by a slow (98–638 ms) component at +40 mV/19°C. Component amplitudes are NOT reported anywhere, so an amplitude-weighted mean cannot be computed without fabrication — fast component retained per the no-fabrication rule (true τ_on is slower). τ_off is genuinely single-exponential per the paper (≈15 ms, red τ_off curve in Fig. 1f). Text: 'time constants for both activation and deactivation were 5–20 ms at 33°C.'",
       "proofread": false
     },
     {
@@ -400,6 +405,7 @@
       "temperature": "35-37°C",
       "source": "doi:10.1371/journal.pone.0043454",
       "sourceFigure": "Fig. 5B",
+      "note": "Mermaid (mUKG channel) measured by Barnett et al. 2012 (ElectricPk paper) in HEK293, +100 mV/200 ms steps from −70 mV, widefield Xenon-arc illumination, bath 35–37°C. Values are SINGLE-exponential fits to the DOMINANT (fast) on/off rates (paper: 'Single exponential fits to the dominant on and off response rates'), i.e. fast-component, not amplitude-weighted; the slow on component is not captured here. τ_on 12 ms, τ_off 23 ms (text: ElectricPk τon 2.24 vs Mermaid 12 ms; τoff 2.09 vs 23 ms).",
       "proofread": false
     }
   ],
@@ -407,8 +413,10 @@
     {
       "deltaF": 40,
       "sign": "positive",
+      "modality": "1P",
       "source": "doi:10.1038/nmeth.1235",
-      "sourceFigure": "Fig. 1E",
+      "sourceFigure": "Fig. 1e",
+      "note": "RATIOMETRIC sensor: this is ΔR/R (mKOκ/mUKG emission-ratio change), not ΔF/F. Paper headline (abstract + main text): '~40% emission ratio increase per 100 mV' in Xenopus oocytes at 19°C (blue F-V curve, Fig. 1e), Vmid −35.8 mV. The −70→+30 mV (100-mV) chord read off the blue oocyte curve is ~36–37%; the Neuro2A 33°C curve (red) plateaus lower (~29%). 40 retained as the paper's explicit per-100-mV value. Widefield epifluorescence (oocyte two-electrode voltage clamp) → 1P. Steady-state (Boltzmann-fit F-V).",
       "proofread": false
     }
   ],
@@ -418,24 +426,28 @@
       "reference": "EGFP",
       "source": "doi:10.1038/nmeth.1235",
       "sourceFigure": "Main text",
+      "note": "Brightness of the DONOR mUKG (the directly-excited FP) relative to EGFP, computed from the paper's stated photophysics: mUKG EC=60,000 M⁻¹cm⁻¹ × QY=0.72 = 43,200, vs EGFP 56,000×0.60 = 33,600 → 1.286. The paper reports the EC/QY constants but does NOT itself state an EGFP comparison or an assembled-Mermaid brightness; this is a derived donor-FP value. (mKOκ acceptor: EC=105,000 × QY=0.61.)",
       "proofread": false
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 1.6,
+      "modality": "1P",
       "source": "doi:10.1038/nmeth.1235",
       "sourceFigure": "Table S1",
+      "note": "RATIOMETRIC: per-AP ΔR/R (mKOκ/mUKG emission-ratio change), not ΔF/F. Supplementary Table 1, rat cortical neurons, single field-stimulation pulse: 1.9, 1.4, 1.4, 1.6 → average 1.6 ± 0.24% (n=4). Widefield epifluorescence → 1P. (A 100-Hz train of 30 pulses gave 4.9 ± 0.85%.)",
       "proofread": false
     }
   ],
   "photostabilityData": [
     {
       "brightnessRemaining": 20,
-      "illumination": "4.08 mW/mm²",
+      "illumination": "12.3 mW/mm²",
       "duration": "2.5 min",
       "source": "doi:10.1038/nmeth.1235",
-      "sourceFigure": "Fig. S2",
+      "sourceFigure": "Fig. S2a",
+      "note": "Photostability of the DONOR mUKG (not assembled Mermaid), continuous arc-lamp cyan excitation (455DF30) at 1.23 W/cm² = 12.3 mW/mm² (stated in Methods), Supplementary Fig. 2a: mUKG normalized fluorescence ≈0.2 (20% remaining) at ~150 s (2.5 min). Illumination CORRECTED 4.08→12.3 mW/mm² — the prior 4.08 value was unsourced and did not match the paper; 1.23 W/cm² is the explicitly stated cyan-FP excitation intensity (the orange-red FPs used 550DF30 at a different intensity). Reflects isolated-donor mUKG bleaching, not the assembled FRET ratio.",
       "proofread": false
     }
   ],

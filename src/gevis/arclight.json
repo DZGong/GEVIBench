@@ -439,12 +439,20 @@
         0.0064
       ]
     },
+    "source": "FPbase: EGFP",
+    "sourceFigure": "FPbase",
+    "note": "ArcLight's fluorophore is super ecliptic pHluorin (A227D); the A227D mutation does not alter its ex/em spectrum (Jin 2012 Fig. S2). Super ecliptic pHluorin has no dedicated FPbase curve and is spectrally ≈ EGFP, so the verbatim FPbase EGFP spectrum is used as the proxy (ex corr 1.00, em corr 1.00). Same convention as the sibling Marina.",
     "proofread": false
   },
   "voltage": {
     "type": "fp",
+    "slope": 30,
     "polarity": "negative",
     "name": "ArcLight",
+    "source": "doi:10.1523/ENEURO.0060-20.2020",
+    "sourceImage": "/fv-sources/arclight.jpg",
+    "sourceFigure": "Fig. 2C",
+    "note": "ArcLight (ArcLightD = A242) ΔF/F–V re-digitized from the normalized voltage-dependence curve in Milosevic 2020 Fig. 2C (−70 mV = 0%, +100 mV = 100%) and rescaled to the Fig. 2D amplitude (−29.6% ΔF/F for the standard −70→+30 mV 100-mV step): ΔF/F(V) = −0.41 × normalized(V). Replaces the previous curve, which was mis-sourced to Jin 2012 Fig. 1C (that figure shows the earlier ~18%/100mV super-ecliptic-pHluorin-A227D precursor, not A242; A242 has no F-V curve in the origin paper, only the Fig. 2C bar). −70 mV normalized to 0; the +100 mV (170-mV step) point is the least certain.",
     "custom": {
       "voltage": [
         -100,
@@ -454,50 +462,50 @@
         100
       ],
       "deltaF": [
-        13,
+        16,
         0,
         -12,
-        -27,
-        -30
+        -30,
+        -41
       ]
     },
-    "source": "doi:10.1016/j.neuron.2012.06.040",
-    "sourceImage": "/fv-sources/arclight.jpg",
-    "sourceFigure": "Fig. 1C",
     "proofread": false
   },
   "kinetics": [
     {
       "on": 9,
       "off": 17,
-      "temperature": "25\u00b0C",
+      "temperature": "25°C",
       "source": "doi:10.1016/j.neuron.2012.06.040",
       "sourceFigure": "Fig. 1D",
+      "note": "on=9 ms is the FAST component of ArcLight's bi-exponential ON response (Jin reports τfast ~10 ms, τslow ~50 ms; Fig. S3B). Fast-component amplitude not extractable here, so the amplitude-weighted mean is not computed for this entry — it is substantially slower (cf. Hochbaum Table S2: weighted ~82/108 ms at 23°C).",
       "proofread": false
     },
     {
       "on": 28,
       "off": 104,
-      "temperature": "22-23\u00b0C",
+      "temperature": "22-23°C",
       "source": "doi:10.1016/j.cell.2019.11.004",
       "sourceFigure": "Table 1",
+      "note": "28/104 ms are the bi-exponential FAST components (identical to the ncomms5625 measurement below: depol τfast 28 ms/τslow 271 ms, hyperpol τfast 104 ms/τslow 283 ms). Villette Table 1 reproduces these literature values; amplitude-weighted means are ~176/174 ms (see ncomms5625 entry). FLAG: likely a re-citation of the same measurement.",
       "proofread": false
     },
     {
-      "on": 15,
-      "off": 45,
-      "temperature": "33-34\u00b0C",
-      "source": "doi:10.1038/nn.3709",
-      "sourceFigure": "Fig. 1e",
+      "on": 25,
+      "off": 21.5,
+      "temperature": "34°C",
+      "source": "doi:10.1038/nmeth.3000",
+      "sourceFigure": "Table S2",
+      "note": "Amplitude-weighted means of the bi-exponential fit at 34°C (Hochbaum Suppl. Table 2, ArcLight A242, HEK293): τup τ1 12 ms (78%)/τ2 72 ms → on = 0.78×12 + 0.22×72 = 25.2 ms; τdown 21.5 ms (mono-exponential, 100% fast) → off = 21.5 ms. CORRECTED: the previous entry (15/45 ms) was mis-cited to St-Pierre nn.3709 Fig. 1e, which actually reports ArcLight Q239 activation τ1 44.6/τ2 273 ms (63.7% fast) at 22°C — neither matches 15/45. At 23°C Hochbaum Table S2 gives weighted ~82/108 ms.",
       "proofread": false
     },
     {
-      "on": 28,
-      "off": 104,
-      "temperature": "23\u00b0C",
+      "on": 176,
+      "off": 174,
+      "temperature": "23°C",
       "source": "doi:10.1038/ncomms5625",
       "sourceFigure": "Table 1",
-      "note": "Fast components from bi-exponential fit; depolarizing 28 ms (39% fast, slow 271 ms), hyperpolarizing 104 ms (61% fast, slow 283 ms)",
+      "note": "Amplitude-weighted means of the bi-exponential fit: depolarizing τfast 28 ms (39%)/τslow 271 ms → on = 0.39×28 + 0.61×271 = 176 ms; hyperpolarizing τfast 104 ms (61%)/τslow 283 ms → off = 0.61×104 + 0.39×283 = 174 ms. Previously stored the fast components alone (28/104 ms).",
       "proofread": false
     }
   ],
@@ -505,6 +513,7 @@
     {
       "deltaF": -35,
       "sign": "negative",
+      "modality": "1P",
       "source": "doi:10.1016/j.neuron.2012.06.040",
       "sourceFigure": "Fig. 2C",
       "proofread": false
@@ -512,6 +521,7 @@
     {
       "deltaF": -29.6,
       "sign": "negative",
+      "modality": "1P",
       "source": "doi:10.1523/ENEURO.0060-20.2020",
       "sourceFigure": "Fig. 2D",
       "proofread": false
@@ -519,14 +529,16 @@
     {
       "deltaF": -32,
       "sign": "negative",
+      "modality": "1P",
       "source": "doi:10.1038/nmeth.3000",
       "sourceFigure": "Fig. S6",
-      "note": "ArcLight A242 in HEK293T cells at 23\u00b0C, n=7 cells",
+      "note": "ArcLight A242 in HEK293T cells at 23°C, n=7 cells",
       "proofread": false
     },
     {
       "deltaF": -31.6,
       "sign": "negative",
+      "modality": "1P",
       "source": "doi:10.1038/ncomms5625",
       "sourceFigure": "Table 1",
       "proofread": false
@@ -535,36 +547,42 @@
   "sensitivityData": [
     {
       "deltaF": 3.2,
+      "modality": "1P",
       "source": "doi:10.1016/j.neuron.2012.06.040",
       "sourceFigure": "Fig. 3",
       "proofread": false
     },
     {
       "deltaF": 3.2,
+      "modality": "1P",
       "source": "doi:10.1016/j.cell.2019.11.004",
       "sourceFigure": "Table 1",
       "proofread": false
     },
     {
       "deltaF": 2.2,
+      "modality": "1P",
       "source": "doi:10.1038/nn.3709",
       "sourceFigure": "Fig. 1g",
       "proofread": false
     },
     {
       "deltaF": 2.6,
+      "modality": "1P",
       "source": "doi:10.1021/acschemneuro.6b00234",
       "sourceFigure": "Main text",
       "proofread": false
     },
     {
       "deltaF": 2.7,
+      "modality": "1P",
       "source": "doi:10.1038/s41598-017-08731-2",
       "sourceFigure": "Table 3",
       "proofread": false
     },
     {
       "deltaF": 8.2,
+      "modality": "1P",
       "source": "doi:10.1038/ncomms5625",
       "sourceFigure": "Table 1",
       "proofread": false
@@ -573,7 +591,7 @@
   "photostabilityData": [
     {
       "brightnessRemaining": 82,
-      "illumination": "100 mW/mm\u00b2",
+      "illumination": "100 mW/mm²",
       "duration": "1 min",
       "source": "doi:10.1523/JNEUROSCI.3590-15.2016",
       "sourceFigure": "Fig. 3I",
@@ -581,7 +599,7 @@
     },
     {
       "brightnessRemaining": 77,
-      "illumination": "11 mW/mm\u00b2",
+      "illumination": "11 mW/mm²",
       "duration": "1 min",
       "source": "doi:10.7554/eLife.25690",
       "sourceFigure": "Fig. S3",
@@ -606,7 +624,8 @@
     {
       "compatible": true,
       "source": "doi:10.1016/j.cell.2019.11.004",
-      "proofread": false
+      "proofread": false,
+      "sourceFigure": "Table 1"
     }
   ],
   "researchPapers": [

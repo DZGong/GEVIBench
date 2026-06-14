@@ -170,10 +170,12 @@ export function SpectrumViewer({ spectrumData, geviName, bioluminescent = false 
   const exColor = config?.peakEx ? wavelengthToColor(config.peakEx) : 'rgb(59,130,246)';
   const emColor = config?.peakEm ? wavelengthToColor(config.peakEm) : 'rgb(34,197,94)';
 
-  // Determine wavelength range for x-axis: default 350–700, expand if data exceeds
+  // Determine wavelength range for x-axis: fit to the data's lower bound (so a curve
+  // truncated at, e.g., 400 nm starts the axis there rather than padding to 350), and
+  // extend the upper bound to at least 700 nm.
   const dataMinWl = computedSpectrum?.[0]?.wavelength ?? 350;
   const dataMaxWl = computedSpectrum?.[computedSpectrum.length - 1]?.wavelength ?? 700;
-  const minWl = Math.min(350, dataMinWl);
+  const minWl = dataMinWl;
   const maxWl = Math.max(700, dataMaxWl);
   const wlRange = maxWl - minWl;
 

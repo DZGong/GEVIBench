@@ -482,6 +482,9 @@
         0.007
       ]
     },
+    "source": "FPbase: Cerulean / Citrine",
+    "sourceFigure": "FPbase",
+    "note": "Composite FRET spectrum: excitation is the donor Cerulean (FPbase, verbatim — corr 1.0000, peak 433 nm), emission is the acceptor Citrine (FPbase, verbatim — corr 1.0000, peak 529 nm). VSFP2.1 (Dimitrov 2007) is a Cerulean/Citrine Ci-VSP FRET pair read as the Citrine/Cerulean emission ratio. Both arrays normalized to max = 1.0. (Same chromophore pair / curves as VSFP2.3.)",
     "proofread": false
   },
   "voltage": {
@@ -489,6 +492,10 @@
     "slope": 9,
     "polarity": "positive",
     "name": "VSFP2.1",
+    "source": "doi:10.1371/journal.pone.0000440",
+    "sourceImage": "/fv-sources/vsfp2.jpg",
+    "sourceFigure": "Fig. 3B",
+    "note": "Re-digitized 2026-06-14 from Dimitrov 2007 Fig. 3B red Boltzmann fit (ΔR/R-voltage, V½ = −68.4 mV, 35°C), normalized to −70 mV = 0. RATIOMETRIC ΔR/R (Citrine/Cerulean), positive-going. Replaces a prior curve that was ~1.4× over-amplified (e.g. stored −4.5% vs the fit's ~−2.7% at −140 mV). The depolarizing response saturates at ~+2.7% by ~−20 mV because V½ (−68.4 mV) sits at the holding potential; the steep near-rest slope (8.6%/100 mV) is captured in subthresholdData.",
     "custom": {
       "voltage": [
         -140,
@@ -504,22 +511,19 @@
         40
       ],
       "deltaF": [
-        -4.5,
-        -4,
+        -3.0,
         -2.8,
-        -1.2,
-        0,
-        1,
-        2.2,
-        3,
-        3.3,
-        3.5,
-        3.6
+        -2.1,
+        -0.8,
+        0.0,
+        0.8,
+        2.0,
+        2.5,
+        2.6,
+        2.7,
+        2.7
       ]
     },
-    "source": "doi:10.1371/journal.pone.0000440",
-    "sourceImage": "/fv-sources/vsfp2.jpg",
-    "sourceFigure": "Fig. 3B",
     "proofread": false
   },
   "kinetics": [
@@ -529,15 +533,27 @@
       "temperature": "35°C",
       "source": "doi:10.1371/journal.pone.0000440",
       "sourceFigure": "Table 1",
-      "proofread": false
+      "proofread": false,
+      "note": "Single-exponential optical-response time constants at +40 mV, 35°C (Dimitrov 2007 Table 1; at 22°C they are slower, 71/96 ms). VSFP2.1 (the R217Q mutant) has the fastest kinetics of the VSFP2 series (the 2A–2D parents are ~60–110 ms on). The underlying Ci-VSP sensing-charge movement is far faster; these τ reflect the FRET/fluorescence response."
     }
   ],
   "dynamicRangeData": [
     {
-      "deltaF": 8.6,
+      "deltaF": 2.7,
       "sign": "positive",
       "source": "doi:10.1371/journal.pone.0000440",
       "sourceFigure": "Table 1",
+      "proofread": false,
+      "modality": "1P",
+      "note": "RATIOMETRIC ΔR/R (Citrine/Cerulean), positive-going. Stored value is the −70→+30 mV (100-mV) depolarizing step ≈ +3% — the depolarizing ΔR/R from rest saturates at ~+3% (Dimitrov 2007 Fig. 3B, V½ = −68.4 mV). The Table 1 figure '8.6%' is the MAX SLOPE at V½ expressed per 100 mV (= (A−B)/4s × 100; paper reports 3.9–8%/100 mV across the VSFP2 series), NOT the −70→+30 chord: because VSFP2.1's V½ sits at the holding potential, its near-rest slope is steep (see subthresholdData) while the depol step saturates by ~−20 mV. The 8.6%/100 mV value is at 35°C (6.5% at 22°C). 1P widefield, PC12 cells."
+    }
+  ],
+  "subthresholdData": [
+    {
+      "slope": 0.086,
+      "source": "doi:10.1371/journal.pone.0000440",
+      "sourceFigure": "Table 1",
+      "note": "Maximal slope of the ΔR/R–V curve at V½ = 8.6%/100 mV = 0.086 %/mV (Dimitrov 2007 Table 1, VSFP2.1 at 35°C). VSFP2.1 was engineered (Ci-VSP R217Q) to place V½ (−68.4 mV) near the resting potential, maximizing near-rest voltage sensitivity — its defining feature. 1P.",
       "proofread": false
     }
   ],

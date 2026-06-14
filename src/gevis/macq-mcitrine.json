@@ -1,6 +1,6 @@
 {
-  "id": "macq",
-  "name": "MacQ",
+  "id": "macq-mcitrine",
+  "name": "MacQ-mCitrine",
   "year": 2014,
   "date": "2014-04-22",
   "category": "eFRET GEVI",
@@ -15,13 +15,14 @@
     "GEVI",
     "Opsin",
     "Opsin-FRET",
-    "macq"
+    "macq-mcitrine"
   ],
+  "siblingId": "macq-morange2",
   "spectrum": {
     "type": "rhodopsin",
     "peakEx": 515,
     "peakEm": 529,
-    "name": "MacQ",
+    "name": "MacQ-mCitrine",
     "custom": {
       "minEx": 380,
       "excitation": [
@@ -368,13 +369,16 @@
         0.0162
       ]
     },
+    "source": "FPbase: mCitrine",
+    "sourceFigure": "FPbase",
+    "note": "Verbatim FPbase mCitrine spectrum (the FRET-donor fluorophore in MacQ-mCitrine; correlation 1.00, max difference 0.00 vs FPbase mCitrine ex/em). MacQ is an eFRET sensor — the mCitrine donor's emission is quenched by FRET to the voltage-dependent Mac rhodopsin acceptor, so the displayed curve is the mCitrine fluorophore. Both arrays normalized to max = 1.0.",
     "proofread": false
   },
   "voltage": {
     "type": "opsin",
     "slope": 20,
     "polarity": "negative",
-    "name": "MacQ",
+    "name": "MacQ-mCitrine",
     "custom": {
       "voltage": [
         -100,
@@ -400,17 +404,18 @@
       ]
     },
     "source": "doi:10.1038/ncomms4674",
-    "sourceImage": "/fv-sources/macq.jpg",
+    "sourceImage": "/fv-sources/macq-mcitrine.jpg",
     "sourceFigure": "Fig. 3b",
     "proofread": false
   },
   "kinetics": [
     {
-      "on": 2.8,
-      "off": 5.4,
+      "on": 20.5,
+      "off": 19.6,
       "temperature": "22°C",
       "source": "doi:10.1038/ncomms4674",
       "sourceFigure": "Table S1",
+      "note": "Amplitude-weighted means of the bi-exponential fits in Supplementary Table 1 (n=3 cells). Activation (depolarizing, +): τfast 2.8 ms (74%), τslow 71 ms → τon = 0.74×2.8 + 0.26×71 = 20.5 ms. Deactivation (hyperpolarizing, −): τfast 5.4 ms (77%), τslow 67 ms → τoff = 0.77×5.4 + 0.23×67 = 19.6 ms. Previously stored the fast components alone (2.8 / 5.4 ms) — the paper's headline ~5 ms (1−1/e) rise is fast-component-dominated, but the ~23–26% slow tail (~70 ms) dominates the amplitude-weighted mean. Temperature not stated; room temperature (~22°C) assumed for the in vitro perfusion-chamber recordings.",
       "proofread": false
     }
   ],
@@ -418,23 +423,29 @@
     {
       "deltaF": -20,
       "sign": "negative",
+      "modality": "1P",
       "source": "doi:10.1038/ncomms4674",
       "sourceFigure": "Fig. 3b",
+      "note": "Steady-state ~20% ΔF/F per 100 mV, computed from a linear fit of the ΔF/F–voltage relationship around the −70 mV holding potential (vs ~35% for ArcLight-239Q). This is the local slope at −70 mV; the F-V curve (Fig. 3b) saturates above 0 mV, so the −70→+30 mV chord reads only ~−12%. 1P widefield, 505 nm, cultured neurons.",
       "proofread": false
     },
     {
       "deltaF": -19.49,
       "sign": "negative",
+      "modality": "1P",
       "source": "doi:10.1073/pnas.1902443116",
       "sourceFigure": "Fig. 4C",
+      "note": "19.49 ± 2.03% ΔF/F per 100 mV in C. elegans pharyngeal muscle, calibrated against simultaneous sharp-electrode voltage recordings (Azimi-Hashemi et al. 2019). 1P widefield (189 fps).",
       "proofread": false
     }
   ],
   "sensitivityData": [
     {
       "deltaF": 4.8,
+      "modality": "1P",
       "source": "doi:10.1038/ncomms4674",
       "sourceFigure": "Fig. 5d",
+      "note": "Peak ΔF/F to a single action potential in cultured neurons (4.8 ± 0.2%, mean ± s.e.m., n=12 cells); MacQ-mOrange2 was 7.2 ± 0.4%. 1P widefield, 505 nm.",
       "proofread": false
     }
   ],
@@ -445,6 +456,7 @@
       "duration": "0.5 min",
       "source": "doi:10.1038/ncomms4674",
       "sourceFigure": "Table S1",
+      "note": "Derived from the photobleaching rate of 1.3 ± 0.1 %/s (Supplementary Table 1, n=10 cells, 15 mW/mm², 505 nm): 100 − 1.3×30 s ≈ 61% remaining after 0.5 min.",
       "proofread": false
     }
   ],
@@ -453,7 +465,8 @@
       "ratio": 3,
       "reference": "arclight",
       "source": "doi:10.1038/ncomms4674",
-      "sourceFigure": "Fig. S4",
+      "sourceFigure": "Main text",
+      "note": "The paper reports a two- to four-fold brightness increase over ArcLight; 3× is the representative midpoint. (Fig. S4 plots SNR / photon-detection rate, not a direct brightness ratio.)",
       "proofread": false
     }
   ],

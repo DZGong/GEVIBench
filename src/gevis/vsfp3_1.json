@@ -25,6 +25,9 @@
       "minEm": 433,
       "emission": [0.0036,0.0037,0.0044,0.0056,0.0042,0.0049,0.0051,0.0065,0.0065,0.0079,0.0093,0.0111,0.013,0.0159,0.0188,0.023,0.0294,0.035,0.0433,0.0539,0.0663,0.0817,0.1014,0.1241,0.1495,0.1793,0.2144,0.259,0.3049,0.3587,0.4174,0.4752,0.5366,0.6004,0.6654,0.7305,0.7849,0.8414,0.8914,0.9304,0.9588,0.9707,0.9946,0.9966,1.0,0.9929,0.9857,0.9683,0.9527,0.9367,0.9205,0.9057,0.8959,0.8834,0.8749,0.8677,0.8586,0.8521,0.8557,0.8617,0.8604,0.8655,0.8742,0.8792,0.8804,0.8873,0.8952,0.8984,0.9051,0.9037,0.9042,0.9037,0.8923,0.891,0.8719,0.8599,0.8454,0.8278,0.8105,0.7875,0.7653,0.743,0.7193,0.695,0.672,0.6529,0.6317,0.6111,0.5935,0.5738,0.5558,0.5412,0.5288,0.5132,0.502,0.4866,0.4751,0.4653,0.4559,0.4486,0.4333,0.4286,0.4227,0.4099,0.4019,0.3952,0.3846,0.3783,0.3723,0.3622,0.354,0.346,0.339,0.3308,0.3161,0.3106,0.3004,0.2942,0.2808,0.2724,0.2674,0.2583,0.2449,0.2405,0.2308,0.2237,0.2166,0.207,0.2022,0.1898,0.1886,0.1823,0.176,0.1676,0.1621,0.1564,0.1516,0.1482,0.1433,0.1401,0.1355,0.1322,0.1264,0.1242,0.1187,0.1177,0.1122,0.1102,0.1065,0.1029,0.101,0.0979,0.0945,0.0945,0.0916,0.0881,0.0858,0.083,0.0814,0.0792,0.0775,0.0753,0.0724,0.0713,0.0686,0.0663,0.0652,0.0623,0.0609,0.0593,0.0569,0.055,0.0534,0.0521,0.0505,0.0474,0.047,0.0467,0.0449,0.0439,0.0432,0.0411,0.0382,0.0374,0.0377,0.0372,0.0359,0.0352,0.0336,0.0325,0.0317,0.0321,0.0299,0.0287,0.0285,0.0286,0.0266,0.0264,0.0271,0.0263,0.0254,0.0251,0.0247,0.0243,0.024,0.0231,0.0231,0.0216,0.0212,0.022,0.0216,0.0207,0.0197,0.02,0.0193,0.019,0.0186,0.0176,0.0184,0.0175,0.0172,0.017,0.0175,0.0166,0.0157,0.0175,0.0165,0.0169,0.0148,0.0148,0.0155,0.0155,0.0158,0.0138,0.0134,0.0148,0.0139,0.014,0.0144,0.0136,0.0147,0.0138,0.0141,0.0137,0.0134,0.0134,0.0135,0.0127,0.0135,0.0146,0.013,0.0129,0.0131,0.0132,0.0133,0.0133,0.0122,0.0126,0.0133,0.0125,0.0126,0.0123,0.0119,0.0131,0.0133,0.0129,0.0119,0.0126]
     },
+    "source": "FPbase: Cerulean",
+    "sourceFigure": "FPbase",
+    "note": "Cerulean (A206K) is VSFP3.1's only chromophore (the FRET acceptor YFP was removed from VSFP2A R217Q). spectrum.custom is the verbatim FPbase Cerulean excitation+emission curve (Pearson r = 1.0000, max|diff| = 0.0000 vs FPbase; peaks 435/477 nm match). The paper itself (Lundby 2008 Fig. 2c, Perron 2009 Fig. 5C) shows only the Cerulean emission band; no full independent ex/em spectrum was published for VSFP3.1.",
     "proofread": false
   },
   "voltage": {
@@ -32,9 +35,14 @@
     "slope": 2,
     "polarity": "negative",
     "name": "VSFP3.1",
-    "source": "doi:10.3389/neuro.02.005.2009",
+    "source": "doi:10.1371/journal.pone.0002514",
     "sourceImage": "/fv-sources/vsfp3_1.jpg",
-    "sourceFigure": "Fig. 5C",
+    "sourceFigure": "Fig. S3a",
+    "note": "Re-digitized 2026-06-13 from Lundby 2008 Fig. S3a, the normalized F-V (ΔF/ΔFmax, 0→1) for VSFP3.1 cyan fluorescence over −110→+110 mV (Boltzmann V½ = −51.2 mV, slope a = 20.8 mV, n=7). The figure is a NORMALIZED magnitude curve (not signed ΔF/F), so each digitized marker n(V) was rescaled to signed ΔF/F via the project's normalized-Boltzmann method: ΔF/F(V) = −D·[n(V) − n(−70)], with D = 1.9% (the total ΔF/F amplitude, Perron 2009 Chem Biol Table 1) and n(−70) = 0.264 read off the curve, giving the site-wide −70 mV = 0 normalization. Negative-going (F decreases on depolarization). The prior sourceImage/sourceFigure ('Fig. 5C') was WRONG — it was the ΔF/F-vs-time kinetics response trace (from Lundby Fig. 2c / Perron Fig. 5C), not an F-V curve; replaced with the real Fig. S3a F-V panel. Note the sensor is already ~26% activated at −70 mV (V½ ≈ −51 mV), so the −70→+30 mV (100-mV) step is only ~−1.3% of the 1.9% full-range swing.",
+    "custom": {
+      "voltage": [-110, -90, -70, -50, -30, -10, 10, 30, 50, 70, 90],
+      "deltaF": [0.5, 0.3, 0, -0.5, -0.9, -1.2, -1.3, -1.3, -1.4, -1.4, -1.4]
+    },
     "proofread": false
   },
   "kinetics": [
@@ -43,15 +51,26 @@
       "temperature": "25°C",
       "source": "doi:10.1371/journal.pone.0002514",
       "sourceFigure": "Fig. 3C",
+      "note": "Activation time constant 1.3 ± 0.1 ms at +70 mV (n=7), 25°C — this is the DOMINANT FAST component of a bi-exponential fluorescence response (the paper notes 'a dominant time-constant that closely tracks the activation time-course of the charge movement, and a less prominent slower component resembling the FRET component'). The slow component is NOT quantified numerically in Lundby 2008, so a proper amplitude-weighted mean cannot be computed from this paper; the headline 1.3 ms is the fast component alone. No deactivation (τ_off) is reported in Lundby 2008. See the Chem Biol Table 1 entry for a fully resolved bi-exponential ON fit at 35°C.",
+      "proofread": false
+    },
+    {
+      "on": 25.3,
+      "temperature": "35°C",
+      "source": "doi:10.1016/j.chembiol.2009.11.014",
+      "sourceFigure": "Table 1",
+      "note": "Amplitude-weighted mean ON τ for VSFP3.1_Cerulean from the double-exponential fit (Perron 2009 Chem Biol Table 1, at -20 mV, 35°C, n>=10 cells): fast τ_ON 1.8 ± 0.3 ms contributing 69% + slow τ_ON 77.5 ± 34 ms contributing 31% -> 0.69x1.8 + 0.31x77.5 = 25.3 ms. The fast component (1.8 ms) alone matches Lundby's 1.3 ms fast component; the weighted mean is dominated by the large slow component. Deactivation (τ_off) for VSFP3.1_Cerulean is reported only in Table S1 (supplementary, not available in the accessible PDF), so off is omitted. ON time constants are voltage-dependent (fast τ peaks near V½_total -43.6 mV).",
       "proofread": false
     }
   ],
   "dynamicRangeData": [
     {
-      "deltaF": -1.9,
+      "deltaF": -1.3,
       "sign": "negative",
+      "modality": "1P",
       "source": "doi:10.1016/j.chembiol.2009.11.014",
       "sourceFigure": "Table 1",
+      "note": "Stored value is the −70→+30 mV (100-mV) step, −1.3% (rule 1d window). The PUBLISHED dynamic range is ΔF/F = 1.9% (Perron 2009 Chem Biol Table 1, 'Dynamic Range' column) — the D (amplitude) parameter of the Boltzmann fit ΔF/F = A + (D−A)/(1+exp((Vm−V½)/s)) over the FULL −140→+60 mV span at 35°C (V½_total = −43.6 mV), i.e. a >100-mV range, so it overstates the per-100-mV step. Because VSFP3.1 is already ~26% activated at −70 mV (V½ ≈ −51 mV, Lundby Fig. S3a), the −70→+30 mV step captures ~0.71 of the full 1.9% swing → ~−1.3%, which matches the rescaled F-V curve (voltage.custom). Negative-going (fluorescence decreases on depolarization), consistent with voltage.polarity. 1P widefield/photometry, PC12 cells.",
       "proofread": false
     }
   ],
@@ -60,9 +79,16 @@
       "ratio": 0.79,
       "reference": "EGFP",
       "source": "Estimated from Cerulean EC=43000, QY=0.62 vs EGFP EC=56000, QY=0.60",
+      "sourceFigure": "FPbase",
+      "note": "Curator estimate, not a measured figure: brightness ratio = (Cerulean EC×QY)/(EGFP EC×QY) = (43000×0.62)/(56000×0.60) = 26660/33600 = 0.79. Cerulean and EGFP photophysical constants (EC, QY) are the FPbase/literature values; VSFP3.1's papers do not report a measured brightness comparison to EGFP. Since VSFP3.1 uses Cerulean as its sole chromophore, this is the component-FP brightness proxy.",
       "proofread": false
     }
   ],
+  "addgene": {
+    "id": "18951",
+    "url": "https://www.addgene.org/18951/",
+    "proofread": false
+  },
   "researchPapers": [
     {
       "title": "Second and third generation voltage-sensitive fluorescent proteins for monitoring membrane potential",
@@ -105,7 +131,7 @@
       "authors": "Matzke AJ, Matzke M",
       "journal": "Frontiers in Plant Science",
       "year": 2013,
-      "sample": "Arabidopsis thaliana roots, in vivo",
+      "sample": "Arabidopsis thaliana roots, in vivo (expressed the VSFP3.1_TagRFP color variant, plus VSFP2.3 and VSFP2.4; not the Cerulean VSFP3.1)",
       "url": "https://doi.org/10.3389/fpls.2013.00311",
       "proofread": false
     }
