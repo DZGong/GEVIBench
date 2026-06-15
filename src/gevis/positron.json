@@ -843,6 +843,14 @@
       "source": "doi:10.1038/s41467-020-17322-1",
       "sourceFigure": "Fig. 2b",
       "proofread": false
+    },
+    {
+      "ratio": 3.5,
+      "reference": "asap4e",
+      "source": "doi:10.1101/2024.06.21.599617",
+      "sourceFigure": "Table S4",
+      "note": "Per-neuron relative brightness in primary rat cortical neurons (Positron525-Kv, JF525 dye), normalized to ASAP4e-Kv = 1.0. \"Positron525\" mapped to Positron (JF525).",
+      "proofread": false
     }
   ],
   "addgene": {

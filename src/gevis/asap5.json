@@ -510,6 +510,14 @@
       "source": "doi:10.1016/j.neuron.2024.08.019",
       "sourceFigure": "Fig. 1G",
       "proofread": false
+    },
+    {
+      "ratio": 1.5,
+      "reference": "asap4e",
+      "source": "doi:10.1101/2024.06.21.599617",
+      "sourceFigure": "Table S4",
+      "note": "Per-neuron relative brightness in primary rat cortical neurons (Kv2.1-tagged constructs), normalized to ASAP4e-Kv = 1.0",
+      "proofread": false
     }
   ],
   "photostabilityData": [

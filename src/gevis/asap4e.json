@@ -801,6 +801,14 @@
       "sourceFigure": "Table S1",
       "note": "3.5-ms FWHM AP waveform, 100 mV, room temperature, HEK293A cells, 1P.",
       "proofread": false
+    },
+    {
+      "deltaF": 32,
+      "modality": "1P",
+      "source": "doi:10.1101/2024.06.21.599617",
+      "sourceFigure": "Table S4",
+      "note": "Single AP in primary rat cortical neurons (ASAP4e-Kv, Kv2.1-tagged), whole-cell patch (Fig. 1h), one-photon. Distinct from the Table S1 HEK293A simulated-AP value.",
+      "proofread": false
     }
   ],
   "brightnessData": [
