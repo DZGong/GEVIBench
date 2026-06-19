@@ -901,6 +901,29 @@
     "url": "https://www.addgene.org/172909/",
     "proofread": false
   },
+  "photobleach": [
+    {
+      "modality": "1P",
+      "illumination": "50 mW/mm²",
+      "intensityMWmm2": 50,
+      "t75": 83,
+      "fit": {
+        "model": "stretched-exponential",
+        "tau": 270.3,
+        "b": 1.053,
+        "r2": 0.997
+      },
+      "custom": {
+        "time": [0, 15, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180, 195, 210, 225, 240, 255, 270, 285, 300, 315],
+        "fluorescence": [1.0, 0.985, 0.93, 0.872, 0.819, 0.768, 0.723, 0.683, 0.646, 0.61, 0.577, 0.544, 0.515, 0.487, 0.463, 0.439, 0.415, 0.395, 0.373, 0.355, 0.336, 0.321]
+      },
+      "source": "doi:10.1126/sciadv.ads1807",
+      "sourceImage": "/photobleach-sources/voltron2.jpg",
+      "sourceFigure": "Fig. S7",
+      "note": "Photobleaching curve for Voltron2525 (Voltron2 + JF525) in HEK293T cells under continuous 1P 532 nm illumination at 5.0 W/cm² (= 50 mW/mm²), digitized from the yellow curve in Fig. S7 (hue-separated from the amber Positron525 curve; curve-tracked to skip the same-colored label). Fit to a stretched exponential F = exp(−(t/270.3)^1.053), t₇₅% ≈ 83 s (inside the ~315 s window). Fit t½ = 191 s matches the cohort half-life 180 ± 32 s (Table S5, n = 18). Companion to HVI+-Cy3b / HVI-Cy3b / Positron525 in the same figure.",
+      "proofread": false
+    }
+  ],
   "researchPapers": [
     {
       "title": "Sensitivity optimization of a rhodopsin-based fluorescent voltage indicator",

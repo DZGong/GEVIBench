@@ -159,6 +159,7 @@ export function getAllGEVIs(): GEVI[] {
     normalize('dynamicRangeData');
     normalize('sensitivityData');
     normalize('photostabilityData');
+    normalize('photobleach');
 
     rawGevis.push(raw as unknown as GEVI);
   }
@@ -199,6 +200,44 @@ export function getAllGEVIs(): GEVI[] {
     ...computeDisplayValues(gevi, bRelMap),
   }));
   return geviCache;
+}
+
+// A companion bleach curve from another GEVI measured in the SAME source figure.
+// Used to overlay all GEVIs' curves on one photobleaching panel (the t75 marker is
+// only drawn for the panel's own GEVI). We pass that GEVI's stored fit + digitized
+// points verbatim so the overlay renders exactly like that GEVI's own panel (smooth
+// fit line, not a jagged polyline through sparse points).
+export interface PhotobleachCompanion {
+  geviId: string;
+  name: string;
+  fit?: NonNullable<GEVI['photobleach']>[number]['fit'];
+  points: { time: number; flux: number }[];  // time in seconds, flux = F/F0
+}
+
+// Find other GEVIs whose photobleach array has an entry from the same paper figure
+// (same source DOI + sourceFigure) as the given curve, returning their digitized curves.
+export function getPhotobleachCompanions(
+  geviId: string,
+  source?: string,
+  sourceFigure?: string,
+): PhotobleachCompanion[] {
+  if (!source || !sourceFigure) return [];
+  const out: PhotobleachCompanion[] = [];
+  for (const g of getAllGEVIs()) {
+    if (g.id === geviId) continue;
+    for (const pb of g.photobleach ?? []) {
+      if (pb.source === source && pb.sourceFigure === sourceFigure && pb.custom?.time?.length) {
+        out.push({
+          geviId: g.id,
+          name: g.name,
+          fit: pb.fit,
+          points: pb.custom.time.map((t, i) => ({ time: t, flux: pb.custom!.fluorescence[i] })),
+        });
+        break;
+      }
+    }
+  }
+  return out;
 }
 
 // ============================================================================

@@ -117,6 +117,36 @@ export interface GEVI {
     sourceImage?: string;
     sourceFigure?: string;
   };
+  // Photobleaching decay curve + model-free t75% metric (time for fluorescence to
+  // fall to 75% of its initial value at the stated illumination). Digitized from the
+  // paper's bleach figure; an explicit fit (power-law, (bi)exponential, …) is stored
+  // so the panel can draw the smooth curve and solve the t75% crossing without
+  // assuming single-exponential decay. Non-standard-power / 2P entries are NOT
+  // intensity-normalized — they stand alone and are not compared across GEVIs.
+  photobleach?: Array<{
+    modality?: '1P' | '2P';
+    illumination: string;          // irradiance/power as reported (may be power-only for 2P)
+    intensityMWmm2?: number;       // 1P illumination intensity in mW/mm² — enables linear-dose scaling of t75 to the 100 mW/mm² reference (1P only; omit for 2P / power-only)
+    t75: number;                   // time to 75% of initial fluorescence, in seconds (at the measured illumination)
+    extrapolated?: boolean;        // true when t75 lies beyond the measured window (fit extrapolated past the data)
+    fit?: {
+      model: 'power-law' | 'biexponential' | 'monoexponential' | 'stretched-exponential';
+      a?: number;                  // power-law: F(t) = a · t^b (t in s). biexponential: fast-component fraction (0-1)
+      b?: number;                  // power-law exponent; also the stretch exponent β for stretched-exponential: F = exp(−(t/tau)^b)
+      tau?: number;                // exponential time constant, in seconds: mono → F = exp(-t/tau); biexp → fast τ₁
+      tau2?: number;               // biexponential slow time constant, in seconds: F = a·exp(-t/tau) + (1-a)·exp(-t/tau2)
+      r2?: number;
+    };
+    custom?: {
+      time: number[];              // seconds
+      fluorescence: number[];      // fraction of initial fluorescence (F/F0)
+    };
+    source?: string;
+    sourceImage?: string;
+    sourceFigure?: string;
+    note?: string;
+    proofread?: boolean;
+  }>;
   researchPapers?: ResearchPaper[];
   lastUpdated?: string;  // ISO date string, e.g. "2026-04-06"
   addgene?: {

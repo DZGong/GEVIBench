@@ -358,7 +358,7 @@
       "source": "doi:10.64898/2026.02.10.701308",
       "sourceFigure": "Table S1",
       "note": "Ratio of maximum Fgreen/Fred (Rmax, mKate2 reference): rEstus2s 1.24 / rEstus 2.07.",
-      "proofread": false
+      "proofread": true
     },
     {
       "ratio": 1.078,
@@ -366,7 +366,7 @@
       "source": "doi:10.64898/2026.02.10.701308",
       "sourceFigure": "Table S1",
       "note": "Ratio of maximum Fgreen/Fred (Rmax, mKate2 reference): rEstus2s 1.24 / ASAP3 1.15.",
-      "proofread": false
+      "proofread": true
     },
     {
       "ratio": 0.738,
@@ -374,7 +374,7 @@
       "source": "doi:10.64898/2026.02.10.701308",
       "sourceFigure": "Table S1",
       "note": "Ratio of maximum Fgreen/Fred (Rmax, mKate2 reference): rEstus2s 1.24 / JEDI-1P 1.68.",
-      "proofread": false
+      "proofread": true
     }
   ],
   "addgene": {

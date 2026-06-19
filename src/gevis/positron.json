@@ -858,6 +858,29 @@
     "url": "https://www.addgene.org/129253/",
     "proofread": false
   },
+  "photobleach": [
+    {
+      "modality": "1P",
+      "illumination": "50 mW/mm²",
+      "intensityMWmm2": 50,
+      "t75": 96,
+      "fit": {
+        "model": "stretched-exponential",
+        "tau": 294.0,
+        "b": 1.110,
+        "r2": 0.999
+      },
+      "custom": {
+        "time": [0, 15, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180, 195, 210, 225, 240, 255, 270, 285, 300, 315, 330],
+        "fluorescence": [1.0, 0.986, 0.937, 0.887, 0.843, 0.805, 0.763, 0.723, 0.685, 0.651, 0.616, 0.585, 0.559, 0.531, 0.499, 0.477, 0.451, 0.428, 0.404, 0.382, 0.361, 0.341, 0.325]
+      },
+      "source": "doi:10.1126/sciadv.ads1807",
+      "sourceImage": "/photobleach-sources/positron.jpg",
+      "sourceFigure": "Fig. S7",
+      "note": "Photobleaching curve for Positron525 (Positron + JF525) in HEK293T cells under continuous 1P 532 nm illumination at 5.0 W/cm² (= 50 mW/mm²), digitized from the amber curve in Fig. S7 (hue-separated from the yellow Voltron2525 curve; curve-tracked to skip the same-colored label). Fit to a stretched exponential F = exp(−(t/294.0)^1.110), t₇₅% ≈ 96 s (inside the ~330 s window). Fit t½ = 211 s matches the cohort half-life 207 ± 47 s (Table S5, n = 18). Companion to HVI+-Cy3b / HVI-Cy3b / Voltron2525 in the same figure.",
+      "proofread": false
+    }
+  ],
   "researchPapers": [
     {
       "title": "A general approach to engineer positive-going eFRET voltage indicators",

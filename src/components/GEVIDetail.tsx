@@ -3,6 +3,8 @@ import { BonusBadges } from './BonusBadges';
 import { BookOpen, ExternalLink, Plus, X, Sun, Zap, Activity, TrendingUp, Shield, Dna, ChevronDown, ChevronUp, Users } from 'lucide-react';
 import { SpectrumViewer, SpectrumData } from '../SpectrumViewer';
 import { VoltageCurveViewer } from '../VoltageCurveViewer';
+import { PhotobleachGallery } from '../PhotobleachViewer';
+import { getPhotobleachCompanions } from '../geviData';
 import { GEVILineage } from './GEVILineage';
 import { DistributionRadar } from './DistributionRadar';
 import { NoteTip, SourceLink } from './SourceCitation';
@@ -312,6 +314,25 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
         <h4 className="text-sm font-semibold mb-3 md:mb-4 text-ink">ΔF/F - Voltage Curve</h4>
         <VoltageCurveViewer voltageData={gevi.voltage || null} geviName={gevi.name} />
       </div>
+
+      {/* Photobleaching curve(s) + t75% metric (only for GEVIs with a digitized bleach curve).
+          Multiple curves (e.g. different papers / illumination) become a swipeable, full-size
+          gallery; each curve overlays the other GEVIs measured in the same figure (t₇₅% marked
+          only for this GEVI). */}
+      {gevi.photobleach && gevi.photobleach.length > 0 && (
+        <div className="border rounded-lg p-4 md:p-6 mt-4 md:mt-6 bg-surface-low border-ink/10">
+          <h4 className="text-sm font-semibold mb-3 md:mb-4 text-ink">
+            Photobleaching Curve{gevi.photobleach.length > 1 ? 's' : ''} (t₇₅%)
+          </h4>
+          <PhotobleachGallery
+            geviName={gevi.name}
+            entries={gevi.photobleach.map(pb => ({
+              data: pb,
+              companions: getPhotobleachCompanions(gevi.id, pb.source, pb.sourceFigure),
+            }))}
+          />
+        </div>
+      )}
 
       {/* Research Papers with Representative Figures */}
       {gevi.researchPapers && gevi.researchPapers.length > 0 && (

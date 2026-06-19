@@ -228,6 +228,67 @@
       "note": "pAce lost 80% of initial fluorescence (retained ~20%) under continuous 10 mW/mm² wide-field illumination in HeLa cells; measured as a reference alongside ElectraON/ElectraOFF in the mBaoJin GEVI paper",
       "sourceFigure": "Fig. 1h",
       "proofread": false
+    },
+    {
+      "brightnessRemaining": 80,
+      "illumination": "40 mW/mm²",
+      "duration": "1 min",
+      "modality": "1P",
+      "note": "F/F0 remaining after 1 min at 40 mW/mm² (1P widefield, 470 nm, CHO cells), read from the pAce 40 mW/mm² bleach curve in Fig. 1F; falls to ~0.47 by 235 s. Measured alongside Jarvis (~92% at 1 min, far more photostable) and JEDI-2P (~71%) at the same 40 mW/mm².",
+      "source": "doi:10.1016/j.neuron.2025.12.014",
+      "sourceFigure": "Fig. 1F",
+      "proofread": false
+    }
+  ],
+  "photobleach": [
+    {
+      "modality": "1P",
+      "intensityMWmm2": 40,
+      "t75": 81,
+      "fit": {
+        "model": "biexponential",
+        "a": 0.355,
+        "tau": 102.6,
+        "tau2": 668.7,
+        "r2": 0.98
+      },
+      "custom": {
+        "time": [
+          0,
+          10,
+          20,
+          30,
+          45,
+          60,
+          80,
+          100,
+          120,
+          150,
+          180,
+          210,
+          235
+        ],
+        "fluorescence": [
+          1.0,
+          0.927,
+          0.9,
+          0.874,
+          0.834,
+          0.796,
+          0.751,
+          0.712,
+          0.6,
+          0.592,
+          0.566,
+          0.522,
+          0.479
+        ]
+      },
+      "source": "doi:10.1016/j.neuron.2025.12.014",
+      "sourceImage": "/photobleach-sources/pace.jpg",
+      "sourceFigure": "Fig. 1F",
+      "proofread": false,
+      "note": "Model-free photostability: t75% = time for fluorescence to fall to 75% of initial. Digitized from the pAce 40 mW/mm² curve in Fig. 1F (1P widefield, 470 nm, CHO cells), F/F0 over ~235 s; t75 read from the digitized points. Bi-exponential fit. 1P/40 mW/mm² (intensityMWmm2=40); the panel scales t75 to the 100 mW/mm² reference."
     }
   ],
   "twoPhoton": [

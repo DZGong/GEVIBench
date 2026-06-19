@@ -571,6 +571,9 @@
         0.0064
       ]
     },
+    "source": "doi:10.1038/s41592-023-01913-z",
+    "sourceFigure": "Ext. Fig. 3e",
+    "note": "No 1P excitation/emission spectrum is published for JEDI-3sub; the JEDI3 paper (doi:10.1038/s41592-026-03043-8, Fig. 1c) reports only a 2P excitation spectrum (peak 940 nm) and states that JEDI3 indicators have excitation profiles similar to the parent JEDI-2P. JEDI3 mutations lie in the voltage-sensing domain, not the cpGFP chromophore environment, so the 1P spectrum is effectively identical to JEDI-2P. The displayed 1P custom curve is inherited verbatim from the parent JEDI-2P, which uses the cpGFP curve digitized from the ASAP4 paper (Yang et al., Ext. Fig. 3e); peaks 489 nm (ex) / 511 nm (em).",
     "proofread": false
   },
   "voltage": {
@@ -580,7 +583,7 @@
     "name": "JEDI-3sub",
     "source": "doi:10.1038/s41592-026-03043-8",
     "sourceImage": "/fv-sources/jedi3sub.jpg",
-    "sourceFigure": "Fig. 1h (main panel) and Fig. S3C (33°C)",
+    "sourceFigure": "Fig. 1h",
     "custom": {
       "voltage": [
         -120,
@@ -611,11 +614,12 @@
   },
   "kinetics": [
     {
-      "on": 0.63,
+      "on": 1.06,
       "off": 2.23,
       "temperature": "33°C",
       "source": "doi:10.1038/s41592-026-03043-8",
       "sourceFigure": "Table 1",
+      "note": "On (−70→+30 mV activation) is the amplitude-weighted mean of the bi-exponential fit in Table 1: τfast 0.63 ms (90.8%) + τslow 5.31 ms (9.2%) = 1.06 ms (the stored value was previously only the fast component, 0.63 ms). Off (+30→−70 mV deactivation) is the monoexponential τ of 2.23 ms. Measured under widefield 1P illumination in voltage-clamped HEK293A cells at 33°C.",
       "proofread": false
     }
   ],
@@ -628,6 +632,15 @@
       "sourceFigure": "Fig. 1h",
       "note": "Response to a 100-mV depolarizing step (-70 mV to +30 mV) at 23°C in HEK293A cells under 2P excitation at 940 nm (Fig. 1h; value reported in main text and Supplementary Fig. 3/Table 2 as 63.5%). Fig. 1h shows ΔF/F saturating near -62% at +30 mV.",
       "proofread": false
+    },
+    {
+      "deltaF": -60.26,
+      "sign": "negative",
+      "modality": "2P",
+      "source": "doi:10.1038/s41592-026-03043-8",
+      "sourceFigure": "Ext. Fig. 1b",
+      "note": "Response amplitude to a 100-mV voltage step (−70 mV to +30 mV) at 33°C in HEK293A cells under 2P resonant scanning at 940 nm (Extended Data Fig. 1b, value 60.26%). This is the 33°C counterpart of the 23°C Fig. 1h value (-63.5%). Compare ASAP5 35.20%, JEDI-2P 41.73%, JEDI3hyp 51.72% in the same panel.",
+      "proofread": false
     }
   ],
   "sensitivityData": [
@@ -637,7 +650,7 @@
       "source": "doi:10.1038/s41592-026-03043-8",
       "sourceFigure": "Fig. 1j",
       "note": "Peak -%ΔF/Fo response to a 2-ms FWHM single-spike waveform at 23°C under 2P excitation at 940 nm in HEK293A cells (Fig. 1j, n = 8). Compare JEDI-2P 23.3% and JEDI3hyp 36.4% in the same experiment.",
-      "proofread": false
+      "proofread": true
     }
   ],
   "brightnessData": [
@@ -646,14 +659,14 @@
       "reference": "jedi2p",
       "source": "doi:10.1038/s41592-026-03043-8",
       "sourceFigure": "Fig. 1d",
-      "proofread": false
+      "proofread": true
     },
     {
       "ratio": 1.39,
       "reference": "asap5",
       "source": "doi:10.1038/s41592-026-03043-8",
       "sourceFigure": "Ext. Fig. 1c",
-      "proofread": false
+      "proofread": true
     }
   ],
   "photostabilityData": [
@@ -668,17 +681,78 @@
       "proofread": false
     }
   ],
+  "photobleach": [
+    {
+      "modality": "2P",
+      "illumination": "37 mW at sample plane (2P)",
+      "t75": 53,
+      "fit": {
+        "model": "biexponential",
+        "a": 0.209,
+        "tau": 9.6,
+        "tau2": 779.4,
+        "r2": 0.985
+      },
+      "custom": {
+        "time": [
+          0,
+          5,
+          10,
+          15,
+          20,
+          30,
+          45,
+          60,
+          90,
+          120,
+          150,
+          180,
+          210,
+          240,
+          270,
+          300,
+          330,
+          360
+        ],
+        "fluorescence": [
+          1.0,
+          0.86,
+          0.847,
+          0.832,
+          0.814,
+          0.789,
+          0.762,
+          0.741,
+          0.702,
+          0.674,
+          0.644,
+          0.616,
+          0.595,
+          0.576,
+          0.555,
+          0.535,
+          0.53,
+          0.53
+        ]
+      },
+      "source": "doi:10.1038/s41592-026-03043-8",
+      "sourceImage": "/photobleach-sources/jedi3sub.jpg",
+      "sourceFigure": "Fig. 1e",
+      "note": "Model-free photostability: t75% = time for fluorescence to fall to 75% of initial. Digitized from the JEDI3sub curve in the representative 6-min 2P photobleaching trace (Fig. 1e, 37-mW excitation at the sample plane, HEK293A cells, n=3-4). Bi-exponential fit (fast tau1, slow tau2). This is a 2P, power-only measurement (not mW/mm2), so it stands alone and is NOT intensity-normalized or comparable to 1P GEVIs.",
+      "proofread": false
+    }
+  ],
   "twoPhoton": [
     {
       "compatible": true,
       "source": "doi:10.1038/s41592-026-03043-8",
-      "proofread": false
+      "proofread": true
     }
   ],
   "addgene": {
     "id": "246619",
     "url": "https://www.addgene.org/246619/",
-    "proofread": false
+    "proofread": true
   },
   "researchPapers": [
     {

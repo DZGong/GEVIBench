@@ -593,6 +593,9 @@
         0.0003
       ]
     },
+    "source": "FPbase: AausFP1",
+    "sourceFigure": "FPbase",
+    "note": "Excitation/emission are the FRET donor AausFP1 (AaFP1), the brightest known FP (Aequorea-derived; ex 504 / em 510, QY ~0.97). Jarvis = Acetabularia (Ace) rhodopsin acceptor + AaFP1 donor (confirmed: Quicke et al. 2026, Neuron; bioRxiv 2024.05.10.593541). The stored curve matches the FPbase AausFP1 spectrum (peaks 504/510); the Ace acceptor absorption (~525 nm) is not part of the displayed donor emission/excitation.",
     "proofread": false
   },
   "voltage": {
@@ -677,18 +680,78 @@
       "source": "doi:10.1016/j.neuron.2025.12.014",
       "sourceFigure": "Fig. 1C",
       "proofread": false
+    },
+    {
+      "ratio": 4.08,
+      "reference": "jedi2p",
+      "note": "Derived from 1P SNR and ΔF/F₀ in ND7/23 cells (Fig. 1C: Jarvis SNR 265±132, ΔF/F₀ 0.29; JEDI-2P SNR 208±110, ΔF/F₀ 0.46), using F₀ ∝ (SNR / (ΔF/F₀))² → Jarvis ≈ 4.1× brighter than JEDI-2P. Indirect proxy (SNR also reflects photon shot noise); the same method reproduces the measured Jarvis/pAce = 0.42. The paper attributes Jarvis's higher SNR than JEDI-2P to the higher brightness of FRET-opsin sensors.",
+      "source": "doi:10.1016/j.neuron.2025.12.014",
+      "sourceFigure": "Fig. 1C",
+      "proofread": false
     }
   ],
   "photostabilityData": [
     {
-      "brightnessRemaining": 99,
-      "illumination": "10 mW/mm\u00b2",
+      "brightnessRemaining": 92,
+      "illumination": "40 mW/mm²",
       "duration": "1 min",
       "modality": "1P",
       "source": "doi:10.1016/j.neuron.2025.12.014",
-      "note": "Read from the topmost (Jarvis, 10 mW/mm\u00b2) bleach curve in CHO cells under 1P wide-field illumination (470 nm LED), F/F\u2080 measured over 240 s; at 1 min Jarvis retains ~99% (far more photostable than pAce and JEDI-2P).",
+      "note": "F/F0 remaining after 1 min at 40 mW/mm² (1P widefield, 470 nm, CHO cells), read from the Jarvis 40 mW/mm² bleach curve in Fig. 1F. Jarvis is far more photostable than pAce (~80% at 1 min) and JEDI-2P (~71%), which bleach to ~0.47 by 235 s while Jarvis stays at ~0.80.",
       "sourceFigure": "Fig. 1F",
       "proofread": false
+    }
+  ],
+  "photobleach": [
+    {
+      "modality": "1P",
+      "intensityMWmm2": 40,
+      "t75": 317,
+      "fit": {
+        "model": "biexponential",
+        "a": 0.032,
+        "tau": 3.2,
+        "tau2": 1244.0,
+        "r2": 0.986
+      },
+      "custom": {
+        "time": [
+          0,
+          10,
+          20,
+          30,
+          45,
+          60,
+          80,
+          100,
+          120,
+          150,
+          180,
+          210,
+          235
+        ],
+        "fluorescence": [
+          1.0,
+          0.965,
+          0.954,
+          0.942,
+          0.934,
+          0.922,
+          0.91,
+          0.898,
+          0.88,
+          0.84,
+          0.84,
+          0.823,
+          0.8
+        ]
+      },
+      "source": "doi:10.1016/j.neuron.2025.12.014",
+      "sourceImage": "/photobleach-sources/jarvis.jpg",
+      "sourceFigure": "Fig. 1F",
+      "proofread": false,
+      "extrapolated": true,
+      "note": "Model-free photostability: t75% = time for fluorescence to fall to 75% of initial. Digitized from the Jarvis 40 mW/mm² curve in Fig. 1F (1P widefield, 470 nm, CHO cells), F/F0 over ~235 s. Jarvis is highly photostable (AaFP1 donor): F only falls to ~0.80 by 235 s and does NOT reach 0.75 within the measurement, so t75 (~317 s) is EXTRAPOLATED from the bi-exponential fit and is uncertain. The 115-185 s segment is partly occluded by the pAce-10mW curve and interpolated. 1P/40 mW/mm² (intensityMWmm2=40); the panel scales t75 to the 100 mW/mm² reference."
     }
   ],
   "twoPhoton": [

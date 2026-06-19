@@ -837,6 +837,77 @@
       "sourceFigure": "Fig. 2b",
       "note": "ASAP4e-Kv showed 0 \u00b1 10% fluorescence loss (\u2192 \u2248100% remaining) after 60 s of continuous 100-mW/mm\u00b2 one-photon illumination in hippocampal SST+ interneurons in vivo (Fig. 2b). The near-zero net bleaching is genuine: some ASAP4e-Kv cells exhibit photoactivation that offsets photobleaching. Powers used were 100\u2013250 mW/mm\u00b2, normalized to 100 mW/mm\u00b2 assuming linearity.",
       "proofread": false
+    },
+    {
+      "brightnessRemaining": 60,
+      "illumination": "100 mW",
+      "duration": "6 min",
+      "modality": "2P",
+      "note": "ASAP4e reference, in vitro (HEK293A) under 2P resonant scanning at 940 nm, 100 mW at the sample plane over a 40 \u00d7 635 \u00b5m FOV for 6 min (FORCE1s paper, Fig. S1.2B). ASAP4e (gray) normalized-2P-fluorescence curve reaches \u2248 0.60 at the 360-s (6-min) endpoint \u2014 slightly more photostable than FORCE1s (\u22480.57) and much more than JEDI-2P (\u22480.32). Sample-plane POWER (not an irradiance), so this 2P entry is display-only and does not normalize to the mW/mm\u00b2 standard.",
+      "source": "doi:10.64898/2026.04.07.717088",
+      "sourceFigure": "Fig. S1.2B",
+      "proofread": false
+    }
+  ],
+  "photobleach": [
+    {
+      "modality": "2P",
+      "illumination": "100 mW at sample plane (2P, 940 nm)",
+      "t75": 104,
+      "fit": {
+        "model": "biexponential",
+        "a": 0.184,
+        "tau": 30.9,
+        "tau2": 1106.8,
+        "r2": 0.998
+      },
+      "custom": {
+        "time": [
+          0,
+          5,
+          10,
+          15,
+          20,
+          30,
+          45,
+          60,
+          90,
+          120,
+          150,
+          180,
+          210,
+          240,
+          270,
+          300,
+          330,
+          360
+        ],
+        "fluorescence": [
+          1.0,
+          0.975,
+          0.943,
+          0.908,
+          0.886,
+          0.859,
+          0.83,
+          0.804,
+          0.767,
+          0.736,
+          0.712,
+          0.689,
+          0.674,
+          0.66,
+          0.639,
+          0.62,
+          0.604,
+          0.595
+        ]
+      },
+      "source": "doi:10.64898/2026.04.07.717088",
+      "sourceImage": "/photobleach-sources/asap4e.jpg",
+      "sourceFigure": "Fig. S1.2B",
+      "note": "Model-free photostability: t75% = time for fluorescence to fall to 75% of initial. Digitized from the ASAP4e curve in Fig. S1.2B (2P resonance-scanning, 940 nm, 100 mW at the sample plane over a 40x635 um FOV, 6 min, HEK293A; normalized 2P fluorescence). 2P power-only measurement (not mW/mm2) so it stands alone and is NOT intensity-normalized or comparable to 1P GEVIs. Measured alongside FORCE1s/ASAP4e/JEDI-2P in the same panel (they cross-overlay).",
+      "proofread": false
     }
   ],
   "twoPhoton": [

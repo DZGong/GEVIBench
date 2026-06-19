@@ -430,6 +430,9 @@
         0.0161
       ]
     },
+    "source": "Cytiva Cy3B SpectraViewer",
+    "sourceFigure": "Manufacturer",
+    "note": "Cy3b is not on FPbase and the paper has no dye-spectrum figure; the excitation/emission curve is the manufacturer Cy3B spectrum (Cytiva/GE Amersham SpectraViewer; Abs ~558 nm / Em ~572 nm), matching the stored peaks (556/571 nm).",
     "proofread": false
   },
   "voltage": {
@@ -533,6 +536,29 @@
       "note": "Photobleaching half-life of 736 ± 113 s (Table S5) for HVI+-Cy3b in HEK293T cells under continuous 532 nm illumination at 5.0 W/cm² (= 50 mW/mm²); 50% remaining at 12.3 min.",
       "source": "doi:10.1126/sciadv.ads1807",
       "sourceFigure": "Fig. S7",
+      "proofread": false
+    }
+  ],
+  "photobleach": [
+    {
+      "modality": "1P",
+      "illumination": "50 mW/mm²",
+      "intensityMWmm2": 50,
+      "t75": 381,
+      "fit": {
+        "model": "stretched-exponential",
+        "tau": 973.7,
+        "b": 1.328,
+        "r2": 0.999
+      },
+      "custom": {
+        "time": [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330, 360, 390, 420, 450, 480, 510, 540, 570, 600, 630, 660, 690, 720, 750, 780, 810, 840, 870, 900],
+        "fluorescence": [1.0, 0.986, 0.981, 0.962, 0.94, 0.923, 0.902, 0.88, 0.858, 0.841, 0.816, 0.797, 0.772, 0.745, 0.72, 0.697, 0.672, 0.648, 0.624, 0.604, 0.581, 0.562, 0.543, 0.524, 0.508, 0.493, 0.479, 0.464, 0.45, 0.434, 0.419]
+      },
+      "source": "doi:10.1126/sciadv.ads1807",
+      "sourceImage": "/photobleach-sources/hviplus.jpg",
+      "sourceFigure": "Fig. S7",
+      "note": "Representative photobleaching curve for HVI+-Cy3b in HEK293T cells under continuous 1P 532 nm illumination at 5.0 W/cm² (= 50 mW/mm²), digitized from the dark-orange curve in Fig. S7 (the same-colored 'HVI+-Cy3b' annotation was excluded by curve-tracking). Fit to a compressed exponential F = exp(−(t/973.7)^1.328) (β > 1 → slow initial bleach with a shoulder; biexponential/monoexponential cannot reproduce this shape). t₇₅% ≈ 381 s, inside the 900 s window (not extrapolated). The fit's t½ = 739 s matches the cohort half-life of 736 ± 113 s (Table S5, n = 24), confirming the calibration.",
       "proofread": false
     }
   ],
