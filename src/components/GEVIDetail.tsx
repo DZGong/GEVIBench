@@ -101,7 +101,7 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
       </div>
 
       {/* Metrics Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 md:gap-3">
         {metrics.map((metric) => (
           <div key={metric.key} className="border rounded-lg p-2 md:p-3 bg-surface-low border-ink/10">
             <div className="flex items-center gap-1.5">

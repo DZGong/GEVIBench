@@ -473,12 +473,12 @@
       ],
       "deltaF": [
         -3,
-        0,
+        -1,
         0,
         1,
-        4,
+        3,
         6,
-        6,
+        7,
         9,
         11,
         12
@@ -486,7 +486,7 @@
     },
     "source": "doi:10.1101/2025.05.30.657123",
     "sourceImage": "/fv-sources/electraon.jpg",
-    "sourceFigure": "Fig. S3B",
+    "sourceFigure": "Fig. S3b",
     "proofread": false
   },
   "kinetics": [
@@ -496,7 +496,7 @@
       "source": "doi:10.1101/2025.05.30.657123",
       "temperature": "23-25°C",
       "sourceFigure": "Fig. S3d",
-      "note": "Fast time constants (τfast) reported by the paper as τon = 1.11 ± 0.18 ms and τoff = 0.58 ± 0.08 ms, measured from a 100-mV step (-70→+30 mV depolarization, +30→-70 mV repolarization) in HEK293T cells at room temperature (23-25°C), 2.5 kHz acquisition. The paper fits a single fast time constant (no slow-component amplitudes reported), so no amplitude-weighted mean applies.",
+      "note": "Values are the fast time constant (τfast) reported by the paper (Fig. S3d is explicitly labeled 'Kinetics (τfast)'): τon = 1.11 ± 0.18 ms and τoff = 0.58 ± 0.08 ms, measured from a 100-mV step (-70→+30 mV depolarization, +30→-70 mV repolarization) in HEK293T cells at 23-25°C (Methods: Tyrode's solution maintained at 23-25°C), 2.5 kHz acquisition. The 'τfast' label implies a multi-exponential fit, but the paper does not report the slow component or its amplitude, so an amplitude-weighted mean cannot be computed; τfast is stored as the best available value and may understate the true mean response if a slow component exists.",
       "proofread": false
     }
   ],
@@ -506,7 +506,7 @@
       "sign": "positive",
       "modality": "1P",
       "source": "doi:10.1101/2025.05.30.657123",
-      "sourceFigure": "Fig. S3B",
+      "sourceFigure": "Fig. S3b",
       "note": "ΔF/F0 for a 100-mV step (-70 → +30 mV) read from the F-V curve in HEK293T cells under 20 mW/mm² 1P wide-field illumination (1 kHz acquisition); main text reports a full-range dynamic range of 15.1 ± 1.8% ΔF/F0 over the -100 to +60 mV (160 mV) sweep",
       "proofread": false
     },
@@ -557,6 +557,22 @@
       "source": "doi:10.1101/2025.05.30.657123",
       "sourceFigure": "Fig. 1h",
       "note": "Retained high baseline fluorescence after continuous 10 mW/mm² illumination in HeLa cells; markedly slower photobleaching than pAce",
+      "proofread": false
+    }
+  ],
+  "photobleach": [
+    {
+      "modality": "1P",
+      "illumination": "5 mW/mm²",
+      "intensityMWmm2": 5,
+      "custom": {
+        "time": [0, 60, 120, 180, 240, 300, 360, 420, 480, 540, 600, 660, 720, 780, 840, 900, 960, 1020, 1080, 1140, 1200, 1260, 1320, 1380, 1440, 1500, 1560, 1620, 1680, 1740],
+        "fluorescence": [1.0, 0.992, 0.991, 0.986, 0.986, 0.986, 0.986, 0.986, 0.983, 0.983, 0.983, 0.983, 0.983, 0.983, 0.983, 0.983, 0.983, 0.983, 0.983, 0.983, 0.983, 0.983, 0.983, 0.983, 0.983, 0.983, 0.983, 0.983, 0.983, 0.983]
+      },
+      "source": "doi:10.1101/2025.05.30.657123",
+      "sourceImage": "/photobleach-sources/electraon.jpg",
+      "sourceFigure": "Fig. S4h",
+      "note": "Photobleaching of the fluorescence baseline over a 30-min continuous 1P recording at 5 mW/mm² in cultured primary hippocampal neurons (Fig. S4h, the dark-orange ElectraON curve — sensor colors confirmed against the labeled bars in Fig. S4f/g: pAce cyan, ElectraON orange, Ace-mNeon2 green, ElectraOFF gold). ElectraON shows negligible bleaching (~1.7% loss over 30 min), so it never reaches 75% within the measured window — t₇₅% is not quantifiable here and is intentionally omitted (no marker). Curve retained for comparison/overlay. Companion curves (same figure): ElectraOFF, pAce, Ace-mNeon2.",
       "proofread": false
     }
   ],

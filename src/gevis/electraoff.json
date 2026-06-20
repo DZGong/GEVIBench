@@ -475,17 +475,17 @@
         1,
         0,
         -1,
-        -5,
+        -3,
+        -6,
         -9,
         -12,
-        -14,
-        -17,
+        -15,
         -19
       ]
     },
     "source": "doi:10.1101/2025.05.30.657123",
     "sourceImage": "/fv-sources/electraoff.jpg",
-    "sourceFigure": "Fig. S3B",
+    "sourceFigure": "Fig. S3b",
     "proofread": false
   },
   "kinetics": [
@@ -493,7 +493,7 @@
       "on": 1.75,
       "off": 1.14,
       "source": "doi:10.1101/2025.05.30.657123",
-      "note": "Fast time constants (τfast) reported by the paper as τon = 1.75 ± 0.32 ms and τoff = 1.14 ± 0.25 ms, measured from a 100-mV step (-70→+30 mV depolarization, +30→-70 mV repolarization) in HEK293T cells at room temperature (23-25°C), 2.5 kHz acquisition. The paper fits a single fast time constant (no slow-component amplitudes reported), so no amplitude-weighted mean applies.",
+      "note": "Values are the fast time constant (τfast) reported by the paper (Fig. S3d is explicitly labeled 'Kinetics (τfast)'): τon = 1.75 ± 0.32 ms and τoff = 1.14 ± 0.25 ms, measured from a 100-mV step (-70→+30 mV depolarization, +30→-70 mV repolarization) in HEK293T cells at 23-25°C (Methods: Tyrode's solution maintained at 23-25°C), 2.5 kHz acquisition. The 'τfast' label implies a multi-exponential fit, but the paper does not report the slow component or its amplitude, so an amplitude-weighted mean cannot be computed; τfast is stored as the best available value and may understate the true mean response if a slow component exists.",
       "temperature": "23-25°C",
       "sourceFigure": "Fig. S3d",
       "proofread": false
@@ -505,8 +505,8 @@
       "sign": "negative",
       "modality": "1P",
       "source": "doi:10.1101/2025.05.30.657123",
-      "note": "ΔF/F0 for a 100-mV step (-70 → +30 mV), read at +30 mV from the F-V curve (Fig. S3B; ≈-12% at +20 mV, ≈-15% at +40 mV) in HEK293T cells under 20 mW/mm² 1P wide-field illumination (1 kHz acquisition); main text reports a full-range dynamic range of -20.6 ± 2.4% ΔF/F0 over the -100 to +60 mV (160 mV) sweep",
-      "sourceFigure": "Fig. S3B",
+      "note": "ΔF/F0 for a 100-mV step (-70 → +30 mV), read at +30 mV from the F-V curve (Fig. S3b; ≈-12% at +20 mV, ≈-15% at +40 mV) in HEK293T cells under 20 mW/mm² 1P wide-field illumination (1 kHz acquisition); main text reports a full-range dynamic range of -20.6 ± 2.4% ΔF/F0 over the -100 to +60 mV (160 mV) sweep",
+      "sourceFigure": "Fig. S3b",
       "proofread": false
     },
     {
@@ -556,6 +556,29 @@
       "source": "doi:10.1101/2025.05.30.657123",
       "note": "Retained high basal fluorescence (~85%, minimal bleaching) under continuous 10 mW/mm² wide-field illumination in HeLa cells, by contrast with pAce and Ace-mNeon2 which lost 80% and 83% respectively over the same window (Fig. 1h)",
       "sourceFigure": "Fig. 1h",
+      "proofread": false
+    }
+  ],
+  "photobleach": [
+    {
+      "modality": "1P",
+      "illumination": "5 mW/mm²",
+      "intensityMWmm2": 5,
+      "t75": 1533,
+      "fit": {
+        "model": "stretched-exponential",
+        "tau": 7219.2,
+        "b": 0.804,
+        "r2": 0.962
+      },
+      "custom": {
+        "time": [0, 60, 120, 180, 240, 300, 360, 420, 480, 540, 600, 660, 720, 780, 840, 900, 960, 1020, 1080, 1140, 1200, 1260, 1320, 1380, 1440, 1500, 1560, 1620, 1680, 1740],
+        "fluorescence": [1.0, 0.998, 0.981, 0.973, 0.964, 0.954, 0.942, 0.923, 0.899, 0.875, 0.86, 0.844, 0.839, 0.83, 0.815, 0.81, 0.806, 0.797, 0.797, 0.783, 0.782, 0.782, 0.771, 0.765, 0.763, 0.761, 0.752, 0.752, 0.749, 0.742]
+      },
+      "source": "doi:10.1101/2025.05.30.657123",
+      "sourceImage": "/photobleach-sources/electraoff.jpg",
+      "sourceFigure": "Fig. S4h",
+      "note": "Photobleaching of the fluorescence baseline over a 30-min continuous 1P recording at 5 mW/mm² in cultured primary hippocampal neurons (Fig. S4h, the gold ElectraOFF curve — sensor colors confirmed against the labeled bars in Fig. S4f/g: pAce cyan, ElectraON orange, Ace-mNeon2 green, ElectraOFF gold). Stretched exponential F = exp(−(t/7219)^0.804), t₇₅% ≈ 1533 s (25.6 min), inside the 1800 s window. Companion curves (same figure): ElectraON, pAce, Ace-mNeon2.",
       "proofread": false
     }
   ],

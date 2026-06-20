@@ -322,7 +322,7 @@ export function PhotobleachViewer({ photobleachData, geviName, companions }: Pho
           <span className="inline-flex items-center gap-1">
             <span className="inline-block w-3 h-0.5" style={{ backgroundColor: primaryColor }} />
             <span className="font-semibold">{geviName || 'This GEVI'}</span>
-            <span className="text-ink/40">(t₇₅% marked)</span>
+            {photobleachData?.t75 != null && <span className="text-ink/40">(t₇₅% marked)</span>}
           </span>
           {companionCurves.map((c, i) => (
             <span key={i} className="inline-flex items-center gap-1">
@@ -335,7 +335,9 @@ export function PhotobleachViewer({ photobleachData, geviName, companions }: Pho
 
       {/* Metric summary */}
       <div className="mt-2 text-xs text-ink">
-        <span className="font-semibold text-klein">t₇₅% ≈ {photobleachData?.t75 != null ? fmtTime(photobleachData.t75) : '—'}</span>
+        {photobleachData?.t75 != null
+          ? <span className="font-semibold text-klein">t₇₅% ≈ {fmtTime(photobleachData.t75)}</span>
+          : <span className="font-semibold text-klein">t₇₅% not reached in window</span>}
         {extrapolated && <span className="ml-1 text-[10px] font-semibold text-amber-600">(extrapolated)</span>}
         {photobleachData?.illumination && <span className="text-ink/70"> @ {photobleachData.illumination}</span>}
         {photobleachData?.modality && (

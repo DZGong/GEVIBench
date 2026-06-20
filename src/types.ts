@@ -127,7 +127,7 @@ export interface GEVI {
     modality?: '1P' | '2P';
     illumination: string;          // irradiance/power as reported (may be power-only for 2P)
     intensityMWmm2?: number;       // 1P illumination intensity in mW/mm² — enables linear-dose scaling of t75 to the 100 mW/mm² reference (1P only; omit for 2P / power-only)
-    t75: number;                   // time to 75% of initial fluorescence, in seconds (at the measured illumination)
+    t75?: number;                  // time to 75% of initial fluorescence, in seconds (at the measured illumination). Omit when the sensor never reaches 75% within the measured window (negligible bleaching) — the curve still renders/overlays, just without a t75 marker.
     extrapolated?: boolean;        // true when t75 lies beyond the measured window (fit extrapolated past the data)
     fit?: {
       model: 'power-law' | 'biexponential' | 'monoexponential' | 'stretched-exponential';

@@ -674,6 +674,29 @@
     "url": "https://www.addgene.org/195518/",
     "proofread": false
   },
+  "photobleach": [
+    {
+      "modality": "1P",
+      "illumination": "5 mW/mm²",
+      "intensityMWmm2": 5,
+      "t75": 277,
+      "fit": {
+        "model": "stretched-exponential",
+        "tau": 1152.2,
+        "b": 0.874,
+        "r2": 1.0
+      },
+      "custom": {
+        "time": [0, 60, 120, 180, 240, 300, 360, 420, 480, 540, 600, 660, 720, 780, 840, 900, 960, 1020, 1080, 1140, 1200, 1260, 1320, 1380, 1440, 1500, 1560, 1620, 1680, 1740],
+        "fluorescence": [1.0, 0.937, 0.877, 0.82, 0.776, 0.736, 0.699, 0.662, 0.63, 0.597, 0.568, 0.535, 0.51, 0.486, 0.463, 0.443, 0.424, 0.404, 0.387, 0.37, 0.355, 0.34, 0.325, 0.314, 0.301, 0.285, 0.274, 0.264, 0.253, 0.241]
+      },
+      "source": "doi:10.1101/2025.05.30.657123",
+      "sourceImage": "/photobleach-sources/ace2n-mneon2.jpg",
+      "sourceFigure": "Fig. S4h",
+      "note": "Cross-GEVI entry from the Electra benchmarking paper. Photobleaching of the fluorescence baseline over a 30-min continuous 1P recording at 5 mW/mm² in cultured primary hippocampal neurons (Fig. S4h, the green Ace-mNeon2 curve — sensor colors confirmed against the labeled bars in Fig. S4f/g: pAce cyan, ElectraON orange, Ace-mNeon2 green, ElectraOFF gold). Stretched exponential F = exp(−(t/1152)^0.874), t₇₅% ≈ 277 s (4.6 min). Companion curves (same figure): ElectraON, ElectraOFF, pAce.",
+      "proofread": false
+    }
+  ],
   "researchPapers": [
     {
       "title": "Dual-polarity voltage imaging of the concurrent dynamics of multiple neuron types",

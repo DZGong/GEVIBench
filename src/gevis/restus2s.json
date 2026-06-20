@@ -17,6 +17,9 @@
     "peakEx": 460,
     "peakEm": 505,
     "name": "rEstus2s",
+    "source": "doi:10.64898/2026.02.10.701308",
+    "sourceFigure": "Fig. S4",
+    "note": "Excitation (dashed) and emission (solid) digitized from Fig. S4 of the origin paper — rEstus2s measured in HEK293T cells without electrophysiological control, emission recorded at 455 nm excitation on an LSM 980 (Carl Zeiss). Unlike its precursor rEstus, rEstus2s lacks the secondary excitation shoulder at ~400 nm (the neutral/protonated-chromophore band): excitation rises monotonically from ~0.12 at 391 nm to the anionic peak at ~460 nm. Emission peaks at ~505 nm.",
     "custom": {
       "minEx": 391,
       "excitation": [
@@ -327,7 +330,7 @@
       "temperature": "23°C",
       "source": "doi:10.64898/2026.02.10.701308",
       "sourceFigure": "Fig. S3",
-      "note": "On: amplitude-weighted mean of the bi-exponential fit for a depolarizing step from -100 to 0 mV, fast 4.3 ms (54.1%) + slow 20.9 ms (45.9%) = 11.9 ms. Off: single-exponential repolarization time constant to -100 mV read from Fig. S3e (~42 ms). One-photon photometry in HEK293T cells under voltage clamp, 23°C.",
+      "note": "Both values from the same voltage-step protocol (Fig. S3, HEK293T whole-cell voltage clamp, 23°C, 470 nm). On: depolarizing step -100 to 0 mV, fitted with a double-exponential (the depolarizing response is biphasic) - fast 4.3 ms (54.1%) + slow 20.9 ms (45.9%) -> amplitude-weighted mean 11.9 ms (Fig. S3a-c). Off: repolarizing pulse 0 -> -100 mV, which the paper fits with a single exponential (the repolarizing response is monophasic in this protocol, so there is no multi-exponential to weight) -> 42 ms (Fig. S3d,e). Cross-reference: under the separate excitation-wavelength-modulation protocol (Fig. S5), the same repolarizing transition fit with a double-exponential gives an amplitude-weighted tau_off ~79 ms at 470 nm (and ~52 ms with 400 nm co-illumination, which accelerates kinetics via cis-trans isomerization); the Fig. S3 single-exponential off is used here so on and off come from one protocol.",
       "proofread": false
     }
   ],
@@ -348,7 +351,7 @@
       "source": "doi:10.64898/2026.02.10.701308",
       "sourceFigure": "Fig. S2",
       "note": "Fractional voltage sensitivity (dF/F dV-1) at -50 mV, the average resting Vm of HEK293T cells, read from Fig. S2 (peak ~1.65 %/mV near -50 mV). Highest sensitivity of all tested GEVIs across the physiological resting Vm range.",
-      "proofread": false
+      "proofread": true
     }
   ],
   "brightnessData": [
@@ -380,7 +383,7 @@
   "addgene": {
     "id": "250991",
     "url": "https://www.addgene.org/250991/",
-    "proofread": false
+    "proofread": true
   },
   "researchPapers": [
     {

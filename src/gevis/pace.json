@@ -289,6 +289,27 @@
       "sourceFigure": "Fig. 1F",
       "proofread": false,
       "note": "Model-free photostability: t75% = time for fluorescence to fall to 75% of initial. Digitized from the pAce 40 mW/mm² curve in Fig. 1F (1P widefield, 470 nm, CHO cells), F/F0 over ~235 s; t75 read from the digitized points. Bi-exponential fit. 1P/40 mW/mm² (intensityMWmm2=40); the panel scales t75 to the 100 mW/mm² reference."
+    },
+    {
+      "modality": "1P",
+      "illumination": "5 mW/mm²",
+      "intensityMWmm2": 5,
+      "t75": 636,
+      "fit": {
+        "model": "stretched-exponential",
+        "tau": 2287.0,
+        "b": 0.974,
+        "r2": 0.999
+      },
+      "custom": {
+        "time": [0, 60, 120, 180, 240, 300, 360, 420, 480, 540, 600, 660, 720, 780, 840, 900, 960, 1020, 1080, 1140, 1200, 1260, 1320, 1380, 1440, 1500, 1560, 1620, 1680, 1740],
+        "fluorescence": [1.0, 0.976, 0.945, 0.923, 0.899, 0.869, 0.855, 0.83, 0.8, 0.786, 0.765, 0.737, 0.718, 0.701, 0.689, 0.668, 0.657, 0.638, 0.618, 0.6, 0.579, 0.568, 0.556, 0.539, 0.525, 0.512, 0.503, 0.492, 0.483, 0.469]
+      },
+      "source": "doi:10.1101/2025.05.30.657123",
+      "sourceImage": "/photobleach-sources/pace-figs4h.jpg",
+      "sourceFigure": "Fig. S4h",
+      "note": "Cross-GEVI entry from the Electra benchmarking paper (a different recording from the Fig. 1F entry above): photobleaching of the fluorescence baseline over a 30-min continuous 1P recording at 5 mW/mm² in cultured primary hippocampal neurons (Fig. S4h, the cyan pAce curve — sensor colors confirmed against the labeled bars in Fig. S4f/g: pAce cyan, ElectraON orange, Ace-mNeon2 green, ElectraOFF gold). Stretched exponential F = exp(−(t/2287)^0.974), t₇₅% ≈ 636 s (10.6 min). Companion curves (same figure): ElectraON, ElectraOFF, Ace-mNeon2.",
+      "proofread": false
     }
   ],
   "twoPhoton": [
