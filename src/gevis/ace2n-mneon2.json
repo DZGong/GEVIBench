@@ -695,6 +695,26 @@
       "sourceFigure": "Fig. S4h",
       "note": "Cross-GEVI entry from the Electra benchmarking paper. Photobleaching of the fluorescence baseline over a 30-min continuous 1P recording at 5 mW/mm² in cultured primary hippocampal neurons (Fig. S4h, the green Ace-mNeon2 curve — sensor colors confirmed against the labeled bars in Fig. S4f/g: pAce cyan, ElectraON orange, Ace-mNeon2 green, ElectraOFF gold). Stretched exponential F = exp(−(t/1152)^0.874), t₇₅% ≈ 277 s (4.6 min). Companion curves (same figure): ElectraON, ElectraOFF, pAce.",
       "proofread": false
+    },
+    {
+      "modality": "1P",
+      "illumination": "30 mW/mm²",
+      "intensityMWmm2": 30,
+      "t75": 35,
+      "fit": {
+        "model": "stretched-exponential",
+        "tau": 125.7,
+        "b": 0.970
+      },
+      "custom": {
+        "time": [0, 15, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180, 195, 210],
+        "fluorescence": [1.0, 0.881, 0.78, 0.691, 0.614, 0.546, 0.485, 0.432, 0.384, 0.342, 0.305, 0.272, 0.243, 0.216, 0.193]
+      },
+      "source": "doi:10.1101/2025.05.29.656768",
+      "sourceImage": "/photobleach-sources/ace2n-mneon2-fig1d.jpg",
+      "sourceFigure": "Fig. 1D",
+      "note": "Cross-GEVI entry from the Vega paper (a second recording at higher intensity than the Fig. S4h entry above). Ace-mNeon2 is the gray curve in Fig. 1D (1P 488 nm at 3 W/cm² = 30 mW/mm², 10 Hz; colors confirmed against the panel legend). It bleaches fastest, and its t₇₅% crossing (~38 s) falls in the early region where its gray trace is obscured beneath the overlapping Vega/JEDI-1P curves — so this curve is a stretched-exponential reconstruction anchored to the digitized visible tail (≈0.7→0.2) plus the cohort t₀.₇₅ = 38 s (Table S1), giving t₇₅% ≈ 35 s. Companion curves (same figure): Vega, JEDI-1P.",
+      "proofread": false
     }
   ],
   "researchPapers": [

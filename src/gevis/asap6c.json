@@ -441,6 +441,19 @@
       "proofread": true
     }
   ],
+  "apWidthData": [
+    {
+      "fwhm": 5.7,
+      "samplingRate": 400,
+      "sample": "Mouse barrel cortex L2/3 pyramidal neurons, in vivo, whisker stimulation (ASAP6c-Kv)",
+      "modality": "2P",
+      "temperature": "37°C",
+      "source": "doi:10.1101/2024.06.21.599617",
+      "sourceFigure": "Fig. 3d",
+      "note": "Optical FWHM (full-width at half-maximum, in ms) of the single optical action-potential waveform, measured under two-photon excitation (960 nm, 40 mW post-objective) at 400 fps in awake mouse barrel cortex during whisker stimulation. Mean of N=24 neurons read from the 'Optical FWHM (ms)' dot plot in Fig. 3d (ASAP6c-Kv mean marker ≈5.7 ms; data span ~5.3-6.0 ms; x-axis 5-8 ms). The 5.7-ms optical width is broadened beyond the underlying ~1-2 ms electrical AP by the 2.5-ms frame period (400 fps) plus sensor kinetics. Temperature is in-vivo physiological (~37°C; not separately stated for Fig. 3). This is the OPTICAL response width (not the simulated command-waveform FWHM of Fig. 1d/Table S2).",
+      "proofread": false
+    }
+  ],
   "brightnessData": [
     {
       "ratio": 1.0,

@@ -45,6 +45,20 @@ export interface GEVI {
     sourceFigure?: string;
     proofread?: boolean;
   }[];
+  // Time width of the optically-recorded action potential (FWHM of the single-AP
+  // fluorescence waveform). Store-only for now — not yet displayed. The measured
+  // width is broadened by finite frame rate, so samplingRate (Hz) is recorded too.
+  apWidthData?: {
+    fwhm: number;          // ms — full-width at half-maximum of the optical AP waveform
+    samplingRate: number;  // Hz — imaging frame rate the width was measured at (required)
+    sample?: string;       // prep: species, cell type, in vivo/slice/culture (see ResearchPaper.sample)
+    modality?: '1P' | '2P';
+    temperature?: string;  // °C — AP width is temperature-dependent
+    source: string;
+    sourceFigure?: string;
+    note?: string;
+    proofread?: boolean;
+  }[];
   brightnessData?: {
     ratio: number;
     reference: string;

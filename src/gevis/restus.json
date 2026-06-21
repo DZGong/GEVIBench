@@ -19,7 +19,7 @@
     "source": "doi:10.64898/2026.02.10.701308",
     "sourceFigure": "Fig. S4",
     "note": "Excitation (dashed; includes the ~400 nm neutral-form shoulder) and emission digitized from Fig. S4 of the rEstus2s paper — rEstus measured in HEK293T cells; anionic excitation peak ~463 nm, emission ~513 nm.",
-    "proofread": false,
+    "proofread": true,
     "custom": {
       "minEx": 392,
       "excitation": [
@@ -233,6 +233,7 @@
     "name": "rEstus",
     "custom": {
       "voltage": [
+        -120,
         -100,
         -80,
         -70,
@@ -242,11 +243,13 @@
         0,
         20,
         40,
-        60
+        60,
+        75
       ],
       "deltaF": [
+        13,
         10,
-        4,
+        5,
         0,
         -6,
         -20,
@@ -254,7 +257,8 @@
         -50,
         -59,
         -64,
-        -67
+        -67,
+        -68
       ]
     },
     "source": "doi:10.1002/advs.202307938",
@@ -277,17 +281,10 @@
     {
       "deltaF": -62,
       "sign": "negative",
+      "modality": "1P",
       "source": "doi:10.1002/advs.202307938",
       "sourceFigure": "Fig. 1G",
-      "note": "ΔF/F for a true 100-mV step (-70 -> +30 mV) computed from the Fig. 1G / Table 1 brightness-voltage Boltzmann fit (Bmax=77.5, ΔBmax=57.0, Vhalf=-32.0, ks=26.0 %EGFP): B(-70)=66.8, B(+30)=25.3 -> -62%. One-photon widefield voltage clamp, HEK293T cells. The full-span -70 -> +60 mV change is -67%.",
-      "proofread": false
-    },
-    {
-      "deltaF": -64,
-      "sign": "negative",
-      "source": "doi:10.64898/2026.02.10.701308",
-      "sourceFigure": "Table S1",
-      "note": "ΔF/F for a true 100-mV step (-70 -> +30 mV) from the Fgreen/Fred R-V Boltzmann fit measured alongside rEstus2s (Rmax=2.07, ΔRmax=-1.60, Vhalf=-41.1, ks=28.5; Table S1). One-photon widefield voltage clamp in HEK293T cells, 23°C.",
+      "note": "ΔF/F for a true 100-mV step (-70 -> +30 mV) computed from the Fig. 1G / Table 1 brightness-voltage Boltzmann fit (Bmax=77.5, ΔBmax=57.0, Vhalf=-32.0, ks=26.0 %EGFP): B(-70)=66.8, B(+30)=25.3 -> -62%. One-photon widefield (470 nm LED) voltage clamp, HEK293T cells. The full-span -70 -> +60 mV change is -67%.",
       "proofread": false
     }
   ],
@@ -327,7 +324,7 @@
   "addgene": {
     "id": "209767",
     "url": "https://www.addgene.org/209767/",
-    "proofread": false
+    "proofread": true
   },
   "researchPapers": [
     {

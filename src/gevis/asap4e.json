@@ -811,6 +811,30 @@
       "proofread": false
     }
   ],
+  "apWidthData": [
+    {
+      "fwhm": 5.8,
+      "samplingRate": 400,
+      "sample": "Mouse barrel cortex L2/3 pyramidal neurons, in vivo, whisker stimulation (ASAP4e-Kv)",
+      "modality": "2P",
+      "temperature": "37°C",
+      "source": "doi:10.1101/2024.06.21.599617",
+      "sourceFigure": "Fig. 3d",
+      "note": "Cross-measured in the ASAP6c paper (Lee et al. 2026, whose primary subject is ASAP6c). Optical FWHM (ms) of the single optical action-potential waveform under two-photon excitation (960 nm, 40 mW post-objective) at 400 fps in awake mouse barrel cortex during whisker stimulation. Mean of N=42 neurons read from the 'Optical FWHM (ms)' dot plot in Fig. 3d (ASAP4e-Kv mean marker ≈5.8 ms; cf. ASAP6b-Kv ≈5.8, ASAP6c-Kv ≈5.7; x-axis 5-8 ms). The mean line partly overlaps the gray data dots so ~5.8 ms is approximate. Temperature is in-vivo physiological (~37°C; not separately stated for Fig. 3).",
+      "proofread": false
+    },
+    {
+      "fwhm": 4.2,
+      "samplingRate": 721,
+      "sample": "HEK293A cells, whole-cell voltage clamp, in vitro (2-ms FWHM command AP waveform)",
+      "modality": "2P",
+      "temperature": "33°C",
+      "source": "doi:10.64898/2026.04.07.717088",
+      "sourceFigure": "Fig. 1K",
+      "note": "Cross-GEVI value measured in the FORCE1s paper (McDonald et al. 2026, primary subject FORCE1s): in-vitro optical response width — FWHM of ASAP4e's fluorescence response to an isolated 2-ms-FWHM, 100-mV command spike waveform under whole-cell voltage clamp + 2P imaging at 33°C, HEK293A (n = 9). Imaging by resonant-scanning at 721 Hz. Digitized from the Fig. 1K dot plot (y-axis 2-6 ms, 95% CI bars): ASAP4e mean ≈ 4.2 ms (±~0.1 ms), intermediate between FORCE1s (≈4.9) and JEDI-2P (≈3.6). This is the response to a synthetic 2-ms command input (broadened by command width + kinetics), distinct from the in-vivo real-spike FWHM (≈5.8 ms at 400 Hz, ASAP6c paper, above). No exact number printed; digitized.",
+      "proofread": false
+    }
+  ],
   "brightnessData": [
     {
       "ratio": 0.362,

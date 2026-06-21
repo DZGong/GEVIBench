@@ -534,6 +534,19 @@
       "proofread": false
     }
   ],
+  "apWidthData": [
+    {
+      "fwhm": 4.8,
+      "samplingRate": 400,
+      "sample": "Mouse, thalamic neurons, acute brain slice",
+      "modality": "1P",
+      "temperature": "34.5°C",
+      "source": "doi:10.1101/2025.05.29.656768",
+      "sourceFigure": "Fig. 3C",
+      "note": "Full-width at half-maximum (FWHM) of optically recorded single-AP waveforms ≈ 4.8 ms (read off Fig. 3C; stable at ~4.7–4.9 ms across twelve 1-min continuous-imaging sessions, n = 3 cells). Thalamic neurons in acute mouse brain slice maintained at 34.5°C, recorded at 400 Hz under 488 nm 1P wide-field illumination at 1 W/cm². The measured AP width is broadened by finite frame rate, so the sampling rate (400 Hz) is recorded alongside; no absolute FWHM was reported for the 484 Hz cultured-neuron recordings (Fig. S6 plots only a normalized FWHM).",
+      "proofread": false
+    }
+  ],
   "brightnessData": [
     {
       "ratio": 2,
@@ -560,6 +573,29 @@
       "source": "doi:10.1101/2025.05.29.656768",
       "sourceFigure": "Table S1",
       "note": "Photobleaching quarter-life t0.75 = 769 ± 297 s (n = 14): fluorescence decays to 75% of initial after ~769 s of continuous 488 nm illumination at 3.0 W/cm² (525/50 emission filter) in live HEK293T cells. >20-fold slower than Ace-mNeon2 (t0.75 = 38 ± 5 s) and >7.5-fold slower than JEDI-1P (t0.75 = 102 ± 21 s).",
+      "proofread": false
+    }
+  ],
+  "photobleach": [
+    {
+      "modality": "1P",
+      "illumination": "30 mW/mm²",
+      "intensityMWmm2": 30,
+      "t75": 946,
+      "fit": {
+        "model": "stretched-exponential",
+        "tau": 4368.5,
+        "b": 0.814,
+        "r2": 0.994
+      },
+      "custom": {
+        "time": [0, 60, 120, 180, 240, 300, 360, 420, 480, 540, 600, 660, 720, 780, 840, 900, 960, 1020, 1080, 1140, 1200, 1260, 1320, 1380, 1440],
+        "fluorescence": [1.0, 0.919, 0.919, 0.919, 0.905, 0.894, 0.882, 0.857, 0.842, 0.831, 0.819, 0.806, 0.795, 0.785, 0.775, 0.763, 0.754, 0.735, 0.721, 0.716, 0.709, 0.693, 0.68, 0.673, 0.663]
+      },
+      "source": "doi:10.1101/2025.05.29.656768",
+      "sourceImage": "/photobleach-sources/vega.jpg",
+      "sourceFigure": "Fig. 1D",
+      "note": "Representative photobleaching curve digitized from Fig. 1D (dark-olive Vega curve; 1P 488 nm at 3 W/cm² = 30 mW/mm², 10 Hz; colors confirmed against the panel legend: Vega olive, Ace-mNeon2 gray, JEDI-1P bright green). Stretched exponential F = exp(−(t/4369)^0.814), t₇₅% ≈ 946 s for this representative trace. The cohort mean t₀.₇₅ is 769 s (Table S1, n = 14) — the value stored in photostabilityData; representative traces run slightly slower than the cohort mean. Companion curves (same figure): Ace-mNeon2, JEDI-1P.",
       "proofread": false
     }
   ],

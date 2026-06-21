@@ -258,6 +258,31 @@
     }
   ],
 
+  "apWidthData": [
+    {
+      "fwhm": 2.6,
+      "samplingRate": 7100,
+      "sample": "Mouse, visual cortex L2/3, awake head-fixed, in vivo (ULoVE 2P), soma-targeted FORCE1s-Kv",
+      "modality": "2P",
+      "temperature": "37°C",
+      "source": "doi:10.64898/2026.04.07.717088",
+      "sourceFigure": "Fig. 3E",
+      "note": "Optical spike full width at half maximum of FORCE1s-Kv single spikes recorded in vivo under ULoVE 2P microscopy: 2.6 ± 0.5 ms (mean ± SD; n = 9 cells), 1.9-fold larger than JEDI-2P-Kv (1.4 ± 0.3 ms, n = 17) measured in the same panel (Fig. 3E). Recorded in layer-2/3 V1 of awake head-fixed mice at 7.1 kHz ULoVE acquisition (10-min recordings); body temperature ~37°C. FWHM = time extent at half-maximum amplitude of the isolated-spike spike-triggered average waveform, after 20 kHz linear interpolation (Methods). Consistent with the in-vivo repolarization τoff of 2.9 ± 0.7 ms (Fig. 3D). Distinct from the 2-ms FWHM electrical command waveform used in vitro (Fig. 1G), which is the injected input shape, not the optical response.",
+      "proofread": false
+    },
+    {
+      "fwhm": 4.9,
+      "samplingRate": 721,
+      "sample": "HEK293A cells, whole-cell voltage clamp, in vitro (2-ms FWHM command AP waveform)",
+      "modality": "2P",
+      "temperature": "33°C",
+      "source": "doi:10.64898/2026.04.07.717088",
+      "sourceFigure": "Fig. 1K",
+      "note": "In-vitro optical response width: FWHM of FORCE1s' fluorescence response to an isolated 2-ms-FWHM, 100-mV command spike waveform under whole-cell voltage clamp + 2P imaging at 33°C, HEK293A (n = 11). Imaging by resonant-scanning at 721 Hz. Digitized from the Fig. 1K dot plot (y-axis 2-6 ms, 95% CI bars): FORCE1s mean ≈ 4.9 ms (±~0.1 ms), wider than ASAP4e (≈4.2 ms) and JEDI-2P (≈3.6 ms) measured in the same panel, consistent with FORCE1s' slower off-kinetics. NOTE: this width is the optical response to a synthetic 2-ms command input (not a real spike), so it is broadened by both the command width and the sensor kinetics — distinct from the in-vivo real-spike FWHM of 2.6 ms (Fig. 3E, 7.1 kHz). No exact number is printed; value is digitized.",
+      "proofread": false
+    }
+  ],
+
   "twoPhoton": [
     {
       "compatible": true,

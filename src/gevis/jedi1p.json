@@ -553,6 +553,29 @@
     "note": "Steady-state -%ΔF/F0 vs command voltage (Fig. 2b), read directly from the JEDI-1P (green) curve and normalized to 0 at -70 mV. The figure shows points every 10 mV (-100 to +50); the 30-mV subset stored here matches the plotted curve (e.g. -100->+9, -40->-16, -10->-32, +20->-46, +50->-56).",
     "proofread": false
   },
+  "photobleach": [
+    {
+      "modality": "1P",
+      "illumination": "30 mW/mm²",
+      "intensityMWmm2": 30,
+      "t75": 112,
+      "fit": {
+        "model": "stretched-exponential",
+        "tau": 448.5,
+        "b": 0.897,
+        "r2": 0.991
+      },
+      "custom": {
+        "time": [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330, 360, 390, 420, 450, 480, 510, 540, 570, 600, 630, 660, 690, 720, 750, 780],
+        "fluorescence": [1.0, 0.979, 0.889, 0.816, 0.744, 0.694, 0.63, 0.59, 0.552, 0.514, 0.479, 0.444, 0.422, 0.402, 0.374, 0.353, 0.344, 0.323, 0.31, 0.294, 0.283, 0.267, 0.256, 0.248, 0.236, 0.231, 0.219]
+      },
+      "source": "doi:10.1101/2025.05.29.656768",
+      "sourceImage": "/photobleach-sources/jedi1p.jpg",
+      "sourceFigure": "Fig. 1D",
+      "note": "Cross-GEVI entry from the Vega paper. Representative photobleaching curve digitized from Fig. 1D (bright-green JEDI-1P curve; 1P 488 nm at 3 W/cm² = 30 mW/mm², 10 Hz; colors confirmed against the panel legend). Stretched exponential F = exp(−(t/449)^0.897), t₇₅% ≈ 112 s for this representative trace; cohort mean t₀.₇₅ = 102 s (Table S1). Companion curves (same figure): Vega, Ace-mNeon2.",
+      "proofread": false
+    }
+  ],
   "researchPapers": [
     {
       "title": "Widefield imaging of rapid pan-cortical voltage dynamics with an indicator evolved for one-photon microscopy",

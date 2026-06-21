@@ -606,6 +606,19 @@
       "proofread": false
     }
   ],
+  "apWidthData": [
+    {
+      "fwhm": 12,
+      "samplingRate": 200,
+      "sample": "Mouse, pancreatic islet α cells, ex vivo",
+      "modality": "1P",
+      "temperature": "37°C",
+      "note": "Cross-GEVI value from the HVI+ paper (Liu 2025, doi:10.1126/sciadv.ads1807), whose primary subject is HVI+. FWHM of the fluorescent (optical) single-AP waveform (FWHMfluo., in ms) for HVI-Cy3b expressed in α cells of intact mouse pancreatic islets imaged at 200 Hz under 1P 532 nm illumination, superfused at 37°C. Read from the 3 mM glucose (resting/baseline, cyan) box of the α-cells group in the FWHMfluo. (ms) box plot in Fig. 6F; box median ≈ 12 ms (IQR ≈ 11-12.5 ms, ±~1 ms digitization precision). At 13 mM glucose the α-cell FWHMfluo. rises modestly (≈ 13-15 ms). Absolute FWHMfluo. read directly from a ms axis (distinct from the dimensionless RFWHM ratio in Table S4/Fig. S6).",
+      "source": "doi:10.1126/sciadv.ads1807",
+      "sourceFigure": "Fig. 6F",
+      "proofread": false
+    }
+  ],
   "photobleach": [
     {
       "modality": "1P",

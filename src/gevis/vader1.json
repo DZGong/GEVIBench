@@ -668,6 +668,30 @@
       "proofread": true
     }
   ],
+  "apWidthData": [
+    {
+      "fwhm": 1.2,
+      "samplingRate": 7142.9,
+      "sample": "Mouse, visual cortex L2/3, awake head-fixed, in vivo",
+      "modality": "2P",
+      "temperature": "37°C",
+      "source": "doi:10.64898/2026.06.01.726307",
+      "note": "Optical action-potential waveform width (full width at half maximum) of VADER1-tKv single spikes recorded in vivo under ULoVE 2P microscopy: 1.2 ± 0.2 ms (mean ± SD), statistically indistinguishable from JEDI-2P-Kv (1.4 ± 0.3 ms). Sampling rate 7.2 kHz (7142.9 Hz, two ULoVE volumes/cell: 2 × (50 µs acquisition + 20 µs AOD access)); awake head-fixed mice, body temperature ~37°C. Spike width was taken as the FWHM of the spike-triggered average waveform after 20 kHz linear interpolation.",
+      "sourceFigure": "Fig. 3C",
+      "proofread": false
+    },
+    {
+      "fwhm": 6,
+      "samplingRate": 440,
+      "sample": "HEK293a cells, whole-cell voltage clamp, in vitro",
+      "modality": "2P",
+      "temperature": "25°C",
+      "source": "doi:10.64898/2026.06.01.726307",
+      "note": "Optical FWHM (~6 ms) of VADER1's fluorescence response to an isolated AP waveform (100-mV amplitude, 4-ms-FWHM electrical spike) imaged under 2P resonant scanning at 440 Hz (1050 nm, ~45 mW), whole-cell voltage clamp of stable HEK293a lines at room temperature (~25°C). The ~6-ms optical width vs ~4-ms electrical spike reflects modest broadening from indicator kinetics and the 440-Hz frame rate undersampling the response (main text). Value read from the Fig. S2.2A scatter (Y-axis 0-8 ms, points clustered near 6 ms).",
+      "sourceFigure": "Fig. S2.2A",
+      "proofread": false
+    }
+  ],
   "brightnessData": [
     {
       "ratio": 0.85,

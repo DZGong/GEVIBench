@@ -517,6 +517,30 @@
       "proofread": false
     }
   ],
+  "apWidthData": [
+    {
+      "fwhm": 5,
+      "samplingRate": 1000,
+      "sample": "Rat, cultured hippocampal neurons, in vitro",
+      "modality": "1P",
+      "temperature": "25°C",
+      "note": "FWHM of the fluorescent (optical) single-AP waveform (FWHMfluo., in ms) for HVI+-Cy3b in cultured rat hippocampal neurons imaged at 1000 Hz under 1P 532 nm illumination (whole-cell patch clamp, room temperature). Read from the untreated 'Blank' box (n = 6 cells) of the FWHMfluo. (ms) box plot in Fig. 3B; box median ≈ 5 ms (IQR ≈ 4-7 ms, ±~1 ms digitization precision). The 2 and 5 mM TEA conditions in the same panel rise sharply (AP broadening). This is an absolute FWHMfluo. read directly from a ms axis (distinct from the dimensionless RFWHM ratio in Table S4/Fig. S6).",
+      "source": "doi:10.1126/sciadv.ads1807",
+      "sourceFigure": "Fig. 3B",
+      "proofread": false
+    },
+    {
+      "fwhm": 14,
+      "samplingRate": 200,
+      "sample": "Mouse, pancreatic islet β cells, ex vivo",
+      "modality": "1P",
+      "temperature": "37°C",
+      "note": "FWHM of the fluorescent (optical) single-AP waveform (FWHMfluo., in ms) for HVI+-Cy3b expressed in β cells of intact mouse pancreatic islets imaged at 200 Hz under 1P 532 nm illumination, superfused at 37°C. Read from the 3 mM glucose (resting/baseline, cyan) box of the β-cells group in the FWHMfluo. (ms) box plot in Fig. 6F; box median ≈ 14 ms (IQR ≈ 13-15 ms, ±~2 ms digitization precision). At 13 mM glucose the β-cell FWHMfluo. rises to ≈ 18-20 ms. The wider width vs the Fig. 3B neuron value (≈ 5 ms at 1000 Hz) reflects the slower frame rate (200 Hz) and the different prep — illustrating why samplingRate and sample are recorded.",
+      "source": "doi:10.1126/sciadv.ads1807",
+      "sourceFigure": "Fig. 6F",
+      "proofread": false
+    }
+  ],
   "brightnessData": [
     {
       "ratio": 0.53,

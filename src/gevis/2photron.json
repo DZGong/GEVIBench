@@ -25,6 +25,9 @@
     "peakEx": 560,
     "peakEm": 581,
     "name": "2Photron (JF552)",
+    "source": "FPbase: Janelia Fluor JF552-HaloTag conjugate",
+    "sourceFigure": "FPbase",
+    "note": "2Photron is the Klebsormidium nitens rhodopsin (KnR) HaloTag fusion labeled with the JF552-HaloTag ligand; the displayed curve is the FPbase 'Janelia Fluor JF552-HaloTag conjugate' spectrum (EX peak 560 nm, EM peak 581 nm), the fluorophore that emits in the chemigenetic eFRET sensor. The 2Photron paper does not publish its own absorption/emission spectrum figure.",
     "custom": {
       "minEx": 250,
       "excitation": [
@@ -797,9 +800,22 @@
       "deltaF": 5.72,
       "modality": "2P",
       "dye": "JF552",
-      "note": "Mean |ΔF/F| per spike = 5.72 ± 1.39 % from layer II/III V1 neurons of awake mice, recorded in vivo with 2P ULoVE excitation at 1045 nm (>3.5 kHz), soma-targeted 2Photron-ST552. (Golgi cells gave 7.88 ± 1.31 %, Fig. S9.)",
+      "note": "Mean |ΔF/F| per spike = 5.72 ± 1.39 % (n=16 cells, 5 mice) from layer II/III V1 neurons of awake mice, recorded in vivo with 2P ULoVE excitation at 1045 nm (>3.5 kHz), soma-targeted 2Photron-ST552; quantified in the Fig. 3f bar comparison (representative trace Fig. 3b). (Golgi cells gave 7.88 ± 1.31 %, Fig. S9.)",
       "source": "doi:10.1101/2024.11.15.623698",
-      "sourceFigure": "Fig. 3B",
+      "sourceFigure": "Fig. 3f",
+      "proofread": false
+    }
+  ],
+  "apWidthData": [
+    {
+      "fwhm": 1.42,
+      "samplingRate": 3500,
+      "sample": "Mouse, V1 cortex layer II/III, awake behaving, in vivo (soma-targeted 2Photron-ST552)",
+      "modality": "2P",
+      "temperature": "37°C",
+      "note": "Optical single-spike FWHM = 1.42 ± 0.13 ms [1.15-1.70 ms] (n=16 cells, 5 mice), recorded with 2P ULoVE excitation at 1045 nm, >3.5 kHz sampling (representative trace 3.75 kHz, Fig. 3b). Significantly narrower than JEDI-2P-Kv (1.84 ± 0.46 ms). In-vivo body temperature ~37°C (not stated explicitly in the paper).",
+      "source": "doi:10.1101/2024.11.15.623698",
+      "sourceFigure": "Fig. 3f",
       "proofread": false
     }
   ],
@@ -809,7 +825,7 @@
       "reference": "jedi2p",
       "note": "In vivo 2P photon flux: 2Photron-ST552 15.5 ± 4.9 MHz vs JEDI-2P-Kv 3.76 ± 1.42 MHz (~4x higher), layer II/III V1 neurons, 1045 nm ULoVE excitation.",
       "source": "doi:10.1101/2024.11.15.623698",
-      "sourceFigure": "Fig. 3F",
+      "sourceFigure": "Fig. 3f",
       "proofread": false
     }
   ],
