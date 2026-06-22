@@ -1,21 +1,21 @@
 {
-  "id": "cephid",
-  "name": "Cepheid1",
+  "id": "cepheid1b",
+  "name": "Cepheid1b",
   "year": 2023,
   "date": "2023-11-24",
   "category": "eFRET GEVI",
   "tags": [
     "Ace opsin",
     "mScarlet-I1.4",
-    "mRuby4",
     "Red",
     "FRET",
     "Somatic targeting"
   ],
   "paper": "Science Advances 2023",
   "paperUrl": "https://doi.org/10.1126/sciadv.adi4208",
-  "description": "Red opsin-FRET voltage indicator pair featuring RFP donor insertion into the first extracellular loop of Ace rhodopsin for large voltage-dependent response with improved brightness or photostability.",
+  "description": "Red eFRET voltage indicator built by inserting the bright RFP donor mScarlet-I1.4 into the first extracellular loop of Ace(D81C) rhodopsin; the brighter (but less photostable) member of the Cepheid1 pair.",
   "parentId": "varnam",
+  "siblingId": "cepheid1s",
   "spectrum": {
     "type": "rhodopsin",
     "peakEx": 570,
@@ -530,7 +530,7 @@
     "polarity": "negative",
     "name": "Cepheid1b",
     "source": "doi:10.1126/sciadv.adi4208",
-    "sourceImage": "/fv-sources/cephid.jpg",
+    "sourceImage": "/fv-sources/cepheid1b.jpg",
     "sourceFigure": "Fig. 1B",
     "custom": {
       "voltage": [
@@ -556,53 +556,16 @@
         -33
       ]
     },
-    "additionalCurves": [
-      {
-        "name": "Cepheid1s",
-        "voltage": [
-          -100,
-          -80,
-          -70,
-          -60,
-          -40,
-          -20,
-          0,
-          20,
-          40
-        ],
-        "deltaF": [
-          12,
-          3,
-          0,
-          -5,
-          -12,
-          -19,
-          -25,
-          -30,
-          -34
-        ],
-        "proofread": false
-      }
-    ],
     "proofread": false
   },
   "kinetics": [
     {
       "on": 2.71,
-      "off": 4.17,
+      "off": 4.99,
       "temperature": "25°C",
       "source": "doi:10.1126/sciadv.adi4208",
-      "sourceFigure": "Fig. S7",
-      "note": "Cepheid1b in HEK293T cells (room temperature, 1058 Hz frame rate). Fig. S7B reports response half-times ('responding time') of t½ = 1.88 ms for depolarization (-70 to +30 mV) and t½ = 2.89 ms for repolarization (+30 to -70 mV); the Solaris paper (same lab) confirms Cepheid1b depolarizing τ1/2 = 1.9 ± 0.1 ms. Converted to time constants via τ = t½/ln2 = 1.443·t½ → on 2.71 ms, off 4.17 ms.",
-      "proofread": false
-    },
-    {
-      "on": 2.74,
-      "off": 2.74,
-      "temperature": "25°C",
-      "note": "Cepheid1b: single response half-time τ1/2 = 1.9 ± 0.1 ms in the depolarizing step (room temperature, HEK293T), converted to τ = t½/ln2 = 2.74 ms; separate on/off not resolved. Measured in the Solaris paper as a comparator to Solaris585.",
-      "source": "doi:10.1101/2024.02.02.578569",
-      "sourceFigure": "Main text",
+      "sourceFigure": "Fig. S7B",
+      "note": "Cepheid1b in HEK293T cells (room temperature, 1058 Hz frame rate). Fig. S7B is a dual-axis bar chart: depolarization (-70 to +30 mV) is read on the LEFT red axis (0-2 ms) and repolarization (+30 to -70 mV) on the RIGHT blue axis (0-3 ms). Pixel-calibrated read: depol t½ ≈ 1.88 ms (the Solaris paper, same lab, confirms depolarizing τ1/2 = 1.9 ± 0.1 ms) and repol t½ ≈ 3.46 ms (the repol bar extends above the right-axis '3' line). Converted to time constants via τ = t½/ln2 = 1.443·t½ → on 2.71 ms, off 4.99 ms. (A previous read of off=4.17 ms came from mis-applying a 1.5× left:right axis ratio; the true ratio is ~1.69×.)",
       "proofread": false
     }
   ],
@@ -646,6 +609,102 @@
       "source": "doi:10.1126/sciadv.adi4208",
       "sourceFigure": "Fig. S6A",
       "note": "Cepheid1b (mScarlet-I1.4 donor) normalized intensity ≈38% at 13 min under 1.59 W/cm² (= 15.9 mW/mm²) 561 nm widefield illumination (Fig. S6A). Cepheid1b is the brighter but less photostable variant; the ~78% remaining (top curve in Fig. S6A) belongs to Cepheid1s (mRuby4), which the main text describes as having a half-photobleach time >13 min.",
+      "proofread": false
+    }
+  ],
+  "photobleach": [
+    {
+      "modality": "1P",
+      "illumination": "15.9 mW/mm²",
+      "intensityMWmm2": 15.9,
+      "t75": 108,
+      "fit": {
+        "model": "biexponential",
+        "a": 0.4502,
+        "tau": 156.2,
+        "tau2": 2001.4,
+        "r2": 0.9998
+      },
+      "custom": {
+        "time": [
+          0.0,
+          3.0,
+          9.0,
+          15.0,
+          21.0,
+          27.0,
+          33.0,
+          39.0,
+          45.0,
+          51.0,
+          57.0,
+          75.0,
+          105.0,
+          135.0,
+          165.0,
+          195.0,
+          225.0,
+          255.0,
+          285.0,
+          315.0,
+          345.0,
+          375.0,
+          405.0,
+          435.0,
+          465.0,
+          495.0,
+          525.0,
+          555.0,
+          585.0,
+          615.0,
+          645.0,
+          675.0,
+          705.0,
+          735.0,
+          765.0
+        ],
+        "fluorescence": [
+          1.0,
+          0.9901,
+          0.9691,
+          0.9506,
+          0.9346,
+          0.9167,
+          0.8994,
+          0.8864,
+          0.871,
+          0.8574,
+          0.8432,
+          0.8105,
+          0.7543,
+          0.7062,
+          0.666,
+          0.6327,
+          0.6025,
+          0.5753,
+          0.5481,
+          0.5296,
+          0.5111,
+          0.4963,
+          0.4815,
+          0.4679,
+          0.4568,
+          0.4457,
+          0.4383,
+          0.4296,
+          0.421,
+          0.4086,
+          0.4043,
+          0.3975,
+          0.3926,
+          0.3877,
+          0.3827
+        ]
+      },
+      "source": "doi:10.1126/sciadv.adi4208",
+      "sourceImage": "/photobleach-sources/cepheid1b.jpg",
+      "sourceFigure": "Fig. S6A",
+      "note": "Cepheid1b (mScarlet-I1.4 donor) photobleaching digitized from Fig. S6A under 1.59 W/cm² (= 15.9 mW/mm²) 561 nm wide-field illumination (HEK293T, n = 6). HSV colour-separated from the 5-curve panel (Cepheid1b = gold-olive curve, ending ≈38% at 13 min). Bi-exponential fit; model-free t₇₅% ≈ 108 s. Cepheid1b is the brighter but less photostable member of the pair (cf. Cepheid1s, the top curve). Companion curves in this figure (Cepheid1s, VARNAM, VARNAM2) cross-overlay via the shared source + Fig. S6A.",
       "proofread": false
     }
   ],

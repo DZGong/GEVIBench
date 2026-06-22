@@ -1,24 +1,29 @@
 {
-  "id": "varnam2",
-  "name": "VARNAM2",
-  "year": 2022,
-  "date": "2022-11-04",
+  "id": "cepheid1s",
+  "name": "Cepheid1s",
+  "year": 2023,
+  "date": "2023-11-24",
   "category": "eFRET GEVI",
   "tags": [
     "Ace opsin",
-    "mRuby3",
+    "mRuby4",
     "Red",
-    "FRET"
+    "FRET",
+    "Somatic targeting"
   ],
-  "paper": "Science 2022",
-  "paperUrl": "https://doi.org/10.1126/science.abm8797",
-  "description": "Second-generation red-shifted eFRET voltage indicator derived from VARNAM with improved voltage sensitivity for low-power in vivo imaging in behaving animals.",
+  "paper": "Science Advances 2023",
+  "paperUrl": "https://doi.org/10.1126/sciadv.adi4208",
+  "description": "Red eFRET voltage indicator built by inserting the photostable RFP donor mRuby4 into the first extracellular loop of Ace(D81C) rhodopsin; the more photostable (but dimmer) member of the Cepheid1 pair, enabling long-duration one-photon voltage imaging.",
   "parentId": "varnam",
+  "siblingId": "cepheid1b",
   "spectrum": {
     "type": "rhodopsin",
     "peakEx": 558,
     "peakEm": 592,
-    "name": "VARNAM2",
+    "name": "Cepheid1s",
+    "source": "FPbase: mRuby3",
+    "sourceFigure": "FPbase",
+    "note": "Cepheid1s uses the RFP donor mRuby4 (an engineered mRuby3 variant; Bajar et al. 2016) inserted into ECL1 of Ace(D81C) rhodopsin. Table S5 reports the Cepheid1s/mRuby4 excitation max 558 nm and emission max 592 nm (561 nm laser, 630/75 emission filter). The paper provides no measured mRuby4 spectrum figure (Fig. S2 only shows mScarlet-I/I1.4, the Cepheid1b donor), and mRuby4 is not in FPbase. mRuby4 is spectrally essentially identical to its parent mRuby3 (identical reported peaks 558/592), so the displayed excitation/emission is the FPbase mRuby3 curve verbatim — the same curve used on the VARNAM page (mRuby3 donor).",
     "custom": {
       "minEx": 447,
       "excitation": [
@@ -473,110 +478,103 @@
   },
   "voltage": {
     "type": "opsin",
-    "slope": 19,
+    "slope": 34,
     "polarity": "negative",
-    "name": "VARNAM2",
-    "source": "doi:10.1126/science.abm8797",
-    "sourceImage": "/fv-sources/varnam2.jpg",
-    "sourceFigure": "Fig. 1D",
+    "name": "Cepheid1s",
+    "source": "doi:10.1126/sciadv.adi4208",
+    "sourceImage": "/fv-sources/cepheid1b.jpg",
+    "sourceFigure": "Fig. 1B",
     "custom": {
       "voltage": [
-        -150,
-        -130,
-        -110,
-        -90,
+        -100,
+        -80,
         -70,
-        -50,
-        -30,
-        -10,
-        10,
-        30,
-        50
+        -60,
+        -40,
+        -20,
+        0,
+        20,
+        40
       ],
       "deltaF": [
-        17,
-        14,
-        11,
-        5,
+        12,
+        3,
         0,
-        -4,
-        -10,
-        -14,
-        -18,
-        -21,
-        -23
+        -5,
+        -12,
+        -19,
+        -25,
+        -30,
+        -34
       ]
     },
     "proofread": false
   },
   "kinetics": [
     {
-      "on": 0.95,
-      "off": 1.21,
-      "temperature": "22°C",
-      "source": "doi:10.1126/science.abm8797",
-      "note": "Amplitude-weighted mean of the bi-exponential fit at 22°C in spiking HEK cells (Table S1): τ_on = 0.68×0.5 + 0.32×1.9 = 0.95 ms; τ_off = 0.72×0.48 + 0.28×3.1 = 1.21 ms (fast amp 68% on / 72% off; slow τ_on=1.9 ms, slow τ_off=3.1 ms). Previously stored only the fast component (0.50/0.48).",
-      "sourceFigure": "Table S1",
+      "on": 2.02,
+      "off": 3.49,
+      "temperature": "25°C",
+      "source": "doi:10.1126/sciadv.adi4208",
+      "sourceFigure": "Fig. S7B",
+      "note": "Cepheid1s in HEK293T cells (room temperature, 1058 Hz frame rate). Fig. S7B is a dual-axis bar chart: depolarization (-70 to +30 mV) is read on the LEFT red axis (0-2 ms) and repolarization (+30 to -70 mV) on the RIGHT blue axis (0-3 ms). Pixel-calibrated read: depol t½ ≈ 1.41 ms (the Solaris paper, same lab, confirms depolarizing τ1/2 = 1.5 ± 0.2 ms) and repol t½ ≈ 2.42 ms; Cepheid1s is faster than Cepheid1b in both directions. Converted to time constants via τ = t½/ln2 = 1.443·t½ → on 2.02 ms, off 3.49 ms. (A previous read of off=3.03 ms came from mis-applying a 1.5× left:right axis ratio; the true ratio is ~1.69×.)",
       "proofread": false
     }
   ],
   "dynamicRangeData": [
     {
-      "deltaF": -19.1,
-      "modality": "1P",
+      "deltaF": -30,
       "sign": "negative",
-      "source": "doi:10.1126/science.abm8797",
-      "note": "ΔF/F per 100 mV step in spiking HEK cells at 22°C (Table S1). Also reported as -22.9 ± 0.7% per 120 mV step in Fig. 1C (n=13 cells).",
-      "sourceFigure": "Table S1",
+      "modality": "1P",
+      "source": "doi:10.1126/sciadv.adi4208",
+      "sourceFigure": "Fig. S7A",
+      "note": "Cepheid1s sensitivity per 100 mV step (-70 to +30 mV) in HEK293T cells under whole-cell voltage clamp (widefield 1P, 1058 Hz); Fig. S7A bar mean ≈30.5%. The main text/Fig. 1B value of -33.6 ± 1.5% (n = 8 cells) is the wider -70 to +40 mV step (the F-V curves are normalized to fluorescence at Vm = 70 mV) and is overstated for a 100 mV window.",
       "proofread": false
     }
   ],
   "sensitivityData": [
     {
-      "deltaF": 7.3,
+      "deltaF": 13.3,
       "modality": "1P",
-      "source": "doi:10.1126/science.abm8797",
-      "note": "Negative-going ΔF/F per single AP (magnitude stored): −7.3 ± 1.2% (mean ± SEM, n=49 spikes) recorded in PPL1-γ2α'1 dopaminergic neurons in Drosophila (main text; the per-spike values were obtained from the fly recordings, not the V1 VIP+ mouse traces shown in Fig. 1I).",
-      "sourceFigure": "Fig. 1I",
+      "source": "doi:10.1126/sciadv.adi4208",
+      "sourceFigure": "Fig. 1C",
+      "note": "Cepheid1s -13.3 ± 0.7% per AP in cultured rat hippocampal neurons (current clamp, widefield 1P imaging at 484 Hz); slightly more sensitive per AP than Cepheid1b (-12.1 ± 0.8%).",
       "proofread": false
     }
   ],
   "brightnessData": [
     {
-      "ratio": 1.0,
+      "ratio": 0.43,
       "reference": "varnam",
-      "source": "doi:10.1126/science.abm8797",
-      "note": "Normalized resting fluorescence in HEK cells (Fig. S11A right panel): VARNAM2 = 1.00 ± SEM relative to VARNAM (n=7 wells/condition)",
-      "sourceFigure": "Fig. S11A",
+      "source": "doi:10.1126/sciadv.adi4208",
+      "sourceFigure": "Fig. S5",
+      "note": "Cepheid1s average photon count ~250 a.u. vs VARNAM ~580 a.u. per cell under wide-field 561 nm epifluorescence (Fig. S5); Cepheid1s (mRuby4 donor) is the dimmer member of the Cepheid1 pair (Cepheid1b ~960 a.u.), trading brightness for photostability.",
       "proofread": false
     }
   ],
   "photostabilityData": [
     {
-      "brightnessRemaining": 45,
-      "illumination": "25 mW/mm²",
-      "duration": "10 min",
-      "source": "doi:10.1126/science.abm8797",
-      "note": "Read from photobleaching curve in Fig. S11B (right panel, 565 nm LED illumination at 25 mW/mm², HEK cells)",
-      "sourceFigure": "Fig. S11B",
+      "brightnessRemaining": 78,
+      "illumination": "15.9 mW/mm²",
+      "duration": "13 min",
+      "modality": "1P",
+      "source": "doi:10.1126/sciadv.adi4208",
+      "sourceFigure": "Fig. S6A",
+      "note": "Cepheid1s (mRuby4 donor) normalized intensity ≈78% remaining at 13 min under 1.59 W/cm² (= 15.9 mW/mm²) 561 nm wide-field illumination (top curve in Fig. S6A; n = 7). The main text reports a half-photobleach time of more than 13 min for the mRuby4 insertion under 561 nm at 1.6 W/cm² (fig. S6). Cepheid1s is the more photostable member of the pair (Cepheid1b ≈38% remaining at 13 min under the same conditions).",
       "proofread": false
     }
   ],
-  "addgene": {
-    "id": "195520",
-    "url": "https://www.addgene.org/195520/",
-    "proofread": false
-  },
   "photobleach": [
     {
       "modality": "1P",
       "illumination": "15.9 mW/mm²",
       "intensityMWmm2": 15.9,
-      "t75": 421,
+      "t75": 869,
+      "extrapolated": true,
       "fit": {
         "model": "monoexponential",
-        "tau": 1447.3,
-        "r2": 0.9628
+        "tau": 3020.1,
+        "r2": 0.898
       },
       "custom": {
         "time": [
@@ -618,75 +616,66 @@
         ],
         "fluorescence": [
           1.0,
-          0.9901,
-          0.9691,
+          0.9809,
+          0.9599,
+          0.9543,
+          0.9525,
+          0.9525,
+          0.9525,
+          0.9525,
+          0.9525,
+          0.9519,
           0.9506,
-          0.9346,
-          0.9346,
-          0.9216,
-          0.9216,
-          0.9216,
-          0.9216,
-          0.9216,
-          0.9216,
-          0.9148,
-          0.9012,
-          0.9012,
-          0.8809,
-          0.8642,
-          0.8451,
-          0.8284,
-          0.813,
-          0.7957,
-          0.7784,
-          0.7593,
-          0.742,
-          0.7253,
-          0.7093,
-          0.6926,
-          0.6802,
-          0.6679,
-          0.6525,
-          0.6407,
-          0.6284,
-          0.6185,
-          0.6056,
-          0.5926
+          0.9494,
+          0.9463,
+          0.9401,
+          0.9395,
+          0.9358,
+          0.9358,
+          0.9309,
+          0.9185,
+          0.9111,
+          0.9006,
+          0.8864,
+          0.8802,
+          0.8735,
+          0.8654,
+          0.8556,
+          0.8488,
+          0.8407,
+          0.8302,
+          0.8185,
+          0.8043,
+          0.7951,
+          0.7864,
+          0.7728,
+          0.7679
         ]
       },
       "source": "doi:10.1126/sciadv.adi4208",
-      "sourceImage": "/photobleach-sources/varnam2.jpg",
+      "sourceImage": "/photobleach-sources/cepheid1s.jpg",
       "sourceFigure": "Fig. S6A",
-      "note": "VARNAM2 photobleaching digitized from Fig. S6A, measured as a comparator alongside Cepheid1 (1.59 W/cm² = 15.9 mW/mm² 561 nm wide-field, HEK293T). Dark-olive curve ending ≈59% at 13 min; mono-exponential fit (τ ≈ 1447 s), model-free t₇₅% ≈ 421 s. The primary subjects of this figure are Cepheid1b/Cepheid1s.",
+      "note": "Cepheid1s (mRuby4 donor) photobleaching digitized from Fig. S6A under 1.59 W/cm² (= 15.9 mW/mm²) 561 nm wide-field illumination (HEK293T, n = 7). HSV colour-separated (Cepheid1s = topmost dark-maroon curve, the most photostable member; ≈77% remaining at 13 min). The curve does not fall to 75% within the 13-min (765 s) window, so t₇₅% ≈ 869 s is EXTRAPOLATED from a mono-exponential fit (τ ≈ 3020 s); this is consistent with the paper's reported 'half-photobleach time > 13 min'. Companion curves cross-overlay via the shared source + Fig. S6A.",
       "proofread": false
     }
   ],
   "researchPapers": [
     {
-      "title": "Dual-polarity voltage imaging of the concurrent dynamics of multiple neuron types",
-      "authors": "Kannan M, Vasan G, Haziza S, Huang C, Chrapkiewicz R, Luo J, Cardin JA, Schnitzer MJ, Pieribone VA",
-      "journal": "Science",
-      "year": 2022,
-      "sample": "HEK cells, in vitro; Drosophila PPL1-α'2α2 dopaminergic neurons, in vivo; mouse hippocampus CA1 EC-projecting pyramidal neurons, in vivo",
-      "url": "https://doi.org/10.1126/science.abm8797",
+      "title": "Bright and sensitive red voltage indicators for imaging action potentials in brain slices and pancreatic islets",
+      "authors": "Han Y, Yang J, Li Y, Chen Y, Ren H, Ding R, Qian W, Ren K, Xie B, Deng M, Xiao Y, Chu J, Zou P",
+      "journal": "Science Advances",
+      "year": 2023,
+      "sample": "HEK293T cells, in vitro; rat hippocampal neurons, in vitro (Cepheid1s/Cepheid1s-ST characterized for sensitivity, kinetics, brightness, photostability, and used for all-optical electrophysiology with CheRiff and long-term recording)",
+      "url": "https://doi.org/10.1126/sciadv.adi4208",
       "proofread": false
     },
     {
-      "title": "Imaging high-frequency voltage dynamics in multiple neuron classes of behaving mammals",
-      "authors": "Haziza S, Chrapkiewicz R, Zhang Y, Kruzhilin V, Li J, Delamare G, Swanson R, Buzsáki G, Kannan M, Vasan G, Lin MZ, Zeng H, Daigle T, Schnitzer MJ",
-      "journal": "Cell",
-      "year": 2025,
-      "sample": "Mouse, visual cortex (pyramidal neurons) and hippocampus, in vivo; dual-cell-type TEMPO imaging with VARNAM2 in pyramidal cells and ASAP3 in PV cells",
-      "url": "https://doi.org/10.1016/j.cell.2025.06.028",
-      "proofread": false
-    },
-    {
-      "title": "Prefrontal gamma oscillations engage dynamic cell type-specific configurations to support flexible behavior",
-      "authors": "Phensy AJ, Hagopian LL, Costello CM, Haziza S, Ghenand O, Zhang Y, Schnitzer MJ, Sohal V",
+      "title": "Solaris: a panel of bright and sensitive hybrid voltage indicators for imaging membrane potential in cultured neurons",
+      "authors": "Yang J, Zhu S, Yang L, Peng L, Han Y, Hayward RF, Park P, Hu D, Cohen AE, Zou P",
       "journal": "bioRxiv",
-      "year": 2025,
-      "sample": "Mouse, medial prefrontal cortex, in vivo; VARNAM2 expressed in PFC→MD projection neurons (dual-color with Ace-mNeon2 in PV interneurons)",
-      "url": "https://doi.org/10.1101/2024.03.08.584173",
+      "year": 2024,
+      "sample": "HEK293T cells, in vitro (Cepheid1s measured as a comparator: voltage-clamp response half-time τ1/2 = 1.5 ± 0.2 ms at 1058 Hz)",
+      "url": "https://doi.org/10.1101/2024.02.02.578569",
       "proofread": false
     }
   ]

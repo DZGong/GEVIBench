@@ -97,7 +97,8 @@ const MANUAL_SUBTREE_SHIFTS: Record<string, { dx: number; dy: number }> = {
   'macq-morange2': { dx: 12, dy: 0 },
   arch: { dx: 0, dy: -44 },
   varnam: { dx: 0, dy: 22 },
-  cephid: { dx: 0, dy: 0 },
+  cepheid1b: { dx: -16, dy: 0 },
+  cepheid1s: { dx: 16, dy: 0 },
   varnam2: { dx: 0, dy: 0 },
   'ace2n-mneon2': { dx: 0, dy: 110 },
   voltron2: { dx: 0, dy: 22 },
@@ -418,7 +419,7 @@ function buildTreeFromPaths(gevis: GEVI[]): TreeNode {
   const SIBLING_ORDER_OVERRIDES: [string, string[]][] = [
     ['VSD-FRET', ['lotusv', 'vsfp1', 'mermaid']],
     ['arclight', ['marina', 'bongwoori', 'harclight1']],
-    ['varnam', ['varnam2', 'cephid']],
+    ['varnam', ['varnam2', '_fork_cepheid1b_cepheid1s']],
     ['Opsin-FRET', ['caesr', '_fork_macq-mcitrine_macq-morange2', 'ace2n-mneon', 'Chemigenetic']],
     ['archon1', ['_fork_quasar6_quasar6b', 'somarchon']],
     ['Opsin-Fluorescent', ['arch', 'props']],
