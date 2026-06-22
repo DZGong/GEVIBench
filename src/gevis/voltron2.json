@@ -841,6 +841,15 @@
       "note": "Median single-AP |ΔF/F0| read from the Voltron2 (gray) boxplot in the Janelia patch-assay spike-detection figure (1P widefield, PatcherBot cultured neurons, n≈9); negative-going, median ≈ -15% (magnitude stored).",
       "sourceFigure": "Fig. 2",
       "proofread": false
+    },
+    {
+      "deltaF": 12.3,
+      "dye": "JF585",
+      "modality": "1P",
+      "source": "doi:10.1101/2024.02.02.578569",
+      "note": "Voltron2585 (JF585): −12.3 ± 0.7% ΔF/F0 per AP (n = 7 cells; magnitude stored, negative-going) in cultured rat hippocampal neurons, 1P widefield 594 nm, imaged at 484 Hz. Measured in the Solaris paper under conditions matched to Solaris585 (−28.1%), whose primary subject is Solaris.",
+      "sourceFigure": "Fig. 2B",
+      "proofread": false
     }
   ],
   "subthresholdData": [

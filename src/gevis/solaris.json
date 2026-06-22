@@ -12,7 +12,7 @@
   "paper": "bioRxiv 2024",
   "paperUrl": "https://doi.org/10.1101/2024.02.02.578569",
   "description": "Novel chemigenetic voltage indicator that inserts a dye-binding tag into the rhodopsin itself, achieving substantially higher voltage sensitivity than previous Voltron-family sensors.",
-  "parentId": "voltron",
+  "parentId": "cepheid1b",
   "kinetics": [
     {
       "on": 2.53,
@@ -34,6 +34,46 @@
       "sourceFigure": "Fig. 1C",
       "note": "ΔF/F0 per 100 mV step (-70 to +30 mV), read off the Solaris585 F-V curve in Fig. 1C; the conclusions state Solaris585 has -53% ΔF/F0 per 100 mV. The headline -60.6 ± 1.6% value (n = 5 cells, 594 nm laser at 1.72 W/cm²) cited in the main text/Fig. 1B is for the wider -80 to +20 mV step, not the 100-mV DB convention. HEK293T whole-cell voltage clamp, one-photon widefield.",
       "proofread": false
+    },
+    {
+      "deltaF": -52,
+      "sign": "negative",
+      "modality": "1P",
+      "dye": "JF552",
+      "source": "doi:10.1101/2024.02.02.578569",
+      "sourceFigure": "Fig. 1C",
+      "note": "ΔF/F0 for the -70→+30 mV step read off the Solaris552 F-V curve in Fig. 1C (between the +20 mV ≈ -50% and +40 mV ≈ -54% markers). Solaris525/549/552/585 nearly overlap in Fig. 1C; the paper quotes the non-585 dyes only as a range (-58% to -24% per 100 mV) and does not tabulate individual values. HEK293T whole-cell voltage clamp, one-photon widefield.",
+      "proofread": false
+    },
+    {
+      "deltaF": -52,
+      "sign": "negative",
+      "modality": "1P",
+      "dye": "JF549",
+      "source": "doi:10.1101/2024.02.02.578569",
+      "sourceFigure": "Fig. 1C",
+      "note": "ΔF/F0 for the -70→+30 mV step read off the Solaris549 F-V curve in Fig. 1C (between the +20 mV ≈ -50% and +40 mV ≈ -54% markers). Solaris525/549/552/585 nearly overlap in Fig. 1C; the paper quotes the non-585 dyes only as a range (-58% to -24% per 100 mV) and does not tabulate individual values. HEK293T whole-cell voltage clamp, one-photon widefield.",
+      "proofread": false
+    },
+    {
+      "deltaF": -51,
+      "sign": "negative",
+      "modality": "1P",
+      "dye": "JF525",
+      "source": "doi:10.1101/2024.02.02.578569",
+      "sourceFigure": "Fig. 1C",
+      "note": "ΔF/F0 for the -70→+30 mV step read off the Solaris525 F-V curve in Fig. 1C (between the +20 mV ≈ -49% and +40 mV ≈ -53% markers). Solaris525/549/552/585 nearly overlap in Fig. 1C; the paper quotes the non-585 dyes only as a range (-58% to -24% per 100 mV) and does not tabulate individual values. HEK293T whole-cell voltage clamp, one-photon widefield.",
+      "proofread": false
+    },
+    {
+      "deltaF": -23,
+      "sign": "negative",
+      "modality": "1P",
+      "dye": "JF635",
+      "source": "doi:10.1101/2024.02.02.578569",
+      "sourceFigure": "Fig. 1C",
+      "note": "ΔF/F0 for the -70→+30 mV step read off the Solaris635 F-V curve in Fig. 1C (between the +20 mV ≈ -21% and +40 mV ≈ -24% markers); JF635 is the least sensitive Solaris conjugate and is the ~-24% lower bound of the paper's stated -58% to -24% per-100-mV range. HEK293T whole-cell voltage clamp, one-photon widefield.",
+      "proofread": false
     }
   ],
   "sensitivityData": [
@@ -45,6 +85,42 @@
       "sourceFigure": "Fig. 2B",
       "note": "ΔF/F0 = -28.1 ± 1.3% per single AP (n = 7 cells), Solaris585 in cultured rat hippocampal neurons, current-clamp evoked spikes imaged at 484 Hz under one-photon 594 nm illumination. More than 2-fold higher than Voltron2585 (-12.3 ± 0.7%) under matched conditions.",
       "proofread": false
+    },
+    {
+      "deltaF": -26.5,
+      "modality": "1P",
+      "dye": "JF552",
+      "source": "doi:10.1101/2024.02.02.578569",
+      "sourceFigure": "Fig. 2B",
+      "note": "ΔF/F0 = -26.5 ± 1.7% per single AP (n = 5 cells), Solaris552 in cultured rat hippocampal neurons (dark-red trace, Fig. 2B), current-clamp evoked spikes, one-photon. Value printed beneath the Fig. 2B optical waveform.",
+      "proofread": false
+    },
+    {
+      "deltaF": -22.6,
+      "modality": "1P",
+      "dye": "JF549",
+      "source": "doi:10.1101/2024.02.02.578569",
+      "sourceFigure": "Fig. 2B",
+      "note": "ΔF/F0 = -22.6 ± 0.7% per single AP (n = 4 cells), Solaris549 in cultured rat hippocampal neurons (orange trace, Fig. 2B), current-clamp evoked spikes, one-photon. Value printed beneath the Fig. 2B optical waveform.",
+      "proofread": false
+    },
+    {
+      "deltaF": -21.9,
+      "modality": "1P",
+      "dye": "JF525",
+      "source": "doi:10.1101/2024.02.02.578569",
+      "sourceFigure": "Fig. 2B",
+      "note": "ΔF/F0 = -21.9 ± 1.1% per single AP (n = 7 cells), Solaris525 in cultured rat hippocampal neurons (yellow trace, Fig. 2B), current-clamp evoked spikes, one-photon. Value printed beneath the Fig. 2B optical waveform.",
+      "proofread": false
+    },
+    {
+      "deltaF": -7.9,
+      "modality": "1P",
+      "dye": "JF635",
+      "source": "doi:10.1101/2024.02.02.578569",
+      "sourceFigure": "Fig. 2B",
+      "note": "ΔF/F0 = -7.9 ± 0.5% per single AP (n = 5 cells), Solaris635 in cultured rat hippocampal neurons (magenta trace, Fig. 2B), the least sensitive Solaris conjugate per AP; current-clamp evoked spikes, one-photon. Value printed beneath the Fig. 2B optical waveform.",
+      "proofread": false
     }
   ],
   "spectrum": {
@@ -52,6 +128,9 @@
     "peakEx": 593,
     "peakEm": 611,
     "name": "Solaris (JF585)",
+    "source": "FPbase: JF585-HaloTag conjugate",
+    "sourceFigure": "FPbase",
+    "note": "Solaris585 is the cpHaloTag-in-Ace scaffold conjugated with the Janelia Fluor JF585 HaloTag ligand. The paper reports no excitation/emission spectrum figure, so this is the digitized FPbase spectrum of the JF585-HaloTag conjugate (FPbase exMax 593 nm, emMax 611 nm), matching the stored peaks. The 1-nm-resolution custom arrays are the FPbase JF585-HaloTag EX (250-679 nm) and EM (540-799 nm) curves verbatim.",
     "custom": {
       "minEx": 250,
       "excitation": [

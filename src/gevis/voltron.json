@@ -897,6 +897,16 @@
       "note": "ΔF/F read from the Voltron (purple) F-V trace between -70 mV (baseline 0) and +30 mV in the Janelia patch-assay F-V curve figure (1P widefield, -20 mV steps, n=8); full sweep -110 to +50 mV spans ~+5.5% to -19.5%.",
       "sourceFigure": "Fig. 1",
       "proofread": false
+    },
+    {
+      "deltaF": -17,
+      "sign": "negative",
+      "modality": "1P",
+      "dye": "JF585",
+      "source": "doi:10.1101/2024.02.02.578569",
+      "note": "Voltron585 (JF585) in HEK293T cells, whole-cell voltage clamp, 1P widefield 594 nm. ΔF/F0 for the standard −70→+30 mV (100 mV) step read off the Voltron585 (gray) F-V curve in Fig. 1C (≈ -17%). The paper's text reports −17.1 ± 1.3% (n = 6) for the wider −80→+20 mV step. Measured in the Solaris paper, whose primary subject is Solaris.",
+      "sourceFigure": "Fig. 1C",
+      "proofread": false
     }
   ],
   "brightnessData": [
