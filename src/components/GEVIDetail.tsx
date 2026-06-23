@@ -322,7 +322,8 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
       {gevi.photobleach && gevi.photobleach.length > 0 && (
         <div className="border rounded-lg p-4 md:p-6 mt-4 md:mt-6 bg-surface-low border-ink/10">
           <h4 className="text-sm font-semibold mb-3 md:mb-4 text-ink">
-            Photobleaching Curve{gevi.photobleach.length > 1 ? 's' : ''} (t₇₅%)
+            Photobleaching Curve{gevi.photobleach.length > 1 ? 's' : ''}
+            <span className="font-normal text-ink/50"> ({gevi.photobleach.some(pb => pb.t50 != null && pb.t75 == null) ? 't₇₅% / t₅₀' : 't₇₅%'})</span>
           </h4>
           <PhotobleachGallery
             geviName={gevi.name}

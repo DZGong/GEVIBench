@@ -932,6 +932,59 @@
       "sourceFigure": "Fig. S1.2B",
       "note": "Model-free photostability: t75% = time for fluorescence to fall to 75% of initial. Digitized from the ASAP4e curve in Fig. S1.2B (2P resonance-scanning, 940 nm, 100 mW at the sample plane over a 40x635 um FOV, 6 min, HEK293A; normalized 2P fluorescence). 2P power-only measurement (not mW/mm2) so it stands alone and is NOT intensity-normalized or comparable to 1P GEVIs. Measured alongside FORCE1s/ASAP4e/JEDI-2P in the same panel (they cross-overlay).",
       "proofread": false
+    },
+    {
+      "modality": "1P",
+      "illumination": "100 mW/mm²",
+      "intensityMWmm2": 100,
+      "fit": {
+        "model": "monoexponential",
+        "tau": 1392.9,
+        "r2": 0.7932
+      },
+      "custom": {
+        "time": [
+          0.0,
+          2.5,
+          7.5,
+          12.5,
+          17.5,
+          22.5,
+          27.5,
+          32.5,
+          37.5,
+          42.5,
+          47.5,
+          52.5,
+          57.5,
+          62.5,
+          67.5,
+          72.5
+        ],
+        "fluorescence": [
+          1.0,
+          1.0,
+          1.0,
+          0.9863,
+          0.9863,
+          0.9794,
+          0.9645,
+          0.9645,
+          0.9645,
+          0.9645,
+          0.9645,
+          0.9645,
+          0.9645,
+          0.9645,
+          0.9565,
+          0.9565
+        ]
+      },
+      "source": "doi:10.1038/s41592-023-01913-z",
+      "sourceImage": "/photobleach-sources/asap4e-fig2b.jpg",
+      "sourceFigure": "Fig. 2b",
+      "note": "In-vivo 1P photostability digitized from Fig. 2b (ASAP4e-Kv, purple), hippocampal SST+ interneurons, continuous 453-nm widefield at 100 mW/mm². ASAP4e is so photostable it retains ~0.96 of F0 at 75 s — it never falls to 75% in the window, so NO t75 is stored (consistent with photostabilityData ~100% at 1 min). Curve kept for cross-overlay (vs ASAP3/ASAP4b, same figure). Mono fit r²≈0.79 reflects the near-flat, noisy in-vivo trace.",
+      "proofread": false
     }
   ],
   "twoPhoton": [

@@ -818,6 +818,62 @@
     "url": "https://www.addgene.org/201030/",
     "proofread": false
   },
+  "photobleach": [
+    {
+      "modality": "1P",
+      "illumination": "100 mW/mm²",
+      "intensityMWmm2": 100,
+      "t75": 59,
+      "fit": {
+        "model": "biexponential",
+        "a": 0.076,
+        "tau": 7.4,
+        "tau2": 255.5,
+        "r2": 0.9587
+      },
+      "custom": {
+        "time": [
+          0.0,
+          2.5,
+          7.5,
+          17.5,
+          22.5,
+          27.5,
+          32.5,
+          37.5,
+          42.5,
+          47.5,
+          52.5,
+          57.5,
+          62.5,
+          67.5,
+          72.5
+        ],
+        "fluorescence": [
+          1.0,
+          1.0,
+          0.9118,
+          0.8578,
+          0.8444,
+          0.8346,
+          0.8309,
+          0.7782,
+          0.777,
+          0.777,
+          0.777,
+          0.777,
+          0.6924,
+          0.6924,
+          0.6924
+        ]
+      },
+      "source": "doi:10.1038/s41592-023-01913-z",
+      "sourceImage": "/photobleach-sources/asap4b-fig2b.jpg",
+      "sourceFigure": "Fig. 2b",
+      "note": "In-vivo 1P photostability digitized from Fig. 2b (ASAP4b-Kv, cyan), hippocampal SST+ interneurons, continuous 453-nm widefield at 100 mW/mm² (acquired continuously at 400 fps for 60 s). Noisy in-vivo trace; t75≈59 s. Measured alongside ASAP3/ASAP4e (same figure → cross-overlay). NB the page's photostabilityData (68% at 1 min, Fig. 2b) is more pessimistic than this digitized trace (~0.78 at 60 s) — both kept.",
+      "proofread": false
+    }
+  ],
   "researchPapers": [
     {
       "title": "A positively tuned voltage indicator for extended electrical recordings in the brain",

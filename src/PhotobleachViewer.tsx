@@ -12,8 +12,9 @@ export interface PhotobleachData {
   modality?: '1P' | '2P';
   illumination?: string;
   intensityMWmm2?: number;      // 1P illumination in mW/mm² (enables linear-dose scaling to 100 mW/mm²)
-  t75?: number;                 // seconds
-  extrapolated?: boolean;       // true when t75 lies beyond the measured window
+  t75?: number;                 // seconds — time to 75% of initial F (default metric)
+  t50?: number;                 // seconds — half-life (time to 50% of initial F). Used instead of t75 when the rapid initial photobleaching makes the 75% crossing unrepresentative (the 50% crossing sits in the sustained phase).
+  extrapolated?: boolean;       // true when the displayed metric (t75 or t50) lies beyond the measured window
   fit?: {
     model?: string;
     a?: number;                 // power-law coeff, or biexponential fast-component fraction
@@ -107,7 +108,15 @@ export function PhotobleachViewer({ photobleachData, geviName, companions }: Pho
   // Evaluate the stored fit at time ts (seconds) → F/F0, or null if no usable fit.
   const fitF = (ts: number): number | null => evalFit(fit, ts);
 
-  const t75Min = photobleachData?.t75 != null ? photobleachData.t75 / 60 : null;
+  // Metric: normally t₇₅% (time to 75% of initial F). For curves whose 75% crossing falls
+  // inside an unrepresentative rapid-initial-photobleach transient, an entry may instead
+  // carry t50 (the half-life) — we then render at the 50% level with a t₅₀ label.
+  const useHalfLife = photobleachData?.t75 == null && photobleachData?.t50 != null;
+  const metricSec = useHalfLife ? photobleachData!.t50! : (photobleachData?.t75 ?? null);
+  const metricLevel = useHalfLife ? 0.5 : 0.75;
+  const metricLabel = useHalfLife ? 't₅₀' : 't₇₅';
+  const metricPct = useHalfLife ? '50%' : '75%';
+  const metricMin = metricSec != null ? metricSec / 60 : null;
   const extrapolated = !!photobleachData?.extrapolated;
 
   // Chart geometry
@@ -124,12 +133,12 @@ export function PhotobleachViewer({ photobleachData, geviName, companions }: Pho
   const xMin = 0;
   // When the fit is extrapolated past the data (t75 beyond the recording), extend the
   // x-axis to include t75 so its marker is visible; otherwise stop just past the data.
-  const xMaxRaw = extrapolated && t75Min != null ? Math.max(dataMaxMin, t75Min) : dataMaxMin;
+  const xMaxRaw = extrapolated && metricMin != null ? Math.max(dataMaxMin, metricMin) : dataMaxMin;
   const niceCeil = (v: number) =>
     v <= 6 ? Math.ceil(v) : v <= 20 ? Math.ceil(v / 5) * 5 : v <= 60 ? Math.ceil(v / 10) * 10 : Math.ceil(v / 30) * 30;
   const xMax = niceCeil(xMaxRaw);
   // Y axis: a little headroom above 1.0 baseline down to below the minimum.
-  const yMin = Math.min(0.5, Math.floor((Math.min(...allFlux, 0.75) - 0.05) * 10) / 10);
+  const yMin = Math.min(0.5, Math.floor((Math.min(...allFlux, metricLevel) - 0.05) * 10) / 10);
   const yMax = 1.0;
 
   const xScale = (tMin: number) => padding.left + ((tMin - xMin) / (xMax - xMin)) * chartWidth;
@@ -140,7 +149,7 @@ export function PhotobleachViewer({ photobleachData, geviName, companions }: Pho
     if (!custom?.time?.length || fitF(custom.time[0]) == null) return null;
     const tStartS = custom.time[0];
     const dataEndS = custom.time[custom.time.length - 1];
-    const tEndS = extrapolated && photobleachData?.t75 != null ? Math.max(dataEndS, photobleachData.t75) : dataEndS;
+    const tEndS = extrapolated && metricSec != null ? Math.max(dataEndS, metricSec) : dataEndS;
     const n = 120;
     const solid: string[] = [];
     const dashed: string[] = [];
@@ -216,9 +225,9 @@ export function PhotobleachViewer({ photobleachData, geviName, companions }: Pho
             <text key={`y-${v}`} x={padding.left - 8} y={yScale(v) + 4} textAnchor="end" fontSize="11" fill="#1c1c19">{v.toFixed(1)}</text>
           ))}
 
-          {/* 75% threshold line */}
-          <line x1={padding.left} y1={yScale(0.75)} x2={width - padding.right} y2={yScale(0.75)} stroke="#9ca3af" strokeWidth="1" strokeDasharray="4" />
-          <text x={width - padding.right - 2} y={yScale(0.75) - 4} textAnchor="end" fontSize="10" fill="#6b7280">75%</text>
+          {/* Threshold line at the metric level (75% by default, 50% for half-life entries) */}
+          <line x1={padding.left} y1={yScale(metricLevel)} x2={width - padding.right} y2={yScale(metricLevel)} stroke="#9ca3af" strokeWidth="1" strokeDasharray="4" />
+          <text x={width - padding.right - 2} y={yScale(metricLevel) - 4} textAnchor="end" fontSize="10" fill="#6b7280">{metricPct}</text>
 
           {/* Rapid-phase guide: from (t=0, F=1.0) to the first measured point — shown
               faintly so the F0=1.0 origin is explicit. Only when data starts after t=0. */}
@@ -267,13 +276,13 @@ export function PhotobleachViewer({ photobleachData, geviName, companions }: Pho
             <path d={pointsPath} fill="none" stroke={primaryColor} strokeWidth="2" />
           )}
 
-          {/* t75% marker */}
-          {t75Min != null && t75Min >= xMin && t75Min <= xMax && (
+          {/* Metric marker (t₇₅ or t₅₀) */}
+          {metricMin != null && metricMin >= xMin && metricMin <= xMax && (
             <>
-              <line x1={xScale(t75Min)} y1={yScale(0.75)} x2={xScale(t75Min)} y2={padding.top + chartHeight} stroke="#2563eb" strokeWidth="1.5" strokeDasharray="3 2" />
-              <circle cx={xScale(t75Min)} cy={yScale(0.75)} r="4" fill="#2563eb" stroke="#fff" strokeWidth="1.5" />
-              <text x={xScale(t75Min)} y={padding.top + 10} textAnchor={t75Min > xMax * 0.85 ? 'end' : 'middle'} fontSize="9" fill="#2563eb">
-                t₇₅{extrapolated ? ' (extrap.)' : ''}
+              <line x1={xScale(metricMin)} y1={yScale(metricLevel)} x2={xScale(metricMin)} y2={padding.top + chartHeight} stroke="#2563eb" strokeWidth="1.5" strokeDasharray="3 2" />
+              <circle cx={xScale(metricMin)} cy={yScale(metricLevel)} r="4" fill="#2563eb" stroke="#fff" strokeWidth="1.5" />
+              <text x={xScale(metricMin)} y={padding.top + 10} textAnchor={metricMin > xMax * 0.85 ? 'end' : 'middle'} fontSize="9" fill="#2563eb">
+                {metricLabel}{extrapolated ? ' (extrap.)' : ''}
               </text>
             </>
           )}
@@ -322,7 +331,7 @@ export function PhotobleachViewer({ photobleachData, geviName, companions }: Pho
           <span className="inline-flex items-center gap-1">
             <span className="inline-block w-3 h-0.5" style={{ backgroundColor: primaryColor }} />
             <span className="font-semibold">{geviName || 'This GEVI'}</span>
-            {photobleachData?.t75 != null && <span className="text-ink/40">(t₇₅% marked)</span>}
+            {metricSec != null && <span className="text-ink/40">({metricLabel} marked)</span>}
           </span>
           {companionCurves.map((c, i) => (
             <span key={i} className="inline-flex items-center gap-1">
@@ -335,9 +344,11 @@ export function PhotobleachViewer({ photobleachData, geviName, companions }: Pho
 
       {/* Metric summary */}
       <div className="mt-2 text-xs text-ink">
-        {photobleachData?.t75 != null
-          ? <span className="font-semibold text-klein">t₇₅% ≈ {fmtTime(photobleachData.t75)}</span>
-          : <span className="font-semibold text-klein">t₇₅% not reached in window</span>}
+        {metricSec != null
+          ? <span className="font-semibold text-klein">{metricLabel}{useHalfLife ? '' : '%'} ≈ {fmtTime(metricSec)}</span>
+          : (Math.min(...points.map(p => p.flux)) > 0.75
+            ? <span className="font-semibold text-klein">remains &gt; 75% in window (negligible bleaching)</span>
+            : <span className="font-semibold text-klein">no t₇₅%/t₅₀ stored — see note</span>)}
         {extrapolated && <span className="ml-1 text-[10px] font-semibold text-amber-600">(extrapolated)</span>}
         {photobleachData?.illumination && <span className="text-ink/70"> @ {photobleachData.illumination}</span>}
         {photobleachData?.modality && (
@@ -345,14 +356,14 @@ export function PhotobleachViewer({ photobleachData, geviName, companions }: Pho
         )}
       </div>
       {/* Linear-dose scaling to the 100 mW/mm² reference — 1P only (2P stands alone). */}
-      {photobleachData?.modality === '1P' && photobleachData?.intensityMWmm2 != null && photobleachData?.t75 != null && (() => {
+      {photobleachData?.modality === '1P' && photobleachData?.intensityMWmm2 != null && metricSec != null && (() => {
         const REF = 100; // mW/mm²
-        const scaled = photobleachData.t75 * (photobleachData.intensityMWmm2 / REF);
+        const scaled = metricSec * (photobleachData.intensityMWmm2 / REF);
         const scaledStr = scaled < 10 ? `${scaled.toFixed(1)} s` : fmtTime(scaled);
         const factor = REF / photobleachData.intensityMWmm2;
         return (
           <div className="mt-0.5 text-[10px] text-ink/70">
-            Scaled to 100 mW/mm² (linear dose, 1P): <span className="font-semibold text-klein">t₇₅% ≈ {scaledStr}</span>
+            Scaled to 100 mW/mm² (linear dose, 1P): <span className="font-semibold text-klein">{metricLabel}{useHalfLife ? '' : '%'} ≈ {scaledStr}</span>
             <span className="text-ink/40"> · {Math.round(factor).toLocaleString()}× more intense; assumes dose-linear bleaching</span>
           </div>
         );

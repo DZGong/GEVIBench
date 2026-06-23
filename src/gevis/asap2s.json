@@ -136,6 +136,82 @@
       "proofread": false
     }
   ],
+  "apWidthData": [
+    {
+      "fwhm": 6.8,
+      "samplingRate": 1000,
+      "sample": "HEK293A cells, optical response to a single AP-like command waveform, whole-cell voltage clamp",
+      "modality": "1P",
+      "temperature": "32-35°C",
+      "source": "doi:10.1038/s41467-023-41975-3",
+      "sourceFigure": "Fig. 2f",
+      "note": "Optical AP-response width (FWHM) to a single AP-like command waveform (2-ms FWHM, +30 mV peak), HEK293A whole-cell voltage clamp at 1 kHz. Measured alongside JEDI-1P in the JEDI-1P paper (whose primary subject is JEDI-1P, 4.9 ms); ASAP3 was 5.8 ms.",
+      "proofread": false
+    }
+  ],
+  "photobleach": [
+    {
+      "modality": "1P",
+      "illumination": "46 mW/mm²",
+      "intensityMWmm2": 46,
+      "fit": {
+        "model": "biexponential",
+        "a": 0.2874,
+        "tau": 2.2,
+        "tau2": 8000.0,
+        "r2": 0.9376
+      },
+      "custom": {
+        "time": [
+          0.0,
+          1.0,
+          3.0,
+          5.0,
+          7.0,
+          9.0,
+          11.5,
+          14.5,
+          22.5,
+          27.5,
+          35.0,
+          45.0,
+          55.0,
+          65.0,
+          75.0,
+          85.0,
+          95.0,
+          105.0,
+          115.0
+        ],
+        "fluorescence": [
+          1.0,
+          0.9657,
+          0.7314,
+          0.7314,
+          0.7257,
+          0.72,
+          0.7143,
+          0.7086,
+          0.7086,
+          0.7086,
+          0.7086,
+          0.7086,
+          0.7086,
+          0.7086,
+          0.7086,
+          0.7086,
+          0.7086,
+          0.7086,
+          0.7086
+        ]
+      },
+      "source": "doi:10.1038/s41467-023-41975-3",
+      "sourceImage": "/photobleach-sources/asap2s-fig-s4.jpg",
+      "sourceFigure": "Fig. S4",
+      "note": "Cross-GEVI photobleaching from the same Fig. S4 46 mW/mm² panel as JEDI-1P (470/24-nm widefield, HEK293T, n=12). Relative-to-ASAP2s trace renormalized to ASAP2s's own first frame → F/F0. ASAP2s drops to F/F0≈0.72 in the first ~3 s (shared rapid-initial-photobleach transient) then PLATEAUS — it does not fall to 50% within the 2-min window, so no half-life (t50) is stored (fractionally very photostable after the transient; the biexp slow component τ2 is poorly constrained). Curve retained for cross-overlay. As with ASAP3, ASAP2s shows less fractional bleaching than the brighter JEDI-1P; JEDI-1P's advantage in this figure is photon budget (absolute brightness).",
+      "proofread": false
+    }
+  ],
   "researchPapers": [
     {
       "title": "Fast two-photon imaging of subcellular voltage dynamics in neuronal tissue with genetically encoded indicators",

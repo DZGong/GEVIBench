@@ -621,6 +621,143 @@
     "url": "https://www.addgene.org/132331/",
     "proofread": false
   },
+  "apWidthData": [
+    {
+      "fwhm": 5.8,
+      "samplingRate": 1000,
+      "sample": "HEK293A cells, optical response to a single AP-like command waveform, whole-cell voltage clamp",
+      "modality": "1P",
+      "temperature": "32-35°C",
+      "source": "doi:10.1038/s41467-023-41975-3",
+      "sourceFigure": "Fig. 2f",
+      "note": "Optical AP-response width (FWHM) to a single AP-like command waveform (2-ms FWHM, +30 mV peak), HEK293A whole-cell voltage clamp at 1 kHz. Measured alongside JEDI-1P in the JEDI-1P paper (whose primary subject is JEDI-1P, 4.9 ms); ASAP2s was 6.8 ms.",
+      "proofread": false
+    }
+  ],
+  "photobleach": [
+    {
+      "modality": "1P",
+      "illumination": "46 mW/mm²",
+      "intensityMWmm2": 46,
+      "t50": 295,
+      "extrapolated": true,
+      "fit": {
+        "model": "biexponential",
+        "a": 0.1549,
+        "tau": 1.5,
+        "tau2": 562.5,
+        "r2": 0.988
+      },
+      "custom": {
+        "time": [
+          0.0,
+          1.0,
+          3.0,
+          5.0,
+          7.0,
+          9.0,
+          11.5,
+          14.5,
+          18.0,
+          22.5,
+          27.5,
+          35.0,
+          45.0,
+          55.0,
+          65.0,
+          75.0,
+          85.0,
+          95.0,
+          105.0,
+          115.0
+        ],
+        "fluorescence": [
+          1.0,
+          0.9193,
+          0.8602,
+          0.8509,
+          0.8447,
+          0.8447,
+          0.8323,
+          0.8292,
+          0.8199,
+          0.8075,
+          0.795,
+          0.7826,
+          0.7702,
+          0.7516,
+          0.7453,
+          0.7329,
+          0.7267,
+          0.7205,
+          0.7081,
+          0.7019
+        ]
+      },
+      "source": "doi:10.1038/s41467-023-41975-3",
+      "sourceImage": "/photobleach-sources/asap3-fig-s4.jpg",
+      "sourceFigure": "Fig. S4",
+      "note": "Cross-GEVI photobleaching from the same Fig. S4 46 mW/mm² panel as JEDI-1P (measured alongside it; 470/24-nm widefield, HEK293T, n=11). The published trace is brightness relative to ASAP2s; the ASAP3 (orange) curve was re-normalized to its own first frame → F/F0. Half-life t50 ≈ 295 s, extrapolated well beyond the 120 s window (curve ends at F/F0≈0.70; relies on the slow component τ2≈562 s). Stored as t50 (not t75) to match the figure's other curves, whose 75% crossings fall in the shared rapid-initial-photobleach transient. NOTE: in fractional (F/F0) terms ASAP3 bleaches slightly LESS than the much brighter JEDI-1P here — JEDI-1P's advantage in this figure is its larger photon budget (absolute brightness), not lower fractional bleaching.",
+      "proofread": false
+    },
+    {
+      "modality": "1P",
+      "illumination": "100 mW/mm²",
+      "intensityMWmm2": 100,
+      "t75": 95,
+      "extrapolated": true,
+      "fit": {
+        "model": "biexponential",
+        "a": 0.2567,
+        "tau": 37.8,
+        "tau2": 5000.0,
+        "r2": 0.9799
+      },
+      "custom": {
+        "time": [
+          0.0,
+          2.5,
+          7.5,
+          12.5,
+          17.5,
+          22.5,
+          27.5,
+          32.5,
+          37.5,
+          42.5,
+          47.5,
+          52.5,
+          57.5,
+          62.5,
+          67.5,
+          72.5
+        ],
+        "fluorescence": [
+          1.0,
+          1.0,
+          0.9642,
+          0.9308,
+          0.9189,
+          0.8831,
+          0.8425,
+          0.8258,
+          0.8258,
+          0.8258,
+          0.8174,
+          0.8091,
+          0.7924,
+          0.7852,
+          0.7709,
+          0.7709
+        ]
+      },
+      "source": "doi:10.1038/s41592-023-01913-z",
+      "sourceImage": "/photobleach-sources/asap3-fig2b.jpg",
+      "sourceFigure": "Fig. 2b",
+      "note": "In-vivo 1P photostability digitized from Fig. 2b (ASAP3-Kv, green), hippocampal SST+ interneurons, continuous 453-nm widefield at 100 mW/mm², acquired in 11-s bouts time-binned to 500 fps. Noisy in-vivo trace; ends at F/F0≈0.77 at 75 s, so t75≈95 s is extrapolated just past the window. Measured alongside ASAP4b/ASAP4e (same figure → cross-overlay).",
+      "proofread": false
+    }
+  ],
   "researchPapers": [
     {
       "title": "Ultrafast Two-Photon Imaging of a High-Gain Voltage Indicator in Awake Behaving Mice",
