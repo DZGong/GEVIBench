@@ -223,7 +223,7 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
   const groupCls = (gevi: any) =>
     `cursor-pointer transition-colors group border-b border-surface ${
       selectedGEVI?.id === gevi.id
-        ? 'bg-surface-low'
+        ? 'bg-surface'
         : '[&:hover]:bg-surface'
     }`;
 

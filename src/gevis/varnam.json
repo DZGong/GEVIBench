@@ -625,11 +625,12 @@
       "proofread": false
     },
     {
-      "brightnessRemaining": 63,
+      "brightnessRemaining": 42,
       "illumination": "25 mW/mm²",
       "duration": "10 min",
+      "modality": "1P",
       "source": "doi:10.1126/science.abm8797",
-      "note": "Fig. S11B photobleaching curve; HEK cells under continuous 565 nm LED",
+      "note": "Digitized F/F0 at 10 min ≈ 0.42 from the Fig. S11B photobleaching curve (right panel, dark-red VARNAM curve; 565 nm LED at 25 mW/mm², HEK cells). Corrected from a prior value of 63%, which had been normalized to the post-initial-drop plateau rather than the t=0 baseline; VARNAM is in fact the fastest-bleaching of the three red sensors. See the photobleach[] entry for the full digitized F/F0 curve.",
       "sourceFigure": "Fig. S11B",
       "proofread": false
     }
@@ -741,6 +742,27 @@
       "sourceFigure": "Fig. S6A",
       "note": "VARNAM (cpmApple) photobleaching digitized from Fig. S6A, where it was measured alongside Cepheid1 as a comparator (1.59 W/cm² = 15.9 mW/mm² 561 nm wide-field, HEK293T). Red curve with a fast initial drop (≈1.0→0.8 in ~20 s) then a slow decline; bi-exponential fit, model-free t₇₅% ≈ 164 s. The primary subjects of this figure are Cepheid1b/Cepheid1s.",
       "proofread": false
+    },
+    {
+      "modality": "1P",
+      "intensityMWmm2": 25,
+      "t50": 368,
+      "fit": {
+        "model": "biexponential",
+        "a": 0.35,
+        "tau": 4.2,
+        "tau2": 1414.8,
+        "r2": 0.9966
+      },
+      "custom": {
+        "time": [0, 6, 12, 18, 24, 30, 45, 60, 90, 120, 150, 180, 240, 300, 360, 420, 480, 540, 600],
+        "fluorescence": [1.0, 0.739, 0.656, 0.631, 0.631, 0.631, 0.63, 0.626, 0.619, 0.607, 0.596, 0.583, 0.556, 0.529, 0.503, 0.48, 0.459, 0.439, 0.423]
+      },
+      "source": "doi:10.1126/science.abm8797",
+      "sourceImage": "/photobleach-sources/varnam-figs11b.jpg",
+      "sourceFigure": "Fig. S11B",
+      "proofread": false,
+      "note": "Origin-paper photobleaching (Fig. S11B, right/red panel, the dark-red VARNAM curve) in HEK cells under continuous 565 nm LED illumination at 25 mW/mm² (n=4 wells, ~100 cells/well). Digitized by HSV color separation, verified against the figure. Rapid initial drop (1.0→~0.63 in ~12 s) then slow decay, so the model-free t75% crossing lands inside the transient (~6 s) and is unrepresentative — the half-life t50 ≈ 368 s is stored instead. Biexponential fit; F/F0 at 10 min ≈ 0.42 (the lowest of the three red sensors). Companion curves in the same panel: VARNAM2, pAceR. (A second, lower-intensity recording exists from the Cepheid paper, Fig. S6A entry above.)"
     }
   ],
   "researchPapers": [

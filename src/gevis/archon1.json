@@ -316,6 +316,71 @@
     "url": "https://www.addgene.org/108423/",
     "proofread": false
   },
+  "photobleach": [
+    {
+      "modality": "1P",
+      "illumination": "4200 mW/mm²",
+      "t75": 536,
+      "fit": {
+        "model": "monoexponential",
+        "tau": 1862.9,
+        "r2": 0.8128
+      },
+      "custom": {
+        "time": [
+          0.0,
+          15.0,
+          45.0,
+          75.0,
+          105.0,
+          135.0,
+          165.0,
+          195.0,
+          225.0,
+          255.0,
+          285.0,
+          315.0,
+          345.0,
+          375.0,
+          405.0,
+          435.0,
+          465.0,
+          495.0,
+          525.0,
+          555.0,
+          585.0
+        ],
+        "fluorescence": [
+          1.0,
+          0.9217,
+          0.9133,
+          0.9067,
+          0.9067,
+          0.9067,
+          0.8933,
+          0.8867,
+          0.875,
+          0.865,
+          0.85,
+          0.8383,
+          0.8242,
+          0.81,
+          0.8067,
+          0.7983,
+          0.785,
+          0.7792,
+          0.7717,
+          0.7583,
+          0.7508
+        ]
+      },
+      "source": "doi:10.1038/s41592-022-01743-5",
+      "sourceImage": "/photobleach-sources/archon1-extfig4f.jpg",
+      "sourceFigure": "Ext. Fig. 4f",
+      "note": "Cross-GEVI photobleaching from the QuasAr6 paper Ext. Fig. 4f (Archon1-Citrine, cyan), HEK293T, continuous 635-nm laser at 420 W/cm² (= 4200 mW/mm²), 10 min, n=2 cells. Mono fit (r²≈0.81; the trace is shallow/noisy at n=2); in this measurement Archon1 retains ~75% at 10 min (similar to, or slightly above, QuasAr6a/6b — consistent with the paper's claim that QuasAr6 photostability is comparable to Archon1). t75≈536 s from the fit (within the 600 s window; the binned data edge sits right at 0.75). NOT dose-normalized (opsin at extreme 4200 mW/mm² intensity). Primary subjects of this paper are QuasAr6a/6b.",
+      "proofread": false
+    }
+  ],
   "researchPapers": [
     {
       "title": "A robotic multidimensional directed evolution approach applied to fluorescent voltage reporters",

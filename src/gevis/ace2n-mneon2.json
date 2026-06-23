@@ -539,7 +539,7 @@
         50
       ],
       "deltaF": [
-        13,
+        15,
         12,
         8,
         4,
@@ -565,7 +565,7 @@
       "note": "Amplitude-weighted mean of the bi-exponential fit at 22°C in spiking HEK cells (Table S1): τ_on = 0.67×0.77 + 0.33×3.1 = 1.54 ms; τ_off = 0.65×0.81 + 0.35×2.8 = 1.51 ms (fast amp 67% on / 65% off; slow τ_on=3.1 ms, slow τ_off=2.8 ms). Previously stored only the fast component (0.77/0.81).",
       "temperature": "22°C",
       "sourceFigure": "Table S1",
-      "proofread": false
+      "proofread": true
     }
   ],
   "dynamicRangeData": [
@@ -576,7 +576,7 @@
       "source": "doi:10.1126/science.abm8797",
       "note": "ΔF/F per 100 mV step in spiking HEK cells at 22°C",
       "sourceFigure": "Table S1",
-      "proofread": false
+      "proofread": true
     },
     {
       "deltaF": -26.7,
@@ -604,7 +604,7 @@
       "source": "doi:10.1126/science.abm8797",
       "note": "Negative-going ΔF/F per single AP (magnitude stored): −16.5 ± 1.9% (mean ± SEM, n=127 spikes) recorded in PPL1-γ2α'1 dopaminergic neurons in Drosophila (main text; per-spike values were obtained from the fly recordings, not the V1 VIP+ mouse traces shown in Fig. 1I).",
       "sourceFigure": "Fig. 1I",
-      "proofread": false
+      "proofread": true
     },
     {
       "deltaF": 11,
@@ -623,13 +623,26 @@
       "proofread": false
     }
   ],
+  "apWidthData": [
+    {
+      "fwhm": 2.1,
+      "samplingRate": 400,
+      "sample": "Mouse, V1 VIP+ interneurons, awake, in vivo",
+      "modality": "1P",
+      "temperature": "37°C",
+      "source": "doi:10.1126/science.abm8797",
+      "sourceFigure": "Fig. 1I",
+      "proofread": false,
+      "note": "Optical single-AP FWHM digitized from the mean ± SEM spike waveform in Fig. 1I (right sub-panel, the green negative-going Ace-mNeon2 trace), recorded in awake mouse V1 VIP+ interneurons in vivo under 1P epifluorescence at 400 Hz with 4×4 binning. FWHM measured at half of the peak ΔF/F deflection, calibrated to the panel's 5 ms scale bar (35 px = 5 ms). At 400 Hz the frame interval is 2.5 ms, so this width is frame-rate-broadened — treat it as an upper bound on the intrinsic optical response (underlying step kinetics τ ≈ 1.5 ms). Companion waveforms in the same panel: pAce, VARNAM2, pAceR."
+    }
+  ],
   "brightnessData": [
     {
       "ratio": 1.1,
       "reference": "ace2n-mneon",
       "source": "doi:10.1126/science.abm8797",
       "sourceFigure": "Fig. S11A",
-      "proofread": false
+      "proofread": true
     },
     {
       "ratio": 0.5,
@@ -672,7 +685,7 @@
   "addgene": {
     "id": "195518",
     "url": "https://www.addgene.org/195518/",
-    "proofread": false
+    "proofread": true
   },
   "photobleach": [
     {
@@ -715,6 +728,27 @@
       "sourceFigure": "Fig. 1D",
       "note": "Cross-GEVI entry from the Vega paper (a second recording at higher intensity than the Fig. S4h entry above). Ace-mNeon2 is the gray curve in Fig. 1D (1P 488 nm at 3 W/cm² = 30 mW/mm², 10 Hz; colors confirmed against the panel legend). It bleaches fastest, and its t₇₅% crossing (~38 s) falls in the early region where its gray trace is obscured beneath the overlapping Vega/JEDI-1P curves — so this curve is a stretched-exponential reconstruction anchored to the digitized visible tail (≈0.7→0.2) plus the cohort t₀.₇₅ = 38 s (Table S1), giving t₇₅% ≈ 35 s. Companion curves (same figure): Vega, JEDI-1P.",
       "proofread": false
+    },
+    {
+      "modality": "1P",
+      "intensityMWmm2": 25,
+      "t75": 79,
+      "fit": {
+        "model": "biexponential",
+        "a": 0.143,
+        "tau": 12.9,
+        "tau2": 555.8,
+        "r2": 0.9997
+      },
+      "custom": {
+        "time": [0, 30, 60, 90, 120, 150, 180, 240, 300, 360, 420, 480, 540, 600],
+        "fluorescence": [1.0, 0.825, 0.775, 0.736, 0.687, 0.65, 0.617, 0.553, 0.499, 0.449, 0.402, 0.36, 0.326, 0.296]
+      },
+      "source": "doi:10.1126/science.abm8797",
+      "sourceImage": "/photobleach-sources/ace2n-mneon2-figs11b.jpg",
+      "sourceFigure": "Fig. S11B",
+      "proofread": false,
+      "note": "Origin-paper photobleaching (Fig. S11B, left/green panel, the lime Ace-mNeon2 curve) in HEK cells under continuous 505 nm LED illumination at 25 mW/mm² (n=4 wells, ~100 cells/well). Digitized by HSV color separation, verified against the figure; biexponential fit, model-free t75% ≈ 79 s; F/F0 at 10 min ≈ 0.30. Companion curves in the same panel: Ace-mNeon, pAce. (A third independent recording, distinct from the Fig. S4h and Fig. 1D entries above.)"
     }
   ],
   "researchPapers": [

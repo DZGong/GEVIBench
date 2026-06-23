@@ -470,7 +470,10 @@
         0.0076
       ]
     },
-    "proofread": false
+    "note": "pAceR's fluorescent reporter is mRuby3 (it is the red, positive-going Ace2/mRuby3 eFRET counterpart of pAce; the Ace2 opsin is the dark FRET acceptor). The stored excitation/emission arrays are the FPbase mRuby3 curve verbatim (identical to the VARNAM / VARNAM2 pages; peaks ex 558 / em 592). No separately measured pAceR curve is published.",
+    "proofread": false,
+    "source": "FPbase: mRuby3",
+    "sourceFigure": "FPbase"
   },
   "voltage": {
     "type": "opsin",
@@ -518,7 +521,7 @@
       "source": "doi:10.1126/science.abm8797",
       "note": "Amplitude-weighted mean of the bi-exponential fit at 22°C in HEK cells (Table S1): τ_on = 0.54×2.4 + 0.46×5.4 = 3.78 ms; τ_off = 0.58×1.9 + 0.42×7.2 = 4.13 ms (fast amp 54% on / 58% off; slow τ_on=5.4 ms, slow τ_off=7.2 ms). Previously stored only the fast component (2.4/1.9).",
       "sourceFigure": "Table S1",
-      "proofread": false
+      "proofread": true
     }
   ],
   "dynamicRangeData": [
@@ -529,7 +532,7 @@
       "source": "doi:10.1126/science.abm8797",
       "note": "ΔF/F per 100 mV step, HEK cells, Table S1; corresponds to 33.4 ± 0.8% per 120 mV step (Fig. 1D, text)",
       "sourceFigure": "Table S1",
-      "proofread": false
+      "proofread": true
     }
   ],
   "sensitivityData": [
@@ -539,7 +542,7 @@
       "source": "doi:10.1126/science.abm8797",
       "note": "ΔF/F per single AP = 3.2 ± 0.5% (mean ± SEM, n=48 spikes) recorded in PPL1-γ2α'1 dopaminergic neurons in Drosophila (main text; the per-spike values were obtained from the fly recordings, not the V1 VIP+ mouse traces shown in Fig. 1I).",
       "sourceFigure": "Fig. 1I",
-      "proofread": false
+      "proofread": true
     },
     {
       "deltaF": 6.6,
@@ -550,6 +553,19 @@
       "proofread": false
     }
   ],
+  "apWidthData": [
+    {
+      "fwhm": 2.7,
+      "samplingRate": 400,
+      "sample": "Mouse, V1 VIP+ interneurons, awake, in vivo",
+      "modality": "1P",
+      "temperature": "37°C",
+      "source": "doi:10.1126/science.abm8797",
+      "sourceFigure": "Fig. 1I",
+      "proofread": false,
+      "note": "Optical single-AP FWHM digitized from the mean ± SEM spike waveform in Fig. 1I (right sub-panel, the salmon positive-going pAceR trace; narrow spike on a flat baseline), recorded in awake mouse V1 VIP+ interneurons in vivo under 1P epifluorescence at 400 Hz with 4×4 binning. FWHM measured at half of the peak ΔF/F deflection, calibrated to the panel's 5 ms scale bar (35 px = 5 ms). At 400 Hz the frame interval is 2.5 ms, so this width is frame-rate-broadened — treat it as an upper bound on the intrinsic optical response (underlying step kinetics τ ≈ 3.8/4.1 ms). Companion waveforms in the same panel: Ace-mNeon2, pAce, VARNAM2."
+    }
+  ],
   "brightnessData": [
     {
       "ratio": 0.7,
@@ -557,18 +573,42 @@
       "source": "doi:10.1126/science.abm8797",
       "note": "Resting fluorescence in HEK cells normalized to VARNAM mean (Fig. S11A): pAceR ~0.70, VARNAM2 ~1.00, VARNAM ~1.00. Expected for positive-polarity variants which have lower resting fluorescence.",
       "sourceFigure": "Fig. S11A",
-      "proofread": false
+      "proofread": true
     }
   ],
   "photostabilityData": [
     {
-      "brightnessRemaining": 65,
+      "brightnessRemaining": 50,
       "illumination": "25 mW/mm²",
       "duration": "10 min",
+      "modality": "1P",
       "source": "doi:10.1126/science.abm8797",
-      "note": "Fig. S11B photobleaching curve for pAceR in HEK cells under continuous 565 nm LED illumination at 25 mW/mm². The stored 65% is normalized to the post-initial-drop plateau (~0.52 retained at 10 min / ~0.80 plateau start ≈ 0.65), consistent with how VARNAM (~63%) was read; relative to the t=0 baseline of 1.0 the curve reads ~50% at 10 min. FLAGGED: cross-trace normalization convention differs from the green-channel entries (pAce/Ace-mNeon2), which were read as raw endpoints because the green traces start near 1.0.",
+      "note": "Digitized F/F0 at 10 min ≈ 0.50 from the Fig. S11B photobleaching curve (right/red panel, the pink pAceR curve; HEK cells, continuous 565 nm LED at 25 mW/mm²). Corrected from a prior value of 65%, which had been normalized to the post-initial-drop plateau rather than the t=0 baseline; now F/F0-normalized for consistency with the green-channel entries and with the photobleach[] curve below.",
       "sourceFigure": "Fig. S11B",
       "proofread": false
+    }
+  ],
+  "photobleach": [
+    {
+      "modality": "1P",
+      "intensityMWmm2": 25,
+      "t75": 162,
+      "fit": {
+        "model": "biexponential",
+        "a": 0.158,
+        "tau": 2.8,
+        "tau2": 1192.4,
+        "r2": 0.9938
+      },
+      "custom": {
+        "time": [0, 6, 12, 18, 24, 30, 45, 60, 90, 120, 150, 180, 240, 300, 360, 420, 480, 540, 600],
+        "fluorescence": [1.0, 0.86, 0.82, 0.814, 0.813, 0.813, 0.809, 0.804, 0.791, 0.774, 0.757, 0.739, 0.7, 0.661, 0.623, 0.589, 0.556, 0.526, 0.5]
+      },
+      "source": "doi:10.1126/science.abm8797",
+      "sourceImage": "/photobleach-sources/pacer-figs11b.jpg",
+      "sourceFigure": "Fig. S11B",
+      "proofread": false,
+      "note": "Origin-paper photobleaching (Fig. S11B, right/red panel, the pink pAceR curve) in HEK cells under continuous 565 nm LED illumination at 25 mW/mm² (n=4 wells, ~100 cells/well). Digitized by HSV color separation, verified against the figure. The red-channel curves show a rapid initial drop (pAceR 1.0→~0.81 in ~12 s) followed by slow decay; pAceR's 0.75 crossing falls in the slow phase, so a model-free t75% ≈ 162 s is representative (unlike VARNAM/VARNAM2, whose larger transients push the 0.75 crossing into the first few seconds, so those use t50). Biexponential fit; F/F0 at 10 min ≈ 0.50. Companion curves in the same panel: VARNAM, VARNAM2."
     }
   ],
   "researchPapers": [
@@ -580,6 +620,20 @@
       "sample": "HEK cells, in vitro; mouse hippocampus CA1, in vivo; Drosophila PPL1 dopaminergic neurons, in vivo",
       "url": "https://doi.org/10.1126/science.abm8797",
       "proofread": false
+    },
+    {
+      "title": "Positive-going hybrid indicators for voltage imaging in excitable cells and tissues",
+      "authors": "Liu S, et al.",
+      "journal": "Science Advances",
+      "year": 2025,
+      "sample": "Cultured rat hippocampal neurons; pAceR measured (3.2%→6.6% ΔF/F per AP) as a positive-going reference, 1P epifluorescence",
+      "url": "https://doi.org/10.1126/sciadv.ads1807",
+      "proofread": false
     }
-  ]
+  ],
+    "addgene": {
+    "id": "195518",
+    "url": "https://www.addgene.org/195534/",
+    "proofread": true
+  }
 }

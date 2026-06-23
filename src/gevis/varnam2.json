@@ -469,7 +469,10 @@
         0.0076
       ]
     },
-    "proofread": false
+    "note": "VARNAM2's fluorescent reporter is mRuby3 (the Ace2 opsin is the dark FRET acceptor). The stored excitation/emission arrays are the FPbase mRuby3 curve verbatim (identical to the VARNAM / pAceR pages; peaks ex 558 / em 592). No separately measured VARNAM2 curve is published.",
+    "proofread": false,
+    "source": "FPbase: mRuby3",
+    "sourceFigure": "FPbase"
   },
   "voltage": {
     "type": "opsin",
@@ -517,7 +520,7 @@
       "source": "doi:10.1126/science.abm8797",
       "note": "Amplitude-weighted mean of the bi-exponential fit at 22°C in spiking HEK cells (Table S1): τ_on = 0.68×0.5 + 0.32×1.9 = 0.95 ms; τ_off = 0.72×0.48 + 0.28×3.1 = 1.21 ms (fast amp 68% on / 72% off; slow τ_on=1.9 ms, slow τ_off=3.1 ms). Previously stored only the fast component (0.50/0.48).",
       "sourceFigure": "Table S1",
-      "proofread": false
+      "proofread": true
     }
   ],
   "dynamicRangeData": [
@@ -528,7 +531,7 @@
       "source": "doi:10.1126/science.abm8797",
       "note": "ΔF/F per 100 mV step in spiking HEK cells at 22°C (Table S1). Also reported as -22.9 ± 0.7% per 120 mV step in Fig. 1C (n=13 cells).",
       "sourceFigure": "Table S1",
-      "proofread": false
+      "proofread": true
     }
   ],
   "sensitivityData": [
@@ -538,7 +541,20 @@
       "source": "doi:10.1126/science.abm8797",
       "note": "Negative-going ΔF/F per single AP (magnitude stored): −7.3 ± 1.2% (mean ± SEM, n=49 spikes) recorded in PPL1-γ2α'1 dopaminergic neurons in Drosophila (main text; the per-spike values were obtained from the fly recordings, not the V1 VIP+ mouse traces shown in Fig. 1I).",
       "sourceFigure": "Fig. 1I",
-      "proofread": false
+      "proofread": true
+    }
+  ],
+  "apWidthData": [
+    {
+      "fwhm": 2.7,
+      "samplingRate": 400,
+      "sample": "Mouse, V1 VIP+ interneurons, awake, in vivo",
+      "modality": "1P",
+      "temperature": "37°C",
+      "source": "doi:10.1126/science.abm8797",
+      "sourceFigure": "Fig. 1I",
+      "proofread": false,
+      "note": "Optical single-AP FWHM digitized from the mean ± SEM spike waveform in Fig. 1I (right sub-panel, the red negative-going VARNAM2 trace), recorded in awake mouse V1 VIP+ interneurons in vivo under 1P epifluorescence at 400 Hz with 4×4 binning. FWHM measured at half of the peak ΔF/F deflection, calibrated to the panel's 5 ms scale bar (35 px = 5 ms). At 400 Hz the frame interval is 2.5 ms, so this width is frame-rate-broadened — treat it as an upper bound on the intrinsic optical response (underlying step kinetics τ ≈ 1 ms). Companion waveforms in the same panel: Ace-mNeon2, pAce, pAceR."
     }
   ],
   "brightnessData": [
@@ -548,16 +564,17 @@
       "source": "doi:10.1126/science.abm8797",
       "note": "Normalized resting fluorescence in HEK cells (Fig. S11A right panel): VARNAM2 = 1.00 ± SEM relative to VARNAM (n=7 wells/condition)",
       "sourceFigure": "Fig. S11A",
-      "proofread": false
+      "proofread": true
     }
   ],
   "photostabilityData": [
     {
-      "brightnessRemaining": 45,
+      "brightnessRemaining": 49,
       "illumination": "25 mW/mm²",
       "duration": "10 min",
+      "modality": "1P",
       "source": "doi:10.1126/science.abm8797",
-      "note": "Read from photobleaching curve in Fig. S11B (right panel, 565 nm LED illumination at 25 mW/mm², HEK cells)",
+      "note": "Digitized F/F0 at 10 min ≈ 0.49 from the Fig. S11B photobleaching curve (right panel, salmon VARNAM2 curve; 565 nm LED at 25 mW/mm², HEK cells). Updated from 45% to match the HSV-digitized photobleach[] curve below.",
       "sourceFigure": "Fig. S11B",
       "proofread": false
     }
@@ -659,6 +676,27 @@
       "sourceFigure": "Fig. S6A",
       "note": "VARNAM2 photobleaching digitized from Fig. S6A, measured as a comparator alongside Cepheid1 (1.59 W/cm² = 15.9 mW/mm² 561 nm wide-field, HEK293T). Dark-olive curve ending ≈59% at 13 min; mono-exponential fit (τ ≈ 1447 s), model-free t₇₅% ≈ 421 s. The primary subjects of this figure are Cepheid1b/Cepheid1s.",
       "proofread": false
+    },
+    {
+      "modality": "1P",
+      "intensityMWmm2": 25,
+      "t50": 552,
+      "fit": {
+        "model": "biexponential",
+        "a": 0.338,
+        "tau": 2.3,
+        "tau2": 1990.8,
+        "r2": 0.9986
+      },
+      "custom": {
+        "time": [0, 6, 12, 18, 24, 30, 45, 60, 90, 120, 150, 180, 240, 300, 360, 420, 480, 540, 600],
+        "fluorescence": [1.0, 0.685, 0.66, 0.65, 0.649, 0.647, 0.646, 0.644, 0.637, 0.63, 0.621, 0.611, 0.59, 0.571, 0.553, 0.534, 0.517, 0.503, 0.489]
+      },
+      "source": "doi:10.1126/science.abm8797",
+      "sourceImage": "/photobleach-sources/varnam2-figs11b.jpg",
+      "sourceFigure": "Fig. S11B",
+      "proofread": false,
+      "note": "Origin-paper photobleaching (Fig. S11B, right/red panel, the salmon VARNAM2 curve) in HEK cells under continuous 565 nm LED illumination at 25 mW/mm² (n=4 wells, ~100 cells/well). Digitized by HSV color separation, verified against the figure. The curve has a rapid initial drop (1.0→~0.65 in ~12 s) then slow decay, so the model-free t75% crossing lands inside the transient (~5 s) and is unrepresentative — the half-life t50 ≈ 552 s is stored instead. Biexponential fit; F/F0 at 10 min ≈ 0.49. Companion curves in the same panel: VARNAM, pAceR. (A second, lower-intensity recording exists from the Cepheid paper, Fig. S6A entry above.)"
     }
   ],
   "researchPapers": [

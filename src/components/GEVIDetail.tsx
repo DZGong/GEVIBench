@@ -48,16 +48,7 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
 
   return (
     <div className="rounded-lg p-4 md:p-6 mb-6 bg-surface-lowest shadow-ambient">
-      {/* Close button */}
-      <button
-        onClick={onClose}
-        className="mb-2 p-1 rounded-md hover:bg-surface-low text-ink/50"
-        title="Close and return to list"
-      >
-        <X className="w-5 h-5" />
-      </button>
-
-      {/* Header: name + info left, score right */}
+      {/* Header: name + info left, compare + close right */}
       <div className="flex items-start justify-between gap-4 mb-4">
         <div className="flex-1">
           <h3 className="text-xl md:text-2xl font-semibold mb-1 text-ink flex items-baseline gap-2">
@@ -85,17 +76,24 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
             </span>
           )}
         </div>
-        <div className="text-center sm:text-right">
+        <div className="flex items-center gap-2 flex-shrink-0">
           <button
             onClick={() => onAddToCompare(gevi)}
             disabled={compareGEVIs.find(g => g.id === gevi.id) || compareGEVIs.length >= 5}
-            className={`mt-2 text-xs px-2 py-1 rounded border flex items-center gap-1 mx-auto sm:mx-0 ${
+            className={`text-xs px-2 py-1 rounded border flex items-center gap-1 ${
               compareGEVIs.find(g => g.id === gevi.id)
                 ? 'text-green-500 border-green-500'
                 : 'border-ink/15 text-ink/60 hover:text-gold hover:border-gold'
             }`}
           >
             <Plus className="w-3 h-3" /> {compareGEVIs.find(g => g.id === gevi.id) ? 'Added' : 'Compare'}
+          </button>
+          <button
+            onClick={onClose}
+            className="p-1 rounded-md hover:bg-surface-low text-ink/50"
+            title="Close and return to list"
+          >
+            <X className="w-5 h-5" />
           </button>
         </div>
       </div>
@@ -106,7 +104,7 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
           <div key={metric.key} className="border rounded-lg p-2 md:p-3 bg-surface-low border-ink/10">
             <div className="flex items-center gap-1.5">
               <metric.icon className="w-3 h-3" />
-              <span className="text-xs md:text-sm font-medium text-ink">{metric.name}</span>
+              <span className="text-sm md:text-sm font-medium text-ink">{metric.name}</span>
             </div>
             {metric.desc && (
               <div className="text-[10px] text-ink/50 leading-snug mt-0.5 mb-1.5">
@@ -117,7 +115,7 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
                 tile header already says "τ_on/τ_off (ms)", so labels and units
                 inside the row would be redundant). */}
             {metric.key === 'kinetics' && gevi.kinetics?.length > 0 && (
-              <div className="mt-2 text-[10px] space-y-1">
+              <div className="mt-2 text-xs space-y-1">
                 {gevi.kinetics.map((k: any, i: number) => (
                   <div key={i} className={`py-1 ${i < gevi.kinetics.length - 1 ? 'border-b border-ink/10' : ''}`}>
                     <div className="flex items-center justify-between gap-2">
@@ -136,12 +134,12 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
             )}
             {/* Sensitivity */}
             {metric.key === 'sensitivity' && gevi.sensitivityData?.length > 0 && (
-              <div className="mt-2 text-[10px] space-y-1">
+              <div className="mt-2 text-xs space-y-1">
                 {gevi.sensitivityData.map((s: any, i: number) => (
                   <div key={i} className={`py-1 ${i < gevi.sensitivityData.length - 1 ? 'border-b border-ink/10' : ''}`}>
                     <div className="flex items-center justify-between gap-2">
                       <span>
-                        <span className="font-semibold">{s.deltaF}%</span> <span className="text-ink">per AP</span>
+                        <span className="font-semibold">{s.deltaF}%</span> <span className="text-ink"></span>
                         {s.dye && <span className="ml-1 align-middle text-[9px] px-1 py-0.5 rounded bg-klein/10 text-klein font-semibold">{s.dye}</span>}
                         {s.modality && <span className="ml-1 align-middle text-[9px] px-1 py-0.5 rounded bg-ink/10 text-ink/70 font-semibold">{s.modality}</span>}
                       </span>
@@ -156,7 +154,7 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
             )}
             {/* Dynamic Range */}
             {metric.key === 'dynamicRange' && gevi.dynamicRangeData?.length > 0 && (
-              <div className="mt-2 text-[10px] space-y-1">
+              <div className="mt-2 text-xs space-y-1">
                 {gevi.dynamicRangeData.map((d: any, i: number) => (
                   <div key={i} className={`py-1 ${i < gevi.dynamicRangeData.length - 1 ? 'border-b border-ink/10' : ''}`}>
                     <div className="flex items-center justify-between gap-2">
@@ -179,14 +177,14 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
             )}
             {/* Photostability */}
             {metric.key === 'photostability' && gevi.photostabilityData === 'bioluminescent' && (
-              <div className="mt-2 text-[10px] text-ink">
+              <div className="mt-2 text-xs text-ink">
                 <div className="flex items-center gap-2">
                   <span>Bioluminescent — no photobleaching</span>
                 </div>
               </div>
             )}
             {metric.key === 'photostability' && Array.isArray(gevi.photostabilityData) && gevi.photostabilityData.length > 0 && (
-              <div className="mt-2 text-[10px] space-y-1">
+              <div className="mt-2 text-xs space-y-1">
                 {gevi.photostabilityData.map((p: any, i: number) => (
                   <div key={i} className={`py-1 ${i < gevi.photostabilityData.length - 1 ? 'border-b border-ink/10' : ''}`}>
                     <div className="flex items-center justify-between gap-2">
@@ -204,7 +202,7 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
             )}
             {/* Brightness — derived B/B_EGFP first (computed via the brightness graph), then raw entries */}
             {metric.key === 'brightness' && (gevi.bRel != null || gevi.brightnessData?.length > 0) && (
-              <div className="mt-2 text-[10px] space-y-1">
+              <div className="mt-2 text-xs space-y-1">
                 {gevi.bRel != null && (
                   <div className={`py-1 ${gevi.brightnessData?.length > 0 ? 'border-b border-ink/10' : ''}`}>
                     <div className="flex items-center justify-between gap-2">
@@ -247,7 +245,7 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
                 }, 0);
               };
               return (
-                <div className="mt-2 text-[10px]">
+                <div className="mt-2 text-xs">
                   <div className="flex items-baseline gap-2">
                     <span className="text-ink">N<sub>used</sub>:</span>
                     <span className="text-ink font-semibold">{total}</span>

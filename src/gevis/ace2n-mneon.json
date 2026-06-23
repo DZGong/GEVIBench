@@ -709,6 +709,29 @@
       "proofread": false
     }
   ],
+  "photobleach": [
+    {
+      "modality": "1P",
+      "intensityMWmm2": 25,
+      "t75": 92,
+      "fit": {
+        "model": "biexponential",
+        "a": 0.124,
+        "tau": 20.5,
+        "tau2": 558.9,
+        "r2": 0.9996
+      },
+      "custom": {
+        "time": [0, 30, 60, 90, 120, 150, 180, 240, 300, 360, 420, 480, 540, 600],
+        "fluorescence": [1.0, 0.856, 0.799, 0.752, 0.709, 0.667, 0.634, 0.567, 0.509, 0.457, 0.41, 0.371, 0.336, 0.308]
+      },
+      "source": "doi:10.1126/science.abm8797",
+      "sourceImage": "/photobleach-sources/ace2n-mneon-figs11b.jpg",
+      "sourceFigure": "Fig. S11B",
+      "proofread": false,
+      "note": "Photobleaching from the Kannan et al. dual-polarity paper (Fig. S11B, left/green panel, the dark-green Ace-mNeon curve) in HEK cells under continuous 505 nm LED illumination at 25 mW/mm² (n=4 wells, ~100 cells/well). Ace-mNeon (the 2015 original) is the green negative-going reference in this paper. Digitized by HSV color separation, verified against the figure; biexponential fit, model-free t75% ≈ 92 s; F/F0 at 10 min ≈ 0.31. Companion curves in the same panel: Ace-mNeon2, pAce."
+    }
+  ],
   "twoPhoton": [
     {
       "compatible": false,

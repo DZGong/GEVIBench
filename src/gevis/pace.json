@@ -77,7 +77,10 @@
         0.0002, 0.0002, 0.0002, 0.0002, 0.0002, 0.0002, 0.0002
       ]
     },
-    "proofread": false
+    "note": "pAce's fluorescent reporter is mNeonGreen (the Ace2 opsin is the dark FRET acceptor). The stored excitation/emission arrays are the FPbase mNeonGreen curve verbatim (identical to the Ace2N-mNeon2 page; peaks ex 506 / em 517). No separately measured pAce curve is published.",
+    "proofread": false,
+    "source": "FPbase: mNeonGreen",
+    "sourceFigure": "FPbase"
   },
   "voltage": {
     "type": "opsin",
@@ -125,7 +128,7 @@
       "source": "doi:10.1126/science.abm8797",
       "note": "Amplitude-weighted mean of the bi-exponential fit at 22°C in spiking HEK cells: τ_on = 0.82×0.51 + 0.18×1.5 = 0.69 ms; τ_off = 0.78×0.61 + 0.22×3.2 = 1.18 ms (fast/slow components and amplitudes from Table S1).",
       "sourceFigure": "Table S1",
-      "proofread": false
+      "proofread": true
     }
   ],
   "dynamicRangeData": [
@@ -136,7 +139,7 @@
       "source": "doi:10.1126/science.abm8797",
       "note": "ΔF/F per 100 mV step in spiking HEK cells at 22°C (Table S1); main text reports 36.6 ± 0.7% ΔF/F per 120 mV step (n=11 cells)",
       "sourceFigure": "Table S1",
-      "proofread": false
+      "proofread": true
     },
     {
       "deltaF": 41,
@@ -164,7 +167,7 @@
       "source": "doi:10.1126/science.abm8797",
       "note": "ΔF/F per single action potential in PPL1-γ2α'1 dopaminergic neurons in Drosophila (n=87 spikes)",
       "sourceFigure": "Fig. 1I",
-      "proofread": false
+      "proofread": true
     },
     {
       "deltaF": 43,
@@ -191,6 +194,19 @@
       "proofread": false
     }
   ],
+  "apWidthData": [
+    {
+      "fwhm": 2.9,
+      "samplingRate": 400,
+      "sample": "Mouse, V1 VIP+ interneurons, awake, in vivo",
+      "modality": "1P",
+      "temperature": "37°C",
+      "source": "doi:10.1126/science.abm8797",
+      "sourceFigure": "Fig. 1I",
+      "proofread": false,
+      "note": "Optical single-AP FWHM digitized from the mean ± SEM spike waveform in Fig. 1I (right sub-panel, the light-green positive-going pAce trace; fast rise + slower decay), recorded in awake mouse V1 VIP+ interneurons in vivo under 1P epifluorescence at 400 Hz with 4×4 binning. FWHM measured at half of the peak ΔF/F deflection, calibrated to the panel's 5 ms scale bar (35 px = 5 ms). At 400 Hz the frame interval is 2.5 ms, so this width is frame-rate-broadened — treat it as an upper bound on the intrinsic optical response (underlying step kinetics τ ≈ 0.7/1.2 ms). Companion waveforms in the same panel: Ace-mNeon2, VARNAM2, pAceR."
+    }
+  ],
   "brightnessData": [
     {
       "ratio": 0.7,
@@ -198,7 +214,7 @@
       "source": "doi:10.1126/science.abm8797",
       "note": "Resting fluorescence normalized to Ace-mNeon in HEK cells (Fig. S11A)",
       "sourceFigure": "Fig. S11A",
-      "proofread": false
+      "proofread": true
     },
     {
       "ratio": 28,
@@ -211,11 +227,12 @@
   ],
   "photostabilityData": [
     {
-      "brightnessRemaining": 33,
+      "brightnessRemaining": 38,
       "illumination": "25 mW/mm²",
       "duration": "10 min",
+      "modality": "1P",
       "source": "doi:10.1126/science.abm8797",
-      "note": "From photobleaching curve in HEK cells under continuous illumination (Fig. S11B); pAce supported extended 30-min continuous imaging at ~5 mW/mm² with stable d' (Fig. S14)",
+      "note": "Digitized F/F0 at 10 min ≈ 0.38 from the photobleaching curve in HEK cells under continuous 505 nm illumination (Fig. S11B, teal pAce curve); pAce supported extended 30-min continuous imaging at ~5 mW/mm² with stable d' (Fig. S14). See the photobleach[] entry for the full digitized curve.",
       "sourceFigure": "Fig. S11B",
       "proofread": false
     },
@@ -310,6 +327,27 @@
       "sourceFigure": "Fig. S4h",
       "note": "Cross-GEVI entry from the Electra benchmarking paper (a different recording from the Fig. 1F entry above): photobleaching of the fluorescence baseline over a 30-min continuous 1P recording at 5 mW/mm² in cultured primary hippocampal neurons (Fig. S4h, the cyan pAce curve — sensor colors confirmed against the labeled bars in Fig. S4f/g: pAce cyan, ElectraON orange, Ace-mNeon2 green, ElectraOFF gold). Stretched exponential F = exp(−(t/2287)^0.974), t₇₅% ≈ 636 s (10.6 min). Companion curves (same figure): ElectraON, ElectraOFF, Ace-mNeon2.",
       "proofread": false
+    },
+    {
+      "modality": "1P",
+      "intensityMWmm2": 25,
+      "t75": 68,
+      "fit": {
+        "model": "biexponential",
+        "a": 0.18,
+        "tau": 6.8,
+        "tau2": 759.7,
+        "r2": 0.9999
+      },
+      "custom": {
+        "time": [0, 30, 60, 90, 120, 150, 180, 240, 300, 360, 420, 480, 540, 600],
+        "fluorescence": [1.0, 0.791, 0.758, 0.728, 0.699, 0.674, 0.65, 0.6, 0.553, 0.509, 0.469, 0.434, 0.403, 0.376]
+      },
+      "source": "doi:10.1126/science.abm8797",
+      "sourceImage": "/photobleach-sources/pace-figs11b.jpg",
+      "sourceFigure": "Fig. S11B",
+      "proofread": false,
+      "note": "Origin-paper photobleaching (Fig. S11B, left/green panel, the teal pAce curve) in HEK cells under continuous 505 nm LED illumination at 25 mW/mm² (n=4 wells, ~100 cells/well). Digitized by HSV color separation, verified against the figure; biexponential fit, model-free t75% ≈ 68 s. Companion curves in the same panel: Ace-mNeon, Ace-mNeon2. (A third independent recording, distinct from the Fig. 1F and Fig. S4h entries above.)"
     }
   ],
   "twoPhoton": [
@@ -323,7 +361,7 @@
   "addgene": {
     "id": "195523",
     "url": "https://www.addgene.org/195523/",
-    "proofread": false
+    "proofread": true
   },
   "researchPapers": [
     {
