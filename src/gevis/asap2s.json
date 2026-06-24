@@ -210,6 +210,27 @@
       "sourceFigure": "Fig. S4",
       "note": "Cross-GEVI photobleaching from the same Fig. S4 46 mW/mm² panel as JEDI-1P (470/24-nm widefield, HEK293T, n=12). Relative-to-ASAP2s trace renormalized to ASAP2s's own first frame → F/F0. ASAP2s drops to F/F0≈0.72 in the first ~3 s (shared rapid-initial-photobleach transient) then PLATEAUS — it does not fall to 50% within the 2-min window, so no half-life (t50) is stored (fractionally very photostable after the transient; the biexp slow component τ2 is poorly constrained). Curve retained for cross-overlay. As with ASAP3, ASAP2s shows less fractional bleaching than the brighter JEDI-1P; JEDI-1P's advantage in this figure is photon budget (absolute brightness).",
       "proofread": false
+    },
+    {
+      "modality": "1P",
+      "intensityMWmm2": 15,
+      "t50": 3,
+      "fit": {
+        "model": "biexponential",
+        "a": 0.571,
+        "tau": 0.9,
+        "tau2": 748.0,
+        "r2": 0.999
+      },
+      "custom": {
+        "time": [0, 3, 6, 10, 15, 20, 30, 45, 60, 90, 120, 150, 180, 210, 240, 270, 300],
+        "fluorescence": [1.0, 0.45, 0.435, 0.425, 0.418, 0.412, 0.406, 0.4, 0.395, 0.387, 0.369, 0.36, 0.339, 0.324, 0.302, 0.3, 0.286]
+      },
+      "source": "doi:10.1016/j.cell.2022.07.013",
+      "sourceImage": "/photobleach-sources/asap2s-figs4g.jpg",
+      "sourceFigure": "Fig. S4G",
+      "proofread": false,
+      "note": "Cross-GEVI entry from the JEDI-2P origin paper (primary subject JEDI-2P): 1P photobleaching of ASAP2s in HEK293-Kir2.1 cells, widefield 1PM at 15 mW/mm² over 5 min (Fig. S4G, blue curve). ASAP2s has the LARGEST fast-bleach component here — it loses ~half its fluorescence within ~3 s (to ~0.42) then declines slowly to ~0.29. Both the t75% and t50 crossings therefore fall inside this fast transient (t50 ≈ 3 s); the stored t50 honestly reflects that ASAP2s is dominated by rapid initial photobleaching under 1PM (caption: 'larger fast-photobleaching component'), not a digitization artifact. Note this is a higher-intensity, longer recording than the Fig. S4 JEDI-1P-paper entry above (which renormalized a relative-brightness trace and plateaued). Biexponential fit. Companion curves: JEDI-2P, ASAP3."
     }
   ],
   "researchPapers": [

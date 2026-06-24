@@ -120,8 +120,14 @@ function computeDisplayValues(gevi: GEVI, bRelMap: Map<string, number>) {
   const drEntries = preferOnePhoton(gevi.dynamicRangeData ?? []).map(d => Math.abs(d.deltaF)).filter(v => v > 0);
   const displayDynamicRange = median(drEntries);
 
+  const subEntries = (gevi.subthresholdData ?? []).map(s => Math.abs(s.slope)).filter(v => v > 0);
+  const displaySubthreshold = median(subEntries);
+
   const sensEntries = preferOnePhoton(gevi.sensitivityData ?? []).map(d => Math.abs(d.deltaF)).filter(v => v > 0);
   const displaySensitivity = median(sensEntries);
+
+  const apEntries = (gevi.apWidthData ?? []).map(a => a.fwhm).filter(v => v > 0);
+  const displayApWidth = median(apEntries);
 
   let displayPhotostab: number | null;
   if (gevi.photostabilityData === 'bioluminescent') {
@@ -135,7 +141,7 @@ function computeDisplayValues(gevi: GEVI, bRelMap: Map<string, number>) {
 
   const paperCount = gevi.researchPapers?.length ?? 0;
 
-  return { bRel, displayTauOn, displayTauOff, displayTauSum, displayDynamicRange, displaySensitivity, displayPhotostab, paperCount };
+  return { bRel, displayTauOn, displayTauOff, displayTauSum, displayDynamicRange, displaySubthreshold, displaySensitivity, displayApWidth, displayPhotostab, paperCount };
 }
 
 // Load all GEVIs from modular files (synchronous, uses eager import)
@@ -246,7 +252,7 @@ export function getPhotobleachCompanions(
 // array of all raw entries for the current GEVI's "stars".
 // ============================================================================
 
-export type DistributionAxisKey = 'tauOn' | 'tauOff' | 'dynamicRange' | 'sensitivity' | 'brightness' | 'photostability' | 'kinetics' | 'nUsed';
+export type DistributionAxisKey = 'tauOn' | 'tauOff' | 'dynamicRange' | 'subthreshold' | 'sensitivity' | 'apWidth' | 'brightness' | 'photostability' | 'kinetics' | 'nUsed';
 
 export interface DistributionAxisSpec {
   key: DistributionAxisKey;
@@ -287,8 +293,12 @@ export function getRawEntriesForGEVI(gevi: GEVI, key: DistributionAxisKey): numb
       return (gevi.kinetics ?? []).map(k => k.off).filter(v => v > 0);
     case 'dynamicRange':
       return (gevi.dynamicRangeData ?? []).map(d => Math.abs(d.deltaF)).filter(v => v > 0);
+    case 'subthreshold':
+      return (gevi.subthresholdData ?? []).map(s => Math.abs(s.slope)).filter(v => v > 0);
     case 'sensitivity':
       return (gevi.sensitivityData ?? []).map(d => Math.abs(d.deltaF)).filter(v => v > 0);
+    case 'apWidth':
+      return (gevi.apWidthData ?? []).map(a => a.fwhm).filter(v => v > 0);
     case 'brightness': {
       const b = gevi.bRel;
       return (b !== null && b !== undefined && b > 0) ? [b] : [];

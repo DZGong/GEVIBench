@@ -756,6 +756,27 @@
       "sourceFigure": "Fig. 2b",
       "note": "In-vivo 1P photostability digitized from Fig. 2b (ASAP3-Kv, green), hippocampal SST+ interneurons, continuous 453-nm widefield at 100 mW/mm², acquired in 11-s bouts time-binned to 500 fps. Noisy in-vivo trace; ends at F/F0≈0.77 at 75 s, so t75≈95 s is extrapolated just past the window. Measured alongside ASAP4b/ASAP4e (same figure → cross-overlay).",
       "proofread": false
+    },
+    {
+      "modality": "1P",
+      "intensityMWmm2": 15,
+      "t50": 59,
+      "fit": {
+        "model": "biexponential",
+        "a": 0.393,
+        "tau": 1.4,
+        "tau2": 359.8,
+        "r2": 0.9958
+      },
+      "custom": {
+        "time": [0, 3, 6, 10, 15, 20, 30, 45, 60, 90, 120, 150, 180, 210, 240, 270, 300],
+        "fluorescence": [1.0, 0.643, 0.622, 0.604, 0.59, 0.576, 0.552, 0.525, 0.499, 0.461, 0.422, 0.39, 0.361, 0.36, 0.312, 0.291, 0.275]
+      },
+      "source": "doi:10.1016/j.cell.2022.07.013",
+      "sourceImage": "/photobleach-sources/asap3-figs4g.jpg",
+      "sourceFigure": "Fig. S4G",
+      "proofread": false,
+      "note": "Cross-GEVI entry from the JEDI-2P origin paper (primary subject JEDI-2P): 1P photobleaching of ASAP3 in HEK293-Kir2.1 cells, widefield 1PM at 15 mW/mm² over 5 min (Fig. S4G, orange curve). Digitized by HSV color separation. Large fast-bleach initial drop (to ~0.64), so the t75% crossing is transient-dominated → half-life t50 ≈ 59 s stored instead. Biexponential fit. Companion curves in the same panel: JEDI-2P, ASAP2s."
     }
   ],
   "researchPapers": [

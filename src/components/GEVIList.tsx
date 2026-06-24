@@ -44,15 +44,16 @@ function fmtTau(v: number): string {
   return Math.round(v).toString();
 }
 
-type MetricKey = 'brightness' | 'tauOn' | 'tauOff' | 'dynamicRange' | 'sensitivity' | 'photostability';
+type MetricKey = 'brightness' | 'kinetics' | 'dynamicRange' | 'subthreshold' | 'sensitivity' | 'apWidth' | 'photostability';
 
-// invert: true → smaller raw value ranks higher (only τ-based metrics)
+// invert: true → smaller raw value ranks higher (only τ-based metrics + AP width)
 const METRICS: { key: MetricKey; sortField: SortField; rawField: keyof any; invert?: boolean; label: string; shortLabel: string; symbol: React.ReactNode; desc: string }[] = [
   { key: 'brightness',    sortField: 'bRel',                 rawField: 'bRel',                label: 'Brightness',    shortLabel: 'B/B_EGFP',    symbol: <>B/B<sub>EGFP</sub></>, desc: 'Relative molecular brightness vs EGFP' },
-  { key: 'tauOn',         sortField: 'displayTauOn',         rawField: 'displayTauOn',        invert: true, label: 'τ_on', shortLabel: 'τ_on', symbol: <>τ<sub>on</sub> (ms)</>, desc: 'Activation time constant (depolarization step)' },
-  { key: 'tauOff',        sortField: 'displayTauOff',        rawField: 'displayTauOff',       invert: true, label: 'τ_off', shortLabel: 'τ_off', symbol: <>τ<sub>off</sub> (ms)</>, desc: 'Decay time constant (repolarization step)' },
+  { key: 'kinetics',      sortField: 'displayTauSum',        rawField: 'displayTauSum',       invert: true, label: 'Kinetics', shortLabel: 'τ_on/τ_off', symbol: <>τ<sub>on</sub>/τ<sub>off</sub> (ms)</>, desc: 'Activation / decay time constants (τ_on / τ_off), in ms; sorted by their sum (faster ranks higher)' },
   { key: 'dynamicRange',  sortField: 'displayDynamicRange',  rawField: 'displayDynamicRange', label: 'Dynamic Range', shortLabel: 'ΔF/F 100mV',  symbol: 'ΔF/F per 100mV', desc: 'Steady-state fluorescence change per 100 mV depolarization; sign indicates polarity' },
+  { key: 'subthreshold',  sortField: 'displaySubthreshold',  rawField: 'displaySubthreshold', label: 'Subthreshold',  shortLabel: 'ΔF/F mV',     symbol: 'ΔF/F per mV', desc: 'Subthreshold sensitivity — fluorescence change per mV near rest (−90 to −50 mV)' },
   { key: 'sensitivity',   sortField: 'displaySensitivity',   rawField: 'displaySensitivity',  label: 'Sensitivity',   shortLabel: 'ΔF/F AP',     symbol: 'ΔF/F per AP', desc: 'Fluorescence change per single action potential in neurons;' },
+  { key: 'apWidth',       sortField: 'displayApWidth',       rawField: 'displayApWidth',      invert: true, label: 'AP width (FWHM)', shortLabel: 'FWHM_AP', symbol: <>FWHM<sub>AP</sub></>, desc: 'Optical single-AP width — full width at half maximum (FWHM, ms) of the spike fluorescence waveform; narrower = faster' },
   { key: 'photostability',sortField: 'displayPhotostab',     rawField: 'displayPhotostab',    label: 'Photostability',shortLabel: 'F_remain%',   symbol: <>F<sub>remain</sub>%</>, desc: 'Fraction of fluorescence remaining after 1 min of continuous illumination at 100 mW/mm² (values reported at other intensities/durations are normalized to this reference);' },
 ];
 
@@ -72,18 +73,23 @@ function getMetricValue(gevi: any, key: MetricKey, _dimBase: string): React.Reac
   switch (key) {
     case 'brightness':
       return gevi.bRel != null ? `${gevi.bRel.toFixed(2)}×` : '—';
-    case 'tauOn':
-      return gevi.displayTauOn != null ? fmtTau(gevi.displayTauOn) : '—';
-    case 'tauOff':
-      return gevi.displayTauOff != null ? fmtTau(gevi.displayTauOff) : '—';
+    case 'kinetics': {
+      const on = gevi.displayTauOn, off = gevi.displayTauOff;
+      if (on == null && off == null) return '—';
+      return `${on != null ? fmtTau(on) : '—'} / ${off != null ? fmtTau(off) : '—'}`;
+    }
     case 'dynamicRange': {
       const dr = gevi.dynamicRangeData?.[0];
       return dr ? `${dr.deltaF > 0 ? '+' : ''}${dr.deltaF}%` : '—';
     }
+    case 'subthreshold':
+      return gevi.displaySubthreshold != null ? `${parseFloat(gevi.displaySubthreshold.toPrecision(2))}%` : '—';
     case 'sensitivity': {
       const sens = gevi.sensitivityData?.[0];
       return sens ? `${sens.deltaF}%` : '—';
     }
+    case 'apWidth':
+      return gevi.displayApWidth != null ? `${parseFloat(gevi.displayApWidth.toPrecision(2))} ms` : '—';
     case 'photostability':
       return gevi.displayPhotostab != null ? `${Math.round(gevi.displayPhotostab)}%` : '—';
   }
@@ -92,10 +98,11 @@ function getMetricValue(gevi: any, key: MetricKey, _dimBase: string): React.Reac
 function hasMetricValue(gevi: any, key: MetricKey): boolean {
   switch (key) {
     case 'brightness': return gevi.bRel != null;
-    case 'tauOn': return gevi.displayTauOn != null;
-    case 'tauOff': return gevi.displayTauOff != null;
+    case 'kinetics': return gevi.displayTauOn != null || gevi.displayTauOff != null;
     case 'dynamicRange': return !!gevi.dynamicRangeData?.[0];
+    case 'subthreshold': return gevi.displaySubthreshold != null;
     case 'sensitivity': return !!gevi.sensitivityData?.[0];
+    case 'apWidth': return gevi.displayApWidth != null;
     case 'photostability': return gevi.displayPhotostab != null;
   }
 }
@@ -417,20 +424,8 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
                 <tbody key={gevi.id} data-gevi-id={gevi.id} onClick={() => onSelect(gevi)} className={groupCls(gevi)}>
                   <tr>
                     <td className={`pl-2 pr-4 pt-3 pb-0 text-center w-16 tabular-nums ${dimBase}`} rowSpan={2} style={{ fontSize: '16px', verticalAlign: 'middle' }}>{sortConfig.field === 'year' || sortConfig.field === 'peakEx' || gevi[sortConfig.field] != null ? idx + 1 : '-'}</td>
-                    <td className="px-1 pt-3 pb-0">
+                    <td className="px-1 pt-3 pb-0" style={{ width: '1%', whiteSpace: 'nowrap' }}>
                       <span className="font-semibold whitespace-nowrap text-ink">{gevi.name}</span>
-                      <a
-                        href={gevi.paperUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        onClick={(e) => e.stopPropagation()}
-                        className="inline-flex items-center gap-1 whitespace-nowrap text-klein hover:underline ml-2"
-                        title={gevi.paper}
-                        style={{ fontSize: '12px' }}
-                      >
-                        <ExternalLink className="w-3 h-3" />
-                        <span><span className="italic">{abbreviatePaper(gevi.paper).replace(/\s*\d{4}$/, '')}</span> {extractYear(gevi.paper)}</span>
-                      </a>
                     </td>
                     <td className={`px-1 lg:px-2 xl:px-3 pt-3 pb-0 text-center tabular-nums ${hasWavelengthValue(gevi) ? cellBase : dimBase}`} style={{ fontSize: '14px' }}>
                       <WavelengthCellContent gevi={gevi} />
@@ -478,7 +473,18 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
                     <td rowSpan={2}></td>
                   </tr>
                   <tr>
-                    <td colSpan={9} className="px-1 pt-0.5 pb-3 text-ink font-sans" style={{ fontSize: '12px', lineHeight: '1.3' }}>
+                    <td colSpan={3 + METRICS.length} className="px-1 pt-0.5 pb-3 text-ink font-sans" style={{ fontSize: '12px', lineHeight: '1.3' }}>
+                      <a
+                        href={gevi.paperUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="inline-flex items-center gap-1 whitespace-nowrap text-klein hover:underline mr-2 align-baseline"
+                        title={gevi.paper}
+                      >
+                        <ExternalLink className="w-3 h-3" />
+                        <span><span className="italic">{abbreviatePaper(gevi.paper).replace(/\s*\d{4}$/, '')}</span> {extractYear(gevi.paper)}</span>
+                      </a>
                       {gevi.description}
                     </td>
                     <td className="w-2 lg:w-3 xl:w-4"></td>

@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import { BonusBadges } from './BonusBadges';
-import { BookOpen, ExternalLink, Plus, X, Sun, Zap, Activity, TrendingUp, Shield, Dna, ChevronDown, ChevronUp, Users } from 'lucide-react';
+import { BookOpen, ExternalLink, Plus, X, Sun, Zap, Activity, TrendingUp, Shield, Dna, ChevronDown, ChevronUp, Users, Waves, Ruler } from 'lucide-react';
 import { SpectrumViewer, SpectrumData } from '../SpectrumViewer';
 import { VoltageCurveViewer } from '../VoltageCurveViewer';
 import { PhotobleachGallery } from '../PhotobleachViewer';
@@ -26,7 +26,9 @@ const metrics = [
   { key: 'brightness',     name: <>B/B<sub>EGFP</sub></>,                      icon: Sun,        desc: 'Relative molecular brightness vs EGFP' },
   { key: 'kinetics',       name: <>τ<sub>on</sub>/τ<sub>off</sub> (ms)</>,     icon: Zap,        desc: 'Activation and decay time constants' },
   { key: 'dynamicRange',   name: <>ΔF/F per 100mV</>,                          icon: TrendingUp, desc: 'Steady-state fluorescence change per 100 mV' },
+  { key: 'subthreshold',   name: <>ΔF/F per mV</>,                             icon: Waves,      desc: 'Subthreshold sensitivity — fluorescence change per mV near rest (−90 to −50 mV)' },
   { key: 'sensitivity',    name: <>ΔF/F per AP</>,                             icon: Activity,   desc: 'Fluorescence change per single action potential' },
+  { key: 'apWidth',        name: <>FWHM<sub>AP</sub> (ms)</>,                   icon: Ruler,      desc: 'Optical single-AP width — full width at half maximum (FWHM) of the spike fluorescence waveform' },
   { key: 'photostability', name: <>F<sub>remain</sub>%</>,                     icon: Shield,     desc: 'Fraction of fluorescence remaining after continuous illumination' },
   { key: 'nUsed',          name: <>N<sub>used</sub></>,                        icon: Users,      desc: 'Number of independent published studies that have applied this sensor' },
 ];
@@ -57,24 +59,25 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
               <span className="text-xs font-normal text-ink/40">Updated {gevi.lastUpdated}</span>
             )}
           </h3>
+          <div className="flex items-center flex-wrap gap-x-3 gap-y-1 mb-2">
+            <a href={gevi.paperUrl} target="_blank" rel="noopener noreferrer" className="text-sm inline-flex items-center gap-1 text-klein hover:underline">
+              <BookOpen className="w-4 h-4" />{gevi.paper}<ExternalLink className="w-3 h-3" />
+            </a>
+            {gevi.addgene ? (
+              <a href={gevi.addgene.url} target="_blank" rel="noopener noreferrer" className="text-sm inline-flex items-center gap-1 text-green-700 hover:underline">
+                <Dna className="w-4 h-4" /> Addgene #{gevi.addgene.id}<ExternalLink className="w-3 h-3" />
+              </a>
+            ) : (
+              <span className="text-sm inline-flex items-center gap-1 text-ink/40">
+                <Dna className="w-4 h-4" /> Addgene: Coming soon
+              </span>
+            )}
+          </div>
           <p className="text-sm mb-2 text-ink font-sans">{gevi.description}</p>
-          <div className="flex flex-wrap gap-2 mb-2">
+          <div className="flex flex-wrap gap-2">
             <span className="text-xs px-2 py-1 bg-klein text-white rounded font-medium">{gevi.category}</span>
             <BonusBadges gevi={gevi} variant="pill" />
           </div>
-          <a href={gevi.paperUrl} target="_blank" rel="noopener noreferrer" className="text-sm inline-flex items-center gap-1 text-klein hover:underline">
-            <BookOpen className="w-4 h-4" />{gevi.paper}<ExternalLink className="w-3 h-3" />
-          </a>
-          <br />
-          {gevi.addgene ? (
-            <a href={gevi.addgene.url} target="_blank" rel="noopener noreferrer" className="text-sm inline-flex items-center gap-1 text-green-700 hover:underline">
-              <Dna className="w-4 h-4" /> Addgene #{gevi.addgene.id}<ExternalLink className="w-3 h-3" />
-            </a>
-          ) : (
-            <span className="text-sm inline-flex items-center gap-1 text-ink/40">
-              <Dna className="w-4 h-4" /> Addgene: Coming soon
-            </span>
-          )}
         </div>
         <div className="flex items-center gap-2 flex-shrink-0">
           <button
@@ -99,8 +102,13 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
       </div>
 
       {/* Metrics Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 min-[1100px]:grid-cols-3 gap-2 md:gap-3">
-        {metrics.map((metric) => (
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3">
+        {metrics.map((metric) => {
+          // Optional panels: only render the tile when the GEVI has that data,
+          // since most sensors don't report subthreshold slope or AP width.
+          if (metric.key === 'subthreshold' && !(gevi.subthresholdData?.length > 0)) return null;
+          if (metric.key === 'apWidth' && !(gevi.apWidthData?.length > 0)) return null;
+          return (
           <div key={metric.key} className="border rounded-lg p-2 md:p-3 bg-surface-low border-ink/10">
             <div className="flex items-center gap-1.5">
               <metric.icon className="w-3 h-3" />
@@ -132,6 +140,26 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
                 ))}
               </div>
             )}
+            {/* AP width (FWHM) */}
+            {metric.key === 'apWidth' && gevi.apWidthData?.length > 0 && (
+              <div className="mt-2 text-xs space-y-1">
+                {gevi.apWidthData.map((a: any, i: number) => (
+                  <div key={i} className={`py-1 ${i < gevi.apWidthData.length - 1 ? 'border-b border-ink/10' : ''}`}>
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-ink">
+                        <span className="font-semibold">{a.fwhm} ms</span>
+                        {a.samplingRate ? <span className="text-ink/60"> @ {Math.round(a.samplingRate)} Hz</span> : null}
+                        {a.modality && <span className="ml-1 align-middle text-[9px] px-1 py-0.5 rounded bg-ink/10 text-ink/70 font-semibold">{a.modality}</span>}
+                      </span>
+                      <span className="flex items-center gap-1.5 min-w-0">
+                        <NoteTip note={a.note} />
+                        <SourceLink source={a.source} sourceFigure={a.sourceFigure} />
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
             {/* Sensitivity */}
             {metric.key === 'sensitivity' && gevi.sensitivityData?.length > 0 && (
               <div className="mt-2 text-xs space-y-1">
@@ -143,6 +171,22 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
                         {s.dye && <span className="ml-1 align-middle text-[9px] px-1 py-0.5 rounded bg-klein/10 text-klein font-semibold">{s.dye}</span>}
                         {s.modality && <span className="ml-1 align-middle text-[9px] px-1 py-0.5 rounded bg-ink/10 text-ink/70 font-semibold">{s.modality}</span>}
                       </span>
+                      <span className="flex items-center gap-1.5 min-w-0">
+                        <NoteTip note={s.note} />
+                        <SourceLink source={s.source} sourceFigure={s.sourceFigure} />
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+            {/* Subthreshold sensitivity */}
+            {metric.key === 'subthreshold' && gevi.subthresholdData?.length > 0 && (
+              <div className="mt-2 text-xs space-y-1">
+                {gevi.subthresholdData.map((s: any, i: number) => (
+                  <div key={i} className={`py-1 ${i < gevi.subthresholdData.length - 1 ? 'border-b border-ink/10' : ''}`}>
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-ink"><span className="font-semibold">{s.slope}</span> %/mV</span>
                       <span className="flex items-center gap-1.5 min-w-0">
                         <NoteTip note={s.note} />
                         <SourceLink source={s.source} sourceFigure={s.sourceFigure} />
@@ -274,7 +318,8 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
               );
             })()}
           </div>
-        ))}
+          );
+        })}
       </div>
 
       {/* Radar Chart + Sample Usage | Lineage */}

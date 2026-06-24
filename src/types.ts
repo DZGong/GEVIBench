@@ -88,7 +88,9 @@ export interface GEVI {
   displayTauOff?: number | null;         // selected τ_off in ms (temperature-preferred)
   displayTauSum?: number | null;         // τ_on + τ_off, for speed sorting
   displayDynamicRange?: number | null;   // median |ΔF/F| across entries
+  displaySubthreshold?: number | null;   // median subthreshold slope (%/mV) across entries
   displaySensitivity?: number | null;    // median |ΔF/F| per AP across entries
+  displayApWidth?: number | null;        // median optical AP width (FWHM, ms) across entries
   displayPhotostab?: number | null;      // normalized % remaining @ 100 mW/mm², 1 min
   description: string;
   familyTreePath?: string[] | null;
@@ -199,7 +201,9 @@ export type SortField =
   | 'displayTauOff'
   | 'displayTauSum'
   | 'displayDynamicRange'
+  | 'displaySubthreshold'
   | 'displaySensitivity'
+  | 'displayApWidth'
   | 'displayPhotostab';
 
 export type SortOrder = 'asc' | 'desc';

@@ -54,7 +54,10 @@ const AXES: AxisSpec[] = [
   // Inverted: faster (smaller sum) sits on the outer ring.
   { key: 'kinetics',       label: [{ text: 'τ' }, { text: 'on', sub: true }, { text: '+τ' }, { text: 'off', sub: true }, { text: ' (ms)' }], ticks: [100, 10,  1] },
   { key: 'dynamicRange',   label: [{ text: 'ΔF/F%' }, { text: 'per 100mV', newline: true }],                                           ticks: [1,   10,  100] },
+  { key: 'subthreshold',   label: [{ text: 'ΔF/F%' }, { text: 'per mV', newline: true }],                                              ticks: [0.01, 0.1, 1] },
   { key: 'sensitivity',    label: [{ text: 'ΔF/F%' }, { text: 'per AP', newline: true }],                                              ticks: [1,   10,  100] },
+  // AP width inverted: narrower (smaller-FWHM) optical spike sits on the outer ring.
+  { key: 'apWidth',        label: [{ text: 'FWHM' }, { text: 'AP', sub: true }, { text: '(ms)', newline: true }],                       ticks: [10,  3,   1] },
   { key: 'photostability', label: [{ text: 'F' }, { text: 'remain', sub: true }, { text: '%' }],                                        ticks: [1,   10,  100] },
   // Independent research papers using this sensor — proxy for adoption.
   { key: 'nUsed',          label: [{ text: 'N' }, { text: 'used', sub: true }],                                                         ticks: [1,   10,  100] },
@@ -98,9 +101,10 @@ function makeAxisRadialPosition(rOuter: number) {
 
 function formatValue(v: number, key: DistributionAxisKey): string {
   if (key === 'brightness') return `${v.toPrecision(2)}× EGFP`;
-  if (key === 'tauOn' || key === 'tauOff' || key === 'kinetics') return `${v.toPrecision(2)} ms`;
+  if (key === 'tauOn' || key === 'tauOff' || key === 'kinetics' || key === 'apWidth') return `${v.toPrecision(2)} ms`;
   if (key === 'photostability') return `${v.toFixed(0)}%/min`;
   if (key === 'nUsed') return `${v.toFixed(0)} ${v === 1 ? 'paper' : 'papers'}`;
+  if (key === 'subthreshold') return `${v.toPrecision(2)}%/mV`;
   return `${v.toPrecision(2)}%`;
 }
 
