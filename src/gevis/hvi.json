@@ -24,6 +24,9 @@
     "peakEx": 553,
     "peakEm": 569,
     "name": "HVI (Cy3)",
+    "source": "FPbase: Cy3",
+    "sourceFigure": "FPbase",
+    "note": "HVI conjugates the Cy3 dye to Ace2; the excitation/emission curve is the FPbase Cy3 reference spectrum (verbatim, EX peak 554 nm / EM peak 568 nm), which matches the HVI-Cy3 conjugate's reported maxima. The origin paper plots only the HVI-series emission spectra (Fig. 2d), not a full dye ex+em.",
     "custom": {
       "minEx": 400,
       "excitation": [
@@ -513,7 +516,7 @@
       "note": "HVI-Cy3, fast component of a bi-exponential fit in HEK293T cells (whole-cell voltage clamp). Activation (depolarizing step): τfast 1.70 ± 0.07 ms, 97.1% fast amplitude; deactivation (hyperpolarizing step): τfast 2.50 ± 0.10 ms, 93.4% fast (Supplementary Table 3). The slow component τ is not reported, so an amplitude-weighted mean cannot be computed; the fast component dominates (>93%) and is used as a close proxy. Main text labels τfast the half-life τ1/2.",
       "source": "doi:10.1038/s41557-021-00641-1",
       "sourceFigure": "Table S3",
-      "proofread": false
+      "proofread": true
     },
     {
       "on": 2.27,
@@ -522,6 +525,15 @@
       "note": "HVI-Cy3b, amplitude-weighted mean τ from the bi-exponential fit in Table S2 of the HVI+ paper (HEK293T whole-cell voltage clamp, room temperature). Activation (depolarizing step): τfast 2.03 ms (95.6%) + τslow 7.40 ms (4.4%) → τ̄ = 2.27 ms. Deactivation (hyperpolarizing step): τfast 3.00 ms (92.1%) + τslow 20.09 ms (7.9%) → τ̄ = 4.35 ms.",
       "source": "doi:10.1126/sciadv.ads1807",
       "sourceFigure": "Table S2",
+      "proofread": false
+    },
+    {
+      "on": 2.16,
+      "off": 4.1,
+      "temperature": "25°C",
+      "source": "doi:10.1126/sciadv.ads1807",
+      "sourceFigure": "Table S2",
+      "note": "HVI-Cy5, amplitude-weighted mean τ from the bi-exponential fit in Table S2 of the HVI+ paper (HEK293T whole-cell voltage clamp, room temperature). Activation (depolarizing step): τfast 1.90 ms (97.9%) + τslow 14.48 ms (2.1%) → τ̄ = 2.16 ms. Deactivation (hyperpolarizing step): τfast 3.09 ms (83.9%) + τslow 9.33 ms (16.1%) → τ̄ = 4.10 ms. The origin paper (Supplementary Table 3) reports only the fast components (τfast 1.87 / 3.09 ms).",
       "proofread": false
     }
   ],
@@ -534,7 +546,7 @@
       "note": "HVI-Cy3: −39.1 ± 0.8% ΔF/F0 per 100 mV (n = 9) in HEK293T cells under whole-cell voltage clamp, 1P (532 nm), from Supplementary Table 3; also stated in the main text and abstract.",
       "source": "doi:10.1038/s41557-021-00641-1",
       "sourceFigure": "Table S3",
-      "proofread": false
+      "proofread": true
     },
     {
       "deltaF": -61.3,
@@ -545,6 +557,16 @@
       "source": "doi:10.1126/sciadv.ads1807",
       "sourceFigure": "Table S2",
       "proofread": false
+    },
+    {
+      "deltaF": -19.6,
+      "sign": "negative",
+      "modality": "1P",
+      "dye": "Cy5",
+      "source": "doi:10.1038/s41557-021-00641-1",
+      "sourceFigure": "Table S3",
+      "note": "HVI-Cy5: -19.6 ± 0.8% ΔF/F0 per 100 mV (n = 7) in HEK293T cells under whole-cell voltage clamp, 1P far-red (637 nm) excitation, from Supplementary Table 3. The HVI+ paper (Table S2) reports a consistent -20.3 ± 0.9% (n = 7). HVI-Cy5 is the most red-shifted HVI variant, enabling crosstalk-free multiplexing.",
+      "proofread": false
     }
   ],
   "sensitivityData": [
@@ -554,7 +576,7 @@
       "dye": "Cy3",
       "source": "doi:10.1038/s41557-021-00641-1",
       "sourceFigure": "Table S3",
-      "proofread": false
+      "proofread": true
     },
     {
       "deltaF": -39.6,
@@ -564,6 +586,15 @@
       "source": "doi:10.1126/sciadv.ads1807",
       "sourceFigure": "Table S2",
       "proofread": false
+    },
+    {
+      "deltaF": -12.8,
+      "modality": "1P",
+      "dye": "Cy5",
+      "source": "doi:10.1038/s41557-021-00641-1",
+      "sourceFigure": "Table S3",
+      "note": "HVI-Cy5: -12.8 ± 0.9% ΔF/F0 per AP (n = 7, SNR 26.1 ± 2.1) in cultured rat hippocampal neurons at 484 Hz, 1P far-red 637 nm illumination (1.2 W/cm²), from Supplementary Table 3; ~3.6-fold more sensitive than the spectrally similar Voltron635. The HVI+ paper (Table S2) reports a consistent -13.5 ± 1.0% (n = 5).",
+      "proofread": false
     }
   ],
   "brightnessData": [
@@ -572,7 +603,7 @@
       "reference": "voltron",
       "source": "doi:10.1038/s41557-021-00641-1",
       "sourceFigure": "Table S4",
-      "proofread": false
+      "proofread": true
     }
   ],
   "photostabilityData": [
@@ -584,7 +615,8 @@
       "note": "HVI-Cy3 photobleaching half-life τ1/2 = 430 ± 64 s (= 7.2 min) in HEK293T cells under continuous 532 nm illumination at 4.9 W/cm² (= 49 mW/mm²); 50% remaining at 7.2 min.",
       "source": "doi:10.1038/s41557-021-00641-1",
       "sourceFigure": "Table S6",
-      "proofread": false
+      "proofread": false,
+      "dye": "Cy3"
     },
     {
       "brightnessRemaining": 50,
@@ -594,6 +626,18 @@
       "note": "HVI-Cy3b photobleaching half-life of 432 ± 111 s in HEK293T cells under continuous 532 nm illumination at 5.0 W/cm² (= 50 mW/mm²); 50% remaining at 7.2 min.",
       "source": "doi:10.1126/sciadv.ads1807",
       "sourceFigure": "Table S5",
+      "proofread": false,
+      "dye": "Cy3b"
+    },
+    {
+      "brightnessRemaining": 50,
+      "illumination": "12 mW/mm²",
+      "duration": "1.4 min",
+      "modality": "1P",
+      "dye": "Cy5",
+      "source": "doi:10.1038/s41557-021-00641-1",
+      "sourceFigure": "Table S6",
+      "note": "HVI-Cy5 photobleaching half-life τ1/2 = 85 ± 14 s (= 1.4 min, n = 7) in HEK293T cells under continuous 637 nm illumination at 1.2 W/cm² (= 12 mW/mm²); 50% remaining at 1.4 min. The far-red Cy5 conjugate bleaches faster than the orange Cy3/Cy3b variants.",
       "proofread": false
     }
   ],
@@ -603,7 +647,7 @@
       "note": "HVI-Cy3: ΔF/F0 responses of −4.7 ± 0.1% and −2.2 ± 0.1% to depolarizing subthreshold steps of +16.9 and +7.8 mV, and +2.2 ± 0.1% and +4.8 ± 0.1% to hyperpolarizing steps of −7.4 and −17.2 mV, at a resting potential of ~−68 mV in cultured rat hippocampal neurons (484 Hz, 532 nm). |ΔF/F0|/|ΔV| ≈ 0.28 %/mV across all four steps.",
       "source": "doi:10.1038/s41557-021-00641-1",
       "sourceFigure": "Table S5",
-      "proofread": false
+      "proofread": true
     }
   ],
   "apWidthData": [
@@ -622,6 +666,85 @@
   "photobleach": [
     {
       "modality": "1P",
+      "illumination": "49 mW/mm²",
+      "intensityMWmm2": 49,
+      "t75": 220,
+      "fit": {
+        "model": "stretched-exponential",
+        "tau": 585.5,
+        "b": 1.275
+      },
+      "custom": {
+        "time": [
+          0,
+          22,
+          44,
+          66,
+          88,
+          110,
+          132,
+          154,
+          176,
+          198,
+          220,
+          242,
+          264,
+          286,
+          308,
+          330,
+          352,
+          374,
+          396,
+          418,
+          440,
+          462,
+          484,
+          505,
+          527,
+          549,
+          571,
+          593
+        ],
+        "fluorescence": [
+          1.0,
+          0.996,
+          0.973,
+          0.949,
+          0.922,
+          0.889,
+          0.865,
+          0.838,
+          0.806,
+          0.778,
+          0.75,
+          0.72,
+          0.692,
+          0.666,
+          0.642,
+          0.617,
+          0.589,
+          0.566,
+          0.543,
+          0.52,
+          0.498,
+          0.476,
+          0.458,
+          0.435,
+          0.417,
+          0.401,
+          0.385,
+          0.37
+        ]
+      },
+      "source": "doi:10.1038/s41557-021-00641-1",
+      "sourceImage": "/photobleach-sources/hvi-edf4g.jpg",
+      "sourceFigure": "Ext. Fig. 4g",
+      "note": "HVI-Cy3 (this page's canonical dye) photobleaching. Digitized from the yellow curve in Extended Data Fig. 4g of the HVI origin paper (Liu 2021), a representative photobleaching trace in HEK293T cells under continuous 1P 532 nm illumination at 4.9 W/cm² (= 49 mW/mm², Cy3); F/F0 normalized to t=0, 20 Hz sampling. Model-free t75 ≈ 220 s (t50 ≈ 439 s), versus the cohort half-life 430 ± 64 s (n = 6) (Supplementary Table 6). Representative curve, so it may run slightly off the cohort mean. Cross-overlaid with the other sensors in the same panel.",
+      "proofread": false,
+      "dye": "Cy3"
+    },
+    {
+      "modality": "1P",
       "illumination": "50 mW/mm²",
       "intensityMWmm2": 50,
       "t75": 143,
@@ -632,13 +755,151 @@
         "r2": 0.997
       },
       "custom": {
-        "time": [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330, 360, 390, 420, 450, 480, 510, 540, 570, 600, 630, 660, 690, 720, 750, 780, 810, 840, 870],
-        "fluorescence": [1.0, 0.95, 0.88, 0.823, 0.773, 0.736, 0.703, 0.672, 0.644, 0.621, 0.597, 0.575, 0.554, 0.535, 0.518, 0.501, 0.486, 0.47, 0.454, 0.44, 0.426, 0.412, 0.399, 0.385, 0.373, 0.362, 0.351, 0.341, 0.332, 0.324]
+        "time": [
+          0,
+          30,
+          60,
+          90,
+          120,
+          150,
+          180,
+          210,
+          240,
+          270,
+          300,
+          330,
+          360,
+          390,
+          420,
+          450,
+          480,
+          510,
+          540,
+          570,
+          600,
+          630,
+          660,
+          690,
+          720,
+          750,
+          780,
+          810,
+          840,
+          870
+        ],
+        "fluorescence": [
+          1.0,
+          0.95,
+          0.88,
+          0.823,
+          0.773,
+          0.736,
+          0.703,
+          0.672,
+          0.644,
+          0.621,
+          0.597,
+          0.575,
+          0.554,
+          0.535,
+          0.518,
+          0.501,
+          0.486,
+          0.47,
+          0.454,
+          0.44,
+          0.426,
+          0.412,
+          0.399,
+          0.385,
+          0.373,
+          0.362,
+          0.351,
+          0.341,
+          0.332,
+          0.324
+        ]
       },
       "source": "doi:10.1126/sciadv.ads1807",
       "sourceImage": "/photobleach-sources/hvi.jpg",
       "sourceFigure": "Fig. S7",
       "note": "Photobleaching curve for the HVI-Cy3b variant (this page's canonical dye is Cy3; Fig. S7 measured the Cy3b conjugate) in HEK293T cells under continuous 1P 532 nm illumination at 5.0 W/cm² (= 50 mW/mm²), digitized from the salmon curve in Fig. S7 (seeded in the mid-plot region and tracked along the lower band to avoid the more-stable HVI+-Cy3b curve above it). Fit to a stretched exponential F = exp(−(t/731.8)^0.763), t₇₅% ≈ 143 s (inside the 870 s window). Fit t½ = 453 s matches the cohort half-life 432 ± 111 s (Table S5, n = 27). Companion to HVI+-Cy3b / Positron525 / Voltron2525 in the same figure.",
+      "proofread": false,
+      "dye": "Cy3b"
+    },
+    {
+      "modality": "1P",
+      "dye": "Cy5",
+      "illumination": "12 mW/mm²",
+      "intensityMWmm2": 12,
+      "t75": 42,
+      "fit": {
+        "model": "stretched-exponential",
+        "tau": 122.1,
+        "b": 1.159
+      },
+      "custom": {
+        "time": [
+          0,
+          22,
+          43,
+          65,
+          87,
+          109,
+          130,
+          152,
+          174,
+          196,
+          217,
+          239,
+          261,
+          282,
+          304,
+          326,
+          348,
+          369,
+          391,
+          413,
+          435,
+          456,
+          478,
+          500,
+          521,
+          543
+        ],
+        "fluorescence": [
+          1.0,
+          0.918,
+          0.753,
+          0.617,
+          0.497,
+          0.406,
+          0.321,
+          0.27,
+          0.217,
+          0.17,
+          0.146,
+          0.118,
+          0.095,
+          0.079,
+          0.065,
+          0.053,
+          0.047,
+          0.037,
+          0.034,
+          0.025,
+          0.021,
+          0.017,
+          0.016,
+          0.016,
+          0.016,
+          0.016
+        ]
+      },
+      "source": "doi:10.1038/s41557-021-00641-1",
+      "sourceImage": "/photobleach-sources/hvi-edf4g-cy5.jpg",
+      "sourceFigure": "Ext. Fig. 4g",
+      "note": "HVI-Cy5 (far-red variant) photobleaching, digitized from the magenta curve in Extended Data Fig. 4g of the origin paper — a representative trace in HEK293T cells under continuous 1P 637 nm illumination at 1.2 W/cm² (= 12 mW/mm², Cy5); F/F0 normalized to t=0, 20 Hz sampling. Model-free t75 ≈ 42 s (t50 ≈ 89 s), matching the cohort half-life 85 ± 14 s (Supplementary Table 6). Cross-overlaid with HVI-Cy3, VARNAM and Ace2N-mNeon from the same panel.",
       "proofread": false
     }
   ],

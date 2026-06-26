@@ -50,64 +50,69 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
 
   return (
     <div className="rounded-lg p-4 md:p-6 mb-6 bg-surface-lowest shadow-ambient">
-      {/* Header: name + info left, compare + close right */}
-      <div className="flex items-start justify-between gap-4 mb-4">
-        <div className="flex-1">
-          <h3 className="text-xl md:text-2xl font-semibold mb-1 text-ink flex items-baseline gap-2">
-            <span className="text-ink">{gevi.name}</span>
-            {gevi.lastUpdated && (
-              <span className="text-xs font-normal text-ink/40">Updated {gevi.lastUpdated}</span>
-            )}
-          </h3>
-          <div className="flex items-center flex-wrap gap-x-3 gap-y-1 mb-2">
-            <a href={gevi.paperUrl} target="_blank" rel="noopener noreferrer" className="text-sm inline-flex items-center gap-1 text-klein hover:underline">
-              <BookOpen className="w-4 h-4" />{gevi.paper}<ExternalLink className="w-3 h-3" />
-            </a>
-            {gevi.addgene ? (
-              <a href={gevi.addgene.url} target="_blank" rel="noopener noreferrer" className="text-sm inline-flex items-center gap-1 text-green-700 hover:underline">
-                <Dna className="w-4 h-4" /> Addgene #{gevi.addgene.id}<ExternalLink className="w-3 h-3" />
+      {/* Header: name + links share the top row with the action buttons; the
+          description and tags span the card's full width below so they don't
+          wrap prematurely in the narrow (split list+detail) layout. */}
+      <div className="mb-4">
+        <div className="flex items-start justify-between gap-4">
+          <div className="flex-1 min-w-0">
+            <h3 className="text-xl md:text-2xl font-semibold mb-1 text-ink flex items-baseline gap-2">
+              <span className="text-ink">{gevi.name}</span>
+              {gevi.lastUpdated && (
+                <span className="text-xs font-normal text-ink/40">Updated {gevi.lastUpdated}</span>
+              )}
+            </h3>
+            <div className="flex items-center flex-wrap gap-x-3 gap-y-1">
+              <a href={gevi.paperUrl} target="_blank" rel="noopener noreferrer" className="text-sm inline-flex items-center gap-1 text-klein hover:underline">
+                <BookOpen className="w-4 h-4" />{gevi.paper}<ExternalLink className="w-3 h-3" />
               </a>
-            ) : (
-              <span className="text-sm inline-flex items-center gap-1 text-ink/40">
-                <Dna className="w-4 h-4" /> Addgene: Coming soon
-              </span>
-            )}
+              {gevi.addgene ? (
+                <a href={gevi.addgene.url} target="_blank" rel="noopener noreferrer" className="text-sm inline-flex items-center gap-1 text-green-700 hover:underline">
+                  <Dna className="w-4 h-4" /> Addgene #{gevi.addgene.id}<ExternalLink className="w-3 h-3" />
+                </a>
+              ) : (
+                <span className="text-sm inline-flex items-center gap-1 text-ink/40">
+                  <Dna className="w-4 h-4" /> Addgene: Coming soon
+                </span>
+              )}
+            </div>
           </div>
-          <p className="text-sm mb-2 text-ink font-sans">{gevi.description}</p>
-          <div className="flex flex-wrap gap-2">
-            <span className="text-xs px-2 py-1 bg-klein text-white rounded font-medium">{gevi.category}</span>
-            <BonusBadges gevi={gevi} variant="pill" />
+          <div className="flex items-center gap-2 flex-shrink-0">
+            <button
+              onClick={() => onAddToCompare(gevi)}
+              disabled={compareGEVIs.find(g => g.id === gevi.id) || compareGEVIs.length >= 5}
+              className={`text-xs px-2 py-1 rounded border flex items-center gap-1 ${
+                compareGEVIs.find(g => g.id === gevi.id)
+                  ? 'text-green-500 border-green-500'
+                  : 'border-ink/15 text-ink/60 hover:text-gold hover:border-gold'
+              }`}
+            >
+              <Plus className="w-3 h-3" /> {compareGEVIs.find(g => g.id === gevi.id) ? 'Added' : 'Compare'}
+            </button>
+            <button
+              onClick={onClose}
+              className="p-1 rounded-md hover:bg-surface-low text-ink/50"
+              title="Close and return to list"
+            >
+              <X className="w-5 h-5" />
+            </button>
           </div>
         </div>
-        <div className="flex items-center gap-2 flex-shrink-0">
-          <button
-            onClick={() => onAddToCompare(gevi)}
-            disabled={compareGEVIs.find(g => g.id === gevi.id) || compareGEVIs.length >= 5}
-            className={`text-xs px-2 py-1 rounded border flex items-center gap-1 ${
-              compareGEVIs.find(g => g.id === gevi.id)
-                ? 'text-green-500 border-green-500'
-                : 'border-ink/15 text-ink/60 hover:text-gold hover:border-gold'
-            }`}
-          >
-            <Plus className="w-3 h-3" /> {compareGEVIs.find(g => g.id === gevi.id) ? 'Added' : 'Compare'}
-          </button>
-          <button
-            onClick={onClose}
-            className="p-1 rounded-md hover:bg-surface-low text-ink/50"
-            title="Close and return to list"
-          >
-            <X className="w-5 h-5" />
-          </button>
+        <p className="text-sm mt-2 mb-2 text-ink font-sans">{gevi.description}</p>
+        <div className="flex flex-wrap gap-2">
+          <span className="text-xs px-2 py-1 bg-klein text-white rounded font-medium">{gevi.category}</span>
+          <BonusBadges gevi={gevi} variant="pill" />
         </div>
       </div>
 
       {/* Metrics Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-3">
         {metrics.map((metric) => {
-          // Optional panels: only render the tile when the GEVI has that data,
-          // since most sensors don't report subthreshold slope or AP width.
-          if (metric.key === 'subthreshold' && !(gevi.subthresholdData?.length > 0)) return null;
-          if (metric.key === 'apWidth' && !(gevi.apWidthData?.length > 0)) return null;
+          // Optional panel: only render the subthreshold tile when the GEVI has
+          // that data, since most sensors don't report subthreshold slope.
+          // AP width always renders (with a "Not reported" empty state) so the
+          // panel is consistent across every GEVI.
+          if (metric.key === 'subthreshold' && !(gevi.subthresholdData?.length > 0) && gevi.displaySubthreshold == null) return null;
           return (
           <div key={metric.key} className="border rounded-lg p-2 md:p-3 bg-surface-low border-ink/10">
             <div className="flex items-center gap-1.5">
@@ -160,6 +165,10 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
                 ))}
               </div>
             )}
+            {/* AP width — empty state; the panel is always shown for consistency */}
+            {metric.key === 'apWidth' && !(gevi.apWidthData?.length > 0) && (
+              <div className="mt-2 text-xs text-ink/40">Not reported</div>
+            )}
             {/* Sensitivity */}
             {metric.key === 'sensitivity' && gevi.sensitivityData?.length > 0 && (
               <div className="mt-2 text-xs space-y-1">
@@ -194,6 +203,15 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
                     </div>
                   </div>
                 ))}
+              </div>
+            )}
+            {/* Subthreshold — F-V-derived estimate (shown only when no value is directly reported) */}
+            {metric.key === 'subthreshold' && !(gevi.subthresholdData?.length > 0) && gevi.subthresholdDerived && gevi.displaySubthreshold != null && (
+              <div className="mt-2 text-xs">
+                <div className="flex items-baseline gap-2">
+                  <span className="text-ink whitespace-nowrap"><span className="font-semibold">{gevi.displaySubthreshold}</span> %</span>
+                  <span className="text-[10px] text-ink/50 leading-snug">Estimated from d(ΔF/F)/dV (V=−70).</span>
+                </div>
               </div>
             )}
             {/* Dynamic Range */}

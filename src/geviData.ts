@@ -108,6 +108,36 @@ function preferOnePhoton<T extends { modality?: string }>(entries: T[]): T[] {
   return oneP.length > 0 ? oneP : entries;
 }
 
+// Estimate subthreshold sensitivity (|ΔF/F| per mV) from the local slope of the
+// F-V curve near rest (−70 mV) — a fallback used only when no value is directly
+// reported. Uses a central difference around the −70 mV node (or the straddling
+// secant when −70 isn't a data point). This is APPROXIMATE: the local F-V slope
+// only loosely tracks dedicated subthreshold measurements (often off ~2×), so
+// every caller must surface it as a derived estimate, never as a measured value.
+export function deriveSubthresholdFromFV(gevi: GEVI): number | null {
+  const c = gevi.voltage?.custom as { voltage?: number[]; deltaF?: number[] } | undefined;
+  if (!c?.voltage?.length || !c?.deltaF?.length || c.voltage.length !== c.deltaF.length) return null;
+  const pts = c.voltage.map((v, i) => ({ v, f: c.deltaF![i] })).sort((a, b) => a.v - b.v);
+  if (pts.length < 2 || pts[0].v > -70 || pts[pts.length - 1].v < -70) return null;
+  // node closest to −70
+  let k = 0;
+  for (let i = 1; i < pts.length; i++) if (Math.abs(pts[i].v + 70) < Math.abs(pts[k].v + 70)) k = i;
+  let lo: { v: number; f: number }, hi: { v: number; f: number };
+  if (Math.abs(pts[k].v + 70) < 1e-6) {
+    // −70 is a data point → central difference across its neighbors
+    lo = pts[k - 1] ?? pts[k];
+    hi = pts[k + 1] ?? pts[k];
+  } else {
+    // −70 falls between two points → secant across the straddling interval
+    let i = 0;
+    while (i < pts.length - 1 && !(pts[i].v <= -70 && pts[i + 1].v >= -70)) i++;
+    lo = pts[i]; hi = pts[i + 1];
+  }
+  if (hi.v === lo.v) return null;
+  const slope = Math.abs((hi.f - lo.f) / (hi.v - lo.v)); // %/mV
+  return slope > 0 ? slope : null;
+}
+
 // Compute raw derived values used for display + sorting in the scoreless UI.
 // No 0-100 score mapping — these are measured quantities.
 function computeDisplayValues(gevi: GEVI, bRelMap: Map<string, number>) {
@@ -121,7 +151,13 @@ function computeDisplayValues(gevi: GEVI, bRelMap: Map<string, number>) {
   const displayDynamicRange = median(drEntries);
 
   const subEntries = (gevi.subthresholdData ?? []).map(s => Math.abs(s.slope)).filter(v => v > 0);
-  const displaySubthreshold = median(subEntries);
+  let displaySubthreshold = median(subEntries);
+  // Fallback: if no value is directly reported, estimate from the F-V slope at rest.
+  let subthresholdDerived = false;
+  if (displaySubthreshold == null) {
+    const est = deriveSubthresholdFromFV(gevi);
+    if (est != null) { displaySubthreshold = parseFloat(est.toPrecision(2)); subthresholdDerived = true; }
+  }
 
   const sensEntries = preferOnePhoton(gevi.sensitivityData ?? []).map(d => Math.abs(d.deltaF)).filter(v => v > 0);
   const displaySensitivity = median(sensEntries);
@@ -141,7 +177,7 @@ function computeDisplayValues(gevi: GEVI, bRelMap: Map<string, number>) {
 
   const paperCount = gevi.researchPapers?.length ?? 0;
 
-  return { bRel, displayTauOn, displayTauOff, displayTauSum, displayDynamicRange, displaySubthreshold, displaySensitivity, displayApWidth, displayPhotostab, paperCount };
+  return { bRel, displayTauOn, displayTauOff, displayTauSum, displayDynamicRange, displaySubthreshold, subthresholdDerived, displaySensitivity, displayApWidth, displayPhotostab, paperCount };
 }
 
 // Load all GEVIs from modular files (synchronous, uses eager import)
@@ -293,8 +329,14 @@ export function getRawEntriesForGEVI(gevi: GEVI, key: DistributionAxisKey): numb
       return (gevi.kinetics ?? []).map(k => k.off).filter(v => v > 0);
     case 'dynamicRange':
       return (gevi.dynamicRangeData ?? []).map(d => Math.abs(d.deltaF)).filter(v => v > 0);
-    case 'subthreshold':
-      return (gevi.subthresholdData ?? []).map(s => Math.abs(s.slope)).filter(v => v > 0);
+    case 'subthreshold': {
+      const measured = (gevi.subthresholdData ?? []).map(s => Math.abs(s.slope)).filter(v => v > 0);
+      if (measured.length) return measured;
+      // Fallback to the F-V-derived estimate so the axis is populated for sensors
+      // without a directly reported subthreshold value (matches the list/detail).
+      const est = deriveSubthresholdFromFV(gevi);
+      return est != null ? [est] : [];
+    }
     case 'sensitivity':
       return (gevi.sensitivityData ?? []).map(d => Math.abs(d.deltaF)).filter(v => v > 0);
     case 'apWidth':

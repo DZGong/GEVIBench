@@ -467,6 +467,16 @@
       "proofread": false
     }
   ],
+  "apWidthData": [
+    {
+      "fwhm": 10.3,
+      "sample": "Rat, cultured cortical neurons, current-evoked APs, in vitro",
+      "source": "doi:10.64898/2026.05.27.728040",
+      "sourceFigure": "Fig. 1c",
+      "proofread": false,
+      "note": "Optical single-AP FWHM digitized from the averaged optical AP waveform in Fig. 1c (the yellow ΔF/F trace — average of n=7 cultured cortical neurons responding to current-evoked APs, plotted above the averaged electrical AP), calibrated to the panel's 20 ms scale bar and overlay-verified: ASAP7y ≈ 10.3 ms vs ASAP5 ≈ 6.8 ms in the same panel. The broad optical AP reflects ASAP7y's slow kinetics (τ_off ≈ 10.7 ms at 25°C). CAVEATS: the paper does not report this experiment's imaging frame rate, so samplingRate is omitted (rule 1j normally requires it) — but here the width is kinetics-dominated rather than frame-rate-limited, so it remains meaningful, though not strictly comparable to frame-rate-specified AP widths. Excitation modality and recording temperature for this panel are not explicitly stated (the ≈10 ms width is consistent with ~25°C kinetics)."
+    }
+  ],
   "brightnessData": [
     {
       "ratio": 1.28,

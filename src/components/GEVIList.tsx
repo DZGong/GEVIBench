@@ -479,7 +479,7 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={(e) => e.stopPropagation()}
-                        className="inline-flex items-center gap-1 whitespace-nowrap text-klein hover:underline mr-2 align-baseline"
+                        className="inline-flex items-center gap-1 whitespace-nowrap text-klein hover:underline mr-2 align-middle"
                         title={gevi.paper}
                       >
                         <ExternalLink className="w-3 h-3" />

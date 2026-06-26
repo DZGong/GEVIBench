@@ -496,6 +496,14 @@
       "sourceFigure": "Fig. S4E",
       "note": "Optical action-potential waveform width (full width at half maximum) of the rapid post-threshold optical spike, recorded by ULoVE random-access 2P microscopy (920 nm) at 7142.9 Hz (two patterns/cell) in layer-2/3 visual cortex pyramidal neurons of awake behaving mice. Main text: 'FWHM of the rapid optical spike varies from sub-millisecond to 2 ms.' Bar (mean) digitized from the Fig. S4E 'Spike FWHM' panel ≈1.3 ms; the 11 per-neuron dots span 0.69-2.15 ms (mean of dots 1.32 ms), n = 11. Mammalian in-vivo cortex (~37°C; exact recording temperature not stated numerically). Axis-tick calibration ±~0.05 ms.",
       "proofread": false
+    },
+    {
+      "fwhm": 6.8,
+      "sample": "Rat, cultured cortical neurons, current-evoked APs, in vitro",
+      "source": "doi:10.64898/2026.05.27.728040",
+      "sourceFigure": "Fig. 1c",
+      "proofread": false,
+      "note": "Cross-GEVI entry from the ASAP7y paper (primary subject ASAP7y). Optical single-AP FWHM digitized from the averaged optical AP waveform in Fig. 1c (the cyan ΔF/F trace — average of n=7 cultured cortical neurons, plotted above the averaged electrical AP), calibrated to the panel's 20 ms scale bar and overlay-verified ≈ 6.8 ms (vs ASAP7y ≈ 10.3 ms in the same panel). This is a DIFFERENT regime from the Neuron-2024 ULoVE entry above (in-vivo 2P rapid post-threshold optical spike, 1.3 ms): here it is the slower full averaged optical AP waveform in culture. CAVEATS: the paper does not report this experiment's frame rate (samplingRate omitted), modality, or temperature for this panel; the ≈7 ms width is kinetics-dominated, not frame-rate-limited."
     }
   ],
   "sensitivityData": [
