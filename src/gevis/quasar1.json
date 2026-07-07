@@ -12,6 +12,7 @@
   "paperUrl": "https://doi.org/10.1038/nmeth.3000",
   "description": "First-generation QuasAr with extremely fast response times.",
   "parentId": "arch",
+  "siblingId": "quasar2",
   "spectrum": {
     "type": "rhodopsin",
     "peakEx": 590,
@@ -369,28 +370,45 @@
     "custom": {
       "voltage": [
         -100,
+        -90,
         -80,
         -70,
+        -60,
         -50,
+        -40,
         -30,
+        -20,
+        -10,
         0,
+        10,
+        20,
         30,
+        40,
         50
       ],
       "deltaF": [
-        -10,
+        -11,
+        -7,
         -3,
         0,
-        6,
-        13,
+        2,
+        5,
+        8,
+        12,
+        15,
+        18,
+        20,
         22,
-        32,
-        38
+        25,
+        26,
+        30,
+        31
       ]
     },
     "source": "doi:10.1038/nmeth.3000",
     "sourceImage": "/fv-sources/quasar1.jpg",
     "sourceFigure": "Fig. 1c",
+    "note": "Digitized directly from the QuasAr1 (blue) fluorescence-vs-voltage trace in Hochbaum et al. 2014, Fig. 1c (HEK293, 640 nm excitation; the panel plots F in A.U. normalized to 1.0 at -100 mV for Arch/QuasAr1/QuasAr2). Converted to ΔF/F normalized to -70 mV = 0. The response is near-linear over -100 to +50 mV. This representative single trace gives a -70→+30 mV ΔF/F of ~26%, slightly below the n=5-cell mean of 32% ± 3% (Fig. 1c text) / 33% (Table S2) that dynamicRangeData records. Previous stored curve was a linear reconstruction scaled to hit 32%, not read from the figure.",
     "proofread": false
   },
   "kinetics": [
@@ -424,13 +442,26 @@
       "proofread": false
     }
   ],
+  "apWidthData": [
+    {
+      "fwhm": 2.6,
+      "samplingRate": 2000,
+      "sample": "Cultured rat hippocampal neurons, in vitro",
+      "modality": "1P",
+      "temperature": "23°C",
+      "source": "doi:10.1038/nmeth.3000",
+      "sourceFigure": "Fig. 1f",
+      "note": "Optical single-AP FWHM derived by digitizing the QuasAr1 optical waveform (blue) in Fig. 1f (acquired at 2-kHz frame rate, 23°C). Half-amplitude span (resting ≈ -57 mV to peak ≈ +38 mV, half-level ≈ -12 mV) measured at ~8.9-11.5 ms → FWHM ≈ 2.6 ms; trace + half-max span overlay-verified against the figure. The paper states QuasAr1 introduced no detectable broadening of the optically recorded AP relative to the simultaneous electrical trace (n=5); no absolute optical FWHM number is printed.",
+      "proofread": false
+    }
+  ],
   "brightnessData": [
     {
       "ratio": 15.2,
       "reference": "arch",
       "source": "doi:10.1038/nmeth.3000",
       "sourceFigure": "Table S2",
-      "note": "At 0.7 W/cm² (500 mW/cm²); 10.3× at high intensity (800 W/cm²)",
+      "note": "At low intensity (0.7 W/cm² column, Table S2); 10.3× at high intensity (800 W/cm²). Main text quotes 15-fold brighter than Arch at 500 mW/cm². Table values are normalized to Arch(WT)=1 at low intensity: QuasAr1/Arch(WT) = 15.2/1 (low) and 10.3/4.0 = 2.6× (high, matching the main-text \"2.5-fold\").",
       "proofread": false
     },
     {
@@ -438,7 +469,7 @@
       "reference": "arch",
       "source": "doi:10.1021/acschemneuro.0c00046",
       "sourceFigure": "Table 1",
-      "proofread": false
+      "proofread": true
     }
   ],
   "photostabilityData": [

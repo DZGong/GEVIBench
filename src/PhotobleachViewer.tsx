@@ -193,6 +193,47 @@ export function PhotobleachViewer({ photobleachData, geviName, companions }: Pho
   const primaryColor = '#dc2626'; // red — the VADER1 / red-GEVI bleach trace
 
   if (!points) {
+    // No digitized decay curve. If a t₇₅/t₅₀ landmark is stored anyway (e.g. derived
+    // from a single reported fraction-remaining value, with no curve to fabricate),
+    // show a compact metric card rather than the empty-state placeholder.
+    if (metricSec != null) {
+      const scaled = photobleachData?.modality === '1P' && photobleachData?.intensityMWmm2 != null
+        ? metricSec * (photobleachData.intensityMWmm2 / 100)
+        : null;
+      const scaledStr = scaled == null ? null : scaled < 10 ? `${scaled.toFixed(1)} s` : fmtTime(scaled);
+      const src = photobleachData?.source;
+      const doi = src?.startsWith('doi:') ? src.slice(4) : null;
+      const citationMap = getDoiCitationMap();
+      const srcLabel = doi ? (citationMap[doi] || src) : src;
+      const srcUrl = doi ? `https://doi.org/${doi}` : null;
+      return (
+        <div className="border rounded-lg p-4 bg-surface-low border-ink/10">
+          <div className="text-xs text-ink">
+            <span className="font-semibold text-klein">{metricLabel}{useHalfLife ? '' : '%'} ≈ {fmtTime(metricSec)}</span>
+            {extrapolated && <span className="ml-1 text-[10px] font-semibold text-amber-600">(extrapolated)</span>}
+            {photobleachData?.illumination && <span className="text-ink/70"> @ {photobleachData.illumination}</span>}
+            {photobleachData?.modality && (
+              <span className="ml-1 align-middle text-[9px] px-1 py-0.5 rounded bg-ink/10 text-ink/70 font-semibold">{photobleachData.modality}</span>
+            )}
+          </div>
+          {scaledStr && (
+            <div className="mt-0.5 text-[10px] text-ink/70">
+              Scaled to 100 mW/mm² (linear dose, 1P): <span className="font-semibold text-klein">{metricLabel}{useHalfLife ? '' : '%'} ≈ {scaledStr}</span>
+            </div>
+          )}
+          <div className="mt-1 text-[10px] text-ink/55 italic">Derived from a reported fraction-remaining value — no decay curve published.</div>
+          {src && (
+            <div className="mt-1 text-[10px] text-ink/50">
+              Source:{' '}
+              {srcUrl
+                ? <a href={srcUrl} target="_blank" rel="noopener noreferrer" className="hover:underline text-klein">{srcLabel}</a>
+                : <span>{srcLabel}</span>}
+              {photobleachData?.sourceFigure && <span> — {abbreviateFigure(photobleachData.sourceFigure)}</span>}
+            </div>
+          )}
+        </div>
+      );
+    }
     return (
       <div className="border rounded-lg p-4 bg-surface-low border-ink/10">
         <div className="text-xs text-ink">No photobleaching curve data available</div>

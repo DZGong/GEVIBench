@@ -567,6 +567,14 @@
       "sourceFigure": "Fig. S7B",
       "note": "Cepheid1b in HEK293T cells (room temperature, 1058 Hz frame rate). Fig. S7B is a dual-axis bar chart: depolarization (-70 to +30 mV) is read on the LEFT red axis (0-2 ms) and repolarization (+30 to -70 mV) on the RIGHT blue axis (0-3 ms). Pixel-calibrated read: depol t½ ≈ 1.88 ms (the Solaris paper, same lab, confirms depolarizing τ1/2 = 1.9 ± 0.1 ms) and repol t½ ≈ 3.46 ms (the repol bar extends above the right-axis '3' line). Converted to time constants via τ = t½/ln2 = 1.443·t½ → on 2.71 ms, off 4.99 ms. (A previous read of off=4.17 ms came from mis-applying a 1.5× left:right axis ratio; the true ratio is ~1.69×.)",
       "proofread": false
+    },
+    {
+      "on": 2.74,
+      "temperature": "25°C",
+      "source": "doi:10.1101/2024.02.02.578569",
+      "sourceFigure": "Main text",
+      "note": "Cross-measured in the Solaris paper (Yang et al. 2024, bioRxiv) as a comparator: Cepheid1b depolarizing-step response half-time τ1/2 = 1.9 ± 0.1 ms in HEK293T cells at room temperature under 561 nm wide-field (1P) illumination, camera frame rate 1058 Hz (n = 5 cells). Converted to a time constant via τ = t½/ln2 = 1.443·t½ → on 2.74 ms. Only the depolarizing (on) τ is reported for Cepheid1b in this paper (the 1.5 ± 0.2 ms value in the same sentence is Cepheid1s). Consistent with the origin-paper Fig. S7B depol read (2.71 ms).",
+      "proofread": false
     }
   ],
   "dynamicRangeData": [
@@ -587,6 +595,18 @@
       "source": "doi:10.1126/sciadv.adi4208",
       "sourceFigure": "Fig. 1C",
       "note": "Cepheid1b -12.1 ± 0.8% per AP in cultured rat hippocampal neurons (current clamp, widefield 1P imaging at 484 Hz)",
+      "proofread": false
+    }
+  ],
+  "apWidthData": [
+    {
+      "fwhm": 7.0,
+      "samplingRate": 484,
+      "sample": "cultured rat hippocampal neurons, in vitro",
+      "modality": "1P",
+      "source": "doi:10.1126/sciadv.adi4208",
+      "sourceFigure": "Fig. 1D",
+      "note": "Optical single-AP FWHM derived by digitizing the averaged Cepheid1b optical fluorescence waveform in Fig. 1D (maroon ΔF/F trace vs time; 20-ms scale bar). Re-digitized at 600 dpi (2026-07-04, targeted re-check): scale bar = 91.6 px sub-pixel = 20 ms (4.578 px/ms); maroon center-line traced column-by-column; baseline = 418.5 px (flat pre-spike segment), peak = 252 px (max upward deflection, not clipped), half-max level y = 335.2 px; sub-pixel half-max crossings at rise x=296.6 and fall x=328.4 → span 31.8 px → FWHM 6.95 ms → 7.0 ms (±0.5 ms digitization uncertainty). This supersedes prior reads of 8.4 ms (low-res PMC JPEG, lower-edge crossing) and 7.8 ms (a mutually-inconsistent 300-dpi read requiring scale bar 42-43 px AND FWHM 16.5-17.1 px simultaneously); the 600-dpi scale bar is 45.8 px/300 dpi and the half-max width is 15.9 px/300 dpi, both consistent, giving 7.0 ms. Physically consistent with τoff ~5 ms. Recorded in current-clamp cultured hippocampal neurons under widefield 1P imaging at 484 Hz (Methods); the frame period (~2.1 ms) is well below the width, so the value is kinetics-dominated. No numeric FWHM is stated in the paper; this is plot-derived.",
       "proofread": false
     }
   ],

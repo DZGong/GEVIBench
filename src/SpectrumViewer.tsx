@@ -29,6 +29,12 @@ interface CustomSpectrum {
 export interface SpectrumData {
   config?: SpectrumConfig;
   custom?: CustomSpectrum;
+  // Inline GEVI format (`spectrum` in the JSON): the config fields may appear at the
+  // top level instead of nested under `config`. See the format note in SpectrumViewer.
+  type?: SpectrumConfig['type'];
+  peakEx?: number;
+  peakEm?: number;
+  name?: string;
   // Optional provenance — rendered as a small caption + note tooltip beneath the panel
   source?: string;
   sourceFigure?: string;

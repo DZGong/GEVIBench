@@ -514,8 +514,8 @@
       "sign": "negative",
       "modality": "2P",
       "source": "doi:10.1101/2025.05.30.657123",
-      "note": "ΔF/F change of approximately 18% in ElectraOFF-expressing CHO cells under scanless two-photon excitation at 940 nm (0.6 mW/μm²) for a -60 → +40 mV (100 mV) voltage-clamp step",
-      "sourceFigure": "Fig. 3b",
+      "note": "ΔF/F change of approximately 18% in ElectraOFF-expressing CHO cells under scanless holographic two-photon excitation at 940 nm (0.60 mW/μm²) for a -60 → +40 mV (100 mV) voltage-clamp step (Fig. 3c quantifies ΔF/F; the traces are in Fig. 3b). Value stated in the main text.",
+      "sourceFigure": "Fig. 3c",
       "proofread": false
     }
   ],
@@ -526,6 +526,19 @@
       "source": "doi:10.1101/2025.05.30.657123",
       "note": "Peak absolute ΔF/F₀ per 1-AP electrical stimulation in primary hippocampal neurons under 1P wide-field illumination (n=36 cells)",
       "sourceFigure": "Fig. 1k",
+      "proofread": false
+    }
+  ],
+  "apWidthData": [
+    {
+      "fwhm": 6.4,
+      "samplingRate": 1000,
+      "sample": "Mouse, primary hippocampal neurons, in vitro",
+      "modality": "1P",
+      "temperature": "22°C",
+      "source": "doi:10.1101/2025.05.30.657123",
+      "sourceFigure": "Fig. 1j",
+      "note": "Optical single-AP FWHM derived by digitizing the averaged ElectraOFF spike waveform (yellow/gold trace) in the right sub-panel of Fig. 1j (|ΔF/F₀| vs time). Trace identity confirmed against the Fig. 1j legend (pAce cyan, Ace-mNeon2 green, ElectraON orange, ElectraOFF yellow) and Fig. 3 caption ('ElectraON (orange) and ElectraOFF (yellow)'). Re-verified 2026-07-04 at a 400-dpi render of p.28: the 50-ms horizontal scale bar is a solid 91-px black run (x1260→1350, y≈3428) → 1.82 px/ms, and the vertical scale bar is 43 px = 10% |ΔF/F₀| (x≈1232, y3363→3405). Yellow gold trace (mask R>185,G>150,B<150) has a flat pre/post-spike baseline y≈3371 and peak y≈3315 (amplitude ~55 px ≈ 12.9% ΔF/F, consistent with the paper's ~14.5% per-AP peak in Fig. 1k); half-max crossings (upper-envelope trace) at x≈1719.3 and x≈1730.9 → FWHM 11.6 px = 6.4 ms (a center-of-mass trace gives 10.7 px = 5.9 ms; value ≈6.1 ± 0.3 ms). Overlay-verified (baseline/half-max/FWHM markers straddle the narrow peak). Supersedes: prior sweep's 7.5 ms (over-estimated 126-px/50-ms calibration) and a QA re-read's ~5.0 ms (101-px/50-ms) — the actual solid scale bar is 91 px. 1P wide-field, 1 kHz imaging; Methods: 1-AP field stimulation in DIV12-18 primary hippocampal neurons at room temperature, 22°C. Value reflects sensor kinetics + AP shape + the 1-ms frame period. Fig. 1j also plots pAce, ElectraON and Ace-mNeon2 averaged waveforms (cross-GEVI).",
       "proofread": false
     }
   ],
@@ -541,20 +554,22 @@
   ],
   "photostabilityData": [
     {
-      "brightnessRemaining": 95,
+      "brightnessRemaining": 71,
       "illumination": "5 mW/mm²",
       "duration": "30 min",
+      "modality": "1P",
       "source": "doi:10.1101/2025.05.30.657123",
-      "note": "Normalized baseline fluorescence after 30-min continuous illumination in cultured primary hippocampal neurons",
+      "note": "Normalized baseline fluorescence after 30-min continuous 1P wide-field illumination at 5 mW/mm² in cultured primary hippocampal neurons — read off the gold ElectraOFF curve in Fig. S4h, which falls from 1.0 to ~0.71 at 30 min (companion curves: ElectraON ~1.0/orange, pAce ~0.44/cyan, Ace-mNeon2 ~0.18/green). Corrected 2026-07-03: the prior stored value (95%) did not match the S4h curve endpoint (~71%). Consistent with the re-digitized photobleach[] curve (t₇₅% ≈ 22.9 min).",
       "sourceFigure": "Fig. S4h",
       "proofread": false
     },
     {
-      "brightnessRemaining": 85,
+      "brightnessRemaining": 92,
       "illumination": "10 mW/mm²",
-      "duration": "~42 min",
+      "duration": "40 min",
+      "modality": "1P",
       "source": "doi:10.1101/2025.05.30.657123",
-      "note": "Retained high basal fluorescence (~85%, minimal bleaching) under continuous 10 mW/mm² wide-field illumination in HeLa cells, by contrast with pAce and Ace-mNeon2 which lost 80% and 83% respectively over the same window (Fig. 1h)",
+      "note": "Retained high basal fluorescence (minimal bleaching) under continuous 10 mW/mm² 1P wide-field illumination in HeLa cells, by contrast with pAce and Ace-mNeon2 which lost 80% and 83% (dropping to ~20%) over the same ~2400 s (~40 min) window (Fig. 1h). Corrected 2026-07-03: the gold ElectraOFF (Ace-N3-mBJ(3M)) curve rises to ~104% by ~500 s then declines to ~92% at 2400 s; the prior stored 85% underread the endpoint (ElectraON/orange stays ~102%).",
       "sourceFigure": "Fig. 1h",
       "proofread": false
     }
@@ -564,21 +579,35 @@
       "modality": "1P",
       "illumination": "5 mW/mm²",
       "intensityMWmm2": 5,
-      "t75": 1533,
+      "t75": 1372,
       "fit": {
         "model": "stretched-exponential",
-        "tau": 7219.2,
-        "b": 0.804,
-        "r2": 0.962
+        "tau": 6518.9,
+        "b": 0.800,
+        "r2": 0.967
       },
       "custom": {
         "time": [0, 60, 120, 180, 240, 300, 360, 420, 480, 540, 600, 660, 720, 780, 840, 900, 960, 1020, 1080, 1140, 1200, 1260, 1320, 1380, 1440, 1500, 1560, 1620, 1680, 1740],
-        "fluorescence": [1.0, 0.998, 0.981, 0.973, 0.964, 0.954, 0.942, 0.923, 0.899, 0.875, 0.86, 0.844, 0.839, 0.83, 0.815, 0.81, 0.806, 0.797, 0.797, 0.783, 0.782, 0.782, 0.771, 0.765, 0.763, 0.761, 0.752, 0.752, 0.749, 0.742]
+        "fluorescence": [1.0, 0.992, 0.979, 0.967, 0.954, 0.945, 0.933, 0.914, 0.888, 0.862, 0.843, 0.829, 0.824, 0.817, 0.804, 0.796, 0.79, 0.784, 0.778, 0.766, 0.766, 0.764, 0.756, 0.753, 0.748, 0.741, 0.737, 0.734, 0.731, 0.727]
       },
       "source": "doi:10.1101/2025.05.30.657123",
       "sourceImage": "/photobleach-sources/electraoff.jpg",
       "sourceFigure": "Fig. S4h",
-      "note": "Photobleaching of the fluorescence baseline over a 30-min continuous 1P recording at 5 mW/mm² in cultured primary hippocampal neurons (Fig. S4h, the gold ElectraOFF curve — sensor colors confirmed against the labeled bars in Fig. S4f/g: pAce cyan, ElectraON orange, Ace-mNeon2 green, ElectraOFF gold). Stretched exponential F = exp(−(t/7219)^0.804), t₇₅% ≈ 1533 s (25.6 min), inside the 1800 s window. Companion curves (same figure): ElectraON, pAce, Ace-mNeon2.",
+      "note": "Photobleaching of the fluorescence baseline over a 30-min continuous 1P recording at 5 mW/mm² in cultured primary hippocampal neurons (Fig. S4h, the gold ElectraOFF curve — sensor colors confirmed against the labeled bars in Fig. S4f/g: pAce cyan, ElectraON orange, Ace-mNeon2 green, ElectraOFF gold). Re-digitized 2026-07-03 (HSV gold-mask column-scan of a 400-dpi render of Fig. S4h, calibration 0/30 min → x, 1.1/0.1 → y; overlay-verified against the figure): the prior curve ran ~0.02–0.03 too high through the 5–25 min region and put the 0.75 crossing near 26 min, whereas the gold curve crosses 0.75 at ~21 min. Stretched exponential F = exp(−(t/6519)^0.800), r²=0.97; t₇₅% ≈ 1372 s (22.9 min), inside the 1800 s window (digitized points cross 0.75 at ~1420 s). Companion curves (same figure): ElectraON, pAce, Ace-mNeon2.",
+      "proofread": false
+    },
+    {
+      "modality": "1P",
+      "illumination": "10 mW/mm²",
+      "intensityMWmm2": 10,
+      "custom": {
+        "time": [0, 120, 240, 360, 480, 600, 720, 840, 960, 1080, 1200, 1320, 1440, 1560, 1680, 1800, 1920, 2040, 2160, 2280, 2400],
+        "fluorescence": [1.0, 1.021, 1.022, 1.024, 1.019, 1.014, 1.009, 1.01, 1.012, 1.001, 0.992, 0.995, 0.987, 0.98, 0.979, 0.972, 0.957, 0.945, 0.949, 0.945, 0.951]
+      },
+      "source": "doi:10.1101/2025.05.30.657123",
+      "sourceImage": "/photobleach-sources/electraoff-fig1h.jpg",
+      "sourceFigure": "Fig. 1h",
+      "note": "Photobleaching of basal fluorescence over ~2400 s (~40 min) continuous 1P wide-field illumination at 10 mW/mm² in HeLa cells (Fig. 1h, the gold 'Ace-N3-mBJ(3M) (ElectraOFF)' curve; companions: ElectraON dark-orange ~1.02 stable, pAce cyan and Ace-mNeon2 green both bleaching to ~0.18–0.20). Digitized 2026-07-04 (HSV gold-mask column-scan of a 400-dpi render of p.28, axis calibration y 0/100 → px2728/2434, x 0/2500 s → px2409/2881; legend-verified gold RGB≈240,210,101 vs ElectraON orange≈255,169,66). The gold curve rises to ~1.024 by ~360 s (an early trafficking/maturation-related rise seen for StayGold-derived FPs) then declines to ~0.95 at 2400 s — it never reaches 75% of initial within the window, so no model-free t₇₅% or bleach fit is reported (analogous to the near-flat ElectraON curve). Added to enable cross-overlay with the Fig. 1h family per the ElectraON page. The endpoint (~92–95%) is also captured in photostabilityData (Fig. 1h). Cross-measured in the same ElectraON/ElectraOFF paper.",
       "proofread": false
     }
   ],

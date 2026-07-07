@@ -1,14 +1,7 @@
 import { useMemo, useState, useRef, useCallback, useEffect } from 'react';
 import { ChevronDown } from 'lucide-react';
-import { getAllGEVIs } from '../geviData';
+import { getAllGEVIs, fmtDuration } from '../geviData';
 import { getTreeNodeColor } from '../utils';
-import {
-  normalizePhotostability,
-  parseDurationMinutes,
-  parseIlluminationMwPerMm2,
-  STANDARD_PHOTOSTABILITY_DURATION_MINUTES,
-  STANDARD_PHOTOSTABILITY_POWER_MW_PER_MM2,
-} from '../photostability';
 import type { GEVI } from '../types';
 
 // ── Types ─────────────────────────────────────────────────────────────────────
@@ -47,7 +40,7 @@ const AXES: Record<AxisKey, AxisConfig> = {
   tauOff:         { labelParts: [{ text: 'τ' }, { text: 'off', sub: true }, { text: ' (ms)' }],   labelText: 'τ_off (ms)',       defaultLog: true,  fmt: tauFmt },
   dynamicRange:   { labelParts: [{ text: 'ΔF/F per 100mV' }],                                     labelText: 'ΔF/F per 100mV',   defaultLog: false, fmt: v => Math.round(v) + '%' },
   sensitivity:    { labelParts: [{ text: 'ΔF/F per AP' }],                                        labelText: 'ΔF/F per AP',      defaultLog: false, fmt: v => parseFloat(v.toPrecision(2)).toString() + '%' },
-  photostability: { labelParts: [{ text: 'F' }, { text: 'remain', sub: true }, { text: '%' }],    labelText: 'F_remain%',        defaultLog: false, fmt: v => Math.round(v) + '%' },
+  photostability: { labelParts: [{ text: 't' }, { text: '75%', sub: true }, { text: ' @100mW (s)' }], labelText: 't₇₅% @100mW (s)',  defaultLog: true,  fmt: fmtDuration },
   year:           { labelParts: [{ text: 'Year' }],                                               labelText: 'Year',             defaultLog: false, fmt: v => Math.round(v).toString() },
 };
 
@@ -147,24 +140,9 @@ function getRawValue(gevi: GEVI, axis: AxisKey): number | null {
       if (!gevi.sensitivityData?.length) return null;
       return Math.max(...gevi.sensitivityData.map(d => Math.abs(d.deltaF)));
     }
-    case 'photostability': {
-      if (gevi.photostabilityData === 'bioluminescent') return 100;
-      if (!Array.isArray(gevi.photostabilityData) || !gevi.photostabilityData.length) return null;
-      const parsed = gevi.photostabilityData.map(e => {
-        const minutes = parseDurationMinutes(e.duration);
-        const power = parseIlluminationMwPerMm2(e.illumination);
-        const value = normalizePhotostability(e);
-        return { value, minutes, power };
-      }).filter((p): p is { value: number; minutes: number; power: number } =>
-        p.value !== null && p.minutes !== null && p.power !== null
-      );
-      if (!parsed.length) return null;
-      parsed.sort((a, b) =>
-        Math.abs(a.minutes - STANDARD_PHOTOSTABILITY_DURATION_MINUTES) - Math.abs(b.minutes - STANDARD_PHOTOSTABILITY_DURATION_MINUTES) ||
-        Math.abs(a.power - STANDARD_PHOTOSTABILITY_POWER_MW_PER_MM2) - Math.abs(b.power - STANDARD_PHOTOSTABILITY_POWER_MW_PER_MM2)
-      );
-      return parsed[0].value;
-    }
+    case 'photostability':
+      // 1P t₇₅ scaled to 100 mW/mm² (seconds); 2P/power-only excluded (see geviData).
+      return gevi.displayT75 != null && gevi.displayT75 > 0 ? gevi.displayT75 : null;
     case 'year':
       return gevi.year != null ? gevi.year : null;
     default:

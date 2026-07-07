@@ -371,22 +371,22 @@
         40
       ],
       "deltaF": [
-        -10,
-        -7,
+        -5,
+        -5,
         -3,
         0,
-        3,
-        13,
-        24,
-        31,
-        35,
-        38
+        2,
+        16,
+        26,
+        33,
+        36,
+        37
       ]
     },
     "source": "doi:10.1038/nmeth.1235",
     "sourceImage": "/fv-sources/mermaid.jpg",
     "sourceFigure": "Fig. 1e",
-    "note": "RATIOMETRIC F-V: y-axis is ΔR/R (mKOκ/mUKG emission ratio), not ΔF/F. Data tracks the BLUE Xenopus-oocyte (19°C) curve in Fig. 1e (the paper's canonical ~40%/100 mV oocyte curve), normalized to −70 mV = 0; the red Neuro2A 33°C curve plateaus lower (~29%). Positive-going, Vmid −35.8 mV, single-Boltzmann fit.",
+    "note": "RATIOMETRIC F-V: y-axis is ΔR/R (mKOκ/mUKG emission ratio), not ΔF/F. Data tracks the BLUE Xenopus-oocyte (19°C) curve in Fig. 1e (the paper's canonical ~40%/100 mV oocyte curve), normalized to −70 mV = 0; the red Neuro2A 33°C curve plateaus lower (~29%). Positive-going, Vmid −35.8 mV, single-Boltzmann fit. Re-digitized 2026-07 from the stored sourceImage (green-mask trace of the blue curve, overlay-verified): the prior hyperpolarized tail was too steep (−120 −10→−5, −100 −7→−5) and the mid-range slightly low (−40 13→16, 0 31→33). The −70→+30 mV chord off this curve is ≈+36%, consistent with the paper's explicit ~40%/100 mV headline.",
     "proofread": false
   },
   "kinetics": [
@@ -396,7 +396,7 @@
       "temperature": "33°C",
       "source": "doi:10.1038/nmeth.1235",
       "sourceFigure": "Fig. 1f",
-      "note": "Neuro2A at 33°C. τ_on stored = the FAST component of a genuinely bi-exponential 'on' response: Fig. 1f plots τ_on(fast) (~8 ms) AND τ_on(slow) (~100–256 ms) separately; the main text notes a fast (7.3–17.4 ms) followed by a slow (98–638 ms) component at +40 mV/19°C. Component amplitudes are NOT reported anywhere, so an amplitude-weighted mean cannot be computed without fabrication — fast component retained per the no-fabrication rule (true τ_on is slower). τ_off is genuinely single-exponential per the paper (≈15 ms, red τ_off curve in Fig. 1f). Text: 'time constants for both activation and deactivation were 5–20 ms at 33°C.'",
+      "note": "Neuro2A at 33°C — the RED curves in Fig. 1f (blue = Xenopus oocyte 19°C). At 33°C the paper reports a SINGLE fast τ_on and a single τ_off (red τ_on ~8 ms, red τ_off ~10–16 ms across voltage; main text: 'time constants for both activation and deactivation were 5–20 ms at 33°C'). No slow on-component is resolved/plotted at 33°C, so 8/15 are single-component reads, not a fast-component-of-a-biexp truncation. The fast+slow decomposition (fast 7.3–17.4 ms + slow 98–638 ms; Suppl. Fig. 6) is the 19°C OOCYTE data (blue τ_on(fast)/τ_on(slow) in Fig. 1f), a different temperature/prep — component amplitudes for that biexp are not reported. Re-verified 2026-07 by reading the log2 y-axis (4/8/16/…/512 ms) of Fig. 1f: the flat blue ~128-ms curve is the oocyte τ_off, the bottom red cluster is the 33°C on/off.",
       "proofread": false
     },
     {
@@ -417,6 +417,15 @@
       "source": "doi:10.1038/nmeth.1235",
       "sourceFigure": "Fig. 1e",
       "note": "RATIOMETRIC sensor: this is ΔR/R (mKOκ/mUKG emission-ratio change), not ΔF/F. Paper headline (abstract + main text): '~40% emission ratio increase per 100 mV' in Xenopus oocytes at 19°C (blue F-V curve, Fig. 1e), Vmid −35.8 mV. The −70→+30 mV (100-mV) chord read off the blue oocyte curve is ~36–37%; the Neuro2A 33°C curve (red) plateaus lower (~29%). 40 retained as the paper's explicit per-100-mV value. Widefield epifluorescence (oocyte two-electrode voltage clamp) → 1P. Steady-state (Boltzmann-fit F-V).",
+      "proofread": false
+    },
+    {
+      "deltaF": 12.9,
+      "sign": "positive",
+      "modality": "1P",
+      "source": "doi:10.1371/journal.pone.0004555",
+      "sourceFigure": "Table 1",
+      "note": "RATIOMETRIC ΔR/R (mKOκ/mUKG emission ratio), cross-measured for Mermaid by Mutoh et al. 2009 (the VSFP2.3 comparison paper, 'Spectrally-Resolved Response Properties of the Three Most Advanced FRET Based Fluorescent Protein Voltage Probes'), Table 1. Voltage-clamped PC12 cells, spectral CCD experiment: emission spectra recorded during a 1200-ms +40 mV step from a holding potential of −70 mV (=110-mV span; the paired −100 mV hyperpolarizing step is the other arm), 35°C, n=5: donor mUKG (500 nm) −6.8 ± 2.7%, acceptor mKOκ (558 nm) +5.1 ± 1.4%, ΔR/R 12.9 ± 4.8% (values read directly from the rendered Table 1 page — pdftotext collapses the leading minus sign onto the number, e.g. it renders the donor as '26.8' when the figure clearly shows −6.8). Note the separate two-photodiode Fig. 3 experiment used a +60 mV step from −70 mV (=130-mV span) and reported different single-channel values (mUKG 25.5%, mKOκ 5.9%) — those are NOT the Table 1 numbers. The 12.9% here is smaller than Tsutsui 2008's Boltzmann-fit ~40%/100-mV oocyte headline (19°C): this is a real +40 mV step chord at 35°C (physiological temperature, PC12), not the per-100-mV normalized deep-depolarization oocyte value. Widefield epifluorescence → 1P.",
       "proofread": false
     }
   ],
@@ -447,10 +456,72 @@
       "duration": "2.5 min",
       "source": "doi:10.1038/nmeth.1235",
       "sourceFigure": "Fig. S2a",
-      "note": "Photostability of the DONOR mUKG (not assembled Mermaid), continuous arc-lamp cyan excitation (455DF30) at 1.23 W/cm² = 12.3 mW/mm² (stated in Methods), Supplementary Fig. 2a: mUKG normalized fluorescence ≈0.2 (20% remaining) at ~150 s (2.5 min). Illumination CORRECTED 4.08→12.3 mW/mm² — the prior 4.08 value was unsourced and did not match the paper; 1.23 W/cm² is the explicitly stated cyan-FP excitation intensity (the orange-red FPs used 550DF30 at a different intensity). Reflects isolated-donor mUKG bleaching, not the assembled FRET ratio.",
+      "note": "Photostability of the DONOR mUKG (not assembled Mermaid), continuous arc-lamp cyan excitation (455DF30) at 1.23 W/cm² = 12.3 mW/mm² (stated in Methods), Supplementary Fig. 2a: mUKG normalized fluorescence ≈0.28 (re-digitized) at 150 s (2.5 min). Illumination CORRECTED 4.08→12.3 mW/mm² — the prior 4.08 value was unsourced and did not match the paper; 1.23 W/cm² is the explicitly stated cyan-FP excitation intensity (the orange-red FPs used 550DF30 at a different intensity). Reflects isolated-donor mUKG bleaching, not the assembled FRET ratio. (2026-07 re-digitization of the mUKG curve reads ~0.28 at 150 s / ~0.20 at ~185 s; brightnessRemaining left at 20 as a ~2.5-min figure, but see the additive `photobleach` entry for the model-free curve.)",
       "proofread": false
     }
   ],
+  "photobleach": [
+    {
+      "custom": {
+        "time": [
+          1,
+          15,
+          30,
+          44,
+          61,
+          90,
+          119,
+          150,
+          199,
+          251,
+          300,
+          351,
+          400,
+          449,
+          500,
+          529
+        ],
+        "fluorescence": [
+          1.0,
+          0.907,
+          0.786,
+          0.689,
+          0.588,
+          0.461,
+          0.366,
+          0.288,
+          0.206,
+          0.148,
+          0.113,
+          0.088,
+          0.071,
+          0.06,
+          0.055,
+          0.05
+        ]
+      },
+      "t75": 33,
+      "fit": {
+        "model": "biexponential",
+        "a": 0.932,
+        "tau": 107.5,
+        "tau2": 1267.4
+      },
+      "intensityMWmm2": 12.3,
+      "modality": "1P",
+      "source": "doi:10.1038/nmeth.1235",
+      "sourceFigure": "Fig. S2a",
+      "sourceImage": "/photobleach-sources/mermaid-figs2a.jpg",
+      "note": "DONOR mUKG photobleach (not assembled Mermaid) under continuous arc-lamp cyan excitation (455DF30) at 1.23 W/cm² = 12.3 mW/mm² (Suppl. Methods), Supplementary Fig. 2a — the LOWER green curve (fast-bleaching monomeric UKG; the upper green curve is dimeric UKG). Digitized 2026-07 by green color-mask + lower-cluster selection, normalized to first frame = 1.0, biexponential fit (A=0.93 fast, τ₁=107.5 s, τ₂=1267 s; RMSE 0.006), overlay-verified against the figure. Model-free t₇₅% ≈ 33 s at 12.3 mW/mm² (dose-scales to ≈4 s at 100 mW/mm²). t₇₅% sits well inside the smooth monotonic decay (not a transient), so t75 (not t50) is used. Same isolated-donor caveat as photostabilityData: this is mUKG alone, not the assembled FRET sensor.",
+      "proofread": false
+    }
+  ],
+  "addgene": {
+    "id": "53617",
+    "url": "https://www.addgene.org/53617/",
+    "note": "Addgene #53617 is 'Chicken Mermaid S188' (deposited by V. Pieribone) — a chicken-codon-optimized derivative of the canonical Mermaid (Tsutsui et al. 2008), which does not appear to have its own Addgene deposit. Added as the closest available plasmid for this sensor; flagged as a variant, not the exact 2008 construct.",
+    "proofread": false
+  },
   "researchPapers": [
     {
       "title": "Improving membrane voltage measurements using FRET with new fluorescent proteins",

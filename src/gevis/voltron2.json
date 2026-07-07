@@ -867,6 +867,41 @@
       "proofread": false
     }
   ],
+  "apWidthData": [
+    {
+      "fwhm": 4.0,
+      "samplingRate": 985,
+      "sample": "Cultured rat hippocampal neurons, uM Workstation whole-cell current clamp, single evoked AP (2 nA, 2 ms pulse)",
+      "modality": "1P",
+      "temperature": "23°C",
+      "source": "doi:10.1016/j.neuron.2023.03.009",
+      "sourceFigure": "Fig. 2F",
+      "note": "Optical single-AP FWHM ≈ 4.0 ms, DERIVED by digitizing the Voltron2525 (red) ΔF/F-vs-time fluorescence waveform in Fig. 2F (the bottom-right optical trace; representative single evoked AP, current clamp) — Voltron2525 is the origin paper's primary subject. Time axis 0–100 ms (2.59 px/ms); baseline from the flat pre-spike segment, peak = max negative deflection (≈ −7.6% here, followed by a positive post-spike overshoot), FWHM = the span where the trace exceeds the half-baseline-to-peak level (HSV-traced, overlay-verified). Imaged on the uM Workstation at its standard 985 Hz frame rate (Methods; the separate Fig. 2D kinetics panel used 3.2 kHz). This OPTICAL FWHM convolves the sensor's ~1–4 ms response kinetics and is much broader than the paper's ELECTRICAL patch-clamp AP half-width (1.6 ± 0.1 ms for Voltron2525). Representative single trace (n=1 shown), so the value is approximate; the Voltron2525 (4.0 ms) vs Voltron525 (5.8 ms) optical-FWHM difference reflects single-trace variability rather than a robust kinetic difference (the paper reports similar kinetics and near-identical electrical AP half-widths, 1.6 vs 1.5 ms).",
+      "proofread": false
+    },
+    {
+      "fwhm": 7.0,
+      "samplingRate": 484,
+      "sample": "Rat, hippocampal neurons, in vitro",
+      "modality": "1P",
+      "temperature": "room temperature",
+      "dye": "JF585",
+      "source": "doi:10.1101/2024.02.02.578569",
+      "sourceFigure": "Fig. 2B",
+      "note": "Optical single-AP FWHM ≈ 7 ms for Voltron2585 (JF585), DERIVED by digitizing the rightmost (dark-red, −12.3 ± 0.7%, n=7) averaged optical waveform in Fig. 2B of the Solaris paper, where Voltron2585 was co-plotted as a comparator to the Solaris dye series under matched conditions (cultured rat hippocampal neurons, current-injected single APs, 1P widefield 594 nm, 484 Hz camera frame rate). Calibration: the panel's 20 ms time scale bar spans ≈32 px at 400 dpi (1.6 px/ms), and each optical sub-panel is ≈270 px ≈ 169 ms wide; the dark-red spike half-max span is ≈11–12 px → ≈7 ms. The paper reports NO temperature for the Fig. 2B neuron recordings (Methods say only 'room temperature'), so temperature is 'room temperature', not a specific value. This OPTICAL FWHM is broader than the paper's HEK293T voltage-clamp step half-time (τ½ = 2.1 ± 0.1 ms, Fig. 1, a DIFFERENT experiment) — that τ½ does NOT corroborate this optical AP FWHM and should not be conflated. Reliability is limited: at 484 Hz (2.07 ms/frame) only ~3–5 samples span this sharp spike, so ±2 ms uncertainty. Measured in the Solaris paper (Yang et al. 2024), not the origin Neuron 2023 paper. (History: a prior sweep stored 2.2 ms using an ~8×-too-large scale-bar calibration; independent re-digitization at the verified 1.6 px/ms calibration gives ~7 ms.)",
+      "proofread": false
+    },
+    {
+      "fwhm": 0.85,
+      "sample": "Mouse, cerebellar granular-layer Golgi/glycinergic interneurons, in vivo, awake, Voltron2-ST552 (JF552)",
+      "modality": "2P",
+      "dye": "JF552",
+      "source": "doi:10.1101/2024.11.15.623698",
+      "sourceFigure": "Fig. S9",
+      "note": "Optical spike FWHM ≈ 0.85 ms (red bar, n = 11) for Voltron2-ST552 (JF552-HaloTag), read off the 'FWHM (ms)' bar panel in Fig. S9d of the 2Photron paper (Villette et al. 2024), where Voltron2-ST552 was cross-measured as a comparator to 2Photron-ST552 and JEDI-2P-Kv. Two-photon ULoVE point-scanning at >3.5 kHz in awake-mouse cerebellar granular-layer interneurons in vivo. Sub-millisecond — below the 1–20 ms optical-FWHM range typical of 1P widefield traces — because the ultrafast >3.5 kHz 2P sampling resolves the true membrane spike far better than 484–985 Hz 1P imaging (see entries above). Cross-measured in 2Photron's (2photron) paper, not the origin Neuron 2023 paper.",
+      "proofread": false
+    }
+  ],
   "brightnessData": [
     {
       "ratio": 0.65,
@@ -911,6 +946,27 @@
     "proofread": false
   },
   "photobleach": [
+    {
+      "modality": "1P",
+      "illumination": "14.7 mW/mm²",
+      "intensityMWmm2": 14.7,
+      "t75": 307,
+      "fit": {
+        "model": "stretched-exponential",
+        "tau": 1156.3,
+        "b": 0.939,
+        "r2": 0.9995
+      },
+      "custom": {
+        "time": [0, 15, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180, 195, 210, 225, 240, 255, 270, 285, 300, 315, 330, 345, 360, 375, 390, 405, 420, 435, 450, 465, 480, 495, 510, 525, 540, 555, 570, 585, 600],
+        "fluorescence": [1.0, 0.988, 0.973, 0.958, 0.944, 0.929, 0.916, 0.901, 0.889, 0.878, 0.865, 0.852, 0.839, 0.827, 0.817, 0.804, 0.795, 0.785, 0.775, 0.764, 0.754, 0.744, 0.733, 0.723, 0.714, 0.704, 0.695, 0.687, 0.676, 0.667, 0.659, 0.651, 0.644, 0.636, 0.628, 0.622, 0.615, 0.608, 0.602, 0.596, 0.59]
+      },
+      "source": "doi:10.1016/j.neuron.2023.03.009",
+      "sourceImage": "/photobleach-sources/voltron2-fig2i.jpg",
+      "sourceFigure": "Fig. 2I",
+      "note": "Origin-paper photobleaching curve for Voltron2525 (Voltron2 + JF525) in cultured neurons over 10 min at room temperature (23°C), digitized from the red curve in Fig. 2I (blue = Voltron525 co-plotted). Continuous 1P widefield imaging at 985 Hz through the JF525 filter cube (510/25 ex, 545/40 em, 525 dichroic) with a measured power of 14.7 mW/mm² in the imaging plane (Methods). Ends at F = 0.59 at 600 s, matching the paper's stated 41% ± 1% reduction over 10 min (→ 59% remaining). Fit to a stretched exponential F = exp(−(t/1156.3)^0.939), t₇₅% ≈ 307 s (well inside the 600 s window; interp of the digitized points gives 306 s). Companion curve: Voltron525 in the same figure.",
+      "proofread": false
+    },
     {
       "modality": "1P",
       "illumination": "50 mW/mm²",

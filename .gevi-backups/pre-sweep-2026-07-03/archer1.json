@@ -1,0 +1,228 @@
+{
+  "id": "archer1",
+  "name": "Archer1",
+  "year": 2014,
+  "date": "2014-09-15",
+  "category": "Opsin GEVI",
+  "tags": [
+    "Archaerhodopsin",
+    "Red",
+    "Positive-going"
+  ],
+  "paper": "Nature Communications 2014",
+  "paperUrl": "https://doi.org/10.1038/ncomms5894",
+  "description": "Archaerhodopsin variant functioning as both a voltage indicator and a light-activated neuronal silencer.",
+  "parentId": "arch",
+  "siblingId": "archer2",
+  "spectrum": {
+    "type": "rhodopsin",
+    "peakEx": 627,
+    "peakEm": 729,
+    "name": "Archer1",
+    "note": "Arch(D95E/T99C) rhodopsin reporter. Peaks from Nikolaev 2025 Table 1 (doi:10.1021/cbe.5c00069): absorption max 626 nm, excitation max 627 nm, emission max 729 nm, FQY 0.33% (values originate in Nikolaev 2024 doi:10.1021/acsphyschemau.3c00073 and McIsaac 2014, compiled in Nikolaev 2025 Table 1). CORRECTED 2026-07-02: ex/em/FQY were mis-attributed to 'Table 2' — they are in Table 1; Table 2 lists Archer1 only as λmax 625, FQY 0.3%, ε640 41100, molar brightness 12.3 (no ex/em). Also fixed the excitation note: imaging uses a 655 nm laser with a 650/13 nm excitation filter (not '630/13'). Previously stored ex 550 / em 687 were the Arch-WT values, not the red-shifted Archer1. No measured ex/em curve is published, so the panel shows the Gaussian fallback from these peaks.",
+    "proofread": false
+  },
+  "voltage": {
+    "type": "opsin",
+    "slope": 75,
+    "polarity": "positive",
+    "name": "Archer1",
+    "custom": {
+      "voltage": [
+        -100,
+        -70,
+        -50,
+        -25,
+        0,
+        25,
+        50
+      ],
+      "deltaF": [
+        -19,
+        0,
+        20,
+        42,
+        67,
+        84,
+        105
+      ]
+    },
+    "source": "doi:10.1038/ncomms5894",
+    "sourceImage": "/fv-sources/archer1.jpg",
+    "sourceFigure": "Fig. 1d",
+    "proofread": false,
+    "note": "Re-digitized from the red Archer1 line in Fig. 1d (a LINEAR ΔF/F-V fit over -100 to +50 mV), normalized to -70 mV = 0; gives ~85-88% ΔF/F per 100-mV step, matching the paper's stated 85%/100 mV. Replaces a fabricated curve of 16 evenly-spaced 10-mV points whose slope (~73%/100 mV) was too shallow and inconsistent with the 85% dynamic range."
+  },
+  "kinetics": [
+    {
+      "on": 2.5,
+      "off": 5.5,
+      "source": "doi:10.1016/j.celrep.2018.12.088",
+      "sourceFigure": "Fig. 1M/1N",
+      "note": "Digitized from the Archer1 bars in Bando 2019 Fig. 1M (rise-time constant τ_on) and Fig. 1N (decay-time constant τ_off): single-exponential fits to the optical response of a −70→+30 mV voltage-clamp step in cultured mouse neurons, 1-photon 640-nm laser, n=5 cells (means ± SEM). No numeric kinetics table exists in the paper (its only supplement is Figures S1–S7), so the values were read off the bar charts. LOW digitization confidence (±~1 ms): the Archer1, QuasAr2, and Ace2N bars all sit near the axis floor and were indistinguishable at this scale (rise ≈2–3 ms, decay ≈5–6 ms). Calibration was validated against the readable tall bars (ArcLight-Q239 60/67, ArcLight-MT 85/91, ASAP1 13/24, ASAP2f 25/31, ASAP2s 22/27 ms rise/decay). Recording temperature is NOT stated in the Methods (perfused ACSF chamber, no heater specified) — flagged as unreported rather than assumed. The Archon paper (Piatkevich 2018) does not provide a usable numeric Archer1 τ (its Supplementary Table 1 lists Archer1 on/off kinetics as 'No data available').",
+      "proofread": false
+    }
+  ],
+  "dynamicRangeData": [
+    {
+      "deltaF": 85,
+      "sign": "positive",
+      "modality": "1P",
+      "source": "doi:10.1038/ncomms5894",
+      "sourceFigure": "Fig. 1d",
+      "note": "85% ΔF/F per 100 mV step (stated in abstract; linear F-V fit in Fig. 1d, R²=0.98). 1P widefield, 655 nm laser (650/13 nm excitation filter).",
+      "proofread": false
+    }
+  ],
+  "sensitivityData": [
+    {
+      "deltaF": 33,
+      "modality": "1P",
+      "source": "doi:10.1038/ncomms5894",
+      "sourceFigure": "Fig. 3e",
+      "note": "ΔF/F per action potential in cultured neurons; the abstract states 25-40% per AP for Archer1.",
+      "proofread": false
+    }
+  ],
+  "brightnessData": [
+    {
+      "ratio": 1.0,
+      "reference": "quasar2",
+      "source": "doi:10.1021/acschemneuro.0c00046",
+      "sourceFigure": "Table 1",
+      "note": "Monakhov 2020 Table 1 footnote d: 'Experimentally measured brightness of Archer1 is approximately the same as brightness of QuasAr2' (both listed as 10 in the brightness column). CORRECTED 2026-07-02: previously stored as ratio 10 vs 'arch' — a misattribution. Table 1's brightness column is normalized to Arch(D95N) = 1 (footnote b), NOT Arch WT (the `arch` node), and there is no Arch(D95N) page to reference; the origin paper's real Arch-WT comparison (5×, Fig. 1a) is the separate entry below.",
+      "proofread": false
+    },
+    {
+      "ratio": 5,
+      "reference": "arch",
+      "source": "doi:10.1038/ncomms5894",
+      "sourceFigure": "Fig. 1a",
+      "note": "5x increased fluorescence over Arch WT (Fig. 1a)",
+      "proofread": false
+    },
+    {
+      "ratio": 0.00367,
+      "reference": "EGFP",
+      "source": "doi:10.1021/cbe.5c00069",
+      "sourceFigure": "Table 2",
+      "note": "Molar brightness = EC640 × FQY = 41100 × 0.003 (FQY 0.3%) = 123.3 M⁻¹cm⁻¹; EGFP reference brightness = 56000 × 0.60 = 33600 → 123.3/33600 ≈ 0.00367. NO 10× error: Table 2's tabulated 'molar brightness' column reads 12.3 for Archer1, but the table footnote DEFINES molar brightness = FQY × ε640 × 10⁻¹, i.e. (EC×QY)/10 (verified against the same table: QuasAr2 0.004×25700×0.1 = 10.3; WT 0.0001×2800×0.1 = 0.03). The standard EC×QY is therefore 123.3 (not 12.3), and FQY is genuinely 0.3% (consistent with Table 1's 0.33%), so the 0.00367 ratio stands.",
+      "proofread": false
+    }
+  ],
+  "addgene": {
+    "id": "60423",
+    "url": "https://www.addgene.org/60423/",
+    "proofread": false
+  },
+  "photobleach": [
+    {
+      "custom": {
+        "time": [
+          0.0,
+          15.0,
+          30.0,
+          60.0,
+          90.0,
+          120.0,
+          180.0,
+          240.0,
+          300.0,
+          400.0,
+          500.0,
+          600.0,
+          700.0,
+          800.0,
+          900.0
+        ],
+        "fluorescence": [
+          1.0,
+          0.974,
+          0.938,
+          0.886,
+          0.833,
+          0.781,
+          0.718,
+          0.677,
+          0.627,
+          0.593,
+          0.54,
+          0.505,
+          0.472,
+          0.442,
+          0.409
+        ]
+      },
+      "illumination": "2200 mW/mm²",
+      "t75": 150,
+      "fit": {
+        "model": "biexponential",
+        "a": 0.265,
+        "tau": 135.3,
+        "tau2": 1562.8
+      },
+      "modality": "1P",
+      "source": "doi:10.1038/s41589-018-0004-9",
+      "sourceFigure": "Fig. 2i",
+      "sourceImage": "/photobleach-sources/archer1-fig2i.jpg",
+      "note": "Black DASHED Archer1 curve, 637 nm 2200 mW/mm²; the fastest-bleaching red opsin here, ~41% at 900 s, t75≈150 s (t50≈615 s). Digitized as the lower black cluster (below the solid QuasAr2), partly occluded by the colored curves — lower reliability than the colored traces. Origin-paper photobleaching panel Fig. 2i, cultured mouse hippocampal neurons, continuous illumination. IMPORTANT: the five sensors in this panel were each imaged at a DIFFERENT intensity/wavelength (Ace2N-4aa-mNeon 13 mW/mm² 475 nm; QuasAr2 & Archer1 2200 mW/mm² 637 nm; Archon1 & Archon2 800 mW/mm² 637 nm), so the raw F/F0 cross-overlay (shared source+Fig. 2i) is NOT iso-condition — it reproduces exactly what the paper plotted. intensityMWmm2 is intentionally OMITTED (linear dose-scaling across a 13-2200 mW/mm² spread would give misleading values), so each t75 stands at its native intensity.",
+      "proofread": false
+    }
+  ],
+  "researchPapers": [
+    {
+      "title": "Archaerhodopsin variants with enhanced voltage-sensitive fluorescence in mammalian and Caenorhabditis elegans neurons",
+      "authors": "Flytzanis NC, Bedbrook CN, Chiu H, Engqvist MKM, Xiao C, Chan KY, Sternberg PW, Arnold FH, Gradinaru V",
+      "journal": "Nature Communications",
+      "year": 2014,
+      "sample": "Cultured rat hippocampal neurons, in vitro; C. elegans AWC-ON neurons, in vivo",
+      "url": "https://doi.org/10.1038/ncomms5894",
+      "proofread": false
+    },
+    {
+      "title": "A robotic multidimensional directed evolution approach applied to fluorescent voltage reporters",
+      "authors": "Piatkevich KD, Jung EE, Straub C, Linghu C, Park D, Suk HJ, Hochbaum DR, Goodwin D, Pnevmatikakis E, Pak N, et al.",
+      "journal": "Nature Chemical Biology",
+      "year": 2018,
+      "sample": "HEK293T cells and cultured rat hippocampal neurons, in vitro",
+      "url": "https://doi.org/10.1038/s41589-018-0004-9",
+      "proofread": false
+    },
+    {
+      "title": "Comparative Evaluation of Genetically Encoded Voltage Indicators",
+      "authors": "Bando Y, Sakamoto M, Kim S, Ayzenshtat I, Yuste R",
+      "journal": "Cell Reports",
+      "year": 2019,
+      "sample": "Mouse cortical neurons, in vitro (excluded from in vivo due to low brightness under LED/2P excitation)",
+      "url": "https://doi.org/10.1016/j.celrep.2018.12.088",
+      "proofread": false
+    },
+    {
+      "title": "Screening and Cellular Characterization of Genetically Encoded Voltage Indicators Based on Near-Infrared Fluorescent Proteins",
+      "authors": "Monakhov MV, Matlashov ME, Colavita M, Song C, Shcherbakova DM, Antic SD, Verkhusha VV, Knöpfel T",
+      "journal": "ACS Chemical Neuroscience",
+      "year": 2020,
+      "sample": "HEK293T cells and cultured rat hippocampal neurons, in vitro",
+      "url": "https://doi.org/10.1021/acschemneuro.0c00046",
+      "proofread": false
+    },
+    {
+      "title": "Rational Design of Far-Red Archaerhodopsin-3-Based Fluorescent Genetically Encoded Voltage Indicators: from Elucidation of the Fluorescence Mechanism in Archers to Novel Red-Shifted Variants",
+      "authors": "Nikolaev DM, et al.",
+      "journal": "ACS Physical Chemistry Au",
+      "year": 2024,
+      "sample": "Computational modeling and HEK293T cells, in vitro",
+      "url": "https://doi.org/10.1021/acsphyschemau.3c00073",
+      "proofread": false
+    },
+    {
+      "title": "Semirational Protein Engineering Yields Archaerhodopsin-3-Based Fluorescent Genetically Encoded Voltage Indicators with Enhanced Brightness and Red Shifted Absorption Bands",
+      "authors": "Nikolaev DM, et al.",
+      "journal": "Chem & Bio Engineering",
+      "year": 2025,
+      "sample": "E. coli and HEK293T cells, in vitro",
+      "url": "https://doi.org/10.1021/cbe.5c00069",
+      "proofread": false
+    }
+  ]
+}

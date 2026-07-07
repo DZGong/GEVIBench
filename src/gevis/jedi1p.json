@@ -35,6 +35,24 @@
       "sourceFigure": "Table 1",
       "note": "Depolarization (on) is the amplitude-weighted mean of a bi-exponential fit: τfast=1.74 ms (85.9%), τslow=27.8 ms (14.1%) -> τ̄=5.41 ms (independently cited as τon=5.41 ms by the Vega paper, doi:10.1101/2025.05.29.656768). Repolarization (off) was best fit by a single exponential, τ=2.91 ms (Table 1).",
       "proofread": false
+    },
+    {
+      "on": 10.86,
+      "off": 14.11,
+      "temperature": "23°C",
+      "source": "doi:10.1016/j.neuron.2024.08.019",
+      "note": "Cross-GEVI measurement from the ASAP5 paper (Hao et al. 2024 Neuron, Table S2; primary subject ASAP5), HEK293A cells imaged at 1888 fps under simultaneous voltage clamp. Amplitude-weighted mean of the bi-exponential fit at 23°C. Activation (−70→+30 mV depolarization): τ_fast=3.6 ms (83%), τ_slow=46.3 ms (17%) → weighted on=10.86 ms. Deactivation (repolarization): τ_fast=4.5 ms (77%), τ_slow=46.3 ms (23%) → weighted off=14.11 ms.",
+      "sourceFigure": "Table S2",
+      "proofread": false
+    },
+    {
+      "on": 8.69,
+      "off": 11.11,
+      "temperature": "37°C",
+      "source": "doi:10.1016/j.neuron.2024.08.019",
+      "note": "Cross-GEVI measurement from the ASAP5 paper (Hao et al. 2024 Neuron, Table S2; primary subject ASAP5), HEK293A cells imaged at 1888 fps under simultaneous voltage clamp. Amplitude-weighted mean of the bi-exponential fit at 37°C. Activation (−70→+30 mV depolarization): τ_fast=0.9 ms (83%), τ_slow=46.7 ms (17%) → weighted on=8.69 ms. Deactivation (repolarization): τ_fast=1.3 ms (90%), τ_slow=99.4 ms (10%) → weighted off=11.11 ms.",
+      "sourceFigure": "Table S2",
+      "proofread": false
     }
   ],
   "dynamicRangeData": [
@@ -540,23 +558,27 @@
         -100,
         -70,
         -40,
-        -10,
+        -20,
+        0,
         20,
+        30,
         50
       ],
       "deltaF": [
-        9,
+        12,
         0,
-        -16,
-        -32,
-        -46,
-        -56
+        -22,
+        -37,
+        -47,
+        -55,
+        -56,
+        -58
       ]
     },
     "source": "doi:10.1038/s41467-023-41975-3",
     "sourceImage": "/fv-sources/jedi1p.jpg",
     "sourceFigure": "Fig. 2b",
-    "note": "Steady-state -%ΔF/F0 vs command voltage (Fig. 2b), read directly from the JEDI-1P (green) curve and normalized to 0 at -70 mV. The figure shows points every 10 mV (-100 to +50); the 30-mV subset stored here matches the plotted curve (e.g. -100->+9, -40->-16, -10->-32, +20->-46, +50->-56).",
+    "note": "Steady-state -%ΔF/F0 vs command voltage (Fig. 2b), read directly from the JEDI-1P (green) curve and normalized to 0 at -70 mV. Re-digitized (2026-07 audit) at the plotted 10-mV step voltages: the curve reaches -56% at +30 mV, matching the dedicated 100-mV-step quantification in Fig. 2c (-56%) and the -70->+30 dynamicRange entry. The prior stored curve was too shallow in the -40 to +20 mV range (e.g. -40 was -16 vs the digitized -22, -10 was -32 vs ~-43); values now: -100->+12, -70->0, -40->-22, -20->-37, 0->-47, +20->-55, +30->-56, +50->-58.",
     "proofread": false
   },
   "photobleach": [
@@ -656,7 +678,7 @@
       "temperature": "32-35°C",
       "source": "doi:10.1038/s41467-023-41975-3",
       "sourceFigure": "Fig. 2f",
-      "note": "Optical AP-response width: FWHM of the fluorescence response to a single AP-like command waveform (2-ms FWHM, +30 mV peak, -70 mV baseline) under whole-cell voltage clamp in HEK293A cells, acquired at 1 kHz. JEDI-1P gives the narrowest optical response (4.9 ms) vs ASAP3 (5.8 ms) and ASAP2s (6.8 ms), reflecting its faster kinetics.",
+      "note": "Optical AP-response width: full-width at half-maximum (FWHM) of the fluorescence response to a single AP-like command waveform (2-ms FWHM, +30 mV peak, -70 mV baseline) under whole-cell voltage clamp in HEK293A cells. Fig. 2f is explicitly labeled FWHM in the Fig. 2 caption (\"The width corresponds to the full-width at half-maximum\"); it is distinct from the screening panel Fig. 1f, whose widths are measured at 30% of the response. The Fig. 2 d-f caption states fluorescence was acquired at 1 kHz (the Methods lists the camera's approximate frame rate as ~987 Hz), at 32-35 °C. JEDI-1P gives the narrowest optical response (4.9 ms) vs ASAP3 (5.8 ms) and ASAP2s (6.8 ms), reflecting its faster kinetics.",
       "proofread": false
     }
   ],

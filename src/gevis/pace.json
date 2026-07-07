@@ -149,15 +149,6 @@
       "note": "ΔF/F₀ = 0.41 ± 0.14 for a 100-mV step (−70 to +30 mV, 100 ms) in ND7/23 cells under 1P wide-field illumination (470 nm LED, 10 mW/mm², 50 Hz), whole-cell voltage clamp. Measured alongside Jarvis (0.29) and JEDI-2P (−0.46).",
       "sourceFigure": "Fig. 1C(i)",
       "proofread": false
-    },
-    {
-      "deltaF": 43.5,
-      "sign": "positive",
-      "modality": "1P",
-      "source": "doi:10.25378/janelia.21534411",
-      "note": "ΔF/F read from the pAce (green) F-V trace between -70 mV (baseline 0) and +30 mV in the Janelia patch-assay F-V curve figure (1P widefield, -20 mV steps, n=7); full sweep -110 to +50 mV spans ~-13% to +50%.",
-      "sourceFigure": "Fig. 1",
-      "proofread": false
     }
   ],
   "sensitivityData": [
@@ -165,9 +156,9 @@
       "deltaF": 10.7,
       "modality": "1P",
       "source": "doi:10.1126/science.abm8797",
-      "note": "ΔF/F per single action potential in PPL1-γ2α'1 dopaminergic neurons in Drosophila (n=87 spikes)",
+      "note": "ΔF/F per single action potential (mean ± SEM 10.7 ± 1.4%, n=87 spikes) in VIP+ interneurons in mouse primary visual cortex (V1), in vivo, 1P widefield epifluorescence (400/600 Hz). Companion per-spike values in the same experiment: Ace-mNeon2 −16.5%, VARNAM2 −7.3%, pAceR 3.2%.",
       "sourceFigure": "Fig. 1I",
-      "proofread": true
+      "proofread": false
     },
     {
       "deltaF": 43,
@@ -181,16 +172,8 @@
       "deltaF": 19.9,
       "modality": "1P",
       "source": "doi:10.1126/sciadv.ads1807",
-      "note": "pAce: 19.9 ± 1.8% ΔF/F0 per AP in cultured rat hippocampal neurons, 1P epifluorescence, measured in the HVI+ paper as the spectrally similar green positive-going reference.",
-      "sourceFigure": "Fig. 2E",
-      "proofread": false
-    },
-    {
-      "deltaF": 19.5,
-      "modality": "1P",
-      "source": "doi:10.25378/janelia.21534411",
-      "note": "Median single-AP ΔF/F0 read from the pAce (green) boxplot in the Janelia patch-assay spike-detection figure (1P widefield, PatcherBot cultured neurons, n=7); box spans ~17-22%.",
-      "sourceFigure": "Fig. 2",
+      "note": "pAce: 19.9 ± 1.8% ΔF/F0 per AP (n=5 cells) in cultured neurons at 484 Hz under 1P epifluorescence (488 nm, 4 W/cm²), measured in the HVI+ paper as the spectrally similar green positive-going reference (Table S2; per-100 mV ΔF/F0 for pAce was not determined). Value also appears in Fig. 2E.",
+      "sourceFigure": "Table S2",
       "proofread": false
     }
   ],
@@ -205,6 +188,17 @@
       "sourceFigure": "Fig. 1I",
       "proofread": false,
       "note": "Optical single-AP FWHM digitized from the mean ± SEM spike waveform in Fig. 1I (right sub-panel, the light-green positive-going pAce trace; fast rise + slower decay), recorded in awake mouse V1 VIP+ interneurons in vivo under 1P epifluorescence at 400 Hz with 4×4 binning. FWHM measured at half of the peak ΔF/F deflection, calibrated to the panel's 5 ms scale bar (35 px = 5 ms). At 400 Hz the frame interval is 2.5 ms, so this width is frame-rate-broadened — treat it as an upper bound on the intrinsic optical response (underlying step kinetics τ ≈ 0.7/1.2 ms). Companion waveforms in the same panel: Ace-mNeon2, VARNAM2, pAceR."
+    },
+    {
+      "fwhm": 5.7,
+      "samplingRate": 1000,
+      "sample": "Mouse, primary hippocampal neurons, in vitro",
+      "modality": "1P",
+      "temperature": "22°C",
+      "source": "doi:10.1101/2025.05.30.657123",
+      "sourceFigure": "Fig. 1j",
+      "proofread": false,
+      "note": "Cross-GEVI entry from the mBaoJin/Electra benchmarking paper (Zhang et al. 2025). Optical single-AP FWHM digitized from the averaged spike waveform generated in response to 1-AP electrical stimulation in primary mouse hippocampal neuronal culture (Fig. 1j, top-left cyan pAce sub-panel), recorded at ~1 kHz field-stim imaging (1006 Hz per Methods) under 1P wide-field illumination at room temperature (22°C). FWHM measured at half of the peak |ΔF/F₀| deflection: re-measured from the page rendered at 400 dpi, the 50-ms scale bar spans 90 px (1.80 px/ms) and the cyan pAce trace is 10.3 px wide at half-max → 5.7 ms. (An earlier read used a mis-calibrated 64 px = 50 ms scale bar and gave 4.9 ms; corrected here.) Companion averaged waveforms in the same panel: ElectraON (orange), Ace-mNeon2 (green), ElectraOFF (gold). This width is frame-rate-broadened at 1 kHz (1 ms frame interval)."
     }
   ],
   "brightnessData": [
@@ -239,10 +233,10 @@
     {
       "brightnessRemaining": 20,
       "illumination": "10 mW/mm²",
-      "duration": "~42 min",
+      "duration": "~40 min",
       "modality": "1P",
       "source": "doi:10.1101/2025.05.30.657123",
-      "note": "pAce lost 80% of initial fluorescence (retained ~20%) under continuous 10 mW/mm² wide-field illumination in HeLa cells; measured as a reference alongside ElectraON/ElectraOFF in the mBaoJin GEVI paper",
+      "note": "pAce lost 80% of initial fluorescence (retained ~20%) under continuous 10 mW/mm² wide-field illumination in HeLa cells (n=14 cells); measured as a reference alongside ElectraON/ElectraOFF in the mBaoJin/Electra GEVI paper. Duration read from the Fig. 1h x-axis: the pAce (cyan) curve reaches ~20% F/F0 near the ~2400 s (~40 min) endpoint (digitized directly; see the photobleach[] Fig. 1h entry).",
       "sourceFigure": "Fig. 1h",
       "proofread": false
     },
@@ -348,6 +342,27 @@
       "sourceFigure": "Fig. S11B",
       "proofread": false,
       "note": "Origin-paper photobleaching (Fig. S11B, left/green panel, the teal pAce curve) in HEK cells under continuous 505 nm LED illumination at 25 mW/mm² (n=4 wells, ~100 cells/well). Digitized by HSV color separation, verified against the figure; biexponential fit, model-free t75% ≈ 68 s. Companion curves in the same panel: Ace-mNeon, Ace-mNeon2. (A third independent recording, distinct from the Fig. 1F and Fig. S4h entries above.)"
+    },
+    {
+      "modality": "1P",
+      "intensityMWmm2": 10,
+      "t75": 325,
+      "fit": {
+        "model": "biexponential",
+        "a": 0.791,
+        "tau": 883.4,
+        "tau2": 7375.7,
+        "r2": 0.9997
+      },
+      "custom": {
+        "time": [0, 60, 120, 180, 240, 300, 420, 540, 660, 780, 900, 1050, 1200, 1350, 1500, 1650, 1800, 1950, 2100, 2250, 2400],
+        "fluorescence": [1.0, 0.935, 0.891, 0.842, 0.804, 0.766, 0.69, 0.625, 0.571, 0.522, 0.473, 0.418, 0.375, 0.348, 0.315, 0.293, 0.266, 0.245, 0.228, 0.217, 0.207]
+      },
+      "source": "doi:10.1101/2025.05.30.657123",
+      "sourceImage": "/photobleach-sources/pace-electra-fig1h.jpg",
+      "sourceFigure": "Fig. 1h",
+      "proofread": false,
+      "note": "Cross-GEVI entry from the mBaoJin/Electra benchmarking paper (Zhang et al. 2025): photobleaching of the fluorescence baseline in HeLa cells under continuous 10 mW/mm² wide-field illumination over ~2400 s (Fig. 1h, cyan pAce curve; n=14 cells). Digitized directly by cyan/teal color separation with black-tick axis calibration (x: 0-2500 s, y: 0-100%), verified against the figure; the pAce curve falls to ~20% F/F0 by ~2400 s, consistent with the paper's 'pAce lost 80% of initial fluorescence'. Biexponential fit, model-free t75% ≈ 325 s (t50% ≈ 834 s). A fourth independent recording, distinct from the Fig. 1F (40 mW/mm²), Fig. S4h (5 mW/mm²), and Fig. S11B (25 mW/mm²) entries; same source+figure as the ElectraON/ElectraOFF Fig. 1h family so panels cross-overlay. Companion curves in the same panel: ElectraON, Ace-mNeon2, ElectraOFF."
     }
   ],
   "twoPhoton": [

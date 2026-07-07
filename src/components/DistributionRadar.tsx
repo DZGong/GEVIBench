@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { GEVI } from '../types';
-import { getRawEntriesForGEVI, type DistributionAxisKey } from '../geviData';
+import { getRawEntriesForGEVI, fmtDuration, BIOLUM_RADAR_MARK, type DistributionAxisKey } from '../geviData';
 
 interface DistributionRadarProps {
   gevi?: GEVI;
@@ -58,7 +58,7 @@ const AXES: AxisSpec[] = [
   { key: 'sensitivity',    label: [{ text: 'ΔF/F%' }, { text: 'per AP', newline: true }],                                              ticks: [1,   10,  100] },
   // AP width inverted: narrower (smaller-FWHM) optical spike sits on the outer ring.
   { key: 'apWidth',        label: [{ text: 'FWHM' }, { text: 'AP', sub: true }, { text: '(ms)', newline: true }],                       ticks: [10,  3,   1] },
-  { key: 'photostability', label: [{ text: 'F' }, { text: 'remain', sub: true }, { text: '%' }],                                        ticks: [1,   10,  100] },
+  { key: 'photostability', label: [{ text: 't' }, { text: '75%', sub: true }, { text: ' (s)' }],                                        ticks: [3,   30,  300] },
   // Independent research papers using this sensor — proxy for adoption.
   { key: 'nUsed',          label: [{ text: 'N' }, { text: 'used', sub: true }],                                                         ticks: [1,   10,  100] },
 ];
@@ -102,7 +102,7 @@ function makeAxisRadialPosition(rOuter: number) {
 function formatValue(v: number, key: DistributionAxisKey): string {
   if (key === 'brightness') return `${v.toPrecision(2)}× EGFP`;
   if (key === 'tauOn' || key === 'tauOff' || key === 'kinetics' || key === 'apWidth') return `${v.toPrecision(2)} ms`;
-  if (key === 'photostability') return `${v.toFixed(0)}%/min`;
+  if (key === 'photostability') return v >= BIOLUM_RADAR_MARK ? 'bioluminescent (no photobleaching)' : `${fmtDuration(v)} @100mW/mm²`;
   if (key === 'nUsed') return `${v.toFixed(0)} ${v === 1 ? 'paper' : 'papers'}`;
   if (key === 'subthreshold') return `${v.toPrecision(2)}%/mV`;
   return `${v.toPrecision(2)}%`;

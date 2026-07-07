@@ -1,10 +1,10 @@
 import { useState, useRef } from 'react';
 import { BonusBadges } from './BonusBadges';
-import { BookOpen, ExternalLink, Plus, X, Sun, Zap, Activity, TrendingUp, Shield, Dna, ChevronDown, ChevronUp, Users, Waves, Ruler } from 'lucide-react';
+import { BookOpen, ExternalLink, Plus, X, Sun, Zap, Activity, TrendingUp, Clock, Dna, ChevronDown, ChevronUp, Users, Waves, Ruler } from 'lucide-react';
 import { SpectrumViewer, SpectrumData } from '../SpectrumViewer';
 import { VoltageCurveViewer } from '../VoltageCurveViewer';
 import { PhotobleachGallery } from '../PhotobleachViewer';
-import { getPhotobleachCompanions } from '../geviData';
+import { getPhotobleachCompanions, fmtDuration, isBioluminescent } from '../geviData';
 import { GEVILineage } from './GEVILineage';
 import { DistributionRadar } from './DistributionRadar';
 import { NoteTip, SourceLink } from './SourceCitation';
@@ -28,8 +28,8 @@ const metrics = [
   { key: 'dynamicRange',   name: <>ΔF/F per 100mV</>,                          icon: TrendingUp, desc: 'Steady-state fluorescence change per 100 mV' },
   { key: 'subthreshold',   name: <>ΔF/F per mV</>,                             icon: Waves,      desc: 'Subthreshold sensitivity — fluorescence change per mV near rest (−90 to −50 mV)' },
   { key: 'sensitivity',    name: <>ΔF/F per AP</>,                             icon: Activity,   desc: 'Fluorescence change per single action potential' },
-  { key: 'apWidth',        name: <>FWHM<sub>AP</sub> (ms)</>,                   icon: Ruler,      desc: 'Optical single-AP width — full width at half maximum (FWHM) of the spike fluorescence waveform' },
-  { key: 'photostability', name: <>F<sub>remain</sub>%</>,                     icon: Shield,     desc: 'Fraction of fluorescence remaining after continuous illumination' },
+  { key: 'apWidth',        name: <>FWHM<sub>AP</sub> (ms)</>,                   icon: Ruler,      desc: 'Full width at half maximum of the spike fluorescence waveform' },
+  { key: 'photostability', name: <>t<sub>75%</sub></>,                          icon: Clock,      desc: 'Time to 75% of initial fluorescence, dose-scaled to 100 mW/mm². 2P curves shown at native power.' },
   { key: 'nUsed',          name: <>N<sub>used</sub></>,                        icon: Users,      desc: 'Number of independent published studies that have applied this sensor' },
 ];
 
@@ -237,30 +237,49 @@ export function GEVIDetail({ gevi, onAddToCompare, compareGEVIs, onClose, onShow
                 ))}
               </div>
             )}
-            {/* Photostability */}
-            {metric.key === 'photostability' && gevi.photostabilityData === 'bioluminescent' && (
-              <div className="mt-2 text-xs text-ink">
-                <div className="flex items-center gap-2">
-                  <span>Bioluminescent — no photobleaching</span>
-                </div>
+            {/* Photostability — t₇₅ (model-free), swapped in for the old F_remain listing */}
+            {metric.key === 'photostability' && isBioluminescent(gevi) && (
+              <div className="mt-2 text-xs text-ink">Bioluminescent — no photobleaching</div>
+            )}
+            {metric.key === 'photostability' && !isBioluminescent(gevi) && gevi.photobleach?.length > 0 && (
+              <div className="mt-2 text-xs space-y-1">
+                {gevi.photobleach.map((p: any, i: number) => {
+                  const landmark = p.t75 ?? p.t50;
+                  const label = p.t75 != null ? <>t<sub>75%</sub></> : <>t<sub>50</sub></>;
+                  const scalable = p.modality === '1P' && p.intensityMWmm2 != null && landmark != null;
+                  const scaled = scalable ? landmark * (p.intensityMWmm2 / 100) : null;
+                  return (
+                    <div key={i} className={`py-1 ${i < gevi.photobleach.length - 1 ? 'border-b border-ink/10' : ''}`}>
+                      <div className="flex items-center justify-between gap-2">
+                        <span className="text-ink">
+                          {scaled != null ? (
+                            <>
+                              <span className="font-semibold">{fmtDuration(scaled)}</span>
+                              <span className="text-ink/60"> @100 mW/mm²{p.extrapolated ? ' (extrap.)' : ''}</span>
+                              <span className="text-ink/40"> · {label} {fmtDuration(landmark)} @ {p.illumination}</span>
+                            </>
+                          ) : landmark != null ? (
+                            <>
+                              <span className="font-semibold">{label} {fmtDuration(landmark)}</span>
+                              <span className="text-ink/60"> @ {p.illumination}{p.extrapolated ? ' (extrap.)' : ''}</span>
+                            </>
+                          ) : (
+                            <span className="text-ink/60">curve digitized — never falls to 75% @ {p.illumination}</span>
+                          )}
+                          {p.modality && <span className="ml-1 align-middle text-[9px] px-1 py-0.5 rounded bg-ink/10 text-ink/70 font-semibold">{p.modality}</span>}
+                        </span>
+                        <span className="flex items-center gap-1.5 min-w-0">
+                          <NoteTip note={p.note} />
+                          <SourceLink source={p.source} sourceFigure={p.sourceFigure} />
+                        </span>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             )}
-            {metric.key === 'photostability' && Array.isArray(gevi.photostabilityData) && gevi.photostabilityData.length > 0 && (
-              <div className="mt-2 text-xs space-y-1">
-                {gevi.photostabilityData.map((p: any, i: number) => (
-                  <div key={i} className={`py-1 ${i < gevi.photostabilityData.length - 1 ? 'border-b border-ink/10' : ''}`}>
-                    <div className="flex items-center justify-between gap-2">
-                      <span className="text-ink">F<sub>remain</sub>: <span className="font-semibold">{p.brightnessRemaining}%</span> @ {p.illumination}, {p.duration}
-                        {p.modality && <span className="ml-1 align-middle text-[9px] px-1 py-0.5 rounded bg-ink/10 text-ink/70 font-semibold">{p.modality}</span>}
-                      </span>
-                      <span className="flex items-center gap-1.5 min-w-0">
-                        <NoteTip note={p.note} />
-                        <SourceLink source={p.source} sourceFigure={p.sourceFigure} />
-                      </span>
-                    </div>
-                  </div>
-                ))}
-              </div>
+            {metric.key === 'photostability' && !isBioluminescent(gevi) && !(gevi.photobleach?.length > 0) && (
+              <div className="mt-2 text-xs text-ink/40">Not reported</div>
             )}
             {/* Brightness — derived B/B_EGFP first (computed via the brightness graph), then raw entries */}
             {metric.key === 'brightness' && (gevi.bRel != null || gevi.brightnessData?.length > 0) && (

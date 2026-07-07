@@ -19,7 +19,7 @@
     "peakEx": 627,
     "peakEm": 729,
     "name": "Archer1",
-    "note": "Arch(D95E/T99C) rhodopsin reporter. Peaks from Nikolaev 2025 Table 2 (doi:10.1021/cbe.5c00069): absorption max 626 nm, excitation max 627 nm, emission max 729 nm (FQY 0.33%). Previously stored ex 550 / em 687 — those were the Arch-WT values, not the red-shifted Archer1; imaging is done at 630/13 nm excitation. No measured ex/em curve is published, so the panel shows the Gaussian fallback from these peaks.",
+    "note": "Arch(D95E/T99C) rhodopsin reporter. Peaks from Nikolaev 2025 Table 1 (doi:10.1021/cbe.5c00069): absorption max 626 nm, excitation max 627 nm, emission max 729 nm, FQY 0.33% (values originate in Nikolaev 2024 doi:10.1021/acsphyschemau.3c00073 and McIsaac 2014, compiled in Nikolaev 2025 Table 1). CORRECTED 2026-07-02: ex/em/FQY were mis-attributed to 'Table 2' — they are in Table 1; Table 2 lists Archer1 only as λmax 625, FQY 0.3%, ε640 41100, molar brightness 12.3 (no ex/em). Also fixed the excitation note: imaging uses a 655 nm laser with a 650/13 nm excitation filter (not '630/13'). Previously stored ex 550 / em 687 were the Arch-WT values, not the red-shifted Archer1. No measured ex/em curve is published, so the panel shows the Gaussian fallback from these peaks.",
     "proofread": false
   },
   "voltage": {
@@ -53,6 +53,16 @@
     "proofread": false,
     "note": "Re-digitized from the red Archer1 line in Fig. 1d (a LINEAR ΔF/F-V fit over -100 to +50 mV), normalized to -70 mV = 0; gives ~85-88% ΔF/F per 100-mV step, matching the paper's stated 85%/100 mV. Replaces a fabricated curve of 16 evenly-spaced 10-mV points whose slope (~73%/100 mV) was too shallow and inconsistent with the 85% dynamic range."
   },
+  "kinetics": [
+    {
+      "on": 2.5,
+      "off": 5.5,
+      "source": "doi:10.1016/j.celrep.2018.12.088",
+      "sourceFigure": "Fig. 1M/1N",
+      "note": "Digitized from the Archer1 bars in Bando 2019 Fig. 1M (rise-time constant τ_on) and Fig. 1N (decay-time constant τ_off): single-exponential fits to the optical response of a −70→+30 mV voltage-clamp step in cultured mouse neurons, 1-photon 640-nm laser, n=5 cells (means ± SEM). No numeric kinetics table exists in the paper (its only supplement is Figures S1–S7), so the values were read off the bar charts. LOW digitization confidence (±~1 ms): the Archer1, QuasAr2, and Ace2N bars all sit near the axis floor and were indistinguishable at this scale (rise ≈2–3 ms, decay ≈5–6 ms). Calibration was validated against the readable tall bars (ArcLight-Q239 60/67, ArcLight-MT 85/91, ASAP1 13/24, ASAP2f 25/31, ASAP2s 22/27 ms rise/decay). Recording temperature is NOT stated in the Methods (perfused ACSF chamber, no heater specified) — flagged as unreported rather than assumed. The Archon paper (Piatkevich 2018) does not provide a usable numeric Archer1 τ (its Supplementary Table 1 lists Archer1 on/off kinetics as 'No data available').",
+      "proofread": false
+    }
+  ],
   "dynamicRangeData": [
     {
       "deltaF": 85,
@@ -60,7 +70,7 @@
       "modality": "1P",
       "source": "doi:10.1038/ncomms5894",
       "sourceFigure": "Fig. 1d",
-      "note": "85% ΔF/F per 100 mV step (stated in abstract; Fig. 1d, Supplementary Fig. 4). 1P widefield, 655 nm excitation.",
+      "note": "85% ΔF/F per 100 mV step (stated in abstract; linear F-V fit in Fig. 1d, R²=0.98). 1P widefield, 655 nm laser (650/13 nm excitation filter).",
       "proofread": false
     }
   ],
@@ -76,10 +86,11 @@
   ],
   "brightnessData": [
     {
-      "ratio": 10,
-      "reference": "arch",
+      "ratio": 1.0,
+      "reference": "quasar2",
       "source": "doi:10.1021/acschemneuro.0c00046",
       "sourceFigure": "Table 1",
+      "note": "Monakhov 2020 Table 1 footnote d: 'Experimentally measured brightness of Archer1 is approximately the same as brightness of QuasAr2' (both listed as 10 in the brightness column). CORRECTED 2026-07-02: previously stored as ratio 10 vs 'arch' — a misattribution. Table 1's brightness column is normalized to Arch(D95N) = 1 (footnote b), NOT Arch WT (the `arch` node), and there is no Arch(D95N) page to reference; the origin paper's real Arch-WT comparison (5×, Fig. 1a) is the separate entry below.",
       "proofread": false
     },
     {
@@ -91,23 +102,11 @@
       "proofread": false
     },
     {
-      "ratio": 0.00615,
+      "ratio": 0.00367,
       "reference": "EGFP",
       "source": "doi:10.1021/cbe.5c00069",
       "sourceFigure": "Table 2",
-      "note": "Computed from molar brightness = EC640 x FQY = 41100 x 0.003 = 123.3; EGFP reference brightness = 20040",
-      "proofread": false
-    }
-  ],
-  "photostabilityData": [
-    {
-      "brightnessRemaining": 94,
-      "illumination": "880 mW/mm²",
-      "duration": "5 min",
-      "modality": "1P",
-      "source": "doi:10.1038/ncomms5894",
-      "sourceFigure": "Fig. S4",
-      "note": "Approximate from Supplementary Fig. 4: sensitivity measurements 56.3% -> 53.1% -> 52.7% delta F/F, retained stability over 5+5 min exposure. Used as proxy for baseline brightness.",
+      "note": "Molar brightness = EC640 × FQY = 41100 × 0.003 (FQY 0.3%) = 123.3 M⁻¹cm⁻¹; EGFP reference brightness = 56000 × 0.60 = 33600 → 123.3/33600 ≈ 0.00367. NO 10× error: Table 2's tabulated 'molar brightness' column reads 12.3 for Archer1, but the table footnote DEFINES molar brightness = FQY × ε640 × 10⁻¹, i.e. (EC×QY)/10 (verified against the same table: QuasAr2 0.004×25700×0.1 = 10.3; WT 0.0001×2800×0.1 = 0.03). The standard EC×QY is therefore 123.3 (not 12.3), and FQY is genuinely 0.3% (consistent with Table 1's 0.33%), so the 0.00367 ratio stands.",
       "proofread": false
     }
   ],
@@ -116,6 +115,61 @@
     "url": "https://www.addgene.org/60423/",
     "proofread": false
   },
+  "photobleach": [
+    {
+      "custom": {
+        "time": [
+          0.0,
+          15.0,
+          30.0,
+          60.0,
+          90.0,
+          120.0,
+          180.0,
+          240.0,
+          300.0,
+          400.0,
+          500.0,
+          600.0,
+          700.0,
+          800.0,
+          900.0
+        ],
+        "fluorescence": [
+          1.0,
+          0.974,
+          0.938,
+          0.886,
+          0.833,
+          0.781,
+          0.718,
+          0.677,
+          0.627,
+          0.593,
+          0.54,
+          0.505,
+          0.472,
+          0.442,
+          0.409
+        ]
+      },
+      "illumination": "2200 mW/mm²",
+      "intensityMWmm2": 2200,
+      "t75": 150,
+      "fit": {
+        "model": "biexponential",
+        "a": 0.265,
+        "tau": 135.3,
+        "tau2": 1562.8
+      },
+      "modality": "1P",
+      "source": "doi:10.1038/s41589-018-0004-9",
+      "sourceFigure": "Fig. 2i",
+      "sourceImage": "/photobleach-sources/archer1-fig2i.jpg",
+      "note": "Black DASHED Archer1 curve, 637 nm 2200 mW/mm²; the fastest-bleaching red opsin here, ~41% at 900 s, t75≈150 s (t50≈615 s). Digitized as the lower black cluster (below the solid QuasAr2), partly occluded by the colored curves — lower reliability than the colored traces. Origin-paper photobleaching panel Fig. 2i, cultured mouse hippocampal neurons, continuous illumination. IMPORTANT: the five sensors in this panel were each imaged at a DIFFERENT intensity/wavelength (Ace2N-4aa-mNeon 13 mW/mm² 475 nm; QuasAr2 & Archer1 2200 mW/mm² 637 nm; Archon1 & Archon2 800 mW/mm² 637 nm), so the raw F/F0 cross-overlay (shared source+Fig. 2i) is NOT iso-condition — it reproduces exactly what the paper plotted. Dose-scaled to the 100 mW/mm² 1P standard using the 637-nm red excitation intensity (2200 mW/mm²), consistent with the sibling Archon1/Archon2 entries from the same panel.",
+      "proofread": false
+    }
+  ],
   "researchPapers": [
     {
       "title": "Archaerhodopsin variants with enhanced voltage-sensitive fluorescence in mammalian and Caenorhabditis elegans neurons",

@@ -482,7 +482,7 @@
     "polarity": "negative",
     "name": "Cepheid1s",
     "source": "doi:10.1126/sciadv.adi4208",
-    "sourceImage": "/fv-sources/cepheid1b.jpg",
+    "sourceImage": "/fv-sources/cepheid1s.jpg",
     "sourceFigure": "Fig. 1B",
     "custom": {
       "voltage": [
@@ -518,6 +518,26 @@
       "source": "doi:10.1126/sciadv.adi4208",
       "sourceFigure": "Fig. S7B",
       "note": "Cepheid1s in HEK293T cells (room temperature, 1058 Hz frame rate). Fig. S7B is a dual-axis bar chart: depolarization (-70 to +30 mV) is read on the LEFT red axis (0-2 ms) and repolarization (+30 to -70 mV) on the RIGHT blue axis (0-3 ms). Pixel-calibrated read: depol t½ ≈ 1.41 ms (the Solaris paper, same lab, confirms depolarizing τ1/2 = 1.5 ± 0.2 ms) and repol t½ ≈ 2.42 ms; Cepheid1s is faster than Cepheid1b in both directions. Converted to time constants via τ = t½/ln2 = 1.443·t½ → on 2.02 ms, off 3.49 ms. (A previous read of off=3.03 ms came from mis-applying a 1.5× left:right axis ratio; the true ratio is ~1.69×.)",
+      "proofread": false
+    },
+    {
+      "on": 2.16,
+      "temperature": "25°C",
+      "source": "doi:10.1101/2024.02.02.578569",
+      "sourceFigure": "Main text",
+      "note": "Independent comparator measurement in the Solaris paper (Yang et al. 2024, bioRxiv; same Zou lab): Cepheid1s voltage-clamp response half-time τ1/2 = 1.5 ± 0.2 ms in HEK293T cells at 1058 Hz frame rate (main text; measured alongside Solaris, Voltron2585 and Cepheid1b). A single instrument-limited response half-time is reported (not separate depol/repol), converted to a time constant via τ = t½/ln2 = 1.443·t½ → on ≈ 2.16 ms. Consistent with the depolarizing τ from Fig. S7B of the origin paper (2.02 ms). No repolarization (off) half-time given in the Solaris comparison, so off is omitted for this entry.",
+      "proofread": false
+    }
+  ],
+  "apWidthData": [
+    {
+      "fwhm": 7.9,
+      "samplingRate": 484,
+      "sample": "cultured rat hippocampal neurons, in vitro",
+      "modality": "1P",
+      "source": "doi:10.1126/sciadv.adi4208",
+      "sourceFigure": "Fig. 1D",
+      "note": "Optical single-AP FWHM derived by digitizing the averaged Cepheid1s optical fluorescence waveform (red trace, ΔF/F vs time) in Fig. 1D of the origin paper (20-ms scale bar). Baseline taken from the flat pre-spike segment, peak as the max downward deflection; FWHM measured at the half baseline-to-peak level ≈ 7.9 ms (±0.5 ms digitization uncertainty). Recorded in current-clamp cultured rat hippocampal neurons under widefield 1P imaging at 484 Hz (Methods); the frame period (~2.1 ms) is well below the width, so the value is kinetics-dominated (consistent with Cepheid1s τoff ≈ 3.5 ms, and comparable to the sibling Cepheid1b's separately-digitized ~7.8 ms from the same panel). No numeric FWHM is stated in the paper; this value was digitized fresh from Fig. 1D for this page.",
       "proofread": false
     }
   ],
@@ -569,12 +589,12 @@
       "modality": "1P",
       "illumination": "15.9 mW/mm²",
       "intensityMWmm2": 15.9,
-      "t75": 869,
-      "extrapolated": true,
       "fit": {
-        "model": "monoexponential",
-        "tau": 3020.1,
-        "r2": 0.898
+        "model": "biexponential",
+        "a": 0.027,
+        "tau": 2.1,
+        "tau2": 3646.9,
+        "r2": 0.963
       },
       "custom": {
         "time": [
@@ -655,7 +675,7 @@
       "source": "doi:10.1126/sciadv.adi4208",
       "sourceImage": "/photobleach-sources/cepheid1s.jpg",
       "sourceFigure": "Fig. S6A",
-      "note": "Cepheid1s (mRuby4 donor) photobleaching digitized from Fig. S6A under 1.59 W/cm² (= 15.9 mW/mm²) 561 nm wide-field illumination (HEK293T, n = 7). HSV colour-separated (Cepheid1s = topmost dark-maroon curve, the most photostable member; ≈77% remaining at 13 min). The curve does not fall to 75% within the 13-min (765 s) window, so t₇₅% ≈ 869 s is EXTRAPOLATED from a mono-exponential fit (τ ≈ 3020 s); this is consistent with the paper's reported 'half-photobleach time > 13 min'. Companion curves cross-overlay via the shared source + Fig. S6A.",
+      "note": "Cepheid1s (mRuby4 donor) photobleaching digitized from Fig. S6A under 1.59 W/cm² (= 15.9 mW/mm²) 561 nm wide-field illumination (HEK293T, n = 7). HSV colour-separated (Cepheid1s = the absolute topmost dark-brown curve, the most photostable member; ≈77% remaining at 13 min, well above the gold Cepheid1b curve which ends ≈38%). The curve does NOT fall to 75% within the 13-min (765 s) digitized window (it ends at F ≈ 0.768), so t₇₅% is not reached in-window: the honest lower bound is t₇₅% > 765 s. The paper states only a half-photobleach time (t₅₀) > 13 min for the mRuby4 insertion — a t₅₀ lower bound, not a t₇₅% anchor — so t₇₅%/t₅₀ are omitted rather than extrapolated (per the no-unanchored-extrapolation rule). The stored biexponential fit (fast a=0.027/τ₁≈2.1 s + slow τ₂≈3647 s, r²≈0.963) captures the small initial drop then slow decline and, extended, crosses 75% near ~948 s — quoted only as an estimate. Companion curves cross-overlay via the shared source + Fig. S6A.",
       "proofread": false
     }
   ],

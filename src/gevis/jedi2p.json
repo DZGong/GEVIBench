@@ -99,6 +99,24 @@
       "source": "doi:10.1038/s41592-026-03043-8",
       "sourceFigure": "Table 1",
       "proofread": false
+    },
+    {
+      "on": 4.57,
+      "off": 3.8,
+      "temperature": "23°C",
+      "note": "Cross-GEVI measurement from the ASAP5 paper (Hao et al. 2024 Neuron, Table S2; primary subject ASAP5), HEK293A cells imaged at 1888 fps under simultaneous voltage clamp. Activation (−70→+30 mV depolarization) is the amplitude-weighted mean of the bi-exponential fit at 23°C: τ_fast=3.0 ms (94%), τ_slow=29.2 ms (6%) → weighted on=4.57 ms. Deactivation (repolarization) was single-exponential (fast 100%, slow not relevant): τ_off=3.8 ms.",
+      "source": "doi:10.1016/j.neuron.2024.08.019",
+      "sourceFigure": "Table S2",
+      "proofread": false
+    },
+    {
+      "on": 4.3,
+      "off": 7.28,
+      "temperature": "37°C",
+      "note": "Cross-GEVI measurement from the ASAP5 paper (Hao et al. 2024 Neuron, Table S2; primary subject ASAP5), HEK293A cells imaged at 1888 fps under simultaneous voltage clamp. Amplitude-weighted mean of the bi-exponential fit at 37°C. Activation (−70→+30 mV depolarization): τ_fast=0.7 ms (88%), τ_slow=30.7 ms (12%) → weighted on=4.30 ms. Deactivation (repolarization): τ_fast=1.2 ms (51%), τ_slow=13.6 ms (49%) → weighted off=7.28 ms.",
+      "source": "doi:10.1016/j.neuron.2024.08.019",
+      "sourceFigure": "Table S2",
+      "proofread": false
     }
   ],
   "dynamicRangeData": [
@@ -319,13 +337,13 @@
     {
       "modality": "1P",
       "intensityMWmm2": 40,
-      "t75": 47,
+      "t75": 44,
       "fit": {
         "model": "biexponential",
-        "a": 0.537,
-        "tau": 75.8,
-        "tau2": 2000.0,
-        "r2": 0.966
+        "a": 0.292,
+        "tau": 39.4,
+        "tau2": 552.4,
+        "r2": 0.9995
       },
       "custom": {
         "time": [
@@ -345,25 +363,25 @@
         ],
         "fluorescence": [
           1.0,
-          0.924,
-          0.862,
-          0.814,
-          0.758,
-          0.709,
-          0.658,
-          0.62,
-          0.477,
-          0.471,
-          0.471,
-          0.471,
-          0.463
+          0.915,
+          0.854,
+          0.807,
+          0.751,
+          0.701,
+          0.654,
+          0.616,
+          0.576,
+          0.544,
+          0.515,
+          0.485,
+          0.466
         ]
       },
       "source": "doi:10.1016/j.neuron.2025.12.014",
       "sourceImage": "/photobleach-sources/jedi2p-fig1f.jpg",
       "sourceFigure": "Fig. 1F",
       "proofread": false,
-      "note": "Model-free photostability: t75% = time for fluorescence to fall to 75% of initial. Digitized from the JEDI-2P 40 mW/mm² curve in Fig. 1F (1P widefield, 470 nm, CHO cells), F/F0 over ~235 s; t75 read from the digitized points. Bi-exponential fit. 1P/40 mW/mm² (intensityMWmm2=40); the panel scales t75 to the 100 mW/mm² reference."
+      "note": "Model-free photostability: t75% = time for fluorescence to fall to 75% of initial. Re-digitized from the JEDI-2P 40 mW/mm² curve (lightest salmon; legend swatch 220,127,175) in Fig. 1F (1P widefield, 470 nm, CHO cells), F/F0 over ~235 s. The curve decays smoothly and monotonically from 1.0 to ~0.47 at 235 s with no plateau; the t75 crossing (~44 s) was read from the digitized points and confirmed by a bi-exponential fit (a=0.292, tau=39.4 s, tau2=552.4 s, r2=0.9995), overlay-verified against the figure. Corrects a prior digitization that had a non-physical flat plateau at ~0.47 from 120 s onward (giving t75=47 with a degenerate tau2=2000 fit). 1P/40 mW/mm² (intensityMWmm2=40); the panel scales t75 to the 100 mW/mm² reference. Measured alongside Jarvis (far more photostable) and pAce at the same 40 mW/mm²."
     },
     {
       "modality": "2P",
@@ -557,6 +575,28 @@
       "source": "doi:10.1016/j.cell.2022.07.013",
       "sourceFigure": "Fig. 5D",
       "note": "Origin-paper in-vivo optical AP width: the spike-triggered average optical waveform (Fig. 5E) reconstructed at 0.23-ms resolution (4.4-kHz effective sampling) had a time-to-peak of 1.7 ms and FWHM = 2.1 ms (Fig. 5D), measured from JEDI-2P-imaged regular-spiking neurons paired with loose-patch juxtacellular recordings in anesthetized mouse V1 L2/3. (The paired electrophysiological spike FWHM was 1.1 ms — that is the electrical AP width, not the optical one, so it is not stored here.) Value stated explicitly in the text.",
+      "proofread": false
+    },
+    {
+      "fwhm": 1.84,
+      "samplingRate": 3500,
+      "sample": "Mouse, V1 cortex layer II/III, awake behaving, in vivo (JEDI-2P-Kv, ULoVE 2P)",
+      "modality": "2P",
+      "temperature": "37°C",
+      "source": "doi:10.1101/2024.11.15.623698",
+      "sourceFigure": "Fig. 3f",
+      "note": "Cross-GEVI value measured/cited in the 2Photron paper (Villette et al. 2024 bioRxiv, primary subject 2Photron-ST552): optical spike FWHM of JEDI-2P-Kv = 1.84 ± 0.46 ms [1.25-3.55 ms], reported alongside 2Photron-ST552 (1.42 ± 0.13 ms) and ASAP3 in awake mouse V1 layer II/III under ULoVE 2P microscopy (>3.5 kHz sampling). Stated explicitly in the main text; the JEDI-2P-Kv cohort is drawn from Liu et al. 2022 (n=34). 2Photron-ST552 spikes were significantly narrower (Wilcoxon rank sum p = 2.91e-05, n=16 cells, 5 mice).",
+      "proofread": false
+    },
+    {
+      "fwhm": 0.72,
+      "samplingRate": 3500,
+      "sample": "Mouse, cerebellar granular layer, fast-spiking Glyt2+ Golgi interneurons, awake behaving, in vivo (JEDI-2P, ULoVE 2P)",
+      "modality": "2P",
+      "temperature": "37°C",
+      "source": "doi:10.1101/2024.11.15.623698",
+      "sourceFigure": "Fig. S9",
+      "note": "Cross-GEVI value measured in the 2Photron paper (Villette et al. 2024 bioRxiv, primary subject 2Photron-ST552): optical spike FWHM of JEDI-2P from fast-spiking cerebellar granular-layer glycinergic (Glyt2+) Golgi interneurons in vivo, ~0.72 ms, read from the FWHM (ms) sub-panel of Fig. S9d (green JEDI2P-Kv bar, n=10; axis 0.5-1.5 ms; alongside Voltron2-ST552 ~0.85 red and 2Photron-ST552 ~0.65 black). ULoVE 2P at 1045 nm, >3.5 kHz sampling, awake behaving mice. This is a SUB-MILLISECOND value that sits below the ~1-20 ms apWidth sanity range because it comes from fast-spiking cerebellar interneurons (much narrower APs) rather than the L2/3 cortical pyramidal neurons of all the other entries here — it is a genuine cell-type-specific measurement, not a broadened cortical spike. Kept for completeness; not representative of JEDI-2P's typical cortical optical AP width (~1.4-1.8 ms).",
       "proofread": false
     }
   ],

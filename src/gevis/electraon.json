@@ -530,6 +530,19 @@
       "proofread": false
     }
   ],
+  "apWidthData": [
+    {
+      "fwhm": 4.8,
+      "samplingRate": 1000,
+      "sample": "Mouse, primary hippocampal neurons, in vitro (culture)",
+      "modality": "1P",
+      "temperature": "22°C",
+      "source": "doi:10.1101/2025.05.30.657123",
+      "sourceFigure": "Fig. 1j",
+      "note": "Optical single-AP FWHM derived by digitizing the averaged ElectraON spike waveform (orange trace, top-right sub-panel) in Fig. 1j (|ΔF/F₀| vs time, 1-AP electrical field stimulation in DIV12-18 primary hippocampal neurons). Trace identity confirmed against the Fig. 1j legend (pAce cyan, Ace-mNeon2 green, ElectraON orange, ElectraOFF yellow) and the Fig. 3 caption ('ElectraON (orange)'). Re-measured 2026-07-04 on a 400-dpi render of p.28: the 50-ms horizontal scale bar is a solid ~91-px black run (x1260→1350, y≈3428) → 1.82 px/ms; the vertical scale bar is 43 px = 10% |ΔF/F₀|. Orange trace (mask R>200, 110<G<185, B<110) has a flat pre/post-spike baseline y≈3090 and peak y≈2992 → amplitude 98 px ≈ 22.8% ΔF/F, which matches the paper's own ~22.8% peak-per-AP in Fig. 1k exactly (calibration validated). Half-max crossings on the upper-envelope trace give FWHM ≈ 9.6 px = 5.3 ms; median-centerline and topmost methods give 4.4-4.6 ms → value ≈ 4.8 ± 0.5 ms. This supersedes the earlier sweep-agent value of 2.5 ms, which used an over-long 160-px/50-ms scale-bar calibration (the actual solid bar is 91 px; the extra pixels were stray marks from the y-axis label). ElectraON's narrower spike vs ElectraOFF (~6.4 ms) is consistent with its faster kinetics (τon 1.11 / τoff 0.58 ms). Sampling rate not stated for Fig. 1j specifically; the paper's 1-AP spike imaging is at 1 kHz, so the 1-ms frame period contributes to the measured width. Fig. 1j also plots pAce and Ace-mNeon2 averaged waveforms (cross-GEVI).",
+      "proofread": false
+    }
+  ],
   "brightnessData": [
     {
       "ratio": 1.3,
@@ -551,12 +564,12 @@
       "proofread": false
     },
     {
-      "brightnessRemaining": 88,
+      "brightnessRemaining": 100,
       "illumination": "10 mW/mm²",
-      "duration": "~42 min",
+      "duration": "40 min",
       "source": "doi:10.1101/2025.05.30.657123",
       "sourceFigure": "Fig. 1h",
-      "note": "Retained high baseline fluorescence after continuous 10 mW/mm² illumination in HeLa cells; markedly slower photobleaching than pAce",
+      "note": "Baseline fluorescence under continuous 10 mW/mm² wide-field (FITC) illumination in HeLa cells over ~2400 s (40 min; x-axis reaches 2400 s). Digitizing the orange ElectraON curve in Fig. 1h (overlay-verified against the 100/50/0% y-axis ticks) shows the baseline stays at ~100-106% throughout and ends ~102% — i.e. NO net photobleaching over 40 min, consistent with the paper's statement that ElectraON exhibited 'minimal bleaching' while pAce and Ace-mNeon2 lost 80% and 83% under identical conditions. brightnessRemaining set to 100 (negligible/no net loss); the prior stored value of 88% is not supported by the digitized curve and likely conflated ElectraON with the more-bleaching ElectraOFF (~90% at end). Not added to the photobleach[] gallery because the curve is non-monotonic (slight photoactivation rise then plateau ≥100%) and never approaches 75%.",
       "proofread": false
     }
   ],

@@ -1,0 +1,198 @@
+{
+  "PROPS": {
+    "dx": 0,
+    "dy": -3
+  },
+  "varnam2": {
+    "dx": 42,
+    "dy": -41
+  },
+  "ace2n-mneon": {
+    "dx": 0,
+    "dy": 18
+  },
+  "varnam": {
+    "dx": 27,
+    "dy": -36
+  },
+  "pacer": {
+    "dx": 42,
+    "dy": -42
+  },
+  "_fork_cepheid1b_cepheid1s": {
+    "dx": 51,
+    "dy": -9
+  },
+  "cepheid1b": {
+    "dx": 48,
+    "dy": 0
+  },
+  "solaris": {
+    "dx": 48,
+    "dy": -21
+  },
+  "vega": {
+    "dx": 48,
+    "dy": 21
+  },
+  "cepheid1s": {
+    "dx": 27,
+    "dy": 12
+  },
+  "ace2n-mneon2": {
+    "dx": 0,
+    "dy": 0
+  },
+  "pace": {
+    "dx": 0,
+    "dy": 0
+  },
+  "jarvis": {
+    "dx": 0,
+    "dy": 0
+  },
+  "electraon": {
+    "dx": 0,
+    "dy": 0
+  },
+  "positron2": {
+    "dx": 0,
+    "dy": 0
+  },
+  "electraoff": {
+    "dx": 0,
+    "dy": 0
+  },
+  "quasar3": {
+    "dx": 24,
+    "dy": -75
+  },
+  "novarch": {
+    "dx": 24,
+    "dy": -75
+  },
+  "_fork_archon1_archon2": {
+    "dx": 75,
+    "dy": -102
+  },
+  "archon1": {
+    "dx": 94,
+    "dy": -123
+  },
+  "_fork_quasar6_quasar6b": {
+    "dx": 75,
+    "dy": -186
+  },
+  "quasar6": {
+    "dx": 75,
+    "dy": -186
+  },
+  "quasar6b": {
+    "dx": 75,
+    "dy": -186
+  },
+  "somarchon": {
+    "dx": 81,
+    "dy": -135
+  },
+  "archon2": {
+    "dx": -51,
+    "dy": -99
+  },
+  "_fork_jedi2p_jedi1p": {
+    "dx": -62,
+    "dy": -24
+  },
+  "jedi2p": {
+    "dx": -21,
+    "dy": -30
+  },
+  "forces1": {
+    "dx": -9,
+    "dy": 18
+  },
+  "_fork_jedi3hyp_jedi3sub": {
+    "dx": -21,
+    "dy": 3
+  },
+  "jedi3hyp": {
+    "dx": -21,
+    "dy": 3
+  },
+  "jedi3sub": {
+    "dx": -21,
+    "dy": 3
+  },
+  "vader1": {
+    "dx": -33,
+    "dy": 21
+  },
+  "jedi1p": {
+    "dx": -156,
+    "dy": 12
+  },
+  "quasar1": {
+    "dx": 51,
+    "dy": -87
+  },
+  "quasar2": {
+    "dx": 51,
+    "dy": -129
+  },
+  "_fork_macq-mcitrine_macq-morange2": {
+    "dx": 30,
+    "dy": -18
+  },
+  "macq-mcitrine": {
+    "dx": 30,
+    "dy": -18
+  },
+  "macq-morange2": {
+    "dx": 30,
+    "dy": -18
+  },
+  "arch": {
+    "dx": -57,
+    "dy": -9
+  },
+  "_fork_archer1_archer2": {
+    "dx": -27,
+    "dy": -30
+  },
+  "archer1": {
+    "dx": -27,
+    "dy": -15
+  },
+  "archer2": {
+    "dx": -27,
+    "dy": -15
+  },
+  "_fork_quasar1_quasar2": {
+    "dx": 21,
+    "dy": -105
+  },
+  "Chemigenetic": {
+    "dx": -42,
+    "dy": 0
+  },
+  "2photron": {
+    "dx": 0,
+    "dy": 42
+  },
+  "mermaid": {
+    "dx": 0,
+    "dy": -27
+  },
+  "mermaid2": {
+    "dx": 0,
+    "dy": -27
+  },
+  "lotusv": {
+    "dx": 0,
+    "dy": 48
+  },
+  "caesr": {
+    "dx": 0,
+    "dy": 9
+  }
+}

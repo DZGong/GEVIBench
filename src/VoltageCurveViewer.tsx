@@ -34,6 +34,12 @@ export interface VoltageData {
   config?: VoltageConfig;
   custom?: VoltageCustom;
   additionalCurves?: AdditionalCurve[];
+  // Inline GEVI format (`voltage` in the JSON): the config fields may appear at the
+  // top level instead of nested under `config`. See the format note in VoltageCurveViewer.
+  type?: VoltageConfig['type'];
+  slope?: number;
+  polarity?: VoltageConfig['polarity'];
+  name?: string;
   source?: string;
   sourceImage?: string;
   sourceFigure?: string;

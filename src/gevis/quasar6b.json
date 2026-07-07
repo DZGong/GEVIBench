@@ -493,11 +493,12 @@
     {
       "modality": "1P",
       "illumination": "4200 mW/mm²",
-      "t75": 503,
+      "intensityMWmm2": 4200,
+      "t75": 405,
       "fit": {
         "model": "monoexponential",
-        "tau": 1796.1,
-        "r2": 0.9624
+        "tau": 1330,
+        "r2": 0.96
       },
       "custom": {
         "time": [
@@ -525,32 +526,54 @@
         ],
         "fluorescence": [
           1.0,
-          0.95,
-          0.9333,
-          0.9333,
-          0.9333,
-          0.9258,
-          0.9183,
-          0.9117,
-          0.8908,
-          0.8783,
-          0.8617,
-          0.8475,
-          0.835,
-          0.8183,
-          0.8017,
-          0.7883,
-          0.7683,
-          0.7542,
-          0.7383,
-          0.7267,
-          0.7125
+          0.9593,
+          0.9399,
+          0.9399,
+          0.9399,
+          0.9225,
+          0.9128,
+          0.907,
+          0.876,
+          0.8605,
+          0.8353,
+          0.8159,
+          0.7984,
+          0.7752,
+          0.7558,
+          0.7306,
+          0.7016,
+          0.6841,
+          0.6628,
+          0.6453,
+          0.6279
         ]
       },
       "source": "doi:10.1038/s41592-022-01743-5",
       "sourceImage": "/photobleach-sources/quasar6b-extfig4f.jpg",
       "sourceFigure": "Ext. Fig. 4f",
-      "note": "Photobleaching digitized from Ext. Fig. 4f (QuasAr6b-Citrine, purple), HEK293T, continuous 635-nm laser at 420 W/cm² (= 4200 mW/mm²), 10 min, n=2 cells. Mono-exponential fit, t75≈503 s. NOT dose-normalized (opsin at extreme intensity; see QuasAr6a entry). Measured alongside Archon1 and QuasAr6a (cross-overlay). Endpoint ~71% at 10 min (cf. photostabilityData ~65%).",
+      "note": "Photobleaching re-digitized from Ext. Fig. 4f (QuasAr6b-Citrine, purple/indigo trace), HEK293T, continuous 635-nm laser at 420 W/cm² (= 4200 mW/mm²), 10 min, n=2 cells. Mono-exponential fit (a=1.01, tau=1330 s, r2=0.96), t75≈405 s (data interp 412 s). Measured alongside Archon1 (cyan) and QuasAr6a (red) — the purple/red traces nearly overlap and end ~62% at 10 min; Archon1 ends ~68%. (Prior stored curve traced ~9% too high, ending 71% with t75 503 s — corrected here to the true purple trace ending ~63% at 585 s. Consistent with photostabilityData ~62-65%.)",
+      "proofread": false
+    }
+  ],
+  "apWidthData": [
+    {
+      "fwhm": 0.87,
+      "samplingRate": 2000,
+      "sample": "Mouse, hippocampal PV interneurons, in vivo",
+      "modality": "1P",
+      "source": "doi:10.1038/s41592-022-01743-5",
+      "sourceFigure": "Ext. Fig. 8f",
+      "note": "Optical spike full-width at half-maximum (FWHM) of optogenetically-triggered spikes in somQuasAr6b+ parvalbumin (PV) neurons, imaged at 2 kHz (1973 Hz), 635 nm one-photon, n=20 cells / 3 animals; 0.87 ± 0.11 ms (mean ± s.d.). Narrower than Archon1 (1.1 ± 0.15 ms). Distinct from the Fig. 3h/Ext.Fig.5b cultured-neuron 'spike width' (9.5 ms) which is defined as the full width at 80% below the AP peak, not FWHM. At 4 kHz the same measurement falls to 0.71 ms (Ext. Fig. 8g), approaching the patch-clamp FWHM 0.49 ms.",
+      "proofread": false
+    },
+    {
+      "fwhm": 2.3,
+      "samplingRate": 1000,
+      "sample": "Mouse, visual cortex layer 1 NDNF interneurons, in vivo",
+      "modality": "1P",
+      "source": "doi:10.1038/s41592-022-01743-5",
+      "sourceFigure": "Fig. 4d",
+      "note": "Optical spike full-width at half-maximum (FWHM) of optogenetically-triggered spikes in somQuasAr6b-Optopatch layer-1 NDNF interneurons imaged in vivo at a 1 kHz (996 Hz) frame rate, 635 nm one-photon, n=29 cells / 2 animals; 2.3 ± 0.3 ms (mean ± s.d.), not significantly different from somQuasAr6a (2.4 ± 0.4 ms) or somArchon1 (2.7 ± 0.5 ms). Panel d is explicitly the optical-spike FWHM (per Fig. 4d caption), so it is directly comparable to the PV-cell 0.87 ms entry; the NDNF value is larger because NDNF spikes are broader than fast-spiking PV spikes and imaging was at half the frame rate. Cross-measured within QuasAr6's characterization (same Tian et al. 2023 paper).",
       "proofread": false
     }
   ],

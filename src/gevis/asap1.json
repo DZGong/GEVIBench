@@ -23,21 +23,22 @@
   },
   "kinetics": [
     {
-      "on": 2.1,
-      "off": 2,
+      "on": 29.7,
+      "off": 29.5,
       "temperature": "22°C",
       "source": "doi:10.1038/nn.3709",
       "sourceFigure": "Fig. 1e",
-      "note": "FAST COMPONENT of a bi-exponential fit, not the amplitude-weighted mean: the paper states the fast component (activation 2.1 ms, deactivation 2.0 ms) accounts for only 60.2% and 43.7% of the response respectively — so the true weighted means are larger (cf. the Zou-2014 entry: 6.7 / 11.6 ms). St-Pierre 2014 does not report the slow τ numerically (only as a ratio vs ArcLight Q239), so the weighted mean cannot be computed from this source alone.",
-      "proofread": false
+      "note": "Amplitude-weighted means of the bi-exponential fit (St-Pierre 2014 Fig. 1e, HEK293A, 22°C). Activation (on): τ1 = 2.1 ms (60.2%), τ2 = 71.5 ms (39.8%) → τon = 0.602×2.1 + 0.398×71.5 = 29.7 ms. Deactivation/inactivation (off): τ1 = 2.0 ms (43.7%), τ2 = 50.8 ms (56.3%) → τoff = 0.437×2.0 + 0.563×50.8 = 29.5 ms. Previously stored only the fast components (2.1 / 2.0 ms), which severely understate the true response — Fig. 1e DOES report the slow τ2 numerically (71.5 / 50.8 ms), so the weighted mean is computable directly and a prior note claiming it was reported only as a ratio was incorrect.",
+      "proofread": true
     },
     {
-      "on": 2.9,
-      "off": 2.4,
+      "on": 44.0,
+      "off": 66.9,
       "temperature": "22°C",
       "source": "doi:10.7554/eLife.25690",
       "sourceFigure": "Table 1",
-      "proofread": false
+      "note": "Amplitude-weighted means of the bi-exponential fit (Chamberland/eLife 2017 Table 1, HEK293A, 22°C). The paper fit each response to a weighted sum of two time constants and explicitly 'focus here on the faster time constants'. Depolarization −70→+30 mV (on): τfast 2.9 ms (74%), τslow 161 ms (26%) → τon = 0.74×2.9 + 0.26×161 = 44.0 ms. Repolarization +30→−70 mV (off): τfast 2.3 ms (63%), τslow 177 ms (37%) → τoff = 0.63×2.3 + 0.37×177 = 66.9 ms. Previously stored the fast components (2.9 / 2.4 ms) — 2.4 did not even match the table's 2.3 ms repolarization τfast. Consistent with St-Pierre 2014 (29.7/29.5 weighted); Zou 2014 (6.7/11.6) reads a much smaller slow-component amplitude/τ.",
+      "proofread": true
     },
     {
       "on": 6.7,
@@ -177,6 +178,203 @@
       "proofread": false
     }
   ],
+  "apWidthData": [
+    {
+      "fwhm": 3.7,
+      "samplingRate": 827,
+      "sample": "Rat cultured hippocampal neurons, current-triggered single AP, in vitro",
+      "modality": "1P",
+      "temperature": "22°C",
+      "source": "doi:10.1038/nn.3709",
+      "sourceFigure": "Fig. 1f",
+      "note": "Optical single-AP FWHM stated in the ASAP1 origin paper (St-Pierre 2014): 'The corresponding FWHM of the fluorescence responses (bottom) were 3.7 ms and 6.5 ms for ASAP1 and ArcLight Q239, respectively' (Fig. 1f). Measured under 1P widefield in cultured rat hippocampal neurons responding to current-triggered single APs, imaged at 827 Hz with 4×4 binning (Methods), at 22°C. The electrical AP FWHM in the same neuron was 3.3 ms (voltage trace), so the optical width is only modestly broadened by the sensor's fast kinetics. Cross-GEVI: ArcLight Q239 optical FWHM 6.5 ms in the same panel.",
+      "proofread": false
+    },
+    {
+      "fwhm": 3.8,
+      "samplingRate": 3700,
+      "sample": "Organotypic hippocampal slice cultures, current-triggered single AP, two-photon RAMP (FEVIR)",
+      "modality": "2P",
+      "temperature": "22°C",
+      "source": "doi:10.7554/eLife.25690",
+      "sourceFigure": "Fig. 6E",
+      "note": "Optical single-AP duration (full-width at half-maximum) stated in the ASAP2s origin paper (primary subject ASAP2s): 'ASAP1 exhibited AP-induced transients with a mean time-to-peak of 3.1 ms and a duration (full-width at half-maximum) of 3.8 ms' (Fig. 6D,E), measured under two-photon FEVIR (RAMP microscopy) in organotypic hippocampal slice cultures, oversampled at 3700 Hz, at room temperature (22°C). ASAP2s in the same experiment was 21.1 ms.",
+      "proofread": false
+    },
+    {
+      "fwhm": 9.0,
+      "samplingRate": 1000,
+      "sample": "Rat, cultured hippocampal neurons, in vitro",
+      "modality": "1P",
+      "source": "doi:10.7554/eLife.25690",
+      "sourceFigure": "Fig. 2J",
+      "note": "Optical spike width (FWHM of the optical AP) read from the Fig. 2J bar graph in cultured hippocampal neurons responding to current-triggered APs, 1P widefield. ASAP1 ≈ 9.0 ms, ASAP2s ≈ 17.4 ms; the electrical AP widths in the same neurons were 4.2 ms (ASAP1) / 4.6 ms (ASAP2s) per the caption, so the optical widths are broadened by the sensors' response kinetics (ASAP2s' slower repolarization gives the wider optical spike). Imaging rate is the Methods-stated 1 kHz widefield optical-AP rate; the width is kinetics-dominated (>> the 1 ms frame period), not frame-rate-limited. Recording temperature not stated for this panel. Distinct from the 2P/organotypic-slice value (Fig. 6E) and the HEK293 value.",
+      "proofread": false
+    },
+    {
+      "fwhm": 8.5,
+      "samplingRate": 500,
+      "sample": "Mouse, cultured primary cortical/hippocampal neurons (P0.5), in vitro",
+      "modality": "1P",
+      "source": "doi:10.1523/ENEURO.0060-20.2020",
+      "sourceFigure": "Fig. 1A",
+      "note": "Cross-GEVI value from the Milosevic 2020 eNeuro GEVI-comparison study (in-vitro testing of Archon1, ArcLightD, ASAP1, ASAP2s, ASAP3b, Bongwoori-Pos6, FlicR1, chi-VSFP-Butterfly; no single primary subject). Half-width (FWHM) of the optically recorded action potential: 'The half-width of optically recorded action potentials was on average 6.1 ± 0.3 ms (n = 9), 8.5 ± 0.2 ms (n = 3), 12.3 ± 0.7 (n = 6), and 33.1 ± 2.6 (n = 6), respectively, for Archon1, ASAP1, ASAP2 and Bongwoori' — so ASAP1 = 8.5 ± 0.2 ms (n = 3). The ASAP1-specific data live in Fig. 1A (A1 shows a cell 'transduced with pCAG-ASAP1'; A3 shows the optical AP half-width); the half-width sentence cites Fig. 1A1–D collectively across all four GEVIs (Fig. 1D is the Archon1 panel, not ASAP1). Primary mouse cortical/hippocampal neuron cultures (P0.5, Swiss Webster; Methods p.266), current-triggered single APs, 1P widefield NeuroCCD imaging at 500 frames/s (Fig. 1A caption); ASAP1 excitation 480/40 nm, emission 535/50 nm, 5.05 mW/mm²; recording temperature not stated. The optical half-width was on average 741 ± 25% of the simultaneously patch-recorded electrical AP half-width (i.e. ~7× wider), reflecting the sensor's response kinetics. Distinct from the origin-paper HEK/neuron value (Fig. 1f) and the eLife 2P/1P values.",
+      "proofread": false
+    }
+  ],
+  "photobleach": [
+    {
+      "custom": {
+        "time": [
+          0.0,
+          10.0,
+          20.0,
+          30.0,
+          45.0,
+          60.0,
+          90.0,
+          120.0,
+          150.0,
+          180.0,
+          210.0,
+          240.0,
+          270.0,
+          300.0
+        ],
+        "fluorescence": [
+          1.0,
+          0.942,
+          0.89,
+          0.842,
+          0.777,
+          0.721,
+          0.628,
+          0.556,
+          0.5,
+          0.455,
+          0.419,
+          0.389,
+          0.364,
+          0.344
+        ]
+      },
+      "illumination": "11 mW/mm²",
+      "intensityMWmm2": 11,
+      "t75": 52,
+      "t50": 150,
+      "fit": {
+        "model": "biexponential",
+        "a": 0.55,
+        "tau": 100.0,
+        "tau2": 850.0
+      },
+      "modality": "1P",
+      "source": "doi:10.7554/eLife.25690",
+      "sourceFigure": "Fig. 1—figure supplement 3A",
+      "sourceImage": "/photobleach-sources/asap1-fig1s3a.jpg",
+      "note": "Cross-GEVI from the ASAP2s paper (primary subject ASAP2s). ASAP1 (blue) biexponential τ1=100 s (55%) + τ2=850 s (45%) per Fig. 1-fig.suppl.3B. t75≈52 s, t50≈150 s. Origin-paper 1P photobleach, Fig. 1—figure supplement 3A: HEK293-Kir2.1 cells, continuous widefield 470–490 nm at 11 mW/mm², emission 525/50 nm, normalized to 1.0 at t=0. The stored curve is generated from the paper's OWN published fit (Fig. 1—figure supplement 3B) rather than pixel-digitized, because ASAP1/ASAP2s/ArcLight overlap almost exactly in panel A; the fit endpoints match the panel-A traces at 5 min. All co-plotted sensors (ASAP1, ASAP2s, ArcLight Q239; ASAP1::EGFP has no page) share this source+sourceFigure so they cross-overlay.",
+      "proofread": false
+    },
+    {
+      "custom": {
+        "time": [
+          0,
+          10,
+          20,
+          30,
+          40,
+          60,
+          90,
+          120,
+          150,
+          180,
+          210,
+          240,
+          270,
+          290
+        ],
+        "fluorescence": [
+          1.0,
+          0.846,
+          0.677,
+          0.561,
+          0.463,
+          0.33,
+          0.227,
+          0.19,
+          0.138,
+          0.114,
+          0.098,
+          0.084,
+          0.074,
+          0.071
+        ]
+      },
+      "illumination": "100 mW/mm²",
+      "intensityMWmm2": 100,
+      "t75": 16,
+      "fit": {
+        "model": "biexponential",
+        "a": 0.745,
+        "tau": 37.3,
+        "tau2": 220.1
+      },
+      "modality": "1P",
+      "source": "doi:10.1523/JNEUROSCI.3484-15.2016",
+      "sourceFigure": "Fig. 3I",
+      "sourceImage": "/photobleach-sources/asap1-fig3i.jpg",
+      "note": "Cross-GEVI value from the FlicR1 origin paper (Abdelfattah 2016, J Neurosci 36:2458–2472; primary subject FlicR1). ASAP1 = green curve in Fig. 3I. Digitized (HSV color separation) from the 1P photobleaching panel Fig. 3I: normalized fluorescence vs time for FlicR1 (red), ArcLight Q239 (black), ASAP1 (green) in HEK293 cells under continuous 488 nm illumination at 10 W/cm² = 100 mW/mm², normalized to 1.0 at t=0. ASAP1 is the LEAST photostable of the three (fastest decay); model-free t75 ≈ 16 s (biexponential fit), consistent with the paper's single-exponential τ = 47 ± 1 s (→ t75 ≈ 14 s). Already at the 100 mW/mm² reference. Distinct from this page's other photobleach entry (ASAP2s paper Fig. 1—fig. suppl. 3A @ 11 mW/mm²). Cross-plotted with FlicR1 and ArcLight Q239 from the same Fig. 3I.",
+      "proofread": false
+    },
+    {
+      "custom": {
+        "time": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          6,
+          8,
+          10,
+          12,
+          14,
+          16,
+          18,
+          20
+        ],
+        "fluorescence": [
+          1.0,
+          0.407,
+          0.285,
+          0.225,
+          0.181,
+          0.136,
+          0.118,
+          0.099,
+          0.093,
+          0.084,
+          0.078,
+          0.075,
+          0.075
+        ]
+      },
+      "illumination": "~1 mW (950 nm, 2P point scan)",
+      "t50": 0.84,
+      "fit": {
+        "model": "biexponential",
+        "a": 0.774,
+        "tau": 0.79,
+        "tau2": 14.27
+      },
+      "modality": "2P",
+      "source": "doi:10.1523/JNEUROSCI.3484-15.2016",
+      "sourceFigure": "Fig. 4C",
+      "sourceImage": "/photobleach-sources/asap1-fig4c.jpg",
+      "note": "TWO-PHOTON photobleach (standalone — NOT intensity-normalized or comparable to the 1P entries; no intensityMWmm2). Cross-GEVI value from the FlicR1 origin paper (Abdelfattah 2016, J Neurosci 36:2458–2472; primary subject FlicR1). Digitized from Fig. 4C: point-scan fluorescence vs time for ASAP1 excited at 950 nm (blue) and FlicR1 at 1120 nm (red), ~1 mW at both wavelengths, tuned to ~400 counts per bin initially, sampled at 100 Hz, HEK293 cells; normalized to the first-frame value (F₀ ≈ 454 counts). ASAP1 bleaches very rapidly under 2P, so a model-free t75 lands deep in the fast transient — the sustained-phase t50 ≈ 0.84 s is stored instead. FlicR1 is ~an order of magnitude more 2P-photostable (t50 8.6 s vs 0.84 s), as the paper states. Cross-plotted with FlicR1 from the same Fig. 4C.",
+      "proofread": false
+    }
+  ],
   "researchPapers": [
     {
       "title": "High-fidelity optical reporting of neuronal electrical activity with an ultrafast fluorescent voltage sensor",
@@ -189,7 +387,7 @@
     },
     {
       "title": "A Bright and Fast Red Fluorescent Protein Voltage Indicator That Reports Neuronal Activity in Organotypic Brain Slices",
-      "authors": "Abdelfattah AS, Farhi SL, Bharioke A, Bharioke A, Boyden ES, Campbell RE",
+      "authors": "Abdelfattah AS, Farhi SL, Zhao Y, Brinks D, Zou P, Ruangkittisakul A, Platisa J, Pieribone VA, Ballanyi K, Cohen AE, Campbell RE",
       "journal": "Journal of Neuroscience",
       "year": 2016,
       "sample": "HEK293 cells; rat hippocampal neurons, in vitro",
@@ -329,6 +527,33 @@
       "year": 2025,
       "sample": "HEK293T cells, in vitro",
       "url": "https://doi.org/10.1021/acschemneuro.5c00670",
+      "proofread": false
+    },
+    {
+      "title": "Bright and fast multicoloured voltage reporters via electrochromic FRET",
+      "authors": "Zou P, Zhao Y, Douglass AD, Hochbaum DR, Brinks D, Werley CA, Harrison DJ, Campbell RE, Cohen AE",
+      "journal": "Nature Communications",
+      "year": 2014,
+      "sample": "HEK293 cells; cultured rat hippocampal neurons, in vitro",
+      "url": "https://doi.org/10.1038/ncomms5625",
+      "proofread": false
+    },
+    {
+      "title": "High-speed recording of neural spikes in awake mice and flies with a fluorescent voltage sensor",
+      "authors": "Gong Y, Huang C, Li JZ, Grewe BF, Zhang Y, Eismann S, Schnitzer MJ",
+      "journal": "Science",
+      "year": 2015,
+      "sample": "HEK293 cells; mouse cortex, in vivo; Drosophila, in vivo",
+      "url": "https://doi.org/10.1126/science.aab0810",
+      "proofread": false
+    },
+    {
+      "title": "Improving a genetically encoded voltage indicator by modifying the cytoplasmic charge composition",
+      "authors": "Lee S, Geiller T, Jung A, Nakajima R, Song YK, Baker BJ",
+      "journal": "Scientific Reports",
+      "year": 2017,
+      "sample": "HEK293 cells, in vitro",
+      "url": "https://doi.org/10.1038/s41598-017-08731-2",
       "proofread": false
     }
   ],

@@ -76,8 +76,11 @@ function buildBrelMap(gevis: GEVI[]): Map<string, number> {
 // Returns average (on, off) across selected entries.
 function selectBestKinetics(gevi: GEVI): { on: number; off: number } | null {
   if (!gevi.kinetics || gevi.kinetics.length === 0) return null;
-  const withTemp = gevi.kinetics.filter(k => parseTemperature(k.temperature) !== null);
-  const withoutTemp = gevi.kinetics.filter(k => parseTemperature(k.temperature) === null);
+  // For chemigenetic GEVIs the displayed kinetics reflect the canonical dye only
+  // (kinetics differ by dye); off-dye entries stay stored but out of the average.
+  const kinetics = preferDye(gevi.kinetics, canonicalDyeOf(gevi));
+  const withTemp = kinetics.filter(k => parseTemperature(k.temperature) !== null);
+  const withoutTemp = kinetics.filter(k => parseTemperature(k.temperature) === null);
   let selected: typeof gevi.kinetics;
   if (withTemp.length > 0) {
     const warm = withTemp.filter(k => parseTemperature(k.temperature)! >= 33);
@@ -106,6 +109,30 @@ function selectBestKinetics(gevi: GEVI): { on: number; off: number } | null {
 function preferOnePhoton<T extends { modality?: string }>(entries: T[]): T[] {
   const oneP = entries.filter(e => e.modality === '1P');
   return oneP.length > 0 ? oneP : entries;
+}
+
+// The canonical dye a chemigenetic GEVI's page represents. ΔF/F per AP and per
+// 100 mV vary several-fold by dye, so the headline median must not conflate
+// dyes — it should reflect only the page's canonical dye, with off-dye entries
+// still stored/badged in the detail panel. The canonical dye is the explicit
+// `canonicalDye` field if set, else parsed from the `spectrum.name` parenthetical
+// (curator convention, e.g. "Voltron (JF525)", "HVI (Cy3)"). Returns undefined
+// for non-chemigenetic GEVIs (FP sensors have no dye), disabling the filter.
+function canonicalDyeOf(gevi: GEVI): string | undefined {
+  if (gevi.voltage?.type !== 'chemi') return undefined;
+  if (gevi.canonicalDye) return gevi.canonicalDye;
+  const m = gevi.spectrum?.name?.match(/\(([^)]+)\)/);
+  return m ? m[1].trim() : undefined;
+}
+
+// Restrict entries to the page's canonical dye for headline/median purposes.
+// Falls back to all entries when no canonical dye is known or none of the
+// entries match it — so single-dye and untagged legacy data behave as before.
+function preferDye<T extends { dye?: string }>(entries: T[], canonicalDye?: string): T[] {
+  if (!canonicalDye) return entries;
+  const target = canonicalDye.toLowerCase();
+  const matching = entries.filter(e => e.dye?.toLowerCase() === target);
+  return matching.length > 0 ? matching : entries;
 }
 
 // Estimate subthreshold sensitivity (|ΔF/F| per mV) from the local slope of the
@@ -138,6 +165,47 @@ export function deriveSubthresholdFromFV(gevi: GEVI): number | null {
   return slope > 0 ? slope : null;
 }
 
+// ── Photostability t₇₅ landmark ─────────────────────────────────────────────
+// Model-free stability metric: time (s) for fluorescence to fall to 75% of its
+// initial value (t₅₀ substitutes per-entry where the 75% crossing lands in an
+// unrepresentative rapid-initial transient — matching PhotobleachViewer's
+// metricSec). 1-photon curves are linearly dose-scaled to a 100 mW/mm² reference
+// (bleaching ∝ illumination dose): t₇₅@100 = t₇₅ × (intensity / 100). 2-photon /
+// power-only curves are EXCLUDED here (not cross-comparable across sensors) — they
+// still render on the detail page's photobleach gallery, just not in the list/
+// radar/scatter/comparison aggregates.
+export const PHOTOBLEACH_REF_MWMM2 = 100;
+export function scaledT75Entries(gevi: GEVI): number[] {
+  const pb = gevi.photobleach;
+  if (!Array.isArray(pb)) return [];
+  const out: number[] = [];
+  for (const e of pb) {
+    if (e.modality !== '1P' || e.intensityMWmm2 == null) continue;
+    const landmark = e.t75 ?? e.t50;   // same landmark slot the panel uses (metricSec)
+    if (landmark == null || !(landmark > 0)) continue;
+    out.push(landmark * (e.intensityMWmm2 / PHOTOBLEACH_REF_MWMM2));
+  }
+  return out;
+}
+
+// Compact duration formatter for the t₇₅ stability metric (seconds → s / min / h).
+export function fmtDuration(sec: number): string {
+  if (sec < 60) return `${sec < 10 ? sec.toFixed(1) : Math.round(sec)} s`;
+  if (sec < 3600) return `${(sec / 60).toFixed(1)} min`;
+  return `${(sec / 3600).toFixed(1)} h`;
+}
+
+// Bioluminescent sensors (BRET, e.g. LOTUS-V, Amber) emit light enzymatically and
+// use NO excitation source, so they simply do not photobleach → treated as
+// maximally photostable: labeled "bioluminescent" in the list and pinned to the
+// outer ring on the radar (rather than shown as missing/"—").
+export function isBioluminescent(gevi: GEVI): boolean {
+  return gevi.photostabilityData === 'bioluminescent' || gevi.category === 'Bioluminescent GEVI';
+}
+// Radar sentinel for bioluminescent on the t₇₅ axis — any value well past the
+// outer tick clamps to the outermost ring (max score).
+export const BIOLUM_RADAR_MARK = 1e6;
+
 // Compute raw derived values used for display + sorting in the scoreless UI.
 // No 0-100 score mapping — these are measured quantities.
 function computeDisplayValues(gevi: GEVI, bRelMap: Map<string, number>) {
@@ -147,7 +215,8 @@ function computeDisplayValues(gevi: GEVI, bRelMap: Map<string, number>) {
   const displayTauOff = bestKinetics?.off ?? null;
   const displayTauSum = bestKinetics ? bestKinetics.on + bestKinetics.off : null;
 
-  const drEntries = preferOnePhoton(gevi.dynamicRangeData ?? []).map(d => Math.abs(d.deltaF)).filter(v => v > 0);
+  const canonDye = canonicalDyeOf(gevi);
+  const drEntries = preferOnePhoton(preferDye(gevi.dynamicRangeData ?? [], canonDye)).map(d => Math.abs(d.deltaF)).filter(v => v > 0);
   const displayDynamicRange = median(drEntries);
 
   const subEntries = (gevi.subthresholdData ?? []).map(s => Math.abs(s.slope)).filter(v => v > 0);
@@ -159,7 +228,7 @@ function computeDisplayValues(gevi: GEVI, bRelMap: Map<string, number>) {
     if (est != null) { displaySubthreshold = parseFloat(est.toPrecision(2)); subthresholdDerived = true; }
   }
 
-  const sensEntries = preferOnePhoton(gevi.sensitivityData ?? []).map(d => Math.abs(d.deltaF)).filter(v => v > 0);
+  const sensEntries = preferOnePhoton(preferDye(gevi.sensitivityData ?? [], canonDye)).map(d => Math.abs(d.deltaF)).filter(v => v > 0);
   const displaySensitivity = median(sensEntries);
 
   const apEntries = (gevi.apWidthData ?? []).map(a => a.fwhm).filter(v => v > 0);
@@ -169,15 +238,22 @@ function computeDisplayValues(gevi: GEVI, bRelMap: Map<string, number>) {
   if (gevi.photostabilityData === 'bioluminescent') {
     displayPhotostab = 100;
   } else if (Array.isArray(gevi.photostabilityData) && gevi.photostabilityData.length > 0) {
-    const normalized = gevi.photostabilityData.map(normalizePhotostability).filter((v): v is number => v !== null && v > 0);
+    // Chemigenetic GEVIs: prefer the canonical dye (photostability differs by dye);
+    // off-dye entries stay stored but out of the displayed median.
+    const photo = preferDye(gevi.photostabilityData, canonicalDyeOf(gevi));
+    const normalized = photo.map(normalizePhotostability).filter((v): v is number => v !== null && v > 0);
     displayPhotostab = median(normalized);
   } else {
     displayPhotostab = null;
   }
 
+  // New stability metric: 1P t₇₅ scaled to 100 mW/mm² (median across scalable
+  // 1P curves). Replaces displayPhotostab as the displayed/sorted stability value.
+  const displayT75 = median(scaledT75Entries(gevi));
+
   const paperCount = gevi.researchPapers?.length ?? 0;
 
-  return { bRel, displayTauOn, displayTauOff, displayTauSum, displayDynamicRange, displaySubthreshold, subthresholdDerived, displaySensitivity, displayApWidth, displayPhotostab, paperCount };
+  return { bRel, displayTauOn, displayTauOff, displayTauSum, displayDynamicRange, displaySubthreshold, subthresholdDerived, displaySensitivity, displayApWidth, displayPhotostab, displayT75, paperCount };
 }
 
 // Load all GEVIs from modular files (synchronous, uses eager import)
@@ -309,7 +385,7 @@ export const DISTRIBUTION_AXES: DistributionAxisSpec[] = [
   { key: 'dynamicRange',   label: 'Dyn. Range',   unit: '% ΔF/F',        invert: false },
   { key: 'sensitivity',    label: 'Sensitivity',  unit: '% ΔF/F per AP', invert: false },
   { key: 'brightness',     label: 'Brightness',   unit: '× EGFP',        invert: false },
-  { key: 'photostability', label: 'Photostab.',   unit: '%/min @100mW',  invert: false },
+  { key: 'photostability', label: 'Photostab.',   unit: 't₇₅% s @100mW',  invert: false },
   { key: 'tauOff',         label: 'τ_off',        unit: 'ms',            invert: true },
 ];
 
@@ -345,11 +421,13 @@ export function getRawEntriesForGEVI(gevi: GEVI, key: DistributionAxisKey): numb
       const b = gevi.bRel;
       return (b !== null && b !== undefined && b > 0) ? [b] : [];
     }
-    case 'photostability': {
-      if (gevi.photostabilityData === 'bioluminescent') return [100];
-      if (!Array.isArray(gevi.photostabilityData)) return [];
-      return gevi.photostabilityData.map(normalizePhotostability).filter((v): v is number => v !== null && v > 0);
-    }
+    case 'photostability':
+      // Bioluminescent sensors don't photobleach → max score (outermost ring).
+      if (isBioluminescent(gevi)) return [BIOLUM_RADAR_MARK];
+      // Stability landmark = 1P t₇₅ (or t₅₀) scaled to 100 mW/mm², in seconds.
+      // 2P / power-only curves are excluded (not cross-comparable), so they never
+      // enter the radar/scatter population for this axis.
+      return scaledT75Entries(gevi);
     // Combined τ_on + τ_off per kinetics entry — the radar's "speed" axis on
     // main collapses on/off into a single dimension so the polygon doesn't
     // double-count kinetics. Display tiles still show on / off separately.
@@ -377,11 +455,12 @@ function getRepresentativeValue(gevi: GEVI, key: DistributionAxisKey): number | 
   // ΔF/F per AP and per 100 mV: 1P is the primary value (matches the list), so
   // the population backdrop uses the 1P-preferred median too. The per-GEVI
   // "stars" still show every raw entry via getRawEntriesForGEVI.
+  const canonDye = canonicalDyeOf(gevi);
   if (key === 'dynamicRange') {
-    return median(preferOnePhoton(gevi.dynamicRangeData ?? []).map(d => Math.abs(d.deltaF)).filter(v => v > 0));
+    return median(preferOnePhoton(preferDye(gevi.dynamicRangeData ?? [], canonDye)).map(d => Math.abs(d.deltaF)).filter(v => v > 0));
   }
   if (key === 'sensitivity') {
-    return median(preferOnePhoton(gevi.sensitivityData ?? []).map(d => Math.abs(d.deltaF)).filter(v => v > 0));
+    return median(preferOnePhoton(preferDye(gevi.sensitivityData ?? [], canonDye)).map(d => Math.abs(d.deltaF)).filter(v => v > 0));
   }
   return median(getRawEntriesForGEVI(gevi, key));
 }

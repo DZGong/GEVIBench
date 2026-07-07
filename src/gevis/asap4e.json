@@ -752,12 +752,12 @@
       "proofread": false
     },
     {
-      "deltaF": 330,
+      "deltaF": 148,
       "sign": "positive",
       "modality": "2P",
       "source": "doi:10.64898/2026.04.07.717088",
-      "sourceFigure": "Fig. 1E",
-      "note": "ΔF/F at +30 mV relative to −70 mV (100-mV step) read from the gray ASAP4e steady-state F-V curve in Fig. 1E, measured under 2P excitation at 33 °C in HEK293A cells (the curve reaches ≈3.0–3.3 ΔF/F0 at +30 mV). Larger than the 1P value (210%), consistent with the origin paper's finding that 2P ΔF/F is ≥35% higher than 1P for these sensors due to background suppression. The paper's quantified panel F reports the −70 → 0 mV (70-mV) response as 148 ± 29% (not a full 100-mV step), so 148% is NOT used as the dynamic range here.",
+      "sourceFigure": "Fig. 1F",
+      "note": "Cross-measured in the FORCE1s paper (McDonald et al. 2026). Steady-state ΔF/F for the −70 → 0 mV (70-mV) voltage step, whole-cell voltage clamp + 2P imaging at 33 °C, HEK293A (n = 5): 148 ± 29% (main text and Fig. 1F, which quantifies panel E for 70-mV steps). This is the only ASAP4e steady-state response the paper reports numerically. NOTE: this is a 70-mV step, not the standard −70 → +30 (100-mV) window, so it is not directly comparable to the 1P 100-mV DR (210%). A prior digitization stored +30 mV ≈ 330%, but the gray ASAP4e curve in Fig. 1E reads ≈1.5 (=148%) at 0 mV and only ≈2.5 at +30 mV (≈4.0 at the terminal ~+60 mV point), so 330% was over-read; the paper-printed 148% value is used instead.",
       "proofread": false
     },
     {
@@ -766,6 +766,16 @@
       "modality": "1P",
       "source": "doi:10.1101/2024.06.21.599617",
       "sourceFigure": "Table S1",
+      "proofread": false
+    }
+  ],
+  "subthresholdData": [
+    {
+      "slope": 1.12,
+      "modality": "2P",
+      "source": "doi:10.64898/2026.04.07.717088",
+      "sourceFigure": "Fig. 1E",
+      "note": "Cross-measured in the FORCE1s paper (McDonald et al. 2026). Subthreshold steady-state response to a 30-mV depolarization from −70 → −40 mV = 33.6 ± 6.4% (n = 5, whole-cell voltage clamp + 2P imaging at 33 °C, HEK293A; main text and Fig. 1E/Fig. S1.2C). Expressed as a slope: 33.6% / 30 mV ≈ 1.12 %/mV (cf. FORCE1s 87.4% → 2.91 %/mV, JEDI-2P 25.9% → 0.86 %/mV over the same step).",
       "proofread": false
     }
   ],

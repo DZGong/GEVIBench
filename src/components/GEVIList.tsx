@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { ExternalLink, ChevronLeft, ChevronRight, Plus } from 'lucide-react';
 import { getGEVIColor, wavelengthToColor } from '../utils';
+import { fmtDuration, isBioluminescent } from '../geviData';
 import type { SortConfig, SortField } from '../types';
 
 interface GEVIListProps {
@@ -53,8 +54,8 @@ const METRICS: { key: MetricKey; sortField: SortField; rawField: keyof any; inve
   { key: 'dynamicRange',  sortField: 'displayDynamicRange',  rawField: 'displayDynamicRange', label: 'Dynamic Range', shortLabel: 'ΔF/F 100mV',  symbol: 'ΔF/F per 100mV', desc: 'Steady-state fluorescence change per 100 mV depolarization; sign indicates polarity' },
   { key: 'subthreshold',  sortField: 'displaySubthreshold',  rawField: 'displaySubthreshold', label: 'Subthreshold',  shortLabel: 'ΔF/F mV',     symbol: 'ΔF/F per mV', desc: 'Subthreshold sensitivity — fluorescence change per mV near rest (−90 to −50 mV)' },
   { key: 'sensitivity',   sortField: 'displaySensitivity',   rawField: 'displaySensitivity',  label: 'Sensitivity',   shortLabel: 'ΔF/F AP',     symbol: 'ΔF/F per AP', desc: 'Fluorescence change per single action potential in neurons;' },
-  { key: 'apWidth',       sortField: 'displayApWidth',       rawField: 'displayApWidth',      invert: true, label: 'AP width (FWHM)', shortLabel: 'FWHM_AP', symbol: <>FWHM<sub>AP</sub></>, desc: 'Optical single-AP width — full width at half maximum (FWHM, ms) of the spike fluorescence waveform; narrower = faster' },
-  { key: 'photostability',sortField: 'displayPhotostab',     rawField: 'displayPhotostab',    label: 'Photostability',shortLabel: 'F_remain%',   symbol: <>F<sub>remain</sub>%</>, desc: 'Fraction of fluorescence remaining after 1 min of continuous illumination at 100 mW/mm² (values reported at other intensities/durations are normalized to this reference);' },
+  { key: 'apWidth',       sortField: 'displayApWidth',       rawField: 'displayApWidth',      invert: true, label: 'AP width (FWHM)', shortLabel: 'FWHM_AP', symbol: <>FWHM<sub>AP</sub></>, desc: 'Full width at half maximum of the spike fluorescence waveform' },
+  { key: 'photostability',sortField: 'displayT75',           rawField: 'displayT75',          label: 'Photostability',shortLabel: 't₇₅% @100mW',  symbol: <>t<sub>75%</sub></>, desc: 'Time for fluorescence to fall to 75% of its initial value, linearly dose-scaled to 100 mW/mm² illumination.' },
 ];
 
 function useIsNarrow(breakpoint = 768) {
@@ -91,7 +92,8 @@ function getMetricValue(gevi: any, key: MetricKey, _dimBase: string): React.Reac
     case 'apWidth':
       return gevi.displayApWidth != null ? `${parseFloat(gevi.displayApWidth.toPrecision(2))} ms` : '—';
     case 'photostability':
-      return gevi.displayPhotostab != null ? `${Math.round(gevi.displayPhotostab)}%` : '—';
+      if (isBioluminescent(gevi)) return <span className="italic whitespace-nowrap font-medium" title="Bioluminescent — no photobleaching">biolum.</span>;
+      return gevi.displayT75 != null ? fmtDuration(gevi.displayT75) : '—';
   }
 }
 
@@ -103,7 +105,7 @@ function hasMetricValue(gevi: any, key: MetricKey): boolean {
     case 'subthreshold': return gevi.displaySubthreshold != null;
     case 'sensitivity': return !!gevi.sensitivityData?.[0];
     case 'apWidth': return gevi.displayApWidth != null;
-    case 'photostability': return gevi.displayPhotostab != null;
+    case 'photostability': return isBioluminescent(gevi) || gevi.displayT75 != null;
   }
 }
 
@@ -205,27 +207,6 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
     return [nameOpt, yearOpt, wavelengthOpt, papersOpt, ...metricOptions];
   }, []);
   const currentNarrow = NARROW_OPTIONS[narrowIdx];
-
-  // Compute top-3 GEVI IDs per raw metric (include ties at the 3rd-place value).
-  // invert=true metrics (τ-based) rank smaller values higher.
-  const top3PerMetric = useMemo(() => {
-    const result: Record<string, Set<string>> = {};
-    for (const m of METRICS) {
-      const dir = m.invert ? 1 : -1;
-      const sorted = [...gevis]
-        .filter(g => g[m.rawField] != null)
-        .sort((a, b) => ((a[m.rawField] as number) - (b[m.rawField] as number)) * dir);
-      if (sorted.length < 3) {
-        result[m.key] = new Set(sorted.map(g => g.id));
-      } else {
-        const cutoff = sorted[2][m.rawField] as number;
-        result[m.key] = new Set(
-          sorted.filter(g => m.invert ? (g[m.rawField] as number) <= cutoff : (g[m.rawField] as number) >= cutoff).map(g => g.id)
-        );
-      }
-    }
-    return result;
-  }, [gevis]);
 
   const groupCls = (gevi: any) =>
     `cursor-pointer transition-colors group border-b border-surface ${
@@ -344,18 +325,11 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
                       <td className={`px-1 pt-3 pb-0 text-center tabular-nums ${gevi.paperCount ? cellBase : dimBase}`} style={{ fontSize: '14px' }}>
                         {gevi.paperCount ?? 0}
                       </td>
-                    ) : (() => {
-                      const isTop3 = top3PerMetric[currentNarrow.key]?.has(gevi.id);
-                      return (
-                        <td className={`px-1 pt-3 pb-0 text-center tabular-nums ${hasVal ? cellBase : dimBase}`} style={{ fontSize: '14px' }}>
-                          {isTop3 ? (
-                            <span className="inline-block px-1.5 py-0.5 rounded-md" style={{ backgroundColor: '#FF91AF30' }}>
-                              {getMetricValue(gevi, currentNarrow.key as MetricKey, dimBase)}
-                            </span>
-                          ) : getMetricValue(gevi, currentNarrow.key as MetricKey, dimBase)}
-                        </td>
-                      );
-                    })()}
+                    ) : (
+                      <td className={`px-1 pt-3 pb-0 text-center tabular-nums ${hasVal ? cellBase : dimBase}`} style={{ fontSize: '14px' }}>
+                        {getMetricValue(gevi, currentNarrow.key as MetricKey, dimBase)}
+                      </td>
+                    )}
                     <td className="px-1 pt-3 pb-0 text-center" rowSpan={2} style={{ verticalAlign: 'middle' }}>
                       {(() => {
                         const isAdded = !!compareGEVIs.find((g: any) => g.id === gevi.id);
@@ -410,7 +384,7 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
                 {METRICS.map(m => (
                   <SortHeader key={m.key} symbol={m.symbol} desc={m.desc} field={m.sortField} sortConfig={sortConfig} onSort={onSortChange} />
                 ))}
-                <th className="w-2 lg:w-3 xl:w-4"></th>
+                <th className="w-5 lg:w-8 xl:w-10"></th>
                 <SortHeader symbol={<>N<sub>used</sub></>} desc="Number of published studies that have applied this sensor to record voltage signals" field="paperCount" sortConfig={sortConfig} onSort={onSortChange} />
                 <th style={{ width: '60%' }}></th>
                 <SortHeader symbol="Year" desc="" field="year" sortConfig={sortConfig} onSort={onSortChange} />
@@ -431,19 +405,12 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
                       <WavelengthCellContent gevi={gevi} />
                     </td>
                     <td className="w-2 lg:w-4 xl:w-6"></td>
-                    {METRICS.map(m => {
-                      const isTop3 = top3PerMetric[m.key]?.has(gevi.id);
-                      return (
-                        <td key={m.key} className={`px-1 lg:px-2 xl:px-3 pt-3 pb-0 text-center tabular-nums ${hasMetricValue(gevi, m.key) ? cellBase : dimBase}`} style={{ fontSize: '14px' }}>
-                          {isTop3 ? (
-                            <span className="inline-block px-1.5 py-0.5 rounded-md" style={{ backgroundColor: '#FF91AF30' }}>
-                              {getMetricValue(gevi, m.key, dimBase)}
-                            </span>
-                          ) : getMetricValue(gevi, m.key, dimBase)}
-                        </td>
-                      );
-                    })}
-                    <td className="w-2 lg:w-3 xl:w-4"></td>
+                    {METRICS.map(m => (
+                      <td key={m.key} className={`px-1 lg:px-2 xl:px-3 pt-3 pb-0 text-center tabular-nums whitespace-nowrap ${hasMetricValue(gevi, m.key) ? cellBase : dimBase}`} style={{ fontSize: '14px' }}>
+                        {getMetricValue(gevi, m.key, dimBase)}
+                      </td>
+                    ))}
+                    <td className="w-5 lg:w-8 xl:w-10"></td>
                     <td className={`px-2 pt-3 pb-0 text-center tabular-nums ${gevi.paperCount ? cellBase : dimBase}`} rowSpan={2} style={{ fontSize: '14px', verticalAlign: 'middle' }}>
                       {gevi.paperCount ?? 0}
                     </td>
@@ -487,7 +454,7 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
                       </a>
                       {gevi.description}
                     </td>
-                    <td className="w-2 lg:w-3 xl:w-4"></td>
+                    <td className="w-5 lg:w-8 xl:w-10"></td>
                   </tr>
                 </tbody>
               );

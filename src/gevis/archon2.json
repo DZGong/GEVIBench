@@ -21,7 +21,7 @@
     "name": "Archon2",
     "source": "doi:10.1117/1.NPh.11.2.024201",
     "sourceFigure": "Fig. 1b",
-    "note": "Emission: borrowed from the near-identical sibling Archon1, digitized from Song et al. 2024 (doi:10.1117/1.NPh.11.2.024201, Fig. 1b) — the first reported Archon1 emission spectrum (638 nm excitation, N=3 cells), peak ~693 nm. Excitation: a Gaussian MODEL centered on Archon's absorption maximum (586 nm; measured for Archon2 by Penzkofer et al. 2021, doi:10.1016/j.jphotobiol.2021.112331). The only published Archon absorption (Penzkofer Fig. 1a) is a 15-curve photocycle-degradation series with the 'gLED 590 nm' reference spike drawn over the 586 nm peak and the inset/annotation covering the blue flank, so it cannot be cleanly digitized — the excitation curve is therefore modeled (shown dashed), not measured.",
+    "note": "Emission: borrowed from the near-identical sibling Archon1 (Archon1 and Archon2 are spectrally near-identical), digitized from Song et al. 2024 (doi:10.1117/1.NPh.11.2.024201, Fig. 1) — the first reported Archon1 emission spectrum (638 nm excitation, lambda-stack confocal, N=3 cells). The Archon1 emission is the LEFT panel of Fig. 1 (the black data curve labeled 'Archon1 emission', x-axis 650-770 nm); it peaks at ~693 nm. Independent pixel re-digitization (x-axis calibrated on the 650/770 nm ticks, verified exact) puts the connecting-line peak and the peak data marker at 691-694 nm — consistent with the stored ~693 nm. The RIGHT panel of Fig. 1 is the miRFP670 donor emission (peak ~670 nm); an earlier sweep edit mistakenly digitized that panel and stored 670 nm as Archon1's peak — that has been reverted. The noisy far-red tail (740-760 nm) reflects the real scatter of the N=3-cell data, not an artifact. Excitation: a Gaussian MODEL centered on Archon2's absorption maximum (586 nm; measured for Archon2 by Penzkofer et al. 2021, doi:10.1016/j.jphotobiol.2021.112331). The only published Archon absorption (Penzkofer Fig. 1a) is a 15-curve photocycle-degradation series with the gLED 590 nm reference spike drawn over the 586 nm peak and the inset/annotation covering the blue flank, so it cannot be cleanly digitized — the excitation curve is therefore modeled (shown dashed), not measured.",
     "proofread": false,
     "custom": {
       "minEm": 650,
@@ -157,6 +157,7 @@
     "name": "Archon2",
     "custom": {
       "voltage": [
+        -100,
         -80,
         -70,
         -60,
@@ -164,9 +165,11 @@
         -20,
         0,
         20,
-        40
+        40,
+        60
       ],
       "deltaF": [
+        -7,
         -2,
         0,
         2,
@@ -174,13 +177,15 @@
         10,
         13,
         17,
-        21
+        20,
+        23
       ]
     },
     "source": "doi:10.1038/s41589-018-0004-9",
     "sourceImage": "/fv-sources/archon2.jpg",
-    "sourceFigure": "Fig. 2e",
-    "proofread": false
+    "sourceFigure": "Fig. S16c",
+    "note": "F-V (ΔF/F vs membrane potential) from the Archon2 population data in Suppl. Fig. 16c (n=5 neurons from 3 cultures; 637 nm laser, 800 mW/mm², 2.3 kHz). Near-linear, ΔF/F=0 at −70 mV, rising to ~+21% at +40 mV; the −70→+30 mV (100-mV) step ≈ +19–20%, consistent with the 19±2% in Suppl. Table 1 and 20% in Fig. 1g. Fig. 2 in the main paper characterizes Archon1 only, so the F-V curve comes from Suppl. Fig. 16c — previously mis-labeled 'Fig. 2e' with a source image byte-identical to Archon1's Fig. 2d/e (now replaced with the correct Fig. 16c crop).",
+    "proofread": true
   },
   "kinetics": [
     {
@@ -210,14 +215,35 @@
       "source": "doi:10.1038/s41589-018-0004-9",
       "sourceFigure": "Table S1",
       "proofread": false
+    },
+    {
+      "deltaF": 9.4,
+      "modality": "1P",
+      "note": "In-vivo ΔF/F per action potential = 9.4 ± 2.1% in mouse motor cortex layer 2/3 pyramidal neurons/interneurons (CAG / in utero electroporation), widefield 1P at 1.5 W/mm², 1 kHz (Suppl. Table 2). The per-100-mV in-vivo value in the same row is 18.8 ± 8.3% (this is the per-AP column). Archon2's per-AP response (9.4%) is about half its per-100-mV response, consistent with its slower kinetics capturing less of a brief spike.",
+      "source": "doi:10.1038/s41589-018-0004-9",
+      "sourceFigure": "Table S2",
+      "proofread": false
+    }
+  ],
+  "apWidthData": [
+    {
+      "fwhm": 2.4,
+      "samplingRate": 2300,
+      "sample": "Mouse, cultured hippocampal neurons, in vitro",
+      "modality": "1P",
+      "source": "doi:10.1038/s41589-018-0004-9",
+      "sourceFigure": "Fig. S16e",
+      "note": "Optical single-AP FWHM ~2.4 ms, derived by digitizing the blue optical spikes in Suppl. Fig. 16e (the zoomed-in view of the single APs marked in Fig. 16d). Independent re-digitization of the tallest spike against the 10-ms scale bar gives FWHM ~2.2 ms; prior manual reading of three single APs gave 2.37 / 2.39 / 2.95 ms (median ~2.4 ms). Cultured mouse hippocampal neurons, widefield 1P (637 nm, 800 mW/mm2). Image acquisition rate 2.3 kHz — panel e is the zoom of panel d, whose caption states 2.3 kHz (the 3.2 kHz in the Fig. 16 a-g header applies to the voltage-clamp panels; a prior version stored 3.2 kHz here in error). Approximate — these are individual (un-averaged) noisy APs, unlike Archon1 Fig. 2h n=160 dataset. Recording temperature not specified.",
+      "proofread": false
     }
   ],
   "brightnessData": [
     {
-      "ratio": 28,
+      "ratio": 80,
       "reference": "arch",
       "source": "doi:10.1021/acschemneuro.0c00046",
       "sourceFigure": "Table 1",
+      "note": "Molecular brightness = 80× (Monakhov et al. 2020, nirButterfly paper, Table 1: Archon2 = 80×, Archon1 = 28×). Table 1 footnote b normalizes these to Arch(D95N) (EC 63,000 × QY 0.04% = 0.0252), NOT wild-type Arch — reference is stored as 'arch' for graph consistency with the sibling Archon1 entry (same convention, ratio 28), since the dataset has no separate Arch(D95N) node. The 80× (Archon2's row) is confirmed correct; a prior value of 28 was Archon1's row (the two vs-Arch(D95N) values had been swapped). Cross-checked by footnote d (Archon2 is 8× brighter than QuasAr2, Archon1 is 2.8×), consistent with the Fig. 2b entry on this page (archon2 = 8.01× quasar2).",
       "proofread": false
     },
     {
@@ -230,9 +256,11 @@
   ],
   "photostabilityData": [
     {
-      "brightnessRemaining": 98,
+      "brightnessRemaining": 55,
       "illumination": "800 mW/mm²",
       "duration": "15 min",
+      "modality": "1P",
+      "note": "Read from the blue Archon2 curve in Fig. 2i: fluorescence falls to ~55% of initial after 900 s (15 min) of continuous 637-nm illumination at 800 mW/mm² in cultured neurons. The prior stored value (98%) was a misread of this panel — the blue Archon2 trace clearly ends near 55%, far below the magenta Archon1 trace (~92-95%, which matches Archon1's stored 95%). The paper otherwise reports Archon2 photobleaching only as a rate (0.03%/s, Suppl. Table 1).",
       "source": "doi:10.1038/s41589-018-0004-9",
       "sourceFigure": "Fig. 2i",
       "proofread": false
@@ -243,6 +271,60 @@
     "url": "https://www.addgene.org/108421/",
     "proofread": false
   },
+  "photobleach": [
+    {
+      "custom": {
+        "time": [
+          0.0,
+          15.0,
+          30.0,
+          60.0,
+          90.0,
+          120.0,
+          180.0,
+          240.0,
+          300.0,
+          400.0,
+          500.0,
+          600.0,
+          700.0,
+          800.0,
+          900.0
+        ],
+        "fluorescence": [
+          1.0,
+          0.983,
+          0.979,
+          0.96,
+          0.945,
+          0.932,
+          0.9,
+          0.87,
+          0.843,
+          0.804,
+          0.764,
+          0.723,
+          0.669,
+          0.621,
+          0.588
+        ]
+      },
+      "illumination": "800 mW/mm²",
+      "intensityMWmm2": 800,
+      "t75": 534,
+      "fit": {
+        "model": "stretched-exponential",
+        "tau": 1718.5,
+        "b": 1.016
+      },
+      "modality": "1P",
+      "source": "doi:10.1038/s41589-018-0004-9",
+      "sourceFigure": "Fig. 2i",
+      "sourceImage": "/photobleach-sources/archon2-fig2i.jpg",
+      "note": "Blue Archon2 curve, 637 nm 800 mW/mm² (n=7 neurons); retains ~59% at 900 s, t75≈534 s. Origin-paper photobleaching panel Fig. 2i, cultured mouse hippocampal neurons, continuous illumination. IMPORTANT: the five sensors in this panel were each imaged at a DIFFERENT intensity/wavelength (Ace2N-4aa-mNeon 13 mW/mm² 475 nm; QuasAr2 & Archer1 2200 mW/mm² 637 nm; Archon1 & Archon2 800 mW/mm² 637 nm), so the raw F/F0 cross-overlay (shared source+Fig. 2i) is NOT iso-condition — it reproduces exactly what the paper plotted. Dose-scaled to the 100 mW/mm² 1P standard using the 637-nm red excitation intensity (800 mW/mm²).",
+      "proofread": false
+    }
+  ],
   "researchPapers": [
     {
       "title": "A robotic multidimensional directed evolution approach applied to fluorescent voltage reporters",

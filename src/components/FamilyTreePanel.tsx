@@ -2,12 +2,19 @@
 // Shows the full GEVI family tree with interactive nodes
 // FPbase-style vertical SVG tree (root at top, descendants below)
 
-import { useMemo, useState, useRef } from 'react';
-import { BookOpen, ExternalLink } from 'lucide-react';
+import { useMemo, useState, useRef, useEffect } from 'react';
+import { BookOpen, ExternalLink, Move, RotateCcw, Trash2, Check, X } from 'lucide-react';
 import { getAllGEVIs } from '../geviData';
 import type { GEVI, TreeNode } from '../types';
 import { getTreeNodeColor } from '../utils';
 import { DistributionRadar } from './DistributionRadar';
+import savedLayoutOverrides from '../familyTreeLayout.json';
+
+// Per-node position deltas produced by the dev-only drag editor and committed to
+// familyTreeLayout.json. Applied as a final layout layer in BOTH dev and prod, so
+// the organized tree is what ships online; only the editing UI is dev-gated.
+type LayoutOverride = { dx: number; dy: number };
+type LayoutOverrides = Record<string, LayoutOverride>;
 
 // Journal name abbreviations for tooltip display
 const JOURNAL_ABBREV: Record<string, string> = {
@@ -124,6 +131,7 @@ const TOOLTIP_H = 430;
 
 interface LayoutNode {
   id: string;
+  key: string;      // stable tree key (geviId for leaves, path segment for branches, _fork_* for forks)
   name: string;
   year?: number;
   x: number;
@@ -164,7 +172,9 @@ function subtreeDepth(node: TreeNode): number {
 }
 
 // Recursively compute subtree layout using contour-based (profile-based) packing.
-function layoutTree(node: TreeNode, x: number, y: number, depth = 0): LayoutResult {
+// `key` is the stable tree key of `node` (its key in the parent's children map),
+// threaded onto the LayoutNode so the drag editor and link rebuild can identify it.
+function layoutTree(node: TreeNode, x: number, y: number, depth = 0, key = node.name): LayoutResult {
   const nodes: LayoutNode[] = [];
   const links: LayoutLink[] = [];
   const isLeaf = !!node.geviId;
@@ -174,7 +184,7 @@ function layoutTree(node: TreeNode, x: number, y: number, depth = 0): LayoutResu
 
   // If no children, this is a leaf
   if (!node.children || Object.keys(node.children).length === 0) {
-    nodes.push({ id: node.name, name: node.name, year: node.year, x, y, geviId: node.geviId, color, isFork });
+    nodes.push({ id: node.name, key, name: node.name, year: node.year, x, y, geviId: node.geviId, color, isFork });
     const hw = MIN_NODE_WIDTH / 2;
     return {
       nodes, links, width: MIN_NODE_WIDTH, maxY: y,
@@ -203,7 +213,7 @@ function layoutTree(node: TreeNode, x: number, y: number, depth = 0): LayoutResu
     const stagger = childIsBranch ? Math.min(subtreeDepth(childNode) * DEPTH_STAGGER_UNIT, MAX_STAGGER) : 0;
     const levelH = isFork ? forkLevelHeight : LEVEL_HEIGHT;
     const childY = y + levelH + stagger;
-    const result = layoutTree(childNode, 0, childY, depth + 1);
+    const result = layoutTree(childNode, 0, childY, depth + 1, key);
     childLayouts.push({ key, result });
   }
 
@@ -246,7 +256,7 @@ function layoutTree(node: TreeNode, x: number, y: number, depth = 0): LayoutResu
   for (let i = 0; i < offsets.length; i++) offsets[i] += centerShift;
 
   // Position this node (fork nodes are invisible junction points)
-  nodes.push({ id: node.name, name: node.name, year: node.year, x, y, geviId: node.geviId, color, isFork });
+  nodes.push({ id: node.name, key, name: node.name, year: node.year, x, y, geviId: node.geviId, color, isFork });
 
   let maxY = y;
 
@@ -454,11 +464,15 @@ function buildTreeFromPaths(gevis: GEVI[]): TreeNode {
   return root;
 }
 
-// Build the complete tree from gevi JSON paths
-function buildFullTree(gevis: GEVI[]) {
+// Compute the base algorithmic layout: node positions (with all the hand-tuned
+// MANUAL_SUBTREE_SHIFTS / NODE_ONLY_SHIFTS / centering baked into node coords) plus
+// the structural tree, which drives link rebuilding. Links are NOT computed here —
+// they are re-derived from final node positions in composeLayout so that moving any
+// node (algorithmically or via the drag editor) automatically drags its links along.
+function buildBaseLayout(gevis: GEVI[]): { baseNodes: LayoutNode[]; treeRoot: TreeNode | null } {
   const geviById = new Map(gevis.map(g => [g.id, g]));
   const root = buildTreeFromPaths(gevis);
-  if (!root) return { nodes: [] as LayoutNode[], links: [] as LayoutLink[], crossLinks: [] as LayoutLink[] };
+  if (!root) return { baseNodes: [], treeRoot: null };
 
   // Layout starting at center x=0, we'll shift everything to be positive afterwards
   const result = layoutTree(root, 0, TOP_PADDING);
@@ -475,34 +489,20 @@ function buildFullTree(gevis: GEVI[]) {
     const color = geviData ? getTreeNodeColor(geviData) : n.color;
     return { ...n, x: n.x + shiftX, color };
   });
-  const shiftedLinks = result.links.map(l => ({
-    fromX: l.fromX + shiftX,
-    toX: l.toX + shiftX,
-    fromY: l.fromY,
-    toY: l.toY,
-  }));
 
-  // Node-only shifts: move the node itself without shifting its subtree.
-  // Parent→node link's endpoint and node→children links' start points are updated,
-  // so connecting lines remain attached to the repositioned node.
+  // Node-only shift: move the node itself without shifting its subtree. Links are
+  // rebuilt from positions afterward, so only the node coordinate needs updating.
   const NODE_ONLY_SHIFTS: Record<string, { dx: number; dy: number }> = {
     Chemigenetic: { dx: 60, dy: -44 },
   };
   for (const [name, { dx, dy }] of Object.entries(NODE_ONLY_SHIFTS)) {
     const node = shiftedNodes.find(n => n.name === name);
     if (!node) continue;
-    const oldX = node.x;
-    const oldFromY = node.y + NODE_RADIUS_BRANCH + 2;
-    const oldToY = node.y - NODE_RADIUS_BRANCH - 2;
     node.x += dx;
     node.y += dy;
-    for (const l of shiftedLinks) {
-      if (l.fromX === oldX && l.fromY === oldFromY) { l.fromX = node.x; l.fromY = node.y + NODE_RADIUS_BRANCH + 2; }
-      if (l.toX === oldX && l.toY === oldToY) { l.toX = node.x; l.toY = node.y - NODE_RADIUS_BRANCH - 2; }
-    }
   }
 
-  // Center branch nodes between pairs of their children (node-only, link endpoints updated).
+  // Center branch nodes between pairs of their children (node-only).
   const CENTER_BETWEEN: [string, string, string][] = [
     ['VSD', 'VSD-FRET', 'VSD-single'],
     ['Opsin', 'Opsin-Fluorescent', 'Opsin-FRET'],
@@ -512,15 +512,7 @@ function buildFullTree(gevis: GEVI[]) {
     const left = shiftedNodes.find(n => n.name === leftName);
     const right = shiftedNodes.find(n => n.name === rightName);
     if (!node || !left || !right) continue;
-    const oldX = node.x;
-    const newX = (left.x + right.x) / 2;
-    node.x = newX;
-    const fromY = node.y + NODE_RADIUS_BRANCH + 2;
-    const toY = node.y - NODE_RADIUS_BRANCH - 2;
-    for (const l of shiftedLinks) {
-      if (l.fromX === oldX && l.fromY === fromY) l.fromX = newX;
-      if (l.toX === oldX && l.toY === toY) l.toX = newX;
-    }
+    node.x = (left.x + right.x) / 2;
   }
 
   // Center GEVI root at the horizontal midpoint of the entire tree.
@@ -528,27 +520,79 @@ function buildFullTree(gevis: GEVI[]) {
   if (geviRoot) {
     const allMinX = Math.min(...shiftedNodes.map(n => n.x));
     const allMaxX = Math.max(...shiftedNodes.map(n => n.x));
-    const oldX = geviRoot.x;
-    const newX = (allMinX + allMaxX) / 2;
-    geviRoot.x = newX;
-    const fromY = geviRoot.y + NODE_RADIUS_BRANCH + 2;
-    for (const l of shiftedLinks) {
-      if (l.fromX === oldX && l.fromY === fromY) l.fromX = newX;
-    }
+    geviRoot.x = (allMinX + allMaxX) / 2;
   }
+
+  return { baseNodes: shiftedNodes, treeRoot: root };
+}
+
+// Collect a node's key plus every descendant key, for whole-subtree drags.
+function collectSubtreeKeys(root: TreeNode | null, targetKey: string): string[] {
+  if (!root) return [targetKey];
+  let found: TreeNode | null = null;
+  const find = (n: TreeNode, key: string) => {
+    if (found) return;
+    if (key === targetKey) { found = n; return; }
+    if (n.children) for (const [k, c] of Object.entries(n.children)) find(c, k);
+  };
+  find(root, 'GEVI');
+  if (!found) return [targetKey];
+  const keys: string[] = [];
+  const gather = (n: TreeNode, key: string) => {
+    keys.push(key);
+    if (n.children) for (const [k, c] of Object.entries(n.children)) gather(c, k);
+  };
+  gather(found, targetKey);
+  return keys;
+}
+
+// Apply the committed + in-session position overrides to the base node positions,
+// then rebuild all links (and cross-branch links) from the resulting coordinates by
+// walking the structural tree. This is the single place link geometry is produced.
+function composeLayout(
+  baseNodes: LayoutNode[],
+  treeRoot: TreeNode | null,
+  gevis: GEVI[],
+  overrides: LayoutOverrides,
+): { nodes: LayoutNode[]; links: LayoutLink[]; crossLinks: LayoutLink[] } {
+  const nodes = baseNodes.map(n => {
+    const ov = overrides[n.key];
+    return ov ? { ...n, x: n.x + ov.dx, y: n.y + ov.dy } : { ...n };
+  });
+  const nodeByKey = new Map(nodes.map(n => [n.key, n]));
+
+  const links: LayoutLink[] = [];
+  const walk = (node: TreeNode, key: string) => {
+    if (!node.children) return;
+    const parent = nodeByKey.get(key);
+    for (const [childKey, child] of Object.entries(node.children)) {
+      const childNode = nodeByKey.get(childKey);
+      if (parent && childNode) {
+        const fromOffset = node.isFork ? 0 : NODE_RADIUS_BRANCH + 2;
+        const toOffset = child.isFork ? 0 : NODE_RADIUS_BRANCH + 2;
+        links.push({
+          fromX: parent.x, fromY: parent.y + fromOffset,
+          toX: childNode.x, toY: childNode.y - toOffset,
+        });
+      }
+      walk(child, childKey);
+    }
+  };
+  if (treeRoot) walk(treeRoot, 'GEVI');
 
   const crossLinks: LayoutLink[] = [];
   for (const gevi of gevis) {
     if (!gevi.crossBranchParentId) continue;
-    const parentNode = shiftedNodes.find(n => n.geviId === gevi.crossBranchParentId);
-    const childNode  = shiftedNodes.find(n => n.geviId === gevi.id);
+    const parentNode = nodeByKey.get(gevi.crossBranchParentId);
+    const childNode = nodeByKey.get(gevi.id);
     if (!parentNode || !childNode) continue;
-    const fromY = parentNode.y + NODE_RADIUS_LEAF + 2;
-    const toY   = childNode.y  - NODE_RADIUS_LEAF - 2;
-    crossLinks.push({ fromX: parentNode.x, fromY, toX: childNode.x, toY });
+    crossLinks.push({
+      fromX: parentNode.x, fromY: parentNode.y + NODE_RADIUS_LEAF + 2,
+      toX: childNode.x, toY: childNode.y - NODE_RADIUS_LEAF - 2,
+    });
   }
 
-  return { nodes: shiftedNodes, links: shiftedLinks, crossLinks };
+  return { nodes, links, crossLinks };
 }
 
 interface FamilyTreePanelProps {
@@ -562,13 +606,184 @@ export function FamilyTreePanel({
   onSelectGEVI,
 }: FamilyTreePanelProps) {
   const gevis = useMemo(() => getAllGEVIs(), []);
-  const { nodes, links, crossLinks } = useMemo(() => buildFullTree(gevis), [gevis]);
+  const { baseNodes, treeRoot } = useMemo(() => buildBaseLayout(gevis), [gevis]);
+
+  // Editor is dev-only: import.meta.env.DEV is true under `vite`, false in the
+  // production build, so all editing UI and its save calls are stripped from prod.
+  const isDev = import.meta.env.DEV;
+  const [editMode, setEditMode] = useState(() => {
+    if (!isDev) return false;
+    try { return sessionStorage.getItem('familyTreeEditMode') === '1'; } catch { return false; }
+  });
+  const [dragMode, setDragMode] = useState<'node' | 'subtree'>('node');
+  const [overrides, setOverrides] = useState<LayoutOverrides>(() => ({ ...(savedLayoutOverrides as LayoutOverrides) }));
+  const [selectedKey, setSelectedKey] = useState<string | null>(null);
+  const [saveState, setSaveState] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle');
+
+  const { nodes, links, crossLinks } = useMemo(
+    () => composeLayout(baseNodes, treeRoot, gevis, overrides),
+    [baseNodes, treeRoot, gevis, overrides],
+  );
+
   const [hoverInfo, setHoverInfo] = useState<HoverInfo | null>(null);
   const hideTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const svgRef = useRef<SVGSVGElement | null>(null);
+  const overridesRef = useRef(overrides);
+  const saveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  // Mirror selection/mode into refs so the once-subscribed keydown handler reads them.
+  const selectedKeyRef = useRef(selectedKey);
+  const dragModeRef = useRef(dragMode);
+  useEffect(() => { overridesRef.current = overrides; }, [overrides]);
+  useEffect(() => { selectedKeyRef.current = selectedKey; }, [selectedKey]);
+  useEffect(() => { dragModeRef.current = dragMode; }, [dragMode]);
+
+  // Persist the edit-mode toggle across dev reloads.
+  useEffect(() => {
+    if (!isDev) return;
+    try { sessionStorage.setItem('familyTreeEditMode', editMode ? '1' : '0'); } catch { /* ignore */ }
+  }, [isDev, editMode]);
+
+  // In dev, load the live on-disk overrides on mount. The static JSON import is the
+  // production source, but Vite may serve a stale cached copy after in-editor writes,
+  // so we re-read the authoritative file from the dev server here.
+  useEffect(() => {
+    if (!isDev) return;
+    let cancelled = false;
+    fetch('/__family-layout')
+      .then(r => (r.ok ? r.json() : null))
+      .then(d => { if (d && !cancelled) setOverrides(d as LayoutOverrides); })
+      .catch(() => { /* keep static import */ });
+    return () => { cancelled = true; };
+  }, [isDev]);
+
+  // Keyboard control: with a node selected in edit mode, arrow keys nudge it (or its
+  // whole subtree, per drag mode). Shift = coarser step; Delete/Backspace resets the
+  // selection's override; Escape deselects. Ignored while typing in a field.
+  useEffect(() => {
+    if (!isDev || !editMode) return;
+    const onKey = (e: KeyboardEvent) => {
+      const tgt = e.target as HTMLElement | null;
+      if (tgt && (tgt.tagName === 'INPUT' || tgt.tagName === 'TEXTAREA' || tgt.isContentEditable)) return;
+      if (e.key === 'Escape') { setSelectedKey(null); return; }
+      const key = selectedKeyRef.current;
+      if (!key) return;
+      const keys = dragModeRef.current === 'subtree' ? collectSubtreeKeys(treeRoot, key) : [key];
+
+      if (e.key === 'Delete' || e.key === 'Backspace') {
+        e.preventDefault();
+        setOverrides(prev => { const next = { ...prev }; for (const k of keys) delete next[k]; return next; });
+        scheduleSave();
+        return;
+      }
+
+      let dx = 0, dy = 0;
+      if (e.key === 'ArrowLeft') dx = -1;
+      else if (e.key === 'ArrowRight') dx = 1;
+      else if (e.key === 'ArrowUp') dy = -1;
+      else if (e.key === 'ArrowDown') dy = 1;
+      else return;
+      e.preventDefault();
+      const step = e.shiftKey ? 12 : 3;
+      setOverrides(prev => {
+        const next = { ...prev };
+        for (const k of keys) {
+          const b = next[k] ?? { dx: 0, dy: 0 };
+          next[k] = { dx: b.dx + dx * step, dy: b.dy + dy * step };
+        }
+        return next;
+      });
+      scheduleSave();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [isDev, editMode, treeRoot]);
 
   // Calculate SVG dimensions with enough padding for labels below deepest nodes
   const svgWidth = Math.max(700, Math.max(...nodes.map(n => n.x)) + 70);
   const svgHeight = Math.max(350, Math.max(...nodes.map(n => n.y)) + 44);
+
+  // Convert a pointer event's client coords into SVG viewBox coords.
+  const clientToSvg = (e: { clientX: number; clientY: number }) => {
+    const svg = svgRef.current;
+    if (!svg) return { x: 0, y: 0 };
+    const pt = svg.createSVGPoint();
+    pt.x = e.clientX; pt.y = e.clientY;
+    const m = svg.getScreenCTM();
+    if (!m) return { x: 0, y: 0 };
+    const p = pt.matrixTransform(m.inverse());
+    return { x: p.x, y: p.y };
+  };
+
+  // Debounced persist of the current overrides to familyTreeLayout.json (dev only).
+  const scheduleSave = () => {
+    if (!isDev) return; // lets the bundler dead-code-eliminate this whole path in prod
+    if (saveTimer.current) clearTimeout(saveTimer.current);
+    saveTimer.current = setTimeout(async () => {
+      setSaveState('saving');
+      // Round to whole pixels so the committed JSON stays clean and readable.
+      const rounded: LayoutOverrides = {};
+      for (const [k, v] of Object.entries(overridesRef.current)) {
+        rounded[k] = { dx: Math.round(v.dx), dy: Math.round(v.dy) };
+      }
+      try {
+        const res = await fetch('/__family-layout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(rounded, null, 2),
+        });
+        setSaveState(res.ok ? 'saved' : 'error');
+      } catch { setSaveState('error'); }
+    }, 350);
+  };
+
+  // Begin dragging a node (or its whole subtree). Deltas accumulate onto whatever
+  // override the node already had, so repeated drags compose.
+  const startDrag = (e: React.PointerEvent<SVGGElement>, node: LayoutNode) => {
+    if (!isDev || !editMode) return;
+    e.preventDefault();
+    e.stopPropagation();
+    setSelectedKey(node.key);
+    const keys = dragMode === 'subtree' ? collectSubtreeKeys(treeRoot, node.key) : [node.key];
+    const start = clientToSvg(e);
+    const base = overridesRef.current;
+    const move = (ev: PointerEvent) => {
+      const p = clientToSvg(ev);
+      const ddx = p.x - start.x;
+      const ddy = p.y - start.y;
+      const next: LayoutOverrides = { ...base };
+      for (const k of keys) {
+        const b = base[k] ?? { dx: 0, dy: 0 };
+        next[k] = { dx: b.dx + ddx, dy: b.dy + ddy };
+      }
+      setOverrides(next);
+    };
+    const up = () => {
+      window.removeEventListener('pointermove', move);
+      window.removeEventListener('pointerup', up);
+      scheduleSave();
+    };
+    window.addEventListener('pointermove', move);
+    window.addEventListener('pointerup', up);
+  };
+
+  const resetSelected = () => {
+    if (!selectedKey) return;
+    const keys = dragMode === 'subtree' ? collectSubtreeKeys(treeRoot, selectedKey) : [selectedKey];
+    setOverrides(prev => {
+      const next = { ...prev };
+      for (const k of keys) delete next[k];
+      return next;
+    });
+    scheduleSave();
+  };
+
+  const clearAll = () => {
+    setOverrides({});
+    setSelectedKey(null);
+    scheduleSave();
+  };
+
+  const overrideCount = Object.keys(overrides).length;
 
   const handleNodeClick = (geviId?: string) => {
     if (geviId) {
@@ -622,9 +837,63 @@ export function FamilyTreePanel({
         </div>
       </div>
 
+      {/* Dev-only layout editor toolbar (stripped from the production build) */}
+      {isDev && (
+        <div className="flex flex-wrap items-center gap-2 mb-3 text-xs">
+          <button
+            onClick={() => setEditMode(v => !v)}
+            className={`inline-flex items-center gap-1 px-2.5 py-1 rounded border font-medium ${editMode ? 'bg-klein text-white border-klein' : 'bg-surface-low text-ink border-ink/20'}`}
+          >
+            <Move className="w-3 h-3" /> {editMode ? 'Editing layout' : 'Edit layout'}
+          </button>
+          {editMode && (
+            <>
+              <div className="inline-flex rounded border border-ink/20 overflow-hidden">
+                <button
+                  onClick={() => setDragMode('node')}
+                  className={`px-2 py-1 ${dragMode === 'node' ? 'bg-klein text-white' : 'bg-surface-low text-ink'}`}
+                >
+                  Node
+                </button>
+                <button
+                  onClick={() => setDragMode('subtree')}
+                  className={`px-2 py-1 border-l border-ink/20 ${dragMode === 'subtree' ? 'bg-klein text-white' : 'bg-surface-low text-ink'}`}
+                >
+                  Subtree
+                </button>
+              </div>
+              <button
+                onClick={resetSelected}
+                disabled={!selectedKey}
+                className="inline-flex items-center gap-1 px-2 py-1 rounded border border-ink/20 bg-surface-low text-ink disabled:opacity-40"
+              >
+                <RotateCcw className="w-3 h-3" /> Reset {dragMode === 'subtree' ? 'subtree' : 'node'}
+              </button>
+              <button
+                onClick={clearAll}
+                className="inline-flex items-center gap-1 px-2 py-1 rounded border border-red-300 text-red-600 bg-surface-low"
+              >
+                <Trash2 className="w-3 h-3" /> Clear all
+              </button>
+              <span className="text-ink/50">{overrideCount} override{overrideCount === 1 ? '' : 's'}</span>
+              {saveState === 'saving' && <span className="text-ink/50">Saving…</span>}
+              {saveState === 'saved' && <span className="inline-flex items-center gap-0.5 text-green-600"><Check className="w-3 h-3" /> Saved</span>}
+              {saveState === 'error' && <span className="inline-flex items-center gap-0.5 text-red-600"><X className="w-3 h-3" /> Save failed</span>}
+              {selectedKey && <span className="text-ink/60">Selected: <span className="font-mono">{selectedKey}</span></span>}
+              <span className="text-ink/40">· drag or select + arrow keys (⇧ = larger step, Del = reset){dragMode === 'subtree' ? '; moves descendants too' : ''}; dev-only</span>
+            </>
+          )}
+        </div>
+      )}
+
       {/* Responsive container - scales SVG to fit available width */}
       <div className="overflow-hidden border rounded-lg bg-surface-low">
-        <svg viewBox={`0 0 ${svgWidth} ${svgHeight}`} className="block w-full h-auto">
+        <svg
+          ref={svgRef}
+          viewBox={`0 0 ${svgWidth} ${svgHeight}`}
+          className="block w-full h-auto"
+          style={editMode ? { touchAction: 'none', userSelect: 'none' } : undefined}
+        >
 
           {/* Links - curved paths */}
           {links.map((link, i) => {
@@ -657,29 +926,51 @@ export function FamilyTreePanel({
           {/* Nodes */}
           {nodes.map((node, i) => {
             const isLeaf = !!node.geviId;
-            const isRoot = i === 0 && node.name === 'GEVI';
+            const isRoot = node.key === 'GEVI';
             const radius = isRoot ? 11 : isLeaf ? NODE_RADIUS_LEAF : NODE_RADIUS_BRANCH;
+            const isSelected = editMode && selectedKey === node.key;
 
-            // Fork nodes are invisible junction points — don't render
-            if (node.isFork) return null;
+            // Fork nodes are invisible junction points. Rendered only in edit mode
+            // as small draggable handles so their junction position can be tuned.
+            if (node.isFork) {
+              if (!editMode) return null;
+              return (
+                <g
+                  key={`node_${i}`}
+                  transform={`translate(${node.x}, ${node.y})`}
+                  onPointerDown={(e) => startDrag(e, node)}
+                  style={{ cursor: 'move' }}
+                >
+                  {isSelected && (
+                    <rect x={-8} y={-8} width={16} height={16} rx={2} fill="none" stroke="#002FA7" strokeWidth={1.5} strokeDasharray="3 2" />
+                  )}
+                  <rect x={-4} y={-4} width={8} height={8} rx={1.5} fill={isSelected ? '#002FA7' : '#94a3b8'} stroke="#fff" strokeWidth={1} opacity={0.85} />
+                </g>
+              );
+            }
 
             return (
               <g
                 key={`node_${i}`}
                 transform={`translate(${node.x}, ${node.y})`}
-                onClick={() => handleNodeClick(node.geviId)}
-                style={{ cursor: isLeaf ? 'pointer' : 'default' }}
-                onMouseEnter={isLeaf ? (e: React.MouseEvent<SVGGElement>) => {
+                onClick={editMode ? undefined : () => handleNodeClick(node.geviId)}
+                onPointerDown={editMode ? (e) => startDrag(e, node) : undefined}
+                style={{ cursor: editMode ? 'move' : isLeaf ? 'pointer' : 'default' }}
+                onMouseEnter={!editMode && isLeaf ? (e: React.MouseEvent<SVGGElement>) => {
                   if (hideTimeout.current) clearTimeout(hideTimeout.current);
                   const gevi = gevis.find(g => g.id === node.geviId);
                   if (gevi) setHoverInfo({ gevi, x: e.clientX, y: e.clientY });
                 } : undefined}
-                onMouseLeave={isLeaf ? () => {
+                onMouseLeave={!editMode && isLeaf ? () => {
                   hideTimeout.current = setTimeout(() => setHoverInfo(null), 120);
                 } : undefined}
               >
-                {/* Hover target (invisible larger hexagon for easier clicking) */}
-                {isLeaf && (
+                {/* Selection ring (edit mode) */}
+                {isSelected && (
+                  <path d={hexPath(radius + 6)} fill="none" stroke="#002FA7" strokeWidth={1.5} strokeDasharray="3 2" />
+                )}
+                {/* Hover / drag target (invisible larger hexagon for easier grabbing) */}
+                {(isLeaf || editMode) && (
                   <path d={hexPath(17)} fill="transparent" />
                 )}
                 <path

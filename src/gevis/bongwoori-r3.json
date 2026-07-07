@@ -15,12 +15,12 @@
   "parentId": "bongwoori",
   "spectrum": {
     "type": "fp",
-    "peakEx": 490,
+    "peakEx": 488,
     "peakEm": 511,
     "name": "Bongwoori-R3",
     "source": "FPbase: EGFP",
     "sourceFigure": "FPbase",
-    "note": "Fluorophore is Super Ecliptic pHluorin (A227D), the GFP-derived reporter shared across the ArcLight/Bongwoori family. Super ecliptic pHluorin carries the S65T (EGFP) mutation, so it is spectrally near-identical to EGFP and no separate measured curve is published; the displayed curve is the FPbase EGFP excitation + emission verbatim (peaks 490/511). Previously the emission was the EGFP curve red-shifted +4 nm (a fabricated shift placing the peak at 515 nm); the shift has been removed (minEm 476→472). Identical to the parent Bongwoori curve.",
+    "note": "Fluorophore is Super Ecliptic pHluorin (A227D), the GFP-derived reporter shared across the ArcLight/Bongwoori family. Super ecliptic pHluorin carries the S65T (EGFP) mutation, so it is spectrally near-identical to EGFP and no separate measured curve is published; the displayed curve is the FPbase EGFP excitation + emission verbatim (peaks 488/511). Previously the emission was the EGFP curve red-shifted +4 nm (a fabricated shift placing the peak at 515 nm); the shift has been removed (minEm 476→472). Identical to the parent Bongwoori curve.",
     "proofread": false,
     "custom": {
       "minEx": 300,
@@ -470,7 +470,7 @@
       "source": "doi:10.1038/s41598-017-08731-2",
       "note": "Weighted τ from Table 2 (HEK293, 34 °C, biexponential fit, n=5 cells). On: weighted 11 ms (fast 7 ms / slow 45 ms, 90% fast). Off: weighted 10 ms (fast 6 ms / slow 46 ms, 91% fast).",
       "sourceFigure": "Table 2",
-      "proofread": false
+      "proofread": true
     }
   ],
   "dynamicRangeData": [
@@ -481,6 +481,15 @@
       "source": "doi:10.1038/s41598-017-08731-2",
       "sourceFigure": "Fig. 4B",
       "proofread": false
+    },
+    {
+      "deltaF": -21,
+      "sign": "negative",
+      "modality": "2P",
+      "source": "doi:10.1038/s41598-017-08731-2",
+      "sourceFigure": "Fig. 4E",
+      "note": "Two-photon voltage imaging of Bongwoori-R3-expressing HEK293 cells (FV1000 MPE, 940 nm), −70→+30 mV (100-mV) step. Text: 'Bongwoori-R3 gives a 21% ΔF/F per 100 mV depolarization' under 2-photon; Fig. 4E trace dips ~−20% (scale bar −20% ΔF/F). Negative-going. 1P value (−20%, Fig. 4B) remains the primary displayed value via preferOnePhoton.",
+      "proofread": false
     }
   ],
   "sensitivityData": [
@@ -489,7 +498,7 @@
       "modality": "1P",
       "source": "doi:10.1038/s41598-017-08731-2",
       "sourceFigure": "Table 3",
-      "proofread": false
+      "proofread": true
     }
   ],
   "brightnessData": [
@@ -498,7 +507,7 @@
       "reference": "bongwoori",
       "source": "doi:10.1038/s41598-017-08731-2",
       "sourceFigure": "Table 3",
-      "proofread": false
+      "proofread": true
     }
   ],
   "photostabilityData": [
@@ -506,8 +515,66 @@
       "brightnessRemaining": 89,
       "illumination": "1 mW/mm²",
       "duration": "1 min",
+      "modality": "1P",
       "source": "doi:10.1038/s41598-017-08731-2",
       "sourceFigure": "Fig. S1",
+      "note": "1P widefield (75 W Xenon arc-lamp, 1 mW/mm² at specimen plane, 40 s on / 20 s off, 34 °C), from the photobleach curve in Fig. S1 (Bongwoori-R3 purple curve). Paper reports the exponential photobleach time constant is >450 s for all three GEVIs (ArcLight A242, Bongwoori, Bongwoori-R3). Note: normalizing 89 %@1 mW/mm² up to the 100 mW/mm² reference is a 100× extrapolation, so displayPhotostab is a normalizer artifact of the very low measurement intensity, not a data error.",
+      "proofread": false
+    }
+  ],
+  "addgene": {
+    "id": "137838",
+    "url": "https://www.addgene.org/137838/",
+    "note": "No plain Bongwoori-R3 plasmid is deposited on Addgene. #137838 is PA-Bongwoori-R3, the photoactivatable derivative from the 2019 follow-up paper (Lee et al. 2019) — a different construct (Bongwoori-R3 fused to a photoactivation module), not the plain 2017 Bongwoori-R3 characterized on this page.",
+    "proofread": false
+  },
+  "photobleach": [
+    {
+      "custom": {
+        "time": [
+          0.0,
+          30.0,
+          60.0,
+          120.0,
+          200.0,
+          300.0,
+          450.0,
+          600.0,
+          800.0,
+          1000.0,
+          1200.0,
+          1400.0,
+          1540.0
+        ],
+        "fluorescence": [
+          1.0,
+          0.941,
+          0.926,
+          0.869,
+          0.819,
+          0.755,
+          0.672,
+          0.598,
+          0.508,
+          0.451,
+          0.402,
+          0.361,
+          0.339
+        ]
+      },
+      "illumination": "1 mW/mm²",
+      "intensityMWmm2": 1,
+      "t75": 295,
+      "fit": {
+        "model": "stretched-exponential",
+        "tau": 1355.0,
+        "b": 0.817
+      },
+      "modality": "1P",
+      "source": "doi:10.1038/s41598-017-08731-2",
+      "sourceFigure": "Fig. S1",
+      "sourceImage": "/photobleach-sources/bongwoori-r3-figs1.jpg",
+      "note": "Purple ▲ Bongwoori-R3 curve — the MOST photostable of the three (retains ~34% at 1540 s; t75 ≈ 295 s). Re-digitized 2026-07-02 as part of a consistent tri-curve pass over Fig. S1 (all three curves re-traced together, axis-calibrated, overlay-verified against the figure); stretched-exponential fit (τ 1355, b 0.817). The prior trace bled slightly low (tail 0.293, t75 235) — corrected to tail 0.339 / t75 295 so the companion overlay with Bongwoori (green, t75 124) and ArcLight A242 (orange, t75 177) is faithful. Origin-paper photobleach Fig. S1 (HEK293 cells, Xenon arc lamp, repeating 40 s on / 20 s off, measured every 40 s, 1 mW/mm² 1P). All three GEVIs were measured under IDENTICAL conditions, so this cross-overlay (shared source+Fig. S1) is genuinely iso-condition. The paper reports the photobleach τ is >450 s for all three but gives no exact per-GEVI value. intensityMWmm2 = 1: dose-scaled to the 100 mW/mm² reference (scaled t75 = 295 × 1/100 ≈ 3.0 s). CAVEAT — 1 mW/mm² is 100× below the reference, so this assumes dose-reciprocity across two orders of magnitude; the scaled value almost certainly understates the true photostability (Bongwoori-R3 is the MOST photostable of the trio at the native condition). The native-condition t75 (295 s @ 1 mW/mm², shown on the curve) is the more meaningful number; the scaled value exists only so the sensor is representable in the cross-GEVI 100 mW/mm² aggregate.",
       "proofread": false
     }
   ],

@@ -484,6 +484,19 @@
       "proofread": false
     }
   ],
+  "apWidthData": [
+    {
+      "fwhm": 2.4,
+      "samplingRate": 1000,
+      "sample": "Mouse, visual cortex layer 1 NDNF interneurons, in vivo",
+      "modality": "1P",
+      "temperature": "37°C",
+      "source": "doi:10.1038/s41592-022-01743-5",
+      "sourceFigure": "Fig. 4d",
+      "note": "Optical spike FWHM (full width at half-maximum of the optically-recorded single AP) of optogenetically triggered spikes in somQuasAr6a-expressing NDNF cells in vivo, imaged at a 1 kHz (996 Hz) frame rate. Read as the box-plot median in Fig. 4d (~2.4 ms; box ~2.2-2.65 ms, n=32 cells, two animals). This is a true FWHM and is distinct from the 'optical spike width' of 10.4 ms in Fig. 3h, which is defined as the full width at 80% below the AP peak (a much wider metric, not comparable to FWHM). The paper prints numeric FWHM only for QuasAr6b (0.87 ms) and Archon1 (1.1 ms) in PV cells at 2 kHz (Fig. 4h); QuasAr6a was measured only in NDNF cells (Fig. 4d), so its value is the panel median. Frame rate 1 kHz recorded; body temperature (~37°C) in vivo.",
+      "proofread": false
+    }
+  ],
   "addgene": {
     "id": "178822",
     "url": "https://www.addgene.org/178822/",
@@ -493,11 +506,12 @@
     {
       "modality": "1P",
       "illumination": "4200 mW/mm²",
-      "t75": 465,
+      "intensityMWmm2": 4200,
+      "t75": 445,
       "fit": {
         "model": "monoexponential",
-        "tau": 1606.5,
-        "r2": 0.9411
+        "tau": 1548.6,
+        "r2": 0.9629
       },
       "custom": {
         "time": [
@@ -525,32 +539,32 @@
         ],
         "fluorescence": [
           1.0,
-          0.9333,
-          0.9233,
-          0.92,
-          0.9167,
-          0.8983,
-          0.8917,
-          0.8783,
-          0.8667,
-          0.85,
-          0.8383,
-          0.8233,
-          0.8067,
-          0.7917,
-          0.78,
-          0.765,
-          0.75,
-          0.7383,
-          0.73,
-          0.7167,
-          0.7033
+          0.9987,
+          0.9808,
+          0.9808,
+          0.964,
+          0.9452,
+          0.9383,
+          0.9096,
+          0.8987,
+          0.872,
+          0.8542,
+          0.8334,
+          0.8066,
+          0.7859,
+          0.7661,
+          0.7453,
+          0.7255,
+          0.7106,
+          0.6938,
+          0.675,
+          0.6562
         ]
       },
       "source": "doi:10.1038/s41592-022-01743-5",
       "sourceImage": "/photobleach-sources/quasar6-extfig4f.jpg",
       "sourceFigure": "Ext. Fig. 4f",
-      "note": "Photobleaching digitized from Ext. Fig. 4f (QuasAr6a-Citrine, red), HEK293T, continuous 635-nm laser at 420 W/cm² (= 4200 mW/mm²), 10 min, n=2 cells. Mono-exponential fit, t75≈465 s. NOT dose-normalized to 100 mW/mm² (intensityMWmm2 omitted): this is an opsin imaged at extreme intensity where bleaching is not dose-linear and the sensor is never used near 100 mW/mm². Measured alongside Archon1 and QuasAr6b (same figure → cross-overlay). Endpoint ~70% at 10 min (cf. photostabilityData ~62%).",
+      "note": "Photobleaching re-digitized from Ext. Fig. 4f (QuasAr6a-Citrine, red curve), HEK293T, continuous 635-nm laser at 420 W/cm² (= 4200 mW/mm²), 10 min, n=2 cells. Mono-exponential fit (tau≈1549 s, R²=0.96), t75≈445 s; QuasAr6a is the lowest of the three curves, ending at ~62-66% of F0 at 585-600 s (consistent with photostabilityData 62%). Measured alongside Archon1 and QuasAr6b in the same figure → cross-overlay (see quasar6b/archon1 entries). Re-digitized 2026-07 because the prior trace over-read the red curve (endpoint ~70%); the corrected trace hugs the red data and matches the figure endpoint.",
       "proofread": false
     }
   ],

@@ -17,6 +17,7 @@ export interface GEVI {
     on: number;
     off: number;
     temperature?: string;
+    dye?: string;  // chemigenetic GEVIs only: the dye this measurement used; the displayed value prefers the canonical dye
     source: string;
     sourceFigure?: string;
     proofread?: boolean;
@@ -41,8 +42,10 @@ export interface GEVI {
   }[];
   subthresholdData?: {
     slope: number;  // %/mV
+    modality?: '1P' | '2P';   // excitation modality of the subthreshold measurement, when identifiable
     source: string;
     sourceFigure?: string;
+    note?: string;
     proofread?: boolean;
   }[];
   // Time width of the optically-recorded action potential (FWHM of the single-AP
@@ -71,6 +74,7 @@ export interface GEVI {
     illumination: string;
     duration: string;
     modality?: '1P' | '2P';  // excitation modality; display-only label (no primary-value logic)
+    dye?: string;  // chemigenetic GEVIs only: the dye this measurement used; the displayed value prefers the canonical dye
     source: string;
     sourceFigure?: string;
     proofread?: boolean;
@@ -92,12 +96,14 @@ export interface GEVI {
   subthresholdDerived?: boolean;         // true when displaySubthreshold was estimated from the F-V slope (not measured)
   displaySensitivity?: number | null;    // median |ΔF/F| per AP across entries
   displayApWidth?: number | null;        // median optical AP width (FWHM, ms) across entries
-  displayPhotostab?: number | null;      // normalized % remaining @ 100 mW/mm², 1 min
+  displayPhotostab?: number | null;      // legacy F_remain metric: normalized % remaining @ 100 mW/mm², 1 min (kept for reference; no longer the displayed/sorted stability metric)
+  displayT75?: number | null;            // photostability landmark: 1P t₇₅ (or t₅₀ where the 75% crossing is transient-dominated), in seconds, linearly dose-scaled to 100 mW/mm². 2P/power-only curves are excluded (not cross-comparable). null when no scalable 1P photobleach curve exists.
   description: string;
   familyTreePath?: string[] | null;
   parentId?: string;
   siblingId?: string;  // geviId of a sibling (same parent, same paper) — renders as Y-fork in tree
   crossBranchParentId?: string;  // geviId of a parent in a different branch
+  canonicalDye?: string;  // chemigenetic GEVIs: the dye the page's headline ΔF/F medians use (e.g. "JF525"); overrides the spectrum.name parenthetical. Off-dye entries stay stored/badged but out of the median.
   spectrum?: {
     type: 'fp' | 'rhodopsin' | 'nir' | 'fret' | 'redfp';
     peakEx: number;
@@ -147,6 +153,7 @@ export interface GEVI {
     t75?: number;                  // time to 75% of initial fluorescence, in seconds (at the measured illumination). Omit when the sensor never reaches 75% within the measured window (negligible bleaching) — the curve still renders/overlays, just without a t75 marker.
     t50?: number;                  // half-life: time to 50% of initial fluorescence, in seconds. Use INSTEAD of t75 when the 75% crossing falls inside an unrepresentative rapid-initial-photobleach transient (the 50% crossing then sits in the sustained phase). The panel renders the marker/threshold at 50% with a t₅₀ label.
     extrapolated?: boolean;        // true when the displayed metric (t75 or t50) lies beyond the measured window (fit extrapolated past the data)
+    reportedTau?: number;          // the paper's OWN reported photobleach time constant, in seconds (usually a single-exponential τ stated in the caption/text). Store-only provenance — the displayed metric is still the model-free t75/t50 from the digitized curve; record this so the authors' authoritative number is preserved even when the real curve is multi-phasic and the model-free metric differs.
     fit?: {
       model: 'power-law' | 'biexponential' | 'monoexponential' | 'stretched-exponential';
       a?: number;                  // power-law: F(t) = a · t^b (t in s). biexponential: fast-component fraction (0-1)
@@ -170,6 +177,7 @@ export interface GEVI {
   addgene?: {
     id: string;
     url: string;
+    note?: string;         // optional caveat, e.g. when the only deposited plasmid is a variant/derivative of this GEVI rather than the exact construct
     proofread?: boolean;
   };
   paperCount?: number;    // computed at runtime from researchPapers.length
@@ -205,7 +213,8 @@ export type SortField =
   | 'displaySubthreshold'
   | 'displaySensitivity'
   | 'displayApWidth'
-  | 'displayPhotostab';
+  | 'displayPhotostab'
+  | 'displayT75';
 
 export type SortOrder = 'asc' | 'desc';
 

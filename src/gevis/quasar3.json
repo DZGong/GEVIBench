@@ -359,7 +359,7 @@
     },
     "source": "doi:10.1038/nmeth.3000",
     "sourceFigure": "Fig. S2d",
-    "note": "Excitation + emission digitized from the QuasAr2 (red) curves in Hochbaum et al. 2014 (Nat. Methods, doi:10.1038/nmeth.3000), Suppl. Fig. 2d. paQuasAr3 = QuasAr3 = QuasAr2 + K171R plus trafficking motifs, which leave the retinal chromophore's fluorescence spectrum essentially unchanged; the paQuasAr3 paper (Adam et al. 2019) independently shows its fluorescence excitation spectrum is 'similar to QuasAr3', with sensitized-state peak λexc ≈ 580 nm (Ext. Data Fig. 3h), vs the QuasAr2 measurement's 590 nm here. Hochbaum measured excitation at λem = 750 nm and emission at λexc = 600 nm on solubilized protein. Both arrays normalized to max = 1.0 (ex peak 590 nm, em peak 715 nm).",
+    "note": "Excitation + emission digitized from the QuasAr2 (red) curves in Hochbaum et al. 2014 (Nat. Methods, doi:10.1038/nmeth.3000), Suppl. Fig. 2d. paQuasAr3 = QuasAr3 = QuasAr2 + K171R plus trafficking motifs, which leave the retinal chromophore's fluorescence spectrum essentially unchanged; the paQuasAr3 paper (Adam et al. 2019) independently shows its fluorescence excitation spectrum is 'similar to QuasAr3', with sensitized-state peak λexc ≈ 580 nm (Ext. Fig. 3h), vs the QuasAr2 measurement's 590 nm here. Hochbaum measured excitation at λem = 750 nm and emission at λexc = 600 nm on solubilized protein. Both arrays normalized to max = 1.0 (ex peak 590 nm, em peak 715 nm).",
     "proofread": false
   },
   "voltage": {
@@ -378,18 +378,19 @@
         75
       ],
       "deltaF": [
-        -2,
-        8,
-        24,
-        38,
-        51,
-        61,
-        69
+        0,
+        12,
+        23,
+        32,
+        42,
+        52,
+        65
       ]
     },
     "source": "doi:10.1038/s41586-019-1166-7",
     "sourceImage": "/fv-sources/quasar3.jpg",
-    "sourceFigure": "Ext. Data Fig. 3d",
+    "sourceFigure": "Ext. Fig. 3d",
+    "note": "ΔF/F0 vs membrane voltage of paQuasAr3, digitized from the solid-black 'paQuasAr3 (red + blue)' (sensitized-state) curve in Ext. Fig. 3d (HEK293T voltage clamp, each trace normalized to F0 at Vm = -75 mV). The paQuasAr3 red-only (black-dashed) curve overlaps it — the caption states fractional voltage sensitivity was the same with or without blue light. The -70 to +30 mV chord is about +42%/100 mV, consistent with the 40 +/- 1.7% PSP value (Fig. 1g). NOTE: the previously stored values [-2,8,24,38,51,61,69] were mistakenly digitized from the grey-dashed 'QuasAr3 red only' curve (which bulges higher in the mid-range), not the paQuasAr3 curve; corrected here.",
     "proofread": false
   },
   "kinetics": [
@@ -399,7 +400,7 @@
       "temperature": "34°C",
       "source": "doi:10.1038/s41586-019-1166-7",
       "note": "Amplitude-weighted mean of double-exponential fit, blue light ON (paQuasAr3 sensitized state), -60 to +40 mV step. tau_up: tau1=0.8 ms (54%), tau2=19.3 ms (46%) -> weighted mean 9.3 ms. tau_down: tau1=0.69 ms (69%), tau2=15.8 ms (31%) -> weighted mean 5.4 ms. n=9 cells.",
-      "sourceFigure": "Ext. Data Fig. 3e",
+      "sourceFigure": "Ext. Fig. 3e",
       "proofread": false
     },
     {
@@ -408,7 +409,7 @@
       "temperature": "34°C",
       "source": "doi:10.1038/s41586-019-1166-7",
       "note": "Amplitude-weighted mean of double-exponential fit, blue light OFF (red-only), -60 to +40 mV step. tau_up: tau1=0.9 ms (57%), tau2=14.6 ms (43%) -> weighted mean 6.8 ms. tau_down: tau1=0.9 ms (79%), tau2=15.0 ms (21%) -> weighted mean 3.9 ms. n=9 cells.",
-      "sourceFigure": "Ext. Data Fig. 3e",
+      "sourceFigure": "Ext. Fig. 3e",
       "proofread": false
     }
   ],
@@ -418,7 +419,7 @@
       "modality": "1P",
       "source": "doi:10.1038/s41586-019-1641-1",
       "note": "ΔF/F per AP in mouse cortex L2/3 brain slices, widefield 1P, simultaneous patch clamp, 1.5 W/mm². Cross-paper comparison value from Piatkevich et al. 2019 Nature (SomArchon paper, doi:10.1038/s41586-019-1641-1), not the 2018 Nat Chem Biol directed-evolution paper. The original Adam 2019 paper does not report a clean ΔF/F per single AP for paQuasAr3.",
-      "sourceFigure": "Ext. Data Fig. 5c",
+      "sourceFigure": "Ext. Fig. 5c",
       "proofread": false
     }
   ],
@@ -428,7 +429,7 @@
       "sign": "positive",
       "modality": "1P",
       "source": "doi:10.1038/s41586-019-1166-7",
-      "note": "Voltage sensitivity ΔF/F = 40 +/- 1.7% per 100 mV, from post-synaptic potential (PSP) measurements in acute brain slices, widefield 1P (n=42 PSPs from 5 cells). Fractional sensitivity was the same for QuasAr3 and paQuasAr3 with or without blue light (P=0.91, Ext. Data Fig. 3d).",
+      "note": "Voltage sensitivity ΔF/F = 40 +/- 1.7% per 100 mV, from post-synaptic potential (PSP) measurements in acute brain slices, widefield 1P (n=42 PSPs from 5 cells). Fractional sensitivity was the same for QuasAr3 and paQuasAr3 with or without blue light (P=0.91, Ext. Fig. 3d). Consistent with the HEK293 voltage-clamp F-V: the paQuasAr3 (red+blue) curve in Ext. Fig. 3d gives a -70 to +30 mV chord of about +42%/100 mV.",
       "sourceFigure": "Fig. 1g",
       "proofread": false
     }
@@ -441,7 +442,43 @@
       "modality": "1P",
       "source": "doi:10.1038/s41586-019-1166-7",
       "note": "Baseline fluorescence photobleached by ~50% during a 10-min in vivo recording in mouse hippocampus (paQuasAr3-s + CheRiff-s, oriens SST cells), under red light at 12 W/mm² (= 12000 mW/mm²) with blue stim up to 10 mW/mm². This is a high-intensity in vivo 1P measurement, not directly comparable to the 100 mW/mm² / 1 min standard. Reporter (gene) expression recovered within 1 week; SNR was stable across 3-week repeat imaging.",
-      "sourceFigure": "Ext. Data Fig. 5",
+      "sourceFigure": "Ext. Fig. 5a",
+      "proofread": false
+    }
+  ],
+  "photobleach": [
+    {
+      "custom": {
+        "time": [0, 10, 30, 50, 70, 90, 110, 130, 170, 210, 250, 290, 330, 370, 410, 450, 490, 530, 570, 590],
+        "fluorescence": [1.0, 1.0, 0.901, 0.814, 0.786, 0.764, 0.743, 0.704, 0.675, 0.633, 0.609, 0.574, 0.557, 0.537, 0.52, 0.505, 0.473, 0.473, 0.454, 0.454]
+      },
+      "illumination": "12000 mW/mm²",
+      "intensityMWmm2": 12000,
+      "t75": 98,
+      "fit": {
+        "model": "biexponential",
+        "a": 0.293,
+        "tau": 85.7,
+        "tau2": 1305.4
+      },
+      "modality": "1P",
+      "source": "doi:10.1038/s41586-019-1166-7",
+      "sourceFigure": "Ext. Fig. 5a",
+      "sourceImage": "/photobleach-sources/quasar3.jpg",
+      "note": "Digitized from the brighter of the two co-recorded cells in Ext. Fig. 5a (Fluorescence A.U. vs time, 0-600 s). Trace = upper envelope of the cell's signal, normalized to its t=0 value (F/F0 ≈ 0.46 at 590 s; the paper states baseline fluorescence photobleached ~50% over the 10-min recording). Biexponential fit a=0.293, τ1=85.7 s, τ2=1305 s -> t75 ≈ 98 s (model-free interpolation ≈ 103 s), within the digitized range (not extrapolated). This is a high-intensity in vivo 1P recording: oriens SST cells expressing paQuasAr3-s + CheRiff-s under red light at 12 W/mm² (= 12000 mW/mm²) with blue optogenetic stim ≤10 mW/mm² and locomotion. intensityMWmm2 set to 12000 (per user request) so the t75 dose-scales to the 100 mW/mm² reference: 98 s × (12000/100) = 11760 s ≈ 3.3 h @100 mW/mm² — the page's displayed t75. STRONG CAVEAT: this is a ~120× linear-dose extrapolation from a saturating in-vivo intensity (12 W/mm²), where photobleaching is NOT linear in intensity, so the scaled value is physically unreliable and is NOT a fair cross-sensor comparison — treat it as an order-of-magnitude upper bound only.",
+      "proofread": false
+    }
+  ],
+  "apWidthData": [
+    {
+      "fwhm": 1.8,
+      "samplingRate": 1000,
+      "sample": "Mouse, hippocampus CA1 oriens interneuron, in vivo",
+      "modality": "1P",
+      "temperature": "37°C",
+      "source": "doi:10.1038/s41586-019-1166-7",
+      "sourceFigure": "Fig. 1i",
+      "note": "FWHM of the somatic optical action potential, derived by digitizing the blue 'Soma' spike-triggered-average (STA) waveform in Fig. 1i (STA of 88 spikes in a CA1 oriens interneuron, ΔF/F vs time; time calibrated against the 10-ms scale bar). Half-maximum measured from the pre-spike baseline to the peak -> FWHM ≈ 1.75 ms (stored rounded to 1.8). Widefield 1P; frame rate 1 kHz (camera frame rate 1 kHz; in vivo traces displayed at native 1-kHz bandwidth). Temperature is the in-vivo mouse-brain approximation (paper reports brain temperature kept <37°C). The same panel also plots the two dendritic STAs (Dendrite 1/2), which are broader and delayed by back-propagation; only the somatic width is stored.",
       "proofread": false
     }
   ],
@@ -459,8 +496,8 @@
       "ratio": 2,
       "reference": "quasar2",
       "source": "doi:10.1038/s41586-019-1166-7",
-      "note": "Blue-light-activated paQuasAr3 is approximately twofold brighter than QuasAr3 (measured in E. coli; Ext. Data Fig. 3b shows 50% maximum photoactivation enhancement). Reference is QuasAr2 here because QuasAr3 = QuasAr2(K171R) with improved trafficking and no separate QuasAr3 page exists.",
-      "sourceFigure": "Ext. Data Fig. 3b",
+      "note": "Blue-light-activated paQuasAr3 is approximately twofold brighter than QuasAr3 (mean of n=10 cells; stated in the Ext. Fig. 3 caption, with panel f plotting the QuasAr/Citrine fluorescence ratio of paQuasAr3 vs QuasAr3). Blue light raises paQuasAr3 near-infrared fluorescence by 2.9 +/- 0.7-fold over its red-only state (n=8 cells, main text); photoactivation saturates with 50% of maximum enhancement at I488 = 27 mW/mm² (Ext. Fig. 3b). Reference is QuasAr2 here because QuasAr3 = QuasAr2(K171R) with improved trafficking and no separate QuasAr3 page exists; QuasAr3 per-molecule brightness ≈ QuasAr2.",
+      "sourceFigure": "Ext. Fig. 3f",
       "proofread": false
     }
   ],

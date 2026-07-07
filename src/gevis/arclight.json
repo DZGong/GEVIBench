@@ -473,12 +473,12 @@
   },
   "kinetics": [
     {
-      "on": 9,
-      "off": 17,
-      "temperature": "25°C",
+      "on": 25,
+      "off": 38,
+      "temperature": "33-35°C",
       "source": "doi:10.1016/j.neuron.2012.06.040",
-      "sourceFigure": "Fig. 1D",
-      "note": "on=9 ms is the FAST component of ArcLight's bi-exponential ON response (Jin reports τfast ~10 ms, τslow ~50 ms; Fig. S3B). Fast-component amplitude not extractable here, so the amplitude-weighted mean is not computed for this entry — it is substantially slower (cf. Hochbaum Table S2: weighted ~82/108 ms at 23°C).",
+      "sourceFigure": "Fig. S3B",
+      "note": "Amplitude-weighted means of the double-exponential fit for ArcLight A242 (the variant this page represents), Jin 2012 Suppl. Fig. 3B, HEK293 voltage clamp, bath 33–35°C (Methods): ON τ1 10 ms (amp 0.65)/τ2 53 ms → on = 0.65×10 + 0.35×53 = 25.1 ms; OFF τ1 22 ms (amp 0.70)/τ2 74 ms → off = 0.70×22 + 0.30×74 = 37.6 ms. CORRECTED: the previous entry stored the fast component of the WRONG variant (9/17 ms is ArcLight Q239, and was the fast component alone at a mislabeled '25°C'); the amplitudes ARE published in Fig. S3B and the A242 row is the correct one for this page. Main-text Fig. 1D (τfast ~10/τslow ~50) is the same ON response summarized.",
       "proofread": false
     },
     {
@@ -593,7 +593,7 @@
       "brightnessRemaining": 82,
       "illumination": "100 mW/mm²",
       "duration": "1 min",
-      "source": "doi:10.1523/JNEUROSCI.3590-15.2016",
+      "source": "doi:10.1523/JNEUROSCI.3484-15.2016",
       "sourceFigure": "Fig. 3I",
       "proofread": false
     },
@@ -608,11 +608,12 @@
   ],
   "brightnessData": [
     {
-      "ratio": 1.097,
+      "ratio": 0.655,
       "reference": "EGFP",
       "source": "doi:10.1016/j.cell.2019.11.004",
       "sourceFigure": "Table 1",
-      "proofread": false
+      "proofread": false,
+      "note": "Molar brightness at −70 mV from Villette et al. 2019 Table 1 = 22 mM⁻¹cm⁻¹ = 22000 M⁻¹cm⁻¹ (absolute); EGFP reference 56000 × 0.60 = 33600 → 22000/33600 ≈ 0.655. (Was 1.097, computed with the incorrect 20040 anchor.)"
     }
   ],
   "addgene": {
@@ -626,6 +627,239 @@
       "source": "doi:10.1016/j.cell.2019.11.004",
       "proofread": false,
       "sourceFigure": "Table 1"
+    }
+  ],
+  "photobleach": [
+    {
+      "custom": {
+        "time": [
+          0.0,
+          30.0,
+          60.0,
+          120.0,
+          200.0,
+          300.0,
+          450.0,
+          600.0,
+          800.0,
+          1000.0,
+          1200.0,
+          1400.0,
+          1540.0
+        ],
+        "fluorescence": [
+          1.0,
+          0.931,
+          0.913,
+          0.811,
+          0.72,
+          0.645,
+          0.531,
+          0.437,
+          0.327,
+          0.268,
+          0.222,
+          0.19,
+          0.177
+        ]
+      },
+      "illumination": "1 mW/mm²",
+      "intensityMWmm2": 1,
+      "t75": 177,
+      "fit": {
+        "model": "stretched-exponential",
+        "tau": 751.7,
+        "b": 0.861
+      },
+      "modality": "1P",
+      "source": "doi:10.1038/s41598-017-08731-2",
+      "sourceFigure": "Fig. S1",
+      "sourceImage": "/photobleach-sources/arclight-figs1.jpg",
+      "note": "Cross-GEVI value from the Bongwoori-R3 origin paper (Lee et al. 2017, primary subject Bongwoori-R3). Orange ▼ ArcLight A242 curve — the least photostable of the three at long times (~18% at 1540 s; t75 ≈ 177 s). This arclight.json page IS ArcLight A242. Re-digitized 2026-07-02 as part of a consistent tri-curve pass over Fig. S1 (all three curves re-traced together, axis-calibrated, overlay-verified against the figure); stretched-exponential fit (τ 751.7, b 0.861). The prior trace bled too low (tail 0.138, t75 146) — corrected to tail 0.177 / t75 177 so the companion overlay with Bongwoori (green, t75 124) and Bongwoori-R3 (purple, t75 295) is faithful. Origin-paper photobleach Fig. S1 (HEK293 cells, Xenon arc lamp, repeating 40 s on / 20 s off, measured every 40 s, 1 mW/mm² 1P). All three GEVIs were measured under IDENTICAL conditions, so this cross-overlay (shared source+Fig. S1) is genuinely iso-condition. The paper reports the photobleach τ is >450 s for all three but gives no exact per-GEVI value. Dose-scaled to the 100 mW/mm² 1P standard using the 1 mW/mm² excitation intensity (a 100× up-scaling from this low-light, duty-cycled Xenon-lamp condition), consistent with the Bongwoori/Bongwoori-R3 entries from the same figure; this page's other entries (11/18/100 mW/mm²) also contribute to the displayed median.",
+      "proofread": false
+    },
+    {
+      "custom": {
+        "time": [
+          0.0,
+          10.0,
+          20.0,
+          30.0,
+          45.0,
+          60.0,
+          90.0,
+          120.0,
+          150.0,
+          180.0,
+          210.0,
+          240.0,
+          270.0,
+          300.0
+        ],
+        "fluorescence": [
+          1.0,
+          0.956,
+          0.915,
+          0.875,
+          0.818,
+          0.765,
+          0.669,
+          0.585,
+          0.512,
+          0.448,
+          0.392,
+          0.343,
+          0.3,
+          0.262
+        ]
+      },
+      "illumination": "11 mW/mm²",
+      "intensityMWmm2": 11,
+      "t75": 64,
+      "t50": 155,
+      "reportedTau": 224,
+      "fit": {
+        "model": "monoexponential",
+        "tau": 224.0
+      },
+      "modality": "1P",
+      "source": "doi:10.7554/eLife.25690",
+      "sourceFigure": "Fig. 1—figure supplement 3A",
+      "sourceImage": "/photobleach-sources/arclight-fig1s3a.jpg",
+      "note": "Cross-GEVI from the ASAP2s paper (primary subject ASAP2s); the sensor measured is 'ArcLight Q239', i.e. the original ArcLight this page represents. ArcLight (red) MONOexponential τ=224 s per Fig. 1-fig.suppl.3B (single-exp, unlike the biexponential ASAP sensors). t75≈64 s, t50≈155 s. Distinct from this page's other photobleach entry (Bongwoori-R3 paper Fig. S1, 1 mW/mm²). Origin-paper 1P photobleach, Fig. 1—figure supplement 3A: HEK293-Kir2.1 cells, continuous widefield 470–490 nm at 11 mW/mm², emission 525/50 nm, normalized to 1.0 at t=0. The stored curve is generated from the paper's OWN published fit (Fig. 1—figure supplement 3B) rather than pixel-digitized, because ASAP1/ASAP2s/ArcLight overlap almost exactly in panel A; the fit endpoints match the panel-A traces at 5 min. All co-plotted sensors (ASAP1, ASAP2s, ArcLight Q239; ASAP1::EGFP has no page) share this source+sourceFigure so they cross-overlay.",
+      "proofread": false
+    },
+    {
+      "custom": {
+        "time": [
+          0,
+          20,
+          40,
+          60,
+          80,
+          100,
+          120,
+          150,
+          180,
+          210,
+          240,
+          270,
+          300
+        ],
+        "fluorescence": [
+          1.0,
+          0.84,
+          0.76,
+          0.702,
+          0.636,
+          0.58,
+          0.536,
+          0.472,
+          0.426,
+          0.383,
+          0.354,
+          0.324,
+          0.294
+        ]
+      },
+      "illumination": "18 mW/mm²",
+      "intensityMWmm2": 18,
+      "t75": 42,
+      "fit": {
+        "model": "biexponential",
+        "a": 0.201,
+        "tau": 33.0,
+        "tau2": 292.7
+      },
+      "modality": "1P",
+      "source": "doi:10.1021/acschemneuro.6b00234",
+      "sourceFigure": "Fig. 3C",
+      "sourceImage": "/photobleach-sources/arclight-fig3c.jpg",
+      "note": "Cross-GEVI value from the Marina origin paper (Platisa 2017; primary subject Marina). Blue ArcLight curve digitized (HSV color separation) from the photobleaching panel Fig. 3C: Intensity (AU) vs cumulative excitation time (0–300 s, 60 cycles of 5 s on / 55 s off, 18 mW/mm² 488 nm widefield, HEK293 cells), normalized to F/F₀ = 1.0 at t = 0 (F₀ ≈ 6255 AU). ArcLight is the least photostable of the three curves in this figure, decaying to ~29% by 300 s; model-free t75 ≈ 42 s (biexponential fit; interpolated data crossing ~43 s), consistent with the paper's single-exponential τ = 132.3 s (→ t75 ≈ 38 s) in the early regime. intensityMWmm2 = 18 → dose-scaled t75 ≈ 7.6 s at the 100 mW/mm² reference. Co-plotted with Marina (a descendant variant of this sensor) from the same Fig. 3C (shared source + sourceFigure → cross-overlay). Distinct from this page's other two photobleach entries (Bongwoori-R3 Fig. S1 @ 1 mW/mm²; ASAP2s Fig. 1—fig. suppl. 3A @ 11 mW/mm²).",
+      "proofread": false
+    },
+    {
+      "custom": {
+        "time": [
+          0,
+          10,
+          20,
+          30,
+          40,
+          60,
+          90,
+          120,
+          150,
+          180,
+          210,
+          240,
+          270,
+          290
+        ],
+        "fluorescence": [
+          1.0,
+          0.949,
+          0.905,
+          0.857,
+          0.809,
+          0.735,
+          0.63,
+          0.55,
+          0.476,
+          0.416,
+          0.362,
+          0.317,
+          0.28,
+          0.257
+        ]
+      },
+      "illumination": "100 mW/mm²",
+      "intensityMWmm2": 100,
+      "t75": 56,
+      "fit": {
+        "model": "biexponential",
+        "a": 0.441,
+        "tau": 130.3,
+        "tau2": 295.3
+      },
+      "modality": "1P",
+      "source": "doi:10.1523/JNEUROSCI.3484-15.2016",
+      "sourceFigure": "Fig. 3I",
+      "sourceImage": "/photobleach-sources/arclight-fig3i.jpg",
+      "note": "Cross-GEVI value from the FlicR1 origin paper (Abdelfattah 2016; primary subject FlicR1). The sensor is 'ArcLight Q239', i.e. the original ArcLight this page represents (black curve in Fig. 3I). Digitized (HSV/black color separation) from the 1P photobleaching panel Fig. 3I: normalized fluorescence vs time for FlicR1 (red), ArcLight Q239 (black), ASAP1 (green) in HEK293 cells under continuous 488 nm illumination at 10 W/cm² = 100 mW/mm², normalized to 1.0 at t=0. ArcLight is the MOST photostable of the three (slowest decay); model-free t75 ≈ 56 s (biexponential fit, a 0.441 / τ 130 / τ2 295 s), broadly consistent with the paper's single-exponential τ = 300 ± 30 s in the early regime (the real curve is somewhat steeper than that single-exp). Already at the 100 mW/mm² reference. RE-VERIFIED 2026-07-04 (flicr1 cross-check): the black ArcLight Q239 curve was re-digitized from Fig. 3I on a clean axis-calibrated grid — the prior trace over-read the mid-region (t=120 s 0.58→0.55; a spurious t=140 s 0.539 point that produced a flatten-then-drop shoulder was removed and replaced by t=150 s 0.476), giving a smoothly monotonic decay; t75 56 vs the prior 58 s. The companion FlicR1 red curve was corrected in the same panel. Distinct from this page's other photobleach entries (Bongwoori-R3 Fig. S1 @ 1 mW/mm²; ASAP2s Fig. 1—fig. suppl. 3A @ 11 mW/mm²; Marina Fig. 3C @ 18 mW/mm²). Cross-plotted with FlicR1 and ASAP1 from the same Fig. 3I.",
+      "proofread": false
+    }
+  ],
+  "apWidthData": [
+    {
+      "fwhm": 6.5,
+      "sample": "Cultured rat hippocampal neurons, in vitro",
+      "modality": "1P",
+      "temperature": "22°C",
+      "source": "doi:10.1038/nn.3709",
+      "sourceFigure": "Fig. 1f",
+      "note": "STATED optical single-AP FWHM for ArcLight Q239 (= the ArcLight this page represents) from St-Pierre 2014 Fig. 1f: 'the FWHM of the fluorescence responses were 3.7 ms and 6.5 ms for ASAP1 and ArcLight Q239, respectively' (current-injected APs in cultured hippocampal neurons; the co-measured electrical-trace FWHM was 3.6 ms). Cross-GEVI value (paper's primary subject is ASAP1). samplingRate omitted: the frame rate for this specific neuron panel is not separately reported (the paper images at 'kilohertz frame rates', 5–10 kHz for the HEK kinetics); the 6.5-ms width is partly kinetics-broadened (ArcLight has slow τ_off) but at the fast end it is not strictly comparable to frame-rate-specified widths without the rate. Patch-clamp performed at 22°C.",
+      "proofread": false
+    },
+    {
+      "fwhm": 70.6,
+      "samplingRate": 1000,
+      "sample": "Cultured rat hippocampal neurons, in vitro",
+      "modality": "1P",
+      "source": "doi:10.1523/JNEUROSCI.3484-15.2016",
+      "sourceFigure": "Fig. 5E",
+      "note": "Cross-GEVI value from the FlicR1 origin paper (Abdelfattah 2016; primary subject FlicR1), 'ArcLight Q239' = the ArcLight this page represents. FWHM of the mean single-AP optical fluorescence waveform, derived by digitizing the ArcLight Q239 (green) trace in Fig. 5E (ΔF/F vs time over the paired electrical AP; 1 kHz frame rate, 10 W/cm² 488 nm, cultured rat hippocampal neurons). No numeric FWHM is stated; measured here as the width at half of the baseline-to-peak amplitude (peak ≈ 48 ms, half-max span ≈ 28.9–99.5 ms → FWHM ≈ 70.6 ms), overlay-verified. This is much broader than the co-measured FlicR1 (≈ 6.8 ms) — the paper explicitly notes the FlicR1 signal 'was not broadened to the extent that it was with ArcLight Q239'. The large FWHM (> the usual 1–20 ms range) is genuine, reflecting ArcLight's slow deactivation kinetics (τ_off tens–hundreds of ms). Recording temperature not stated for this neuron experiment.",
+      "proofread": false
+    },
+    {
+      "fwhm": 6.6,
+      "samplingRate": 440,
+      "sample": "Cultured neurons, in vitro",
+      "modality": "1P",
+      "source": "doi:10.1038/ncomms4674",
+      "sourceFigure": "Fig. 5c",
+      "note": "Cross-GEVI value from the MacQ origin paper (Gong et al. 2014, Nat. Commun. 5:3674; primary subject MacQ-mCitrine/MacQ-mOrange2). The sensor is 'Arclight 239Q' (= the ArcLight this page represents), included as the direct comparison. FWHM of the averaged optical single-AP fluorescence waveform (blue trace, ΔF/F peak ≈ −3%, averaged over n=10 spikes) digitized (HSV blue color separation) from Fig. 5c, tightly cropped to exclude the panel-d legend dot. No numeric FWHM is stated; measured here as the width at half of the baseline-to-peak amplitude (rise ≈ 8.7 ms → peak ≈ 10.4 ms → decay through half-max ≈ 15.4 ms; FWHM ≈ 6.6 ms), x-axis calibrated against the 20 ms scale bar (230 px). Cultured neuron, 480 nm widefield 15 mW/mm², 440 Hz frame acquisition. Corroborates the St-Pierre 2014 Fig. 1f value (6.5 ms, same 'ArcLight Q239'); distinctly narrower than the 70.6 ms read from Abdelfattah Fig. 5E — the co-plotted faster MacQ-mCitrine trace foreshortens the visible ArcLight decay tail here, so this width reflects the peak/early-decay half-width, not the full slow τ_off. Recording temperature not stated.",
+      "proofread": false
     }
   ],
   "researchPapers": [
@@ -1103,7 +1337,7 @@
       "year": 2016,
       "authors": "Abdelfattah AS, et al.",
       "sample": "HEK293 cells, organotypic rat brain slices",
-      "url": "https://doi.org/10.1523/JNEUROSCI.3590-15.2016",
+      "url": "https://doi.org/10.1523/JNEUROSCI.3484-15.2016",
       "proofread": false
     }
   ]

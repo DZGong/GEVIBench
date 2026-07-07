@@ -264,6 +264,17 @@
     "sourceFigure": "Fig. 1F",
     "proofread": false
   },
+  "kinetics": [
+    {
+      "on": 181,
+      "off": 433,
+      "temperature": "20-23°C",
+      "source": "doi:10.1021/acschemneuro.5c00670",
+      "sourceFigure": "Fig. S6C",
+      "note": "Amplitude-weighted mean τ of the double-exponential fluorescence response to voltage steps from −60 mV (Eq. S2). A common, resolution-limited fast time constant τf = 70 ms is shared by both directions; the slow component (τs,on, τs,off) and its shared fraction (rs = roff) are strongly voltage-dependent, read from Fig. S6C (τ values are NOT in Table S2, which lists only the steady-state Boltzmann parameters). Values here are at a representative depolarizing step to 0 mV, pixel-calibrated from Fig. S6C: rs ≈ 0.265, τs,on ≈ 0.49 s → on = 0.735·70 + 0.265·490 ≈ 181 ms; τs,off ≈ 1.44 s → off = 0.735·70 + 0.265·1440 ≈ 433 ms. NOTE the reference-voltage sensitivity: the paper's own headline (main text) quotes τs,on ≈ 1.5 s with rs = 45% at −120 mV (my Fig. S6C reading at −100 mV: rs ≈ 0.42, τs,on ≈ 1.43 s), which would give a much larger weighted on-τ — a single stored value cannot capture this strong voltage dependence. rEstus-NI is deliberately slow (a FLIM/absolute-Vm sensor for non-excitable cells; the authors state the experiments were not optimized for speed), so τ far exceeds the typical VSD-cpGFP range. Confocal 1P-FLIM in HEK293T under voltage clamp, 480 nm excitation, room temperature (20−23°C).",
+      "proofread": false
+    }
+  ],
   "dynamicRangeData": [
     {
       "deltaF": -57,
@@ -271,7 +282,7 @@
       "modality": "1P",
       "source": "doi:10.1021/acschemneuro.5c00670",
       "sourceFigure": "Fig. 1F",
-      "note": "ΔF/F for a 100-mV step (−70→+30 mV), from the re-digitized green F/F−60mV curve in Fig. 1F (F/F−60 ≈ 1.15 at −70 mV, ≈0.50 at +30 mV); consistent with the paper's Boltzmann fit (Fmax=2.60, ΔF=2.19, VhF=−96.6, khF=36.6). The paper quotes ~70% change over the full −120→+60 mV (180 mV) span; one-photon FLIM calibration in HEK293T cells under voltage clamp (480 nm excitation, 20-23°C).",
+      "note": "ΔF/F for a 100-mV step (−70→+30 mV), from the re-digitized green F/F−60mV curve in Fig. 1F (F/F−60 ≈ 1.15 at −70 mV, ≈0.50 at +30 mV); consistent with the paper's Boltzmann fit of the Fig. 1F curve (Fmax=2.60, ΔF=2.19, VhF=−96.6 mV, khF=36.6 mV; verified in the Fig. 1F caption). The paper quotes ~70% change over the full −120→+60 mV (180 mV) span; one-photon FLIM calibration in HEK293T cells under voltage clamp (480 nm excitation, 20-23°C).",
       "proofread": false
     }
   ],

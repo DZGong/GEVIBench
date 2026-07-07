@@ -557,6 +557,7 @@
     {
       "modality": "1P",
       "illumination": "20 mW/mm² (SNR-matched effective)",
+      "intensityMWmm2": 20,
       "t75": 87,
       "extrapolated": true,
       "fit": {
@@ -571,7 +572,26 @@
       "source": "doi:10.1016/j.neuron.2024.08.019",
       "sourceImage": "/photobleach-sources/asap5.jpg",
       "sourceFigure": "Fig. S5E",
-      "note": "Digitized (cyan ASAP5-Kv curve) from Fig. S5E, an SNR-matched photostability comparison vs Voltron2525-Kv. Acquired at 46 mW/mm², but the time-axis was multiplied by 2.3 (STAR Methods) so the plotted curve represents ASAP5-Kv photobleaching at the SNR-matched effective irradiance of ~20 mW/mm² (=46/2.3) in real-time-equivalent seconds. Normalized to the 0.5 s value — the brief transient bright state in the first 0.5 s is excluded, so F0 is the post-transient baseline (true bleaching is slightly faster than shown). Decays to ~83% at 60 s; monoexponential fit τ≈301 s (r²=0.99); t75≈87 s is EXTRAPOLATED beyond the 60 s window. intensityMWmm2 intentionally omitted: this SNR-matched / time-rescaled / 0.5 s-normalized measurement is non-standard, so it stands alone and is NOT linearly dose-scaled to the 100 mW/mm² reference or compared across GEVIs.",
+      "note": "Digitized (cyan ASAP5-Kv curve) from Fig. S5E, an SNR-matched photostability comparison vs Voltron2525-Kv. Acquired at 46 mW/mm², but the time-axis was multiplied by 2.3 (STAR Methods) so the plotted curve represents ASAP5-Kv photobleaching at the SNR-matched effective irradiance of ~20 mW/mm² (=46/2.3) in real-time-equivalent seconds. Normalized to the 0.5 s value — the brief transient bright state in the first 0.5 s is excluded, so F0 is the post-transient baseline (true bleaching is slightly faster than shown). Decays to ~83% at 60 s; monoexponential fit τ≈301 s (r²=0.99); t75≈87 s is EXTRAPOLATED beyond the 60 s window. intensityMWmm2 set to 20 (the SNR-matched effective irradiance) so t75 is linearly dose-scaled to the 100 mW/mm² reference (≈17 s) for the list/radar/comparison views. APPROXIMATE — this SNR-matched / time-rescaled / 0.5 s-normalized measurement is non-standard AND the t75 itself is extrapolated past the data, so treat the scaled value as order-of-magnitude only.",
+      "proofread": false
+    },
+    {
+      "modality": "2P",
+      "illumination": "16 mW at 940 nm (2P power-only)",
+      "fit": {
+        "model": "monoexponential",
+        "tau": 11.6,
+        "c": 0.861,
+        "r2": 0.975
+      },
+      "custom": {
+        "time": [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60],
+        "fluorescence": [1.0, 0.937, 0.917, 0.902, 0.89, 0.877, 0.879, 0.872, 0.869, 0.867, 0.86, 0.857, 0.85]
+      },
+      "source": "doi:10.64898/2026.05.27.728040",
+      "sourceImage": "/photobleach-sources/asap5-2p-940nm-asap7ypaper.jpg",
+      "sourceFigure": "Fig. 2g",
+      "note": "Cross-GEVI entry from the ASAP7y paper (Hao 2026; primary subject ASAP7y). Digitized (blue ASAP5 curve) from Fig. 2g: normalized fluorescence over 1 min of continuous two-photon imaging of Mi1 neurons in vivo (Drosophila) on an AOD random-access microscope at 940 nm (~16 mW post-objective, STAR Methods 'sensor comparison in Mi1'), plotted against ASAP7y at 940 nm (green, plateaus near 1.0). ASAP5 decays to ~0.85 at 60 s and plateaus (offset-monoexponential τ≈11.6 s, plateau c≈0.86, r²≈0.98). t75 OMITTED: the curve never falls to 75% of F0 within the 60 s window (too photostable at this power) — honest lower bound is t75 > 60 s; not extrapolated. 2P power-only measurement: intensityMWmm2 intentionally omitted (no mW/mm² given), NOT dose-scaled to the 100 mW/mm² 1P reference and NOT compared across the 1P entry above; stands alone. Co-figure GEVI ASAP7y (940 nm) shares this source + Fig. 2g for cross-overlay.",
       "proofread": false
     }
   ],

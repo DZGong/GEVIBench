@@ -423,13 +423,14 @@
       "source": "doi:10.1016/j.cell.2019.11.004",
       "note": "Amplitude-weighted mean of the bi-exponential fit at 32-35°C in CHO cells (Table 1). Activation: τ_fast=0.94 ms (72%), τ_slow=7.24 ms → weighted on=2.70 ms. Deactivation: τ_fast=3.79 ms (76%), τ_slow=16.0 ms → weighted off=6.72 ms.",
       "sourceFigure": "Table 1",
-      "proofread": false
+      "proofread": true
     },
     {
-      "on": 1.3,
-      "off": 3.5,
-      "temperature": "25°C",
+      "on": 13.23,
+      "off": 3.58,
+      "temperature": "37°C",
       "source": "doi:10.1016/j.neuron.2024.08.019",
+      "note": "Amplitude-weighted mean of the bi-exponential fit at 37°C in HEK293A cells imaged at 1888 fps under simultaneous voltage clamp (ASAP5 paper, Table S2; ASAP3 row, 37°C). Activation (−70→+30 mV depolarization): τ_fast=1.3 ms (73%), τ_slow=45.5 ms (27%) → weighted on=13.23 ms. Deactivation (repolarization): τ_fast=3.5 ms (81%), τ_slow=3.9 ms (19%) → weighted off=3.58 ms. Corrected from a prior entry that stored the fast components only (1.3/3.5) and mislabeled the temperature as 25°C — those values are the 37°C τ-fast pair, not a room-temperature measurement. The same table also lists a 23°C ASAP3 row (act τ_fast 3.6/63%, τ_slow 18.5; deact τ_fast 9.0/29%, τ_slow 22.8 → weighted 9.11/18.80).",
       "sourceFigure": "Table S2",
       "proofread": false
     },
@@ -440,21 +441,23 @@
       "note": "Amplitude-weighted mean of the bi-exponential fit at 22-23°C in HEK293 cells (Table 1; Table S1, -70→+30 mV step). Activation: τ_fast=3.7 ms (81%), τ_slow=48 ms → weighted on=12.12 ms. Deactivation: τ_fast=16.0 ms (81%), τ_slow=102 ms → weighted off=32.34 ms.",
       "temperature": "22-23°C",
       "sourceFigure": "Table 1",
-      "proofread": false
+      "proofread": true
     },
     {
-      "on": 0.98,
-      "off": 4.29,
+      "on": 4.49,
+      "off": 21.54,
       "temperature": "32-35°C",
       "source": "doi:10.1016/j.cell.2022.07.013",
+      "note": "Amplitude-weighted mean of the bi-exponential fit at 32-35°C in HEK293-Kir2.1 cells (JEDI-2P paper, Table S2; ASAP3 column). Activation: τ_fast=0.98 ms (82.4%), τ_slow=20.9 ms → weighted on=4.49 ms. Deactivation: τ_fast=4.29 ms (86.9%), τ_slow=136 ms → weighted off=21.54 ms. Previously stored the fast components only (0.98/4.29).",
       "sourceFigure": "Table S2",
       "proofread": false
     },
     {
-      "on": 2.26,
-      "off": 11,
+      "on": 8.73,
+      "off": 25.85,
       "temperature": "21-23°C",
       "source": "doi:10.1016/j.cell.2022.07.013",
+      "note": "Amplitude-weighted mean of the bi-exponential fit at 21-23°C in HEK293-Kir2.1 cells (JEDI-2P paper, Table S2; ASAP3 column). Activation: τ_fast=2.26 ms (78.4%), τ_slow=32.2 ms → weighted on=8.73 ms. Deactivation: τ_fast=11.0 ms (85.3%), τ_slow=112 ms → weighted off=25.85 ms. Previously stored the fast components only (2.26/11).",
       "sourceFigure": "Table S2",
       "proofread": false
     }
@@ -467,7 +470,7 @@
       "source": "doi:10.1016/j.cell.2019.11.004",
       "note": "ΔF/F per 100-mV step (-70→+30 mV) under one-photon widefield voltage clamp in HEK293 cells at 22-23°C (Table 1, Voltage Responsivity 1-Photon).",
       "sourceFigure": "Table 1",
-      "proofread": false
+      "proofread": true
     },
     {
       "deltaF": -49.3,
@@ -495,7 +498,7 @@
       "source": "doi:10.1016/j.cell.2019.11.004",
       "note": "ΔF/F per single AP (17.9 ± 1.2%) in cultured hippocampal neurons under one-photon widefield illumination at room temperature (Table 1, Voltage Responsivity 1-Photon; Fig. 2E/2F).",
       "sourceFigure": "Table 1",
-      "proofread": false
+      "proofread": true
     },
     {
       "deltaF": 10.2,
@@ -527,7 +530,7 @@
       "slope": 0.46,
       "source": "doi:10.1016/j.cell.2019.11.004",
       "sourceFigure": "Fig. S5E",
-      "proofread": false
+      "proofread": true
     },
     {
       "slope": 0.9,
@@ -538,11 +541,12 @@
   ],
   "brightnessData": [
     {
-      "ratio": 0.748,
+      "ratio": 0.446,
       "reference": "EGFP",
       "source": "doi:10.1016/j.cell.2019.11.004",
-      "sourceFigure": "Fig. S5D",
-      "proofread": false
+      "sourceFigure": "Table 1",
+      "proofread": false,
+      "note": "Molar brightness at −70 mV from Villette et al. 2019 Table 1 = 15 mM⁻¹cm⁻¹ = 15000 M⁻¹cm⁻¹ (absolute); EGFP reference 56000 × 0.60 = 33600 → 15000/33600 ≈ 0.446. Consistent with the independent 37.5 %EGFP direct measurement in Rühl et al. 2024. (Was 0.748, computed with the incorrect 20040 anchor and mis-sourced to Fig. S5D.)"
     },
     {
       "ratio": 0.682,
@@ -592,10 +596,10 @@
     },
     {
       "brightnessRemaining": 53,
-      "illumination": "1500 mW/mm²",
+      "illumination": "25 mW/mm²",
       "duration": "5 min",
       "source": "doi:10.1038/s41586-019-1641-1",
-      "note": "ASAP3-Kv in mouse cortex L2/3 brain slices, n=11 cells. From Piatkevich et al. 2019 Ext. Fig. 5e",
+      "note": "ASAP3-Kv in primary cultured mouse neurons, n=11 cells, 475-nm LED continuous illumination at 25 mW/mm² (Piatkevich et al. 2019 Ext. Fig. 5e source data, MOESM12). Illumination corrected from a prior '1500 mW/mm²' value, which was the SomArchon red-laser intensity (637 nm) mis-copied onto this green/cpGFP sensor; the green channel in that figure is 25 mW/mm². F/F0 = 0.529 at 300 s (matches the digitized photobleach entry from the same panel).",
       "sourceFigure": "Ext. Fig. 5e",
       "proofread": false
     },
@@ -604,8 +608,8 @@
       "illumination": "10 µW/mm²",
       "duration": "60 min",
       "source": "doi:10.64898/2026.05.27.728040",
-      "note": "~40% photobleaching over a 1-h recording of ASAP3 in PV interneurons in mouse cortex under CW 445-nm exposure (~10 µW/mm²), versus ~10% for ASAP7y under the same conditions",
-      "sourceFigure": "Fig. S3a",
+      "note": "~40% photobleaching over a 1-h recording of ASAP3 in PV interneurons in mouse cortex under CW 445-nm exposure (~10 µW/mm²), versus ~10% for ASAP7y under the same conditions (green ASAP3 trace ends at ~64% at 60 min in Ext. Data Fig. 3a). Cross-measured in the ASAP7y paper (Hao et al. 2026); ASAP3, but not ASAP7y, shows reversible photobleaching (sawtooth recovery at periodic 445-nm bouts).",
+      "sourceFigure": "Ext. Fig. 3a",
       "proofread": false
     }
   ],
@@ -613,24 +617,44 @@
     {
       "compatible": true,
       "source": "doi:10.1016/j.cell.2019.11.004",
-      "proofread": false
+      "proofread": true
     }
   ],
   "addgene": {
     "id": "132331",
     "url": "https://www.addgene.org/132331/",
-    "proofread": false
+    "proofread": true
   },
   "apWidthData": [
     {
       "fwhm": 5.8,
-      "samplingRate": 1000,
+      "samplingRate": 987,
       "sample": "HEK293A cells, optical response to a single AP-like command waveform, whole-cell voltage clamp",
       "modality": "1P",
-      "temperature": "32-35°C",
+      "temperature": "room temperature",
       "source": "doi:10.1038/s41467-023-41975-3",
       "sourceFigure": "Fig. 2f",
-      "note": "Optical AP-response width (FWHM) to a single AP-like command waveform (2-ms FWHM, +30 mV peak), HEK293A whole-cell voltage clamp at 1 kHz. Measured alongside JEDI-1P in the JEDI-1P paper (whose primary subject is JEDI-1P, 4.9 ms); ASAP2s was 6.8 ms.",
+      "note": "Optical response width (FWHM) to a single AP-like command waveform (2-ms FWHM, +30 mV peak), HEK293A whole-cell voltage clamp, fluorescence acquired at ~987 Hz (ORCA Flash 4.0 V2 sCMOS; the paper's Methods repeatedly specify ~987 fps/Hz for green-GEVI voltage imaging, not a round 1 kHz). Fig. 2f y-axis is 'Width of response to spike waveforms (ms)' and the caption states 'The width corresponds to the full-width at half-maximum' (so this IS a true FWHM, not a 30%-max width). ASAP3 (orange) bar ≈ 5.7 ms verified off the rendered panel; ASAP2s ≈ 6.7 ms. Measured alongside JEDI-1P (primary subject, ≈4.4 ms). Experiments done at room temperature (Fig. 2 caption: 'unless otherwise noted'; the 32–35 °C note applies only to panels m–o).",
+      "proofread": false
+    },
+    {
+      "fwhm": 12.7,
+      "sample": "Cultured rat hippocampal neurons, optical response to current-evoked single APs, current clamp, room temperature",
+      "modality": "1P",
+      "temperature": "room temperature",
+      "source": "doi:10.1016/j.cell.2019.11.004",
+      "sourceFigure": "Fig. 2F",
+      "note": "Optical spike width at half-maximum (FWHM ≈ 12.7 ms, n = 5) of the ASAP3 optical single-AP waveform in cultured hippocampal neurons, read from the 'Optical spike width (ms)' bar chart in Fig. 2F of the origin paper (Villette et al. 2019); the co-plotted ASAP2s bar is ≈17.3 ms. Measured under one-photon widefield illumination at room temperature. samplingRate is omitted: the paper reports only a range (1–2 kHz, Table 1 footnote) rather than a single frame rate for this experiment, and this width (~12.7 ms) is dominated by ASAP3's own deactivation kinetics (τ_off ~16–32 ms at RT) rather than the frame interval (kinetics-dominated exception), so it is meaningful but not strictly comparable to frame-rate-specified widths. Distinct from the electrical AP FWHM (3.9 ± 0.2 ms) also reported in Fig. 2E, which is the command AP waveform, not the optical response.",
+      "proofread": false
+    },
+    {
+      "fwhm": 3.4,
+      "samplingRate": 3750,
+      "sample": "Mouse, cortex, in vivo (ASAP3)",
+      "modality": "2P",
+      "source": "doi:10.1101/2024.11.15.623698",
+      "sourceFigure": "Fig. 3f",
+      "note": "Optical spike FWHM ≈ 3.4 ms (grey ASAP3 bar) read off the 'Spike FWHM (ms)' bar sub-panel of Fig. 3f in the 2Photron paper (Böhm et al. 2024 bioRxiv), where ASAP3 (grey) is cross-plotted with JEDI-2P (green, ≈1.85 ms) and 2Photron-ST552 (red, ≈1.42 ms). ASAP3 data are from Villette et al. 2019 (n=23 cells) as noted in the caption. Two-photon ULoVE recording (3.75 kHz). No numeric ASAP3 value is given in the text; value verified by rendering and reading the bar height against the y-axis (0–4 ms). Cross-measured in the 2Photron paper.",
       "proofread": false
     }
   ],
@@ -769,14 +793,188 @@
         "r2": 0.9958
       },
       "custom": {
-        "time": [0, 3, 6, 10, 15, 20, 30, 45, 60, 90, 120, 150, 180, 210, 240, 270, 300],
-        "fluorescence": [1.0, 0.643, 0.622, 0.604, 0.59, 0.576, 0.552, 0.525, 0.499, 0.461, 0.422, 0.39, 0.361, 0.36, 0.312, 0.291, 0.275]
+        "time": [
+          0,
+          3,
+          6,
+          10,
+          15,
+          20,
+          30,
+          45,
+          60,
+          90,
+          120,
+          150,
+          180,
+          210,
+          240,
+          270,
+          300
+        ],
+        "fluorescence": [
+          1.0,
+          0.643,
+          0.622,
+          0.604,
+          0.59,
+          0.576,
+          0.552,
+          0.525,
+          0.499,
+          0.461,
+          0.422,
+          0.39,
+          0.361,
+          0.36,
+          0.312,
+          0.291,
+          0.275
+        ]
       },
       "source": "doi:10.1016/j.cell.2022.07.013",
       "sourceImage": "/photobleach-sources/asap3-figs4g.jpg",
       "sourceFigure": "Fig. S4G",
       "proofread": false,
       "note": "Cross-GEVI entry from the JEDI-2P origin paper (primary subject JEDI-2P): 1P photobleaching of ASAP3 in HEK293-Kir2.1 cells, widefield 1PM at 15 mW/mm² over 5 min (Fig. S4G, orange curve). Digitized by HSV color separation. Large fast-bleach initial drop (to ~0.64), so the t75% crossing is transient-dominated → half-life t50 ≈ 59 s stored instead. Biexponential fit. Companion curves in the same panel: JEDI-2P, ASAP2s."
+    },
+    {
+      "modality": "1P",
+      "illumination": "25 mW/mm² (475 nm)",
+      "t75": 95,
+      "fit": {
+        "model": "biexponential",
+        "a": 0.211,
+        "tau": 70.96,
+        "tau2": 718.26,
+        "r2": 0.9985
+      },
+      "custom": {
+        "time": [
+          0,
+          7.2,
+          13.2,
+          20.2,
+          27.2,
+          33.2,
+          40.2,
+          46.2,
+          53.2,
+          60.2,
+          72.2,
+          84.2,
+          96.2,
+          108.2,
+          120.2,
+          132.2,
+          144.2,
+          156.2,
+          168.2,
+          180.3,
+          192.2,
+          204.2,
+          216.2,
+          228.2,
+          240.2,
+          252.2,
+          264.2,
+          276.2,
+          288.2,
+          300.2
+        ],
+        "fluorescence": [
+          1.0,
+          0.9565,
+          0.9386,
+          0.9146,
+          0.8969,
+          0.8816,
+          0.8642,
+          0.8488,
+          0.8335,
+          0.8172,
+          0.7939,
+          0.7706,
+          0.75,
+          0.7262,
+          0.7091,
+          0.6897,
+          0.6723,
+          0.6579,
+          0.6423,
+          0.6288,
+          0.6139,
+          0.6024,
+          0.59,
+          0.5801,
+          0.5697,
+          0.5601,
+          0.5514,
+          0.5435,
+          0.5357,
+          0.5289
+        ]
+      },
+      "source": "doi:10.1038/s41586-019-1641-1",
+      "sourceImage": "/photobleach-sources/asap3-ext5e.jpg",
+      "sourceFigure": "Ext. Fig. 5e",
+      "note": "Cross-GEVI photobleaching from the SomArchon paper (Piatkevich et al. 2019, primary subject SomArchon). ASAP3-Kv (cpGFP, KV2.1-targeted) in primary cultured mouse neurons (n=11), 475 nm LED at 25 mW/mm² continuous illumination, digitized from the exact Ext. Data Fig. 5e source data (MOESM12 spreadsheet). F/F0 falls to 0.529 at 300 s and never reaches 50% in-window, so the model-free t75 = 95 s is stored (no t50; the t75 crossing is in the sustained phase, not a rapid initial transient). Biexponential fit, R²=0.998. CAVEAT (cross-overlay): the Ext. Fig. 5e panel co-plots this green sensor with SomArchon, which was imaged at 637 nm / 1,500 mW/mm² — a ~60x higher intensity at a different wavelength. intensityMWmm2 is OMITTED (no dose-scaling) because the cross-sensor comparison is NOT apples-to-apples across that wavelength/intensity gap. NB: this page's separate photostabilityData Ext.-Fig.-5e entry currently lists '1500 mW/mm²' for ASAP3-Kv, which is the SomArchon red-laser value mis-copied; the green channel here is 25 mW/mm².",
+      "proofread": false
+    },
+    {
+      "modality": "1P",
+      "illumination": "~10 µW/mm² (445 nm CW, in vivo)",
+      "intensityMWmm2": 0.01,
+      "t75": 886,
+      "custom": {
+        "time": [
+          0,
+          60,
+          120,
+          180,
+          240,
+          300,
+          420,
+          600,
+          780,
+          960,
+          1200,
+          1500,
+          1800,
+          2100,
+          2400,
+          2700,
+          3000,
+          3300,
+          3600
+        ],
+        "fluorescence": [
+          1.0,
+          0.8295,
+          0.8114,
+          0.8039,
+          0.7986,
+          0.8472,
+          0.8339,
+          0.7513,
+          0.7977,
+          0.7169,
+          0.7624,
+          0.6793,
+          0.7261,
+          0.7067,
+          0.6899,
+          0.6193,
+          0.6621,
+          0.6475,
+          0.636
+        ]
+      },
+      "source": "doi:10.64898/2026.05.27.728040",
+      "sourceImage": "/photobleach-sources/asap3-ext-fig3a.jpg",
+      "sourceFigure": "Ext. Fig. 3a",
+      "note": "Cross-GEVI in-vivo photobleaching from the ASAP7y paper (Hao et al. 2026 bioRxiv, primary subject ASAP7y). ASAP3 (green) expressed in mouse cortical PV interneurons, co-plotted with ASAP7y (yellow) over a 1-h continuous recording under CW 445-nm exposure (~10 µW/mm²); the green ASAP3 curve was digitized by color-masking with the correct 0-min (x=349 px) → 60-min (x=1619 px) tick calibration. The net trend falls from 100% to ~64% at 60 min (~40% photobleaching vs ~10% for ASAP7y, per caption). NON-MONOTONIC SAWTOOTH: ASAP3 (but not ASAP7y) undergoes REVERSIBLE photobleaching — the curve drops then recovers at each periodic 445-nm bout, so the stored trace is the median-line envelope and reflects real reversible-recovery physiology, not a digitization artifact. No biexponential fit is stored (the sawtooth makes a monotonic-decay model inappropriate, R²<0). t75 = 886 s is the first (model-free) crossing below 0.75; because of the reversible recovery the signal transiently returns above 0.75 until ~20 min. t50 never reached in-window.",
+      "proofread": false
     }
   ],
   "researchPapers": [

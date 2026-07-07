@@ -14,7 +14,7 @@
   "parentId": "arclight",
   "spectrum": {
     "type": "fp",
-    "peakEx": 490,
+    "peakEx": 488,
     "peakEm": 511,
     "name": "Bongwoori",
     "source": "FPbase: EGFP",
@@ -450,16 +450,16 @@
         1,
         0,
         -4,
-        -10,
         -13,
-        -13
+        -19,
+        -19
       ]
     },
-    "source": "doi:10.1523/JNEUROSCI.3008-14.2015",
+    "source": "doi:10.1038/s41598-017-08731-2",
     "sourceImage": "/fv-sources/bongwoori.jpg",
-    "sourceFigure": "Fig. 6B",
+    "sourceFigure": "Fig. 4B",
     "proofread": false,
-    "note": "Fig. 6B plots the NORMALIZED ΔF/F (0→1 Boltzmann fit, V1/2 ≈ -3 mV), not signed ΔF/F. Digitized the blue Bongwoori curve (normalized: -120→0.015, -70→0.066, -20→0.34, +30→0.78, +80→0.96, +130→1.0) and rescaled to signed ΔF/F with -70 mV = 0 and the -70→+30 mV step anchored to the -10% per-100-mV dynamic range (Fig. 6A). The curve saturates near -13% by +80 mV. Replaces a prior curve that did not saturate (-16% at +80, -21% at +130) and included an off-figure -170 mV point (Fig. 6B starts at -120 mV)."
+    "note": "Read directly (signed) from the Lee 2017 Fig. 4B bar graph, which plots -ΔF/F (%) for Bongwoori at the exact 100-mV-step voltages against a -70 mV holding potential (legend: -120, -20, 30, 80, 130 mV; 34°C, HEK293, 1P). Bongwoori (leftmost group) reads -ΔF/F ≈ 0 (-120), 4.3 (-20), 13.4 (30), 18.5 (80), 19.3 (130) %, i.e. signed ΔF/F ≈ +1, -4, -13, -19, -19 with -70 mV = 0. Negative-going, monotonic, saturates near -19% by +80 mV; the -70→+30 mV step is -13% (matches dynamicRangeData). Previous curve was digitized from the Piao 2015 Fig. 6B NORMALIZED Boltzmann (0→1) and rescaled to a -10% anchor, which understated the response (had +30 = -10, +80 = -13); the -10% anchor was actually the ArcLight scale bar from Fig. 7A, not a Bongwoori 100-mV value. Lee Fig. 4B is a direct signed reading at the target steps, so it supersedes the rescaled Boltzmann. sourceImage updated to the Fig. 4B crop (was the Piao Fig. 6B normalized plot)."
   },
   "kinetics": [
     {
@@ -483,12 +483,13 @@
   ],
   "dynamicRangeData": [
     {
-      "deltaF": -10,
+      "deltaF": -13,
       "sign": "negative",
       "modality": "1P",
-      "source": "doi:10.1523/JNEUROSCI.3008-14.2015",
-      "sourceFigure": "Fig. 6A",
-      "proofread": false
+      "source": "doi:10.1038/s41598-017-08731-2",
+      "sourceFigure": "Fig. 4B",
+      "proofread": false,
+      "note": "ΔF/F for the -70→+30 mV (100-mV) step read directly off the Lee 2017 Fig. 4B bar graph: Bongwoori -ΔF/F ≈ 13.4% at +30 mV (holding -70 mV), 34°C, HEK293, 1P widefield. Was previously -10% cited to Piao 2015 'Fig. 6A' — but the -10% figure was the ArcLight (not Bongwoori) scale bar in Fig. 7A neuron traces, a misattribution; Fig. 4B gives the correct signed 100-mV value. Consistent with the F-V curve (voltage.custom)."
     }
   ],
   "sensitivityData": [
@@ -503,8 +504,9 @@
       "deltaF": 2.5,
       "modality": "1P",
       "source": "doi:10.1523/JNEUROSCI.3008-14.2015",
-      "sourceFigure": "Fig. 7",
-      "proofread": false
+      "sourceFigure": "Discussion",
+      "proofread": false,
+      "note": "Per-AP ΔF/F ≈ 2.5% for Bongwoori in cultured hippocampal neurons (current clamp, 1P widefield, Fig. 7A trace). Piao 2015 Discussion states \"Bongwoori exhibits optical signals up to 5% ΔF/F for an action potential, but 50% of that signal is attributable to spiking\" — i.e. the total optical excursion during an AP is up to ~5%, of which ~50% (≈2.5%) is due to the spike itself (the rest is the subthreshold/slow-component depolarization). This 2.5% is therefore the spike-attributable per-AP signal derived from the paper's own stated numbers, not an eyeballed scale-bar read. The Lee 2017 Table 3 entry (3.7%) is a separately tabulated per-spike ΔF/F. sourceFigure corrected from the previously-cited Fig. 7A scale bar to the Discussion text that gives the numeric basis."
     }
   ],
   "brightnessData": [
@@ -513,6 +515,18 @@
       "reference": "arclight",
       "source": "doi:10.1038/s41598-017-08731-2",
       "sourceFigure": "Table 3",
+      "proofread": false
+    }
+  ],
+  "apWidthData": [
+    {
+      "fwhm": 33.1,
+      "samplingRate": 500,
+      "sample": "Mouse, cultured hippocampal neurons, in vitro",
+      "modality": "1P",
+      "source": "doi:10.1523/ENEURO.0060-20.2020",
+      "sourceFigure": "Fig. 1C",
+      "note": "Independent optical single-AP half-width (FWHM) = 33.1 ± 2.6 ms (n = 6 neurons) measured in the Milosevic et al. 2020 eNeuro benchmarking study, cultured mouse hippocampal neurons, widefield 1P (excitation 480/40 nm, 510 nm dichroic, 535/50 nm emission; 10.1 mW/mm²), CCD acquisition at 500 fps (0.5 kHz). The construct assayed was hSyn-Bongwoori-Pos6 (the positive-going Bongwoori derivative, Lee 2018); the paper's summary sentence refers to it simply as \"Bongwoori.\" This is the broadest optical AP among the tested green GEVIs — the optical AP was on average ~18× (1800 ± 122%) wider than the paired electrical AP half-width in the same trial, reflecting Bongwoori's slow response kinetics plus the 500 Hz frame rate. Cross-measured (this GEVI was not the primary subject of the paper). No separate Bongwoori-Pos6 page exists, so applied here to the parent Bongwoori page.",
       "proofread": false
     }
   ],
@@ -531,6 +545,56 @@
     "url": "https://www.addgene.org/63720/",
     "proofread": false
   },
+  "photobleach": [
+    {
+      "custom": {
+        "time": [
+          0.0,
+          30.0,
+          60.0,
+          120.0,
+          200.0,
+          300.0,
+          450.0,
+          600.0,
+          800.0,
+          1000.0,
+          1200.0,
+          1400.0,
+          1540.0
+        ],
+        "fluorescence": [
+          1.0,
+          0.901,
+          0.881,
+          0.758,
+          0.65,
+          0.586,
+          0.497,
+          0.426,
+          0.362,
+          0.313,
+          0.271,
+          0.245,
+          0.231
+        ]
+      },
+      "illumination": "1 mW/mm²",
+      "intensityMWmm2": 1,
+      "t75": 124,
+      "fit": {
+        "model": "stretched-exponential",
+        "tau": 799.6,
+        "b": 0.668
+      },
+      "modality": "1P",
+      "source": "doi:10.1038/s41598-017-08731-2",
+      "sourceFigure": "Fig. S1",
+      "sourceImage": "/photobleach-sources/bongwoori-figs1.jpg",
+      "note": "Cross-GEVI value from the Bongwoori-R3 origin paper (Lee et al. 2017, primary subject Bongwoori-R3). Green ■ Bongwoori curve — bleaches faster initially than Bongwoori-R3 but levels off, retaining ~23% at 1540 s (slightly above ArcLight A242's ~18%). Re-digitized 2026-07-02 (color-masked green squares, axis-calibrated 6 y-ticks 1.0→0.0 rows 172→1392 / 4 x-ticks 0→1500 cols 607→2510, stretched-exponential fit r²=0.995, trace + fit + t75 overlay-verified against Fig. S1); the prior trace bleached too fast (t75 100 s, tail 0.187 = ArcLight-orange level) — corrected to t75 ≈ 124 s (stretched-exp fit; direct F=0.75 crossing of the digitized points ≈ 126 s). Origin-paper photobleach Fig. S1 (HEK293 cells, Xenon arc lamp, repeating 40 s on / 20 s off, measured every 40 s, 1 mW/mm² 1P). All three GEVIs (ArcLight A242, Bongwoori, Bongwoori-R3) were measured under IDENTICAL conditions, so the cross-overlay (shared source+Fig. S1) is genuinely iso-condition. The paper reports the exponential photobleach τ is >450 s for all three but gives no exact per-GEVI value. Dose-scaled to the 100 mW/mm² 1P standard using the 1 mW/mm² excitation intensity — a 100× up-scaling from this low-light, duty-cycled (40 s on / 20 s off) Xenon-lamp condition.",
+      "proofread": false
+    }
+  ],
   "researchPapers": [
     {
       "title": "Combinatorial mutagenesis of the voltage-sensing domain enables the optical resolution of action potentials firing at 60 Hz by a genetically encoded fluorescent sensor of membrane potential",

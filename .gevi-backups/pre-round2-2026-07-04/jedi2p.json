@@ -1,0 +1,740 @@
+{
+  "id": "jedi2p",
+  "name": "JEDI-2P",
+  "year": 2022,
+  "date": "2022-08-18",
+  "category": "VSD-cpGFP GEVI",
+  "tags": [
+    "cpGFP",
+    "Two-photon"
+  ],
+  "paper": "Cell 2022",
+  "paperUrl": "https://doi.org/10.1016/j.cell.2022.07.013",
+  "description": "Two-photon optimized GEVI evolved from ASAP2s with improved brightness, photostability, and sensitivity under two-photon illumination.",
+  "parentId": "asap2s",
+  "siblingId": "jedi1p",
+  "spectrum": {
+    "type": "fp",
+    "peakEx": 501,
+    "peakEm": 519,
+    "name": "JEDI-2P",
+    "custom": {
+      "minEx": 350,
+      "excitation": [0.08, 0.08, 0.1012, 0.0968, 0.0996, 0.108, 0.1132, 0.116, 0.1224, 0.1236, 0.1229, 0.129, 0.1334, 0.1365, 0.1412, 0.1385, 0.1405, 0.1468, 0.1513, 0.152, 0.1614, 0.1729, 0.1725, 0.1794, 0.189, 0.1967, 0.207, 0.2149, 0.2223, 0.2325, 0.2383, 0.2407, 0.2476, 0.2578, 0.2658, 0.2733, 0.2797, 0.2831, 0.2909, 0.3021, 0.3079, 0.3123, 0.3191, 0.3243, 0.3298, 0.3368, 0.3407, 0.3436, 0.3453, 0.3536, 0.2986, 0.3674, 0.3744, 0.3786, 0.3859, 0.3896, 0.3942, 0.3989, 0.3974, 0.3994, 0.4031, 0.3989, 0.3982, 0.4021, 0.4056, 0.4031, 0.4031, 0.4078, 0.4093, 0.4148, 0.4196, 0.42, 0.4212, 0.4251, 0.4291, 0.4255, 0.423, 0.4208, 0.419, 0.4153, 0.4147, 0.4136, 0.4097, 0.4067, 0.4069, 0.4034, 0.4006, 0.3978, 0.3983, 0.3967, 0.394, 0.3936, 0.3947, 0.3929, 0.3928, 0.3925, 0.3935, 0.3959, 0.3974, 0.395, 0.3926, 0.3374, 0.4012, 0.4104, 0.4187, 0.4271, 0.4442, 0.4551, 0.4677, 0.4811, 0.497, 0.503, 0.5176, 0.5297, 0.54, 0.5509, 0.5608, 0.569, 0.5803, 0.5917, 0.6002, 0.6113, 0.6211, 0.625, 0.6339, 0.6443, 0.6508, 0.6648, 0.6874, 0.7047, 0.7193, 0.7388, 0.7631, 0.7826, 0.7965, 0.8157, 0.8324, 0.846, 0.8547, 0.8601, 0.8696, 0.8796, 0.894, 0.9021, 0.921, 0.9397, 0.956, 0.9669, 0.9764, 0.9814, 0.9925, 1.0, 0.9953, 0.9868, 0.9759, 0.9577, 0.9481, 0.9151, 0.886, 0.8841, 0.8, 0.7717, 0.7412, 0.704, 0.6553, 0.6026, 0.5624, 0.5147, 0.4613, 0.4165, 0.3732, 0.3315, 0.2896, 0.2577, 0.2285, 0.1993, 0.1796, 0.1618, 0.1474, 0.1346, 0.1246, 0.1162, 0.1075, 0.1012, 0.0924, 0.0885, 0.0862, 0.0847, 0.0847, 0.0847, 0.0847],
+      "minEm": 458,
+      "emission": [0.0607, 0.059, 0.0581, 0.0609, 0.0638, 0.0661, 0.07, 0.0723, 0.0745, 0.0776, 0.0801, 0.083, 0.0855, 0.0882, 0.0911, 0.0959, 0.0985, 0.1043, 0.1101, 0.1153, 0.1204, 0.1281, 0.1362, 0.1411, 0.1512, 0.1593, 0.1704, 0.1838, 0.1967, 0.2104, 0.2248, 0.2406, 0.2568, 0.2781, 0.2957, 0.3175, 0.3405, 0.362, 0.3847, 0.4065, 0.4322, 0.4579, 0.4865, 0.5185, 0.5513, 0.5847, 0.6198, 0.6587, 0.695, 0.7308, 0.7706, 0.8034, 0.8371, 0.8698, 0.8946, 0.9181, 0.9388, 0.9561, 0.9747, 0.9857, 0.9928, 1.0, 0.9976, 0.9909, 0.9816, 0.9732, 0.9606, 0.9401, 0.9197, 0.9011, 0.8788, 0.8464, 0.8227, 0.7993, 0.7668, 0.7376, 0.712, 0.6932, 0.6617, 0.6429, 0.6304, 0.6068, 0.5876, 0.5648, 0.5561, 0.5462, 0.5351, 0.5159, 0.5017, 0.4886, 0.4733, 0.4586, 0.4481, 0.4342, 0.4214, 0.4097, 0.3965, 0.3849, 0.3744, 0.362, 0.3508, 0.3448, 0.3315, 0.3195, 0.3105, 0.3038, 0.292, 0.2817, 0.2731, 0.2625, 0.2545, 0.2451, 0.2348, 0.2267, 0.2205, 0.212, 0.2061, 0.1969, 0.1889, 0.1811, 0.1757, 0.1679, 0.1608, 0.1556, 0.1486, 0.1419, 0.1389, 0.1332, 0.1283, 0.1221, 0.1202, 0.1193, 0.1145, 0.1077, 0.1059, 0.1047, 0.1011, 0.0962, 0.0921, 0.0891, 0.0862, 0.0839, 0.0817, 0.0768, 0.0738, 0.071, 0.0688, 0.066, 0.0635, 0.0615, 0.0589, 0.0579, 0.0574, 0.0547, 0.0516, 0.0523, 0.0529, 0.0474, 0.0436, 0.0449, 0.0464, 0.0455, 0.041, 0.0355, 0.0356, 0.0355, 0.0332, 0.0322, 0.0277, 0.0268, 0.0301, 0.0307, 0.028, 0.0262, 0.027, 0.0274, 0.0257, 0.0235, 0.0211, 0.0214, 0.0232, 0.0217, 0.019, 0.0167, 0.0168, 0.0189, 0.0165, 0.0154, 0.0154, 0.0143, 0.0141, 0.0148, 0.0148]
+    },
+    "source": "doi:10.1016/j.cell.2022.07.013",
+    "sourceFigure": "Fig. S4J",
+    "note": "JEDI-2P's real 1P excitation/emission spectra digitized from the origin paper (Cell 2022, Fig. S4J): excitation peak ~501 nm with a ~420 nm vibronic shoulder, emission peak ~519 nm. Replaces a previously stored curve that was byte-identical to ASAP4e and mis-attributed to the ASAP4 paper — JEDI-2P is ~10-12 nm red-shifted vs ASAP2s/ASAP4 due to the T207H (GFP T203H) mutation, so the inherited curve was wrong. The paper's 2P excitation spectrum peaks at 940 nm (Fig. 2J).",
+    "proofread": false
+  },
+  "voltage": {
+    "type": "fp",
+    "slope": 13,
+    "polarity": "negative",
+    "name": "JEDI-2P",
+    "custom": {
+      "voltage": [
+        -100,
+        -80,
+        -60,
+        -40,
+        -20,
+        0,
+        20,
+        30,
+        50
+      ],
+      "deltaF": [
+        10,
+        3,
+        -5,
+        -20,
+        -34,
+        -43,
+        -47,
+        -48,
+        -49
+      ]
+    },
+    "source": "doi:10.1016/j.cell.2022.07.013",
+    "sourceImage": "/fv-sources/jedi2p.jpg",
+    "sourceFigure": "Fig. 2B",
+    "proofread": false
+  },
+  "kinetics": [
+    {
+      "on": 1.45,
+      "off": 1.21,
+      "temperature": "32-35\u00b0C",
+      "note": "Depolarization is bi-exponential (Table S2): \u03c4_fast = 0.54 ms (87.5%), \u03c4_slow = 7.78 ms (12.5%); amplitude-weighted mean \u03c4_on = 0.875\u00d70.54 + 0.125\u00d77.78 = 1.45 ms. Repolarization is mono-exponential (\u03c4_slow = '-' in Table S2), \u03c4_off = 1.21 ms. HEK293A whole-cell voltage clamp, \u221270\u219230 mV depolarization / 30\u2192\u221270 mV repolarization, n = 11 cells.",
+      "source": "doi:10.1016/j.cell.2022.07.013",
+      "sourceFigure": "Table S2",
+      "proofread": false
+    },
+    {
+      "on": 2.47,
+      "off": 2.54,
+      "temperature": "21-23\u00b0C",
+      "note": "Depolarization is bi-exponential (Table S2): \u03c4_fast = 1.21 ms (88.3%), \u03c4_slow = 12.0 ms (11.7%); amplitude-weighted mean \u03c4_on = 0.883\u00d71.21 + 0.117\u00d712.0 = 2.47 ms. Repolarization is mono-exponential (\u03c4_slow = '-' in Table S2), \u03c4_off = 2.54 ms. HEK293A whole-cell voltage clamp, n = 10 cells.",
+      "source": "doi:10.1016/j.cell.2022.07.013",
+      "sourceFigure": "Table S2",
+      "proofread": false
+    },
+    {
+      "on": 0.91,
+      "off": 1.5,
+      "temperature": "33\u00b0C",
+      "note": "Amplitude-weighted mean of the bi-exponential fit at 33\u00b0C under widefield 1P illumination (HEK293A whole-cell voltage clamp, n=11; FORCE1s paper Table S1.4). Activation (\u221270\u2192+30 mV): \u03c4fast 0.49 ms (78%) + \u03c4slow 2.4 ms (22%) \u2192 \u03c4\u0304 = 0.78\u00d70.49 + 0.22\u00d72.4 = 0.91 ms. Deactivation (+30\u2192\u221270 mV): \u03c4 1.5 ms, best fit by a monoexponential (no slow component reported). Previously stored the fast component 0.49 alone; corrected to the weighted mean per policy.",
+      "source": "doi:10.64898/2026.04.07.717088",
+      "sourceFigure": "Table S1.4",
+      "proofread": false
+    },
+    {
+      "on": 1.6,
+      "off": 1.2,
+      "temperature": "33°C",
+      "note": "JEDI-2P reference values measured in the JEDI3 paper (Land et al. 2026) under widefield 1P illumination, HEK293A whole-cell voltage clamp at 33°C. On (−70→+30 mV activation) is the amplitude-weighted mean of the bi-exponential fit in Table 1: τfast 0.55 ms (85.1%) + τslow 7.57 ms (14.9%) = 1.60 ms. Off (+30→−70 mV deactivation) is the monoexponential τ of 1.20 ms.",
+      "source": "doi:10.1038/s41592-026-03043-8",
+      "sourceFigure": "Table 1",
+      "proofread": false
+    },
+    {
+      "on": 4.57,
+      "off": 3.8,
+      "temperature": "23°C",
+      "note": "Cross-GEVI measurement from the ASAP5 paper (Hao et al. 2024 Neuron, Table S2; primary subject ASAP5), HEK293A cells imaged at 1888 fps under simultaneous voltage clamp. Activation (−70→+30 mV depolarization) is the amplitude-weighted mean of the bi-exponential fit at 23°C: τ_fast=3.0 ms (94%), τ_slow=29.2 ms (6%) → weighted on=4.57 ms. Deactivation (repolarization) was single-exponential (fast 100%, slow not relevant): τ_off=3.8 ms.",
+      "source": "doi:10.1016/j.neuron.2024.08.019",
+      "sourceFigure": "Table S2",
+      "proofread": false
+    },
+    {
+      "on": 4.3,
+      "off": 7.28,
+      "temperature": "37°C",
+      "note": "Cross-GEVI measurement from the ASAP5 paper (Hao et al. 2024 Neuron, Table S2; primary subject ASAP5), HEK293A cells imaged at 1888 fps under simultaneous voltage clamp. Amplitude-weighted mean of the bi-exponential fit at 37°C. Activation (−70→+30 mV depolarization): τ_fast=0.7 ms (88%), τ_slow=30.7 ms (12%) → weighted on=4.30 ms. Deactivation (repolarization): τ_fast=1.2 ms (51%), τ_slow=13.6 ms (49%) → weighted off=7.28 ms.",
+      "source": "doi:10.1016/j.neuron.2024.08.019",
+      "sourceFigure": "Table S2",
+      "proofread": false
+    }
+  ],
+  "dynamicRangeData": [
+    {
+      "deltaF": -48,
+      "sign": "negative",
+      "modality": "2P",
+      "note": "Peak steady-state response amplitude to a 100-mV step from a resting potential of −70 mV, HEK293A cells under 2PM (940 nm), room temperature. Fig. 2C scatter mean ≈ −48% (read from figure; exact value in Data S2, not available). The previously-stored −43 corresponded to the Fig. 2B F-V curve value at +30 mV, not the Fig. 2C peak step amplitude.",
+      "source": "doi:10.1016/j.cell.2022.07.013",
+      "sourceFigure": "Fig. 2C",
+      "proofread": false
+    },
+    {
+      "deltaF": -45,
+      "sign": "negative",
+      "modality": "1P",
+      "note": "Peak response amplitude to a 100-mV step from −70 mV under widefield 1PM, HEK293A cells, room temperature. Fig. S4C scatter mean ≈ −45% (read from figure; exact value in Data S2, not available). Per the legend, JEDI-2P and ASAP3 produce similar 1PM step responses (n.s.).",
+      "source": "doi:10.1016/j.cell.2022.07.013",
+      "sourceFigure": "Fig. S4C",
+      "proofread": false
+    },
+    {
+      "deltaF": -46,
+      "sign": "negative",
+      "modality": "1P",
+      "source": "doi:10.1016/j.neuron.2025.12.014",
+      "note": "\u0394F/F\u2080 = \u22120.46 \u00b1 0.10 (highest magnitude of the three sensors) for a 100-mV step (\u221270 to +30 mV, 100 ms) in ND7/23 cells under 1P wide-field illumination (470 nm LED, 10 mW/mm\u00b2, 50 Hz), whole-cell voltage clamp. Measured alongside Jarvis (0.29) and pAce (0.41).",
+      "sourceFigure": "Fig. 1C(i)",
+      "proofread": false
+    },
+    {
+      "deltaF": -41.8,
+      "sign": "negative",
+      "modality": "2P",
+      "source": "doi:10.1038/s41592-026-03043-8",
+      "note": "Response to a 100-mV depolarizing step (-70 mV to +30 mV) at 23°C in HEK293A cells under 2P excitation at 940 nm (Fig. 1h; value 41.8% reported in main text and Supplementary Fig. 3/Table 2). Measured alongside JEDI3hyp (51.5%) and JEDI3sub (63.5%).",
+      "sourceFigure": "Fig. 1h",
+      "proofread": false
+    },
+    {
+      "deltaF": -41.73,
+      "sign": "negative",
+      "modality": "2P",
+      "source": "doi:10.1038/s41592-026-03043-8",
+      "note": "JEDI-2P reference: response amplitude to a 100-mV voltage step (−70 mV to +30 mV) at 33°C in HEK293A cells under 2P resonant scanning at 940 nm (Extended Data Fig. 1b, value 41.73%). 33°C counterpart of the 23°C Fig. 1h value (-41.8%). Compare ASAP5 35.20%, JEDI3hyp 51.72%, JEDI3sub 60.26% in the same panel.",
+      "sourceFigure": "Ext. Fig. 1b",
+      "proofread": false
+    }
+  ],
+  "sensitivityData": [
+    {
+      "deltaF": 18.2,
+      "modality": "2P",
+      "note": "Mean single-spike response amplitude (−18.2% ± 4.8% ΔF/F0, mean ± 95% CI) measured in vivo in awake mouse visual cortex L2/3 with resonant-scanning 2PM at 440 Hz (main text; Fig. 5C/5D, Fig. S6A–C). NOTE: previously mis-attributed to Fig. 2E — 18.2% is the in vivo 2P value, not the in vitro spike-waveform value. The Fig. 2E in vitro 2P single-spike value is ≈ −26% (see separate entry).",
+      "source": "doi:10.1016/j.cell.2022.07.013",
+      "sourceFigure": "Fig. 5D",
+      "proofread": false
+    },
+    {
+      "deltaF": 26,
+      "modality": "2P",
+      "note": "Peak response amplitude to a single 2-ms-FWHM spike waveform (mimicking L2/3 cortical AP) in HEK293A cells under 2PM, room temperature. Fig. 2E scatter mean ≈ −26% (read from figure; exact value in Data S2, not available).",
+      "source": "doi:10.1016/j.cell.2022.07.013",
+      "sourceFigure": "Fig. 2E",
+      "proofread": false
+    },
+    {
+      "deltaF": 24,
+      "modality": "1P",
+      "note": "Peak response amplitude to a single 2-ms-FWHM spike waveform in HEK293A cells under widefield 1PM, room temperature. Fig. S4E scatter mean ≈ −24% (read from figure; exact value in Data S2, not available).",
+      "source": "doi:10.1016/j.cell.2022.07.013",
+      "sourceFigure": "Fig. S4E",
+      "proofread": false
+    },
+    {
+      "deltaF": 23.3,
+      "modality": "2P",
+      "source": "doi:10.1038/s41592-026-03043-8",
+      "note": "Peak -%ΔF/Fo response to a 2-ms FWHM single-spike waveform at 23°C in HEK293A cells under 2P excitation at 940 nm (Fig. 1j). Measured alongside JEDI3hyp (36.4%) and JEDI3sub (42.8%).",
+      "sourceFigure": "Fig. 1j",
+      "proofread": false
+    },
+    {
+      "deltaF": 28.6,
+      "modality": "2P",
+      "source": "doi:10.64898/2026.06.01.726307",
+      "note": "Mean single-spike response amplitude of JEDI-2P-Kv in Layer 2/3 cortical neurons of awake, head-fixed mice under ULoVE 2P microscopy (-28.6 ± 4.1% ΔF/F, mean ± SD; bright-to-dim, magnitude reported). Modality inferred as 2P from the note (ULoVE is a two-photon technique); source preprint not directly accessible.",
+      "sourceFigure": "Fig. 3B",
+      "proofread": false
+    },
+    {
+      "deltaF": 27.6,
+      "modality": "2P",
+      "source": "doi:10.64898/2026.04.07.717088",
+      "note": "Mean single-spike (isolated AP) response amplitude of JEDI-2P-Kv in Layer 2/3 V1 neurons of awake, head-fixed mice under ULoVE 2P microscopy (27.6 ± 4.1% ΔF/F, mean ± SD; bright-to-dim, magnitude reported). Measured as the in vivo benchmark for FORCE1s-Kv (92.7%).",
+      "sourceFigure": "Fig. 3B",
+      "proofread": false
+    }
+  ],
+  "brightnessData": [
+    {
+      "ratio": 1.67,
+      "reference": "asap3",
+      "note": "Relative brightness under 2PM (Fig. 2I, HEK293-Kir2.1 cells at −77 mV): JEDI-2P ≈ 1.52, ASAP3 ≈ 0.90 (both normalized to ASAP2s = 1.0), giving JEDI-2P/ASAP3 ≈ 1.69 ≈ 1.67. The stored ratio matches the 2PM Fig. 2I values, not the 1PM Fig. S4I values (where JEDI-2P/ASAP3 ≈ 1.55); sourceFigure corrected from Fig. S4I to Fig. 2I.",
+      "source": "doi:10.1016/j.cell.2022.07.013",
+      "sourceFigure": "Fig. 2I",
+      "proofread": false
+    },
+    {
+      "ratio": 1.5,
+      "reference": "asap2s",
+      "note": "Relative brightness under 2PM (Fig. 2I, HEK293-Kir2.1 cells at −77 mV): JEDI-2P ≈ 1.52 vs ASAP2s = 1.0, i.e. ≈ 1.5×. The stored ratio matches the 2PM Fig. 2I values, not the 1PM Fig. S4I values (≈ 1.4×); sourceFigure corrected from Fig. S4I to Fig. 2I.",
+      "source": "doi:10.1016/j.cell.2022.07.013",
+      "sourceFigure": "Fig. 2I",
+      "proofread": false
+    },
+    {
+      "ratio": 1.45,
+      "reference": "asap5",
+      "source": "doi:10.1038/s41592-026-03043-8",
+      "note": "mBeRFP-normalized brightness at ~-70 mV in HEK293-Kir2.1 cells under 2P excitation at 940 nm, normalized to ASAP5 median (Ext. Fig. 1c, n ≥ 3,500 cells per indicator).",
+      "sourceFigure": "Ext. Fig. 1c",
+      "proofread": false
+    }
+  ],
+  "photostabilityData": [
+    {
+      "brightnessRemaining": 47,
+      "illumination": "15 mW/mm\u00b2",
+      "duration": "2 min",
+      "modality": "1P",
+      "note": "Widefield 1PM photobleaching at 15 mW/mm\u00b2 in HEK293-Kir2.1 cells at \u221277 mV (Fig. S4G). Normalized fluorescence read from the curve: \u2248 0.55 at 1 min, \u2248 0.47 at 2 min, \u2248 0.36 at 3 min. The previously-stored 55% @ 2 min was inconsistent with the figure (\u2248 47% at 2 min; 55% corresponds to \u2248 1 min); value corrected to 47% @ 2 min.",
+      "source": "doi:10.1016/j.cell.2022.07.013",
+      "sourceFigure": "Fig. S4G",
+      "proofread": false
+    },
+    {
+      "brightnessRemaining": 71,
+      "illumination": "40 mW/mm²",
+      "duration": "1 min",
+      "modality": "1P",
+      "note": "F/F0 remaining after 1 min at 40 mW/mm² (1P widefield, 470 nm, CHO cells), read from the JEDI-2P 40 mW/mm² bleach curve in Fig. 1F; falls to ~0.46 by 235 s. Measured alongside Jarvis (~92% at 1 min, far more photostable) and pAce (~80%) at the same 40 mW/mm².",
+      "source": "doi:10.1016/j.neuron.2025.12.014",
+      "sourceFigure": "Fig. 1F",
+      "proofread": false
+    },
+    {
+      "brightnessRemaining": 32,
+      "illumination": "100 mW",
+      "duration": "6 min",
+      "modality": "2P",
+      "note": "JEDI-2P reference, in vitro (HEK293A) under 2P resonant scanning at 940 nm, 100 mW at the sample plane over a 40 × 635 µm FOV for 6 min (FORCE1s paper, Fig. S1.2B). JEDI-2P (purple) normalized-2P-fluorescence curve reaches ≈ 0.32 at the 360-s (6-min) endpoint — bleaching faster than FORCE1s (≈0.57) and ASAP4e (≈0.60) in the same panel. Sample-plane POWER (not an irradiance), so this 2P entry is display-only and does not normalize to the mW/mm² standard.",
+      "source": "doi:10.64898/2026.04.07.717088",
+      "sourceFigure": "Fig. S1.2B",
+      "proofread": false
+    }
+  ],
+  "photobleach": [
+    {
+      "modality": "2P",
+      "illumination": "37 mW at sample plane (2P)",
+      "t75": 64,
+      "fit": {
+        "model": "biexponential",
+        "a": 0.19,
+        "tau": 7.5,
+        "tau2": 764.5,
+        "r2": 0.985
+      },
+      "custom": {
+        "time": [
+          0,
+          5,
+          10,
+          15,
+          20,
+          30,
+          45,
+          60,
+          90,
+          120,
+          150,
+          180,
+          210,
+          240,
+          270,
+          300,
+          330,
+          360
+        ],
+        "fluorescence": [
+          1.0,
+          0.857,
+          0.849,
+          0.839,
+          0.827,
+          0.804,
+          0.779,
+          0.755,
+          0.717,
+          0.686,
+          0.654,
+          0.628,
+          0.607,
+          0.588,
+          0.568,
+          0.548,
+          0.536,
+          0.536
+        ]
+      },
+      "source": "doi:10.1038/s41592-026-03043-8",
+      "sourceImage": "/photobleach-sources/jedi2p.jpg",
+      "sourceFigure": "Fig. 1e",
+      "note": "Model-free photostability: t75% = time for fluorescence to fall to 75% of initial. Digitized from the JEDI-2P curve in the representative 6-min 2P photobleaching trace (Fig. 1e, 37-mW excitation at the sample plane, HEK293A cells, n=3-4). Bi-exponential fit (fast tau1, slow tau2). This is a 2P, power-only measurement (not mW/mm2), so it stands alone and is NOT intensity-normalized or comparable to 1P GEVIs.",
+      "proofread": false
+    },
+    {
+      "modality": "1P",
+      "intensityMWmm2": 40,
+      "t75": 44,
+      "fit": {
+        "model": "biexponential",
+        "a": 0.292,
+        "tau": 39.4,
+        "tau2": 552.4,
+        "r2": 0.9995
+      },
+      "custom": {
+        "time": [
+          0,
+          10,
+          20,
+          30,
+          45,
+          60,
+          80,
+          100,
+          120,
+          150,
+          180,
+          210,
+          235
+        ],
+        "fluorescence": [
+          1.0,
+          0.915,
+          0.854,
+          0.807,
+          0.751,
+          0.701,
+          0.654,
+          0.616,
+          0.576,
+          0.544,
+          0.515,
+          0.485,
+          0.466
+        ]
+      },
+      "source": "doi:10.1016/j.neuron.2025.12.014",
+      "sourceImage": "/photobleach-sources/jedi2p-fig1f.jpg",
+      "sourceFigure": "Fig. 1F",
+      "proofread": false,
+      "note": "Model-free photostability: t75% = time for fluorescence to fall to 75% of initial. Re-digitized from the JEDI-2P 40 mW/mm² curve (lightest salmon; legend swatch 220,127,175) in Fig. 1F (1P widefield, 470 nm, CHO cells), F/F0 over ~235 s. The curve decays smoothly and monotonically from 1.0 to ~0.47 at 235 s with no plateau; the t75 crossing (~44 s) was read from the digitized points and confirmed by a bi-exponential fit (a=0.292, tau=39.4 s, tau2=552.4 s, r2=0.9995), overlay-verified against the figure. Corrects a prior digitization that had a non-physical flat plateau at ~0.47 from 120 s onward (giving t75=47 with a degenerate tau2=2000 fit). 1P/40 mW/mm² (intensityMWmm2=40); the panel scales t75 to the 100 mW/mm² reference. Measured alongside Jarvis (far more photostable) and pAce at the same 40 mW/mm²."
+    },
+    {
+      "modality": "2P",
+      "illumination": "100 mW at sample plane (2P, 940 nm)",
+      "t75": 14,
+      "fit": {
+        "model": "biexponential",
+        "a": 0.371,
+        "tau": 17.2,
+        "tau2": 464.5,
+        "r2": 0.994
+      },
+      "custom": {
+        "time": [
+          0,
+          5,
+          10,
+          15,
+          20,
+          30,
+          45,
+          60,
+          90,
+          120,
+          150,
+          180,
+          210,
+          240,
+          270,
+          300,
+          330,
+          360
+        ],
+        "fluorescence": [
+          1.0,
+          0.875,
+          0.797,
+          0.745,
+          0.711,
+          0.664,
+          0.616,
+          0.581,
+          0.522,
+          0.478,
+          0.447,
+          0.417,
+          0.392,
+          0.368,
+          0.352,
+          0.33,
+          0.321,
+          0.306
+        ]
+      },
+      "source": "doi:10.64898/2026.04.07.717088",
+      "sourceImage": "/photobleach-sources/jedi2p-figs12b.jpg",
+      "sourceFigure": "Fig. S1.2B",
+      "note": "Model-free photostability: t75% = time for fluorescence to fall to 75% of initial. Digitized from the JEDI-2P curve in Fig. S1.2B (2P resonance-scanning, 940 nm, 100 mW at the sample plane over a 40x635 um FOV, 6 min, HEK293A; normalized 2P fluorescence). 2P power-only measurement (not mW/mm2) so it stands alone and is NOT intensity-normalized or comparable to 1P GEVIs. Measured alongside FORCE1s/ASAP4e/JEDI-2P in the same panel (they cross-overlay).",
+      "proofread": false
+    },
+    {
+      "modality": "2P",
+      "illumination": "22.5 mW at 1045 nm (ULoVE 2P, brain surface)",
+      "t75": 234,
+      "fit": {
+        "model": "power-law",
+        "a": 1.018,
+        "b": -0.056,
+        "r2": 0.94
+      },
+      "custom": {
+        "time": [
+          61,
+          66,
+          76,
+          82,
+          163,
+          225,
+          279,
+          296,
+          354,
+          389,
+          416,
+          491
+        ],
+        "fluorescence": [
+          0.809,
+          0.805,
+          0.799,
+          0.795,
+          0.765,
+          0.752,
+          0.743,
+          0.74,
+          0.733,
+          0.729,
+          0.726,
+          0.72
+        ]
+      },
+      "source": "doi:10.64898/2026.06.01.726307",
+      "sourceImage": "/photobleach-sources/jedi2p-fig3f.jpg",
+      "sourceFigure": "Fig. 3F",
+      "note": "Model-free photostability: t75% = time for fluorescence to fall to 75% of initial. Digitized from the JEDI-2P (gray) slow-phase bleach trace in Fig. 3F (in vivo ULoVE 2P, 1045 nm, 22.5 mW at the brain surface) of the VADER1 paper, where JEDI-2P is the photostable reference. The slow phase follows a power law F(t)=a*t^b; the paper's stated slope is b=-0.056 (a free fit to the digitized low-contrast gray trace gave -0.061, within tolerance). F(60s)~0.81 after the rapid phase, which never reaches 0.75, so the 75% crossing (~234 s) lies in the slow-phase regime. JEDI-2P is markedly more photostable than VADER1 (slope -0.135) in the same panel. 2P power-only measurement, so it stands alone and is NOT intensity-normalized.",
+      "proofread": false
+    },
+    {
+      "modality": "1P",
+      "intensityMWmm2": 15,
+      "t50": 65,
+      "fit": {
+        "model": "biexponential",
+        "a": 0.28,
+        "tau": 4.3,
+        "tau2": 212.3,
+        "r2": 0.9877
+      },
+      "custom": {
+        "time": [0, 3, 6, 10, 15, 20, 30, 45, 60, 90, 120, 150, 180, 210, 240, 270, 300],
+        "fluorescence": [1.0, 0.808, 0.778, 0.746, 0.712, 0.681, 0.629, 0.565, 0.514, 0.435, 0.377, 0.333, 0.299, 0.278, 0.25, 0.232, 0.216]
+      },
+      "source": "doi:10.1016/j.cell.2022.07.013",
+      "sourceImage": "/photobleach-sources/jedi2p-figs4g.jpg",
+      "sourceFigure": "Fig. S4G",
+      "proofread": false,
+      "note": "Origin-paper 1P photobleaching (Fig. S4G) in HEK293-Kir2.1 cells under continuous widefield 1PM at 15 mW/mm² over 5 min (300 frames, n=4 wells). Digitized by HSV color separation, verified against the figure. All three traces have a fast initial photobleaching component (caption); JEDI-2P has the SMALLEST initial drop (to ~0.81) but the steepest overall decline, ending lowest (~0.22) — consistent with the paper noting JEDI-2P is 'slightly more photolabile under 1PM' (its photostability advantage is under 2PM, not 1PM). Because the t75% crossing (~9 s) sits in the fast-bleach transient, the half-life t50 ≈ 65 s (in the sustained phase) is stored instead. Biexponential fit. Companion curves in the same panel: ASAP3, ASAP2s."
+    }
+  ],
+  "apWidthData": [
+    {
+      "fwhm": 1.4,
+      "samplingRate": 7142.9,
+      "sample": "Mouse, visual cortex L2/3, awake head-fixed, in vivo",
+      "modality": "2P",
+      "temperature": "37°C",
+      "source": "doi:10.64898/2026.06.01.726307",
+      "note": "Cross-GEVI value measured in the VADER1 paper: optical action-potential waveform width (full width at half maximum) of JEDI-2P-Kv single spikes recorded in vivo under ULoVE 2P microscopy: 1.4 ± 0.3 ms (mean ± SD), statistically indistinguishable from VADER1-tKv (1.2 ± 0.2 ms). Sampling rate 7.2 kHz (7142.9 Hz, two ULoVE volumes/cell); awake head-fixed mice, body temperature ~37°C. Spike width = FWHM of the spike-triggered average waveform after 20 kHz linear interpolation.",
+      "sourceFigure": "Fig. 3C",
+      "proofread": false
+    },
+    {
+      "fwhm": 5.6,
+      "samplingRate": 20000,
+      "sample": "HEK293A cells, whole-cell voltage clamp, in vitro (2-ms FWHM command AP waveform)",
+      "modality": "2P",
+      "temperature": "23°C",
+      "source": "doi:10.1038/s41592-026-03043-8",
+      "sourceFigure": "Fig. 1k",
+      "note": "Cross-GEVI value measured in the JEDI-3 paper (St-Pierre lab, Nat Methods 2026, primary subjects JEDI3hyp/JEDI3sub): optical FWHM of JEDI-2P's fluorescence response to a single-spike waveform, printed value from Fig. 1k. 2-ms FWHM command AP waveform, 2P at 940 nm, 23°C, HEK293A (n = 10). Data at 80 kHz, downsampled to 20 kHz; FWHM after 20-kHz interpolation. Narrowest of the three (vs JEDI3hyp 6.3, JEDI3sub 6.6; *).",
+      "proofread": false
+    },
+    {
+      "fwhm": 1.4,
+      "samplingRate": 1000,
+      "sample": "Mouse visual cortex, awake behaving, in vivo, soma-targeted JEDI-2P-Kv (ULoVE 2P)",
+      "modality": "2P",
+      "temperature": "37°C",
+      "source": "doi:10.1038/s41592-026-03043-8",
+      "sourceFigure": "Fig. 2d",
+      "note": "Cross-GEVI value measured in the JEDI-3 paper: optical spike-width FWHM of JEDI-2P-Kv from real cortical APs recorded in vivo with ULoVE 2P (820 nm, 1 kHz frame rate) in awake mice (n = 13 cells). Digitized from the unlabeled Fig. 2d bar chart (±~0.1 ms); spike widths were statistically indistinguishable across indicators (JEDI3sub ~1.3, JEDI3hyp ~1.2). Exact values in the paper's Supplementary Table 2 (not available locally). Consistent with the independent VADER1-paper measurement above (1.4 ms @ 7.2 kHz).",
+      "proofread": false
+    },
+    {
+      "fwhm": 1.4,
+      "samplingRate": 7100,
+      "sample": "Mouse, visual cortex L2/3, awake head-fixed, in vivo (ULoVE 2P), soma-targeted JEDI-2P-Kv",
+      "modality": "2P",
+      "temperature": "37°C",
+      "source": "doi:10.64898/2026.04.07.717088",
+      "sourceFigure": "Fig. 3E",
+      "note": "Cross-GEVI value measured in the FORCE1s paper (primary subject FORCE1s, parentId jedi2p): optical spike full width at half maximum of JEDI-2P-Kv single spikes recorded in vivo under ULoVE 2P microscopy: 1.4 ± 0.3 ms (mean ± SD; n = 17 cells), 1.9-fold narrower than FORCE1s-Kv (2.6 ± 0.5 ms, n = 9) measured in the same panel (Fig. 3E). Layer-2/3 V1 of awake head-fixed mice at 7.1 kHz ULoVE acquisition; body temperature ~37°C. FWHM = time at half-maximum amplitude of the isolated-spike spike-triggered average after 20 kHz linear interpolation (Methods). Independent of the VADER1-paper measurement above (also 1.4 ms @ 7.2 kHz) — different paper, same agreement.",
+      "proofread": false
+    },
+    {
+      "fwhm": 3.6,
+      "samplingRate": 721,
+      "sample": "HEK293A cells, whole-cell voltage clamp, in vitro (2-ms FWHM command AP waveform)",
+      "modality": "2P",
+      "temperature": "33°C",
+      "source": "doi:10.64898/2026.04.07.717088",
+      "sourceFigure": "Fig. 1K",
+      "note": "Cross-GEVI value measured in the FORCE1s paper (primary subject FORCE1s): in-vitro optical response width — FWHM of JEDI-2P's fluorescence response to an isolated 2-ms-FWHM, 100-mV command spike waveform under whole-cell voltage clamp + 2P imaging at 33°C, HEK293A (n = 10). Imaging by resonant-scanning at 721 Hz. Digitized from the Fig. 1K dot plot (y-axis 2-6 ms, 95% CI bars): JEDI-2P mean ≈ 3.6 ms (±~0.1 ms), narrowest of the three (vs FORCE1s ≈4.9, ASAP4e ≈4.2). This is the response to a synthetic 2-ms command input (broadened by command width + kinetics), distinct from the in-vivo real-spike FWHM of 1.4 ms (Fig. 3E). No exact number printed; digitized.",
+      "proofread": false
+    },
+    {
+      "fwhm": 2.1,
+      "samplingRate": 4400,
+      "sample": "Mouse, visual cortex L2/3, anesthetized, in vivo (2P, paired juxtacellular)",
+      "modality": "2P",
+      "temperature": "37°C",
+      "source": "doi:10.1016/j.cell.2022.07.013",
+      "sourceFigure": "Fig. 5D",
+      "note": "Origin-paper in-vivo optical AP width: the spike-triggered average optical waveform (Fig. 5E) reconstructed at 0.23-ms resolution (4.4-kHz effective sampling) had a time-to-peak of 1.7 ms and FWHM = 2.1 ms (Fig. 5D), measured from JEDI-2P-imaged regular-spiking neurons paired with loose-patch juxtacellular recordings in anesthetized mouse V1 L2/3. (The paired electrophysiological spike FWHM was 1.1 ms — that is the electrical AP width, not the optical one, so it is not stored here.) Value stated explicitly in the text.",
+      "proofread": false
+    },
+    {
+      "fwhm": 1.84,
+      "samplingRate": 3500,
+      "sample": "Mouse, V1 cortex layer II/III, awake behaving, in vivo (JEDI-2P-Kv, ULoVE 2P)",
+      "modality": "2P",
+      "temperature": "37°C",
+      "source": "doi:10.1101/2024.11.15.623698",
+      "sourceFigure": "Fig. 3f",
+      "note": "Cross-GEVI value measured/cited in the 2Photron paper (Villette et al. 2024 bioRxiv, primary subject 2Photron-ST552): optical spike FWHM of JEDI-2P-Kv = 1.84 ± 0.46 ms [1.25-3.55 ms], reported alongside 2Photron-ST552 (1.42 ± 0.13 ms) and ASAP3 in awake mouse V1 layer II/III under ULoVE 2P microscopy (>3.5 kHz sampling). Stated explicitly in the main text; the JEDI-2P-Kv cohort is drawn from Liu et al. 2022 (n=34). 2Photron-ST552 spikes were significantly narrower (Wilcoxon rank sum p = 2.91e-05, n=16 cells, 5 mice).",
+      "proofread": false
+    }
+  ],
+  "subthresholdData": [
+    {
+      "slope": 0.7,
+      "source": "doi:10.1016/j.neuron.2024.08.019",
+      "sourceFigure": "Fig. 1D",
+      "proofread": true
+    }
+  ],
+  "twoPhoton": [
+    {
+      "compatible": true,
+      "source": "doi:10.1016/j.cell.2022.07.013",
+      "proofread": false
+    }
+  ],
+  "addgene": {
+    "id": "179463",
+    "url": "https://www.addgene.org/179463/",
+    "proofread": false
+  },
+  "researchPapers": [
+    {
+      "title": "Sustained deep-tissue voltage recording using a fast indicator evolved for two-photon microscopy",
+      "authors": "Liu Z, Lu X, Villette V, et al.",
+      "journal": "Cell",
+      "year": 2022,
+      "sample": "HEK293 cells, in vitro; Mouse, visual cortex L2/3, in vivo; Drosophila, interneurons, ex vivo; Mouse, retina, ex vivo",
+      "url": "https://doi.org/10.1016/j.cell.2022.07.013",
+      "proofread": false
+    },
+    {
+      "title": "Scanless two-photon voltage imaging",
+      "authors": "Sims RR, et al.",
+      "journal": "Nature Communications",
+      "year": 2024,
+      "sample": "Mouse, hippocampal slices, in vitro; Mouse, barrel cortex, in vivo",
+      "url": "https://doi.org/10.1038/s41467-024-49192-2",
+      "proofread": false
+    },
+    {
+      "title": "A fast and responsive voltage indicator with enhanced sensitivity for unitary synaptic events",
+      "authors": "Hao YA, et al.",
+      "journal": "Neuron",
+      "year": 2024,
+      "sample": "Rat, cultured neurons, in vitro; Mouse, cortex, in vivo",
+      "url": "https://doi.org/10.1016/j.neuron.2024.08.019",
+      "proofread": false
+    },
+    {
+      "title": "A novel rhodopsin-based voltage indicator for simultaneous two-photon optical recording with GCaMP in vivo",
+      "authors": "Villette V, et al.",
+      "journal": "bioRxiv",
+      "year": 2024,
+      "sample": "Mouse, visual cortex, in vivo",
+      "url": "https://doi.org/10.1101/2024.11.15.623698",
+      "proofread": false
+    },
+    {
+      "title": "Two-photon voltage imaging with rhodopsin-based sensors",
+      "authors": "Grimm C, et al.",
+      "journal": "Neuron",
+      "year": 2026,
+      "sample": "HEK293 cells, in vitro; Mouse, cortex and cerebellum, in vivo",
+      "url": "https://doi.org/10.1016/j.neuron.2025.12.014",
+      "proofread": false
+    },
+    {
+      "title": "All-optical voltage interrogation for probing synaptic plasticity in vivo",
+      "authors": "Carolan J, et al.",
+      "journal": "Nature Communications",
+      "year": 2025,
+      "sample": "Mouse, cerebellum, Purkinje cell dendrites, in vivo",
+      "url": "https://doi.org/10.1038/s41467-025-63867-4",
+      "proofread": false
+    },
+    {
+      "title": "FACED 2.0 enables large-scale voltage and calcium imaging in vivo",
+      "authors": "Zhong J, et al.",
+      "journal": "Nature Methods",
+      "year": 2025,
+      "sample": "Mouse, visual cortex L2/3, in vivo; Zebrafish larvae, in vivo",
+      "url": "https://doi.org/10.1038/s41592-025-02925-7",
+      "proofread": false
+    },
+    {
+      "title": "Retroreflective beam multiplexing enables high-throughput two-photon voltage imaging in vivo",
+      "authors": "Liu Z, et al.",
+      "journal": "bioRxiv",
+      "year": 2025,
+      "sample": "Mouse, visual cortex V1, in vivo; Mouse, hippocampus CA1, in vivo",
+      "url": "https://doi.org/10.64898/2025.12.09.693349",
+      "proofread": false
+    },
+    {
+      "title": "Movement-stabilized three-dimensional optical recordings of membrane potential changes and calcium dynamics in hippocampal CA1 dendrites",
+      "authors": "Gonzalez KC, et al.",
+      "journal": "Neuron",
+      "year": 2026,
+      "sample": "Mouse, hippocampus CA1, dendrites and soma, in vivo",
+      "url": "https://doi.org/10.1016/j.neuron.2026.01.004",
+      "proofread": false
+    },
+    {
+      "title": "Kilohertz-rate two-photon voltage imaging of population dynamics in vivo",
+      "authors": "Zhang M, et al.",
+      "journal": "bioRxiv",
+      "year": 2026,
+      "sample": "Mouse, cortex, in vivo",
+      "url": "https://doi.org/10.64898/2025.12.29.696942",
+      "proofread": false
+    },
+    {
+      "title": "Designer indicators for two-photon recording of subthreshold voltage dynamics",
+      "authors": "Land MA, Galdamez M, Villette V, Zhu J, Lu X, Marosi M, et al.",
+      "journal": "Nature Methods",
+      "year": 2026,
+      "sample": "HEK293 cells, in vitro; Rat, cultured hippocampal neurons, in vitro; Mouse, visual cortex L2/3, in vivo",
+      "url": "https://doi.org/10.1038/s41592-026-03043-8",
+      "proofread": false
+    },
+    {
+      "title": "Optical constraints on two-photon voltage imaging",
+      "authors": "Brooks FP, et al.",
+      "journal": "Neurophotonics",
+      "year": 2024,
+      "sample": "HEK293 cells, in vitro; Mouse, cortex, in vivo",
+      "url": "https://doi.org/10.1117/1.NPh.11.3.035007",
+      "proofread": false
+    },
+    {
+      "title": "Linking functional activity and connectivity of neuronal circuits via fast cross-layer all-optical physiology",
+      "authors": "Liu C, et al.",
+      "journal": "Cell Reports",
+      "year": 2025,
+      "sample": "Mouse, visual cortex V1 and somatosensory cortex S1, in vivo",
+      "url": "https://doi.org/10.1016/j.celrep.2025.116646",
+      "proofread": false
+    },
+    {
+      "title": "A red-emitting, genetically encoded indicator for two-photon voltage recording in vivo",
+      "authors": "Yang S, McDonald AJ, Lu X, Villette V, Hakam N, Galdamez M, et al.",
+      "journal": "bioRxiv",
+      "year": 2026,
+      "sample": "Mouse, visual cortex L2/3, in vivo (JEDI-2P-Kv used as the in vivo benchmark for the red GEVI VADER1 under ULoVE and resonant-scanning 2P microscopy)",
+      "url": "https://doi.org/10.64898/2026.06.01.726307",
+      "proofread": false
+    }
+  ]
+}

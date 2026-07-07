@@ -1,0 +1,120 @@
+{
+  "id": "archer2",
+  "name": "Archer2",
+  "year": 2014,
+  "date": "2014-09-15",
+  "category": "Opsin GEVI",
+  "tags": [
+    "Archaerhodopsin",
+    "Red",
+    "Positive-going"
+  ],
+  "paper": "Nature Communications 2014",
+  "paperUrl": "https://doi.org/10.1038/ncomms5894",
+  "description": "Archaerhodopsin variant that further suppresses photocurrents at the expense of slower kinetics and lower sensitivity than its Archer1.",
+  "parentId": "arch",
+  "siblingId": "archer1",
+  "spectrum": {
+    "type": "rhodopsin",
+    "peakEx": 640,
+    "peakEm": 731,
+    "name": "Archer2",
+    "note": "Arch(D95E/T99C/A225M) rhodopsin reporter. Peaks from Nikolaev 2025 (doi:10.1021/cbe.5c00069): excitation max 640 nm, emission max 731 nm, FQY 0.66% (Table 1); absorption max 633 nm (Table 2, which lists Archer2 λmax 633, FQY 0.7%, ε640 78200, molar brightness 54.8). CORRECTED 2026-07-02: the ex/em/FQY (640/731/0.66%) were mis-attributed to 'Table 2' — they are in Table 1. Previously stored em 687 — that was the Arch-WT value, not the red-shifted Archer2. No measured ex/em curve is published, so the panel shows the Gaussian fallback from these peaks.",
+    "proofread": false
+  },
+  "voltage": {
+    "type": "opsin",
+    "slope": 60,
+    "polarity": "positive",
+    "name": "Archer2",
+    "custom": {
+      "voltage": [
+        -100,
+        -80,
+        -70,
+        -60,
+        -50,
+        -40,
+        -20,
+        0,
+        20,
+        30,
+        50
+      ],
+      "deltaF": [
+        -15,
+        -4,
+        0,
+        5,
+        11,
+        18,
+        30,
+        42,
+        54,
+        58,
+        70
+      ]
+    },
+    "source": "doi:10.1038/ncomms5894",
+    "sourceImage": "/fv-sources/archer2.jpg",
+    "sourceFigure": "Fig. 1d",
+    "proofread": false
+  },
+  "dynamicRangeData": [
+    {
+      "deltaF": 60,
+      "sign": "positive",
+      "modality": "1P",
+      "source": "doi:10.1038/ncomms5894",
+      "sourceFigure": "Fig. 1d",
+      "note": "60% ΔF/F per 100 mV step (stated in abstract; Fig. 1d). 1P widefield, 655 nm excitation.",
+      "proofread": false
+    }
+  ],
+  "brightnessData": [
+    {
+      "ratio": 3,
+      "reference": "arch",
+      "source": "doi:10.1038/ncomms5894",
+      "sourceFigure": "Fig. 1a",
+      "proofread": false
+    },
+    {
+      "ratio": 0.0163,
+      "reference": "EGFP",
+      "source": "doi:10.1021/cbe.5c00069",
+      "sourceFigure": "Table 2",
+      "proofread": false,
+      "note": "Archer2 molecular brightness from cbe.5c00069 Table 2 (same EC640×FQY method as Archer1) = 78200 × 0.007 = 547 M⁻¹cm⁻¹ (Table 2 molar-brightness column 54.8 = 547 × 10⁻¹); EGFP reference 56000 × 0.60 = 33600 → 547/33600 ≈ 0.0163. Rescaled 2026-07-01 to the 33600 EGFP anchor (was 0.027, computed with the incorrect 20040 anchor); minor 0.0161→0.0163 correction 2026-07-02 to match Table 2 exactly."
+    }
+  ],
+  "researchPapers": [
+    {
+      "title": "Archaerhodopsin variants with enhanced voltage-sensitive fluorescence in mammalian and Caenorhabditis elegans neurons",
+      "authors": "Flytzanis NC, Bedbrook CN, Chiu H, Engqvist MKM, Xiao C, Chan KY, Sternberg PW, Arnold FH, Gradinaru V",
+      "journal": "Nature Communications",
+      "year": 2014,
+      "sample": "Cultured rat hippocampal neurons, in vitro",
+      "url": "https://doi.org/10.1038/ncomms5894",
+      "proofread": false
+    },
+    {
+      "title": "Rational Design of Far-Red Archaerhodopsin-3-Based Fluorescent Genetically Encoded Voltage Indicators: from Elucidation of the Fluorescence Mechanism in Archers to Novel Red-Shifted Variants",
+      "authors": "Nikolaev DM, et al.",
+      "journal": "ACS Physical Chemistry Au",
+      "year": 2024,
+      "sample": "Computational modeling and HEK293T cells, in vitro",
+      "url": "https://doi.org/10.1021/acsphyschemau.3c00073",
+      "proofread": false
+    },
+    {
+      "title": "Semirational Protein Engineering Yields Archaerhodopsin-3-Based Fluorescent Genetically Encoded Voltage Indicators with Enhanced Brightness and Red Shifted Absorption Bands",
+      "authors": "Nikolaev DM, et al.",
+      "journal": "Chem & Bio Engineering",
+      "year": 2025,
+      "sample": "E. coli and HEK293T cells, in vitro",
+      "url": "https://doi.org/10.1021/cbe.5c00069",
+      "proofread": false
+    }
+  ]
+}

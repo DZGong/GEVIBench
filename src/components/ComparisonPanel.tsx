@@ -3,6 +3,7 @@ import React, { useState, useRef, useCallback } from 'react';
 import { generateVoltageCurve } from '../VoltageCurveViewer';
 import { DistributionRadar } from './DistributionRadar';
 import { WavelengthCellContent, extractYear, abbreviatePaper } from './GEVIList';
+import { fmtDuration } from '../geviData';
 
 const COLORS = ['#002FA7', '#ef4444', '#22c55e', '#f59e0b', '#8b5cf6'];
 
@@ -25,7 +26,7 @@ const RAW_METRICS: { key: string; symbol: React.ReactNode; fmt: (g: any) => stri
   { key: 'tauOff',  symbol: <>τ<sub>off</sub> (ms)</>, fmt: g => g.displayTauOff != null ? fmtTau(g.displayTauOff) : '—' },
   { key: 'dr',      symbol: <>ΔF/F per 100mV</>,       fmt: g => g.displayDynamicRange != null ? `${g.displayDynamicRange.toFixed(1)}%` : '—' },
   { key: 'sens',    symbol: <>ΔF/F per AP</>,          fmt: g => g.displaySensitivity != null ? `${g.displaySensitivity.toFixed(1)}%` : '—' },
-  { key: 'photo',   symbol: <>F<sub>remain</sub>%</>,  fmt: g => g.displayPhotostab != null ? `${Math.round(g.displayPhotostab)}%` : '—' },
+  { key: 'photo',   symbol: <>t<sub>75%</sub> @100mW</>, fmt: g => g.displayT75 != null ? fmtDuration(g.displayT75) : '—' },
 ];
 
 export function ComparisonPanel({ compareGEVIs, onRemove, showEmpty = false, onClose }: ComparisonProps) {

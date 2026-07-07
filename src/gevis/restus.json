@@ -264,6 +264,7 @@
     "source": "doi:10.1002/advs.202307938",
     "sourceImage": "/fv-sources/restus.jpg",
     "sourceFigure": "Fig. 1G",
+    "note": "ΔF/F points read directly from the mKate2-rEstus brightness–voltage curve in Fig. 1G, which plots molecular brightness B(%EGFP) vs Vm with the fit passing through the mean data points. Converted to ΔF/F relative to −70 mV via ΔF/F = (B(V) − B(−70))/B(−70) (B ∝ FcpGFP). Independently re-digitized from the Fig. 1G teal data points during audit — values agree with the stored curve within ≤2%; monotonic negative-going, −70 mV normalized to 0, −70→+30 mV chord ≈ −61% (consistent with dynamicRangeData −62%). Consistent with the Table 1 Boltzmann fit (Bmax 77.5, ΔBmax 57.0, Vhalf −32.0, ks 26.0 %EGFP).",
     "proofread": false
   },
   "kinetics": [
@@ -293,7 +294,7 @@
       "slope": 1.25,
       "source": "doi:10.64898/2026.02.10.701308",
       "sourceFigure": "Fig. S2",
-      "note": "Peak fractional voltage sensitivity (dF/F dV-1, %/mV) read from Fig. S2 of the rEstus2s paper, the first derivative of the Boltzmann F-V fit divided by the fit; rEstus (black) peaks at ~1.25 %/mV near -10 to 0 mV. Re-sourced here because the origin paper's Fig. 1H plots absolute |dB/dVm| in %EGFP/mV (a different quantity), not fractional %/mV. rEstus2s reaches ~1.8 %/mV on the same axis (about two-fold over rEstus across the -100 to 0 mV resting range).",
+      "note": "Peak fractional voltage sensitivity (dF/F dV-1, %/mV) read from Fig. S2 of the rEstus2s paper, the first derivative of the Boltzmann F-V fit divided by the fit; rEstus (black) peaks at ~1.25 %/mV near -10 to 0 mV. Re-sourced here because the origin paper's Fig. 1H plots absolute |dB/dVm| in %EGFP/mV (a different quantity), not fractional %/mV. On the same axis the sibling rEstus2s (red) peaks at ~2.0 %/mV near +5 mV (about 1.6-fold over rEstus across the -100 to 0 mV resting range).",
       "proofread": false
     }
   ],
@@ -309,15 +310,16 @@
       "ratio": 2.07,
       "reference": "asap3",
       "source": "doi:10.1002/advs.202307938",
-      "sourceFigure": "Fig. 1G",
+      "sourceFigure": "Table 1",
+      "note": "Ratio of maximum molecular brightness (Bmax, %EGFP at saturating negative Vm) from the origin paper Table 1 / Fig. 1G: mKate2-rEstus Bmax = 77.5 ± 1.7 %EGFP vs mKate2-ASAP3 Bmax = 37.5 ± 2.2 %EGFP -> 77.5/37.5 = 2.07. Same-paper Bmax comparison; distinct from the Nair et al. FLIM entry below (rEstus/ASAP3 = 8.49/4.96 = 1.71 Fgreen/Fred), which is a different brightness measurement (relative to mKate2 at -120 mV) in a different paper.",
       "proofread": false
     },
     {
-      "ratio": 1.96,
+      "ratio": 1.71,
       "reference": "asap3",
       "source": "doi:10.1021/acschemneuro.5c00670",
-      "sourceFigure": "Fig. 2C",
-      "note": "Mean molecular brightness at -120 mV relative to mKate2 (Fig. 2C): rEstus F/Fred = 7.94, ASAP3 = 4.06 (from the Table S1 fits Max/Offset/Vh/kh: rEstus 8.49/19.1/-40.3/32.6, ASAP3 4.96/26.8/-69.9/45.0) -> ratio 1.96. The ratio of the bare Max Fgreen/Fred fit parameters alone (8.49/4.96) is 1.71.",
+      "sourceFigure": "Table S1",
+      "note": "Relative molecular brightness (Fgreen/Fred at -120 mV) cross-measured against ASAP3 in the Nair et al. FLIM paper. Ratio of the fitted Max Fgreen/Fred parameters (Eq. 1 fits, Table S1): rEstus 8.49 ± 0.04 / ASAP3 4.96 ± 0.02 = 1.71. This uses the same convention as the sibling cross-entries in the repo (JEDI-1P/ASAP3 = 8.48/4.96 = 1.71; ASAP1/ASAP3 = 4.66/4.96 = 0.94). Evaluating the full Eq. 1 fits at exactly -120 mV (including the Offset floor) gives rEstus 7.94 / ASAP3 4.06 = 1.96, but the bare Max-parameter ratio is the consistent cross-comparison quantity.",
       "proofread": false
     }
   ],

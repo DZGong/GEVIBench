@@ -1,0 +1,96 @@
+{
+  "id": "amber",
+  "name": "AMBER",
+  "year": 2021,
+  "date": "2021-11-10",
+  "category": "Bioluminescent GEVI",
+  "tags": [
+    "Luciferase",
+    "Bioluminescent",
+    "Positive-going",
+    "YPet",
+    "BRET"
+  ],
+  "paper": "Advanced Biology 2021",
+  "paperUrl": "https://doi.org/10.1002/adbi.202100842",
+  "description": "First autonomous bioluminescent voltage indicator by pairing a VSD with a self-sufficient luciferase enzyme.",
+  "parentId": "vsfp2",
+  "spectrum": {
+    "type": "fret",
+    "peakEx": 490,
+    "peakEm": 528,
+    "name": "AMBER",
+    "custom": {
+      "minEm": 400,
+      "emission": [0.0021, 0.0021, 0.0021, 0.0021, 0.0021, 0.0021, 0.0021, 0.0021, 0.0021, 0.0021, 0.0021, 0.0021, 0.0021, 0.0021, 0.0021, 0.0021, 0.0021, 0.0044, 0.0068, 0.0091, 0.0114, 0.0158, 0.0202, 0.0246, 0.029, 0.0361, 0.0433, 0.0504, 0.0575, 0.0693, 0.081, 0.0928, 0.1046, 0.1212, 0.1377, 0.1542, 0.1708, 0.1884, 0.206, 0.2236, 0.2412, 0.2583, 0.2753, 0.2924, 0.3095, 0.3314, 0.3533, 0.3751, 0.397, 0.42, 0.443, 0.4661, 0.4891, 0.5095, 0.53, 0.5504, 0.5709, 0.5894, 0.6079, 0.6264, 0.6449, 0.6624, 0.6799, 0.6973, 0.7148, 0.7298, 0.7448, 0.7598, 0.7748, 0.7827, 0.7906, 0.7985, 0.8064, 0.812, 0.8175, 0.8231, 0.8287, 0.8322, 0.8357, 0.8392, 0.8427, 0.8441, 0.8455, 0.8469, 0.8483, 0.847, 0.8458, 0.8445, 0.8432, 0.8375, 0.8318, 0.8261, 0.8204, 0.8138, 0.8072, 0.8006, 0.794, 0.7879, 0.7819, 0.7758, 0.7697, 0.7619, 0.7542, 0.7464, 0.7386, 0.7368, 0.735, 0.7332, 0.7314, 0.7363, 0.7412, 0.7461, 0.751, 0.7642, 0.7774, 0.7906, 0.8038, 0.8293, 0.8548, 0.8803, 0.9058, 0.9261, 0.9465, 0.9668, 0.9871, 0.9903, 0.9935, 0.9968, 1.0, 0.9866, 0.9731, 0.9597, 0.9462, 0.9206, 0.895, 0.8693, 0.8437, 0.8205, 0.7974, 0.7742, 0.751, 0.7297, 0.7083, 0.6869, 0.6656, 0.6428, 0.62, 0.5973, 0.5745, 0.5557, 0.537, 0.5182, 0.4995, 0.4864, 0.4733, 0.4603, 0.4472, 0.436, 0.4247, 0.4134, 0.4022]
+    },
+    "source": "doi:10.1002/adbi.202100842",
+    "sourceFigure": "Fig. 2A",
+    "note": "AMBER is a bioluminescent BRET sensor (no excitation light) — its real readout is the bioluminescence EMISSION spectrum, digitized here from the depolarized (ON-state) curve in Fig. 2A: a characteristic dual-peak BRET emission with the eluxAB luciferase donor at ~490 nm and the YPet acceptor at ~528 nm (the tallest peak), normalized to the 528 nm peak. Replaces a prior stored curve that was merely YPet's fluorescence excitation+emission (peaks 517/529), which is wrong for a bioluminescent indicator (it has no excitation and omitted the donor peak). The excitation array was removed (SpectrumViewer hides excitation for bioluminescent sensors). Fig. 2A truncates near 565 nm, so the YPet red-emission tail beyond ~560 nm is not shown. peakEx is repurposed as the donor emission peak.",
+    "proofread": false
+  },
+  "voltage": {
+    "type": "fret",
+    "slope": 200,
+    "polarity": "positive",
+    "name": "AMBER",
+    "custom": {
+      "voltage": [
+        -60,
+        -40,
+        -20,
+        0,
+        20,
+        40,
+        60
+      ],
+      "deltaF": [
+        0,
+        14,
+        68,
+        88,
+        97,
+        100,
+        99
+      ],
+      "note": "Read directly from Fig. 2B (normalized bioluminescence vs membrane potential, single-cell voltage clamp), expressed on a 0-100 scale (max = 1.0 at +40 mV). The figure's lowest measured potential is -60 mV (luminescence floor ~0), so that point sets the 0 baseline; no -70 mV point exists in the figure and none was extrapolated. Boltzmann fit V1/2 = -25.5 +/- 1 mV."
+    },
+    "source": "doi:10.1002/adbi.202100842",
+    "sourceImage": "/fv-sources/amber.jpg",
+    "sourceFigure": "Fig. 2B",
+    "proofread": true
+  },
+  "kinetics": [
+    {
+      "on": 40,
+      "off": 30,
+      "temperature": "25°C",
+      "source": "doi:10.1002/adbi.202100842",
+      "sourceFigure": "Fig. 3B",
+      "note": "Switching kinetics from the gating-current fast component (Fig. 3B, voltage-clamp steps -60 to +60 mV). Paper reports tau_on ~26-330 ms (closer to 26-63 ms near/above V1/2) and tau_off ~15-45 ms; representative mid-range values stored. A slow envelope component of ~200-300 ms (substrate recycling, not gating) is an upper bound and is not used here. All recordings at room temperature (SI 1.4).",
+      "proofread": false
+    }
+  ],
+  "dynamicRangeData": [
+    {
+      "deltaF": 200,
+      "sign": "positive",
+      "source": "doi:10.1002/adbi.202100842",
+      "sourceFigure": "Fig. 2A",
+      "note": "Bioluminescent dynamic range (delta-L/L on depolarization), not a fluorescence delta-F/F per 100 mV. AMBER shows ~3-fold (i.e. ~200% delta-L/L) average increase in bioluminescence upon KCl-induced depolarization (Fig. 2A / Section 2.1). Population stats (Fig. 1C caption): 28-fold maximal increase, 72% average increase across cells. On-off ratio reported greater than LOTUS-V. No 1P/2P modality applies (bioluminescent, no excitation light).",
+      "proofread": false
+    }
+  ],
+  "photostabilityData": "bioluminescent",
+  "researchPapers": [
+    {
+      "title": "An Autonomous Molecular Bioluminescent Reporter (AMBER) for Voltage Imaging in Freely Moving Animals",
+      "authors": "Srinivasan P, Griffin NM, Thakur DP, Joshi PM, Nguyen-Le A, McCotter S, Jain A, Saeidi M, Kulkarni P, Eisdorfer JT, Rothman JH, Montell C, Theogarajan L",
+      "journal": "Advanced Biology",
+      "year": 2021,
+      "sample": "C. elegans, pharyngeal muscle and mechanosensory neurons, in vivo",
+      "url": "https://doi.org/10.1002/adbi.202100842",
+      "proofread": false
+    }
+  ]
+}

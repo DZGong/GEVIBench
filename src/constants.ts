@@ -64,5 +64,5 @@ export const METRICS = [
   { key: 'speed', name: 'Kinetics', icon: 'Zap' },
   { key: 'dynamicRange', name: 'Dynamic Range', icon: 'TrendingUp' },
   { key: 'sensitivity', name: 'Sensitivity', icon: 'Activity' },
-  { key: 'photostability', name: 'Photostability', icon: 'Shield' },
+  { key: 'photostability', name: 'Photostability', icon: 'Clock' },
 ] as const;

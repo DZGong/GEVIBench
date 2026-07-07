@@ -20,17 +20,11 @@
       "proofread": false
     },
     {
-      "ratio": 10,
-      "reference": "arch",
-      "source": "doi:10.1021/acschemneuro.0c00046",
-      "sourceFigure": "Table 1",
-      "proofread": false
-    },
-    {
-      "ratio": 0.417,
+      "ratio": 0.36,
       "reference": "archon1",
       "source": "doi:10.1038/s41589-018-0004-9",
       "sourceFigure": "Fig. 2b",
+      "note": "QuasAr2 molecular brightness = 0.36× Archon1 (Piatkevich 2018 Fig. 2b, cultured neurons). Fig. 2b statistics (Suppl.): QuasAr2 mean = 519.07 (n=18), Archon1 mean = 1440.33 (n=23) → 519.07/1440.33 = 0.36. Reciprocal of the Archon1-page entry (2.78× QuasAr2 = 1440.33/519.07). Corrected from a prior value of 0.417, which was not consistent with the Fig. 2b means / the reciprocal 1/2.78.",
       "proofread": false
     }
   ],
@@ -60,6 +54,15 @@
       "temperature": "33-34°C",
       "source": "doi:10.1016/j.cell.2019.11.004",
       "sourceFigure": "Table 1",
+      "proofread": false
+    },
+    {
+      "on": 4.46,
+      "off": 6.02,
+      "temperature": "32°C",
+      "source": "doi:10.1038/s41589-018-0004-9",
+      "note": "Cross-GEVI measurement from the Archon paper (Piatkevich et al. 2018, Suppl. Table 1), QuasAr2 template re-measured in cultured neurons at 32 °C (n=11), 637 nm laser, 800 mW/mm², bi-exponential fit F(t)=A(C·exp(-t/τfast)+(1-C)·exp(-t/τslow)). On: τfast 0.9 ms (67%) + τslow 11.7 ms (33%) → 0.67×0.9 + 0.33×11.7 = 4.46 ms. Off: τfast 1.6 ms (76%) + τslow 20 ms (24%) → 0.76×1.6 + 0.24×20 = 6.02 ms. Slower than the Hochbaum 2014 values because measured in neurons at a different intensity/temperature. (Table cell annotates 34 °C, but the table footnote states on/off kinetics were measured at 32 °C.)",
+      "sourceFigure": "Table S1",
       "proofread": false
     }
   ],
@@ -103,6 +106,7 @@
       "modality": "1P",
       "source": "doi:10.1038/ncomms5625",
       "sourceFigure": "Table 1",
+      "note": "Zou et al. 2014 (eFRET/CAESR paper) Table 1 lists QuasAr2 ΔF/F for a single AP = 48% (cultured rat hippocampal neurons, 23 °C, direct retinal fluorescence, 640 nm, 200 W/cm²), reported side-by-side with their eFRET constructs, ArcLight and ASAP1. Corroborates the origin-paper value (Hochbaum 2014, 48% single-AP ΔF/F). Note the companion SNR=41 in the same Table 1 row is attributed in Zou's body text to Hochbaum (ref. 13, at 300 W/cm²), and the Table footnote's '(ref. 23)' annotation refers only to the QuasAr2 illumination intensity of 200 W/cm² (ref. 23 = Gong et al. MacQ paper), not to the ΔF/F value. Does not change the displayed median.",
       "proofread": false
     }
   ],
@@ -111,8 +115,10 @@
       "brightnessRemaining": 94,
       "illumination": "3000 mW/mm²",
       "duration": "1 min",
+      "modality": "1P",
       "source": "doi:10.1038/nmeth.3000",
-      "sourceFigure": "Fig. S5",
+      "sourceFigure": "Fig. S5A",
+      "note": "QuasAr2 photobleaching, cultured neuron (Optopatch2), continuous 640 nm at 300 W/cm² (= 3000 mW/mm²) over 30 min (Suppl. Fig. 5A). % remaining after 1 min is approximate (read off the early phase of the exponential-fit trace, which shows ~1–6% loss in the first minute); the full digitized bleach curve (t75 ≈ 412 s) is stored in `photobleach` below. See also the main text: ~5% photobleaching typically observed over a 40-s acquisition at standard 300 W/cm² imaging.",
       "proofread": false
     }
   ],
@@ -128,7 +134,8 @@
       "proofread": false
     }
   ],
-  "parentId": "quasar1",
+  "parentId": "arch",
+  "siblingId": "quasar1",
   "spectrum": {
     "type": "rhodopsin",
     "peakEx": 590,
@@ -486,30 +493,114 @@
     "custom": {
       "voltage": [
         -100,
+        -90,
         -80,
         -70,
+        -60,
         -50,
+        -40,
         -30,
+        -20,
+        -10,
         0,
+        10,
+        20,
         30,
+        40,
         50
       ],
       "deltaF": [
-        -27,
-        -9,
+        -17,
+        -13,
+        -6,
         0,
-        18,
-        36,
-        63,
-        90,
-        108
+        8,
+        16,
+        25,
+        32,
+        41,
+        51,
+        60,
+        69,
+        77,
+        84,
+        91,
+        98
       ]
     },
     "source": "doi:10.1038/nmeth.3000",
     "sourceImage": "/fv-sources/quasar2.jpg",
     "sourceFigure": "Fig. 1c",
+    "note": "Re-digitized 2026-07 from the red QuasAr2 fluorescence-vs-voltage trace in Fig. 1c (Hochbaum 2014), the same panel/method used for QuasAr1: F (a.u., normalized to 1.0 at −100 mV) color-masked and axis-calibrated (V −100 mV at the y-axis / +50 mV at the x-axis right end; F 1.0 at the x-axis / 2.5 at the y-axis top), then converted to ΔF/F relative to the −70 mV holding potential (= 0), overlay-verified against the figure. Positive-going, monotonic, saturating gently. The −70→+30 mV (100-mV) chord of this representative trace ≈ +84%, slightly below the n=5–9-cell mean of 90%/100 mV (Table S2) recorded in dynamicRangeData — the representative Fig. 1c trace runs a bit under the per-cell mean, as for QuasAr1. Replaces a prior fabricated linear reconstruction (8 evenly-scaled points hitting the 90% headline).",
     "proofread": false
   },
+  "photobleach": [
+    {
+      "custom": {
+        "time": [
+          0.0,
+          15.0,
+          30.0,
+          60.0,
+          90.0,
+          120.0,
+          180.0,
+          240.0,
+          300.0,
+          400.0,
+          500.0,
+          600.0,
+          700.0,
+          800.0,
+          900.0
+        ],
+        "fluorescence": [
+          1.0,
+          0.998,
+          0.994,
+          0.986,
+          0.975,
+          0.963,
+          0.935,
+          0.905,
+          0.873,
+          0.816,
+          0.758,
+          0.7,
+          0.642,
+          0.587,
+          0.534
+        ]
+      },
+      "illumination": "2200 mW/mm²",
+      "intensityMWmm2": 2200,
+      "t75": 513,
+      "fit": {
+        "model": "stretched-exponential",
+        "tau": 1258.1,
+        "b": 1.39
+      },
+      "modality": "1P",
+      "source": "doi:10.1038/s41589-018-0004-9",
+      "sourceFigure": "Fig. 2i",
+      "sourceImage": "/photobleach-sources/quasar2-fig2i.jpg",
+      "note": "Black SOLID QuasAr2 curve, 637 nm 2200 mW/mm²; ends ~53% at 900 s. In this panel the solid QuasAr2 trace is repeatedly OCCLUDED by the overlying colored Archon curves, so the stored curve is a smooth stretched-exponential fit through the reliable (un-occluded) segments rather than raw per-column points — shape/endpoints are reliable, the mid-curve is model-interpolated. Origin-paper photobleaching panel Fig. 2i, cultured mouse hippocampal neurons, continuous illumination. IMPORTANT: the five sensors in this panel were each imaged at a DIFFERENT intensity/wavelength (Ace2N-4aa-mNeon 13 mW/mm² 475 nm; QuasAr2 & Archer1 2200 mW/mm² 637 nm; Archon1 & Archon2 800 mW/mm² 637 nm), so the raw F/F0 cross-overlay (shared source+Fig. 2i) is NOT iso-condition — it reproduces exactly what the paper plotted. intensityMWmm2 set to 2200 (per user request) so the t75 dose-scales to the 100 mW/mm² reference: 513 s × (2200/100) = 11286 s ≈ 3.1 h @100 mW/mm² — the page's displayed t75. CAVEAT: this is a ~22× linear-dose extrapolation from a high red-light intensity; treat as approximate, and note the raw Fig. 2i cross-overlay is NOT iso-condition (the five sensors were imaged at 13-2200 mW/mm² across two wavelengths), so it is not a fair cross-sensor photostability ranking.",
+      "proofread": false
+    }
+  ],
+  "apWidthData": [
+    {
+      "fwhm": 4.5,
+      "samplingRate": 1000,
+      "sample": "Cultured rat hippocampal neuron (Optopatch2), in vitro",
+      "modality": "1P",
+      "temperature": "34°C",
+      "source": "doi:10.1038/nmeth.3000",
+      "sourceFigure": "Fig. S5C",
+      "note": "Optical single-AP width for QuasAr2. Hochbaum et al. 2014 Suppl. Fig. 5C directly plots the optically-recorded AP width vs illumination time measured at 30% and 50% recovery from peak fluorescence deviation (5-AP averages, 34 °C, 1 kHz frame rate, cultured neuron). AP50 (width at 50% recovery = FWHM-equivalent) is stable at ≈4.3–4.5 ms across the 30-min recording (blue trace); the stored 4.5 ms is that AP50 value read at the start of the recording. (AP30, the 30% level, ≈2.5 ms, red trace.) The single-AP waveform itself is in Fig. S5B / Fig. S6E; the main text separately reports that QuasAr2 broadens the optical AP by 650 ± 150 µs relative to the electrical waveform at 70% max depolarization. Value is kinetics/frame-rate-influenced (QuasAr2 τ ≈ 1.3–1.4 ms at 34 °C). Previously mis-cited as Fig. S6 (which is the F-V + voltage-step figure).",
+      "proofread": false
+    }
+  ],
   "researchPapers": [
     {
       "title": "All-optical electrophysiology in mammalian neurons using engineered microbial rhodopsins",
