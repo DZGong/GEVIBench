@@ -279,7 +279,7 @@ function GEVIBenchApp() {
           disableRemotePlayback
           className="absolute inset-0 w-full h-full object-cover"
         >
-          <source src="/imgs/spike_mov.mp4" type="video/mp4" />
+          <source src="/imgs/spike_mov3.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-black/25" />
         <div className="relative text-center py-4 px-3">
