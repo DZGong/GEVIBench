@@ -19,6 +19,7 @@
     "voltron"
   ],
   "crossBranchParentId": "ace2n-mneon",
+  "proofread": true,
   "spectrum": {
     "type": "rhodopsin",
     "peakEx": 534,
@@ -705,7 +706,7 @@
     "source": "FPbase: JF525-HaloTag conjugate",
     "sourceFigure": "FPbase",
     "note": "Voltron labels the Ace2-HaloTag with the JF525-HaloTag ligand; the displayed curve is the verbatim FPbase Janelia Fluor JF525-HaloTag conjugate spectrum (EX peak 534 / EM peak 553-554 nm), shared with the JF525-conjugated Voltron2 and Positron pages. peakEx/peakEm corrected from the free-dye nominal 525/549 (the 'JF525' name) to the conjugate maxima 534/554 so the labeled peaks match the plotted curve, consistent with the voltron2 and positron sibling pages. The HaloTag conjugate is red-shifted ~9 nm versus the free dye.",
-    "proofread": false
+    "proofread": true
   },
   "voltage": {
     "type": "chemi",
@@ -726,13 +727,13 @@
       ],
       "deltaF": [
         8,
-        4,
+        4.5,
         0,
-        -4,
+        -4.5,
         -9,
-        -13,
+        -13.5,
         -18,
-        -22,
+        -22.5,
         -27
       ]
     },
@@ -761,7 +762,7 @@
           -16,
           -19
         ],
-        "proofread": false
+        "proofread": true
       },
       {
         "name": "Voltron (JF549)",
@@ -777,17 +778,47 @@
           50
         ],
         "deltaF": [
-          4,
+          5,
           3,
           0,
           -3,
-          -8,
-          -12,
-          -15,
+          -7,
+          -10,
+          -14,
           -18,
-          -21
+          -22
         ],
-        "proofread": false
+        "proofread": true,
+        "review": {
+          "status": "corrected",
+          "date": "2026-08-20",
+          "previous": {
+            "curve": {
+              "changedPoints": [
+                {
+                  "voltage": -110,
+                  "deltaF": 4
+                },
+                {
+                  "voltage": -30,
+                  "deltaF": -8
+                },
+                {
+                  "voltage": -10,
+                  "deltaF": -12
+                },
+                {
+                  "voltage": 10,
+                  "deltaF": -15
+                },
+                {
+                  "voltage": 50,
+                  "deltaF": -21
+                }
+              ]
+            }
+          }
+        }
       },
       {
         "name": "Voltron (JF585)",
@@ -803,17 +834,55 @@
           50
         ],
         "deltaF": [
+          5,
           3,
-          2,
           0,
-          -2,
-          -7,
-          -11,
-          -15,
+          -3,
+          -6.5,
+          -9.5,
+          -14,
           -18,
-          -22
+          -22.5
         ],
-        "proofread": false
+        "proofread": true,
+        "review": {
+          "status": "corrected",
+          "date": "2026-08-20",
+          "previous": {
+            "curve": {
+              "changedPoints": [
+                {
+                  "voltage": -110,
+                  "deltaF": 3
+                },
+                {
+                  "voltage": -90,
+                  "deltaF": 2
+                },
+                {
+                  "voltage": -50,
+                  "deltaF": -2
+                },
+                {
+                  "voltage": -30,
+                  "deltaF": -7
+                },
+                {
+                  "voltage": -10,
+                  "deltaF": -11
+                },
+                {
+                  "voltage": 10,
+                  "deltaF": -15
+                },
+                {
+                  "voltage": 50,
+                  "deltaF": -22
+                }
+              ]
+            }
+          }
+        }
       },
       {
         "name": "Voltron (JF635)",
@@ -830,23 +899,49 @@
         ],
         "deltaF": [
           2,
-          1,
+          1.5,
           0,
-          -2,
+          -1.5,
           -3,
           -4,
           -5,
-          -7,
-          -9
+          -6.5,
+          -8
         ],
-        "proofread": false
+        "proofread": true,
+        "review": {
+          "status": "corrected",
+          "date": "2026-08-20",
+          "previous": {
+            "curve": {
+              "changedPoints": [
+                {
+                  "voltage": -90,
+                  "deltaF": 1
+                },
+                {
+                  "voltage": -50,
+                  "deltaF": -2
+                },
+                {
+                  "voltage": 30,
+                  "deltaF": -7
+                },
+                {
+                  "voltage": 50,
+                  "deltaF": -9
+                }
+              ]
+            }
+          }
+        }
       }
     ],
     "source": "doi:10.1126/science.aav6416",
     "sourceImage": "/fv-sources/voltron.jpg",
     "sourceFigure": "Fig. 1E",
     "note": "Re-digitized from Fig. 1E (the per-dye ΔF/F–V curves) on 2025: the figure steps the command voltage from −110 to +50 mV in 20-mV increments, so the data points are at [−110,−90,−70,−50,−30,−10,10,30,50] mV with −70 mV as the 0% baseline. Each curve was traced by HSV color separation of the source image (dye→hue mapping verified from the in-plot legend dots: JF503≈114° green, JF525≈70° lime, JF549≈59° yellow, JF585≈41° amber/orange, JF635≈10° red), cross-checked by eye. Voltron525 (main curve) is the most voltage-sensitive (−22% for the −70→+30 mV step, matching the paper's −23± 1% in the main text); Voltron635 the least (−7% at +30). Voltron549 and Voltron585 nearly coincide (within ~1–2% of each other across the range) and both sit between Voltron503 and Voltron525. The Voltron503 curve was added in this pass (previously omitted). Replaces an earlier digitization whose voltage grid (−100,−80,−70,−60,−40,−20,0,30,50) did not match the figure's 20-mV step points and whose JF585 curve was read too shallow (−16% vs ≈22% at +50 mV).",
-    "proofread": false
+    "proofread": true
   },
   "kinetics": [
     {
@@ -859,13 +954,20 @@
       "proofread": true
     },
     {
-      "on": 2.69,
-      "off": 2.56,
+      "on": 2,
+      "off": 3.19,
       "temperature": "23°C",
-      "note": "Voltron525 (JF525) amplitude-weighted mean τ from the bi-exponential fit in the Voltron2 Neuron 2023 paper, Fig. 2D/2E (cultured neurons, +100 mV step from −70 mV, imaged at 3.2 kHz, room temperature 23°C per Methods). Onset: τfast 0.85 ms + τslow 4.76 ms with %fast ≈ 52% (Fig. 2E onset %fast bar, blue = Voltron525, independently digitized at 52.2%) → τ̄ = 0.52×0.85 + 0.48×4.76 = 2.69 ms. Decay: τfast 1.13 ms + τslow 4.74 ms with %fast ≈ 60% (Fig. 2E decay %fast bar, blue = Voltron525) → τ̄ = 0.60×1.13 + 0.40×4.74 = 2.56 ms. The component τ values are stated numerically in the text (fast/slow onset 0.85/4.76 ms, fast/slow decay 1.13/4.74 ms for Voltron525); the %fast amplitudes are only plotted in Fig. 2E (read off the bar plot, hence approximate). QA re-check 2026-07-04: the Fig. 2E blue bars were independently re-digitized against tick-calibrated axes (onset 0/25/50/75%=rows 923/780/641/499; decay 75/50/25%=1102/1262/1416) — Voltron525 onset %fast = 52.2%, decay %fast = 60.4% (the decay bar sits DECISIVELY higher than the onset bar). This contradicts the pre-sweep value off=2.83, which had reused the onset ~53% %fast for the decay; the correct decay %fast is ~60%, giving off ≈ 2.56 ms. (The paper's 'fast component significantly larger in onset but not decay' sentence is a Voltron2525-vs-Voltron525 between-sensor comparison, not a within-Voltron525 onset-vs-decay statement, so it does not force equal onset/decay %fast for Voltron525.) Previously stored as the fast component only (0.85/1.13) at a wrong temperature (34°C — that value is the slice-prep NMDG solution temperature, not the kinetics recording temperature).",
+      "note": "Voltron525 (JF525) amplitude-weighted mean τ from the bi-exponential fit in the Voltron2 Neuron 2023 paper, Fig. 2D/2E (cultured neurons, +100 mV step from −70 mV, imaged at 3.2 kHz, room temperature 23°C per Methods). Onset: τfast 0.85 ms + τslow 3.26 ms with %fast ≈ 52% (Fig. 2E onset %fast bar, blue = Voltron525, independently digitized at 52.2%) → τ̄ = 0.52×0.85 + 0.48×3.26 = 2.00 ms. Decay: τfast 1.13 ms + τslow 6.28 ms with %fast ≈ 60% (Fig. 2E decay %fast bar, blue = Voltron525) → τ̄ = 0.60×1.13 + 0.40×6.28 = 3.19 ms.",
       "source": "doi:10.1016/j.neuron.2023.03.009",
       "sourceFigure": "Fig. 2E",
-      "proofread": false
+      "proofread": true,
+      "review": {
+        "status": "corrected",
+        "date": "2026-08-20",
+        "previous": {
+          "note": "Voltron525 (JF525) amplitude-weighted mean τ from the bi-exponential fit in the Voltron2 Neuron 2023 paper, Fig. 2D/2E (cultured neurons, +100 mV step from −70 mV, imaged at 3.2 kHz, room temperature 23°C per Methods). Onset: τfast 0.85 ms + τslow 3.26 ms with %fast ≈ 52% (Fig. 2E onset %fast bar, blue = Voltron525, independently digitized at 52.2%) → τ̄ = 0.52×0.85 + 0.48×3.26 = 2.00 ms. Decay: τfast 1.13 ms + τslow 6.28 ms with %fast ≈ 60% (Fig. 2E decay %fast bar, blue = Voltron525) → τ̄ = 0.60×1.13 + 0.40×6.28 = 3.19 ms. The component τ values are stated numerically in the text (fast/slow onset 0.85/4.76 ms, fast/slow decay 1.13/4.74 ms for Voltron525); the %fast amplitudes are only plotted in Fig. 2E (read off the bar plot, hence approximate). QA re-check 2026-07-04: the Fig. 2E blue bars were independently re-digitized against tick-calibrated axes (onset 0/25/50/75%=rows 923/780/641/499; decay 75/50/25%=1102/1262/1416) — Voltron525 onset %fast = 52.2%, decay %fast = 60.4% (the decay bar sits DECISIVELY higher than the onset bar). This contradicts the pre-sweep value off=2.83, which had reused the onset ~53% %fast for the decay; the correct decay %fast is ~60%, giving off ≈ 2.56 ms. (The paper's 'fast component significantly larger in onset but not decay' sentence is a Voltron2525-vs-Voltron525 between-sensor comparison, not a within-Voltron525 onset-vs-decay statement, so it does not force equal onset/decay %fast for Voltron525.) Previously stored as the fast component only (0.85/1.13) at a wrong temperature (34°C — that value is the slice-prep NMDG solution temperature, not the kinetics recording temperature)."
+        }
+      }
     }
   ],
   "dynamicRangeData": [
@@ -877,17 +979,24 @@
       "source": "doi:10.1126/science.aav6416",
       "note": "Voltron525 (JF525): −23 ± 1% ΔF/F0 for a −70→+30 mV (100 mV) voltage step in cultured neurons under one-photon widefield imaging; stated in the main text and shown in the Fig. 1E F-V curve. Voltron549 showed similar sensitivity.",
       "sourceFigure": "Fig. 1E",
-      "proofread": false
+      "proofread": true
     },
     {
-      "deltaF": -20,
+      "deltaF": -23,
       "sign": "negative",
       "modality": "1P",
       "dye": "JF525",
       "source": "doi:10.1038/s41467-020-17322-1",
       "note": "Voltron-JF525 per 100 mV step (−70→+30 mV), measured as the parent-indicator control in the Positron paper (Abdelfattah et al. 2020), HEK293/cultured neurons under 1P widefield (Fig. 2a).",
       "sourceFigure": "Fig. 2a",
-      "proofread": false
+      "proofread": true,
+      "review": {
+        "status": "corrected",
+        "date": "2026-08-20",
+        "previous": {
+          "deltaF": -20
+        }
+      }
     },
     {
       "deltaF": -18.5,
@@ -897,7 +1006,7 @@
       "source": "doi:10.25378/janelia.21534411",
       "note": "ΔF/F read from the Voltron (purple) F-V trace between -70 mV (baseline 0) and +30 mV in the Janelia patch-assay F-V curve figure (1P widefield, -20 mV steps, n=8); full sweep -110 to +50 mV spans ~+5.5% to -19.5%.",
       "sourceFigure": "Fig. 1",
-      "proofread": false
+      "proofread": true
     },
     {
       "deltaF": -17.1,
@@ -907,7 +1016,7 @@
       "source": "doi:10.1101/2024.02.02.578569",
       "note": "Voltron585 (JF585) in HEK293T cells, whole-cell voltage clamp, 1P widefield (594 nm illumination). ΔF/F0 = −17.1 ± 1.3% (n = 6 cells) for a −80→+20 mV (100 mV) depolarizing step, stated in the running main text and shown as the Voltron585 (gray) normalized F-V curve in Fig. 1C. This paper's voltage protocol stepped the membrane potential in 20-mV increments and measured the −80→+20 mV chord (the standard −70→+30 mV step was not separately reported), so this is the paper's own 100-mV dynamic range. Cross-measured in the Solaris paper (Deng et al. 2024 bioRxiv), whose primary subject is Solaris; used there as the Voltron comparator (Solaris585 reached −60.6 ± 1.6% for the same step).",
       "sourceFigure": "Fig. 1C",
-      "proofread": false
+      "proofread": true
     },
     {
       "deltaF": -16,
@@ -917,7 +1026,7 @@
       "source": "doi:10.1126/science.aav6416",
       "note": "Voltron503 (JF503) ΔF/F0 for the −70→+30 mV (100 mV) step, read from the Voltron Fig. 1E per-dye F-V curve (the same digitized curve stored as a voltage.additionalCurve). Cultured rat neurons under 1P widefield voltage clamp. JF503 (green-emitting) gives a smaller response than the canonical JF525.",
       "sourceFigure": "Fig. 1E",
-      "proofread": false
+      "proofread": true
     },
     {
       "deltaF": -18,
@@ -927,7 +1036,7 @@
       "source": "doi:10.1126/science.aav6416",
       "note": "Voltron549 (JF549) ΔF/F0 for the −70→+30 mV (100 mV) step, read from the Voltron Fig. 1E per-dye F-V curve (stored as a voltage.additionalCurve). Cultured rat neurons under 1P widefield voltage clamp. The main text states Voltron549 'showed similar sensitivity' to Voltron525.",
       "sourceFigure": "Fig. 1E",
-      "proofread": false
+      "proofread": true
     },
     {
       "deltaF": -18,
@@ -937,17 +1046,24 @@
       "source": "doi:10.1126/science.aav6416",
       "note": "Voltron585 (JF585) ΔF/F0 for the −70→+30 mV (100 mV) step, read from the Voltron Fig. 1E per-dye F-V curve (stored as a voltage.additionalCurve). Cultured rat neurons under 1P widefield voltage clamp. This is the origin-paper value; a separate JF585 entry (−17) comes from the later Solaris paper Fig. 1C.",
       "sourceFigure": "Fig. 1E",
-      "proofread": false
+      "proofread": true
     },
     {
-      "deltaF": -7,
+      "deltaF": -8,
       "sign": "negative",
       "modality": "1P",
       "dye": "JF635",
       "source": "doi:10.1126/science.aav6416",
       "note": "Voltron635 (JF635) ΔF/F0 for the −70→+30 mV (100 mV) step, read from the Voltron Fig. 1E per-dye F-V curve (stored as a voltage.additionalCurve). Cultured rat neurons under 1P widefield voltage clamp. The far-red JF635 conjugate gives the smallest voltage response of the dye series.",
       "sourceFigure": "Fig. 1E",
-      "proofread": false
+      "proofread": true,
+      "review": {
+        "status": "corrected",
+        "date": "2026-08-20",
+        "previous": {
+          "deltaF": -7
+        }
+      }
     }
   ],
   "brightnessData": [
@@ -956,7 +1072,7 @@
       "reference": "ace2n-mneon",
       "source": "doi:10.1126/science.aav6416",
       "sourceFigure": "Fig. 1F",
-      "proofread": false
+      "proofread": true
     }
   ],
   "sensitivityData": [
@@ -967,7 +1083,7 @@
       "source": "doi:10.1016/j.neuron.2023.03.009",
       "note": "Voltron525 single-AP ΔF/F0 = 6.16% ± 0.74% (n=5 cells) in cultured neurons, current clamp, 1P epifluorescence; measured as the parent-sensor control in the Voltron2 paper (Fig. 2G).",
       "sourceFigure": "Fig. 2G",
-      "proofread": false
+      "proofread": true
     },
     {
       "deltaF": 6.5,
@@ -976,7 +1092,7 @@
       "source": "doi:10.1038/s41586-019-1641-1",
       "note": "Soma-Voltron525 (Voltron-ST, JF525-labeled) single-AP ΔF/F0, n=14 cells (mean 6.53%, median 6.14% of the MOESM12 Ext. Fig. 5c source data). Piatkevich et al. 2019, mouse cortex L2/3 neurons, 1P widefield, JF525 visualized with 510/25 nm LED excitation / 545/40 nm emission (caption). Illumination corrected from a prior '1.5 W/mm²', which is the 637 nm SomArchon red-laser intensity mis-copied onto this green/JF525 channel; the green channel here is ~25 mW/mm².",
       "sourceFigure": "Ext. Fig. 5c",
-      "proofread": false
+      "proofread": true
     },
     {
       "deltaF": 6.5,
@@ -985,7 +1101,7 @@
       "source": "doi:10.25378/janelia.21534411",
       "note": "Median single-AP |ΔF/F0| read from the Voltron (purple) boxplot in the Janelia patch-assay spike-detection figure (1P widefield, PatcherBot cultured neurons, n=8); negative-going, median ≈ -6.5%.",
       "sourceFigure": "Fig. 2",
-      "proofread": false
+      "proofread": true
     }
   ],
   "subthresholdData": [
@@ -994,20 +1110,20 @@
       "note": "Voltron525 subthreshold slope 0.21%/mV ± 0.01%/mV in the −90 to −50 mV range (cultured neurons, n=8 cells), reported in the running main text of the Voltron2 paper as the comparator to Voltron2525 (0.54%/mV). Not a labeled figure panel (Fig. 2B is the F-V curve).",
       "source": "doi:10.1016/j.neuron.2023.03.009",
       "sourceFigure": "Main text",
-      "proofread": false
+      "proofread": true
     }
   ],
   "apWidthData": [
     {
-      "fwhm": 5.8,
+      "fwhm": 3,
       "samplingRate": 985,
       "sample": "Cultured rat hippocampal neurons, uM Workstation whole-cell current clamp, single evoked AP (2 nA, 2 ms pulse)",
       "modality": "1P",
       "temperature": "23°C",
       "source": "doi:10.1016/j.neuron.2023.03.009",
       "sourceFigure": "Fig. 2F",
-      "note": "Optical single-AP FWHM ≈ 5.8 ms, DERIVED by digitizing the Voltron525 (blue) ΔF/F-vs-time fluorescence waveform in Fig. 2F (the bottom-left optical trace; representative single evoked AP, current clamp), measured as the Voltron comparator in the Voltron2 paper (primary subject Voltron2). Time axis 0–100 ms (2.59 px/ms); baseline from the flat pre-spike segment, peak = max negative deflection (≈ −5.4% here), FWHM = the span where the trace exceeds the half-baseline-to-peak level (HSV-traced, overlay-verified). Imaged on the uM Workstation at its standard 985 Hz frame rate (Methods; the separate Fig. 2D kinetics panel used 3.2 kHz). This OPTICAL FWHM convolves the sensor's ~1–4 ms response kinetics and is therefore much broader than the paper's ELECTRICAL patch-clamp AP half-width (1.5 ± 0.07 ms for Voltron525). Representative single trace (n=1 shown), so the value is approximate; the Voltron525 (5.8 ms) vs Voltron2525 (4.0 ms) optical-FWHM difference reflects single-trace variability rather than a robust kinetic difference (the paper reports similar onset/decay kinetics and near-identical electrical AP half-widths, 1.5 vs 1.6 ms).",
-      "proofread": false
+      "note": "The paper reports  electrical AP half-widths, 1.5 vs 1.6 ms).",
+      "proofread": true
     }
   ],
   "photostabilityData": [
@@ -1065,7 +1181,12 @@
       "sourceImage": "/photobleach-sources/voltron-ext5e.jpg",
       "sourceFigure": "Ext. Fig. 5e",
       "note": "Cross-GEVI photobleaching from the SomArchon paper (Piatkevich et al. 2019, primary subject SomArchon). Soma-Voltron525 (Voltron-ST, JF525-labeled, KV2.1-targeted) in primary cultured mouse neurons (n=8), continuous LED at ~25 mW/mm² with 510/25 nm excitation (Ext. Data Fig. 5e caption; the 475/36 nm figure is the separate cell-death panel 5f, not this one), digitized from the exact Ext. Data Fig. 5e source data (MOESM12 spreadsheet). F/F0 falls to 0.288 at 600 s; model-free t75 = 30.5 s (t50 = 131 s; the early decline is gradual, not a few-second transient, so t75 is representative). Biexponential fit, R²=0.97. CAVEAT (cross-overlay): the Ext. Fig. 5e panel co-plots this green/JF525 sensor with SomArchon, which was imaged at 637 nm / 1,500 mW/mm² — a ~60x higher intensity at a different wavelength. intensityMWmm2 is OMITTED (no dose-scaling) because the cross-sensor comparison is NOT apples-to-apples across that wavelength/intensity gap.",
-      "proofread": false
+      "proofread": false,
+      "review": {
+        "status": "questionable",
+        "comment": "not sure the source of the 25mW/mm2",
+        "date": "2026-08-20"
+      }
     },
     {
       "modality": "1P",
@@ -1087,7 +1208,7 @@
       "sourceImage": "/photobleach-sources/voltron-fig1h.jpg",
       "sourceFigure": "Fig. 1H",
       "note": "Origin-paper ensemble photobleaching panel (Fig. 1H) — Voltron's headline photostability claim. Voltron525 (JF525, lime curve) in primary rat hippocampal neuron culture, 1P widefield continuous illumination at ~23 mW/mm² (caption; 510/25 nm excitation filter per Methods), imaged 1 Hz over a 10 min record. Digitized by HSV color separation from the 'Relative Fluor. (ensemble)' main plot (y normalized to ASAP2f mean intensity, so curves start at different absolute values), then RENORMALIZED to its own first frame (F0 ≈ 16.2 ×ASAP2f units) so F/F0 = 1.0 at t=0; falls to ≈0.148 at 600 s (≈15% remaining, matching the panel and this page's photostabilityData Fig.-1H entry). Biexponential fit (a 0.875, τ1 183 s, τ2 10663 s, R²=0.9999); model-free t75 ≈ 61 s (t50 ≈ 155 s), both well inside the 600 s window. Cross-overlays with the Ace2N-mNeon curve from the same panel (identical source+sourceFigure): Voltron525 is ≈2× slower in t75 and the gap widens at longer times, the panel's point that Voltron is far more photostable than the FP-based sensors. Distinct from the page's other photobleach entries (SomArchon Ext.Fig.5e, Voltron-ST at 25 mW/mm²/510-25 nm; and Voltron2 Fig.2I at 14.7 mW/mm²/510-25 nm).",
-      "proofread": false
+      "proofread": true
     },
     {
       "modality": "1P",
@@ -1109,13 +1230,32 @@
       "sourceImage": "/photobleach-sources/voltron-fig2i.jpg",
       "sourceFigure": "Fig. 2I",
       "note": "Voltron2 paper (Abdelfattah et al. Neuron 2023, primary subject Voltron2525) photobleaching-comparison panel Fig. 2I: Voltron525 (blue curve) vs Voltron2525 (red) in cultured rat neurons over 10 min, room temperature, imaged at 985 Hz continuous 1P widefield with the JF525 filter cube (510/25 nm excitation, 545/40 emission) at a measured 14.7 mW/mm² in the imaging plane (Methods). Digitized by blue color separation with per-column median tracking, gridline-calibrated (x 0/200/400/600 s at cols 133/385/637/889; y 1.0–0.6 at rows 116–403), normalized to the first frame. F/F0 falls to ≈0.56 at 600 s — i.e. a 44% reduction, matching the paper's stated 45% ± 2% reduction over 10 min for Voltron525. Model-free t75 ≈ 245 s (the curve never reaches 0.50 in-window, so no t50); biexponential fit a 0.534 / τ1 440 s / τ2 6112 s, R²=0.9996. Cross-overlays with the Voltron2 Fig. 2I entry (identical source+sourceFigure). Note the lower t75 than the Fig. 1H entry despite similar wavelength is because the light dose here is lower (14.7 vs ~23 mW/mm²) yet the F/F0 curve is shallower — dose-scaled t75 = 245 × 14.7/100 = 36 s.",
-      "proofread": false
+      "proofread": true
+    },
+    {
+      "modality": "1P",
+      "illumination": "70–140 mW/mm² (DMD patterned, per-cell)",
+      "fit": {
+        "model": "stretched-exponential",
+        "tau": 2435.7,
+        "b": 0.693,
+        "r2": 0.997
+      },
+      "custom": {
+        "time": [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100, 105, 110, 115, 120, 125, 130, 135, 140, 145, 150, 155, 160, 165, 170, 175, 180],
+        "fluorescence": [1.0, 0.982, 0.977, 0.969, 0.963, 0.957, 0.952, 0.946, 0.944, 0.94, 0.938, 0.933, 0.928, 0.923, 0.916, 0.914, 0.912, 0.909, 0.904, 0.903, 0.901, 0.893, 0.891, 0.884, 0.884, 0.876, 0.876, 0.873, 0.867, 0.866, 0.865, 0.863, 0.859, 0.857, 0.855, 0.851, 0.847]
+      },
+      "source": "doi:10.1016/j.neuron.2023.03.009",
+      "sourceImage": "/photobleach-sources/voltron-figS8d.jpg",
+      "sourceFigure": "Fig. S8d",
+      "note": "In-vivo photobleaching of Voltron552-ST (Voltron + JF552-HaloTag, soma-targeted) in awake mouse CA1 parvalbumin interneurons, digitized from the BLUE curve in Fig. S8d (red = Voltron2552-ST co-plotted, on the voltron2 page; solid line = mean of n=105 neurons, 7 imaging sessions). One-photon DMD-based patterned illumination (64 µm discs per cell, 561 nm LED for JF552), imaged at 2 kHz. Ends at F≈0.847 at 180 s, matching the paper's stated 15.6% ± 4.6% reduction over 3 min — Voltron552 bleaches significantly faster than Voltron2552 (9.9%; p<0.001). NOTE: a DIFFERENT dye (JF552) and prep (in vivo, patterned illumination) from this page's canonical JF525 in-vitro curves above. intensityMWmm2 is deliberately OMITTED: the sample-plane irradiance is a per-cell patterned range (~70–140 mW/mm²), not a single uniform dose, so it is NOT comparable to the 100 mW/mm² 1P reference and must not be dose-scaled. t75/t50 are also OMITTED: the curve bleaches only ~15% and never reaches 75% within the 180 s window (stretched-exp fit extrapolates t75≈400 s, beyond the data with no paper-stated anchor), so this is an honest lower bound (t75 > 180 s). Companion (red) curve: Voltron2552-ST in voltron2.json, same source+sourceFigure, cross-overlays.",
+      "proofread": true
     }
   ],
   "addgene": {
     "id": "119033",
     "url": "https://www.addgene.org/119033/",
-    "proofread": false
+    "proofread": true
   },
   "researchPapers": [
     {

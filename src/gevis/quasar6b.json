@@ -13,6 +13,7 @@
   "description": "Archon1 variant evolved through video-based pooled screening with improved speed.",
   "parentId": "archon1",
   "siblingId": "quasar6",
+  "proofread": false,
   "spectrum": {
     "type": "rhodopsin",
     "peakEx": 590,

@@ -13,6 +13,7 @@
   "description": "JEDI-2P variant with two-photon voltage sensitivity shifted toward hyperpolarized potentials for detecting subthreshold fluctuations below resting membrane potential.",
   "parentId": "jedi2p",
   "siblingId": "jedi3sub",
+  "proofread": false,
   "spectrum": {
     "type": "fp",
     "peakEx": 501,

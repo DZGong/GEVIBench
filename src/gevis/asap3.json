@@ -12,6 +12,7 @@
   "paperUrl": "https://doi.org/10.1016/j.cell.2019.11.004",
   "description": "3rd-gen ASAP sensor with large fluorescence modulation and fast kinetics.",
   "parentId": "asap2s",
+  "proofread": false,
   "spectrum": {
     "type": "fp",
     "peakEx": 490,
@@ -385,26 +386,22 @@
     "name": "ASAP3",
     "custom": {
       "voltage": [
-        -120,
-        -100,
+        -110,
         -90,
         -70,
         -50,
         -30,
         -10,
-        0,
         10,
         30
       ],
       "deltaF": [
-        55,
-        34,
+        45,
         23,
         0,
         -20,
         -35,
         -43,
-        -48,
         -49,
         -51
       ]
@@ -412,7 +409,7 @@
     "source": "doi:10.1016/j.cell.2019.11.004",
     "sourceImage": "/fv-sources/asap3.jpg",
     "sourceFigure": "Fig. 2A",
-    "note": "Derived curve: the steady-state response SHAPE was digitized from the green ASAP3 Boltzmann in Fig. 2A (normalized (F−Fmin)/(Fmax−Fmin), V½ ≈ −88 mV), then converted to ΔF/F relative to −70 mV by solving the absolute floor Fmin/Fmax = 0.23 from the Table 1 anchor (ΔF/F per 100-mV step −70→+30 mV = −51%). The depolarizing side is well constrained; the hyperpolarizing side is steeper than the directly-measured subthreshold slope (0.46%/mV, Fig. S5E) because the Fig. 2A Boltzmann is full steady-state whereas the subthreshold measurement is kinetically attenuated.",
+    "note": "Derived curve: the steady-state response SHAPE was digitized from the green ASAP3 Boltzmann in Fig. 2A (normalized (F−Fmin)/(Fmax−Fmin)), then converted to ΔF/F relative to −70 mV by solving the absolute floor Fmin/Fmax ≈ 0.24 from the Table 1 anchor (ΔF/F per 100-mV step −70→+30 mV = −51%). Re-digitized 2026-07-07 (color-mask + Boltzmann fit, V½ ≈ −85 mV, k ≈ 31; max residual 1.3% vs the prior digitization — confirmed faithful to Fig. 2A) and resampled onto an even 20-mV grid (−110→+30 mV, anchored at −70 = 0). The depolarizing side is well constrained; the hyperpolarizing side is steeper than the directly-measured subthreshold slope (0.46%/mV, Fig. S5E) because the Fig. 2A Boltzmann is full steady-state whereas the subthreshold measurement is kinetically attenuated.",
     "proofread": false
   },
   "kinetics": [
@@ -536,7 +533,7 @@
       "slope": 0.9,
       "source": "doi:10.1016/j.neuron.2024.08.019",
       "sourceFigure": "Fig. S1C",
-      "proofread": false
+      "proofread": true
     }
   ],
   "brightnessData": [
@@ -574,14 +571,6 @@
       "reference": "quasar3",
       "source": "doi:10.1016/j.cell.2019.11.004",
       "sourceFigure": "Table 1",
-      "proofread": false
-    },
-    {
-      "ratio": 0.51,
-      "reference": "restus",
-      "source": "doi:10.1021/acschemneuro.5c00670",
-      "sourceFigure": "Fig. 2C",
-      "note": "Reciprocal of rEstus/ASAP3 = 1.96 read from Fig. 2C (mean molecular brightness at -120 mV relative to mKate2: ASAP3 4.06, rEstus 7.94).",
       "proofread": false
     }
   ],
@@ -631,7 +620,7 @@
       "samplingRate": 987,
       "sample": "HEK293A cells, optical response to a single AP-like command waveform, whole-cell voltage clamp",
       "modality": "1P",
-      "temperature": "room temperature",
+      "temperature": "25°C",
       "source": "doi:10.1038/s41467-023-41975-3",
       "sourceFigure": "Fig. 2f",
       "note": "Optical response width (FWHM) to a single AP-like command waveform (2-ms FWHM, +30 mV peak), HEK293A whole-cell voltage clamp, fluorescence acquired at ~987 Hz (ORCA Flash 4.0 V2 sCMOS; the paper's Methods repeatedly specify ~987 fps/Hz for green-GEVI voltage imaging, not a round 1 kHz). Fig. 2f y-axis is 'Width of response to spike waveforms (ms)' and the caption states 'The width corresponds to the full-width at half-maximum' (so this IS a true FWHM, not a 30%-max width). ASAP3 (orange) bar ≈ 5.7 ms verified off the rendered panel; ASAP2s ≈ 6.7 ms. Measured alongside JEDI-1P (primary subject, ≈4.4 ms). Experiments done at room temperature (Fig. 2 caption: 'unless otherwise noted'; the 32–35 °C note applies only to panels m–o).",
@@ -641,7 +630,7 @@
       "fwhm": 12.7,
       "sample": "Cultured rat hippocampal neurons, optical response to current-evoked single APs, current clamp, room temperature",
       "modality": "1P",
-      "temperature": "room temperature",
+      "temperature": "25°C",
       "source": "doi:10.1016/j.cell.2019.11.004",
       "sourceFigure": "Fig. 2F",
       "note": "Optical spike width at half-maximum (FWHM ≈ 12.7 ms, n = 5) of the ASAP3 optical single-AP waveform in cultured hippocampal neurons, read from the 'Optical spike width (ms)' bar chart in Fig. 2F of the origin paper (Villette et al. 2019); the co-plotted ASAP2s bar is ≈17.3 ms. Measured under one-photon widefield illumination at room temperature. samplingRate is omitted: the paper reports only a range (1–2 kHz, Table 1 footnote) rather than a single frame rate for this experiment, and this width (~12.7 ms) is dominated by ASAP3's own deactivation kinetics (τ_off ~16–32 ms at RT) rather than the frame interval (kinetics-dominated exception), so it is meaningful but not strictly comparable to frame-rate-specified widths. Distinct from the electrical AP FWHM (3.9 ± 0.2 ms) also reported in Fig. 2E, which is the command AP waveform, not the optical response.",

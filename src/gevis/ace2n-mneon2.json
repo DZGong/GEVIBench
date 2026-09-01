@@ -11,6 +11,7 @@
   "paperUrl": "https://doi.org/10.1126/science.abm8797",
   "description": "Improved Ace2N-mNeon variant optimized for lower illumination power.",
   "parentId": "ace2n-mneon",
+  "proofread": false,
   "spectrum": {
     "type": "rhodopsin",
     "peakEx": 506,

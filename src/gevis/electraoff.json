@@ -13,6 +13,7 @@
   "paperUrl": "https://doi.org/10.1101/2025.05.30.657123",
   "description": "Photostable negative-going eFRET GEVI combining Ace2 opsin with mBaoJin(3M), a StayGold-derived bright and photostable green FP.",
   "parentId": "ace2n-mneon2",
+  "proofread": false,
   "spectrum": {
     "type": "rhodopsin",
     "peakEx": 500,

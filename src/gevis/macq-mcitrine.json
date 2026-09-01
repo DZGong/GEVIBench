@@ -18,6 +18,7 @@
     "macq-mcitrine"
   ],
   "siblingId": "macq-morange2",
+  "proofread": false,
   "spectrum": {
     "type": "rhodopsin",
     "peakEx": 515,
@@ -458,7 +459,7 @@
       "modality": "1P",
       "source": "doi:10.1038/ncomms4674",
       "sourceFigure": "Fig. 5c",
-      "note": "Derived by digitizing the green MacQ-mCitrine averaged optical single-AP waveform (mean of n=16 spikes) in Fig. 5c: calibrated time from the 20 ms scale bar, traced the ΔF/F curve, and measured the full-width at half-maximum (baseline from the flat pre-spike segment; peak amplitude ≈4% ΔF/F, consistent with the 4.8% peak-per-AP value). FWHM ≈ 10.2 ms — much broader than the simultaneously recorded electrical AP (3.2 ± 0.6 ms FWHM, main text) because MacQ-mCitrine's ~20 ms off-kinetics broaden the optical response. Kinetics-dominated (FWHM ≫ the 2.27 ms frame period at 440 Hz), so the frame rate does not materially set the width. 1P widefield, 15 mW/mm², 505 nm.",
+      "note": "Derived by digitizing the green MacQ-mCitrine averaged optical single-AP waveform (mean of n=16 spikes) in Fig. 5c: calibrated time from the 20 ms scale bar, traced the ΔF/F curve, and measured the full-width at half-maximum (baseline from the flat pre-spike segment; the averaged-waveform peak reads ≈ −3% ΔF/F off the Fig. 5c scale bar, smaller than the 4.8% mean-over-individual-spikes peak-per-AP value from Fig. 5d as expected for an n=16 average). FWHM ≈ 10.2 ms — much broader than the simultaneously recorded electrical AP (3.2 ± 0.6 ms FWHM, main text) because MacQ-mCitrine's ~20 ms off-kinetics broaden the optical response. Kinetics-dominated (FWHM ≫ the 2.27 ms frame period at 440 Hz), so the frame rate does not materially set the width. 1P widefield, 15 mW/mm², 505 nm.",
       "proofread": false
     }
   ],

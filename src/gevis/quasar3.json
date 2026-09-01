@@ -13,6 +13,7 @@
   "paperUrl": "https://doi.org/10.1038/s41586-019-1166-7",
   "description": "Photoactivatable QuasAr3 variant that can be selectively activated.",
   "parentId": "quasar2",
+  "proofread": false,
   "spectrum": {
     "type": "rhodopsin",
     "peakEx": 590,

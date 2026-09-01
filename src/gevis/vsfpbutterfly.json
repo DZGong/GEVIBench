@@ -14,6 +14,7 @@
   "paperUrl": "https://doi.org/10.1152/jn.00452.2012",
   "description": "FRET-based voltage indicator with a novel 'Butterfly' topology sandwiching the voltage-sensing domain between two fluorescent proteins.",
   "parentId": "vsfp2",
+  "proofread": false,
   "spectrum": {
     "type": "fret",
     "peakEx": 516,

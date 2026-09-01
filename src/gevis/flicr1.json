@@ -14,6 +14,7 @@
   "paperUrl": "https://doi.org/10.1523/JNEUROSCI.3484-15.2016",
   "description": "Red fluorescent GEVI using the same voltage-sensing domain as ArcLight.",
   "parentId": "electricpk",
+  "proofread": false,
   "spectrum": {
     "type": "fp",
     "peakEx": 570,

@@ -17,6 +17,7 @@
     "Opsin-Fluorescent",
     "arch"
   ],
+  "proofread": false,
   "spectrum": {
     "type": "rhodopsin",
     "peakEx": 558,

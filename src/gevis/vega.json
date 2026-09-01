@@ -15,6 +15,7 @@
   "paperUrl": "https://doi.org/10.1101/2025.05.29.656768",
   "description": "Photostable green eFRET GEVI built by inserting mBaoJin(3M) into the first extracellular loop of Ace2 rhodopsin, with Kv2.1 and ER2 targeting motifs for long-duration one-photon voltage imaging.",
   "parentId": "cepheid1b",
+  "proofread": false,
   "spectrum": {
     "type": "rhodopsin",
     "peakEx": 500,

@@ -20,6 +20,7 @@
     "caesr"
   ],
   "crossBranchParentId": "arch",
+  "proofread": false,
   "spectrum": {
     "type": "rhodopsin",
     "peakEx": 516,

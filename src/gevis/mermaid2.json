@@ -14,6 +14,7 @@
   "paperUrl": "https://doi.org/10.1113/jphysiol.2013.257048",
   "description": "Improved CFP/YFP FRET variant of Mermaid engineered for larger ratiometric response and submillisecond activation, enabling single-trial detection of action potential trains up to 150 Hz.",
   "parentId": "mermaid",
+  "proofread": false,
   "spectrum": {
     "type": "fret",
     "peakEx": 435,

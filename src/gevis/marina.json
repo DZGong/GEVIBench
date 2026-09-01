@@ -13,6 +13,7 @@
   "paperUrl": "https://doi.org/10.1021/acschemneuro.6b00234",
   "description": "Positive-going ArcLight variant created by directed evolution.",
   "parentId": "arclight",
+  "proofread": false,
   "spectrum": {
     "type": "fp",
     "peakEx": 488,

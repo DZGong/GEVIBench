@@ -17,6 +17,7 @@
     "arclight"
   ],
   "crossBranchParentId": "mermaid",
+  "proofread": false,
   "spectrum": {
     "type": "fp",
     "peakEx": 488,

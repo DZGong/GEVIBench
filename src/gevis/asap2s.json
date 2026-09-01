@@ -12,6 +12,7 @@
   "paperUrl": "https://doi.org/10.7554/eLife.25690",
   "description": "Higher-sensitivity ASAP1 variant that trades speed for larger fluorescence responses.",
   "parentId": "asap1",
+  "proofread": false,
   "addgene": {
     "id": "101274",
     "url": "https://www.addgene.org/101274/",

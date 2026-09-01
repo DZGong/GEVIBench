@@ -14,6 +14,7 @@
   "paperUrl": "https://doi.org/10.64898/2026.05.27.728040",
   "description": "Red-shifted ASAP5 variant optimized for ultrasensitive subthreshold voltage imaging, with a steep response near resting potential and excitation compatibility extending to high-power 1030-nm fiber lasers.",
   "parentId": "asap5",
+  "proofread": true,
   "spectrum": {
     "type": "fp",
     "peakEx": 510,
@@ -383,26 +384,32 @@
       "voltage": [
         -120,
         -100,
+        -80,
         -70,
-        -50,
+        -60,
+        -40,
         -20,
+        0,
         30,
         80
       ],
       "deltaF": [
         100,
         78,
+        25,
         0,
         -30,
-        -55,
+        -60,
+        -75,
         -80,
+        -85,
         -90
       ]
     },
     "source": "doi:10.64898/2026.05.27.728040",
     "sourceImage": "/fv-sources/asap7y.jpg",
     "sourceFigure": "Fig. 1b",
-    "proofread": false
+    "proofread": true
   },
   "kinetics": [
     {
@@ -411,7 +418,7 @@
       "temperature": "37°C",
       "source": "doi:10.64898/2026.05.27.728040",
       "sourceFigure": "Ext. Fig. 1b",
-      "proofread": false,
+      "proofread": true,
       "note": "Activation (−70→+30 mV) and deactivation (+30→−70 mV) dynamics in HEK293 cells (n=6 at 37°C). Ext. Data Fig. 1b labels each curve with a single time constant and its amplitude fraction in parentheses: activation τ = 0.9 ms (95%), deactivation τ = 2.7 ms (90%). These are the DOMINANT component of a multi-exponential (biexponential) fit — the parenthetical % is that component's amplitude weight, so a small (~5–10%) slower component exists. The slow-component τ is NOT reported in the paper (no kinetics table, no fit methods), so a true amplitude-weighted mean τ̄ cannot be computed; the stored value is the dominant τ, which the main text also cites as the sensor's onset 'time constant' (0.9 ms at 37°C). Because the fast component carries 90–95% of the amplitude, the weighted mean would be only marginally slower."
     },
     {
@@ -420,7 +427,7 @@
       "temperature": "25°C",
       "source": "doi:10.64898/2026.05.27.728040",
       "sourceFigure": "Ext. Fig. 1b",
-      "proofread": false,
+      "proofread": true,
       "note": "Activation (−70→+30 mV) and deactivation (+30→−70 mV) dynamics in HEK293 cells (n=8 at 25°C). Ext. Data Fig. 1b labels each curve with a single time constant and its amplitude fraction: activation τ = 3.0 ms (85%), deactivation τ = 10.7 ms (74%) — the DOMINANT component of a biexponential fit (the parenthetical % is the amplitude weight). The slower component's τ is not reported anywhere in the paper (no kinetics table / fit methods), so an amplitude-weighted mean cannot be computed; the stored value is the dominant τ, matching the main text's stated onset 'time constant of 3.0 ms at 25°C'. The 74% deactivation weight at 25°C means the slow component is more prominent here, so the true weighted mean τ_off is somewhat >10.7 ms — but the slow τ is unpublished, so no correction is made."
     }
   ],
@@ -432,7 +439,7 @@
       "source": "doi:10.64898/2026.05.27.728040",
       "sourceFigure": "Fig. 1b",
       "note": "ΔF/F0 across the physiological range from -70 mV to +30 mV (100-mV step) in voltage-clamped HEK293 cells; full dynamic range (Fmax/Fmin) = 18 vs 3.5 for ASAP5",
-      "proofread": false
+      "proofread": true
     }
   ],
   "sensitivityData": [
@@ -450,7 +457,7 @@
       "source": "doi:10.64898/2026.05.27.728040",
       "sourceFigure": "Fig. 2k",
       "note": "Peak -ΔF/F per spontaneous action potential in Drosophila TPN-II neurons in vivo under 940-nm two-photon excitation; 81% higher than ASAP5 (13%) in the same prep",
-      "proofread": false
+      "proofread": true
     }
   ],
   "subthresholdData": [
@@ -459,14 +466,14 @@
       "source": "doi:10.64898/2026.05.27.728040",
       "sourceFigure": "Fig. 1b",
       "note": "Voltage-fluorescence conversion ratio around resting membrane potential in HEK293 cells (2-fold higher than ASAP5 at 1.3%/mV)",
-      "proofread": false
+      "proofread": true
     },
     {
       "slope": 1.9,
       "source": "doi:10.64898/2026.05.27.728040",
       "sourceFigure": "Fig. 1f",
       "note": "In vivo whole-cell patch-clamp near resting membrane voltage in mouse visual cortex",
-      "proofread": false
+      "proofread": true
     }
   ],
   "apWidthData": [
@@ -476,6 +483,11 @@
       "source": "doi:10.64898/2026.05.27.728040",
       "sourceFigure": "Fig. 1c",
       "proofread": false,
+      "review": {
+        "status": "questionable",
+        "comment": "Is it really true that asap7's width is broader than asap5?",
+        "date": "2026-08-21"
+      },
       "note": "Optical single-AP FWHM digitized from the averaged optical AP waveform in Fig. 1c (the yellow ΔF/F trace — average of n=7 cultured cortical neurons responding to current-evoked APs, plotted above the averaged electrical AP), calibrated to the panel's 20 ms scale bar and overlay-verified: ASAP7y ≈ 10.3 ms vs ASAP5 ≈ 6.8 ms in the same panel. The broad optical AP reflects ASAP7y's slow kinetics (τ_off ≈ 10.7 ms at 25°C). CAVEATS: the paper does not report this experiment's imaging frame rate, so samplingRate is omitted (rule 1j normally requires it) — but here the width is kinetics-dominated rather than frame-rate-limited, so it remains meaningful, though not strictly comparable to frame-rate-specified AP widths. Excitation modality and recording temperature for this panel are not explicitly stated (the ≈10 ms width is consistent with ~25°C kinetics)."
     }
   ],
@@ -486,7 +498,7 @@
       "source": "doi:10.64898/2026.05.27.728040",
       "sourceFigure": "Fig. 2l",
       "note": "Baseline brightness (F0) in Drosophila TPN-II neurons in vivo under 940-nm two-photon excitation",
-      "proofread": false
+      "proofread": true
     }
   ],
   "photostabilityData": [
@@ -522,7 +534,7 @@
       "sourceImage": "/photobleach-sources/asap7y.jpg",
       "sourceFigure": "Ext. Fig. 3a",
       "note": "Model-free t75% = time for fluorescence to fall to 75% of its initial value. ASAP7y is exceptionally photostable: in its only bleach figure (Ext. Fig. 3a — 1P widefield, bouts of CW 445 nm at ~10 µW/mm² over a 1-h in vivo recording in mouse PV interneurons) it loses only ~10-13% and NEVER reaches 75% within the 60-min recording, so t75% is EXTRAPOLATED beyond the data. The resolved decline is a slow single exponential, F(t)=0.91·exp(−t/τ) with τ≈18 h (R²=0.85), reaching 0.75 at t75% ≈ 209 min (~3.5 h); a biexponential fit and a slow-phase linear extrapolation agree (~210-230 min). This runs ~3.5× past the measured window and is only approximate — treat it as an order-of-magnitude indicator of excellent photostability, not a precise value. The amplitude 0.91 (not 1.0) reflects a small fast drop in the first unresolved seconds; the displayed curve is a smoothed monotonic trend of the noisy (gamma-band) trace, and the dashed segment beyond 60 min is the extrapolation. Measured at 1P ~10 µW/mm², which is 1e4× below the 100 mW/mm² reference; under a linear-dose model (bleaching ∝ intensity×time) the reference-scaled t75% ≈ 12570 s ÷ 1e4 ≈ 1.3 s — a steep ×1e4 extrapolation on top of the already-extrapolated t75%, so order-of-magnitude only. Does not replace the photostabilityData entry (90% remaining at 1 h).",
-      "proofread": false
+      "proofread": true
     },
     {
       "modality": "2P",
@@ -535,7 +547,12 @@
       "sourceImage": "/photobleach-sources/asap7y-2p.png",
       "sourceFigure": "Fig. 2g",
       "note": "2P photostability of ASAP7y (green, 940 nm curve) over 1 min of continuous imaging in Drosophila Mi1 neurons in vivo (AOD random-access microscope, 16 mW at 940 nm), digitized from Fig. 2g where it is plotted alongside the ASAP5 curve (which drops to ~0.85 at 60 s — see asap5.json Fig. 2g entry). ASAP7y is far more photostable: it shows a small transient BRIGHTENING to ~1.04 in the first ~10 s, then a slow decline back to ~0.98 at 60 s, i.e. it effectively plateaus near 1.0 and never approaches 75% — so no t75% is reported. Because F/F0 rises above 1.0 (photoactivation-like brightening) rather than monotonically bleaching, no exponential fit is given. 2P power-only measurement (in-vivo Drosophila brain, focal excitation): NOT linearly dose-scaled to the 100 mW/mm² 1P reference and NOT comparable across modalities, so intensityMWmm2/t75 are intentionally omitted. Cross-measured in the same Fig. 2g panel as ASAP5 in this (the ASAP7y) paper.",
-      "proofread": false
+      "proofread": false,
+      "review": {
+        "status": "questionable",
+        "comment": "the curve of asap5 looks off",
+        "date": "2026-08-21"
+      }
     }
   ],
   "twoPhoton": [

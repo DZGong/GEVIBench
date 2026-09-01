@@ -14,6 +14,7 @@
   "paperUrl": "https://doi.org/10.64898/2026.06.01.726307",
   "description": "Red-emitting voltage indicator built on the JEDI/ASAP architecture with a circularly permuted mApple for reliable spike detection under in vivo 2P.",
   "parentId": "jedi2p",
+  "proofread": false,
   "spectrum": {
     "type": "fp",
     "peakEx": 567,

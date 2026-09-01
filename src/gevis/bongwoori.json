@@ -12,6 +12,7 @@
   "paperUrl": "https://doi.org/10.1523/JNEUROSCI.3008-14.2015",
   "description": "ArcLight-derived voltage indicator with an improved voltage-sensing domain.",
   "parentId": "arclight",
+  "proofread": false,
   "spectrum": {
     "type": "fp",
     "peakEx": 488,

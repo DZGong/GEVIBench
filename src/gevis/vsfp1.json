@@ -17,6 +17,7 @@
     "VSD-FRET",
     "vsfp1"
   ],
+  "proofread": false,
   "spectrum": {
     "type": "fret",
     "peakEx": 435,

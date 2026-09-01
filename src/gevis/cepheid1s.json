@@ -16,6 +16,7 @@
   "description": "Red eFRET voltage indicator built by inserting the photostable RFP donor mRuby4 into the first extracellular loop of Ace(D81C) rhodopsin; the more photostable (but dimmer) member of the Cepheid1 pair, enabling long-duration one-photon voltage imaging.",
   "parentId": "varnam",
   "siblingId": "cepheid1b",
+  "proofread": false,
   "spectrum": {
     "type": "rhodopsin",
     "peakEx": 558,
@@ -537,7 +538,7 @@
       "modality": "1P",
       "source": "doi:10.1126/sciadv.adi4208",
       "sourceFigure": "Fig. 1D",
-      "note": "Optical single-AP FWHM derived by digitizing the averaged Cepheid1s optical fluorescence waveform (red trace, ΔF/F vs time) in Fig. 1D of the origin paper (20-ms scale bar). Baseline taken from the flat pre-spike segment, peak as the max downward deflection; FWHM measured at the half baseline-to-peak level ≈ 7.9 ms (±0.5 ms digitization uncertainty). Recorded in current-clamp cultured rat hippocampal neurons under widefield 1P imaging at 484 Hz (Methods); the frame period (~2.1 ms) is well below the width, so the value is kinetics-dominated (consistent with Cepheid1s τoff ≈ 3.5 ms, and comparable to the sibling Cepheid1b's separately-digitized ~7.8 ms from the same panel). No numeric FWHM is stated in the paper; this value was digitized fresh from Fig. 1D for this page.",
+      "note": "Optical single-AP FWHM derived by digitizing the averaged Cepheid1s optical fluorescence waveform (red trace, ΔF/F vs time) in Fig. 1D of the origin paper (20-ms scale bar). Baseline taken from the flat pre-spike segment, peak as the max downward deflection; FWHM measured at the half baseline-to-peak level ≈ 7.9 ms (±0.5 ms digitization uncertainty). Recorded in current-clamp cultured rat hippocampal neurons under widefield 1P imaging at 484 Hz (Methods); the frame period (~2.1 ms) is well below the width, so the value is kinetics-dominated (consistent with Cepheid1s τoff ≈ 3.5 ms, and comparable to the sibling Cepheid1b's separately-digitized ~7.0 ms from the same panel). No numeric FWHM is stated in the paper; this value was digitized fresh from Fig. 1D for this page.",
       "proofread": false
     }
   ],

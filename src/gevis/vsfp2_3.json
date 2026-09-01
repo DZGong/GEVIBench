@@ -13,6 +13,7 @@
   "paperUrl": "https://doi.org/10.1371/journal.pone.0002514",
   "description": "The first VSFP variant to achieve reliable in vivo cortical voltage imaging in transgenic mice.",
   "parentId": "vsfp2",
+  "proofread": false,
   "spectrum": {
     "type": "fret",
     "peakEx": 433,

@@ -12,6 +12,7 @@
   "description": "One-photon optimized GEVI evolved from ASAP2s with improved brightness, kinetics, and sensitivity.",
   "parentId": "asap2s",
   "siblingId": "jedi2p",
+  "proofread": false,
   "addgene": {
     "id": "202613",
     "url": "https://www.addgene.org/202613/",

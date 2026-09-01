@@ -14,6 +14,7 @@
   "description": "Sibling variant of Archon1 with superior membrane localization and brightness at the cost of reduced sensitivity.",
   "parentId": "quasar2",
   "siblingId": "archon1",
+  "proofread": false,
   "spectrum": {
     "type": "rhodopsin",
     "peakEx": 586,
@@ -238,14 +239,6 @@
     }
   ],
   "brightnessData": [
-    {
-      "ratio": 80,
-      "reference": "arch",
-      "source": "doi:10.1021/acschemneuro.0c00046",
-      "sourceFigure": "Table 1",
-      "note": "Molecular brightness = 80× (Monakhov et al. 2020, nirButterfly paper, Table 1: Archon2 = 80×, Archon1 = 28×). Table 1 footnote b normalizes these to Arch(D95N) (EC 63,000 × QY 0.04% = 0.0252), NOT wild-type Arch — reference is stored as 'arch' for graph consistency with the sibling Archon1 entry (same convention, ratio 28), since the dataset has no separate Arch(D95N) node. The 80× (Archon2's row) is confirmed correct; a prior value of 28 was Archon1's row (the two vs-Arch(D95N) values had been swapped). Cross-checked by footnote d (Archon2 is 8× brighter than QuasAr2, Archon1 is 2.8×), consistent with the Fig. 2b entry on this page (archon2 = 8.01× quasar2).",
-      "proofread": false
-    },
     {
       "ratio": 8.01,
       "reference": "quasar2",

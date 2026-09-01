@@ -14,6 +14,7 @@
   "paperUrl": "https://doi.org/10.25378/janelia.21534411",
   "description": "Positive-going Ace2N-HaloTag variant optimized for stronger spike and subthreshold responses in cultured neurons.",
   "parentId": "pace",
+  "proofread": false,
   "spectrum": {
     "type": "rhodopsin",
     "peakEx": 534,

@@ -12,6 +12,7 @@
   "paperUrl": "https://doi.org/10.1016/j.neuron.2024.08.019",
   "description": "Optimized for detecting subthreshold activity, with the steepest F-V slope near resting potential.",
   "parentId": "asap3",
+  "proofread": true,
   "spectrum": {
     "type": "fp",
     "peakEx": 488,
@@ -20,7 +21,7 @@
     "source": "doi:10.64898/2026.05.27.728040",
     "sourceFigure": "Fig. 1a",
     "note": "Excitation digitized from Fig. 1a of the ASAP7y paper (Hao 2026). Emission is the shared cpGFP-family profile — ASAP5 emission is not reported in this figure.",
-    "proofread": false,
+    "proofread": true,
     "custom": {
       "minEx": 350,
       "excitation": [
@@ -465,7 +466,7 @@
       "source": "doi:10.1016/j.neuron.2024.08.019",
       "sourceFigure": "Fig. 1D",
       "note": "Steady-state -ΔF/F for a -70 to +30 mV (100-mV) depolarizing step in HEK293A cells under one-photon widefield voltage clamp; -57 ± 2% at 23°C and -57 ± 3% at 37°C (Table S2). The F-V curve continues to a ~-60% plateau by +80 mV over the wider -70 to +80 mV sweep.",
-      "proofread": false
+      "proofread": true
     },
     {
       "deltaF": -35.2,
@@ -474,7 +475,7 @@
       "source": "doi:10.1038/s41592-026-03043-8",
       "sourceFigure": "Ext. Fig. 1b",
       "note": "Response to a 100-mV depolarizing step from -70 mV at 33°C in HEK293A cells under 2P resonant scanning at 940 nm (Ext. Fig. 1b, n = 7 cells). Reduced response relative to JEDI-2P (41.8%) under 2P.",
-      "proofread": false
+      "proofread": true
     }
   ],
   "subthresholdData": [
@@ -482,20 +483,20 @@
       "slope": 1.3,
       "source": "doi:10.1016/j.neuron.2024.08.019",
       "sourceFigure": "Fig. S1C",
-      "proofread": false
+      "proofread": true
     }
   ],
   "apWidthData": [
     {
       "fwhm": 1.3,
-      "samplingRate": 7142.9,
+      "samplingRate": 7142,
       "sample": "Mouse, visual cortex L2/3 pyramidal neurons, awake behaving, in vivo, soma-targeted ASAP5-Kv (ULoVE 2P)",
       "modality": "2P",
       "temperature": "37°C",
       "source": "doi:10.1016/j.neuron.2024.08.019",
       "sourceFigure": "Fig. S4E",
       "note": "Optical action-potential waveform width (full width at half maximum) of the rapid post-threshold optical spike, recorded by ULoVE random-access 2P microscopy (920 nm) at 7142.9 Hz (two patterns/cell) in layer-2/3 visual cortex pyramidal neurons of awake behaving mice. Main text: 'FWHM of the rapid optical spike varies from sub-millisecond to 2 ms.' Bar (mean) digitized from the Fig. S4E 'Spike FWHM' panel ≈1.3 ms; the 11 per-neuron dots span 0.69-2.15 ms (mean of dots 1.32 ms), n = 11. Mammalian in-vivo cortex (~37°C; exact recording temperature not stated numerically). Axis-tick calibration ±~0.05 ms.",
-      "proofread": false
+      "proofread": true
     },
     {
       "fwhm": 6.8,
@@ -503,6 +504,11 @@
       "source": "doi:10.64898/2026.05.27.728040",
       "sourceFigure": "Fig. 1c",
       "proofread": false,
+      "review": {
+        "status": "questionable",
+        "comment": "Same issue with the FWHM of ASAP7, it's hard to believe that ASAP5 is narrower than ASAP7",
+        "date": "2026-08-24"
+      },
       "note": "Cross-GEVI entry from the ASAP7y paper (primary subject ASAP7y). Optical single-AP FWHM digitized from the averaged optical AP waveform in Fig. 1c (the cyan ΔF/F trace — average of n=7 cultured cortical neurons, plotted above the averaged electrical AP), calibrated to the panel's 20 ms scale bar and overlay-verified ≈ 6.8 ms (vs ASAP7y ≈ 10.3 ms in the same panel). This is a DIFFERENT regime from the Neuron-2024 ULoVE entry above (in-vivo 2P rapid post-threshold optical spike, 1.3 ms): here it is the slower full averaged optical AP waveform in culture. CAVEATS: the paper does not report this experiment's frame rate (samplingRate omitted), modality, or temperature for this panel; the ≈7 ms width is kinetics-dominated, not frame-rate-limited."
     }
   ],
@@ -521,7 +527,7 @@
       "source": "doi:10.64898/2026.05.27.728040",
       "sourceFigure": "Fig. 2k",
       "note": "Peak -ΔF/F per action potential in Drosophila TPN-II neurons in vivo under 940-nm two-photon excitation; ASAP7y responded 81% more strongly in the same prep",
-      "proofread": false
+      "proofread": true
     }
   ],
   "brightnessData": [
@@ -538,7 +544,7 @@
       "source": "doi:10.1101/2024.06.21.599617",
       "sourceFigure": "Table S4",
       "note": "Per-neuron relative brightness in primary rat cortical neurons (Kv2.1-tagged constructs), normalized to ASAP4e-Kv = 1.0",
-      "proofread": false
+      "proofread": true
     }
   ],
   "photostabilityData": [
@@ -573,7 +579,12 @@
       "sourceImage": "/photobleach-sources/asap5.jpg",
       "sourceFigure": "Fig. S5E",
       "note": "Digitized (cyan ASAP5-Kv curve) from Fig. S5E, an SNR-matched photostability comparison vs Voltron2525-Kv. Acquired at 46 mW/mm², but the time-axis was multiplied by 2.3 (STAR Methods) so the plotted curve represents ASAP5-Kv photobleaching at the SNR-matched effective irradiance of ~20 mW/mm² (=46/2.3) in real-time-equivalent seconds. Normalized to the 0.5 s value — the brief transient bright state in the first 0.5 s is excluded, so F0 is the post-transient baseline (true bleaching is slightly faster than shown). Decays to ~83% at 60 s; monoexponential fit τ≈301 s (r²=0.99); t75≈87 s is EXTRAPOLATED beyond the 60 s window. intensityMWmm2 set to 20 (the SNR-matched effective irradiance) so t75 is linearly dose-scaled to the 100 mW/mm² reference (≈17 s) for the list/radar/comparison views. APPROXIMATE — this SNR-matched / time-rescaled / 0.5 s-normalized measurement is non-standard AND the t75 itself is extrapolated past the data, so treat the scaled value as order-of-magnitude only.",
-      "proofread": false
+      "proofread": false,
+      "review": {
+        "status": "questionable",
+        "comment": "Maybe we can scale back the curves to make the curves to be that both Voltron2 and ASAP5 are measured under the same illumination intensity",
+        "date": "2026-08-24"
+      }
     },
     {
       "modality": "2P",
@@ -592,7 +603,12 @@
       "sourceImage": "/photobleach-sources/asap5-2p-940nm-asap7ypaper.jpg",
       "sourceFigure": "Fig. 2g",
       "note": "Cross-GEVI entry from the ASAP7y paper (Hao 2026; primary subject ASAP7y). Digitized (blue ASAP5 curve) from Fig. 2g: normalized fluorescence over 1 min of continuous two-photon imaging of Mi1 neurons in vivo (Drosophila) on an AOD random-access microscope at 940 nm (~16 mW post-objective, STAR Methods 'sensor comparison in Mi1'), plotted against ASAP7y at 940 nm (green, plateaus near 1.0). ASAP5 decays to ~0.85 at 60 s and plateaus (offset-monoexponential τ≈11.6 s, plateau c≈0.86, r²≈0.98). t75 OMITTED: the curve never falls to 75% of F0 within the 60 s window (too photostable at this power) — honest lower bound is t75 > 60 s; not extrapolated. 2P power-only measurement: intensityMWmm2 intentionally omitted (no mW/mm² given), NOT dose-scaled to the 100 mW/mm² 1P reference and NOT compared across the 1P entry above; stands alone. Co-figure GEVI ASAP7y (940 nm) shares this source + Fig. 2g for cross-overlay.",
-      "proofread": false
+      "proofread": false,
+      "review": {
+        "status": "questionable",
+        "comment": "the curve is off",
+        "date": "2026-08-24"
+      }
     }
   ],
   "twoPhoton": [

@@ -14,6 +14,7 @@
   "paperUrl": "https://doi.org/10.1038/s41592-018-0188-7",
   "description": "Voltage indicator using opsin-FRET architecture with red fluorescent protein for improved tissue penetration.",
   "parentId": "ace2n-mneon",
+  "proofread": false,
   "spectrum": {
     "type": "rhodopsin",
     "peakEx": 558,

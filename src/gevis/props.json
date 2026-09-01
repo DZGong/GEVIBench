@@ -18,6 +18,7 @@
     "Opsin-Fluorescent",
     "PROPS"
   ],
+  "proofread": false,
   "spectrum": {
     "type": "rhodopsin",
     "peakEx": 555,

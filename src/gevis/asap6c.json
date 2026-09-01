@@ -13,6 +13,7 @@
   "paperUrl": "https://doi.org/10.1101/2024.06.21.599617",
   "description": "Contrast-optimized descendant of ASAP4b with the largest per-spike fluorescence increase and signal-to-noise of the ASAP lineage for one- and two-photon spike detection in vivo.",
   "parentId": "asap4b",
+  "proofread": true,
   "spectrum": {
     "type": "fp",
     "peakEx": 500,
@@ -362,7 +363,12 @@
     "source": "doi:10.1101/2024.06.21.599617",
     "sourceFigure": "Fig. 2a",
     "note": "1P excitation and emission digitized from Lee 2026 Fig. 2a (the blue ASAP6c curves), measured in HEK293-Kir2.1 cells. Excitation rises from ~360 nm with a vibronic shoulder near ~425 nm and a dip near ~455 nm, peaking ~497-500 nm, then falls steeply; its far red edge (beyond ~516 nm) overlaps the emission band and was extended smoothly to baseline. Emission peaks ~520 nm with the characteristic GFP-like red tail. ASAP6c (=ASAP6.3) carries the T203H red-shifting mutation, so it is red-shifted vs ASAP3/ASAP4b and spectrally similar to JEDI-2P (paper text: 'peak excitation at 500 nm vs the 485 nm peak of ASAP3'). Replaces an earlier verbatim ASAP4b copy.",
-    "proofread": false
+    "proofread": false,
+    "review": {
+      "status": "questionable",
+      "comment": "excitation seems to be a bit lower than 500",
+      "date": "2026-08-22"
+    }
   },
   "voltage": {
     "type": "fp",
@@ -378,10 +384,11 @@
         -70,
         -50,
         -30,
-        0,
+        -10,
+        5,
         30,
-        60,
-        90
+        50,
+        80
       ],
       "deltaF": [
         -41,
@@ -391,6 +398,7 @@
         0,
         24,
         60,
+        95,
         136,
         215,
         279,
@@ -400,7 +408,41 @@
     "source": "doi:10.1101/2024.06.21.599617",
     "sourceImage": "/fv-sources/asap6c.jpg",
     "sourceFigure": "Fig. 1c",
-    "proofread": false
+    "proofread": true,
+    "review": {
+      "status": "corrected",
+      "date": "2026-08-22",
+      "previous": {
+        "curve": {
+          "voltage": [
+            -170,
+            -150,
+            -120,
+            -90,
+            -70,
+            -50,
+            -30,
+            0,
+            30,
+            60,
+            90
+          ],
+          "deltaF": [
+            -41,
+            -39,
+            -27,
+            -18,
+            0,
+            24,
+            60,
+            136,
+            215,
+            279,
+            325
+          ]
+        }
+      }
+    }
   },
   "kinetics": [
     {
@@ -451,7 +493,7 @@
       "source": "doi:10.1101/2024.06.21.599617",
       "sourceFigure": "Fig. 3d",
       "note": "Optical FWHM (full-width at half-maximum, in ms) of the single optical action-potential waveform, measured under two-photon excitation (960 nm, 40 mW post-objective) at 400 fps in awake mouse barrel cortex during whisker stimulation. Mean of N=24 neurons read from the 'Optical FWHM (ms)' dot plot in Fig. 3d (ASAP6c-Kv mean marker ≈5.7 ms; data span ~5.3-6.0 ms; x-axis 5-8 ms). The 5.7-ms optical width is broadened beyond the underlying ~1-2 ms electrical AP by the 2.5-ms frame period (400 fps) plus sensor kinetics. Temperature is in-vivo physiological (~37°C; not separately stated for Fig. 3). This is the OPTICAL response width (not the simulated command-waveform FWHM of Fig. 1d/Table S2).",
-      "proofread": false
+      "proofread": true
     }
   ],
   "brightnessData": [

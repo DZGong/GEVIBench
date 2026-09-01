@@ -14,6 +14,7 @@
   "description": "Bright-optimized ASAP4 variant with superior brightness and photostability for extended two-photon recordings.",
   "parentId": "asap3",
   "siblingId": "asap4e",
+  "proofread": false,
   "spectrum": {
     "type": "fp",
     "peakEx": 489,

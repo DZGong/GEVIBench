@@ -16,6 +16,7 @@
     "Opsin-FRET",
     "ace2n-mneon"
   ],
+  "proofread": false,
   "spectrum": {
     "type": "rhodopsin",
     "peakEx": 506,

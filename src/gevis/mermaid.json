@@ -18,6 +18,7 @@
     "VSD-FRET",
     "mermaid"
   ],
+  "proofread": false,
   "spectrum": {
     "type": "fret",
     "peakEx": 483,

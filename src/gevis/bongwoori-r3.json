@@ -13,6 +13,7 @@
   "paperUrl": "https://doi.org/10.1038/s41598-017-08731-2",
   "description": "Bongwoori variant with an arginine-enriched linker that enlarges the fluorescence response and shifts voltage sensitivity near resting potential for robust action-potential imaging.",
   "parentId": "bongwoori",
+  "proofread": false,
   "spectrum": {
     "type": "fp",
     "peakEx": 488,

@@ -14,6 +14,7 @@
   "paperUrl": "https://doi.org/10.1038/s41589-021-00775-w",
   "description": "Chemigenetic adaptation of the ASAP architecture that replaces cpGFP with cpHaloTag labeled with a far-red Si-rhodamine dye, giving positive-going fluorescence responses to depolarization.",
   "parentId": "asap1",
+  "proofread": false,
   "spectrum": {
     "type": "rhodopsin",
     "peakEx": 642,

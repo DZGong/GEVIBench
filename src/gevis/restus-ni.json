@@ -11,6 +11,7 @@
   "paperUrl": "https://doi.org/10.1021/acschemneuro.5c00670",
   "description": "Variant of rEstus optimized for fluorescence lifetime imaging and absolute membrane potential measurement.",
   "parentId": "restus",
+  "proofread": false,
   "spectrum": {
     "type": "fp",
     "peakEx": 463,

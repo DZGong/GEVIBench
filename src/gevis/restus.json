@@ -11,6 +11,7 @@
   "paperUrl": "https://doi.org/10.1002/advs.202307938",
   "description": "Variant of ASAP3 optimized for non-excitable cells, shifting voltage sensitivity to match their characteristically negative resting potentials.",
   "parentId": "asap3",
+  "proofread": false,
   "spectrum": {
     "type": "fp",
     "peakEx": 463,

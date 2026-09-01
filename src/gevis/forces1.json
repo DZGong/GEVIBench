@@ -10,6 +10,7 @@
   "description": "Positive-going variant evolved from JEDI-2P with substantially larger spike responses, high intrinsic brightness, and repolarization kinetics tuned for 2P imaging.",
 
   "parentId": "jedi2p",
+  "proofread": false,
 
   "spectrum": {
     "type": "fp",

@@ -13,6 +13,7 @@
   "description": "Two-photon optimized GEVI evolved from ASAP2s with improved brightness, photostability, and sensitivity under two-photon illumination.",
   "parentId": "asap2s",
   "siblingId": "jedi1p",
+  "proofread": false,
   "spectrum": {
     "type": "fp",
     "peakEx": 501,

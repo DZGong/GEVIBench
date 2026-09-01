@@ -14,6 +14,7 @@
   "description": "Speed-optimized ASAP4 variant with fast kinetics and a large fluorescence increase per action potential.",
   "parentId": "asap3",
   "siblingId": "asap4b",
+  "proofread": true,
   "spectrum": {
     "type": "fp",
     "peakEx": 489,
@@ -669,7 +670,12 @@
         0.0064
       ]
     },
-    "proofread": false
+    "proofread": false,
+    "review": {
+      "status": "questionable",
+      "comment": "need to redigitalize the Ext.Fig3e, the current curve is totally wrong",
+      "date": "2026-08-24"
+    }
   },
   "voltage": {
     "type": "fp",
@@ -689,7 +695,8 @@
         30,
         50,
         70,
-        90
+        90,
+        120
       ],
       "deltaF": [
         -13,
@@ -702,15 +709,38 @@
         98,
         210,
         300,
-        375,
-        435
+        360,
+        410,
+        460
       ]
     },
     "source": "doi:10.1038/s41592-023-01913-z",
     "sourceImage": "/fv-sources/asap4e.jpg",
     "sourceFigure": "Fig. 1B",
     "note": "Re-digitized from the F-V plot in Fig. 1B (ASAP4e = lavender, ASAP4.2 F413M) at the measured command-voltage steps, normalized to ΔF/F=0 at -70 mV with +30 mV anchored to the Table 1 100-mV value (+210%). Spans the full plotted range (-120 to +90 mV, reaching ~+435%); ASAP4e diverges above ASAP4b past ~+15 mV and keeps rising steeply. The prior curve's negative/mid-range points were over-steep.",
-    "proofread": false
+    "proofread": true,
+    "review": {
+      "status": "corrected",
+      "date": "2026-08-25",
+      "previous": {
+        "curve": {
+          "changedPoints": [
+            {
+              "voltage": 70,
+              "deltaF": 375
+            },
+            {
+              "voltage": 90,
+              "deltaF": 415
+            },
+            {
+              "voltage": 120,
+              "deltaF": 450
+            }
+          ]
+        }
+      }
+    }
   },
   "kinetics": [
     {
@@ -720,7 +750,7 @@
       "source": "doi:10.1038/s41592-023-01913-z",
       "sourceFigure": "Table S1",
       "note": "Amplitude-weighted mean of bi-exponential fit (Supplementary Table 1, ASAP4e at 22 \u00b0C, HEK293A voltage clamp). On (depolarization \u221270\u2192+30 mV): \u03c4fast 3.93 ms (14.0%), \u03c4slow 20.64 ms \u2192 weighted mean 18.29 ms. Off (repolarization +30\u2192\u221270 mV): \u03c4fast 8.40 ms (20.6%), \u03c4slow 17.47 ms \u2192 weighted mean 15.60 ms. Note: Table S1 is not column-swapped \u2014 it explicitly labels ASAP4b (\u03c4fast 2.62 ms) and ASAP4e (\u03c4fast 3.93 ms) at 22 \u00b0C; the main text instead pairs the 2.6-ms fast component with the larger 19% amplitude (= ASAP4b) and 3.9 ms with 14% (= ASAP4e). The amplitude\u2192variant mapping is consistent between text and table, so the table values are used here.",
-      "proofread": false
+      "proofread": true
     },
     {
       "on": 4.55,
@@ -729,7 +759,7 @@
       "source": "doi:10.1038/s41592-023-01913-z",
       "sourceFigure": "Table S1",
       "note": "Amplitude-weighted mean of bi-exponential fit (Supplementary Table 1, ASAP4e at 37 \u00b0C). On (depolarization): \u03c4fast 1.49 ms (14.5%), \u03c4slow 5.07 ms \u2192 weighted mean 4.55 ms. Off (repolarization): \u03c4fast 3.66 ms (68.6%), \u03c4slow 7.01 ms \u2192 weighted mean 4.71 ms. As expected, speed-optimized ASAP4e is faster than brightness-optimized ASAP4b (5.56/7.00 ms at 37 \u00b0C).",
-      "proofread": false
+      "proofread": true
     },
     {
       "on": 8.14,
@@ -738,7 +768,7 @@
       "source": "doi:10.64898/2026.04.07.717088",
       "sourceFigure": "Table S1.4",
       "note": "ASAP4e measured under 1P widefield voltage clamp at 33 \u00b0C in the FORCE1s preprint (Table S1.4). On (\u221270\u2192+30 mV) is the amplitude-weighted mean of a bi-exponential fit: \u03c4fast 2.6 ms (34%), \u03c4slow 11 ms (66%) \u2192 8.14 ms. Off (+30\u2192\u221270 mV) was best fit by a monoexponential, \u03c4 6.7 ms.",
-      "proofread": false
+      "proofread": true
     }
   ],
   "dynamicRangeData": [
@@ -749,7 +779,7 @@
       "source": "doi:10.1038/s41592-023-01913-z",
       "sourceFigure": "Table 1",
       "note": "ΔF100/F0 across the −70 → +30 mV (100-mV) step, voltage clamp in HEK293A cells, 1P. The full F-V sweep reaches 468% over all voltages (main text, Fig. 1b).",
-      "proofread": false
+      "proofread": true
     },
     {
       "deltaF": 148,
@@ -758,7 +788,7 @@
       "source": "doi:10.64898/2026.04.07.717088",
       "sourceFigure": "Fig. 1F",
       "note": "Cross-measured in the FORCE1s paper (McDonald et al. 2026). Steady-state ΔF/F for the −70 → 0 mV (70-mV) voltage step, whole-cell voltage clamp + 2P imaging at 33 °C, HEK293A (n = 5): 148 ± 29% (main text and Fig. 1F, which quantifies panel E for 70-mV steps). This is the only ASAP4e steady-state response the paper reports numerically. NOTE: this is a 70-mV step, not the standard −70 → +30 (100-mV) window, so it is not directly comparable to the 1P 100-mV DR (210%). A prior digitization stored +30 mV ≈ 330%, but the gray ASAP4e curve in Fig. 1E reads ≈1.5 (=148%) at 0 mV and only ≈2.5 at +30 mV (≈4.0 at the terminal ~+60 mV point), so 330% was over-read; the paper-printed 148% value is used instead.",
-      "proofread": false
+      "proofread": true
     },
     {
       "deltaF": 212,
@@ -766,7 +796,7 @@
       "modality": "1P",
       "source": "doi:10.1101/2024.06.21.599617",
       "sourceFigure": "Table S1",
-      "proofread": false
+      "proofread": true
     }
   ],
   "subthresholdData": [
@@ -776,7 +806,7 @@
       "source": "doi:10.64898/2026.04.07.717088",
       "sourceFigure": "Fig. 1E",
       "note": "Cross-measured in the FORCE1s paper (McDonald et al. 2026). Subthreshold steady-state response to a 30-mV depolarization from −70 → −40 mV = 33.6 ± 6.4% (n = 5, whole-cell voltage clamp + 2P imaging at 33 °C, HEK293A; main text and Fig. 1E/Fig. S1.2C). Expressed as a slope: 33.6% / 30 mV ≈ 1.12 %/mV (cf. FORCE1s 87.4% → 2.91 %/mV, JEDI-2P 25.9% → 0.86 %/mV over the same step).",
-      "proofread": false
+      "proofread": true
     }
   ],
   "sensitivityData": [
@@ -786,7 +816,7 @@
       "source": "doi:10.1038/s41592-023-01913-z",
       "sourceFigure": "Table 1",
       "note": "\u0394FAP/F0 to a 3.5-ms FWHM, 100-mV AP waveform by voltage patch-clamp in HEK293A cells, room temperature, 1P (Table 1 reference value).",
-      "proofread": false
+      "proofread": true
     },
     {
       "deltaF": 23,
@@ -794,7 +824,7 @@
       "source": "doi:10.1038/s41592-023-01913-z",
       "sourceFigure": "Ext. Fig. 5a",
       "note": "\u0394FAP/F\u221270 to a 2-ms FWHM AP, HEK293A voltage clamp, 1P (order ASAP4b 19% < ASAP3 22% < ASAP4e 23%).",
-      "proofread": false
+      "proofread": true
     },
     {
       "deltaF": 41,
@@ -802,7 +832,7 @@
       "source": "doi:10.1038/s41592-023-01913-z",
       "sourceFigure": "Ext. Fig. 5c",
       "note": "Naturalistic mouse-hippocampal single-AP waveform (1-ms FWHM) at 37\u00b0C, HEK293A voltage clamp, 1P.",
-      "proofread": false
+      "proofread": true
     },
     {
       "deltaF": 33,
@@ -810,7 +840,7 @@
       "source": "doi:10.1101/2024.06.21.599617",
       "sourceFigure": "Table S1",
       "note": "3.5-ms FWHM AP waveform, 100 mV, room temperature, HEK293A cells, 1P.",
-      "proofread": false
+      "proofread": true
     },
     {
       "deltaF": 32,
@@ -818,7 +848,7 @@
       "source": "doi:10.1101/2024.06.21.599617",
       "sourceFigure": "Table S4",
       "note": "Single AP in primary rat cortical neurons (ASAP4e-Kv, Kv2.1-tagged), whole-cell patch (Fig. 1h), one-photon. Distinct from the Table S1 HEK293A simulated-AP value.",
-      "proofread": false
+      "proofread": true
     }
   ],
   "apWidthData": [

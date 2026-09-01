@@ -14,6 +14,7 @@
   "description": "Archaerhodopsin variant that further suppresses photocurrents (~99× vs Arch WT, producing no peak current) at the expense of slower kinetics and lower sensitivity (60% ΔF/F per 100 mV) than its sibling Archer1 (~55×).",
   "parentId": "arch",
   "siblingId": "archer1",
+  "proofread": false,
   "spectrum": {
     "type": "rhodopsin",
     "peakEx": 640,

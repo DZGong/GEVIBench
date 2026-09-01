@@ -14,6 +14,7 @@
   "paperUrl": "https://doi.org/10.1126/sciadv.abe3216",
   "description": "Photoactivatable archaerhodopsin-derived indicator whose near-infrared fluorescence is reversibly enhanced by one-photon blue or two-photon near-infrared excitation, enabling optically sectioned voltage imaging in tissue.",
   "parentId": "quasar3",
+  "proofread": false,
   "spectrum": {
     "type": "rhodopsin",
     "peakEx": 620,

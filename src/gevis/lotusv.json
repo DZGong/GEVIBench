@@ -21,6 +21,7 @@
     "VSD-FRET",
     "lotusv"
   ],
+  "proofread": false,
   "spectrum": {
     "type": "fret",
     "peakEx": 455,

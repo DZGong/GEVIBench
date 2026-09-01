@@ -19,6 +19,7 @@
     "macq-morange2"
   ],
   "siblingId": "macq-mcitrine",
+  "proofread": false,
   "spectrum": {
     "type": "rhodopsin",
     "peakEx": 548,

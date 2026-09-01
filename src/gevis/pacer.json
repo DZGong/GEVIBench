@@ -15,6 +15,7 @@
   "paperUrl": "https://doi.org/10.1126/science.abm8797",
   "description": "Reverse-polarity red variant of VARNAM2 that brightens upon depolarization, enabling dual-polarity multiplexed voltage imaging alongside negative-going sensors in the same color channel.",
   "parentId": "varnam2",
+  "proofread": false,
   "spectrum": {
     "type": "rhodopsin",
     "peakEx": 558,

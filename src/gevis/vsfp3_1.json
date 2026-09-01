@@ -14,6 +14,7 @@
   "paperUrl": "https://www.frontiersin.org/journals/molecular-neuroscience/articles/10.3389/neuro.02.005.2009/full",
   "description": "Third-generation Ci-VSP voltage sensor using a single Cerulean fluorescent protein, derived from VSFP2 by removing the FRET acceptor, achieving the fastest response kinetics reported among fluorescent protein-based voltage indicators at the time.",
   "parentId": "vsfp2",
+  "proofread": false,
   "spectrum": {
     "type": "fp",
     "peakEx": 435,

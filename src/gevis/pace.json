@@ -14,6 +14,7 @@
   "paperUrl": "https://doi.org/10.1126/science.abm8797",
   "description": "Reverse-polarity variant of Ace-mNeon2 whose fluorescence increases during depolarization, enabling dual-polarity multiplexed voltage imaging in a single color channel.",
   "parentId": "ace2n-mneon2",
+  "proofread": false,
   "spectrum": {
     "type": "rhodopsin",
     "peakEx": 506,

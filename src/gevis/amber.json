@@ -15,6 +15,7 @@
   "paperUrl": "https://doi.org/10.1002/adbi.202100842",
   "description": "First autonomous bioluminescent voltage indicator by pairing a VSD with a self-sufficient luciferase enzyme.",
   "parentId": "vsfp2",
+  "proofread": false,
   "spectrum": {
     "type": "fret",
     "peakEx": 490,

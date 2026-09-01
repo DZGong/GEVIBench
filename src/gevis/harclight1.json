@@ -15,6 +15,7 @@
   "paperUrl": "https://doi.org/10.1038/s41589-021-00775-w",
   "description": "Chemigenetic adaptation of the ArcLight architecture that replaces the pH-sensitive GFP with a HaloTag labeled with a far-red Si-rhodamine dye, giving negative-going fluorescence responses to depolarization.",
   "parentId": "arclight",
+  "proofread": false,
   "spectrum": {
     "type": "rhodopsin",
     "peakEx": 642,
@@ -753,7 +754,7 @@
       "off": 5.7,
       "temperature": "25°C",
       "source": "doi:10.1038/s41589-021-00775-w",
-      "note": "Amplitude-weighted mean τ from double-exponential fit. Activation: τ_fast=2.2 ms (54%), τ_slow=8.5 ms (46%) → 5.10 ms. Deactivation: τ_fast=1.6 ms (37%), τ_slow=8.1 ms (63%) → 5.70 ms. Neurons expressing HArclight1-JF635 imaged at 400 Hz during whole-cell voltage clamp, 100 mV step (-70 to +30 mV) in rat hippocampal neurons (Supplementary Table 6). Recorded at room temperature per the paper (Methods: 'All recordings were carried out at room temperature'; no numeric value given); 25°C assumed.",
+      "note": "Amplitude-weighted mean τ from double-exponential fit. Activation: τ_fast=2.2 ms (54%), τ_slow=8.5 ms (46%) → 5.10 ms. Deactivation: τ_fast=1.6 ms (37%), τ_slow=8.1 ms (63%) → 5.70 ms. Neurons expressing HArclight1-JF635 imaged at 1 kHz during whole-cell voltage clamp, 100 mV step (-70 to +30 mV) in rat hippocampal neurons (Supplementary Table 6; kinetics traces in Supplementary Figs. 3-4 acquired at 1,200 Hz). The 400 Hz rate applies to the F-V step protocol and field-stim AP imaging, not the kinetics measurement. Recorded at room temperature per the paper (Methods: 'All recordings were carried out at room temperature'; no numeric value given); 25°C assumed.",
       "sourceFigure": "Table S6",
       "proofread": false
     }

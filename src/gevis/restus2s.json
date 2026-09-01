@@ -12,6 +12,7 @@
   "paperUrl": "https://doi.org/10.64898/2026.02.10.701308",
   "description": "Rationally engineered variant of rEstus with enhanced voltage sensitivity tuned for sub-millivolt resolution across the physiological resting potential range of non-excitable cells.",
   "parentId": "restus",
+  "proofread": false,
   "spectrum": {
     "type": "fp",
     "peakEx": 460,

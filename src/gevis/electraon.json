@@ -14,6 +14,7 @@
   "paperUrl": "https://doi.org/10.1101/2025.05.30.657123",
   "description": "Photostable positive-going eFRET GEVI combining pAce with mBaoJin(3M), a StayGold-derived bright and photostable green FP.",
   "parentId": "pace",
+  "proofread": false,
   "spectrum": {
     "type": "rhodopsin",
     "peakEx": 500,

@@ -16,6 +16,7 @@
   "description": "Red eFRET voltage indicator built by inserting the bright RFP donor mScarlet-I1.4 into the first extracellular loop of Ace(D81C) rhodopsin; the brighter (but less photostable) member of the Cepheid1 pair.",
   "parentId": "varnam",
   "siblingId": "cepheid1s",
+  "proofread": false,
   "spectrum": {
     "type": "rhodopsin",
     "peakEx": 570,

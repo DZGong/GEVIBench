@@ -13,6 +13,7 @@
   "description": "First-generation QuasAr with extremely fast response times.",
   "parentId": "arch",
   "siblingId": "quasar2",
+  "proofread": false,
   "spectrum": {
     "type": "rhodopsin",
     "peakEx": 590,

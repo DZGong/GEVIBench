@@ -12,6 +12,7 @@
   "paperUrl": "https://doi.org/10.1038/s41586-019-1641-1",
   "description": "Soma-targeted Archon1 variant designed for population voltage imaging.",
   "parentId": "archon1",
+  "proofread": false,
   "spectrum": {
     "type": "rhodopsin",
     "peakEx": 586,

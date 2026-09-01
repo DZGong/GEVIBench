@@ -17,6 +17,7 @@
     "VSD-single",
     "pado"
   ],
+  "proofread": false,
   "spectrum": {
     "type": "fp",
     "peakEx": 488,

@@ -14,6 +14,7 @@
   "description": "Archaerhodopsin variant functioning as both a voltage indicator and a light-activated neuronal silencer.",
   "parentId": "arch",
   "siblingId": "archer2",
+  "proofread": false,
   "spectrum": {
     "type": "rhodopsin",
     "peakEx": 627,
