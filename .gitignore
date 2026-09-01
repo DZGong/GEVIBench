@@ -33,6 +33,7 @@ package-lock.json
 local/
 docs/superpowers/
 fv-curve-issues.md
+checker/
 .claude/
 CLAUDE.md
 public/imgs/*_original.*

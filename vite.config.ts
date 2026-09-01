@@ -4,6 +4,7 @@ import { execSync } from "child_process"
 import react from "@vitejs/plugin-react"
 import { defineConfig, Plugin } from "vite"
 import sourceIdentifierPlugin from 'vite-plugin-source-identifier'
+import { validationApiPlugin } from "./scripts/validationApiPlugin"
 
 function geviGitDatesPlugin(): Plugin {
   const virtualId = 'virtual:gevi-git-dates'
@@ -80,6 +81,13 @@ export default defineConfig({
   plugins: [
     geviGitDatesPlugin(),
     familyTreeLayoutPlugin(),
+    validationApiPlugin({
+      gevisDir: path.resolve(__dirname, 'src/gevis'),
+      papersDir: path.resolve(__dirname, '../Papers'),
+      checkerDir: path.resolve(__dirname, 'checker'),
+      bookmarkFile: path.resolve(__dirname, 'checker/validation-bookmarks.json'),
+      doiIndexFile: path.resolve(__dirname, 'checker/pdf-doi-index.json'),
+    }),
     react(),
     ...(isProd ? [sourceIdentifierPlugin({
       enabled: true,

@@ -1,5 +1,23 @@
 // GEVI TypeScript Interfaces
 
+/**
+ * Outcome of a manual review in the data validator (`validator.html`, dev only).
+ * Sits next to the `proofread` flag on whatever record was reviewed:
+ *   - `proofread: true` alone            → checked against the source, value stands
+ *   - `proofread: true` + `corrected`    → value was wrong and was fixed here
+ *   - `proofread: false` + `questionable`→ needs another look; feeds the next
+ *                                          gevi-page-checker round via checker/flagged-*.md
+ */
+export interface ReviewMark {
+  status: 'corrected' | 'questionable';
+  /** Why it was flagged, or what was changed and on what basis. */
+  comment?: string;
+  /** ISO date of the review, e.g. "2026-08-17". */
+  date: string;
+  /** For `corrected`: the superseded values, keyed by field, so the change is auditable. */
+  previous?: Record<string, unknown>;
+}
+
 export interface GEVI {
   id: string;
   name: string;
@@ -11,6 +29,12 @@ export interface GEVI {
   tags: string[];
   paper: string;
   paperUrl: string;
+  /** Review state of this object's OWN top-level fields — name, year, date, category,
+   *  tags, paper, paperUrl, description and the lineage ids. Exactly like the `proofread`
+   *  on any nested record, it covers the fields sitting beside it, not the whole file;
+   *  each nested record carries its own flag. */
+  proofread?: boolean;
+  review?: ReviewMark;
   // Raw data fields — stored in JSON, used to compute scores at runtime.
   // Each entry has a source (DOI). Multiple entries from different papers are averaged.
   kinetics?: {
@@ -21,6 +45,7 @@ export interface GEVI {
     source: string;
     sourceFigure?: string;
     proofread?: boolean;
+    review?: ReviewMark;
   }[];
   dynamicRangeData?: {
     deltaF: number;
@@ -31,6 +56,7 @@ export interface GEVI {
     source: string;
     sourceFigure?: string;
     proofread?: boolean;
+    review?: ReviewMark;
   }[];
   sensitivityData?: {
     deltaF: number;  // ΔF/F % per action potential
@@ -39,6 +65,7 @@ export interface GEVI {
     source: string;
     sourceFigure?: string;
     proofread?: boolean;
+    review?: ReviewMark;
   }[];
   subthresholdData?: {
     slope: number;  // %/mV
@@ -47,6 +74,7 @@ export interface GEVI {
     sourceFigure?: string;
     note?: string;
     proofread?: boolean;
+    review?: ReviewMark;
   }[];
   // Time width of the optically-recorded action potential (FWHM of the single-AP
   // fluorescence waveform). Store-only for now — not yet displayed. The measured
@@ -61,6 +89,7 @@ export interface GEVI {
     sourceFigure?: string;
     note?: string;
     proofread?: boolean;
+    review?: ReviewMark;
   }[];
   brightnessData?: {
     ratio: number;
@@ -68,6 +97,7 @@ export interface GEVI {
     source: string;
     sourceFigure?: string;
     proofread?: boolean;
+    review?: ReviewMark;
   }[];
   photostabilityData?: {
     brightnessRemaining: number;
@@ -78,12 +108,14 @@ export interface GEVI {
     source: string;
     sourceFigure?: string;
     proofread?: boolean;
+    review?: ReviewMark;
   }[] | 'bioluminescent';
   twoPhoton?: {
     compatible: boolean;
     source: string;
     sourceFigure?: string;
     proofread?: boolean;
+    review?: ReviewMark;
   }[];
 
   // Raw derived values — computed at runtime for tabular display + sorting
@@ -113,6 +145,7 @@ export interface GEVI {
     sourceFigure?: string;
     note?: string;
     proofread?: boolean;
+    review?: ReviewMark;
     custom?: {
       minEx?: number;
       excitation?: number[];
@@ -126,6 +159,7 @@ export interface GEVI {
     polarity: 'positive' | 'negative';
     name: string;
     proofread?: boolean;
+    review?: ReviewMark;
     custom?: {
       voltage: number[];
       deltaF: number[];
@@ -135,6 +169,7 @@ export interface GEVI {
       voltage: number[];
       deltaF: number[];
       proofread?: boolean;
+      review?: ReviewMark;
     }[];
     source?: string;
     sourceImage?: string;
@@ -171,6 +206,7 @@ export interface GEVI {
     sourceFigure?: string;
     note?: string;
     proofread?: boolean;
+    review?: ReviewMark;
   }>;
   researchPapers?: ResearchPaper[];
   lastUpdated?: string;  // ISO date string, e.g. "2026-04-06"
@@ -179,6 +215,7 @@ export interface GEVI {
     url: string;
     note?: string;         // optional caveat, e.g. when the only deposited plasmid is a variant/derivative of this GEVI rather than the exact construct
     proofread?: boolean;
+    review?: ReviewMark;
   };
   paperCount?: number;    // computed at runtime from researchPapers.length
 }
@@ -193,6 +230,7 @@ export interface ResearchPaper {
   url: string;
   applications?: string[];
   proofread?: boolean;
+  review?: ReviewMark;
 }
 
 export interface GEVIColor {
