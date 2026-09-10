@@ -25,6 +25,17 @@ function escHtml(s) {
   return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
 
+// The sensor count appears in index.html's meta description, og:description and
+// og:image:alt — the text a link preview actually shows. Rewriting it from the live file
+// count means adding a GEVI can't leave the shared blurb claiming a stale number.
+const GEVI_COUNT = gevis.length;
+function withLiveCount(html) {
+  return html.replace(
+    /Compare \d+ (sensors|genetically encoded voltage indicators|voltage indicators)/g,
+    `Compare ${GEVI_COUNT} $1`
+  );
+}
+
 // Generate HTML for a route with custom meta tags and noscript content
 function renderPage({ path, title, description, noscriptHtml }) {
   let html = template;
@@ -82,7 +93,7 @@ function renderPage({ path, title, description, noscriptHtml }) {
   // Write to dist
   const dir = join(DIST, ...path.split('/').filter(Boolean));
   mkdirSync(dir, { recursive: true });
-  writeFileSync(join(dir, 'index.html'), html);
+  writeFileSync(join(dir, 'index.html'), withLiveCount(html));
 }
 
 // --- Generate GEVI detail pages ---
@@ -176,7 +187,7 @@ let mainHtml = readFileSync(join(DIST, 'index.html'), 'utf-8');
 const linkLines = [
   '<noscript><div style="max-width:800px;margin:0 auto;padding:20px;font-family:sans-serif">',
   '<h1>GEVIBench — Genetically Encoded Voltage Indicator Benchmark</h1>',
-  '<p>Compare 70 voltage indicators by speed, brightness, sensitivity, dynamic range, photostability, and popularity.</p>',
+  `<p>Compare ${GEVI_COUNT} voltage indicators by speed, brightness, sensitivity, dynamic range, photostability, and popularity.</p>`,
   '<h2>All Sensors</h2><ul>',
 ];
 for (const gevi of gevis) {
@@ -190,7 +201,7 @@ linkLines.push('<li><a href="/methodology">Scoring Methodology</a></li>');
 linkLines.push('<li><a href="/contact">Contact & Contribute</a></li>');
 linkLines.push('</ul></div></noscript>');
 mainHtml = mainHtml.replace('</body>', linkLines.join('\n') + '\n</body>');
-writeFileSync(join(DIST, 'index.html'), mainHtml);
+writeFileSync(join(DIST, 'index.html'), withLiveCount(mainHtml));
 
 // --- Generate sitemap.xml (auto-generated each build — do NOT hand-edit) ---
 // Static routes mirror the app's navigable views; GEVI detail pages are derived
