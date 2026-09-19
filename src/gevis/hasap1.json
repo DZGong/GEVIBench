@@ -770,6 +770,29 @@
       "proofread": true
     }
   ],
+  "sensitivityData": [
+    {
+      "deltaF": 3.7,
+      "modality": "1P",
+      "dye": "JF635",
+      "source": "doi:10.1038/s41589-021-00775-w",
+      "note": "Single-AP ΔF/F0 for HASAP1 labeled with the JF635-HaloTag ligand (trace \"1\"), DERIVED by digitizing the ten isolated field-stimulated APs of the 10-AP 10-Hz train in Fig. 4i: mean peak amplitude 3.7 ± 0.2% (calibrated against the panel’s 2% ΔF/F0 and 0.1 s scale bars; the 10-Hz AP spacing independently reproduces the time calibration). Rat hippocampal neuron culture, widefield 1P (645/30 nm excitation) at 400 Hz, single representative cell. The bioRxiv version of this work (doi:10.1101/2020.01.08.898783, Fig. 2m) states HASAP1 gives \"4-6% per neuron action potential spike\" across ligands 1/7/8; the same digitization of the JF630 (ligand 7) trace of Fig. 4i gives 4.0%, so 3.7% is the JF635-specific low end of that range. The preprint’s Fig. 2l box-plot value (6.3 ± 0.4%, n = 19 neurons) is the peak response to the 10-AP 50-Hz burst, NOT a single AP, and is deliberately not stored here.",
+      "sourceFigure": "Fig. 4i",
+      "proofread": false
+    }
+  ],
+  "apWidthData": [
+    {
+      "fwhm": 15.3,
+      "samplingRate": 400,
+      "sample": "Rat, dissociated hippocampal neurons, in vitro (culture)",
+      "modality": "1P",
+      "source": "doi:10.1038/s41589-021-00775-w",
+      "note": "Optical single-AP FWHM, DERIVED (the paper states no AP width) by digitizing the ten isolated field-stimulated APs of the 10-AP 10-Hz train in the HASAP1-JF635 trace (\"1\") of Fig. 4i: 15.3 ± 1.4 ms (mean ± s.d., range 13.8–17.3 ms). Time calibrated from the panel’s 0.1 s scale bar (127 px at 1200 dpi) and cross-checked against the 10-Hz AP spacing (129 px); the half-maximum spans were overlaid back on the figure to verify. The co-plotted JF630 trace (\"7\") of the same panel gives 15.6 ms, so the width is set by the AP waveform and prep rather than by the dye. It is far broader than HASAP1’s own kinetics (τon 2.2 ms, τoff 2.4 ms) because these are field-stimulated APs in room-temperature dissociated culture sampled at 400 Hz (2.5 ms/frame). Temperature is omitted: the paper states room temperature only for the patch-clamp recordings, not for the field-stimulation imaging.",
+      "sourceFigure": "Fig. 4i",
+      "proofread": false
+    }
+  ],
   "brightnessData": [
     {
       "ratio": 1.808,

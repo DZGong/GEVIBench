@@ -16,7 +16,7 @@
   "proofread": true,
   "spectrum": {
     "type": "fp",
-    "peakEx": 500,
+    "peakEx": 497,
     "peakEm": 520,
     "name": "ASAP6c",
     "custom": {
@@ -362,7 +362,7 @@
     },
     "source": "doi:10.1101/2024.06.21.599617",
     "sourceFigure": "Fig. 2a",
-    "note": "1P excitation and emission digitized from Lee 2026 Fig. 2a (the blue ASAP6c curves), measured in HEK293-Kir2.1 cells. Excitation rises from ~360 nm with a vibronic shoulder near ~425 nm and a dip near ~455 nm, peaking ~497-500 nm, then falls steeply; its far red edge (beyond ~516 nm) overlaps the emission band and was extended smoothly to baseline. Emission peaks ~520 nm with the characteristic GFP-like red tail. ASAP6c (=ASAP6.3) carries the T203H red-shifting mutation, so it is red-shifted vs ASAP3/ASAP4b and spectrally similar to JEDI-2P (paper text: 'peak excitation at 500 nm vs the 485 nm peak of ASAP3'). Replaces an earlier verbatim ASAP4b copy.",
+    "note": "1P excitation and emission digitized from Lee 2026 Fig. 2a left panel (the blue ASAP6c curves; the green curves are ASAP6b), measured in HEK293-Kir2.1 cells. Excitation rises from ~360 nm with a vibronic shoulder near ~425 nm and a dip near ~452 nm, peaking ~497 nm, then falls steeply; its far red edge (beyond ~516 nm) overlaps the emission band and was extended smoothly to baseline. Emission peaks ~520 nm with the characteristic GFP-like red tail. ASAP6c (=ASAP6.3) carries the T203H red-shifting mutation, so it is red-shifted vs ASAP3/ASAP4b and spectrally similar to JEDI-2P. Replaces an earlier verbatim ASAP4b copy. peakEx corrected 500 -> 497 (2026-09 audit): an independent re-digitization of Fig. 2a puts the 1P excitation maximum on a broad plateau spanning ~492-499 nm with its apex at ~496-498 nm (emission apex 520.6 nm, unchanged), matching the stored curve, whose maximum sits at 496 nm. The paper's running text rounds this to '500 nm' only when contrasting ASAP6c/JEDI-2P against the 485-nm peak of ASAP3, so 500 was a rounded comparative figure rather than a measured peak - this resolves the reviewer flag that the plotted excitation peaks below 500 nm.",
     "proofread": false,
     "review": {
       "status": "questionable",
@@ -481,6 +481,14 @@
       "sourceFigure": "Table S4",
       "note": "Single AP in cultured rat hippocampal neurons (ASAP6c-Kv), one-photon widefield imaging at 800 fps, physiological temperature",
       "proofread": true
+    },
+    {
+      "deltaF": 83,
+      "modality": "2P",
+      "source": "doi:10.1101/2024.06.21.599617",
+      "sourceFigure": "Fig. 3d",
+      "note": "Single-AP ΔF/F0 under TWO-PHOTON excitation in vivo (the page's other entries are all one-photon). Mouse barrel cortex layer-2/3 neurons during whisker stimulation, resonant-galvo raster scanning at 400 fps, 960-nm excitation at 40 mW post-objective power, physiological temperature. Read from the mean marker of the 'Spike ΔF/F (%)' dot plot in Fig. 3d for ASAP6c-Kv (N = 24 neurons): ≈83% (x-axis 0-200%; cf. ASAP6b-Kv ≈61%, ASAP4e-Kv ≈43%). The main text rounds this to '~80% for ASAP6c-Kv'.",
+      "proofread": false
     }
   ],
   "apWidthData": [
@@ -494,6 +502,17 @@
       "sourceFigure": "Fig. 3d",
       "note": "Optical FWHM (full-width at half-maximum, in ms) of the single optical action-potential waveform, measured under two-photon excitation (960 nm, 40 mW post-objective) at 400 fps in awake mouse barrel cortex during whisker stimulation. Mean of N=24 neurons read from the 'Optical FWHM (ms)' dot plot in Fig. 3d (ASAP6c-Kv mean marker ≈5.7 ms; data span ~5.3-6.0 ms; x-axis 5-8 ms). The 5.7-ms optical width is broadened beyond the underlying ~1-2 ms electrical AP by the 2.5-ms frame period (400 fps) plus sensor kinetics. Temperature is in-vivo physiological (~37°C; not separately stated for Fig. 3). This is the OPTICAL response width (not the simulated command-waveform FWHM of Fig. 1d/Table S2).",
       "proofread": true
+    },
+    {
+      "fwhm": 4.9,
+      "samplingRate": 800,
+      "sample": "HEK293A cells, whole-cell voltage clamp, in vitro (simulated 2-ms-FWHM, 100-mV command AP waveform)",
+      "modality": "1P",
+      "temperature": "25°C",
+      "source": "doi:10.1101/2024.06.21.599617",
+      "sourceFigure": "Fig. 1d",
+      "note": "In-vitro one-photon counterpart to the 5.7-ms in-vivo 2P width above. Derived by digitizing the blue ASAP6.3 (=ASAP6c) mean optical waveform in Fig. 1d ('AP waveform ΔF/F (%)' vs time, x-axis -10 to +40 ms, N = 7 cells): baseline (pre-spike flat segment) ≈ -0.8%, peak +69.7% at t ≈ 0 ms (in agreement with the 70% of Table S2), half-maximum level 34.5% crossed at t = -1.70 ms and t = +3.22 ms, so FWHM = 4.9 ms. Overlay-verified: the half-max span and the peak/baseline levels were redrawn on the figure and land on the blue trace. This is the OPTICAL response width; the command stimulus itself was a 2.0-ms-FWHM, 100-mV waveform, so ~2.9 ms of the width comes from sensor kinetics plus the 1.25-ms frame period (800 Hz, per Methods). Cross-plotted in the same panel: ASAP4e ≈7.7 ms (approximate; its trace is partly occluded), ASAP6.1 and ASAP6.2 have no page.",
+      "proofread": false
     }
   ],
   "brightnessData": [

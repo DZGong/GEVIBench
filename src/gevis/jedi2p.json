@@ -565,7 +565,7 @@
       "source": "doi:10.64898/2026.04.07.717088",
       "sourceFigure": "Fig. 1K",
       "note": "Cross-GEVI value measured in the FORCE1s paper (primary subject FORCE1s): in-vitro optical response width — FWHM of JEDI-2P's fluorescence response to an isolated 2-ms-FWHM, 100-mV command spike waveform under whole-cell voltage clamp + 2P imaging at 33°C, HEK293A (n = 10). Imaging by resonant-scanning at 721 Hz. Digitized from the Fig. 1K dot plot (y-axis 2-6 ms, 95% CI bars): JEDI-2P mean ≈ 3.6 ms (±~0.1 ms), narrowest of the three (vs FORCE1s ≈4.9, ASAP4e ≈4.2). This is the response to a synthetic 2-ms command input (broadened by command width + kinetics), distinct from the in-vivo real-spike FWHM of 1.4 ms (Fig. 3E). No exact number printed; digitized.",
-      "proofread": false
+      "proofread": true
     },
     {
       "fwhm": 2.1,

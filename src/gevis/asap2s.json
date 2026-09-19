@@ -32,8 +32,8 @@
       "ratio": 1,
       "reference": "asap1",
       "source": "doi:10.7554/eLife.25690",
-      "sourceFigure": "Fig. S2",
-      "note": "ASAP2s matched the brightness of ASAP1 under both one- and two-photon illumination in HEK293-Kir2.1 cells (Fig. 1—figure supplement 2A,B).",
+      "sourceFigure": "Fig. 1—figure supplement 2A",
+      "note": "ASAP2s matched the brightness of ASAP1 under both one- and two-photon illumination in HEK293-Kir2.1 cells (main text: 'ASAP2s matched the brightness of ASAP1 under both one- and two-photon illumination (Figure 1—figure supplement 2A,B)'). eLife numbers its supplements per-figure, so there is no 'Fig. S2' in this paper — the exact compound label is used here (panel A = one-photon relative brightness; panel B = two-photon).",
       "proofread": false
     }
   ],
@@ -63,7 +63,7 @@
       "source": "doi:10.1016/j.cell.2022.07.013",
       "sourceFigure": "Table S2",
       "proofread": false,
-      "note": "Amplitude-weighted mean of the bi-exponential fit at 32-35°C in HEK293-Kir2.1 cells (JEDI-2P paper, Table S2; ASAP2s column). Activation: τ_fast=3.78 ms (93.6%), τ_slow=132 ms → weighted on=11.99 ms. Deactivation: τ_fast=7.59 ms (91.7%), τ_slow=170 ms → weighted off=21.07 ms. Previously stored the fast components only (3.78/7.59)."
+      "note": "Amplitude-weighted mean of the bi-exponential fit at 32-35°C in HEK293A cells (JEDI-2P paper, Table S2; ASAP2s column). Activation: τ_fast=3.78 ms (93.6%), τ_slow=132 ms → weighted on=11.99 ms. Deactivation: τ_fast=7.59 ms (91.7%), τ_slow=170 ms → weighted off=21.07 ms. Previously stored the fast components only (3.78/7.59)."
     },
     {
       "on": 16.71,
@@ -72,7 +72,7 @@
       "source": "doi:10.1016/j.cell.2022.07.013",
       "sourceFigure": "Table S2",
       "proofread": false,
-      "note": "Amplitude-weighted mean of the bi-exponential fit at 21-23°C in HEK293-Kir2.1 cells (JEDI-2P paper, Table S2; ASAP2s column). Activation: τ_fast=6.39 ms (91.3%), τ_slow=125 ms → weighted on=16.71 ms. Deactivation: τ_fast=12.7 ms (87.1%), τ_slow=143 ms → weighted off=29.51 ms. Previously stored the fast components only (6.39/12.7)."
+      "note": "Amplitude-weighted mean of the bi-exponential fit at 21-23°C in HEK293A cells (JEDI-2P paper, Table S2; ASAP2s column). Activation: τ_fast=6.39 ms (91.3%), τ_slow=125 ms → weighted on=16.71 ms. Deactivation: τ_fast=12.7 ms (87.1%), τ_slow=143 ms → weighted off=29.51 ms. Previously stored the fast components only (6.39/12.7)."
     }
   ],
   "dynamicRangeData": [
@@ -91,6 +91,24 @@
       "modality": "1P",
       "source": "doi:10.1016/j.cell.2019.11.004",
       "sourceFigure": "Table 1",
+      "proofread": false
+    },
+    {
+      "deltaF": -28.5,
+      "sign": "negative",
+      "modality": "1P",
+      "source": "doi:10.1038/s41467-023-41975-3",
+      "sourceFigure": "Fig. 2c",
+      "note": "Steady-state response to a 100-mV step (−70 → +30 mV) under widefield one-photon illumination in HEK293A cells at room temperature, fluorescence acquired at ~987 fps, n = 6 cells. Cross-measured in the JEDI-1P origin paper (Lu 2023 Nat Commun, primary subject JEDI-1P). Read off the Fig. 2c dot plot by pixel calibration of the mean bar: ASAP2s ≈ 28.5, ASAP3 ≈ 43.6, JEDI-1P ≈ 54.9 (JEDI-1P's own page stores −56 from the same panel, so the reading is consistent to ~1%). Lower than the origin paper's −38.7% (Chamberland Fig. 1C) and Villette's −36% — a different lab/rig, not a window error (the panel is explicitly a −70 → +30 mV, 100-mV step).",
+      "proofread": false
+    },
+    {
+      "deltaF": -33.3,
+      "sign": "negative",
+      "modality": "2P",
+      "source": "doi:10.1016/j.cell.2022.07.013",
+      "sourceFigure": "Fig. 2C",
+      "note": "Steady-state response amplitude to a 100-mV step (−70 → +30 mV) under TWO-PHOTON excitation (920 nm, resonant scanner, 440 Hz frame rate) in HEK293A cells at 22°C, n = 5 cells. Cross-measured in the JEDI-2P origin paper (Liu 2022 Cell, primary subject JEDI-2P). Read off the Fig. 2C dot plot by pixel calibration of the mean bar: ASAP2s ≈ 33.3, ASAP3 ≈ 28.9, JEDI-2P ≈ 48.3 (ASAP2s vs ASAP3 is n.s.). First 2P dynamic-range value on this page; the 1P entries remain the displayed/sorted value.",
       "proofread": false
     }
   ],
@@ -194,6 +212,28 @@
       "sourceFigure": "Fig. 1B",
       "note": "Half-width of the optically recorded action potential = 12.3 ± 0.7 ms (n = 6), text-stated in Milosevic 2020 eNeuro (which labels the sensor 'ASAP2' but images AAV CamK2-ASAP2s / hSyn-ASAP2s per the Fig. 1B legend, so it is ASAP2s). Same-paper values: Archon1 6.1 ms, ASAP1 8.5 ms, Bongwoori-Pos6 33.1 ms. Optical AP recorded at 500 frames/s (0.5 kHz) widefield; the optical AP half-width is ~8× wider than the simultaneous whole-cell electrical AP half-width (766 ± 121% distortion) due to ASAP2s response kinetics. Cross-measured alongside Archon1 (Archon1 is the paper's primary/newer subject in the AP-width comparison). Distinct from the eLife Fig. 2J (~17.4 ms) and Villette Fig. 2F (~17.3 ms) values — Milosevic used a lower 500 Hz frame rate and different neurons.",
       "proofread": false
+    },
+    {
+      "fwhm": 6.7,
+      "samplingRate": 987,
+      "sample": "HEK293A cells, optical response to a single AP-like command waveform (2-ms FWHM, +30 mV peak, −70 mV baseline), whole-cell voltage clamp, in vitro",
+      "modality": "1P",
+      "temperature": "25°C",
+      "source": "doi:10.1038/s41467-023-41975-3",
+      "sourceFigure": "Fig. 2f",
+      "note": "Full-width at half-maximum of the optical response to a single AP-like command waveform, read off the Fig. 2f dot plot by pixel calibration of the mean bar: ASAP2s ≈ 6.70 ms, ASAP3 ≈ 5.75 ms, JEDI-1P ≈ 4.85 ms. The calibration reproduces the values already stored on the co-plotted pages (ASAP3 5.8 ms, JEDI-1P 4.9 ms) to <0.1 ms. Cross-measured in the JEDI-1P origin paper (Lu 2023 Nat Commun, primary subject JEDI-1P); widefield 1P at 987 fps, room temperature, n = 10 ASAP2s cells. This is a command-waveform response in HEK293A cells, so it is much narrower than the neuronal optical-AP widths above (which convolve a real AP with the sensor kinetics).",
+      "proofread": false
+    },
+    {
+      "fwhm": 7.6,
+      "samplingRate": 440,
+      "sample": "HEK293A cells, optical response to a single AP-like command waveform (2-ms FWHM), whole-cell voltage clamp, in vitro",
+      "modality": "2P",
+      "temperature": "22°C",
+      "source": "doi:10.1016/j.cell.2022.07.013",
+      "sourceFigure": "Fig. 2F",
+      "note": "Full-width at half-maximum of the optical response to a single AP-like command waveform under TWO-PHOTON excitation (920 nm, resonant scanner, 512×32 pixels at a 440 Hz frame rate, 22°C), read off the Fig. 2F dot plot by pixel calibration of the mean bar: ASAP2s ≈ 7.63 ms, ASAP3 ≈ 7.73 ms, JEDI-2P ≈ 6.07 ms (ASAP2s vs ASAP3 n.s.). Cross-measured in the JEDI-2P origin paper (Liu 2022 Cell, primary subject JEDI-2P), n = 5 ASAP2s cells. Directly comparable with the 1P HEK293A command-waveform value (6.7 ms, JEDI-1P Fig. 2f) rather than with the neuronal optical-AP widths.",
+      "proofread": false
     }
   ],
   "photobleach": [
@@ -260,6 +300,7 @@
     },
     {
       "modality": "1P",
+      "illumination": "15 mW/mm²",
       "intensityMWmm2": 15,
       "t50": 3,
       "fit": {
@@ -353,7 +394,6 @@
       "illumination": "11 mW/mm²",
       "intensityMWmm2": 11,
       "t75": 50,
-      "t50": 134,
       "fit": {
         "model": "biexponential",
         "a": 0.69,
@@ -364,7 +404,116 @@
       "source": "doi:10.7554/eLife.25690",
       "sourceFigure": "Fig. 1—figure supplement 3A",
       "sourceImage": "/photobleach-sources/asap2s-fig1s3a.jpg",
-      "note": "ASAP2s (green) biexponential τ1=121 s (69%) + τ2=1017 s (31%) per Fig. 1-fig.suppl.3B. t75≈50 s, t50≈134 s. Origin-paper 1P photobleach, Fig. 1—figure supplement 3A: HEK293-Kir2.1 cells, continuous widefield 470–490 nm at 11 mW/mm², emission 525/50 nm, normalized to 1.0 at t=0. The stored curve is generated from the paper's OWN published fit (Fig. 1—figure supplement 3B) rather than pixel-digitized, because ASAP1/ASAP2s/ArcLight overlap almost exactly in panel A; the fit endpoints match the panel-A traces at 5 min. All co-plotted sensors (ASAP1, ASAP2s, ArcLight Q239; ASAP1::EGFP has no page) share this source+sourceFigure so they cross-overlay.",
+      "note": "ASAP2s (green) biexponential τ1=121 s (69%) + τ2=1017 s (31%) per Fig. 1-fig.suppl.3B. t75≈50 s (the 50% crossing, ≈134 s, is not stored: the 75% crossing already sits in the slow sustained phase — τ1 = 121 s, no rapid-initial transient — so t75 is the representative landmark and an entry carries t75 OR t50, not both). Origin-paper 1P photobleach, Fig. 1—figure supplement 3A: HEK293-Kir2.1 cells, continuous widefield 470–490 nm at 11 mW/mm², emission 525/50 nm, normalized to 1.0 at t=0. The stored curve is generated from the paper's OWN published fit (Fig. 1—figure supplement 3B) rather than pixel-digitized, because ASAP1/ASAP2s/ArcLight overlap almost exactly in panel A; the fit endpoints match the panel-A traces at 5 min. All co-plotted sensors (ASAP1, ASAP2s, ArcLight Q239; ASAP1::EGFP has no page) share this source+sourceFigure so they cross-overlay.",
+      "proofread": false
+    },
+    {
+      "custom": {
+        "time": [
+          0,
+          5,
+          10,
+          15,
+          20,
+          30,
+          45,
+          60,
+          80,
+          100,
+          120,
+          140,
+          160,
+          180,
+          200
+        ],
+        "fluorescence": [
+          1.0,
+          0.9646,
+          0.9284,
+          0.8985,
+          0.8722,
+          0.8232,
+          0.7607,
+          0.7044,
+          0.641,
+          0.5839,
+          0.534,
+          0.4887,
+          0.4488,
+          0.4116,
+          0.3799
+        ]
+      },
+      "illumination": "24 mW/mm²",
+      "intensityMWmm2": 24,
+      "t75": 47.7,
+      "fit": {
+        "model": "biexponential",
+        "a": 0.1042,
+        "tau": 28.8,
+        "tau2": 230.9,
+        "r2": 0.9999
+      },
+      "modality": "1P",
+      "source": "doi:10.7554/eLife.25690",
+      "sourceFigure": "Fig. 2—figure supplement 3B",
+      "sourceImage": "/photobleach-sources/asap2s-fig2s3b.jpg",
+      "note": "Origin-paper 1P photobleach in NEURONS (distinct from the HEK293-Kir2.1 curve above): dissociated hippocampal neurons under continuous widefield 470–490 nm illumination at 24 mW/mm², emission 525/25 nm, normalized to 1.0 at t=0, n=5 cells (Fig. 2—figure supplement 3B). Digitized by HSV green-channel tracing of the ASAP2s trace (the blue ASAP1 trace runs just below it; the in-plot legend line was rejected by nearest-cluster tracking), renormalized to its own first frame, then overlay-verified against the panel (50 s ≈ 0.74, 100 s ≈ 0.58, 200 s ≈ 0.38). Model-free t75 = 47.7 s from the digitized points; the biexponential refit (τ1 = 28.8 s, 10.4%; τ2 = 231 s) reproduces the paper's own published fit in panel C (τ1 = 21 ± 11 s, 13 ± 7%; τ2 = 256 ± 34 s, 87 ± 7%) within its error bars. ASAP1 is co-plotted in the same panel and should carry a matching entry so the two cross-overlay.",
+      "proofread": false
+    },
+    {
+      "custom": {
+        "time": [
+          0,
+          1,
+          2,
+          3,
+          5,
+          7,
+          10,
+          15,
+          20,
+          30,
+          45,
+          60,
+          90,
+          120,
+          150,
+          180
+        ],
+        "fluorescence": [
+          1.0,
+          0.9909,
+          0.971,
+          0.9383,
+          0.8802,
+          0.8439,
+          0.8076,
+          0.775,
+          0.7514,
+          0.7223,
+          0.6969,
+          0.6788,
+          0.6461,
+          0.6225,
+          0.6007,
+          0.5844
+        ]
+      },
+      "illumination": "6.4 mW at objective back aperture (2P, 920 nm)",
+      "t75": 20.4,
+      "fit": {
+        "model": "biexponential",
+        "a": 0.2666,
+        "tau": 9.62,
+        "tau2": 744.4,
+        "r2": 0.9962
+      },
+      "modality": "2P",
+      "source": "doi:10.7554/eLife.25690",
+      "sourceFigure": "Fig. 1—figure supplement 4A",
+      "sourceImage": "/photobleach-sources/asap2s-fig1s4a.jpg",
+      "note": "Origin-paper TWO-PHOTON photobleach (the 2P counterpart of the Fig. 1—figure supplement 3A 1P curve): HEK293-Kir2.1 cells, femtosecond Ti:sapphire at 920 nm, 6.4 mW at the objective back aperture, 60×/0.9 NA, each pixel sampled at 2.23 Hz with a 5.2 µs dwell time, normalized to 1.0 at t=0, n=12 cells. Digitized by HSV green-channel tracing of the ASAP2s trace over the full 0–3 min window and renormalized to its own first frame; overlay-verified against the paper's OWN published tri-exponential fit in panel B (τ1 = 5.7 ± 0.4 s, 24 ± 2%; τ2 = 75 ± 11 s, 17 ± 2%; τ3 = 2388 ± 417 s, 59 ± 2%), which tracks the digitized trace to within ~0.02 F/F0 everywhere. Model-free t75 = 20.4 s from the digitized points (the schema has no tri-exponential model, so `fit` is the best biexponential refit, r²=0.996, whose own 75% crossing is 19.4 s). 2P/power-only entry: NOT intensity-normalized and not dose-comparable with the 1P entries. Co-plotted sensors that have pages (ASAP1, ArcLight Q239) should carry matching entries so all cross-overlay; ASAP1::EGFP has no page.",
       "proofread": false
     }
   ],
@@ -469,6 +618,15 @@
       "proofread": false
     },
     {
+      "title": "Widefield imaging of rapid pan-cortical voltage dynamics with an indicator evolved for one-photon microscopy",
+      "authors": "Lu X, Wang Y, Liu Z, et al.",
+      "journal": "Nature Communications",
+      "year": 2023,
+      "sample": "HEK293A cells; HEK293-Kir2.1 cells; rat cortical and hippocampal neurons, in vitro",
+      "url": "https://doi.org/10.1038/s41467-023-41975-3",
+      "proofread": false
+    },
+    {
       "title": "Physiological features of parvalbumin-expressing GABAergic interneurons contributing to high-frequency oscillations in the cerebral cortex",
       "authors": "Milicevic KD, et al.",
       "journal": "Current Research in Neurobiology",
@@ -480,7 +638,7 @@
   ],
   "spectrum": {
     "type": "fp",
-    "peakEx": 489,
+    "peakEx": 490,
     "peakEm": 511,
     "name": "ASAP2s",
     "custom": {

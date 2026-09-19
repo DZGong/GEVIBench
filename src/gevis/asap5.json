@@ -413,30 +413,33 @@
         -100,
         -80,
         -70,
-        -50,
-        -30,
-        -10,
+        -60,
+        -40,
+        -20,
         0,
-        10,
-        30
+        30,
+        50,
+        80
       ],
       "deltaF": [
         57,
-        42,
-        13,
+        38,
+        14,
         0,
-        -20,
-        -35,
-        -47,
+        -13,
+        -33,
+        -45,
         -52,
-        -55,
-        -57
+        -57,
+        -59,
+        -60
       ]
     },
     "source": "doi:10.1016/j.neuron.2024.08.019",
     "sourceImage": "/fv-sources/asap5.jpg",
     "sourceFigure": "Fig. 1D",
-    "proofread": true
+    "note": "Re-digitized 2026-09-08 from the Fig. 1D source crop (cyan ASAP5 curve, n = 5 HEK293A cells). Axis calibration from the printed x-ticks (-120/-70/-20/30/80 mV at x = 283/373/463/551/641 px) and y-ticks (60% to -80% at 69.4 px per 20%), cross-checked against the grey physiological band, which spans exactly -70 to +30 mV. Marker centres were located by erosion + connected components and overlay-verified. The eleven plotted voltage steps are -120, -100, -80, -70, -60, -40, -20, 0, +30, +50, +80 mV. The previous stored array mislabelled three of them (-60/-40/-20 were stored as -50/-30/-10), carried a +10 mV point that has no marker in the figure, and read -100 mV as +42% instead of +38%. The -70 to +30 mV step of -57% matches Table S2 (-57 +/- 2% at 23 C) exactly, and the +80 mV plateau of -60% matches the text.",
+    "proofread": false
   },
   "kinetics": [
     {
@@ -509,7 +512,7 @@
         "comment": "Same issue with the FWHM of ASAP7, it's hard to believe that ASAP5 is narrower than ASAP7",
         "date": "2026-08-24"
       },
-      "note": "Cross-GEVI entry from the ASAP7y paper (primary subject ASAP7y). Optical single-AP FWHM digitized from the averaged optical AP waveform in Fig. 1c (the cyan ΔF/F trace — average of n=7 cultured cortical neurons, plotted above the averaged electrical AP), calibrated to the panel's 20 ms scale bar and overlay-verified ≈ 6.8 ms (vs ASAP7y ≈ 10.3 ms in the same panel). This is a DIFFERENT regime from the Neuron-2024 ULoVE entry above (in-vivo 2P rapid post-threshold optical spike, 1.3 ms): here it is the slower full averaged optical AP waveform in culture. CAVEATS: the paper does not report this experiment's frame rate (samplingRate omitted), modality, or temperature for this panel; the ≈7 ms width is kinetics-dominated, not frame-rate-limited."
+      "note": "Cross-GEVI entry from the ASAP7y paper (primary subject ASAP7y). Optical single-AP FWHM digitized from the averaged optical AP waveform in Fig. 1c (the cyan ΔF/F trace — average of n=7 cultured cortical neurons, plotted below the averaged electrical AP), calibrated to the panel's 20 ms scale bar and overlay-verified ≈ 6.8 ms (vs ASAP7y ≈ 10.3 ms in the same panel). This is a DIFFERENT regime from the Neuron-2024 ULoVE entry above (in-vivo 2P rapid post-threshold optical spike, 1.3 ms): here it is the slower full averaged optical AP waveform in culture. CAVEATS: the paper does not report this experiment's frame rate (samplingRate omitted), modality, or temperature for this panel; the ≈7 ms width is kinetics-dominated, not frame-rate-limited. RE-VERIFIED 2026-09-08 against the reviewer flag ('hard to believe that ASAP5 is narrower than ASAP7'): the panel was re-rendered at 600 dpi and re-measured independently (20 ms scale bar = 158 px; baseline from the flat pre-spike segment, peak from the max deflection) giving FWHM = 6.6 ms, confirming the stored 6.8 ms to within ±0.2 ms. The co-plotted averaged ELECTRICAL AP in the same panel measures ≈3.6 ms FWHM by the same method, so the optical waveform is ~1.8× broader than the voltage it reports. ASAP5 being narrower than ASAP7y here is the EXPECTED direction, not an error: ASAP7y's deactivation time constant is ~10.7 ms at 25 °C versus ASAP5's 4.3 ms (75% fast component, Table S2 of the Neuron 2024 paper), so the slower sensor smears the optical AP more. Both numbers are optical-waveform widths broadened by sensor kinetics and are not action-potential durations."
     }
   ],
   "sensitivityData": [
@@ -562,23 +565,23 @@
   "photobleach": [
     {
       "modality": "1P",
-      "illumination": "20 mW/mm² (SNR-matched effective)",
-      "intensityMWmm2": 20,
-      "t75": 87,
+      "illumination": "46 mW/mm²",
+      "intensityMWmm2": 46,
+      "t75": 37.6,
       "extrapolated": true,
       "fit": {
         "model": "monoexponential",
-        "tau": 301,
+        "tau": 131,
         "r2": 0.989
       },
       "custom": {
-        "time": [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60],
+        "time": [0, 2.17, 4.35, 6.52, 8.7, 10.87, 13.04, 15.22, 17.39, 19.57, 21.74, 23.91, 26.09],
         "fluorescence": [1.0, 0.983, 0.965, 0.944, 0.93, 0.911, 0.897, 0.888, 0.869, 0.865, 0.853, 0.837, 0.827]
       },
       "source": "doi:10.1016/j.neuron.2024.08.019",
       "sourceImage": "/photobleach-sources/asap5.jpg",
       "sourceFigure": "Fig. S5E",
-      "note": "Digitized (cyan ASAP5-Kv curve) from Fig. S5E, an SNR-matched photostability comparison vs Voltron2525-Kv. Acquired at 46 mW/mm², but the time-axis was multiplied by 2.3 (STAR Methods) so the plotted curve represents ASAP5-Kv photobleaching at the SNR-matched effective irradiance of ~20 mW/mm² (=46/2.3) in real-time-equivalent seconds. Normalized to the 0.5 s value — the brief transient bright state in the first 0.5 s is excluded, so F0 is the post-transient baseline (true bleaching is slightly faster than shown). Decays to ~83% at 60 s; monoexponential fit τ≈301 s (r²=0.99); t75≈87 s is EXTRAPOLATED beyond the 60 s window. intensityMWmm2 set to 20 (the SNR-matched effective irradiance) so t75 is linearly dose-scaled to the 100 mW/mm² reference (≈17 s) for the list/radar/comparison views. APPROXIMATE — this SNR-matched / time-rescaled / 0.5 s-normalized measurement is non-standard AND the t75 itself is extrapolated past the data, so treat the scaled value as order-of-magnitude only.",
+      "note": "Digitized (cyan ASAP5-Kv curve) from Fig. S5E, the photostability comparison vs Voltron2525-Kv during mEPSP recordings in cultured rat neurons. RE-SCALED TO REAL ACQUISITION TIME (2026-09-08, per reviewer request): both sensors were actually imaged at 46 mW/mm² (STAR Methods), but the paper multiplied ASAP5-Kv's plotted time-axis by 2.3 to display an SNR-matched comparison at an effective ~20 mW/mm². Dividing the plotted time by 2.3 restores real seconds at 46 mW/mm², so this curve and the co-plotted Voltron2525-Kv curve (also 46 mW/mm²) are now an iso-irradiance comparison — which shows ASAP5-Kv bleaching FASTER than Voltron2525-Kv at equal power (0.83 vs 0.91 at 26 s); the paper's point is that ASAP5-Kv reaches the same mEPSP SNR at 2.3-fold lower power. The digitized fluorescence values were independently re-verified against the figure (max deviation 0.003). Normalized to the 0.5 s value — the brief transient bright state in the first 0.5 s is excluded, so F0 is the post-transient baseline and true bleaching is slightly faster than shown. Monoexponential fit τ≈131 s (r²=0.989); t75≈37.6 s is EXTRAPOLATED beyond the 26.1 s of real-time data (the same 1.4× extrapolation as before the rescale). Dose-scaled t75 at the 100 mW/mm² reference is ≈17 s, unchanged by the rescale because linear dose-scaling makes the two representations equivalent. APPROXIMATE — 0.5 s-normalized, extrapolated.",
       "proofread": false,
       "review": {
         "status": "questionable",
@@ -590,25 +593,68 @@
       "modality": "2P",
       "illumination": "16 mW at 940 nm (2P power-only)",
       "fit": {
-        "model": "monoexponential",
-        "tau": 11.6,
-        "c": 0.861,
-        "r2": 0.975
+        "model": "biexponential",
+        "a": 0.101,
+        "tau": 6.98,
+        "tau2": 1163,
+        "r2": 0.992
       },
       "custom": {
-        "time": [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60],
-        "fluorescence": [1.0, 0.937, 0.917, 0.902, 0.89, 0.877, 0.879, 0.872, 0.869, 0.867, 0.86, 0.857, 0.85]
+        "time": [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58, 60],
+        "fluorescence": [1.0, 0.9669, 0.947, 0.9321, 0.9272, 0.9172, 0.9139, 0.904, 0.9007, 0.8957, 0.8907, 0.8891, 0.8808, 0.8775, 0.8742, 0.8725, 0.8725, 0.8725, 0.8709, 0.8692, 0.8675, 0.8675, 0.8675, 0.8659, 0.8642, 0.8642, 0.8576, 0.8576, 0.8576, 0.856, 0.8526]
       },
       "source": "doi:10.64898/2026.05.27.728040",
       "sourceImage": "/photobleach-sources/asap5-2p-940nm-asap7ypaper.jpg",
       "sourceFigure": "Fig. 2g",
-      "note": "Cross-GEVI entry from the ASAP7y paper (Hao 2026; primary subject ASAP7y). Digitized (blue ASAP5 curve) from Fig. 2g: normalized fluorescence over 1 min of continuous two-photon imaging of Mi1 neurons in vivo (Drosophila) on an AOD random-access microscope at 940 nm (~16 mW post-objective, STAR Methods 'sensor comparison in Mi1'), plotted against ASAP7y at 940 nm (green, plateaus near 1.0). ASAP5 decays to ~0.85 at 60 s and plateaus (offset-monoexponential τ≈11.6 s, plateau c≈0.86, r²≈0.98). t75 OMITTED: the curve never falls to 75% of F0 within the 60 s window (too photostable at this power) — honest lower bound is t75 > 60 s; not extrapolated. 2P power-only measurement: intensityMWmm2 intentionally omitted (no mW/mm² given), NOT dose-scaled to the 100 mW/mm² 1P reference and NOT compared across the 1P entry above; stands alone. Co-figure GEVI ASAP7y (940 nm) shares this source + Fig. 2g for cross-overlay.",
+      "note": "Cross-GEVI entry from the ASAP7y paper (Hao 2026; primary subject ASAP7y). Digitized (blue ASAP5 curve) from Fig. 2g: normalized fluorescence over 1 min of continuous two-photon imaging of Mi1 neurons in vivo (Drosophila) on an AOD random-access microscope at 940 nm (16 mW post-objective, STAR Methods 'In vivo sensor comparisons in Mi1'; scanned at 1041 Hz), plotted against ASAP7y at 940 nm (green, stays near 1.0). RE-DIGITIZED 2026-09-08 (reviewer flagged the stored curve as 'off'): re-traced at 1 s resolution against the printed ticks (x 0/20/40/60 s at 173/388/604/820 px; y 0.0/0.5/1.0 at 427/276/125 px) and stored at 2 s spacing after a running-minimum pass — this removes the non-physical rise at 25→30 s in the previous array (0.877 → 0.879) and replaces the poor offset-monoexponential (r²=0.975, which forced a flat 0.861 plateau the data never settles on) with a biexponential a=0.101, τ₁=6.98 s, τ₂=1163 s (r²=0.992) that reproduces both the fast first-10-s drop and the continuing slow decline to 0.853 at 60 s. t75 OMITTED: the curve never falls to 75% of F0 within the 60 s window — honest lower bound t75 > 60 s (the fit would put it near 210 s, far outside the data, so it is not stored). 2P power-only measurement: intensityMWmm2 intentionally omitted (no mW/mm² given), NOT dose-scaled to the 100 mW/mm² 1P reference and NOT comparable to the 1P entry above; stands alone. Co-figure GEVI ASAP7y (940 nm) shares this source + Fig. 2g for cross-overlay.",
       "proofread": false,
       "review": {
         "status": "questionable",
         "comment": "the curve is off",
         "date": "2026-08-24"
       }
+    },
+    {
+      "modality": "2P",
+      "illumination": "25 mW at 920 nm (2P power-only)",
+      "fit": {
+        "model": "biexponential",
+        "a": 0.098,
+        "tau": 3.51,
+        "tau2": 474,
+        "r2": 0.997
+      },
+      "custom": {
+        "time": [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40, 42, 44, 46, 48, 50, 52, 54, 56, 58, 60],
+        "fluorescence": [1.0, 0.9485, 0.9258, 0.9093, 0.8969, 0.8948, 0.8866, 0.8825, 0.8742, 0.866, 0.866, 0.8588, 0.8546, 0.8536, 0.8495, 0.8454, 0.8423, 0.8392, 0.833, 0.8289, 0.8289, 0.8247, 0.8227, 0.8206, 0.8165, 0.8124, 0.8082, 0.8021, 0.8021, 0.8021, 0.7979]
+      },
+      "source": "doi:10.1016/j.neuron.2024.08.019",
+      "sourceImage": "/photobleach-sources/asap5-fig3a.jpg",
+      "sourceFigure": "Fig. 3A",
+      "note": "Digitized (blue ASAP5 curve) from the Fig. 3A right sub-panel: F/F0 over 1 min of continuous two-photon imaging of Mi1 neurites in the M10 layer of the medulla in awake Drosophila, 920 nm, 25 mW post-objective, resonant-galvanometric scanning at 354 fps (STAR Methods, 'Two-photon in vivo imaging of Drosophila'); n = 59 ASAP5 neurons from 5 flies. Co-plotted with JEDI-2P (green), which the text describes as having 'slightly better photostability'. Axis calibration from the printed ticks (x 0/20/40/60 s, y 0.0-1.0 in 0.2 steps) and overlay-verified against the source crop. ASAP5 falls to 0.798 at 60 s; biexponential a=0.098, τ₁=3.51 s, τ₂=474 s (r²=0.997). t75 OMITTED: the curve does not reach 75% of F0 inside the 60 s window — honest lower bound t75 > 60 s (the fit alone would put it near 88 s, outside the data, and there is no paper-stated anchor, so it is not extrapolated). 2P power-only: intensityMWmm2 omitted, not dose-scaled, not comparable to the 1P entry. This is the SAME preparation as the ASAP7y-paper Fig. 2g entry above but a different rig/power (Bruker resonant 354 fps at 25 mW vs AOD 1041 Hz at 16 mW), which is why the 60 s endpoint differs (0.80 vs 0.85). Co-figure GEVI JEDI-2P shares this source + Fig. 3A for cross-overlay.",
+      "proofread": false
+    },
+    {
+      "modality": "2P",
+      "illumination": "30-160 mW at 925 nm (2P power-only)",
+      "t75": 970,
+      "extrapolated": false,
+      "fit": {
+        "model": "biexponential",
+        "a": 0.116,
+        "tau": 20,
+        "tau2": 5091,
+        "r2": 0.967
+      },
+      "custom": {
+        "time": [0, 15, 30, 60, 90, 120, 180, 240, 300, 360, 420, 480, 540, 600, 660, 720, 780, 840, 900, 960, 1020, 1080, 1140, 1200, 1260, 1320, 1380, 1440, 1500, 1560, 1620, 1680, 1740, 1800],
+        "fluorescence": [1.0, 0.9462, 0.9034, 0.8672, 0.8537, 0.8537, 0.835, 0.8345, 0.8161, 0.8161, 0.8161, 0.8161, 0.8089, 0.7855, 0.7855, 0.7855, 0.7855, 0.7855, 0.7855, 0.7602, 0.7106, 0.7034, 0.7005, 0.6964, 0.6957, 0.6957, 0.6955, 0.6567, 0.6235, 0.6235, 0.6235, 0.6235, 0.6235, 0.6235]
+      },
+      "source": "doi:10.1016/j.neuron.2024.08.019",
+      "sourceImage": "/photobleach-sources/asap5-figS4A.jpg",
+      "sourceFigure": "Fig. S4A",
+      "note": "Digitized (blue ASAP5-Kv curve) from the Fig. S4A RIGHT sub-panel — normalized raw traces from long-term (30 min) two-photon recordings of soma-targeted ASAP5-Kv in layer-2 motor cortex of awake behaving mice in vivo, n = 3 mice; 925 nm, 30-160 mW post-objective, LotosScan resonant scanner at 500 fps (STAR Methods, 'Resonant-galvanometric two-photon voltage imaging'). Co-plotted with JEDI-2P-Kv (green); the text calls both 'exceptional' in photostability under two-photon illumination. Axis calibration from the printed ticks (x 0/15/30 min, y 0.0-1.0 in 0.2 steps); the blue line core was isolated by requiring B-R > 90 (which rejects the semi-transparent SEM bands), the largest contiguous run taken per column, then passed through a decreasing isotonic (monotone least-squares) regression before sampling — overlay-verified against the source crop. Time stored in SECONDS. t75 = 970 s (16.2 min) is MODEL-FREE, read by interpolating the digitized points, and lies inside the 1800 s window (extrapolated: false); the biexponential display fit (a=0.116, τ₁=20 s, τ₂=5091 s, r²=0.967) smooths the plateau-then-step structure of the real trace and would place the crossing ~13% earlier at ≈840 s. The Fig. S4A LEFT sub-panel (the 2-min recordings of Fig. 4A, n = 7 ASAP5-Kv / 12 JEDI-2P-Kv) shows the same sensors reaching ≈0.82 at 120 s and is consistent with this curve; only the long-term panel is stored because it is the one that actually crosses 75%. 2P power-only measurement over a power RANGE: intensityMWmm2 intentionally omitted, NOT dose-scaled to the 100 mW/mm² 1P reference and NOT comparable to the 1P entry above; stands alone. Co-figure GEVI JEDI-2P shares this source + Fig. S4A for cross-overlay.",
+      "proofread": false
     }
   ],
   "twoPhoton": [
@@ -694,6 +740,33 @@
       "year": 2026,
       "sample": "HEK293 cells, in vitro; Mouse, visual cortex L2/3, in vivo",
       "url": "https://doi.org/10.1038/s41592-026-03043-8",
+      "proofread": false
+    },
+    {
+      "title": "Highly attenuated dendritic propagation of isolated synaptic potentials in vivo",
+      "authors": "Cornejo VH, Bouazza-Arostegui B, Alejandre-Garcia T, Hao YA, Lee S, Lin MZ, Yuste R",
+      "journal": "Science Advances",
+      "year": 2026,
+      "url": "https://doi.org/10.1126/sciadv.adz4123",
+      "sample": "Mouse, somatosensory cortex L2/3 pyramidal dendrites and spines, in vivo (two-photon voltage imaging with ASAP5 targeted by the PSD95.FingR nanobody, with simultaneous somatic whole-cell patch clamp)",
+      "proofread": false
+    },
+    {
+      "title": "Structure-guided, physics-aware reconstruction expands scan-limited multiphoton imaging",
+      "authors": "Liu S, et al.",
+      "journal": "bioRxiv",
+      "year": 2026,
+      "url": "https://doi.org/10.64898/2026.04.20.719672",
+      "sample": "Mouse, somatosensory cortex, in vivo (AAV-CaMKIIα-ASAP5-Kv two-photon voltage imaging)",
+      "proofread": false
+    },
+    {
+      "title": "Voltage imaging of neurons distributed across entire brains of larval zebrafish",
+      "authors": "Wang Z, et al.",
+      "journal": "Nature Methods",
+      "year": 2026,
+      "url": "https://doi.org/10.1038/s41592-026-03179-7",
+      "sample": "Zebrafish larva, whole brain, in vivo (sparse transient ASAP5-Kv expression used to verify that spikes resolved at 1,000 Hz survive downsampling to 200 Hz; ASAP5-Kv kinetics also used in the sampling-rate simulations)",
       "proofread": false
     }
   ]

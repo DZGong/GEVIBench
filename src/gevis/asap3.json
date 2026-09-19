@@ -16,7 +16,7 @@
   "spectrum": {
     "type": "fp",
     "peakEx": 490,
-    "peakEm": 511,
+    "peakEm": 509,
     "name": "ASAP3",
     "custom": {
       "minEx": 352,
@@ -377,7 +377,7 @@
     "proofread": false,
     "source": "FPbase: Superfolder GFP",
     "sourceFigure": "FPbase",
-    "note": "No one-photon excitation/emission spectrum is published for ASAP3: the Villette 2019 paper reports only imaging filter settings (ex 490/10, em 525/40 — a collection band, not a peak) and no spectral figure, and FPbase has no ASAP entry. ASAP3 shares the cpsfGFP-OPT (superfolder GFP) chromophore of ASAP1/ASAP2s (derived from ASAP2f via L146G/S147T/S150G/H151D/R414Q; EGFP was used only as a brightness control) and is not spectrally red-shifted, so the FPbase Superfolder GFP excitation/emission curve is used as a fluorophore proxy. Replaces a fabricated curve that was the FPbase EGFP spectrum red-shifted +16 nm (ex) / +14 nm (em) to fake peaks of 505/525."
+    "note": "No one-photon excitation/emission spectrum is published for ASAP3: the Villette 2019 paper reports only imaging filter settings (ex 490/10, em 525/40 — a collection band, not a peak) and no spectral figure, and FPbase has no ASAP entry. ASAP3 shares the cpsfGFP-OPT (superfolder GFP) chromophore of ASAP1/ASAP2s (derived from ASAP2f via L146G/S147T/S150G/H151D/R414Q; EGFP was used only as a brightness control) and is not spectrally red-shifted, so the FPbase Superfolder GFP excitation/emission curve is used as a fluorophore proxy. Replaces a fabricated curve that was the FPbase EGFP spectrum red-shifted +16 nm (ex) / +14 nm (em) to fake peaks of 505/525. Re-verified 2026-09 against the live FPbase API (/api/proteins/spectra/?name__iexact=Superfolder GFP): the stored arrays are byte-identical to FPbase's Superfolder GFP default_ex (188 pts, 352-539 nm) and default_em (160 pts, 469-628 nm), max abs difference 0.000000. peakEm corrected 511 -> 509 nm to match the stored curve's own argmax (peakEx 490 nm already did); FPbase's tabulated summary values for this protein are 488/510 nm, which are rounded reads of the same curve."
   },
   "voltage": {
     "type": "fp",
@@ -445,7 +445,7 @@
       "off": 21.54,
       "temperature": "32-35°C",
       "source": "doi:10.1016/j.cell.2022.07.013",
-      "note": "Amplitude-weighted mean of the bi-exponential fit at 32-35°C in HEK293-Kir2.1 cells (JEDI-2P paper, Table S2; ASAP3 column). Activation: τ_fast=0.98 ms (82.4%), τ_slow=20.9 ms → weighted on=4.49 ms. Deactivation: τ_fast=4.29 ms (86.9%), τ_slow=136 ms → weighted off=21.54 ms. Previously stored the fast components only (0.98/4.29).",
+      "note": "Amplitude-weighted mean of the bi-exponential fit at 32-35°C in HEK293A cells under whole-cell voltage clamp, −70→+30 mV (JEDI-2P paper, Table S2; ASAP3 column, n=16 cells). Activation: τ_fast=0.98 ms (82.4%), τ_slow=20.9 ms → weighted on=4.49 ms. Deactivation: τ_fast=4.29 ms (86.9%), τ_slow=136 ms → weighted off=21.54 ms. Previously stored the fast components only (0.98/4.29). Cell line corrected from 'HEK293-Kir2.1' — the Table S2 legend specifies HEK293A cells (HEK293-Kir2.1 was used for the photostability/brightness panels in that paper, not for kinetics).",
       "sourceFigure": "Table S2",
       "proofread": false
     },
@@ -454,7 +454,16 @@
       "off": 25.85,
       "temperature": "21-23°C",
       "source": "doi:10.1016/j.cell.2022.07.013",
-      "note": "Amplitude-weighted mean of the bi-exponential fit at 21-23°C in HEK293-Kir2.1 cells (JEDI-2P paper, Table S2; ASAP3 column). Activation: τ_fast=2.26 ms (78.4%), τ_slow=32.2 ms → weighted on=8.73 ms. Deactivation: τ_fast=11.0 ms (85.3%), τ_slow=112 ms → weighted off=25.85 ms. Previously stored the fast components only (2.26/11).",
+      "note": "Amplitude-weighted mean of the bi-exponential fit at 21-23°C in HEK293A cells under whole-cell voltage clamp, −70→+30 mV (JEDI-2P paper, Table S2; ASAP3 column, n=9 cells). Activation: τ_fast=2.26 ms (78.4%), τ_slow=32.2 ms → weighted on=8.73 ms. Deactivation: τ_fast=11.0 ms (85.3%), τ_slow=112 ms → weighted off=25.85 ms. Previously stored the fast components only (2.26/11). Cell line corrected from 'HEK293-Kir2.1' — the Table S2 legend specifies HEK293A cells.",
+      "sourceFigure": "Table S2",
+      "proofread": false
+    },
+    {
+      "on": 9.11,
+      "off": 18.8,
+      "temperature": "23°C",
+      "source": "doi:10.1016/j.neuron.2024.08.019",
+      "note": "Amplitude-weighted mean of the bi-exponential fit at 23°C in HEK293A cells imaged at 1888 fps under simultaneous voltage clamp (ASAP5 paper, Table S2; ASAP3 row, 23°C, n=6-9 cells). Activation (−70→+30 mV): τ_fast=3.6 ms (63%), τ_slow=18.5 ms (37%) → weighted on=9.11 ms. Deactivation (+30→−70 mV): τ_fast=9.0 ms (29%), τ_slow=22.8 ms (71%) → weighted off=18.80 ms. Companion room-temperature row to the 37°C entry from the same table; previously only described in that entry's note and not stored.",
       "sourceFigure": "Table S2",
       "proofread": false
     }
@@ -484,7 +493,25 @@
       "modality": "1P",
       "source": "doi:10.64898/2026.02.10.701308",
       "sourceFigure": "Table S1",
-      "note": "ΔF/F for a true 100-mV step (-70 -> +30 mV) from the Fgreen/Fred R-V Boltzmann fit measured alongside rEstus2s (Rmax=1.15, ΔRmax=-0.85, Vhalf=-60.0, ks=40.2; Table S1). One-photon widefield voltage clamp in HEK293T cells, 23°C.",
+      "note": "ΔF/F for a true 100-mV step (-70 -> +30 mV) from the Fgreen/Fred R-V Boltzmann fit measured alongside rEstus2s (Rmax=1.15, ΔRmax=-0.85, Vhalf=-60.0, ks=40.2, n=5; Table S1). One-photon widefield voltage clamp in HEK293T cells, 23°C. Verified 2026-09: R(-70)=0.778, R(+30)=0.382 → ΔR/R = -50.9%.",
+      "proofread": false
+    },
+    {
+      "deltaF": -43.5,
+      "sign": "negative",
+      "modality": "1P",
+      "source": "doi:10.1038/s41467-023-41975-3",
+      "sourceFigure": "Fig. 2c",
+      "note": "Steady-state response to a 100-mV voltage step (−70 → +30 mV) under one-photon widefield 470/24-nm illumination in HEK293A cells at room temperature, measured alongside JEDI-1P (≈55%) and ASAP2s (≈29%); n = 7 cells. Value read off the Fig. 2c mean line (y-axis '−%ΔF/F0'); the matching Fig. 2b F-V curve gives the same amplitude at +30 mV. Cross-GEVI entry from the JEDI-1P origin paper (primary subject JEDI-1P).",
+      "proofread": false
+    },
+    {
+      "deltaF": -47,
+      "sign": "negative",
+      "modality": "1P",
+      "source": "doi:10.1016/j.neuron.2024.08.019",
+      "sourceFigure": "Table S2",
+      "note": "Steady-state −ΔF/F for a −70 → +30 mV step, −47 ± 4% at 23°C (and −47 ± 6% at 37°C), read from the F-V curve at 800 fps in HEK293A cells under one-photon widefield voltage clamp (ASAP5 paper, Table S2, ASAP3 row; 4-8 cells). Cross-GEVI entry from the ASAP5 origin paper (primary subject ASAP5, −57%).",
       "proofread": false
     }
   ],
@@ -501,8 +528,24 @@
       "deltaF": 10.2,
       "modality": "1P",
       "source": "doi:10.1038/s41592-023-01913-z",
-      "note": "ASAP3-Kv optical spike amplitude (10.2% ΔF/F) under one-photon widefield blue-LED illumination at 100 mW/mm² in cultured neurons (Evans et al. 2023).",
+      "note": "ASAP3-Kv optical spike amplitude (10.2% ΔF/F, with an empirical SNR of 2.8) under one-photon widefield 453-nm illumination at 100 mW/mm², recorded IN VIVO from mouse hippocampal SST+ interneurons at 1,000 fps (Evans et al. 2023, main text: 'optical AP amplitudes averaged 10.2% for ASAP3-Kv and 11.5% for ASAP4e-Kv ... (Fig. 3c)'). Prep corrected 2026-09 from a prior note that said 'cultured neurons' — Figs. 2 and 3 of that paper are in vivo hippocampal SST+ interneuron recordings.",
       "sourceFigure": "Fig. 3c",
+      "proofread": false
+    },
+    {
+      "deltaF": 16.5,
+      "modality": "1P",
+      "source": "doi:10.1038/s41467-023-41975-3",
+      "sourceFigure": "Fig. 2n",
+      "note": "ASAP3-Kv peak fluorescence response to current-evoked single APs in dissociated rat hippocampal neurons (DIV14-16) at 32-35°C under one-photon widefield 470/24-nm illumination; n = 5 neurons, mean ≈ 16.5 −%ΔF/F0 read off the Fig. 2n mean line (JEDI-1P-Kv ≈ 26.5% in the same panel). Cross-GEVI entry from the JEDI-1P origin paper.",
+      "proofread": false
+    },
+    {
+      "deltaF": 10.2,
+      "modality": "1P",
+      "source": "doi:10.1038/s41586-019-1641-1",
+      "sourceFigure": "Ext. Fig. 5c",
+      "note": "ASAP3-Kv ΔF/F per action potential in mouse cortex layer 2/3 brain slices, imaged on a confocal microscope with 488-nm excitation / 525-50-nm emission at ~500 Hz; APs evoked via CoChR. Computed from the paper's own Ext. Data Fig. 5c source data (MOESM12 spreadsheet, 'Extended Data Figure 5c' sheet): n = 18 neurons, mean 10.24% (median 9.10%, range 3.3-18.9%). Cross-GEVI entry from the SomArchon paper (primary subject SomArchon, mean 53.5% in the same panel).",
       "proofread": false
     },
     {
@@ -519,6 +562,14 @@
       "source": "doi:10.1016/j.cell.2019.11.004",
       "note": "ΔF/F per single AP (8.3 ± 1.1%) in cerebellar molecular layer interneurons (very narrow spikes, FWHM 0.43 ms) at 34°C under two-photon RAMP microscopy, outperforming ASAP2s (5.3 ± 0.9%).",
       "sourceFigure": "Fig. 3E",
+      "proofread": false
+    },
+    {
+      "deltaF": 37.3,
+      "modality": "2P",
+      "source": "doi:10.1016/j.cell.2019.11.004",
+      "sourceFigure": "Fig. 3H",
+      "note": "ASAP3-Kv reported single current-evoked APs with ΔF/F of 37.3 ± 4.1% (mean ± SD, n = 8 spikes) at 22°C in acute mouse striatal slices, under two-photon line scanning at 1 kHz along the soma with a signal-to-noise ratio of 2.6 ± 0.39 (Villette et al. 2019, Figs. 3H and S6D). Substantially larger than the 17% recorded in cultured hippocampal slices (Fig. 3C) — the Kv2.1-targeted soma-restricted construct concentrates the signal. Small sample (spikes from a single prep), so treat as an upper-end 2P value.",
       "proofread": false
     }
   ],
@@ -564,6 +615,23 @@
       "reference": "quasar2",
       "source": "doi:10.1016/j.cell.2019.11.004",
       "sourceFigure": "Table 1",
+      "proofread": false
+    },
+    {
+      "ratio": 0.167,
+      "reference": "ace2n-mneon",
+      "source": "doi:10.1016/j.cell.2019.11.004",
+      "sourceFigure": "Table 1",
+      "note": "Molar brightness at −70 mV, Villette et al. 2019 Table 1: ASAP3 = 15 mM⁻¹cm⁻¹ vs Ace2N-4aa-mNeon ≈ 90 mM⁻¹cm⁻¹ (values from Gong et al. 2015) → 15/90 ≈ 0.167. Completes the Table 1 brightness row, which was already harvested for ArcLight, Archon1 and QuasAr2/3 but not for Ace2N-mNeon. The Ace2N-mNeon value is given as an approximate (≈90) in the table; consistent with that page's independent 2.76×EGFP entry (0.446/2.76 = 0.162).",
+      "proofread": false
+    },
+    {
+      "ratio": 0.87,
+      "reference": "asap2s",
+      "modality": "1P",
+      "source": "doi:10.1038/s41467-023-41975-3",
+      "sourceFigure": "Fig. 2h",
+      "note": "Relative brightness under one-photon widefield 470/24-nm illumination in HEK293-Kir2.1 cells, quantified as the GEVI/mCherry (green/red) fluorescence ratio; n = 4 independent transfections per GEVI. ASAP2s is the normalization reference (1.00); the ASAP3 mean line reads ≈0.87 (difference n.s.), JEDI-1P ≈2.35. Cross-GEVI entry from the JEDI-1P origin paper. Consistent with the 2P Fig. 2I value already stored on the ASAP2s page (ASAP2s/ASAP3 = 1.11 → 0.90) and with JEDI-2P Fig. S4I (≈0.89 under 1PM).",
       "proofread": false
     },
     {
@@ -623,7 +691,7 @@
       "temperature": "25°C",
       "source": "doi:10.1038/s41467-023-41975-3",
       "sourceFigure": "Fig. 2f",
-      "note": "Optical response width (FWHM) to a single AP-like command waveform (2-ms FWHM, +30 mV peak), HEK293A whole-cell voltage clamp, fluorescence acquired at ~987 Hz (ORCA Flash 4.0 V2 sCMOS; the paper's Methods repeatedly specify ~987 fps/Hz for green-GEVI voltage imaging, not a round 1 kHz). Fig. 2f y-axis is 'Width of response to spike waveforms (ms)' and the caption states 'The width corresponds to the full-width at half-maximum' (so this IS a true FWHM, not a 30%-max width). ASAP3 (orange) bar ≈ 5.7 ms verified off the rendered panel; ASAP2s ≈ 6.7 ms. Measured alongside JEDI-1P (primary subject, ≈4.4 ms). Experiments done at room temperature (Fig. 2 caption: 'unless otherwise noted'; the 32–35 °C note applies only to panels m–o).",
+      "note": "Optical response width (FWHM) to a single AP-like command waveform (2-ms FWHM, +30 mV peak), HEK293A whole-cell voltage clamp, fluorescence acquired at ~987 Hz (ORCA Flash 4.0 V2 sCMOS; the paper's Methods repeatedly specify ~987 fps/Hz for green-GEVI voltage imaging, not a round 1 kHz). Fig. 2f y-axis is 'Width of response to spike waveforms (ms)' and the caption states 'The width corresponds to the full-width at half-maximum' (so this IS a true FWHM, not a 30%-max width). Re-measured 2026-09 by pixel calibration off the rendered panel: ASAP3 (orange) mean line ≈ 5.7-5.8 ms, ASAP2s ≈ 6.7-6.9 ms, JEDI-1P (primary subject) ≈ 4.85 ms; n = 8 ASAP3 cells. Independently corroborated by JEDI-2P Fig. S4F (same 2-ms AP-waveform protocol, ≈5.6 ms). Experiments done at room temperature (Fig. 2 caption: 'unless otherwise noted'; the 32–35 °C note applies only to panels m–o).",
       "proofread": false
     },
     {
@@ -643,11 +711,84 @@
       "modality": "2P",
       "source": "doi:10.1101/2024.11.15.623698",
       "sourceFigure": "Fig. 3f",
-      "note": "Optical spike FWHM ≈ 3.4 ms (grey ASAP3 bar) read off the 'Spike FWHM (ms)' bar sub-panel of Fig. 3f in the 2Photron paper (Böhm et al. 2024 bioRxiv), where ASAP3 (grey) is cross-plotted with JEDI-2P (green, ≈1.85 ms) and 2Photron-ST552 (red, ≈1.42 ms). ASAP3 data are from Villette et al. 2019 (n=23 cells) as noted in the caption. Two-photon ULoVE recording (3.75 kHz). No numeric ASAP3 value is given in the text; value verified by rendering and reading the bar height against the y-axis (0–4 ms). Cross-measured in the 2Photron paper.",
+      "note": "Optical spike FWHM ≈ 3.4 ms (grey ASAP3 bar) read off the 'Spike FWHM (ms)' bar sub-panel of Fig. 3f in the 2Photron paper (Villette et al. 2024 bioRxiv), where ASAP3 (grey) is cross-plotted with JEDI-2P (green, ≈1.85 ms) and 2Photron-ST552 (red, ≈1.42 ms). ASAP3 data are from Villette et al. 2019 (n=23 cells) as noted in the caption. Two-photon ULoVE recording (3.75 kHz is the 2Photron paper's own ULoVE rate; the re-plotted ASAP3 data were acquired by Villette et al. at 3-5 kHz). No numeric ASAP3 value is given in the text; value verified by rendering and reading the bar height against the y-axis (0–4 ms). Cross-measured in the 2Photron paper.",
+      "proofread": false
+    },
+    {
+      "fwhm": 5.6,
+      "samplingRate": 1000,
+      "sample": "HEK293A cells, optical response to a single AP-like command waveform (2-ms FWHM, +30 mV peak), whole-cell voltage clamp",
+      "modality": "1P",
+      "temperature": "25°C",
+      "source": "doi:10.1016/j.cell.2022.07.013",
+      "sourceFigure": "Fig. S4F",
+      "note": "Full width at half maximum of the fluorescence response to a single AP waveform under widefield one-photon microscopy (JEDI-2P paper Fig. S4F, caption: 'Full width at half maximum of the fluorescence response to single action potential waveforms'); n = 7 ASAP3 HEK293A cells. Time series captured at 1 kHz on an ORCA Flash 4.0 V2 sCMOS at room temperature (Methods). Pixel-calibrated off the published panel: ASAP2s ≈ 6.9 ms, ASAP3 ≈ 5.6 ms, JEDI-2P ≈ 5.1 ms. Cross-GEVI entry from the JEDI-2P origin paper; agrees with the ≈5.8 ms measured by the same protocol in JEDI-1P Fig. 2f.",
       "proofread": false
     }
   ],
   "photobleach": [
+    {
+      "modality": "2P",
+      "illumination": "920 nm, 20 mW post-objective (ULoVE pattern 3)",
+      "t75": 2.5,
+      "fit": {
+        "model": "power-law",
+        "a": 0.7867,
+        "b": -0.0335,
+        "r2": 0.968
+      },
+      "custom": {
+        "time": [
+          0.0003,
+          0.001,
+          0.003,
+          0.01,
+          0.03,
+          0.1,
+          0.3,
+          0.6,
+          1,
+          2,
+          3,
+          5,
+          7.5,
+          10,
+          15,
+          20,
+          30,
+          40,
+          50,
+          62
+        ],
+        "fluorescence": [
+          1.0,
+          0.9809,
+          0.9683,
+          0.9559,
+          0.9256,
+          0.8735,
+          0.8036,
+          0.7779,
+          0.7654,
+          0.7557,
+          0.746,
+          0.7375,
+          0.727,
+          0.727,
+          0.7223,
+          0.7017,
+          0.7017,
+          0.7017,
+          0.7017,
+          0.7017
+        ]
+      },
+      "source": "doi:10.1016/j.cell.2019.11.004",
+      "sourceImage": "/photobleach-sources/asap3-fig4d.jpg",
+      "sourceFigure": "Fig. 4D",
+      "note": "Two-photon in-vivo photobleaching of ASAP3-Kv in mouse cortical L2/3 neurons of awake head-fixed mice, digitized from the green Pattern 3 (ULoVE) curve of Fig. 4D-left (log-log 'Normalized flux' vs 'Time (s)'; n = 17 cells). Ti:sapphire 920 nm, 80 MHz, 20 mW post-objective, 25x 0.95-NA objective; the 9-focus multiplexed-line ULoVE pattern is the configuration used for every in-vivo ASAP3-Kv recording in this paper. Digitized by colour-masking the green trace with a two-point log calibration (decade ticks at 10^-4...10^2 s on x, 1.0 and 0.1 on y) and overlay-verified against the panel. Model-free t75 = 2.5 s; the curve never falls to 50% in the 62-s window (it ends at F/F0 = 0.70), so no t50 is stored. The co-plotted grey Pattern 1 curve (a conventional diffraction-limited 2P spot, n = 24 cells) bleaches far faster on the same axes - model-free t75 = 5 ms and t50 = 0.39 s, ending at F/F0 = 0.14 at 62 s - which is the ~40x photobleaching reduction that motivates ULoVE; it is not stored as a separate entry because it is the same sensor under a control illumination geometry. The companion bar chart in Fig. 4D-right quantifies the same data as % photobleaching at 0.1, 1, 10, 60 and 300 s. 2P entry: intensityMWmm2 is deliberately OMITTED - a 2P point-scanning dose is not comparable to the 1P 100 mW/mm2 reference and must not be linearly dose-scaled. The fit is a power law (a=0.787, b=-0.0335, R2=0.968), the best of the viewer's supported models across the six decades of time spanned here; a biexponential reaches R2=0.974 but places its own 75% crossing at 0.8 s, three-fold off the model-free value, so the power law was preferred. The stored t75 is the model-free crossing, not the fit's.",
+      "proofread": false
+    },
     {
       "modality": "1P",
       "illumination": "46 mW/mm²",
@@ -1049,6 +1190,15 @@
       "proofread": false
     },
     {
+      "title": "Widefield imaging of rapid pan-cortical voltage dynamics with an indicator evolved for one-photon microscopy",
+      "authors": "Lu X, Wang Y, Liu Z, Gou Y, Jaeger D, St-Pierre F",
+      "journal": "Nature Communications",
+      "year": 2023,
+      "sample": "HEK293A cells, in vitro (ASAP3 benchmarked against JEDI-1P for response amplitude, spike-waveform width and photostability); rat hippocampal neurons, in vitro (ASAP3-Kv single-AP responses)",
+      "url": "https://doi.org/10.1038/s41467-023-41975-3",
+      "proofread": false
+    },
+    {
       "title": "Dendritic mGluR2 and perisomatic Kv3 signaling regulate dendritic computation of mouse starburst amacrine cells",
       "authors": "Ledesma HA, et al.",
       "journal": "Nature Communications",
@@ -1064,6 +1214,15 @@
       "year": 2024,
       "sample": "Mouse, visual cortex L2/3, in vivo",
       "url": "https://doi.org/10.1117/1.NPh.11.2.025005",
+      "proofread": false
+    },
+    {
+      "title": "A novel rhodopsin-based voltage indicator for simultaneous two-photon optical recording with GCaMP in vivo",
+      "authors": "Villette V, Yang S, Valenti R, Macklin JJ, Bradley J, Mathieu B, Lombardini A, Podgorski K, Dieudonné S, Schreiter ER, Abdelfattah AS",
+      "journal": "bioRxiv",
+      "year": 2024,
+      "sample": "Mouse, cortex and cerebellum, in vivo (ASAP3 spike amplitude / spike FWHM / photon flux cross-plotted against 2Photron-ST552 and JEDI-2P-Kv)",
+      "url": "https://doi.org/10.1101/2024.11.15.623698",
       "proofread": false
     },
     {

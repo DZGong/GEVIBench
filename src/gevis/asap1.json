@@ -47,7 +47,16 @@
       "temperature": "23°C",
       "source": "doi:10.1038/ncomms5625",
       "sourceFigure": "Table 1",
-      "note": "Amplitude-weighted means of the bi-exponential fit (Zou 2014 Table 1): depolarizing (on) τfast 2.3 ms (88%), τslow 39 ms → τon = 0.88×2.3 + 0.12×39 = 6.7 ms; hyperpolarizing (off) τfast 3.0 ms (67%), τslow 29 ms → τoff = 0.67×3.0 + 0.33×29 = 11.6 ms. Previously stored the fast components (2.3 / 3.0 ms).",
+      "note": "Amplitude-weighted means of the bi-exponential fit (Zou 2014 Table 1): depolarizing (on) τfast 2.3 ms (88%), τslow 39 ms → τon = 0.88×2.3 + 0.12×39 = 6.7 ms; hyperpolarizing (off) τfast 3.0 ms (67%), τslow 29 ms → τoff = 0.67×3.0 + 0.33×29 = 11.6 ms. Previously stored the fast components (2.3 / 3.0 ms). Verified 2026-09-08 against the Table 1 row (ΔF/F per 100 mV 28.8; depolarizing step −70 → +30 mV, hyperpolarizing step +30 → −70 mV, 23°C, 6–9 cells, 3 W/cm²).",
+      "proofread": false
+    },
+    {
+      "on": 23.3,
+      "off": 36.4,
+      "temperature": "23°C",
+      "source": "doi:10.1016/j.cell.2019.11.004",
+      "sourceFigure": "Table S1",
+      "note": "Amplitude-weighted means of the bi-exponential fit re-measured for ASAP1 in the ASAP3 paper (Villette 2019 Table S1, HEK293A, 23°C, n = 4 cells). Depolarization −70 → +30 mV (on): τfast 2.4 ± 0.2 ms (70 ± 3%), τslow 72 ± 2 ms → τon = 0.70×2.4 + 0.30×72 = 23.3 ms. Return from depolarization +30 → −70 mV (off): τfast 2.1 ± 0.4 ms (53 ± 5%), τslow 75 ± 2 ms → τoff = 0.53×2.1 + 0.47×75 = 36.4 ms. Added 2026-09-08; this is an independent re-measurement by the originating (Lin) lab, distinct from the St-Pierre 2014 Fig. 1e numbers. NOTE for future checkers: the Gong 2015 Science Table S2 ASAP1 row (τfast 2.1/τslow 72/60% fast; 2.0/51/44%) is the SAME data as St-Pierre 2014 Fig. 1e rounded (shared authors), NOT an independent measurement, and is deliberately NOT stored as a separate entry.",
       "proofread": false
     }
   ],
@@ -115,6 +124,16 @@
       "proofread": false
     }
   ],
+  "subthresholdData": [
+    {
+      "slope": 0.21,
+      "modality": "1P",
+      "source": "doi:10.1038/nn.3709",
+      "sourceFigure": "Fig. 3b",
+      "note": "Subthreshold voltage sensitivity ≈ 0.21 %/mV, derived from the Fig. 3b (top) quantification in voltage-clamped cultured rat hippocampal neurons: ASAP1 peak −ΔF/F was 1.20 / 2.05 / 2.85 / 4.52% for simulated subthreshold depolarization waveforms of 5 / 10 / 15 / 20 mV peak amplitude (17 ms peak FWHM, n = 6 neurons, 1P widefield, 22°C). Through-origin least squares over the four points gives 0.213 %/mV (free-intercept fit gives 0.215 %/mV with a ~0 intercept, i.e. the response is linear over this range). Read off the bar graph, so ±~5%. Comparable steady-state chord slope from the HEK293A F−V curve (Fig. 1d, −80 → −60 mV) is 0.31 %/mV; the neuronal waveform value is lower because these are brief transient responses, not steady-state steps. Cross-GEVI: ArcLight Q239 in the same panel gives ≈ 0.13 %/mV (0.80 / 1.63 / 2.12 / 2.28%).",
+      "proofread": false
+    }
+  ],
   "brightnessData": [
     {
       "ratio": 1,
@@ -140,35 +159,43 @@
   ],
   "photostabilityData": [
     {
-      "brightnessRemaining": 74,
+      "brightnessRemaining": 65,
       "illumination": "0.12 mW/mm²",
       "duration": "15 min",
+      "modality": "1P",
       "source": "doi:10.1038/nn.3709",
       "sourceFigure": "Fig. S9",
+      "note": "Origin-paper photobleaching in dissociated rat hippocampal neurons under continuous 470–490 nm widefield illumination at 0.12 mW/mm² (Fig. S9; four neurons imaged every 10 s for 4.5–15 min, F normalized to 1.0 at t=0). Mono-exponential photobleaching time constants were 41.7 / 35.7 / 32.3 / 30.3 min (mean 35.0 ± 2.5 min, also stated in the main text), so the fluorescence remaining after 15 min is exp(−15/35.0) = 65%. CORRECTED from a previously stored 74%, which corresponds to the SNR-decay time T(4→2) = 49.1 ± 9.8 min — a signal-to-noise metric, not the fluorescence photobleaching τ. The one neuron actually imaged for the full 15 min (gray trace, τ = 30.3 min) ended at F/F₀ ≈ 0.615, bracketing the 65% model value.",
       "proofread": false
     },
     {
       "brightnessRemaining": 91,
       "illumination": "15 mW/mm²",
       "duration": "0.5 min",
+      "modality": "1P",
       "source": "doi:10.1126/science.aab0810",
       "sourceFigure": "Table S2",
+      "note": "Gong 2015 Table S2 reports an ASAP1 bleaching rate of 0.3 ± 0.1% per s (n = 10 cells) under 480/470 nm one-photon epifluorescence at 15 mW/mm² at the specimen plane (stated in the Table S2 footnote), i.e. ≈ 91% remaining after 30 s.",
       "proofread": false
     },
     {
       "brightnessRemaining": 28,
       "illumination": "100 mW/mm²",
       "duration": "1 min",
+      "modality": "1P",
       "source": "doi:10.1523/JNEUROSCI.3484-15.2016",
       "sourceFigure": "Fig. 3I",
+      "note": "Cross-GEVI from the FlicR1 origin paper. ASAP1 single-exponential photobleaching τ = 47 ± 1 s (n = 5 HEK293 cells) under continuous 488 nm at 10 W/cm² = 100 mW/mm² (Fig. 3I curves, Fig. 3J time constants), i.e. exp(−60/47) = 28% remaining at 1 min. Already at the 100 mW/mm², 1 min reference condition.",
       "proofread": false
     },
     {
       "brightnessRemaining": 72,
       "illumination": "11 mW/mm²",
       "duration": "1 min",
+      "modality": "1P",
       "source": "doi:10.7554/eLife.25690",
-      "sourceFigure": "Fig. S3",
+      "sourceFigure": "Fig. 1—figure supplement 3A",
+      "note": "Fluorescence remaining after 1 min of continuous widefield 470–490 nm illumination at 11 mW/mm² in HEK293-Kir2.1 cells (ASAP1 blue trace of Fig. 1—figure supplement 3A; biexponential τ1 = 100 s / τ2 = 850 s per panel B → F/F₀ = 0.72 at t = 60 s). Consistent with the digitized photobleach curve stored for the same figure. sourceFigure was previously the ambiguous \"Fig. S3\" — this eLife paper has BOTH a Figure 1—figure supplement 3 (1P photostability in immortalized cells) and a Figure 2—figure supplement 3 (photobleaching in neurons); this value is the former, matching the ASAP2s page.",
       "proofread": false
     }
   ],
@@ -224,6 +251,62 @@
     }
   ],
   "photobleach": [
+    {
+      "custom": {
+        "time": [
+          0,
+          30,
+          60,
+          90,
+          120,
+          180,
+          240,
+          300,
+          360,
+          420,
+          480,
+          540,
+          600,
+          660,
+          720,
+          780,
+          840,
+          890
+        ],
+        "fluorescence": [
+          1.0,
+          0.982,
+          0.95,
+          0.929,
+          0.917,
+          0.899,
+          0.871,
+          0.849,
+          0.821,
+          0.792,
+          0.755,
+          0.728,
+          0.716,
+          0.691,
+          0.667,
+          0.648,
+          0.62,
+          0.615
+        ]
+      },
+      "illumination": "0.12 mW/mm²",
+      "t75": 508,
+      "fit": {
+        "model": "monoexponential",
+        "tau": 1766.0
+      },
+      "modality": "1P",
+      "source": "doi:10.1038/nn.3709",
+      "sourceFigure": "Fig. S9",
+      "sourceImage": "/photobleach-sources/asap1-figs9.jpg",
+      "note": "ORIGIN-PAPER 1P photobleach (St-Pierre 2014 Fig. S9), digitized 2026-09-08. Dissociated rat hippocampal neurons, continuous 470–490 nm widefield at 0.12 mW/mm², imaged every 10 s, F normalized to 1.0 at t=0; four neurons are plotted (red/blue/green/gray) with mono-exponential τ = 41.7 / 35.7 / 32.3 / 30.3 min (mean 35.0 ± 2.5 min). The stored curve is the GRAY neuron — the only trace covering the full 0–15 min window (the other three stop at 4.5–5 min) — extracted by colour-masking the markers and calibrating against the axis ticks, then overlay-verified against the figure. A least-squares mono-exponential through the digitized points gives τ = 1766 s (29.4 min), within 3% of the paper's own published 30.3 min for this trace, and a biexponential does not improve the residual (rms 0.0087 vs 0.0097) — so mono-exponential is the correct model, as the paper states. t₇₅ = 1766·ln(4/3) = 508 s (8.5 min), well inside the digitized window; direct interpolation of the digitized points gives 492 s, and the 4-neuron MEAN τ of 35.0 min would give t₇₅ = 604 s. `intensityMWmm2` is deliberately OMITTED: linear dose-scaling from 0.12 to the 100 mW/mm² reference is an 833× extrapolation and disagrees ~26× with the direct 100 mW/mm² measurement in Abdelfattah 2016 Fig. 3I (t₇₅ 16 s) stored on this page, so a dose-scaled number here would be misleading. ASAP1 is the only sensor in this figure, so there are no cross-overlay companions.",
+      "proofread": false
+    },
     {
       "custom": {
         "time": [
@@ -549,6 +632,15 @@
       "proofread": false
     },
     {
+      "title": "Ultrafast Two-Photon Imaging of a High-Gain Voltage Indicator in Awake Behaving Mice",
+      "authors": "Villette V, Chavarha M, Dimov IK, Bradley J, Pradhan L, Mathieu B, Evans SW, Chamberland S, Shi D, Yang R, Kim BB, Ayon A, Jalil A, St-Pierre F, Schnitzer MJ, Bi G, Toth K, Ding J, Dieudonné S, Lin MZ",
+      "journal": "Cell",
+      "year": 2019,
+      "sample": "HEK293A cells; mouse cortex and hippocampus, in vivo",
+      "url": "https://doi.org/10.1016/j.cell.2019.11.004",
+      "proofread": false
+    },
+    {
       "title": "Improving a genetically encoded voltage indicator by modifying the cytoplasmic charge composition",
       "authors": "Lee S, Geiller T, Jung A, Nakajima R, Song YK, Baker BJ",
       "journal": "Scientific Reports",
@@ -561,7 +653,7 @@
   "spectrum": {
     "type": "fp",
     "peakEx": 490,
-    "peakEm": 511,
+    "peakEm": 510,
     "name": "ASAP1",
     "custom": {
       "minEx": 352,
@@ -933,25 +1025,32 @@
       "voltage": [
         -120,
         -100,
+        -80,
         -70,
-        -50,
-        -30,
+        -60,
+        -40,
+        -20,
         0,
-        30
+        30,
+        50
       ],
       "deltaF": [
         23.4,
         11.7,
+        3.3,
         0,
-        -6,
-        -11,
-        -15.5,
-        -17.5
+        -2.8,
+        -6.7,
+        -9.8,
+        -12.8,
+        -17.5,
+        -21.1
       ]
     },
     "source": "doi:10.1038/nn.3709",
     "sourceImage": "/fv-sources/asap1.jpg",
     "sourceFigure": "Fig. 1d",
+    "note": "Re-digitized (2026-09-08) marker-by-marker from St-Pierre 2014 Fig. 1d (mean ASAP1 response vs transmembrane voltage, HEK293A, n = 10 cells, 22°C, normalized to the −70 mV holding potential). The nine plotted command steps are −120, −100, −80, −60, −40, −20, 0, +30 and +50 mV; the −70 mV point is the paper's own normalization baseline and is therefore exactly 0 by definition (the digitized curve crosses zero at ≈ −71 mV, consistent). Paper-stated anchors reproduced exactly: +23.4% at −120 mV and +11.7% at −100 mV (50 and 30 mV hyperpolarizations, main text) and −17.5% at +30 mV (the 100-mV depolarization from −70 mV, main text); the digitized +50 mV value (−21.1%) is consistent with the stated −36.3% total change from −120 to +50 mV (23.4% → −21.4% predicted). REPLACES a previous array [−120,−100,−70,−50,−30,0,30] → [23.4,11.7,0,−6,−11,−15.5,−17.5] whose −50/−30 mV points were not measured step voltages at all and whose 0 mV value (−15.5%) disagreed with the figure (−12.8%).",
     "proofread": false
   }
 }

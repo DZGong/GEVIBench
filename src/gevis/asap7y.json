@@ -22,7 +22,8 @@
     "name": "ASAP7y",
     "source": "doi:10.64898/2026.05.27.728040",
     "sourceFigure": "Fig. 1a",
-    "proofread": true,
+    "note": "Digitized from the Fig. 1a left panel (yellow solid = ASAP7y 1P excitation, yellow dashed = ASAP7y emission), normalized to max = 1.0; peaks 510 nm (ex) / 525 nm (em). Re-audited 2026-09-08: the traced values match the figure across the whole plotted range (checked at 10-nm intervals; the stored curve is the figure curve × ~1.025 from the max=1 renormalization), but two SYNTHETIC TAILS that are not in the figure were removed — the excitation ran on from 525 to 532 nm decaying to 0 (the plotted excitation scan stops at ~524 nm at ~0.58, where the emission filter cuts it off) and the emission ran on from 601 to 645 nm as a perfectly linear −0.007/nm ramp to 0 (the figure's x-axis ends at 600 nm, where the emission is still at 0.25). Both arrays now end where the paper's data ends: excitation 350-524 nm, emission 486-600 nm.",
+    "proofread": false,
     "custom": {
       "minEx": 350,
       "excitation": [
@@ -200,15 +201,7 @@
         0.675,
         0.644,
         0.62,
-        0.581,
-        0.523,
-        0.444,
-        0.345,
-        0.226,
-        0.132,
-        0.064,
-        0.021,
-        0
+        0.581
       ],
       "minEm": 486,
       "emission": [
@@ -326,52 +319,7 @@
         0.264,
         0.26,
         0.257,
-        0.254,
-        0.247,
-        0.24,
-        0.233,
-        0.226,
-        0.219,
-        0.212,
-        0.205,
-        0.198,
-        0.191,
-        0.184,
-        0.177,
-        0.17,
-        0.163,
-        0.156,
-        0.149,
-        0.142,
-        0.135,
-        0.128,
-        0.121,
-        0.114,
-        0.107,
-        0.1,
-        0.093,
-        0.086,
-        0.078,
-        0.071,
-        0.064,
-        0.057,
-        0.05,
-        0.043,
-        0.036,
-        0.029,
-        0.022,
-        0.015,
-        0.008,
-        0.001,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
+        0.254
       ]
     }
   },
@@ -458,6 +406,13 @@
       "sourceFigure": "Fig. 2k",
       "note": "Peak -ΔF/F per spontaneous action potential in Drosophila TPN-II neurons in vivo under 940-nm two-photon excitation; 81% higher than ASAP5 (13%) in the same prep",
       "proofread": true
+    },
+    {
+      "deltaF": 46,
+      "source": "doi:10.64898/2026.05.27.728040",
+      "sourceFigure": "Fig. 1c",
+      "note": "Peak -ΔF/F of the averaged optical single-AP waveform in cultured rat cortical neurons (current-evoked APs, n = 7 cells), derived from Fig. 1c: the ASAP7y optical AP is 137.5 px tall against the panel's 150-px '-50% ΔF/F' scale bar → 45.8%. ASAP5 in the same panel measures 87 px → 29.0%, i.e. ASAP7y is 58% larger, matching the main text's '61% larger changes than ASAP5'. The averaged electrical APs in the two panels are matched (73.7 vs 73.1 mV; FWHM 3.5 vs 3.4 ms), so the difference is the sensor, not the AP. MODALITY NOT TAGGED: the paper does not state whether Fig. 1c was recorded under one- or two-photon excitation (the preceding brightness sentence cites both 490-nm 1P and 940-nm 2P for this prep), so per rule 1f the tag is omitted — which means this entry does NOT feed the displayed sensitivity (a 1P entry exists). Tag it if the modality can be established.",
+      "proofread": false
     }
   ],
   "subthresholdData": [
@@ -474,6 +429,13 @@
       "sourceFigure": "Fig. 1f",
       "note": "In vivo whole-cell patch-clamp near resting membrane voltage in mouse visual cortex",
       "proofread": true
+    },
+    {
+      "slope": 2.0,
+      "source": "doi:10.64898/2026.05.27.728040",
+      "sourceFigure": "Fig. 1d",
+      "note": "Subthreshold -ΔF/F₋₇₀ per mV measured in cultured rat cortical neurons during current-injection-evoked plateau potentials (n = 7 cells; P < 0.0001 vs ASAP5). Read off the Fig. 1d bar chart, whose y-axis is literally 'Subthreshold -ΔF/F₋₇₀ per mV (%)': ASAP7y bar ≈ 2.0%/mV vs ASAP5 ≈ 0.78%/mV, consistent with the main text's 'responses to subthreshold activities were 140% larger'. This is the neuronal counterpart of the 2.7%/mV HEK293 F-V slope (Fig. 1b) and the 1.9%/mV in-vivo value (Fig. 1f). (The Ext. Fig. 1c commanded 3-mV EPSP gives the same figure independently: -6% ΔF/F0 ÷ 3 mV = 2.0%/mV in HEK293 at 37°C.)",
+      "proofread": false
     }
   ],
   "apWidthData": [
@@ -488,7 +450,7 @@
         "comment": "Is it really true that asap7's width is broader than asap5?",
         "date": "2026-08-21"
       },
-      "note": "Optical single-AP FWHM digitized from the averaged optical AP waveform in Fig. 1c (the yellow ΔF/F trace — average of n=7 cultured cortical neurons responding to current-evoked APs, plotted above the averaged electrical AP), calibrated to the panel's 20 ms scale bar and overlay-verified: ASAP7y ≈ 10.3 ms vs ASAP5 ≈ 6.8 ms in the same panel. The broad optical AP reflects ASAP7y's slow kinetics (τ_off ≈ 10.7 ms at 25°C). CAVEATS: the paper does not report this experiment's imaging frame rate, so samplingRate is omitted (rule 1j normally requires it) — but here the width is kinetics-dominated rather than frame-rate-limited, so it remains meaningful, though not strictly comparable to frame-rate-specified AP widths. Excitation modality and recording temperature for this panel are not explicitly stated (the ≈10 ms width is consistent with ~25°C kinetics)."
+      "note": "Optical single-AP FWHM digitized from the averaged optical AP waveform in Fig. 1c (the yellow ΔF/F trace — average of n=7 cultured cortical neurons responding to current-evoked APs, plotted above the averaged electrical AP), calibrated to the panel's 20 ms scale bar and overlay-verified: ASAP7y ≈ 10.3 ms vs ASAP5 ≈ 6.8 ms in the same panel. The broad optical AP reflects ASAP7y's slow kinetics (τ_off ≈ 10.7 ms at 25°C). CAVEATS: the paper does not report this experiment's imaging frame rate, so samplingRate is omitted (rule 1j normally requires it) — but here the width is kinetics-dominated rather than frame-rate-limited, so it remains meaningful, though not strictly comparable to frame-rate-specified AP widths. Excitation modality and recording temperature for this panel are not explicitly stated (the ≈10 ms width is consistent with ~25°C kinetics). RE-VERIFIED 2026-09-08 (answers the 'is ASAP7y really broader than ASAP5?' flag): the two Fig. 1c sub-panels were re-digitized independently at 600 dpi. Both carry an identical 20-ms scale bar (158 px in each), so the time calibration is common. Optical AP FWHM: ASAP7y 10.4 ms, ASAP5 6.5 ms. Crucially, the averaged ELECTRICAL APs plotted directly above them are the same in both panels — amplitude 73.7 vs 73.1 mV (150-px '50 mV' bar) and FWHM 3.49 vs 3.39 ms — so the ~1.6× wider optical waveform is the sensor's slower off-kinetics (ASAP7y τ_off 10.7 ms at 25°C / 2.7 ms at 37°C vs ASAP5's faster deactivation), not a broader underlying spike or a scale-bar mismatch. YES, ASAP7y's optical AP is genuinely broader."
     }
   ],
   "brightnessData": [
@@ -546,7 +508,7 @@
       "source": "doi:10.64898/2026.05.27.728040",
       "sourceImage": "/photobleach-sources/asap7y-2p.png",
       "sourceFigure": "Fig. 2g",
-      "note": "2P photostability of ASAP7y (green, 940 nm curve) over 1 min of continuous imaging in Drosophila Mi1 neurons in vivo (AOD random-access microscope, 16 mW at 940 nm), digitized from Fig. 2g where it is plotted alongside the ASAP5 curve (which drops to ~0.85 at 60 s — see asap5.json Fig. 2g entry). ASAP7y is far more photostable: it shows a small transient BRIGHTENING to ~1.04 in the first ~10 s, then a slow decline back to ~0.98 at 60 s, i.e. it effectively plateaus near 1.0 and never approaches 75% — so no t75% is reported. Because F/F0 rises above 1.0 (photoactivation-like brightening) rather than monotonically bleaching, no exponential fit is given. 2P power-only measurement (in-vivo Drosophila brain, focal excitation): NOT linearly dose-scaled to the 100 mW/mm² 1P reference and NOT comparable across modalities, so intensityMWmm2/t75 are intentionally omitted. Cross-measured in the same Fig. 2g panel as ASAP5 in this (the ASAP7y) paper.",
+      "note": "2P photostability of ASAP7y (green, 940 nm curve) over 1 min of continuous imaging in Drosophila Mi1 neurons in vivo (AOD random-access microscope, 16 mW at 940 nm), digitized from Fig. 2g where it is plotted alongside the ASAP5 curve (which drops to ~0.85 at 60 s — see asap5.json Fig. 2g entry). ASAP7y is far more photostable: it shows a small transient BRIGHTENING to ~1.04 in the first ~10 s, then a slow decline back to ~0.98 at 60 s, i.e. it effectively plateaus near 1.0 and never approaches 75% — so no t75% is reported. Because F/F0 rises above 1.0 (photoactivation-like brightening) rather than monotonically bleaching, no exponential fit is given. 2P power-only measurement (in-vivo Drosophila brain, focal excitation): NOT linearly dose-scaled to the 100 mW/mm² 1P reference and NOT comparable across modalities, so intensityMWmm2/t75 are intentionally omitted. Cross-measured in the same Fig. 2g panel as ASAP5 in this (the ASAP7y) paper. RE-VERIFIED 2026-09-08: this ASAP7y trace was re-digitized independently at 600 dpi (green curve, tick calibration 0/20/40/60 s and 0.0/0.5/1.0) and reproduces the stored points to ≤0.005 — 1.036, 1.044, 1.030, 1.018, 1.021, 1.026, 1.016, 1.011, 1.000, 0.996, 0.984, 0.981 at 5-60 s — so the brightening-then-plateau shape is real. CAUSE OF THE 'ASAP5 curve looks off' FLAG (a rendering bug in the companion, not in this entry): the ASAP5 Fig. 2g entry in asap5.json stores fit {model:'monoexponential', tau:11.6, c:0.861}; PhotobleachViewer's evalFit has no 'c' (offset) term, so the overlay is drawn as exp(-t/11.6), which collapses to ~0.006 by 60 s instead of tracking the real ~0.85 plateau. The ASAP5 DATA points in that entry are correct (re-digitized here: 0.941, 0.919, 0.904, 0.893, 0.885, 0.879, 0.874, 0.870, 0.868, 0.865, 0.859, 0.854 at 5-60 s). This was FIXED in asap5.json in the same 2026-09-08 sweep by that page's own agent, which replaced the monoexponential with its own independent re-digitization of the same panel: {model:'biexponential', a:0.101, tau:6.98, tau2:1163, r2:0.992}. The values differ slightly from the {a:0.096, tau:6.0, tau2:998} anticipated here because the two digitizations were independent; asap5.json's own trace is authoritative for that entry.",
       "proofread": false,
       "review": {
         "status": "questionable",

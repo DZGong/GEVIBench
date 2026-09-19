@@ -34,6 +34,8 @@ local/
 docs/superpowers/
 fv-curve-issues.md
 checker/
+.gevi-backups/
+gevi-*-sweep-report-*.md
 .claude/
 CLAUDE.md
 public/imgs/*_original.*
