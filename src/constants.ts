@@ -10,6 +10,11 @@ export const DEFAULT_SORT: SortField = 'year';
 // Comparison
 export const MAX_COMPARE_ITEMS = 5;
 
+// Series colors for the compare selection. The same index colors a sensor's chip in the
+// comparison panel, its curve in the charts, and its pinned row in the sensor table — the
+// dot is the only thing tying a row of numbers to a line on a plot.
+export const COMPARE_COLORS = ['#002FA7', '#ef4444', '#22c55e', '#f59e0b', '#8b5cf6'];
+
 // Colors
 export const COLORS = {
   // Spectrum colors

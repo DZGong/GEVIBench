@@ -1,35 +1,24 @@
-import { Trash2, GitCompare, X, ExternalLink } from 'lucide-react';
+import { Trash2, GitCompare, X } from 'lucide-react';
 import React, { useState, useRef, useCallback } from 'react';
 import { generateVoltageCurve } from '../VoltageCurveViewer';
 import { DistributionRadar } from './DistributionRadar';
-import { WavelengthCellContent, extractYear, abbreviatePaper } from './GEVIList';
-import { fmtDuration } from '../geviData';
-
-const COLORS = ['#002FA7', '#ef4444', '#22c55e', '#f59e0b', '#8b5cf6'];
+import { COMPARE_COLORS as COLORS } from '../constants';
 
 interface ComparisonProps {
   compareGEVIs: any[];
   onRemove: (id: string) => void;
   showEmpty?: boolean;
   onClose?: () => void;
+  /**
+   * The raw values for the selection, as the site's own `GEVIList` narrowed to the compared
+   * sensors. The panel used to rebuild that table column for column with its own formatters,
+   * which drifted from the real one; passing the component in means there is a single
+   * definition of what a sensor row looks like.
+   */
+  table: React.ReactNode;
 }
 
-function fmtTau(v: number): string {
-  if (v < 1) return v.toFixed(2);
-  if (v < 10) return v.toFixed(1);
-  return Math.round(v).toString();
-}
-
-const RAW_METRICS: { key: string; symbol: React.ReactNode; fmt: (g: any) => string }[] = [
-  { key: 'bRel',    symbol: <>B/B<sub>EGFP</sub></>,   fmt: g => g.bRel != null ? `${g.bRel.toFixed(2)}×` : '—' },
-  { key: 'tauOn',   symbol: <>τ<sub>on</sub> (ms)</>,  fmt: g => g.displayTauOn != null ? fmtTau(g.displayTauOn) : '—' },
-  { key: 'tauOff',  symbol: <>τ<sub>off</sub> (ms)</>, fmt: g => g.displayTauOff != null ? fmtTau(g.displayTauOff) : '—' },
-  { key: 'dr',      symbol: <>ΔF/F per 100mV</>,       fmt: g => g.displayDynamicRange != null ? `${g.displayDynamicRange.toFixed(1)}%` : '—' },
-  { key: 'sens',    symbol: <>ΔF/F per AP</>,          fmt: g => g.displaySensitivity != null ? `${g.displaySensitivity.toFixed(1)}%` : '—' },
-  { key: 'photo',   symbol: <>t<sub>75%</sub> @100mW</>, fmt: g => g.displayT75 != null ? fmtDuration(g.displayT75) : '—' },
-];
-
-export function ComparisonPanel({ compareGEVIs, onRemove, showEmpty = false, onClose }: ComparisonProps) {
+export function ComparisonPanel({ compareGEVIs, onRemove, showEmpty = false, onClose, table }: ComparisonProps) {
   // Show empty state when no GEVIs selected and showEmpty is true
   if (compareGEVIs.length === 0) {
     if (!showEmpty) return null;
@@ -72,91 +61,24 @@ export function ComparisonPanel({ compareGEVIs, onRemove, showEmpty = false, onC
         )}
       </div>
 
-      {/* Selected GEVIs */}
-      <div className="flex flex-wrap gap-2 mb-6">
+      {/* Selected GEVIs — also the legend for both charts, since the colors are shared. */}
+      <div className="flex flex-wrap items-center gap-2 mb-4">
         {compareGEVIs.map((gevi, idx) => (
-          <div key={gevi.id} className="flex items-center gap-2 px-3 py-2 rounded-lg bg-surface-low">
+          <div key={gevi.id} className="flex items-center gap-2 pl-3 pr-1.5 py-1.5 rounded-lg bg-surface-low">
             <div className="w-3 h-3 rounded-full" style={{ backgroundColor: COLORS[idx % COLORS.length] }} />
             <span className="text-sm font-medium text-ink/70">{gevi.name}</span>
-            <button onClick={() => onRemove(gevi.id)} className="p-1 rounded hover:bg-surface-low text-ink/50">
-              <Trash2 className="w-4 h-4" />
+            <button
+              onClick={() => onRemove(gevi.id)}
+              className="p-1 rounded text-ink/40 hover:text-red-600"
+              title={`Remove ${gevi.name} from comparison`}
+            >
+              <Trash2 className="w-3.5 h-3.5" />
             </button>
           </div>
         ))}
       </div>
 
-      {/* Raw values comparison — column layout mirrors the GEVI list */}
-      <div className="mb-4 border rounded-lg p-3 overflow-x-auto bg-surface-low border-ink/10">
-        <h4 className="text-sm font-semibold mb-2 text-ink/70">Raw Values</h4>
-        <table className="w-full text-xs" style={{ borderCollapse: 'collapse' }}>
-          <thead>
-            <tr className="text-ink/60">
-              <th className="text-left px-2 py-1.5 font-medium">GEVI</th>
-              <th className="text-center px-2 py-1.5 font-medium whitespace-nowrap">
-                <>λ<sub>ex</sub>/λ<sub>em</sub> (nm)</>
-              </th>
-              {RAW_METRICS.map(m => (
-                <th key={m.key} className="text-center px-2 py-1.5 font-medium whitespace-nowrap">
-                  {m.symbol}
-                </th>
-              ))}
-              <th
-                className="text-center px-2 py-1.5 font-medium whitespace-nowrap"
-                title="Number of independent published studies that have applied this sensor to record voltage signals (a usage / adoption count, not citation count)"
-              >
-                <>N<sub>used</sub></>
-              </th>
-              <th className="text-center px-2 py-1.5 font-medium whitespace-nowrap">Year</th>
-            </tr>
-          </thead>
-          <tbody>
-            {compareGEVIs.map((gevi, idx) => (
-              <tr key={gevi.id} className="border-t border-ink/5">
-                <td className="px-2 py-1.5 whitespace-nowrap align-middle">
-                  <span
-                    className="font-medium"
-                    style={{ color: COLORS[idx % COLORS.length] }}
-                  >
-                    {gevi.name}
-                  </span>
-                  {gevi.paperUrl && (
-                    <a
-                      href={gevi.paperUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={(e) => e.stopPropagation()}
-                      className="inline-flex items-center gap-1 whitespace-nowrap text-klein hover:underline ml-2"
-                      title={gevi.paper}
-                    >
-                      <ExternalLink className="w-3 h-3" />
-                      <span>
-                        <span className="italic">
-                          {abbreviatePaper(gevi.paper).replace(/\s*\d{4}$/, '')}
-                        </span>{' '}
-                        {extractYear(gevi.paper)}
-                      </span>
-                    </a>
-                  )}
-                </td>
-                <td className="px-2 py-1.5 text-center tabular-nums text-ink align-middle">
-                  <WavelengthCellContent gevi={gevi} />
-                </td>
-                {RAW_METRICS.map(m => (
-                  <td key={m.key} className="px-2 py-1.5 text-center tabular-nums text-ink align-middle">
-                    {m.fmt(gevi)}
-                  </td>
-                ))}
-                <td className="px-2 py-1.5 text-center tabular-nums text-ink align-middle">
-                  {gevi.paperCount ?? 0}
-                </td>
-                <td className="px-2 py-1.5 text-center tabular-nums text-ink align-middle">
-                  {gevi.year}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <div className="mb-4 rounded-lg overflow-x-auto bg-surface-lowest border border-ink/10">{table}</div>
 
       {/* Charts side by side */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -175,16 +97,6 @@ export function ComparisonPanel({ compareGEVIs, onRemove, showEmpty = false, onC
                 gevis={compareGEVIs}
                 colors={compareGEVIs.map((_, idx) => COLORS[idx % COLORS.length])}
               />
-            </div>
-            <div className="mt-2 pt-2 border-t border-ink/10">
-              <div className="flex flex-wrap gap-3 justify-center">
-                {compareGEVIs.map((gevi, idx) => (
-                  <div key={gevi.id} className="flex items-center gap-1.5">
-                    <div className="w-3 h-3 rounded-full" style={{ backgroundColor: COLORS[idx % COLORS.length] }} />
-                    <span className="text-xs text-ink/60">{gevi.name}</span>
-                  </div>
-                ))}
-              </div>
             </div>
           </div>
         </div>
@@ -426,19 +338,10 @@ function FVCurveCompare({ compareGEVIs, COLORS }: { compareGEVIs: any[]; COLORS:
         </svg>
       </div>
 
-      {/* Legend and Data Readout */}
-      <div className="mt-2 pt-2 border-t border-ink/10">
-        <div className="flex flex-wrap gap-3 justify-center mb-2">
-          {compareGEVIs.map((gevi, idx) => (
-            <div key={gevi.id} className="flex items-center gap-1.5">
-              <div className="w-3 h-3 rounded-full" style={{ backgroundColor: COLORS[idx % COLORS.length] }} />
-              <span className="text-xs text-ink/60">{gevi.name}</span>
-            </div>
-          ))}
-        </div>
-
-        {/* Hover data readout */}
-        {hoverData.length > 0 && (
+      {/* Readout at the hovered voltage. The selection chips above carry the color → sensor
+          mapping for both charts, so there is no separate legend here. */}
+      <div className="mt-2 pt-2 border-t border-ink/10 min-h-[1.5rem]">
+        {hoverData.length > 0 ? (
           <div className="flex flex-wrap gap-3 justify-center">
             {hoverData.map(({ gevi, point }) => {
               const geviIdx = compareGEVIs.findIndex(g => g.id === gevi.id);
@@ -458,6 +361,8 @@ function FVCurveCompare({ compareGEVIs, COLORS }: { compareGEVIs: any[]; COLORS:
               );
             })}
           </div>
+        ) : (
+          <div className="text-center text-xs text-ink/35">hover the plot to read ΔF/F at a voltage</div>
         )}
       </div>
     </div>

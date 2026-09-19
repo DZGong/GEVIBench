@@ -314,6 +314,20 @@ function GEVIBenchApp() {
             setCompareGEVIs([]);
             setShowCompareEmpty(false);
           }}
+          // The raw values are the sensor table itself, narrowed to the selection — same
+          // columns, same formatters, same sort headers as the list below.
+          table={(
+            <GEVIList
+              gevis={compareGEVIs}
+              selectedGEVI={selectedGEVI}
+              onSelect={handleSelectGEVI}
+              onAddToCompare={addToCompare}
+              onRemoveFromCompare={removeFromCompare}
+              compareGEVIs={compareGEVIs}
+              sortConfig={sortConfig}
+              onSortChange={handleSortChange}
+            />
+          )}
         />
       )}
 
@@ -374,6 +388,7 @@ function GEVIBenchApp() {
                   selectedGEVI={selectedGEVI}
                   onSelect={handleSelectGEVI}
                   onAddToCompare={addToCompare}
+                  onRemoveFromCompare={removeFromCompare}
                   compareGEVIs={compareGEVIs}
                   compact={!!selectedGEVI && filteredGEVIs.length > 0}
                   sortConfig={sortConfig}

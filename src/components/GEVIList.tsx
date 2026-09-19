@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { ExternalLink, ChevronLeft, ChevronRight, Plus } from 'lucide-react';
-import { getGEVIColor, wavelengthToColor } from '../utils';
+import { ExternalLink, ChevronLeft, ChevronRight, Plus, X } from 'lucide-react';
+import { wavelengthToColor } from '../utils';
 import { fmtDuration, isBioluminescent } from '../geviData';
+import { COMPARE_COLORS, MAX_COMPARE_ITEMS } from '../constants';
 import type { SortConfig, SortField } from '../types';
 
 interface GEVIListProps {
@@ -9,6 +10,7 @@ interface GEVIListProps {
   selectedGEVI: any;
   onSelect: (gevi: any) => void;
   onAddToCompare: (gevi: any) => void;
+  onRemoveFromCompare: (id: string) => void;
   compareGEVIs: any[];
   compact?: boolean;
   sortConfig: SortConfig;
@@ -192,7 +194,58 @@ function SortHeader({ symbol, desc, field, sortConfig, onSort, className = '' }:
   );
 }
 
-export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compareGEVIs, compact = false, sortConfig, onSortChange }: GEVIListProps) {
+/** Rank in the current sort, or '-' for a sensor the active sort has no value to rank by. */
+function rankLabel(gevi: any, idx: number, sortConfig: SortConfig): string {
+  const ranked = sortConfig.field === 'year' || sortConfig.field === 'peakEx' || gevi[sortConfig.field] != null;
+  return ranked ? String(idx + 1) : '-';
+}
+
+/** The row's action cell: adds the sensor to the comparison, or takes it back out. */
+function CompareToggle({ gevi, compared, atLimit, labelled, onAdd, onRemove }: {
+  gevi: any;
+  compared: boolean;
+  atLimit: boolean;
+  labelled: boolean;
+  onAdd: (gevi: any) => void;
+  onRemove: (id: string) => void;
+}) {
+  const Icon = compared ? X : Plus;
+  const title = compared ? 'Remove from comparison' : 'Add to comparison';
+  const hover = compared ? 'hover:text-red-600' : 'hover:text-gold';
+  const props = {
+    onClick: (e: React.MouseEvent) => {
+      e.stopPropagation();
+      if (compared) onRemove(gevi.id); else onAdd(gevi);
+    },
+    disabled: !compared && atLimit,
+    title,
+  };
+  return labelled ? (
+    <button
+      {...props}
+      className={`text-xs px-2 py-1 rounded border inline-flex items-center gap-1 whitespace-nowrap border-ink/15 text-ink/60 disabled:opacity-40 ${hover} ${compared ? 'hover:border-red-600' : 'hover:border-gold'}`}
+    >
+      <Icon className="w-3 h-3" /> {compared ? 'Remove' : 'Compare'}
+    </button>
+  ) : (
+    <button {...props} className={`p-1 rounded inline-flex items-center justify-center text-ink/60 disabled:opacity-40 ${hover}`}>
+      <Icon className="w-3.5 h-3.5" />
+    </button>
+  );
+}
+
+/** Colored dot tying a row to its curve in the comparison charts. */
+function CompareDot({ idx }: { idx: number }) {
+  return (
+    <span
+      className="inline-block w-2 h-2 rounded-full mr-1.5 align-middle"
+      style={{ backgroundColor: COMPARE_COLORS[idx % COMPARE_COLORS.length] }}
+      aria-hidden="true"
+    />
+  );
+}
+
+export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, onRemoveFromCompare, compareGEVIs, compact = false, sortConfig, onSortChange }: GEVIListProps) {
   const thBase = 'font-medium text-ink font-sans';
   const cellBase = 'text-ink/80';
   const dimBase = 'text-ink/40';
@@ -207,6 +260,12 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
     return [nameOpt, yearOpt, wavelengthOpt, papersOpt, ...metricOptions];
   }, []);
   const currentNarrow = NARROW_OPTIONS[narrowIdx];
+  const atLimit = compareGEVIs.length >= MAX_COMPARE_ITEMS;
+  // Slot in the comparison, or -1. Drives the series-color dot and the add/remove button.
+  const compareIdx = useMemo(
+    () => new Map<string, number>(compareGEVIs.map((g, i) => [g.id, i])),
+    [compareGEVIs],
+  );
 
   const groupCls = (gevi: any) =>
     `cursor-pointer transition-colors group border-b border-surface ${
@@ -284,7 +343,7 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
               </tr>
             </thead>
             {gevis.map((gevi: any, idx: number) => {
-              const geviColor = getGEVIColor(gevi);
+              const cIdx = compareIdx.get(gevi.id) ?? -1;
               const isName = currentNarrow.key === 'name';
               const isYear = currentNarrow.key === 'year';
               const isWavelength = currentNarrow.key === 'wavelength';
@@ -293,8 +352,9 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
               return (
                 <tbody key={gevi.id} data-gevi-id={gevi.id} onClick={() => onSelect(gevi)} className={groupCls(gevi)}>
                   <tr>
-                    <td className={`pl-2 pr-2 pt-3 pb-0 text-center w-12 tabular-nums ${dimBase}`} rowSpan={2} style={{ fontSize: '16px', verticalAlign: 'middle' }}>{sortConfig.field === 'year' || sortConfig.field === 'peakEx' || gevi[sortConfig.field] != null ? idx + 1 : '-'}</td>
+                    <td className={`pl-2 pr-2 pt-3 pb-0 text-center w-12 tabular-nums ${dimBase}`} rowSpan={2} style={{ fontSize: '16px', verticalAlign: 'middle' }}>{rankLabel(gevi, idx, sortConfig)}</td>
                     <td className="pl-1 pr-0 pt-3 pb-0" style={{ width: '1%', whiteSpace: 'nowrap' }}>
+                      {cIdx >= 0 && <CompareDot idx={cIdx} />}
                       <span className="font-semibold text-ink">{gevi.name}</span>
                       <a
                         href={gevi.paperUrl}
@@ -331,23 +391,14 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
                       </td>
                     )}
                     <td className="px-1 pt-3 pb-0 text-center" rowSpan={2} style={{ verticalAlign: 'middle' }}>
-                      {(() => {
-                        const isAdded = !!compareGEVIs.find((g: any) => g.id === gevi.id);
-                        return (
-                          <button
-                            onClick={(e) => { e.stopPropagation(); onAddToCompare(gevi); }}
-                            disabled={isAdded || compareGEVIs.length >= 5}
-                            className={`p-1 rounded inline-flex items-center justify-center ${
-                              isAdded
-                                ? 'text-green-500'
-                                : 'text-ink/60 hover:text-gold'
-                            }`}
-                            title={isAdded ? 'Already in compare' : 'Add to compare'}
-                          >
-                            <Plus className="w-3.5 h-3.5" />
-                          </button>
-                        );
-                      })()}
+                      <CompareToggle
+                        gevi={gevi}
+                        compared={cIdx >= 0}
+                        atLimit={atLimit}
+                        labelled={false}
+                        onAdd={onAddToCompare}
+                        onRemove={onRemoveFromCompare}
+                      />
                     </td>
                   </tr>
                   <tr>
@@ -393,12 +444,13 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
               </tr>
             </thead>
             {gevis.map((gevi: any, idx: number) => {
-              const geviColor = getGEVIColor(gevi);
+              const cIdx = compareIdx.get(gevi.id) ?? -1;
               return (
                 <tbody key={gevi.id} data-gevi-id={gevi.id} onClick={() => onSelect(gevi)} className={groupCls(gevi)}>
                   <tr>
-                    <td className={`pl-2 pr-4 pt-3 pb-0 text-center w-16 tabular-nums ${dimBase}`} rowSpan={2} style={{ fontSize: '16px', verticalAlign: 'middle' }}>{sortConfig.field === 'year' || sortConfig.field === 'peakEx' || gevi[sortConfig.field] != null ? idx + 1 : '-'}</td>
+                    <td className={`pl-2 pr-4 pt-3 pb-0 text-center w-16 tabular-nums ${dimBase}`} rowSpan={2} style={{ fontSize: '16px', verticalAlign: 'middle' }}>{rankLabel(gevi, idx, sortConfig)}</td>
                     <td className="px-1 pt-3 pb-0" style={{ width: '1%', whiteSpace: 'nowrap' }}>
+                      {cIdx >= 0 && <CompareDot idx={cIdx} />}
                       <span className="font-semibold whitespace-nowrap text-ink">{gevi.name}</span>
                     </td>
                     <td className={`px-1 lg:px-2 xl:px-3 pt-3 pb-0 text-center tabular-nums ${hasWavelengthValue(gevi) ? cellBase : dimBase}`} style={{ fontSize: '14px' }}>
@@ -419,23 +471,14 @@ export function GEVIList({ gevis, selectedGEVI, onSelect, onAddToCompare, compar
                       {gevi.year}
                     </td>
                     <td className="px-1 pt-3 pb-0 text-center" rowSpan={2} style={{ verticalAlign: 'middle' }}>
-                      {(() => {
-                        const isAdded = !!compareGEVIs.find((g: any) => g.id === gevi.id);
-                        return (
-                          <button
-                            onClick={(e) => { e.stopPropagation(); onAddToCompare(gevi); }}
-                            disabled={isAdded || compareGEVIs.length >= 5}
-                            className={`text-xs px-2 py-1 rounded border inline-flex items-center gap-1 whitespace-nowrap ${
-                              isAdded
-                                ? 'text-green-500 border-green-500'
-                                : 'border-ink/15 text-ink/60 hover:text-gold hover:border-gold'
-                            }`}
-                            title={isAdded ? 'Already in compare' : 'Add to compare'}
-                          >
-                            <Plus className="w-3 h-3" /> {isAdded ? 'Added' : 'Compare'}
-                          </button>
-                        );
-                      })()}
+                      <CompareToggle
+                        gevi={gevi}
+                        compared={cIdx >= 0}
+                        atLimit={atLimit}
+                        labelled
+                        onAdd={onAddToCompare}
+                        onRemove={onRemoveFromCompare}
+                      />
                     </td>
                     <td rowSpan={2}></td>
                   </tr>
