@@ -40,7 +40,9 @@
   <meta name="twitter:image" content="https://gevibench.org/imgs/og-image.png" />
   <meta name="twitter:image:alt" content="GEVIBench — Voltage Indicator Benchmark" />
 
-  <!-- Structured data (JSON-LD) — helps Google recognize the GEVIBench brand -->
+  <!-- Structured data (JSON-LD) — helps Google recognize the GEVIBench brand, and ties the
+       site to the paper it should be cited as. The citation's source of truth is
+       src/citation.json (rendered at /about); keep the ScholarlyArticle node in sync with it. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -60,7 +62,25 @@
         "url": "https://gevibench.org/",
         "description": "An open benchmark and interactive database for genetically encoded voltage indicators (GEVIs), comparing sensors by speed, brightness, sensitivity, dynamic range, and photostability.",
         "inLanguage": "en",
-        "publisher": { "@id": "https://gevibench.org/#organization" }
+        "publisher": { "@id": "https://gevibench.org/#organization" },
+        "citation": { "@id": "https://doi.org/10.1016/j.neuron.2026.08.002" }
+      },
+      {
+        "@type": "ScholarlyArticle",
+        "@id": "https://doi.org/10.1016/j.neuron.2026.08.002",
+        "name": "Voltage imaging: A practical guide",
+        "headline": "Voltage imaging: A practical guide",
+        "author": [
+          { "@type": "Person", "name": "Adam E. Cohen", "sameAs": "https://orcid.org/0000-0002-8699-2404" },
+          { "@type": "Person", "name": "Daozheng Gong", "sameAs": "https://orcid.org/0000-0002-3951-1890" }
+        ],
+        "datePublished": "2026-09",
+        "isPartOf": { "@type": "Periodical", "name": "Neuron", "issn": "0896-6273" },
+        "publisher": { "@type": "Organization", "name": "Elsevier" },
+        "sameAs": "https://doi.org/10.1016/j.neuron.2026.08.002",
+        "identifier": [
+          { "@type": "PropertyValue", "propertyID": "DOI", "value": "10.1016/j.neuron.2026.08.002" }
+        ]
       }
     ]
   }

@@ -11,6 +11,14 @@ const DIST = join(process.cwd(), 'dist');
 const GEVIS_DIR = join(process.cwd(), 'src', 'gevis');
 const BASE_URL = 'https://gevibench.org';
 
+// The paper GEVIBench should be cited as. Same record the app reads (src/citation.ts);
+// prose here rather than reference-list style, since this is crawler-visible text.
+const CITATION = JSON.parse(readFileSync(join(process.cwd(), 'src', 'citation.json'), 'utf-8'));
+const CITATION_URL = `https://doi.org/${CITATION.doi}`;
+const CITATION_PROSE =
+  `${CITATION.authors.map(a => `${a.given} ${a.family}`).join(' and ')} (${CITATION.year}). ` +
+  `${CITATION.title}. ${CITATION.journal}. ${CITATION_URL}`;
+
 // Read the built index.html as template
 const template = readFileSync(join(DIST, 'index.html'), 'utf-8');
 
@@ -36,8 +44,11 @@ function withLiveCount(html) {
   );
 }
 
-// Generate HTML for a route with custom meta tags and noscript content
-function renderPage({ path, title, description, noscriptHtml }) {
+// Generate HTML for a route with custom meta tags and noscript content.
+// `canonical` differs from `path` only for retired URLs that still resolve: /contact
+// and /cite merged into /about, and pointing their canonical at /about keeps the three
+// from competing as duplicates in search results.
+function renderPage({ path, title, description, noscriptHtml, canonical = path }) {
   let html = template;
 
   // Replace <title>
@@ -55,7 +66,7 @@ function renderPage({ path, title, description, noscriptHtml }) {
   // Replace canonical
   html = html.replace(
     /<link rel="canonical" href="[^"]*" \/>/,
-    `<link rel="canonical" href="${escHtml(BASE_URL + path)}" />`
+    `<link rel="canonical" href="${escHtml(BASE_URL + canonical)}" />`
   );
 
   // Replace og tags
@@ -146,12 +157,17 @@ const staticPages = [
     description: 'How GEVIBench scores voltage indicators: formulas for speed, brightness, sensitivity, dynamic range, photostability, and popularity.',
     noscriptHtml: '<h1>Scoring Methodology</h1><p>GEVIBench scores GEVIs using logarithmic formulas across 6 metrics: speed, brightness, sensitivity, dynamic range, photostability, and popularity. All scores are computed at runtime from raw published data.</p>',
   },
-  {
-    path: '/contact',
-    title: 'Contact & Contribute — GEVIBench',
-    description: 'Request new GEVIs, report missing sensors, or share relevant papers and resources with the GEVIBench team.',
-    noscriptHtml: '<h1>Contact & Contribute</h1><p>Request a new GEVI to be added, report missing sensors, or share relevant papers and resources.</p>',
-  },
+  ...['/about', '/contact', '/cite'].map(path => ({
+    // /contact and /cite are the retired URLs, kept alive and pointed at /about.
+    path,
+    canonical: '/about',
+    title: 'About & How to Cite — GEVIBench',
+    description: `What GEVIBench is, how its numbers are standardized, and how to cite it: ${CITATION.authors.map(a => a.family).join(' & ')} (${CITATION.year}), "${CITATION.title}", ${CITATION.journal}.`,
+    noscriptHtml:
+      `<h1>About GEVIBench</h1><p>GEVIBench gathers the published performance data for genetically encoded voltage indicators, so that sensors can be compared on the same axes instead of on the claims in each paper's abstract. Brightness, dynamic range, kinetics and photostability are each normalized to one definition before they reach the table.</p>` +
+      `<h2>How to cite</h2><p>GEVIBench accompanies a review of voltage imaging in ${escHtml(CITATION.journal)}. Please cite: ${escHtml(CITATION_PROSE)}</p>` +
+      `<h2>Contact &amp; contribute</h2><p>Request a sensor, report a missing or wrong number, or share a paper we should be reading.</p>`,
+  })),
   {
     path: '/family-tree',
     title: 'Family Tree — GEVIBench',
@@ -198,7 +214,7 @@ for (const gevi of gevis) {
 linkLines.push('</ul>');
 linkLines.push('<h2>Tools & Info</h2><ul>');
 linkLines.push('<li><a href="/methodology">Scoring Methodology</a></li>');
-linkLines.push('<li><a href="/contact">Contact & Contribute</a></li>');
+linkLines.push('<li><a href="/about">About &amp; How to Cite</a></li>');
 linkLines.push('</ul></div></noscript>');
 mainHtml = mainHtml.replace('</body>', linkLines.join('\n') + '\n</body>');
 writeFileSync(join(DIST, 'index.html'), withLiveCount(mainHtml));
@@ -206,8 +222,9 @@ writeFileSync(join(DIST, 'index.html'), withLiveCount(mainHtml));
 // --- Generate sitemap.xml (auto-generated each build — do NOT hand-edit) ---
 // Static routes mirror the app's navigable views; GEVI detail pages are derived
 // from the JSON files so the sitemap can never drift out of sync with the data.
+// /contact and /cite still resolve but canonicalize to /about, so only /about is listed.
 const SITEMAP_STATIC_ROUTES = [
-  '/', '/methodology', '/contact',
+  '/', '/methodology', '/about',
   '/family-tree', '/brightness-network', '/scatter-plot', '/ap-simulator',
 ];
 const lastmod = new Date().toISOString().slice(0, 10);

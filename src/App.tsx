@@ -1,5 +1,5 @@
 import { useState, useCallback, useMemo, useRef, useEffect } from 'react';
-import { Clock } from 'lucide-react';
+import { Clock, Quote } from 'lucide-react';
 import { getAllGEVIs } from './geviData';
 import { FamilyTreePanel } from './components/FamilyTreePanel';
 import { BrightnessNetworkPanel } from './components/BrightnessNetworkPanel';
@@ -10,7 +10,9 @@ import { SearchFilters } from './components/SearchFilters';
 import { GEVIList } from './components/GEVIList';
 import { GEVIDetail } from './components/GEVIDetail';
 import { ComparisonPanel } from './components/ComparisonPanel';
-import { ContactForm } from './components/ContactForm';
+import { AboutPanel } from './components/AboutPanel';
+import { CitationHint } from './components/CitationHint';
+import { CITATION, CITATION_URL } from './citation';
 import { RainbowText, getGEVIColor } from './utils';
 import { COLORS } from './constants';
 import { getSpikeTextureDataURI } from './spikeTexture';
@@ -82,8 +84,10 @@ function GEVIBenchApp() {
         return;
       }
     }
-    if (path === '/contact') {
-      setActiveTab('contact');
+    // /contact and /cite were separate pages before they merged into /about; both are
+    // indexed and linked from elsewhere, so they keep resolving here.
+    if (path === '/about' || path === '/contact' || path === '/cite') {
+      setActiveTab('about');
       setSelectedGEVI(null);
     } else if (path === '/family-tree') {
       setActiveTab('database');
@@ -245,6 +249,19 @@ function GEVIBenchApp() {
     window.history.pushState(null, '', '/');
   }, []);
 
+  // Switching top-level tabs: close any open tool panel, sync the URL, and start the
+  // new view at the top — the footer's "Cite" link is reached from the bottom of a long
+  // list, and landing mid-page on a short view looks like a blank screen.
+  const navigateToTab = useCallback((tab: ViewTab) => {
+    setActiveTab(tab);
+    setShowFamilyTree(false);
+    setShowBrightnessNetwork(false);
+    setShowScatterPlot(false);
+    setShowAPSimulator(false);
+    window.history.pushState(null, '', tab === 'database' ? '/' : `/${tab}`);
+    window.scrollTo({ top: 0 });
+  }, []);
+
   const handleSortChange = useCallback((field: SortField) => {
     setSortConfig(prev => {
       // First-click default order: text fields (name) start A→Z (asc);
@@ -269,19 +286,23 @@ function GEVIBenchApp() {
           grey panel in Chrome. `preload="auto"` lets the browser fetch enough
           to start playback right away, and `disableRemotePlayback` hides the
           AirPlay/Cast affordance on Safari for a clean background loop. */}
-      <div className="relative rounded-xl overflow-hidden mb-3 -mt-1">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-          disableRemotePlayback
-          className="absolute inset-0 w-full h-full object-cover"
-        >
-          <source src="/imgs/spike_mov3.mp4" type="video/mp4" />
-        </video>
-        <div className="absolute inset-0 bg-black/25" />
+      {/* The rounded clip lives on the inner backdrop, not the panel: the panel holds the
+          citation hover card, and clipping at this level would cut it off at the border. */}
+      <div className="relative rounded-xl mb-3 -mt-1">
+        <div className="absolute inset-0 rounded-xl overflow-hidden">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            disableRemotePlayback
+            className="absolute inset-0 w-full h-full object-cover"
+          >
+            <source src="/imgs/spike_mov3.mp4" type="video/mp4" />
+          </video>
+          <div className="absolute inset-0 bg-black/25" />
+        </div>
         <div className="relative text-center py-4 px-3">
           <button onClick={handleLogoClick} className="hover:opacity-80 transition-opacity">
             <h2 className="font-semibold mb-1 whitespace-nowrap" style={{ fontSize: 'clamp(16px, 4vw, 24px)' }}>
@@ -289,8 +310,19 @@ function GEVIBenchApp() {
               <span className="font-sans font-semibold text-gray-200" style={{ fontSize: 'clamp(12px, 3vw, 20px)' }}> — Voltage Indicator Benchmark</span>
             </h2>
           </button>
-          <p className="font-sans text-gray-300 whitespace-nowrap" style={{ fontSize: 'clamp(11px, 2.5vw, 15px)' }}>
-            Standardized evaluation from published studies
+          {/* The citation is the subtitle: most visitors land here and never open the nav,
+              so the paper they should cite is named in full, with the title linking out. */}
+          <p className="font-sans text-gray-300" style={{ fontSize: 'clamp(11px, 2.5vw, 15px)' }}>
+            Described in{' '}
+            <a
+              href={CITATION_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white underline decoration-gold/70 hover:decoration-gold underline-offset-2 transition-colors"
+            >
+              {CITATION.title}
+            </a>
+            , <em>{CITATION.journal}</em> ({CITATION.year})
           </p>
         </div>
       </div>
@@ -433,18 +465,7 @@ function GEVIBenchApp() {
       <div className="spike-trace-layer" style={{ backgroundImage: getSpikeTextureDataURI() }} aria-hidden="true" />
       <Header
         activeTab={headerActiveTab}
-        setActiveTab={(tab) => {
-          setActiveTab(tab);
-          setShowFamilyTree(false);
-          setShowBrightnessNetwork(false);
-          setShowScatterPlot(false);
-          setShowAPSimulator(false);
-          if (tab === 'database') {
-            window.history.pushState(null, '', '/');
-          } else {
-            window.history.pushState(null, '', `/${tab}`);
-          }
-        }}
+        setActiveTab={navigateToTab}
         mobileMenuOpen={mobileMenuOpen}
         setMobileMenuOpen={setMobileMenuOpen}
         onLogoClick={handleLogoClick}
@@ -491,7 +512,7 @@ function GEVIBenchApp() {
       />
 
       {activeTab === 'database' && renderDatabaseTab()}
-      {activeTab === 'contact' && <ContactForm />}
+      {activeTab === 'about' && <AboutPanel />}
       {activeTab === 'tools' && (
         <FamilyTreePanel
           onSelectGEVI={handleSelectGEVI}
@@ -507,6 +528,10 @@ function GEVIBenchApp() {
           <span className="flex items-center gap-1 text-xs font-sans text-ink/40">
             © 2026 GEVIBench. Data sourced from published studies.
           </span>
+          <CitationHint className="flex items-center gap-1 text-xs font-sans text-ink/40 hover:text-klein transition-colors">
+            <Quote className="w-3 h-3" />
+            Cite GEVIBench
+          </CitationHint>
           <span className="flex items-center gap-1 text-xs font-sans text-ink/40">
             <Clock className="w-3 h-3" />
             Updated {timeAgo(BUILD_DATE)}

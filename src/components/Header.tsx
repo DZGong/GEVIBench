@@ -132,8 +132,8 @@ export function Header({ activeTab, setActiveTab, mobileMenuOpen, setMobileMenuO
                 )}
               </div>
 
-              <button onClick={() => setActiveTab('contact')} className={tabButtonClass('contact')}>
-                Contact
+              <button onClick={() => setActiveTab('about')} className={tabButtonClass('about')}>
+                About
               </button>
             </nav>
           </div>
@@ -179,11 +179,13 @@ export function Header({ activeTab, setActiveTab, mobileMenuOpen, setMobileMenuO
               </button>
               {/* AP Simulator mobile entry hidden while the feature is in development.
                   It is still reachable by visiting /ap-simulator directly. */}
+              {/* No hover on a touchscreen, so the mobile menu goes straight to About,
+                  where the citation is a panel. */}
               <button
-                onClick={() => { setActiveTab('contact'); setMobileMenuOpen(false); }}
-                className={`label px-3 py-2 text-left border-b-2 ${activeTab === 'contact' ? 'text-klein border-gold' : 'text-ink border-transparent'}`}
+                onClick={() => { setActiveTab('about'); setMobileMenuOpen(false); }}
+                className={`label px-3 py-2 text-left border-b-2 ${activeTab === 'about' ? 'text-klein border-gold' : 'text-ink border-transparent'}`}
               >
-                Contact
+                About
               </button>
             </div>
           </div>

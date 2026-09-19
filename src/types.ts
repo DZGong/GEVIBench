@@ -261,7 +261,7 @@ export interface SortConfig {
   order: SortOrder;
 }
 
-export type ViewTab = 'database' | 'contact' | 'tools';
+export type ViewTab = 'database' | 'about' | 'tools';
 
 export type MobileView = 'list' | 'detail';
 
