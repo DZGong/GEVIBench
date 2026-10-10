@@ -3,20 +3,43 @@ import { ChevronDown } from 'lucide-react';
 import { getAllGEVIs, fmtDuration } from '../geviData';
 import { getTreeNodeColor } from '../utils';
 import type { GEVI } from '../types';
+import { ExportSvgButton } from './ExportSvgButton';
+import { ScatterExpressionEditor } from './ScatterExpressionEditor';
+import { parseExpr, evalExpr, formatExpr, ExprError, type Expr } from '../scatterExpression';
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
-type AxisKey = 'brightness' | 'tauOn' | 'tauOff' | 'dynamicRange' | 'sensitivity' | 'photostability' | 'year';
-type SizeAxis = AxisKey | 'none';
+type AxisKey =
+  | 'brightness' | 'tauOn' | 'tauOff' | 'tauSum' | 'dynamicRange' | 'subthreshold'
+  | 'sensitivity' | 'apWidth' | 'photostability' | 'papers' | 'year';
+/** An axis is either a single metric or a user-typed expression over metrics. */
+type AxisSel = AxisKey | 'custom';
+type SizeAxis = AxisSel | 'none';
+type AxisSlot = 'x' | 'y' | 'size';
 
 type LabelPart = { text: string; sub?: boolean };
 
 interface AxisConfig {
   labelParts: LabelPart[];     // rendered in SVG via <tspan> (for real subscripts)
-  labelText: string;           // plain-text form for <select> options and tooltips
+  labelText: string;           // plain-text form for tooltips / menus
+  /** Unit-less symbol used when the metric appears inside a custom expression label. */
+  symbolParts: LabelPart[];
+  /** Identifier used for this metric in custom expressions. */
+  varName: string;
   defaultLog: boolean;
   fmt: (v: number) => string;
 }
+
+/** What the chart needs from an axis, whether a single metric or an expression. */
+interface ResolvedAxis {
+  labelParts: LabelPart[];
+  fmt: (v: number) => string;
+  get: (gevi: GEVI) => number | null;
+  /** Marker-size encoding: τ axes are inverted so faster kinetics → bigger marker. */
+  invertSize: boolean;
+}
+
+interface CustomAxis { expr: string; label: string }
 
 interface PlotPoint {
   x: number;
@@ -33,18 +56,37 @@ interface HoverInfo {
 // ── Axis configs ──────────────────────────────────────────────────────────────
 
 const tauFmt = (v: number) => (v < 1 ? v.toPrecision(2) : v < 10 ? v.toFixed(1) : Math.round(v).toString()) + ' ms';
+const pctFmt = (v: number) => parseFloat(v.toPrecision(2)).toString() + '%';
+const genericFmt = (v: number) => {
+  const a = Math.abs(v);
+  return a !== 0 && (a < 1e-3 || a >= 1e5) ? v.toExponential(2) : parseFloat(v.toPrecision(3)).toString();
+};
 
+// Values are the same per-sensor numbers the database table shows (geviData display*),
+// so a metric reads identically here, in the list, and inside an expression.
 const AXES: Record<AxisKey, AxisConfig> = {
-  brightness:     { labelParts: [{ text: 'B/B' }, { text: 'EGFP', sub: true }],                   labelText: 'B/B_EGFP',         defaultLog: true,  fmt: v => v < 0.01 ? v.toExponential(1) : parseFloat(v.toPrecision(2)).toString() + '×' },
-  tauOn:          { labelParts: [{ text: 'τ' }, { text: 'on', sub: true }, { text: ' (ms)' }],    labelText: 'τ_on (ms)',        defaultLog: true,  fmt: tauFmt },
-  tauOff:         { labelParts: [{ text: 'τ' }, { text: 'off', sub: true }, { text: ' (ms)' }],   labelText: 'τ_off (ms)',       defaultLog: true,  fmt: tauFmt },
-  dynamicRange:   { labelParts: [{ text: 'ΔF/F per 100mV' }],                                     labelText: 'ΔF/F per 100mV',   defaultLog: false, fmt: v => Math.round(v) + '%' },
-  sensitivity:    { labelParts: [{ text: 'ΔF/F per AP' }],                                        labelText: 'ΔF/F per AP',      defaultLog: false, fmt: v => parseFloat(v.toPrecision(2)).toString() + '%' },
-  photostability: { labelParts: [{ text: 't' }, { text: '75%', sub: true }, { text: ' @100mW (s)' }], labelText: 't₇₅% @100mW (s)',  defaultLog: true,  fmt: fmtDuration },
-  year:           { labelParts: [{ text: 'Year' }],                                               labelText: 'Year',             defaultLog: false, fmt: v => Math.round(v).toString() },
+  brightness:     { labelParts: [{ text: 'B/B' }, { text: 'EGFP', sub: true }], symbolParts: [{ text: 'B/B' }, { text: 'EGFP', sub: true }], labelText: 'B/B_EGFP', varName: 'B', defaultLog: true, fmt: v => v < 0.01 ? v.toExponential(1) : parseFloat(v.toPrecision(2)).toString() + '×' },
+  tauOn:          { labelParts: [{ text: 'τ' }, { text: 'on', sub: true }, { text: ' (ms)' }], symbolParts: [{ text: 'τ' }, { text: 'on', sub: true }], labelText: 'τ_on (ms)', varName: 'tau_on', defaultLog: true, fmt: tauFmt },
+  tauOff:         { labelParts: [{ text: 'τ' }, { text: 'off', sub: true }, { text: ' (ms)' }], symbolParts: [{ text: 'τ' }, { text: 'off', sub: true }], labelText: 'τ_off (ms)', varName: 'tau_off', defaultLog: true, fmt: tauFmt },
+  tauSum:         { labelParts: [{ text: 'τ' }, { text: 'on', sub: true }, { text: '+τ' }, { text: 'off', sub: true }, { text: ' (ms)' }], symbolParts: [{ text: '(τ' }, { text: 'on', sub: true }, { text: '+τ' }, { text: 'off', sub: true }, { text: ')' }], labelText: 'τ_on+τ_off (ms)', varName: 'tau_sum', defaultLog: true, fmt: tauFmt },
+  dynamicRange:   { labelParts: [{ text: 'ΔF/F per 100mV' }], symbolParts: [{ text: 'ΔF/F' }, { text: '100mV', sub: true }], labelText: 'ΔF/F per 100mV (%)', varName: 'dff_100mV', defaultLog: false, fmt: v => Math.round(v) + '%' },
+  subthreshold:   { labelParts: [{ text: 'ΔF/F per mV' }], symbolParts: [{ text: 'ΔF/F' }, { text: 'mV', sub: true }], labelText: 'ΔF/F per mV (%)', varName: 'dff_mV', defaultLog: false, fmt: pctFmt },
+  sensitivity:    { labelParts: [{ text: 'ΔF/F per AP' }], symbolParts: [{ text: 'ΔF/F' }, { text: 'AP', sub: true }], labelText: 'ΔF/F per AP (%)', varName: 'dff_AP', defaultLog: false, fmt: pctFmt },
+  apWidth:        { labelParts: [{ text: 'FWHM' }, { text: 'AP', sub: true }, { text: ' (ms)' }], symbolParts: [{ text: 'FWHM' }, { text: 'AP', sub: true }], labelText: 'AP width FWHM (ms)', varName: 'ap_width', defaultLog: false, fmt: tauFmt },
+  photostability: { labelParts: [{ text: 't' }, { text: '75%', sub: true }, { text: ' @100mW (s)' }], symbolParts: [{ text: 't' }, { text: '75%', sub: true }], labelText: 't₇₅% @100mW (s)', varName: 't75', defaultLog: true, fmt: fmtDuration },
+  papers:         { labelParts: [{ text: 'N' }, { text: 'used', sub: true }], symbolParts: [{ text: 'N' }, { text: 'used', sub: true }], labelText: 'Papers using it (N_used)', varName: 'n_used', defaultLog: false, fmt: v => Math.round(v).toString() },
+  year:           { labelParts: [{ text: 'Year' }], symbolParts: [{ text: 'Year' }], labelText: 'Year', varName: 'year', defaultLog: false, fmt: v => Math.round(v).toString() },
 };
 
 const AXIS_KEYS = Object.keys(AXES) as AxisKey[];
+const VAR_TO_AXIS = new Map(AXIS_KEYS.map(k => [AXES[k].varName, k]));
+const VAR_NAMES = new Set(VAR_TO_AXIS.keys());
+
+const CUSTOM_PRESETS: { name: string; expr: string; label: string }[] = [
+  { name: 'SNR proxy (AP)', expr: 'dff_AP * sqrt(B)', label: '' },
+  { name: 'SNR proxy (mV)', expr: 'dff_mV * sqrt(B)', label: '' },
+  { name: 'Speed (1/τ)', expr: '1000 / tau_sum', label: '' },
+];
 
 // Render a subscripted axis label as SVG <tspan>s. `baseline-shift="sub"` keeps
 // subscripts correctly positioned even when the parent <text> is rotated (Y axis).
@@ -124,48 +166,83 @@ function LabelDropdown<T extends string>({
 
 // ── Raw value extraction ──────────────────────────────────────────────────────
 
+const positive = (v: number | null | undefined) => (v != null && v > 0 ? v : null);
+
 function getRawValue(gevi: GEVI, axis: AxisKey): number | null {
   switch (axis) {
-    case 'brightness':
-      return gevi.bRel != null && gevi.bRel > 0 ? gevi.bRel : null;
-    case 'tauOn':
-      return gevi.displayTauOn != null && gevi.displayTauOn > 0 ? gevi.displayTauOn : null;
-    case 'tauOff':
-      return gevi.displayTauOff != null && gevi.displayTauOff > 0 ? gevi.displayTauOff : null;
-    case 'dynamicRange': {
-      if (!gevi.dynamicRangeData?.length) return null;
-      return Math.max(...gevi.dynamicRangeData.map(d => Math.abs(d.deltaF)));
-    }
-    case 'sensitivity': {
-      if (!gevi.sensitivityData?.length) return null;
-      return Math.max(...gevi.sensitivityData.map(d => Math.abs(d.deltaF)));
-    }
-    case 'photostability':
-      // 1P t₇₅ scaled to 100 mW/mm² (seconds); 2P/power-only excluded (see geviData).
-      return gevi.displayT75 != null && gevi.displayT75 > 0 ? gevi.displayT75 : null;
-    case 'year':
-      return gevi.year != null ? gevi.year : null;
-    default:
-      return null;
+    case 'brightness':     return positive(gevi.bRel);
+    case 'tauOn':          return positive(gevi.displayTauOn);
+    case 'tauOff':         return positive(gevi.displayTauOff);
+    case 'tauSum':         return positive(gevi.displayTauSum);
+    case 'dynamicRange':   return positive(gevi.displayDynamicRange);
+    case 'subthreshold':   return positive(gevi.displaySubthreshold);
+    case 'sensitivity':    return positive(gevi.displaySensitivity);
+    case 'apWidth':        return positive(gevi.displayApWidth);
+    // 1P t₇₅ scaled to 100 mW/mm² (seconds); 2P/power-only excluded (see geviData).
+    case 'photostability': return positive(gevi.displayT75);
+    case 'papers':         return gevi.paperCount ?? null;
+    case 'year':           return gevi.year ?? null;
+    default:               return null;
   }
+}
+
+/** Turn a formatted expression (metric names wrapped in \0) into label parts with real subscripts. */
+function exprLabelParts(expr: Expr): LabelPart[] {
+  const text = formatExpr(expr, name => `\0${name}\0`);
+  const parts: LabelPart[] = [];
+  text.split('\0').forEach((chunk, i) => {
+    if (!chunk) return;
+    if (i % 2 === 1) parts.push(...AXES[VAR_TO_AXIS.get(chunk)!].symbolParts);
+    else parts.push({ text: chunk });
+  });
+  return parts;
+}
+
+/** `expr` is null when parsing failed; `error`/`pos` then describe why and where. */
+type ParsedCustom = { ok: boolean; expr: Expr | null; error: string; pos: number };
+
+function parseCustom(src: string): ParsedCustom {
+  try {
+    return { ok: true, expr: parseExpr(src, VAR_NAMES), error: '', pos: 0 };
+  } catch (e) {
+    if (e instanceof ExprError) return { ok: false, expr: null, error: e.message, pos: e.pos };
+    throw e;
+  }
+}
+
+function resolveAxis(sel: AxisSel, custom: CustomAxis, lastGood: Expr | null): ResolvedAxis | null {
+  if (sel !== 'custom') {
+    const cfg = AXES[sel];
+    return { labelParts: cfg.labelParts, fmt: cfg.fmt, get: g => getRawValue(g, sel), invertSize: sel === 'tauOn' || sel === 'tauOff' || sel === 'tauSum' };
+  }
+  const expr = lastGood;
+  if (!expr) return null;
+  return {
+    labelParts: custom.label.trim() ? [{ text: custom.label.trim() }] : exprLabelParts(expr),
+    fmt: genericFmt,
+    get: g => evalExpr(expr, name => getRawValue(g, VAR_TO_AXIS.get(name)!)),
+    invertSize: false,
+  };
 }
 
 // Map a raw value to the quantity encoded by marker size (bigger = "better").
-// τ axes are inverted so smaller τ → larger marker (faster kinetics).
-function sizeEncoded(raw: number | null, axis: AxisKey): number | null {
+function sizeEncoded(raw: number | null, invert: boolean): number | null {
   if (raw == null || raw <= 0) return null;
-  return (axis === 'tauOn' || axis === 'tauOff') ? 1 / raw : raw;
+  return invert ? 1 / raw : raw;
 }
 
-function generatePoints(gevis: GEVI[], xAxis: AxisKey, yAxis: AxisKey): PlotPoint[] {
+/** Points with both coordinates; values that a log axis cannot show (≤ 0) are dropped. */
+function generatePoints(gevis: GEVI[], xa: ResolvedAxis, ya: ResolvedAxis, xLog: boolean, yLog: boolean) {
   const pts: PlotPoint[] = [];
+  let hiddenByLog = 0;
   for (const gevi of gevis) {
-    const xVal = getRawValue(gevi, xAxis);
-    const yVal = getRawValue(gevi, yAxis);
-    if (xVal == null || yVal == null) continue;
-    pts.push({ x: xVal, y: yVal, gevi });
+    const x = xa.get(gevi);
+    const y = ya.get(gevi);
+    if (x == null || y == null) continue;
+    if ((xLog && x <= 0) || (yLog && y <= 0)) { hiddenByLog++; continue; }
+    pts.push({ x, y, gevi });
   }
-  return pts;
+  return { pts, hiddenByLog };
 }
 
 // ── Scale & ticks ─────────────────────────────────────────────────────────────
@@ -224,6 +301,30 @@ function CircleMarker({ cx, cy, r, fill, stroke, strokeWidth }: { cx: number; cy
   return <circle cx={cx} cy={cy} r={r} fill={fill} stroke={stroke} strokeWidth={strokeWidth} />;
 }
 
+// ── Custom-axis persistence ───────────────────────────────────────────────────
+
+const CUSTOM_STORAGE_KEY = 'gevibench.scatterCustomAxes';
+const DEFAULT_CUSTOM: Record<AxisSlot, CustomAxis> = {
+  x: { expr: 'B', label: '' },
+  y: { expr: 'dff_AP * sqrt(B)', label: '' },
+  size: { expr: '1000 / tau_sum', label: '' },
+};
+
+function loadCustomAxes(): Record<AxisSlot, CustomAxis> {
+  try {
+    const saved = JSON.parse(localStorage.getItem(CUSTOM_STORAGE_KEY) ?? 'null');
+    if (saved && typeof saved === 'object') {
+      const out = { ...DEFAULT_CUSTOM };
+      for (const slot of ['x', 'y', 'size'] as AxisSlot[]) {
+        const v = saved[slot];
+        if (v && typeof v.expr === 'string') out[slot] = { expr: v.expr, label: typeof v.label === 'string' ? v.label : '' };
+      }
+      return out;
+    }
+  } catch { /* ignore */ }
+  return DEFAULT_CUSTOM;
+}
+
 // ── Component ─────────────────────────────────────────────────────────────────
 
 interface Props {
@@ -233,9 +334,15 @@ interface Props {
 export function ScatterPlotPanel({ onSelectGEVI }: Props) {
   const gevis = useMemo(() => getAllGEVIs(), []);
 
-  const [xAxis, setXAxis] = useState<AxisKey>('brightness');
-  const [yAxis, setYAxis] = useState<AxisKey>('tauOn');
+  const [xAxis, setXAxis] = useState<AxisSel>('brightness');
+  const [yAxis, setYAxis] = useState<AxisSel>('tauOn');
   const [sizeAxis, setSizeAxis] = useState<SizeAxis>('none');
+  const [custom, setCustom] = useState<Record<AxisSlot, CustomAxis>>(loadCustomAxes);
+  useEffect(() => {
+    try { localStorage.setItem(CUSTOM_STORAGE_KEY, JSON.stringify(custom)); } catch { /* ignore */ }
+  }, [custom]);
+  const setCustomSlot = (slot: AxisSlot, patch: Partial<CustomAxis>) =>
+    setCustom(c => ({ ...c, [slot]: { ...c[slot], ...patch } }));
   const [xLog, setXLog] = useState(true);
   const [yLog, setYLog] = useState(true);
   const [sizeLog, setSizeLog] = useState(true);
@@ -243,23 +350,40 @@ export function ScatterPlotPanel({ onSelectGEVI }: Props) {
   const hideTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const svgRef = useRef<SVGSVGElement>(null);
 
-  // Sync log defaults when axis changes
-  useEffect(() => { setXLog(AXES[xAxis].defaultLog); }, [xAxis]);
-  useEffect(() => { setYLog(AXES[yAxis].defaultLog); }, [yAxis]);
-  useEffect(() => { if (sizeAxis !== 'none') setSizeLog(AXES[sizeAxis].defaultLog); }, [sizeAxis]);
+  // Sync log defaults when axis changes (custom expressions start on log: most are
+  // products/ratios of positive metrics spanning decades).
+  const defaultLog = (sel: AxisSel) => (sel === 'custom' ? true : AXES[sel].defaultLog);
+  useEffect(() => { setXLog(defaultLog(xAxis)); }, [xAxis]);
+  useEffect(() => { setYLog(defaultLog(yAxis)); }, [yAxis]);
+  useEffect(() => { if (sizeAxis !== 'none') setSizeLog(defaultLog(sizeAxis)); }, [sizeAxis]);
 
-  const points = useMemo(() => generatePoints(gevis, xAxis, yAxis), [gevis, xAxis, yAxis]);
+  // Parse each custom expression; while one is mid-edit and invalid, the chart keeps
+  // plotting the last expression that parsed so it doesn't blank out on every keystroke.
+  const parsed = useMemo(() => ({
+    x: parseCustom(custom.x.expr), y: parseCustom(custom.y.expr), size: parseCustom(custom.size.expr),
+  }), [custom]);
+  const lastGood = useRef<Record<AxisSlot, Expr | null>>({ x: null, y: null, size: null });
+  for (const slot of ['x', 'y', 'size'] as AxisSlot[]) {
+    const r = parsed[slot];
+    if (r.expr) lastGood.current[slot] = r.expr;
+  }
+
+  const xa = useMemo(() => resolveAxis(xAxis, custom.x, lastGood.current.x), [xAxis, custom.x, parsed.x]);
+  const ya = useMemo(() => resolveAxis(yAxis, custom.y, lastGood.current.y), [yAxis, custom.y, parsed.y]);
+  const sa = useMemo(() => (sizeAxis === 'none' ? null : resolveAxis(sizeAxis, custom.size, lastGood.current.size)), [sizeAxis, custom.size, parsed.size]);
+
+  const { pts: points, hiddenByLog } = useMemo(
+    () => (xa && ya ? generatePoints(gevis, xa, ya, xLog, yLog) : { pts: [], hiddenByLog: 0 }),
+    [gevis, xa, ya, xLog, yLog],
+  );
 
   // Size-dimension values: raw (for tooltip display) and encoded (for marker size).
-  const sizeRaw = useMemo(() => {
-    if (sizeAxis === 'none') return null;
-    return points.map(p => getRawValue(p.gevi, sizeAxis));
-  }, [points, sizeAxis]);
+  const sizeRaw = useMemo(() => (sa ? points.map(p => sa.get(p.gevi)) : null), [points, sa]);
 
   const sizeEnc = useMemo(() => {
-    if (!sizeRaw || sizeAxis === 'none') return null;
-    return sizeRaw.map(v => sizeEncoded(v, sizeAxis));
-  }, [sizeRaw, sizeAxis]);
+    if (!sizeRaw || !sa) return null;
+    return sizeRaw.map(v => sizeEncoded(v, sa.invertSize));
+  }, [sizeRaw, sa]);
 
   const { sMin, sMax } = useMemo(() => {
     if (!sizeEnc) return { sMin: 1, sMax: 1 };
@@ -343,7 +467,17 @@ export function ScatterPlotPanel({ onSelectGEVI }: Props) {
     hideTimer.current = setTimeout(() => setHover(null), 80);
   }, []);
 
-  const xCfg = AXES[xAxis], yCfg = AXES[yAxis];
+  const EMPTY_AXIS: ResolvedAxis = { labelParts: [{ text: '—' }], fmt: genericFmt, get: () => null, invertSize: false };
+  const xCfg = xa ?? EMPTY_AXIS, yCfg = ya ?? EMPTY_AXIS;
+
+  const axisOptions = [
+    ...AXIS_KEYS.map(k => ({ key: k as AxisSel, parts: AXES[k].labelParts })),
+    { key: 'custom' as AxisSel, parts: [{ text: 'ƒ  Custom expression…' }] },
+  ];
+  const customSlots = ([['x', xAxis], ['y', yAxis], ['size', sizeAxis]] as [AxisSlot, SizeAxis][])
+    .filter(([, sel]) => sel === 'custom')
+    .map(([slot]) => slot);
+  const fileKey = (sel: SizeAxis) => (sel === 'custom' ? 'custom' : sel);
 
   return (
     <div className="flex flex-col rounded-lg border-2 p-4 bg-surface-lowest border-gold/40 shadow-md text-ink">
@@ -355,7 +489,11 @@ export function ScatterPlotPanel({ onSelectGEVI }: Props) {
             Compare GEVI performance metrics on customizable axes with linear or logarithmic scaling.
           </p>
         </div>
-        <div className="ml-auto text-xs text-ink/40">{points.length} data points · {gevis.length} GEVIs</div>
+        <div className="ml-auto text-xs text-ink/40 text-right">
+          {points.length} data points · {gevis.length} GEVIs
+          {hiddenByLog > 0 && <div>{hiddenByLog} hidden (≤ 0 on a log axis)</div>}
+        </div>
+        <ExportSvgButton getSvg={() => svgRef.current} filename={`gevi-scatter-${fileKey(xAxis)}-vs-${fileKey(yAxis)}.svg`} />
       </div>
 
       {/* Inner container */}
@@ -365,10 +503,10 @@ export function ScatterPlotPanel({ onSelectGEVI }: Props) {
         {/* X axis */}
         <div className="flex items-center gap-2">
           <span className="text-xs font-semibold text-ink/60 w-5">X</span>
-          <LabelDropdown<AxisKey>
+          <LabelDropdown<AxisSel>
             value={xAxis}
             onChange={setXAxis}
-            options={AXIS_KEYS.map(k => ({ key: k, parts: AXES[k].labelParts }))}
+            options={axisOptions}
           />
           <div className="flex rounded overflow-hidden border border-ink/20 text-xs">
             <button onClick={() => setXLog(false)} className={`px-2 py-1 ${!xLog ? 'bg-klein text-white' : 'bg-surface-low text-ink/60 hover:bg-surface'}`}>Linear</button>
@@ -379,10 +517,10 @@ export function ScatterPlotPanel({ onSelectGEVI }: Props) {
         {/* Y axis */}
         <div className="flex items-center gap-2">
           <span className="text-xs font-semibold text-ink/60 w-5">Y</span>
-          <LabelDropdown<AxisKey>
+          <LabelDropdown<AxisSel>
             value={yAxis}
             onChange={setYAxis}
-            options={AXIS_KEYS.map(k => ({ key: k, parts: AXES[k].labelParts }))}
+            options={axisOptions}
           />
           <div className="flex rounded overflow-hidden border border-ink/20 text-xs">
             <button onClick={() => setYLog(false)} className={`px-2 py-1 ${!yLog ? 'bg-klein text-white' : 'bg-surface-low text-ink/60 hover:bg-surface'}`}>Linear</button>
@@ -401,8 +539,9 @@ export function ScatterPlotPanel({ onSelectGEVI }: Props) {
               ...AXIS_KEYS.map(k => ({
                 key: k as SizeAxis,
                 parts: AXES[k].labelParts,
-                suffix: (k === 'tauOn' || k === 'tauOff') ? ' (1/τ)' : undefined,
+                suffix: (k === 'tauOn' || k === 'tauOff' || k === 'tauSum') ? ' (1/τ)' : undefined,
               })),
+              { key: 'custom' as SizeAxis, parts: [{ text: 'ƒ  Custom expression…' }] },
             ]}
           />
           {sizeAxis !== 'none' && (
@@ -414,6 +553,29 @@ export function ScatterPlotPanel({ onSelectGEVI }: Props) {
         </div>
 
       </div>
+
+      {/* Expression editors for the axes set to "Custom expression" */}
+      {customSlots.map(slot => {
+        const r = parsed[slot];
+        const expr = r.expr;
+        const nWithValue = expr ? gevis.filter(g => evalExpr(expr, name => getRawValue(g, VAR_TO_AXIS.get(name)!)) != null).length : 0;
+        return (
+          <ScatterExpressionEditor
+            key={slot}
+            slotLabel={slot === 'size' ? 'Size' : slot.toUpperCase()}
+            value={custom[slot].expr}
+            label={custom[slot].label}
+            onChange={expr => setCustomSlot(slot, { expr })}
+            onLabelChange={label => setCustomSlot(slot, { label })}
+            metrics={AXIS_KEYS.map(k => ({ varName: AXES[k].varName, parts: AXES[k].symbolParts, description: AXES[k].labelText }))}
+            presets={CUSTOM_PRESETS}
+            status={r.ok
+              ? { ok: true, message: `${nWithValue} of ${gevis.length} GEVIs have every metric used` }
+              : { ok: false, message: r.error, pos: r.pos }}
+            renderLabel={renderHtmlLabel}
+          />
+        );
+      })}
 
       {/* Chart */}
       <div className="px-4 py-3 overflow-x-auto">
@@ -526,7 +688,7 @@ export function ScatterPlotPanel({ onSelectGEVI }: Props) {
         const left = mx + TW + GAP > window.innerWidth ? mx - TW - GAP : mx + GAP;
         const top  = my + TH + GAP > window.innerHeight ? my - TH - GAP : my + GAP;
         const hoverIdx = points.indexOf(p);
-        const sizeVal = sizeAxis !== 'none' && sizeRaw ? sizeRaw[hoverIdx] : null;
+        const sizeVal = sizeRaw ? sizeRaw[hoverIdx] : null;
         return (
           <div
             style={{ position: 'fixed', left, top, width: TW, zIndex: 9999, pointerEvents: 'none' }}
@@ -538,9 +700,9 @@ export function ScatterPlotPanel({ onSelectGEVI }: Props) {
             <div className="text-[10px] text-ink/70 space-y-0.5">
               <div>{renderHtmlLabel(xCfg.labelParts)}: {xCfg.fmt(p.x)}</div>
               <div>{renderHtmlLabel(yCfg.labelParts)}: {yCfg.fmt(p.y)}</div>
-              {sizeAxis !== 'none' && (
+              {sa && (
                 <div>
-                  {renderHtmlLabel(AXES[sizeAxis].labelParts)}: {sizeVal != null ? AXES[sizeAxis].fmt(sizeVal) : '—'}
+                  {renderHtmlLabel(sa.labelParts)}: {sizeVal != null ? sa.fmt(sizeVal) : '—'}
                 </div>
               )}
             </div>
