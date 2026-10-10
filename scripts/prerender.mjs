@@ -330,7 +330,8 @@ renderPage({
   bodyHtml: homeDoc.toHtml(),
 });
 
-// About (+ retired /contact and /cite, canonicalized to /about)
+// About (+ retired /contact, /cite and /methodology, canonicalized to /about). The site
+// returns 404 for paths with no file, so retired URLs that are still indexed need one.
 const aboutDoc = breadcrumb('About')
   .h(1, 'About GEVIBench')
   .p("GEVIBench gathers the published performance data for genetically encoded voltage indicators, so that sensors can be compared on the same axes instead of on the claims in each paper's abstract. Brightness, dynamic range, kinetics and photostability are each normalized to one definition before they reach the table. GEVIBench reports measured values only; it does not score or rank sensors.");
@@ -338,7 +339,7 @@ definitions(aboutDoc);
 aboutDoc.h(2, 'How to cite').p([`GEVIBench accompanies a review of voltage imaging in ${CITATION.journal}. Please cite: `, ...citeLine.slice(1)]);
 aboutDoc.h(2, 'Contact & contribute').p('Request a sensor, report a missing or wrong number, or share a paper we should be reading.');
 footer(aboutDoc);
-for (const path of ['/about', '/contact', '/cite']) {
+for (const path of ['/about', '/contact', '/cite', '/methodology']) {
   renderPage({
     path, canonical: '/about',
     title: 'About & How to Cite — GEVIBench',
@@ -474,8 +475,8 @@ writeFileSync(join(DIST, 'data', 'gevis.csv'),
   [CSV_COLS.map(c => c[0]).join(','), ...records.map(r => CSV_COLS.map(([, f]) => csvCell(f(r))).join(','))].join('\n') + '\n');
 
 // ── sitemap.xml ──
-// /methodology is not listed: scoring lives on the arena branch; on main the URL just
-// shows the database. /contact and /cite canonicalize to /about.
+// /methodology, /contact and /cite are retired URLs that canonicalize to /about (scoring,
+// which /methodology described, lives on the arena branch).
 const sitemapPaths = ['/', '/about', '/family-tree', '/brightness-network', '/scatter-plot', '/ap-simulator',
   ...records.map(r => r.id).sort((a, b) => a.localeCompare(b)).map(id => `/gevi/${id}`)];
 writeFileSync(join(DIST, 'sitemap.xml'),
