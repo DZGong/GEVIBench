@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { ExternalLink, ChevronLeft, ChevronRight, Plus, X } from 'lucide-react';
 import { wavelengthToColor } from '../utils';
-import { fmtDuration, isBioluminescent } from '../geviData';
+import { isBioluminescent } from '../geviData';
+import { metricText, type MetricKey } from '../metricText';
 import { COMPARE_COLORS, MAX_COMPARE_ITEMS } from '../constants';
 import type { SortConfig, SortField } from '../types';
 
@@ -41,13 +42,7 @@ function abbreviatePaper(paper: string): string {
   return paper;
 }
 
-function fmtTau(v: number): string {
-  if (v < 1) return v.toFixed(2);
-  if (v < 10) return v.toFixed(1);
-  return Math.round(v).toString();
-}
 
-type MetricKey = 'brightness' | 'kinetics' | 'dynamicRange' | 'subthreshold' | 'sensitivity' | 'apWidth' | 'photostability';
 
 // invert: true → smaller raw value ranks higher (only τ-based metrics + AP width)
 const METRICS: { key: MetricKey; sortField: SortField; rawField: keyof any; invert?: boolean; label: string; shortLabel: string; symbol: React.ReactNode; desc: string }[] = [
@@ -73,30 +68,10 @@ function useIsNarrow(breakpoint = 768) {
 }
 
 function getMetricValue(gevi: any, key: MetricKey, _dimBase: string): React.ReactNode {
-  switch (key) {
-    case 'brightness':
-      return gevi.bRel != null ? `${gevi.bRel.toFixed(2)}×` : '—';
-    case 'kinetics': {
-      const on = gevi.displayTauOn, off = gevi.displayTauOff;
-      if (on == null && off == null) return '—';
-      return `${on != null ? fmtTau(on) : '—'} / ${off != null ? fmtTau(off) : '—'}`;
-    }
-    case 'dynamicRange': {
-      const dr = gevi.dynamicRangeData?.[0];
-      return dr ? `${dr.deltaF > 0 ? '+' : ''}${dr.deltaF}%` : '—';
-    }
-    case 'subthreshold':
-      return gevi.displaySubthreshold != null ? `${parseFloat(gevi.displaySubthreshold.toPrecision(2))}%` : '—';
-    case 'sensitivity': {
-      const sens = gevi.sensitivityData?.[0];
-      return sens ? `${sens.deltaF}%` : '—';
-    }
-    case 'apWidth':
-      return gevi.displayApWidth != null ? `${parseFloat(gevi.displayApWidth.toPrecision(2))} ms` : '—';
-    case 'photostability':
-      if (isBioluminescent(gevi)) return <span className="italic whitespace-nowrap font-medium" title="Bioluminescent — no photobleaching">biolum.</span>;
-      return gevi.displayT75 != null ? fmtDuration(gevi.displayT75) : '—';
+  if (key === 'photostability' && isBioluminescent(gevi)) {
+    return <span className="italic whitespace-nowrap font-medium" title="Bioluminescent — no photobleaching">biolum.</span>;
   }
+  return metricText(gevi, key) ?? '—';
 }
 
 function hasMetricValue(gevi: any, key: MetricKey): boolean {
