@@ -12,8 +12,15 @@
   "paper": "bioRxiv 2024",
   "paperUrl": "https://doi.org/10.1101/2024.02.02.578569",
   "description": "Novel chemigenetic voltage indicator that inserts a dye-binding tag into the rhodopsin itself, achieving substantially higher voltage sensitivity than previous Voltron-family sensors.",
-  "parentId": "cepheid1b",
-  "proofread": false,
+  "parentId": "voltron2",
+  "proofread": true,
+  "review": {
+    "status": "corrected",
+    "date": "2026-09-28",
+    "previous": {
+      "parentId": "voltron"
+    }
+  },
   "kinetics": [
     {
       "on": 2.53,
@@ -994,5 +1001,6 @@
       "url": "https://doi.org/10.1101/2024.02.02.578569",
       "proofread": false
     }
-  ]
+  ],
+  "crossBranchParentId": "cepheid1b"
 }

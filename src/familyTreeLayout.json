@@ -1,198 +1,362 @@
 {
   "PROPS": {
-    "dx": 0,
+    "dx": 21,
     "dy": -3
   },
   "varnam2": {
-    "dx": 42,
-    "dy": -41
+    "dx": 113,
+    "dy": -16
   },
   "ace2n-mneon": {
     "dx": 0,
     "dy": 18
   },
   "varnam": {
-    "dx": 27,
-    "dy": -36
+    "dx": 97,
+    "dy": -7
   },
   "pacer": {
-    "dx": 42,
-    "dy": -42
+    "dx": 113,
+    "dy": -17
   },
   "_fork_cepheid1b_cepheid1s": {
-    "dx": 51,
-    "dy": -9
+    "dx": 102,
+    "dy": -2
   },
   "cepheid1b": {
-    "dx": 48,
-    "dy": 0
+    "dx": 173,
+    "dy": -2
   },
   "solaris": {
-    "dx": 48,
-    "dy": -21
+    "dx": 25,
+    "dy": 16
   },
   "vega": {
-    "dx": 48,
-    "dy": 21
+    "dx": 173,
+    "dy": 19
   },
   "cepheid1s": {
-    "dx": 27,
-    "dy": 12
+    "dx": 25,
+    "dy": 8
   },
   "ace2n-mneon2": {
-    "dx": 0,
-    "dy": 0
+    "dx": -165,
+    "dy": -32
   },
   "pace": {
-    "dx": 0,
-    "dy": 0
+    "dx": -150,
+    "dy": -33
   },
   "jarvis": {
-    "dx": 0,
-    "dy": 0
+    "dx": -66,
+    "dy": -7
   },
   "electraon": {
-    "dx": 0,
-    "dy": 0
+    "dx": -176,
+    "dy": -8
   },
   "positron2": {
-    "dx": 0,
-    "dy": 0
+    "dx": 19,
+    "dy": 72
   },
   "electraoff": {
-    "dx": 0,
-    "dy": 0
+    "dx": -262,
+    "dy": 70
   },
   "quasar3": {
-    "dx": 24,
+    "dx": 45,
     "dy": -75
   },
   "novarch": {
-    "dx": 24,
+    "dx": 45,
     "dy": -75
   },
   "_fork_archon1_archon2": {
-    "dx": 75,
+    "dx": 96,
     "dy": -102
   },
   "archon1": {
-    "dx": 94,
+    "dx": 115,
     "dy": -123
   },
   "_fork_quasar6_quasar6b": {
-    "dx": 75,
+    "dx": 96,
     "dy": -186
   },
   "quasar6": {
-    "dx": 75,
+    "dx": 96,
     "dy": -186
   },
   "quasar6b": {
-    "dx": 75,
+    "dx": 96,
     "dy": -186
   },
   "somarchon": {
-    "dx": 81,
+    "dx": 102,
     "dy": -135
   },
   "archon2": {
-    "dx": -51,
+    "dx": -30,
     "dy": -99
   },
   "_fork_jedi2p_jedi1p": {
-    "dx": -62,
+    "dx": -41,
     "dy": -24
   },
   "jedi2p": {
-    "dx": -21,
+    "dx": 0,
     "dy": -30
   },
   "forces1": {
-    "dx": -9,
+    "dx": 12,
     "dy": 18
   },
   "_fork_jedi3hyp_jedi3sub": {
-    "dx": -21,
+    "dx": 0,
     "dy": 3
   },
   "jedi3hyp": {
-    "dx": -21,
+    "dx": 0,
     "dy": 3
   },
   "jedi3sub": {
-    "dx": -21,
+    "dx": 0,
     "dy": 3
   },
   "vader1": {
-    "dx": -33,
+    "dx": -12,
     "dy": 21
   },
   "jedi1p": {
-    "dx": -156,
+    "dx": -135,
     "dy": 12
   },
   "quasar1": {
-    "dx": 51,
+    "dx": 72,
     "dy": -87
   },
   "quasar2": {
-    "dx": 51,
+    "dx": 72,
     "dy": -129
   },
   "_fork_macq-mcitrine_macq-morange2": {
-    "dx": 30,
+    "dx": 51,
     "dy": -18
   },
   "macq-mcitrine": {
-    "dx": 30,
+    "dx": 51,
     "dy": -18
   },
   "macq-morange2": {
-    "dx": 30,
+    "dx": 51,
     "dy": -18
   },
   "arch": {
-    "dx": -57,
+    "dx": -36,
     "dy": -9
   },
   "_fork_archer1_archer2": {
-    "dx": -27,
+    "dx": -6,
     "dy": -30
   },
   "archer1": {
-    "dx": -27,
+    "dx": -6,
     "dy": -15
   },
   "archer2": {
-    "dx": -27,
+    "dx": -6,
     "dy": -15
   },
   "_fork_quasar1_quasar2": {
-    "dx": 21,
+    "dx": 42,
     "dy": -105
   },
   "Chemigenetic": {
-    "dx": -42,
-    "dy": 0
+    "dx": -27,
+    "dy": 60
   },
   "2photron": {
-    "dx": 0,
-    "dy": 42
+    "dx": 7,
+    "dy": 137
   },
   "mermaid": {
-    "dx": 0,
+    "dx": 21,
     "dy": -27
   },
   "mermaid2": {
-    "dx": 0,
+    "dx": 21,
     "dy": -27
   },
   "lotusv": {
-    "dx": 0,
+    "dx": 21,
     "dy": 48
   },
   "caesr": {
-    "dx": 0,
+    "dx": 21,
     "dy": 9
+  },
+  "voltron": {
+    "dx": 15,
+    "dy": 30
+  },
+  "positron": {
+    "dx": 17,
+    "dy": 21
+  },
+  "voltron2": {
+    "dx": 24,
+    "dy": 61
+  },
+  "hvi": {
+    "dx": 15,
+    "dy": 56
+  },
+  "hviplus": {
+    "dx": 15,
+    "dy": 107
+  },
+  "GEVI": {
+    "dx": -27,
+    "dy": 0
+  },
+  "VSD": {
+    "dx": 21,
+    "dy": 0
+  },
+  "VSD-FRET": {
+    "dx": 21,
+    "dy": 0
+  },
+  "vsfp1": {
+    "dx": 21,
+    "dy": 0
+  },
+  "vsfp2": {
+    "dx": 21,
+    "dy": 0
+  },
+  "vsfp2_3": {
+    "dx": 21,
+    "dy": 0
+  },
+  "vsfp3_1": {
+    "dx": 21,
+    "dy": 0
+  },
+  "vsfpbutterfly": {
+    "dx": 21,
+    "dy": 0
+  },
+  "nirbutterfly": {
+    "dx": 21,
+    "dy": 0
+  },
+  "amber": {
+    "dx": 21,
+    "dy": 0
+  },
+  "VSD-single": {
+    "dx": 21,
+    "dy": 0
+  },
+  "arclight": {
+    "dx": 21,
+    "dy": 0
+  },
+  "marina": {
+    "dx": 21,
+    "dy": 0
+  },
+  "bongwoori": {
+    "dx": 21,
+    "dy": 0
+  },
+  "bongwoori-r3": {
+    "dx": 21,
+    "dy": 0
+  },
+  "harclight1": {
+    "dx": 21,
+    "dy": 0
+  },
+  "electricpk": {
+    "dx": 21,
+    "dy": 0
+  },
+  "flicr1": {
+    "dx": 21,
+    "dy": 0
+  },
+  "flicr2": {
+    "dx": 21,
+    "dy": 0
+  },
+  "asap1": {
+    "dx": 21,
+    "dy": 0
+  },
+  "asap2s": {
+    "dx": 21,
+    "dy": 0
+  },
+  "asap3": {
+    "dx": 21,
+    "dy": 0
+  },
+  "_fork_asap4b_asap4e": {
+    "dx": 21,
+    "dy": 0
+  },
+  "asap4b": {
+    "dx": 21,
+    "dy": 0
+  },
+  "asap6c": {
+    "dx": 21,
+    "dy": 0
+  },
+  "asap4e": {
+    "dx": 21,
+    "dy": 0
+  },
+  "asap5": {
+    "dx": 21,
+    "dy": 0
+  },
+  "asap7y": {
+    "dx": 21,
+    "dy": 0
+  },
+  "restus": {
+    "dx": 21,
+    "dy": 0
+  },
+  "restus-ni": {
+    "dx": 21,
+    "dy": 0
+  },
+  "restus2s": {
+    "dx": 21,
+    "dy": 0
+  },
+  "hasap1": {
+    "dx": 21,
+    "dy": 0
+  },
+  "pado": {
+    "dx": 21,
+    "dy": 0
+  },
+  "Opsin": {
+    "dx": 21,
+    "dy": 0
+  },
+  "Opsin-Fluorescent": {
+    "dx": 21,
+    "dy": 0
+  },
+  "Opsin-FRET": {
+    "dx": 21,
+    "dy": 0
   }
 }
