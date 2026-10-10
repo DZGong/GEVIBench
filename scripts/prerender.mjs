@@ -56,6 +56,7 @@ const METRICS = [
   { key: 'sensitivity', label: 'ΔF/F per AP', def: 'Fluorescence change per single action potential in neurons. The table shows the first listed measurement; the median across measurements (one-photon preferred) is used for sorting.' },
   { key: 'apWidth', label: 'AP width (FWHM, ms)', def: 'Full width at half maximum of the optical spike waveform.' },
   { key: 'photostability', label: 'Photostability t75% @ 100 mW/mm²', def: 'Time for fluorescence to fall to 75% of its initial value under one-photon illumination, linearly dose-scaled to 100 mW/mm² (t50% is used where the 75% crossing falls inside a fast initial transient). Two-photon curves are not dose-scaled and are excluded.' },
+  { key: 'papers', label: 'Papers using it (N_used)', def: 'Number of published research papers, tracked by GEVIBench, that used the sensor for an experiment (a popularity / track-record measure).' },
 ];
 
 // ── Formatting helpers ──
@@ -99,7 +100,7 @@ function buildRecord(g) {
     addgene: g.addgene ? { id: g.addgene.id, url: g.addgene.url, note: g.addgene.note ?? null } : null,
     lastUpdated: g.lastUpdated ?? null,
     // Exactly the strings the database table shows.
-    display: Object.fromEntries(METRICS.map(m => [m.key, metricText(g, m.key)])),
+    display: { ...Object.fromEntries(METRICS.filter(m => m.key !== 'papers').map(m => [m.key, metricText(g, m.key)])), papers: String(g.paperCount ?? 0) },
     values: {
       brightnessRelEGFP: num(g.bRel),
       tauOnMs: num(g.displayTauOn),
@@ -202,7 +203,6 @@ function sensorDoc(r, doc = new Doc(), level = 1) {
     if (m.key === 'sensitivity' && r.measurements.dffPerAP.length > 1) val += ` (median of ${r.measurements.dffPerAP.length} measurements: ${signed(r.values.dffPerAPMedianAbs, r.values.dffPerAP)})`;
     return [m.label, val, m.def];
   }));
-  doc.p(`Used in ${r.values.papersUsingIt} research paper${r.values.papersUsingIt === 1 ? '' : 's'} tracked by GEVIBench.`);
 
   doc.h(H(1), 'Measurements and sources');
   const M = r.measurements;
@@ -403,8 +403,11 @@ const oneLine = r => {
     r.display.brightness && `B ${r.display.brightness} EGFP`,
     r.display.kinetics && `τ_on/τ_off ${r.display.kinetics} ms`,
     r.display.dynamicRange && `ΔF/F ${r.display.dynamicRange}/100 mV`,
-    r.display.sensitivity && `${r.display.sensitivity}/AP`,
+    r.display.subthreshold && `ΔF/F ${r.display.subthreshold}/mV${r.values.dffPerMVEstimatedFromFV ? ' (F–V estimate)' : ''}`,
+    r.display.sensitivity && `ΔF/F ${r.display.sensitivity}/AP`,
+    r.display.apWidth && `AP FWHM ${r.display.apWidth}`,
     r.display.photostability && `t75 ${r.display.photostability}`,
+    `N_used ${r.values.papersUsingIt} papers`,
   ].filter(Boolean);
   return `- [${r.name}](${r.url}): ${bits.join('; ')}`;
 };
