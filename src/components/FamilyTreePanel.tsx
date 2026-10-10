@@ -4,6 +4,7 @@
 
 import { useMemo, useState, useRef, useEffect } from 'react';
 import { BookOpen, ExternalLink, Move, RotateCcw, Trash2, Check, X } from 'lucide-react';
+import { ExportSvgButton } from './ExportSvgButton';
 import { getAllGEVIs } from '../geviData';
 import type { GEVI, TreeNode } from '../types';
 import { getTreeNodeColor } from '../utils';
@@ -828,13 +829,14 @@ export function FamilyTreePanel({
 
   return (
     <div className="rounded-lg border-2 p-4 bg-surface-lowest border-gold/40 shadow-md">
-      <div className="flex items-center gap-2 mb-4">
-        <div>
+      <div className="flex items-start gap-2 mb-4">
+        <div className="flex-1">
           <h3 className="text-lg font-bold text-klein">Family Tree</h3>
           <p className="text-xs text-ink mt-0.5">
             Evolutionary lineage of genetically encoded voltage indicators, from founding scaffolds to latest variants.
           </p>
         </div>
+        <ExportSvgButton getSvg={() => svgRef.current} filename="gevi-family-tree.svg" />
       </div>
 
       {/* Dev-only layout editor toolbar (stripped from the production build) */}
@@ -937,6 +939,7 @@ export function FamilyTreePanel({
               return (
                 <g
                   key={`node_${i}`}
+                  data-export="skip"
                   transform={`translate(${node.x}, ${node.y})`}
                   onPointerDown={(e) => startDrag(e, node)}
                   style={{ cursor: 'move' }}
@@ -967,11 +970,11 @@ export function FamilyTreePanel({
               >
                 {/* Selection ring (edit mode) */}
                 {isSelected && (
-                  <path d={hexPath(radius + 6)} fill="none" stroke="#002FA7" strokeWidth={1.5} strokeDasharray="3 2" />
+                  <path data-export="skip" d={hexPath(radius + 6)} fill="none" stroke="#002FA7" strokeWidth={1.5} strokeDasharray="3 2" />
                 )}
                 {/* Hover / drag target (invisible larger hexagon for easier grabbing) */}
                 {(isLeaf || editMode) && (
-                  <path d={hexPath(17)} fill="transparent" />
+                  <path data-export="skip" d={hexPath(17)} fill="transparent" />
                 )}
                 <path
                   d={hexPath(radius)}

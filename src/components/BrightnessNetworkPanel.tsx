@@ -4,6 +4,7 @@ import { getAllGEVIs } from '../geviData';
 import { getTreeNodeColor } from '../utils';
 import type { GEVI } from '../types';
 import { DistributionRadar } from './DistributionRadar';
+import { ExportSvgButton } from './ExportSvgButton';
 
 // Journal name abbreviations for tooltip display
 const JOURNAL_ABBREV: Record<string, string> = {
@@ -478,6 +479,7 @@ export function BrightnessNetworkPanel({ onSelectGEVI }: Props) {
         <div className="ml-auto text-xs text-ink/40">
           {nodes.length} nodes · {edges.length} edges
         </div>
+        <ExportSvgButton getSvg={() => svgRef.current} filename="gevi-brightness-network.svg" />
       </div>
 
       {/* Canvas */}
@@ -491,7 +493,7 @@ export function BrightnessNetworkPanel({ onSelectGEVI }: Props) {
         onMouseLeave={onMouseUp}
       >
         <svg ref={svgRef} width="100%" height="100%" style={{ display: 'block' }}>
-          <g transform={`translate(${tx},${ty}) scale(${scale})`}>
+          <g transform={`translate(${tx},${ty}) scale(${scale})`} data-export-reset-transform>
 
 
 

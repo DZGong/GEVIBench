@@ -3,6 +3,7 @@ import React, { useState, useRef, useCallback } from 'react';
 import { generateVoltageCurve } from '../VoltageCurveViewer';
 import { DistributionRadar } from './DistributionRadar';
 import { COMPARE_COLORS as COLORS } from '../constants';
+import { ExportSvgButton } from './ExportSvgButton';
 
 interface ComparisonProps {
   compareGEVIs: any[];
@@ -19,6 +20,9 @@ interface ComparisonProps {
 }
 
 export function ComparisonPanel({ compareGEVIs, onRemove, showEmpty = false, onClose, table }: ComparisonProps) {
+  const fvRef = useRef<HTMLDivElement>(null);
+  const radarRef = useRef<HTMLDivElement>(null);
+
   // Show empty state when no GEVIs selected and showEmpty is true
   if (compareGEVIs.length === 0) {
     if (!showEmpty) return null;
@@ -47,6 +51,9 @@ export function ComparisonPanel({ compareGEVIs, onRemove, showEmpty = false, onC
       </div>
     );
   }
+
+  // The selection chips are the on-page legend; exported charts carry this copy instead.
+  const legend = compareGEVIs.map((g, idx) => ({ label: g.name, color: COLORS[idx % COLORS.length] }));
 
   return (
     <div id="compare-panel" className="border-2 rounded-lg p-4 md:p-6 mb-6 bg-surface-lowest border-gold/40 shadow-md">
@@ -84,15 +91,21 @@ export function ComparisonPanel({ compareGEVIs, onRemove, showEmpty = false, onC
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* F-V Curve Comparison */}
         <div>
-          <h4 className="text-sm font-semibold mb-3 text-ink/70">ΔF/F - Voltage Curve</h4>
-          <FVCurveCompare compareGEVIs={compareGEVIs} COLORS={COLORS} />
+          <div className="flex items-center justify-between mb-3">
+            <h4 className="text-sm font-semibold text-ink/70">ΔF/F - Voltage Curve</h4>
+            <ExportSvgButton getSvg={() => fvRef.current?.querySelector('svg')} filename="gevi-compare-fv.svg" legend={legend} />
+          </div>
+          <div ref={fvRef}><FVCurveCompare compareGEVIs={compareGEVIs} COLORS={COLORS} /></div>
         </div>
 
         {/* Performance Profile (raw-data radar) */}
         <div>
-          <h4 className="text-sm font-semibold mb-3 text-ink/70">Performance Profile</h4>
+          <div className="flex items-center justify-between mb-3">
+            <h4 className="text-sm font-semibold text-ink/70">Performance Profile</h4>
+            <ExportSvgButton getSvg={() => radarRef.current?.querySelector('svg')} filename="gevi-compare-profile.svg" legend={legend} />
+          </div>
           <div className="border rounded-lg p-3 bg-surface-low border-ink/10">
-            <div className="h-64">
+            <div className="h-64" ref={radarRef}>
               <DistributionRadar
                 gevis={compareGEVIs}
                 colors={compareGEVIs.map((_, idx) => COLORS[idx % COLORS.length])}
@@ -310,6 +323,7 @@ function FVCurveCompare({ compareGEVIs, COLORS }: { compareGEVIs: any[]; COLORS:
           {/* Hover vertical line */}
           {hoverVoltage && (
             <line
+              data-export="skip"
               x1={xScale(hoverVoltage)}
               y1={yScale(minDeltaF)}
               x2={xScale(hoverVoltage)}
@@ -326,6 +340,7 @@ function FVCurveCompare({ compareGEVIs, COLORS }: { compareGEVIs: any[]; COLORS:
             return (
               <circle
                 key={gevi.id}
+                data-export="skip"
                 cx={xScale(point!.voltage)}
                 cy={yScale(point!.deltaF)}
                 r="5"
