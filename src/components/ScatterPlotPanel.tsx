@@ -315,7 +315,9 @@ function loadCustomAxes(): Record<AxisSlot, CustomAxis> {
     const saved = JSON.parse(localStorage.getItem(CUSTOM_STORAGE_KEY) ?? 'null');
     if (saved && typeof saved === 'object') {
       const out = { ...DEFAULT_CUSTOM };
-      for (const slot of ['x', 'y', 'size'] as AxisSlot[]) {
+      // Y opens on the custom axis by default, so it always starts from the SNR-proxy
+      // preset; a remembered Y expression would silently replace the default view.
+      for (const slot of ['x', 'size'] as AxisSlot[]) {
         const v = saved[slot];
         if (v && typeof v.expr === 'string') out[slot] = { expr: v.expr, label: typeof v.label === 'string' ? v.label : '' };
       }
@@ -334,9 +336,11 @@ interface Props {
 export function ScatterPlotPanel({ onSelectGEVI }: Props) {
   const gevis = useMemo(() => getAllGEVIs(), []);
 
-  const [xAxis, setXAxis] = useState<AxisSel>('brightness');
-  const [yAxis, setYAxis] = useState<AxisSel>('tauOn');
-  const [sizeAxis, setSizeAxis] = useState<SizeAxis>('none');
+  // Default view: SNR proxy (ΔF/F_AP × √B, log) over publication year (linear), marker
+  // size = papers using the sensor (linear). Log/linear follow each axis's defaultLog.
+  const [xAxis, setXAxis] = useState<AxisSel>('year');
+  const [yAxis, setYAxis] = useState<AxisSel>('custom');
+  const [sizeAxis, setSizeAxis] = useState<SizeAxis>('papers');
   const [custom, setCustom] = useState<Record<AxisSlot, CustomAxis>>(loadCustomAxes);
   useEffect(() => {
     try { localStorage.setItem(CUSTOM_STORAGE_KEY, JSON.stringify(custom)); } catch { /* ignore */ }
