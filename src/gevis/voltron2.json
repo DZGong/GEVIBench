@@ -761,20 +761,6 @@
       "source": "doi:10.1126/sciadv.ads1807",
       "sourceFigure": "Table S2",
       "proofread": true
-    },
-    {
-      "on": 3.03,
-      "off": 3.03,
-      "temperature": "25°C",
-      "note": "Voltron2585 (JF585): single response half-time τ1/2 = 2.1 ± 0.1 ms in the depolarizing step (n = 5 cells, 1058 Hz, room temperature, HEK293T), converted to τ = t½/ln2 = 3.03 ms; separate on/off not resolved. Measured in the Solaris paper as a comparator to Solaris585.",
-      "source": "doi:10.1101/2024.02.02.578569",
-      "sourceFigure": "Main text",
-      "proofread": false,
-      "review": {
-        "status": "questionable",
-        "comment": "this number is highly extrapolated, can be deleted.",
-        "date": "2026-08-18"
-      }
     }
   ],
   "dynamicRangeData": [
