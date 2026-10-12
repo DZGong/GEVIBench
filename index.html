@@ -25,20 +25,21 @@
   <meta property="og:url" content="https://gevibench.org/" />
   <!-- Must be a raster image: no link-preview crawler renders SVG, and pointing og:image
        at logo.svg is why shared links showed a blank placeholder card. Regenerate with
-       scripts/make-og-card.mjs. Absolute URLs are required. -->
-  <meta property="og:image" content="https://gevibench.org/imgs/og-image.png" />
+       scripts/make-og-card.mjs. Absolute URLs are required. Bump ?v= on both image URLs
+       whenever the PNG changes — preview services cache the image by URL. -->
+  <meta property="og:image" content="https://gevibench.org/imgs/og-image.png?v=2" />
   <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="GEVIBench — Voltage Indicator Benchmark. Compare 73 genetically encoded voltage indicators by speed, brightness, sensitivity, dynamic range and photostability." />
+  <meta property="og:image:alt" content="GEVIBench logo" />
   <meta property="og:site_name" content="GEVIBench" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="GEVIBench — Voltage Indicator Benchmark" />
   <meta name="twitter:description" content="Compare 73 genetically encoded voltage indicators by speed, brightness, sensitivity, and more." />
-  <meta name="twitter:image" content="https://gevibench.org/imgs/og-image.png" />
-  <meta name="twitter:image:alt" content="GEVIBench — Voltage Indicator Benchmark" />
+  <meta name="twitter:image" content="https://gevibench.org/imgs/og-image.png?v=2" />
+  <meta name="twitter:image:alt" content="GEVIBench logo" />
 
   <!-- Structured data (JSON-LD) — helps Google recognize the GEVIBench brand, and ties the
        site to the paper it should be cited as. The citation's source of truth is
