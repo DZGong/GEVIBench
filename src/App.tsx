@@ -7,6 +7,7 @@ import { ScatterPlotPanel } from './components/ScatterPlotPanel';
 import { APSimulatorPanel } from './components/APSimulatorPanel';
 import { Header } from './components/Header';
 import { SearchFilters } from './components/SearchFilters';
+import { SPECIES, getSpecies } from './species';
 import { GEVIList } from './components/GEVIList';
 import { GEVIDetail } from './components/GEVIDetail';
 import { ComparisonPanel } from './components/ComparisonPanel';
@@ -52,6 +53,7 @@ function GEVIBenchApp() {
   const [gevis] = useState<GEVI[]>(() => getAllGEVIs());
   const [selectedGEVI, setSelectedGEVI] = useState<GEVI | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [speciesFilter, setSpeciesFilter] = useState<string | null>(null);
   const [categoryFilter, setCategoryFilter] = useState(DEFAULT_CATEGORY);
   const [yearFilter, setYearFilter] = useState(DEFAULT_YEAR);
   const [sortConfig, setSortConfig] = useState<SortConfig>({ field: DEFAULT_SORT, order: 'desc' });
@@ -140,6 +142,14 @@ function GEVIBenchApp() {
   const categories = [DEFAULT_CATEGORY, ...new Set(gevis.map(g => g.category))];
   const years = [DEFAULT_YEAR, ...new Set(gevis.map(g => g.year).sort((a, b) => a - b).map(String))];
 
+  const speciesOptions = useMemo(
+    () => SPECIES
+      .map(({ name }) => ({ name, count: gevis.filter(g => getSpecies(g).has(name)).length }))
+      .filter(o => o.count > 0)
+      .sort((a, b) => b.count - a.count),
+    [gevis],
+  );
+
   // Filter and sort
   const filteredGEVIs = gevis
     .filter(g => {
@@ -148,7 +158,8 @@ function GEVIBenchApp() {
         g.description.toLowerCase().includes(searchTerm.toLowerCase());
       const matchesCategory = categoryFilter === DEFAULT_CATEGORY || g.category === categoryFilter;
       const matchesYear = yearFilter === DEFAULT_YEAR || g.year === parseInt(yearFilter, 10);
-      return matchesSearch && matchesCategory && matchesYear;
+      const matchesSpecies = !speciesFilter || getSpecies(g).has(speciesFilter);
+      return matchesSearch && matchesCategory && matchesYear && matchesSpecies;
     })
     .sort((a, b) => {
       const { field, order } = sortConfig;
@@ -332,6 +343,9 @@ function GEVIBenchApp() {
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
           totalCount={gevis.length}
+          speciesOptions={speciesOptions}
+          speciesFilter={speciesFilter}
+          setSpeciesFilter={setSpeciesFilter}
         />
       )}
 
